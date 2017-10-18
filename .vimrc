@@ -1,29 +1,43 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('/home/benjc/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'junegunn/limelight.vim'
-Plugin 'c.vim'
-Plugin 'fatih/vim-go'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
-Plugin 'scrooloose/nerdtree'
-"Plugin 'FuzzyFinder'
-Plugin 'kien/ctrlp.vim'
-Plugin 'ervandew/supertab'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-Plugin 'joshdick/onedark.vim'
-Plugin 'chr4/jellygrass.vim'
-Plugin 'itchyny/lightline.vim'
+" New
 
-call vundle#end()
-filetype plugin indent on
+Plug 'kien/ctrlp.vim'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'rhysd/vim-grammarous'
+Plug 'lervag/vimtex'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/limelight.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/goyo.vim'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'ervandew/supertab'
+"Plug 'BodneyC/TexTemplate-VimPlugin'
+
+"Plug '~/.local/share/nvim/plugged/TexTemplate-VimPlugin/'
+
+" Colorschemes
+
+Plug 'dim13/smyck.vim'
+Plug 'nightsense/carbonized'
+Plug 'joshdick/onedark.vim'
+Plug 'chr4/jellygrass.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'nanotech/jellybeans.vim'
+
+call plug#end()
 
 runtime! archlinux.vim
 set nocompatible    "run in vim mode
@@ -66,10 +80,6 @@ set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-
-
-
 " For NERDTree
 "autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -92,12 +102,11 @@ autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
 let g:onedark_termcolors = 256
-let g:lightline = { 'colorscheme': 'one', }
+colorscheme jellybeans
+let g:lightline = { 'colorscheme': 'jellybeans', }
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-
-let g:AutoPairsMutilineClose=0
 
 " Modular Config
 source /home/benjc/.vim/config/nerdtreeCFG.vim
