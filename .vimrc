@@ -108,6 +108,10 @@ set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 
+" AutoPairs settings
+let g:AutoPairsMutilineClose=0
+let g:AutoPairsFlyMode=0
+
 " Modular Config
 source /home/benjc/.vim/config/nerdtreeCFG.vim
 source /home/benjc/.vim/config/goyo.vim
