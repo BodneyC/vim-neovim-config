@@ -143,4 +143,4 @@ source /home/benjc/.config/nvim/config/remappings.vim
 " NVIMUX
 let nvimux_open_term_by_default=1
 let g:AutoPairsMutilineClose=0
-
+let g:AutoPairsFlyMode=0
