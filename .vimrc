@@ -107,9 +107,6 @@ let g:lightline = { 'colorscheme': 'jellybeans', }
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
- 
-let g:AutoPairsMultiLineClose=0
-let g:AutoPairsFlyMode=0
 
 " AutoPairs settings
 let g:AutoPairsMutilineClose=0
