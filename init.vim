@@ -73,8 +73,8 @@ autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 let g:grammarous#use_vim_spelllang = 1
 
-" !!!WEN
-
+" AStyle
+autocmd BufNewFile,BufRead *.c,*.cc,*.cpp set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
 
 " Colorschemes
 

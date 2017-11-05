@@ -101,6 +101,9 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
+" AStyle
+autocmd BufNewFile,BufRead *.c,*.cc,*.cpp set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
+
 let g:onedark_termcolors = 256
 colorscheme jellybeans
 let g:lightline = { 'colorscheme': 'jellybeans', }
