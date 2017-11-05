@@ -33,4 +33,8 @@ nnoremap g4 :b4<CR>
 command! -nargs=0 TODO e D:\Users\BenJC\Documents\1_Current\Programming\TODO.md
 command! -nargs=0 ConvLineEndings %s///g
 
-
+" Case beefs
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
