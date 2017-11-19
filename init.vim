@@ -61,11 +61,17 @@ set ignorecase
 set hlsearch
 set incsearch
 set autochdir
-
-" NEW!!!
-
 set linebreak
 
+" Modular Config
+source /home/benjc/.config/nvim/config/nerdtreeCFG.vim
+source /home/benjc/.config/nvim/config/goyo.vim
+source /home/benjc/.config/nvim/config/latex.vim
+source /home/benjc/.config/nvim/config/pandoc.vim
+source /home/benjc/.config/nvim/config/remappings.vim
+source /home/benjc/.config/nvim/config/WordCount.vim
+
+" NVIMUX
 " Spelling
 set spelllang=en_gb
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -79,9 +85,21 @@ autocmd BufNewFile,BufRead *.c,*.cc,*.cpp set formatprg=astyle\ --style=allman\ 
 " Colorschemes
 
 if !exists("g:vimrc_loaded")
-    colorscheme jellygrass 
+    colorscheme jellybeans 
     let g:onedark_termcolors = 256
-	let g:lightline = { 'colorscheme': 'one', }
+	let g:lightline = { 
+				\ 'colorscheme': 'one',
+				\ 'active': {
+				\   'right': [ [ 'lineinfo' ],
+				\              [ 'percent' ],
+				\              [ 'WordCount', 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
+				\   'left': [ [ 'mode', 'paste' ],
+				\             [ 'readonly', 'filename', 'modified' ] ]
+				\ }, 
+				\ 'component' : {
+				\	'WordCount' : 'wc: %{WordCount()}'
+				\ }
+				\ }
 	set laststatus=2
 	let g:limelight_conceal_guifg = 'DarkGray'
 	let g:limelight_conceal_guifg = '#777777'
@@ -132,15 +150,6 @@ set foldcolumn=0
 set foldlevelstart=200
 set foldlevel=200  " disable auto folding
 
-" Modular Config
-source /home/benjc/.config/nvim/config/nerdtreeCFG.vim
-source /home/benjc/.config/nvim/config/goyo.vim
-source /home/benjc/.config/nvim/config/latex.vim
-source /home/benjc/.config/nvim/config/pandoc.vim
-source /home/benjc/.config/nvim/config/remappings.vim
-
-
-" NVIMUX
 let nvimux_open_term_by_default=1
 let g:AutoPairsMutilineClose=0
 let g:AutoPairsFlyMode=0

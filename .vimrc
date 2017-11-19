@@ -57,6 +57,13 @@ set laststatus=2
 set mouse=a
 syntax on           "turn on syntax highlighting
 
+" Modular Config
+source /home/benjc/.vim/config/nerdtreeCFG.vim
+source /home/benjc/.vim/config/goyo.vim
+source /home/benjc/.vim/config/latex.vim
+source /home/benjc/.vim/config/pandoc.vim
+source /home/benjc/.vim/config/remappings.vim
+
 if has("autocmd")
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 \| exe "normal g'\"" | endif
@@ -106,7 +113,19 @@ autocmd BufNewFile,BufRead *.c,*.cc,*.cpp set formatprg=astyle\ --style=allman\ 
 
 let g:onedark_termcolors = 256
 colorscheme jellybeans
-let g:lightline = { 'colorscheme': 'jellybeans', }
+let g:lightline = { 
+			\ 'colorscheme': 'one',
+			\ 'active': {
+			\   'right': [ [ 'lineinfo' ],
+			\              [ 'percent' ],
+			\              [ 'WordCount', 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'readonly', 'filename', 'modified' ] ]
+			\ }, 
+			\ 'component' : {
+			\	'WordCount' : 'wc: %{WordCount()}'
+			\ }
+			\ }
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
@@ -115,9 +134,3 @@ let g:limelight_conceal_guifg = '#777777'
 let g:AutoPairsMutilineClose=0
 let g:AutoPairsFlyMode=0
 
-" Modular Config
-source /home/benjc/.vim/config/nerdtreeCFG.vim
-source /home/benjc/.vim/config/goyo.vim
-source /home/benjc/.vim/config/latex.vim
-source /home/benjc/.vim/config/pandoc.vim
-source /home/benjc/.vim/config/remappings.vim
