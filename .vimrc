@@ -25,6 +25,7 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'ervandew/supertab'
 "Plug 'BodneyC/TexTemplate-VimPlugin'
+Plug 'ChesleyTan/wordCount.vim'
 
 "Plug '~/.local/share/nvim/plugged/TexTemplate-VimPlugin/'
 
@@ -123,7 +124,7 @@ let g:lightline = {
 			\             [ 'readonly', 'filename', 'modified' ] ]
 			\ }, 
 			\ 'component' : {
-			\	'WordCount' : 'wc: %{WordCount()}'
+			\	'WordCount' : 'wc: %{wordCount#WordCount()}'
 			\ }
 			\ }
 set laststatus=2

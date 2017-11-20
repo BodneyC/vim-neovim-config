@@ -29,11 +29,13 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'BodneyC/TexTemplate-VimPlugin'
 Plug 'ervandew/supertab'
+Plug 'ChesleyTan/wordCount.vim'
 
 " Aesthetics
 
 Plug 'joshdick/onedark.vim'
 Plug 'chr4/jellygrass.vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
 "Plug 'ryanoasis/vim-devicons' "UNCOMMENT IF PATCHED FONT IS INSTALLED
 
@@ -69,7 +71,6 @@ source /home/benjc/.config/nvim/config/goyo.vim
 source /home/benjc/.config/nvim/config/latex.vim
 source /home/benjc/.config/nvim/config/pandoc.vim
 source /home/benjc/.config/nvim/config/remappings.vim
-source /home/benjc/.config/nvim/config/WordCount.vim
 
 " NVIMUX
 " Spelling
@@ -97,7 +98,7 @@ if !exists("g:vimrc_loaded")
 				\             [ 'readonly', 'filename', 'modified' ] ]
 				\ }, 
 				\ 'component' : {
-				\	'WordCount' : 'wc: %{WordCount()}'
+				\	'WordCount' : 'wc: %{wordCount#WordCount()}'
 				\ }
 				\ }
 	set laststatus=2
