@@ -27,14 +27,16 @@ nnoremap g2 :b2<CR>
 nnoremap g3 :b3<CR>
 nnoremap g4 :b4<CR>
 
-
-" Commands
-
-command! -nargs=0 TODO e D:\Users\BenJC\Documents\1_Current\Programming\TODO.md
-command! -nargs=0 ConvLineEndings %s///g
+" Update .vimrc
+nmap <leader>s :so $MYVIMRC
+nmap <leader>v :e $MYVIMRC
 
 " Case beefs
 command! WQ wq
 command! Wq wq
 command! W w
 command! Q q
+
+" Commands
+command! -nargs=0 TODO e D:\Users\BenJC\Documents\1_Current\Programming\TODO.md
+command! -nargs=0 ConvLineEndings %s///g
