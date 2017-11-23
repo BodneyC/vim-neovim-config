@@ -81,7 +81,7 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufWritePre *.css :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
 
-:set bs=2 "fix backspace on some consoles
+set bs=2 "fix backspace on some consoles
 
 set scrolloff=3
 set backspace=indent,eol,start
@@ -110,7 +110,7 @@ autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
 " AStyle
-autocmd BufNewFile,BufRead *.c,*.cc,*.cpp set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
+autocmd BufNewFile,BufRead *.c,*.cc,*.cpp,*.C,*.java set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
 
 let g:onedark_termcolors = 256
 colorscheme jellybeans
@@ -135,3 +135,8 @@ let g:limelight_conceal_guifg = '#777777'
 let g:AutoPairsMutilineClose=0
 let g:AutoPairsFlyMode=0
 
+" Undo stuff
+set undofile
+set undodir=$HOME/.vim/undo
+set undolevels=10000
+set undoreload=10000

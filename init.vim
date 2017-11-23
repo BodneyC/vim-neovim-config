@@ -81,7 +81,7 @@ autocmd BufRead,BufNewFile *.txt setlocal spell
 let g:grammarous#use_vim_spelllang = 1
 
 " AStyle
-autocmd BufNewFile,BufRead *.c,*.cc,*.cpp set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
+autocmd BufNewFile,BufRead *.c,*.cc,*.cpp,*.C,*.java set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
 
 " Colorschemes
 
@@ -154,3 +154,9 @@ set foldlevel=200  " disable auto folding
 let nvimux_open_term_by_default=1
 let g:AutoPairsMutilineClose=0
 let g:AutoPairsFlyMode=0
+
+" Undo stuff
+set undofile
+set undodir=$HOME/.vim/undo
+set undolevels=10000
+set undoreload=10000
