@@ -138,6 +138,6 @@ let g:AutoPairsFlyMode=0
 " Undo stuff
 set undofile
 set undodir=$HOME/.vim/undo
-set undolevels=10000
-set undoreload=10000
+set undolevels=100000
+set undoreload=100000
 set viminfo+=n~/.vim/.viminfo
