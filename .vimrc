@@ -140,3 +140,4 @@ set undofile
 set undodir=$HOME/.vim/undo
 set undolevels=10000
 set undoreload=10000
+set viminfo+=n~/.vim/.viminfo
