@@ -26,6 +26,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'ervandew/supertab'
 "Plug 'BodneyC/TexTemplate-VimPlugin'
 Plug 'ChesleyTan/wordCount.vim'
+Plug 'majutsushi/tagbar'
 
 "Plug '~/.local/share/nvim/plugged/TexTemplate-VimPlugin/'
 
