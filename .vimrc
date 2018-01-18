@@ -42,12 +42,12 @@ call plug#end()
 
 runtime! archlinux.vim
 set nocompatible    "run in vim mode
-set expandtab       "expand tabs into spaces
+set noexpandtab       "expand tabs into spaces
 set autoindent      "auto-indent new lines
 set smartindent     "return ending brackets to proper locations
-set softtabstop=4   "indentation level of soft-tabs
-set tabstop=4       "indentation leves of normal tabs
-set shiftwidth=4    "how many columns to re-indent with << and >>
+set tabstop=8       "indentation leves of normal tabs
+set softtabstop=-1   "indentation level of soft-tabs
+set shiftwidth=0    "how many columns to re-indent with << and >>
 set showmatch       "show matching brackets
 set ruler           "show cursor position at all times
 set hls           "don't highlight the previous search term
@@ -58,7 +58,7 @@ set laststatus=2
 set mouse=a
 syntax on           "turn on syntax highlighting
 
-" Modular Config
+" Modular Config  
 source /home/benjc/.vim/config/nerdtreeCFG.vim
 source /home/benjc/.vim/config/goyo.vim
 source /home/benjc/.vim/config/latex.vim
@@ -110,7 +110,7 @@ autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
 " AStyle
-autocmd BufNewFile,BufRead *.c,*.cc,*.cpp,*.C,*.java set formatprg=astyle\ --style=allman\ -f\ -xb\ -xg\ -p
+autocmd BufNewFile,BufRead *.* set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
 
 let g:onedark_termcolors = 256
 colorscheme jellybeans

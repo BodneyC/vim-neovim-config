@@ -50,9 +50,10 @@ set autoindent
 set modeline
 set cursorline
 set cursorcolumn
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set tabstop=8
+set shiftwidth=0
+set softtabstop=-1
+set noexpandtab
 set showmatch
 set matchtime=0
 set nobackup
