@@ -27,6 +27,8 @@ Plug 'ervandew/supertab'
 "Plug 'BodneyC/TexTemplate-VimPlugin'
 Plug 'ChesleyTan/wordCount.vim'
 Plug 'majutsushi/tagbar'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'justinmk/vim-syntax-extra'
 
 "Plug '~/.local/share/nvim/plugged/TexTemplate-VimPlugin/'
 

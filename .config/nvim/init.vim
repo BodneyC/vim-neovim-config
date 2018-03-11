@@ -30,6 +30,8 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'BodneyC/TexTemplate-VimPlugin'
 Plug 'ervandew/supertab'
 Plug 'ChesleyTan/wordCount.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'justinmk/vim-syntax-extra'
 
 " Aesthetics
 
