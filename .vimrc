@@ -3,6 +3,16 @@ filetype off
 
 call plug#begin('/home/benjc/.vim/plugged')
 
+" Terminak
+Plug 'tc50cal/vim-terminal'
+
+" Linter
+Plug 'w0rp/ale'
+
+" Angular
+Plug 'Shougo/deoplete.nvim'
+Plug 'mhartington/nvim-typescript'
+
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -10,8 +20,9 @@ Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" New
+" Vim Stuff
 
+Plug 'mhinz/vim-startify'
 Plug 'kien/ctrlp.vim'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
@@ -24,13 +35,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'ervandew/supertab'
-"Plug 'BodneyC/TexTemplate-VimPlugin'
 Plug 'ChesleyTan/wordCount.vim'
 Plug 'majutsushi/tagbar'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'justinmk/vim-syntax-extra'
-
-"Plug '~/.local/share/nvim/plugged/TexTemplate-VimPlugin/'
 
 " Colorschemes
 
@@ -48,10 +56,9 @@ set nocompatible    "run in vim mode
 set noexpandtab       "expand tabs into spaces
 set autoindent      "auto-indent new lines
 set smartindent     "return ending brackets to proper locations
-set tabstop=8       "indentation leves of normal tabs
+set tabstop=4       "indentation leves of normal tabs
 set softtabstop=-1   "indentation level of soft-tabs
 set shiftwidth=0    "how many columns to re-indent with << and >>
-set showmatch       "show matching brackets
 set ruler           "show cursor position at all times
 set hls           "don't highlight the previous search term
 set number          "turn on line numbering
@@ -67,6 +74,7 @@ source /home/benjc/.vim/config/goyo.vim
 source /home/benjc/.vim/config/latex.vim
 source /home/benjc/.vim/config/pandoc.vim
 source /home/benjc/.vim/config/remappings.vim
+source /home/benjc/.vim/config/web-dev.vim
 
 if has("autocmd")
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
