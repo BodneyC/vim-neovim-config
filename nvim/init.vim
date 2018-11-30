@@ -1,7 +1,10 @@
 set nocompatible
 filetype off
 
-call plug#begin('~/.vim/plugged')
+let g:python_host_prog='/usr/bin/python2'
+let g:python3_host_prog='/usr/bin/python3'
+
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Terminak
 Plug 'tc50cal/vim-terminal'
@@ -52,39 +55,30 @@ Plug 'nanotech/jellybeans.vim'
 
 call plug#end()
 
-set number
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
+"runtime! archlinux.vim
+set nocompatible    "run in vim mode
+set noexpandtab       "expand tabs into spaces
+set autoindent      "auto-indent new lines
+set smartindent     "return ending brackets to proper locations
+set tabstop=4       "indentation leves of normal tabs
+set softtabstop=-1   "indentation level of soft-tabs
+set shiftwidth=0    "how many columns to re-indent with << and >>
+set ruler           "show cursor position at all times
+set hls           "don't highlight the previous search term
+set number          "turn on line numbering
+set wrap            "turn on visual word wrapping
+set linebreak       "only break lines on 'breakat' characters
+set laststatus=2
 set mouse=a
-set autoindent
-set modeline
-set cursorline
-set cursorcolumn
-set tabstop=4
-set shiftwidth=0
-set softtabstop=-1
-set noexpandtab
-set showmatch
-set matchtime=0
-set nobackup
-set nowritebackup
-set directory=/home/${USER}/.config/nvim/.swapfiles/
-set smartcase
-set ignorecase
-set hlsearch
-set incsearch
-set autochdir
-set linebreak
+syntax on           "turn on syntax highlighting
 
 " Modular Config  
-source /home/${USER}/.vim/config/nerdtreeCFG.vim
-source /home/${USER}/.vim/config/goyo.vim
-source /home/${USER}/.vim/config/latex.vim
-source /home/${USER}/.vim/config/pandoc.vim
-source /home/${USER}/.vim/config/remappings.vim
-source /home/${USER}/.vim/config/web-dev.vim
+source ~/.config/nvim/config/nerdtreeCFG.vim
+source ~/.config/nvim/config/goyo.vim
+source ~/.config/nvim/config/latex.vim
+source ~/.config/nvim/config/pandoc.vim
+source ~/.config/nvim/config/remappings.vim
+source ~/.config/nvim/config/web-dev.vim
 
 " Ale
 let g:ale_fixers = {
@@ -115,6 +109,7 @@ set bs=2 "fix backspace on some consoles
 set scrolloff=3
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
+"runtime! macros/matchit.vim
 
 " For NERDTree
 "autocmd vimenter * NERDTree
@@ -165,7 +160,8 @@ let g:AutoPairsFlyMode=0
 
 " Undo stuff
 set undofile
-set undodir=$HOME/.vim/undo
+set undodir=$HOME/.config/nvim/undo
 set undolevels=100000
 set undoreload=100000
-set viminfo+=n~/.vim/.viminfo
+set viminfo+=n~/.config/nvim/.viminfo
+
