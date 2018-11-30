@@ -26,6 +26,6 @@ echo "Moving init.vim to $INIT_VIM"
 cd nvim
 mkdir -p ~/.config/nvim/{plugged,config,undo,.swapfiles,viminfo}
 cp init.vim ~/.config/nvim
-cp config/*.vim ~/.config/nvim/config
+cp ../config/*.vim ~/.config/nvim/config
 
 nvim +PlugInstall
