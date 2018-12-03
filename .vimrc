@@ -70,7 +70,7 @@ set showmatch
 set matchtime=0
 set nobackup
 set nowritebackup
-set directory=/home/${USER}/.config/nvim/.swapfiles/
+set directory=~/.vim/swapfiles
 set smartcase
 set ignorecase
 set hlsearch
@@ -79,12 +79,12 @@ set autochdir
 set linebreak
 
 " Modular Config  
-source /home/${USER}/.vim/config/nerdtreeCFG.vim
-source /home/${USER}/.vim/config/goyo.vim
-source /home/${USER}/.vim/config/latex.vim
-source /home/${USER}/.vim/config/pandoc.vim
-source /home/${USER}/.vim/config/remappings.vim
-source /home/${USER}/.vim/config/web-dev.vim
+source ~/.vim/config/nerdtreeCFG.vim
+source ~/.vim/config/goyo.vim
+source ~/.vim/config/latex.vim
+source ~/.vim/config/pandoc.vim
+source ~/.vim/config/remappings.vim
+source ~/.vim/config/web-dev.vim
 
 " Ale
 let g:ale_fixers = {
@@ -169,3 +169,9 @@ set undodir=$HOME/.vim/undo
 set undolevels=100000
 set undoreload=100000
 set viminfo+=n~/.vim/.viminfo
+
+" gVim stuff
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
