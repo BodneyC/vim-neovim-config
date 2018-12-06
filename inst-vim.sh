@@ -13,7 +13,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 echo "Moving .vimrc to ~/"
 cp .vimrc ~
-mkdir -p ~/.vim/{config,undo,.swapfiles,viminfo}
+mkdir -p ~/.vim/{config,undo,swapfiles,viminfo}
 cp config/*.vim ~/.vim/config
 
 vim +PlugInstall

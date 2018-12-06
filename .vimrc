@@ -10,9 +10,7 @@ Plug 'tc50cal/vim-terminal'
 Plug 'w0rp/ale'
 
 " Angular
-Plug 'Shougo/deoplete.nvim'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
 
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
