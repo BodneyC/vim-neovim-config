@@ -43,6 +43,7 @@ Plug 'ChesleyTan/wordCount.vim'
 Plug 'majutsushi/tagbar'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'justinmk/vim-syntax-extra'
+Plug 'lambdalisue/suda.vim'
 
 " Colorschemes
 
@@ -53,14 +54,18 @@ Plug 'chr4/jellygrass.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'nanotech/jellybeans.vim'
 
+" Note-taking
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
 call plug#end()
 
 "runtime! archlinux.vim
 set nocompatible    "run in vim mode
-set noexpandtab       "expand tabs into spaces
+set expandtab       "expand tabs into spaces
 set autoindent      "auto-indent new lines
 set smartindent     "return ending brackets to proper locations
-set tabstop=4       "indentation leves of normal tabs
+set tabstop=2       "indentation leves of normal tabs
 set softtabstop=-1   "indentation level of soft-tabs
 set shiftwidth=0    "how many columns to re-indent with << and >>
 set ruler           "show cursor position at all times
@@ -78,7 +83,6 @@ source ~/.config/nvim/config/goyo.vim
 source ~/.config/nvim/config/latex.vim
 source ~/.config/nvim/config/pandoc.vim
 source ~/.config/nvim/config/remappings.vim
-source ~/.config/nvim/config/web-dev.vim
 
 " Ale
 let g:ale_fixers = {
@@ -109,10 +113,8 @@ set bs=2 "fix backspace on some consoles
 set scrolloff=3
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
-"runtime! macros/matchit.vim
 
 " For NERDTree
-"autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif "Open if directory
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "Close if last window
@@ -133,10 +135,14 @@ autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
 " AStyle
-autocmd BufNewFile,BufRead *.* set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
+autocmd BufNewFile,BufRead *.C,*.java,*.c,*.H,*.h set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
 
 let g:onedark_termcolors = 256
 colorscheme jellybeans
+
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
+
 let g:lightline = { 
 			\ 'colorscheme': 'one',
 			\ 'active': {
