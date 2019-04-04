@@ -142,6 +142,7 @@ colorscheme jellybeans
 
 hi Normal guibg=NONE ctermbg=NONE
 hi NonText guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
 
 let g:lightline = { 
 			\ 'colorscheme': 'one',
