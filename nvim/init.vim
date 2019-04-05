@@ -10,7 +10,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tc50cal/vim-terminal'
 
 " Linter
-Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'w0rp/ale'
 
 " Angular
 Plug 'Shougo/deoplete.nvim'

@@ -29,3 +29,4 @@ cp init.vim ~/.config/nvim
 cp ../config/*.vim ~/.config/nvim/config
 
 nvim +PlugInstall
+nvim +CocInstall coc-{json,java,python,css,yank}
