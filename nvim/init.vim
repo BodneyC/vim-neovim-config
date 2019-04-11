@@ -4,7 +4,7 @@ filetype off
 let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog='/usr/bin/python3'
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Terminak
 Plug 'tc50cal/vim-terminal'
@@ -64,13 +64,13 @@ call plug#end()
 "runtime! archlinux.vim
 set nocompatible    "run in vim mode
 set expandtab       "expand tabs into spaces
+set tabstop=2       "indentation leves of normal tabs
+set softtabstop=0   "indentation level of soft-tabs
+set shiftwidth=0    "how many columns to re-indent with << and >>
 set autoindent      "auto-indent new lines
 set breakindent
 set breakindentopt=shift:1
 set smartindent     "return ending brackets to proper locations
-set tabstop=2       "indentation leves of normal tabs
-set softtabstop=-1   "indentation level of soft-tabs
-set shiftwidth=0    "how many columns to re-indent with << and >>
 set ruler           "show cursor position at all times
 set hls           "don't highlight the previous search term
 set number          "turn on line numbering
