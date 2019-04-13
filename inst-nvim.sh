@@ -12,7 +12,7 @@ fi
 INIT_VIM='~/.config/nvim/init.vim'
 
 if [[ -f $INIT_VIM ]]; then
-	read -p "$INIT_VIM already exists, overwrite? [yn]" -n 1 -r
+	read -p "$INIT_VIM already exists, overwrite? [yN]" -n 1 -r
 	if [[ $REPLY != ^[Yy]$ ]]; then
 		echo "Exiting script..."
 		exit
@@ -29,4 +29,14 @@ cp init.vim ~/.config/nvim
 cp ../config/*.vim ~/.config/nvim/config
 
 nvim +PlugInstall
-nvim "+CocInstall coc-{json,java,python,css,yank}"
+nvim "+CocInstall coc-{html,json,java,python,css,yank}"
+
+if hash pip3 2>/dev/null; then
+  echo "Installing pynvim..."
+  pip3 install --user pynvim
+  nvim +UpdateRemotePlugins
+else
+  echo "No pip3 bin found, pynvim required for denite"
+fi
+
+nvim "+call coc#util#build()"
