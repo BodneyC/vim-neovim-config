@@ -1,13 +1,9 @@
 #!/bin/bash
 
 if hash nvim 2>/dev/null; then
-	echo "Neovim installed, continuing..."
-else
-	echo "Neovim not installed"
-	echo "   Try `sudo [pacman|apt|yum] install neovim` etc"
-	echo "Exiting..."
-	exit
+  sudo pacman -S --noconfirm nvim 
 fi
+sudo pacman -S --noconfirm fd exa ripgrep
 
 INIT_VIM='~/.config/nvim/init.vim'
 
@@ -37,6 +33,14 @@ if hash pip3 2>/dev/null; then
   nvim +UpdateRemotePlugins
 else
   echo "No pip3 bin found, pynvim required for denite"
+fi
+
+if hash npm 2>/dev/null; then
+  echo "Installing node neovim..."
+  npm i -g neovim
+  nvim +UpdateRemotePlugins
+else
+  echo "No npm bin found"
 fi
 
 nvim "+call coc#util#build()"

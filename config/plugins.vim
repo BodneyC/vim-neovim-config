@@ -1,11 +1,8 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Terminak
-Plug 'tc50cal/vim-terminal'
-
 " Linter
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 
 " Angular
 Plug 'Shougo/deoplete.nvim'
@@ -18,6 +15,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Vim Stuff
 
@@ -38,17 +36,31 @@ Plug 'ChesleyTan/wordCount.vim'
 Plug 'majutsushi/tagbar'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'justinmk/vim-syntax-extra'
-Plug 'lambdalisue/suda.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/denite.nvim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'xolox/vim-easytags'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'tpope/vim-eunuch'
+Plug 'Yggdroot/indentLine'
+Plug 'wincent/terminus'
+Plug 'moll/vim-bbye'
+" Better . functionality
+Plug 'tpope/vim-repeat'
+" Surround with ys<w>"
+Plug 'tpope/vim-surround'
+" n[<space> add space 
+Plug 'inkarkat/vim-ingo-library'  " required by LineJuggler
+Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
+Plug 'itchyny/lightline.vim'
 
 " Colorschemes
 
-Plug 'dim13/smyck.vim'
-Plug 'nightsense/carbonized'
-Plug 'joshdick/onedark.vim'
+"Plug 'dim13/smyck.vim'
+"Plug 'nightsense/carbonized'
+"Plug 'joshdick/onedark.vim'
 Plug 'chr4/jellygrass.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'nanotech/jellybeans.vim'
 
 " Note-taking
