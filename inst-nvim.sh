@@ -1,9 +1,10 @@
 #!/bin/bash
 
+cd $(dirname "${BASH_SOURCE[0]}")
+
 if hash nvim 2>/dev/null; then
   sudo pacman -S --noconfirm nvim 
 fi
-sudo pacman -S --noconfirm fd exa ripgrep
 
 INIT_VIM='~/.config/nvim/init.vim'
 
@@ -19,10 +20,8 @@ echo "Curling vim-plug setup file"
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Moving init.vim to $INIT_VIM"
-cd nvim
-mkdir -p ~/.config/nvim/{plugged,config,undo,.swapfiles,viminfo}
-cp init.vim ~/.config/nvim
-cp ../config/*.vim ~/.config/nvim/config
+mkdir -p ~/.config/nvim/{config,undo,.swapfiles,viminfo}
+chmod +x ./update-nvim.sh && ./update-nvim.sh
 
 nvim +PlugInstall
 nvim "+CocInstall coc-{html,json,java,python,css,yank}"
@@ -40,7 +39,7 @@ if hash npm 2>/dev/null; then
   npm i -g neovim
   nvim +UpdateRemotePlugins
 else
-  echo "No npm bin found"
+  echo "No npm bin found for npm -> neovim"
 fi
 
 nvim "+call coc#util#build()"
