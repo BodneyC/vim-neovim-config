@@ -27,6 +27,7 @@
   set scrolloff=3                " # lines below cursor always
   set backspace=indent,eol,start " Backspace behaviour
   set matchpairs+=<:>            " use % to jump between pairs
+  set autowrite                  " Automatically write when switching buffers
   syntax on                      " turn on syntax highlighting
 
 " Folding

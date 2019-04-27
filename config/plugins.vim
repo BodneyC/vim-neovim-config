@@ -50,7 +50,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Terminal
     Plug 'wincent/terminus'
   " exCtags
-    Plug 'xolox/vim-easytags'
+    "Plug 'xolox/vim-easytags'
   " Tmux
     Plug 'benmills/vimux'
     Plug 'christoomey/vim-tmux-navigator'

@@ -1,3 +1,5 @@
+set signcolumn=yes
+
 function s:CocFormat(range, line1, line2) abort
   if a:range == 0
     call CocAction('format')
@@ -9,6 +11,8 @@ function s:CocFormat(range, line1, line2) abort
   endif
 endfunction
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 let g:coc_filetypes = []
 
@@ -59,3 +63,15 @@ augroup vimrc-coc
     \|endif
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+nmap <silent> <space>gd <Plug>(coc-definition)
+nmap <silent> <space>gt <Plug>(coc-type-definition)
+nmap <silent> <space>gi <Plug>(coc-implementation)
+nmap <silent> <space>gr <Plug>(coc-references)
+
+nnoremap <silent> <space>l :CocList<CR>
+nnoremap <silent> <space>d :CocList --auto-preview diagnostics<CR>
+nnoremap <silent> <space>c :CocList commands<CR>

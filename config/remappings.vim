@@ -17,15 +17,15 @@ map <silent> <leader>ge :call goyo#Goyo_e()<CR>
 map <silent> <leader>gl :call goyo#Goyo_l()<CR>
 
 " Buffer Control
-nnoremap gp :up<CR>:bp<CR>
-nnoremap gn :up<CR>:bn<CR>
-nnoremap gd :up<CR>:b#<CR>:bd#<CR>
+nnoremap gp :bp<CR>
+nnoremap gn :bn<CR>
+nnoremap gd :b#<CR>:bd#<CR>
 nnoremap gl :ls<CR>
 " Made a function for this but 'b' doesn't like being passed variables
-nnoremap g1 :up<CR>:b1<CR>
-nnoremap g2 :up<CR>:b2<CR>
-nnoremap g3 :up<CR>:b3<CR>
-nnoremap g4 :up<CR>:b4<CR>
+nnoremap g1 :b1<CR>
+nnoremap g2 :b2<CR>
+nnoremap g3 :b3<CR>
+nnoremap g4 :b4<CR>
 
 " Update .vimrc
 nmap <leader>s :so $MYVIMRC
