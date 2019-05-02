@@ -20,6 +20,7 @@ map <silent> <leader>gl :call goyo#Goyo_l()<CR>
 nnoremap gp :bp<CR>
 nnoremap gn :bn<CR>
 nnoremap gd :b#<CR>:bd#<CR>
+nnoremap g# :b#<CR>
 nnoremap gl :ls<CR>
 " Made a function for this but 'b' doesn't like being passed variables
 nnoremap g1 :b1<CR>
