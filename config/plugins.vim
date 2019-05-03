@@ -53,7 +53,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     "Plug 'xolox/vim-easytags'
   " Tmux
     Plug 'benmills/vimux'
-    Plug 'christoomey/vim-tmux-navigator'
   " Git
     Plug 'tpope/vim-fugitive'
 

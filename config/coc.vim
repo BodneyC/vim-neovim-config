@@ -46,7 +46,7 @@ call coc#add_extension('coc-python')
 let g:coc_filetypes += ['python']
 augroup vimrc-language-python
   autocmd!
-  autocmd FileType python Indent 4
+  autocmd FileType python set ts=4
 augroup END
 
 let g:python_highlight_all = 1
