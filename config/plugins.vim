@@ -49,6 +49,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Integrations
   " Terminal
     Plug 'wincent/terminus'
+    Plug 'christoomey/vim-tmux-navigator'
   " exCtags
     "Plug 'xolox/vim-easytags'
   " Tmux
