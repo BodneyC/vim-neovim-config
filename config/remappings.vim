@@ -14,7 +14,7 @@ nnoremap <F6> gg"*yG``
 inoremap <F6> <esc>gg"*yG``a
 
 " F-keys
-nnoremap <F7> :set spell!
+nnoremap <F7> :set spell!<CR>
 inoremap <F7> <esc>:set spell!<CR>a
 nnoremap <F10> :split term://zsh<CR><C-w>J:resize 10<CR>
 inoremap <F10> <esc>:split term://zsh<CR><C-w>J:resize 10<CR>a
@@ -49,6 +49,10 @@ nnoremap g4 :b4<CR>
 " Update .vimrc
 nmap <leader>s :so $MYVIMRC
 nmap <leader>v :e $MYVIMRC
+
+" Split
+nmap <leader>" :sbn<CR>
+nmap <leader>% :vert sbn<CR>
 
 " Case beefs
 command! WQ wq
