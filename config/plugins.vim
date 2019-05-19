@@ -45,6 +45,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'inkarkat/vim-ingo-library'  " required by LineJuggler
   Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
   Plug 'terryma/vim-multiple-cursors'
+  Plug 'andymass/vim-matchup'
   
 " Integrations
   " Terminal

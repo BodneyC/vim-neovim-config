@@ -16,8 +16,6 @@ inoremap <F6> <esc>gg"*yG``a
 " F-keys
 nnoremap <F7> :set spell!<CR>
 inoremap <F7> <esc>:set spell!<CR>a
-nnoremap <F10> :split term://zsh<CR><C-w>J:resize 10<CR>
-inoremap <F10> <esc>:split term://zsh<CR><C-w>J:resize 10<CR>a
 
 " Misc
 nnoremap Q q
@@ -55,6 +53,8 @@ nmap <leader>" :sbn<CR>
 nmap <leader>% :vert sbn<CR>
 
 " Case beefs
+command! Wqa wqa
+command! WQa wqa
 command! WQ wq
 command! Wq wq
 command! W w

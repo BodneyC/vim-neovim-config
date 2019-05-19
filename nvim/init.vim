@@ -8,6 +8,7 @@ source ~/.config/nvim/config/plugins.vim
 
 " Modular Config  
 source ~/.config/nvim/config/interface.vim
+source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/files.vim
 source ~/.config/nvim/config/coc.vim
 
