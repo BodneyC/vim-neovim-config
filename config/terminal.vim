@@ -1,10 +1,3 @@
-" Terminal stuff
-  augroup _terminal_stuff
-    autocmd!
-    autocmd TermOpen * setlocal nospell nobuflisted nonumber textwidth=0 winheight=1
-    autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
-  augroup END
-
 function! ChooseTerm(termname, slider)
   let pane = bufwinnr(a:termname)
   let buf = bufexists(a:termname)

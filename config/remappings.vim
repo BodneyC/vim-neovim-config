@@ -72,3 +72,9 @@ function! ToLin()
 	%retab!
 endfunction
 nnoremap <F2> :call ToLin()<CR>
+
+" Movement
+  nnoremap <S-up>   :m-2<CR>
+  nnoremap <S-down> :m+<CR>
+  inoremap <S-up>   <Esc>:m-2<CR>
+  inoremap <S-down> <Esc>:m+<CR>

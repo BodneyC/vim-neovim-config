@@ -44,16 +44,6 @@ let g:coc_filetypes += ['yaml']
 
 call coc#add_extension('coc-python')
 let g:coc_filetypes += ['python']
-augroup vimrc-language-python
-  autocmd!
-  autocmd FileType python set ts=4
-augroup END
-
-augroup vimrc-language-shell
-  autocmd!
-  autocmd FileType sh set noexpandtab
-  autocmd FileType sh set ts=4
-augroup end
 
 let g:python_highlight_all = 1
 
