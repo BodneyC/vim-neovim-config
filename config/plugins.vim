@@ -33,6 +33,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Yggdroot/indentLine'
   Plug 'itchyny/lightline.vim'
 
+" Git
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+  Plug 'shumphrey/fugitive-gitlab.vim'
+
 " Text manipulation
   Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
   Plug 'junegunn/vim-easy-align'
@@ -50,7 +55,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Integrations
   " Terminal
     Plug 'wincent/terminus'
-    Plug 'christoomey/vim-tmux-navigator'
+    "Plug 'christoomey/vim-tmux-navigator'
   " exCtags
     "Plug 'xolox/vim-easytags'
   " Tmux

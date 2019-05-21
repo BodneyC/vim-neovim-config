@@ -8,7 +8,7 @@ command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
 augroup vimrc-feature-directory
   autocmd!
-  autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == '' | setlocal nobuflisted nonumber | endif
+  "autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == '' | setlocal nobuflisted nonumber | endif
 augroup END
 
 augroup vimrc-feature-terminal

@@ -74,7 +74,22 @@ endfunction
 nnoremap <F2> :call ToLin()<CR>
 
 " Movement
-  nnoremap <S-up>   :m-2<CR>
-  nnoremap <S-down> :m+<CR>
-  inoremap <S-up>   <Esc>:m-2<CR>
-  inoremap <S-down> <Esc>:m+<CR>
+nnoremap <S-up>   :m-2<CR>
+nnoremap <S-down> :m+<CR>
+inoremap <S-up>   <Esc>:m-2<CR>
+inoremap <S-down> <Esc>:m+<CR>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+inoremap <C-h> <Esc><C-w>h
+inoremap <C-j> <Esc><C-w>j
+inoremap <C-k> <Esc><C-w>k
+inoremap <C-l> <Esc><C-w>l
+
+" FZF
+nnoremap <silent> <space>b :Buffer<CR>
+nnoremap <silent> <space>f :Files<CR>
+nnoremap <silent> <space>r :Rg 
+nnoremap <silent> <space>m :Marks<CR> 
