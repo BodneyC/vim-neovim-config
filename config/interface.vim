@@ -72,14 +72,15 @@
   set laststatus=2
   let g:limelight_conceal_guifg = 'DarkGray'
   let g:limelight_conceal_guifg = '#777777'
+
   let g:lightline = { 
         \   'colorscheme': 'one',
         \   'active': {
         \     'right': [ [ 'lineinfo' ],
         \                [ 'percent' ],
         \                [ 'WordCount', 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
-        \     'left': [ [ 'mode', 'paste' ],
-        \               [ 'cocstatus', 'readonly', 'filename', 'Fugitive', 'modified' ] ]
+        \     'left': [ [ 'mode' ],
+        \               [ 'paste', 'cocstatus', 'readonly', 'filename', 'Fugitive', 'modified' ] ]
         \   }, 
         \   'component' : {
         \	    'WordCount' : 'wc: %{wordCount#WordCount()}',
@@ -89,6 +90,16 @@
         \     'cocstatus': 'coc#status'
         \   }
         \ }
+  let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+  let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+  let s:palette.normal.left   = [ [ 'black', '#98c379', 'NONE', 'NONE' ] ]
+  let s:palette.insert.left   = [ [ 'black', '#61afef', 'NONE', 'NONE' ] ]
+  let s:palette.replace.left  = [ [ 'black', '#e06c75', 'NONE', 'NONE' ] ]
+  let s:palette.visual.left   = [ [ 'black', '#c678dd', 'NONE', 'NONE' ] ]
+  let s:palette.normal.right  = s:palette.normal.left
+  let s:palette.insert.right  = s:palette.insert.left
+  let s:palette.replace.right = s:palette.replace.left
+  let s:palette.visual.right  = s:palette.visual.left
 
 " AutoPairs settings
   let g:AutoPairsMultilineClose=0

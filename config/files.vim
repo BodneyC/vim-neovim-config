@@ -29,6 +29,6 @@ augroup END
 
 augroup vimrc-language-shell
   autocmd!
-  autocmd FileType sh set noexpandtab
-  autocmd FileType sh set ts=4 | set sw=4
+  autocmd FileType sh,zsh set noexpandtab
+  autocmd FileType sh,zsh set ts=4 | set sw=4
 augroup end
