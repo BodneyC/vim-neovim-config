@@ -93,3 +93,4 @@ nnoremap <silent> <space>b :Buffer<CR>
 nnoremap <silent> <space>f :Files<CR>
 nnoremap <silent> <space>r :Rg 
 nnoremap <silent> <space>m :Marks<CR> 
+nnoremap <silent> <space>i :IndentLinesToggle<CR>

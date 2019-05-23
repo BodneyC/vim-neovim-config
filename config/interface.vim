@@ -91,15 +91,18 @@
         \   }
         \ }
   let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-  let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-  let s:palette.normal.left   = [ [ 'black', '#98c379', 'NONE', 'NONE' ] ]
-  let s:palette.insert.left   = [ [ 'black', '#61afef', 'NONE', 'NONE' ] ]
-  let s:palette.replace.left  = [ [ 'black', '#e06c75', 'NONE', 'NONE' ] ]
-  let s:palette.visual.left   = [ [ 'black', '#c678dd', 'NONE', 'NONE' ] ]
-  let s:palette.normal.right  = s:palette.normal.left
-  let s:palette.insert.right  = s:palette.insert.left
-  let s:palette.replace.right = s:palette.replace.left
-  let s:palette.visual.right  = s:palette.visual.left
+  let s:palette.normal.middle   = [ [ 'NONE', '#111111', 'NONE', 'NONE' ] ]
+  let s:palette.normal.left     = [ [ 'black', '#98c379', 'NONE', 'NONE' ] ]
+  let s:palette.normal.right    = s:palette.normal.left
+  let s:palette.inactive.middle = [ [ 'NONE', '#111f23', 'NONE', 'NONE' ] ]
+  let s:palette.inactive.left   = s:palette.inactive.middle
+  let s:palette.inactive.right  = s:palette.inactive.middle
+  let s:palette.insert.left     = [ [ 'black', '#61afef', 'NONE', 'NONE' ] ]
+  let s:palette.insert.right    = s:palette.insert.left
+  let s:palette.visual.left     = [ [ 'black', '#c678dd', 'NONE', 'NONE' ] ]
+  let s:palette.visual.right    = s:palette.visual.left
+  let s:palette.replace.right   = s:palette.replace.left
+  let s:palette.replace.left    = [ [ 'black', '#e06c75', 'NONE', 'NONE' ] ]
 
 " AutoPairs settings
   let g:AutoPairsMultilineClose=0

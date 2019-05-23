@@ -6,6 +6,16 @@ let g:ranger_map_keys = 0
 nnoremap <silent> <Leader>R :Ranger<CR>
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
+augroup vimrc-plugin-startify
+  autocmd!
+  autocmd User Startified IndentLinesDisable
+augroup END
+
+augroup vimrc-language-json
+  autocmd!
+  autocmd BufEnter,BufWinEnter,WinEnter *.json,*.JSON IndentLinesDisable
+augroup END
+
 augroup vimrc-feature-directory
   autocmd!
   "autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == '' | setlocal nobuflisted nonumber | endif
