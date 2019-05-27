@@ -28,7 +28,12 @@
   set backspace=indent,eol,start " Backspace behaviour
   set matchpairs+=<:>            " use % to jump between pairs
   set autowrite                  " Automatically write when switching buffers
+  set ttimeout
+  set ttimeoutlen=50
+  set splitbelow
+  set splitright
   syntax on                      " turn on syntax highlighting
+  
 
 " Folding
   set nofoldenable

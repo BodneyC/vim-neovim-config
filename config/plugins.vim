@@ -15,6 +15,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
   " C++
     Plug 'octol/vim-cpp-enhanced-highlight'
+  " Jekyll
+    Plug 'tpope/vim-liquid'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
@@ -32,6 +34,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'Yggdroot/indentLine'
   Plug 'itchyny/lightline.vim'
+  Plug 'ryanoasis/vim-devicons'
 
 " Git
   Plug 'tpope/vim-fugitive'

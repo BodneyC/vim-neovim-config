@@ -1,10 +1,11 @@
 let mapleader="\<Space>"
 
 " Tags
-nnoremap <leader>ct :!ctags -Rf .git/tags --tag-relative --extra=+f --exclude=.git,pkg,node_modules<CR>
+nnoremap <leader>ct :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags --tag-relative --extras=+f --exclude=.git --exclude=pkg --exclude=node_modules<CR>
 
 " General leader
 nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
 nnoremap <leader>* :s/\<<c-r><c-w>\>//<left>
 
 " Resizing of slices
@@ -117,6 +118,7 @@ inoremap <C-k> <Esc><C-w>k
 inoremap <C-l> <Esc><C-w>l
 
 " FZF
+let g:bclose_no_plugin_maps=1
 nnoremap <leader>b :Buffer<CR>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>r :Rg 

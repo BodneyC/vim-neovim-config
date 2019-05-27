@@ -24,12 +24,18 @@ augroup END
 augroup vimrc-feature-terminal
   autocmd!
   autocmd TermOpen * setlocal nospell nobuflisted nonumber textwidth=0 winheight=1
+  autocmd TermOpen * IndentLinesDisable
   autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
 
 augroup vimrc-language-other
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile,Dockerfile set ts=4 | set sw=4
+augroup END
+
+augroup vimrc-language-web
+  autocmd!
+  autocmd FileType html,css,js set ts=4 | set sw=4
 augroup END
 
 augroup vimrc-language-python
@@ -42,3 +48,12 @@ augroup vimrc-language-shell
   autocmd FileType sh,zsh set noexpandtab
   autocmd FileType sh,zsh set ts=4 | set sw=4
 augroup end
+
+function s:SetIndent(n)
+  let &l:ts=a:n
+  let &l:sw=a:n
+  IndentLinesDisable
+  IndentLinesEnable
+endfunction
+
+command! -nargs=1 SetIndent call s:SetIndent(<f-args>)

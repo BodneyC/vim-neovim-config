@@ -15,4 +15,4 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " UNCOMMENT IF PATCHED FONT IS INSTALLED
 "set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
-"set encoding=utf-8
+set encoding=UTF-8
