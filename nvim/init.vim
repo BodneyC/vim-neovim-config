@@ -6,7 +6,7 @@ let g:python3_host_prog='/usr/bin/python3'
 
 source ~/.config/nvim/config/plugins.vim
 
-" Modular Config  
+" Modular Config
 source ~/.config/nvim/config/interface.vim
 source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/files.vim

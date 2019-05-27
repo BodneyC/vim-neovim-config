@@ -76,16 +76,6 @@ command! Q q
 " Commands
 command! -nargs=0 ConvLineEndings %s///g
 
-" Four spaces to eight col tabs
-function! ToLin()
-	set ts=4
-	set noet
-	%retab!
-	set ts=8
-	%retab!
-endfunction
-nnoremap <F2> :call ToLin()<CR>
-
 " Movement
 xnoremap <S-up>   :m-2<CR>gv=gv
 xnoremap <S-down> :m'>+<CR>gv=gv

@@ -49,11 +49,23 @@ augroup vimrc-language-shell
   autocmd FileType sh,zsh set ts=4 | set sw=4
 augroup end
 
-function s:SetIndent(n)
+" Four spaces to eight col tabs
+function! ToLin(n)
+	set noet
+	%retab!
+  let &l:ts=a:n
+  set expandtab
+	%retab!
+  call SetIndent(a:n)
+endfunction
+
+command! -nargs=1 ChangeIndent call ToLin(<f-args>)
+
+function SetIndent(n)
   let &l:ts=a:n
   let &l:sw=a:n
   IndentLinesDisable
   IndentLinesEnable
 endfunction
 
-command! -nargs=1 SetIndent call s:SetIndent(<f-args>)
+command! -nargs=1 SetIndent call SetIndent(<f-args>)
