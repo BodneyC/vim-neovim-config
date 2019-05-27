@@ -22,7 +22,7 @@
   set laststatus=2               " Always display
   set mouse=a                    " Enable mouse
   set termguicolors              " Should probably check if available
-  set tags=./tags;$HOME          " Search upwards to $HOME for tag file
+  set tags=.git/tags;$HOME          " Search upwards to $HOME for tag file
   set bs=2                       " fix backspace on some consoles
   set scrolloff=3                " # lines below cursor always
   set backspace=indent,eol,start " Backspace behaviour

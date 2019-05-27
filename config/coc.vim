@@ -63,11 +63,11 @@ augroup end
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-nmap <silent> <space>gd <Plug>(coc-definition)
-nmap <silent> <space>gt <Plug>(coc-type-definition)
-nmap <silent> <space>gi <Plug>(coc-implementation)
-nmap <silent> <space>gr <Plug>(coc-references)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
-nnoremap <silent> <space>l :CocList<CR>
-nnoremap <silent> <space>d :CocList --auto-preview diagnostics<CR>
-nnoremap <silent> <space>c :CocList commands<CR>
+nnoremap <silent> <leader>l :CocList<CR>
+nnoremap <silent> <leader>d :CocList --auto-preview diagnostics<CR>
+nnoremap <silent> <leader>c :CocList commands<CR>

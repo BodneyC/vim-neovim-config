@@ -1,3 +1,12 @@
+let mapleader="\<Space>"
+
+" Tags
+nnoremap <leader>ct :!ctags -Rf .git/tags --tag-relative --extra=+f --exclude=.git,pkg,node_modules<CR>
+
+" General leader
+nnoremap <leader>w :w<CR>
+nnoremap <leader>* :s/\<<c-r><c-w>\>//<left>
+
 " Resizing of slices
 nnoremap <silent> <leader>j :resize -5<CR>
 nnoremap <silent> <leader>k :resize +5<CR>
@@ -31,6 +40,9 @@ map <silent> <leader>ge :call goyo#Goyo_e()<CR>
 map <silent> <leader>gl :call goyo#Goyo_l()<CR>
 
 " Buffer Control
+nnoremap <Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
+nnoremap <leader><leader> <c-^>
 nnoremap gp :bp<CR>
 nnoremap gn :bn<CR>
 nnoremap gd :bn<CR>:bd#<CR>
@@ -74,23 +86,39 @@ endfunction
 nnoremap <F2> :call ToLin()<CR>
 
 " Movement
+xnoremap <S-up>   :m-2<CR>gv=gv
+xnoremap <S-down> :m'>+<CR>gv=gv
 nnoremap <S-up>   :m-2<CR>
 nnoremap <S-down> :m+<CR>
 inoremap <S-up>   <Esc>:m-2<CR>
 inoremap <S-down> <Esc>:m+<CR>
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <silent> <C-h> :call WinMove('h')<CR>
+nnoremap <silent> <C-j> :call WinMove('j')<CR>
+nnoremap <silent> <C-k> :call WinMove('k')<CR>
+nnoremap <silent> <C-l> :call WinMove('l')<CR>
+
+function! WinMove(k)
+  let t:curwin = winnr()
+  exec "wincmd " . a:k
+  if(t:curwin == winnr())
+    if(match(a:k, '[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
+    exec "wincmd " . a:k
+  endif
+endfunction
+
 inoremap <C-h> <Esc><C-w>h
 inoremap <C-j> <Esc><C-w>j
 inoremap <C-k> <Esc><C-w>k
 inoremap <C-l> <Esc><C-w>l
 
 " FZF
-nnoremap <silent> <space>b :Buffer<CR>
-nnoremap <silent> <space>f :Files<CR>
-nnoremap <silent> <space>r :Rg 
-nnoremap <silent> <space>m :Marks<CR> 
-nnoremap <silent> <space>i :IndentLinesToggle<CR>
+nnoremap <leader>b :Buffer<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>r :Rg 
+nnoremap <leader>m :Marks<CR> 
+nnoremap <leader>i :IndentLinesToggle<CR>

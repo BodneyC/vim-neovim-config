@@ -27,4 +27,4 @@ nnoremap <F10> :call ChooseTerm("term-split", 1)<CR>
 inoremap <F10> <esc>:call ChooseTerm("term-split", 1)<CR>a
 
 tnoremap <C-q> <C-\><C-n>
-"tnoremap <LeftRelease> <Nop>
+tnoremap <LeftRelease> <Nop>
