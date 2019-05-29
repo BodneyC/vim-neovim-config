@@ -46,7 +46,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'kien/ctrlp.vim'
   Plug 'jiangmiao/auto-pairs'
-  Plug 'ervandew/supertab'
+  "Plug 'ervandew/supertab'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-repeat' " Better . functionality
   Plug 'tpope/vim-surround' " Surround with ys<w>
@@ -78,7 +78,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-notes'
   Plug 'rhysd/vim-grammarous'
-  Plug 'lervag/vimtex'
+  "Plug 'lervag/vimtex'
   Plug 'junegunn/goyo.vim'
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'vim-pandoc/vim-pandoc-syntax'
