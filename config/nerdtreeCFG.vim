@@ -1,4 +1,4 @@
-nmap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>nt :NERDTreeToggle<cr>
 
 let NERDTreeWinSize=25
 let NERDTreeMinimalUI=0

@@ -1,19 +1,5 @@
 set signcolumn=yes
 
-function s:CocFormat(range, line1, line2) abort
-  if a:range == 0
-    call CocAction('format')
-  else
-    call cursor(a:line1, 1)
-    normal! V
-    call cursor(a:line2, 1)
-    call CocAction('formatSelected', 'V')
-  endif
-endfunction
-command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 let g:coc_filetypes = []
 
 call coc#add_extension('coc-css')
@@ -60,22 +46,6 @@ augroup vimrc-coc
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gt <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-
-nnoremap <silent> <leader>l :CocList<CR>
-nnoremap <silent> <leader>d :CocList --auto-preview diagnostics<CR>
-nnoremap <silent> <leader>c :CocList commands<CR>
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 function! s:check_back_space() abort

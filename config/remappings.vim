@@ -1,7 +1,7 @@
 let mapleader="\<Space>"
 
 " Tags
-nnoremap <leader>ct :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags --tag-relative --extras=+f --exclude=.git --exclude=pkg --exclude=node_modules<CR>
+nnoremap <leader>t :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags --tag-relative --extras=+f --exclude=.git --exclude=pkg --exclude=node_modules<CR>
 
 " General leader
 nnoremap <leader>w :w<CR>
@@ -92,6 +92,9 @@ nnoremap <silent> <C-l> :call WinMove('l')<CR>
 function! WinMove(k)
   let t:curwin = winnr()
   exec "wincmd " . a:k
+  if(a:k == 'h')
+    return
+  endif
   if(t:curwin == winnr())
     if(match(a:k, '[jk]'))
       wincmd v
@@ -108,9 +111,55 @@ inoremap <C-k> <Esc><C-w>k
 inoremap <C-l> <Esc><C-w>l
 
 " FZF
+function! FZFOpen(command_str)
+  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+    exe "normal! \<c-w>\<c-w>"
+  endif
+  exe 'normal! ' . a:command_str . "\<cr>"
+endfunction
+
 let g:bclose_no_plugin_maps=1
-nnoremap <leader>b :Buffer<CR>
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>r :Rg 
-nnoremap <leader>m :Marks<CR> 
-nnoremap <leader>i :IndentLinesToggle<CR>
+
+nnoremap <leader>b :call FZFOpen(':Buffer')<CR>
+nnoremap <leader>f :call FZFOpen(':Files')<CR>
+nnoremap <leader>r :call FZFOpen(':Rg')
+nnoremap <leader>m :call FZFOpen(':Marks')<CR>
+nnoremap <leader>i :call FZFOpen(':IndentLinesToggle')<CR>
+
+" Ranger
+nnoremap <silent> gx :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>
+vnoremap <silent> gx :<C-u>call netrw#BrowseXVis()<CR>
+nnoremap <silent> <Leader>R :Ranger<CR>
+
+" Coc
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+
+nnoremap <silent> <leader>l :CocList<CR>
+nnoremap <silent> <leader>d :CocList --auto-preview diagnostics<CR>
+nnoremap <silent> <leader>c :CocList commands<CR>
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+function s:CocFormat(range, line1, line2) abort
+  if a:range == 0
+    call CocAction('format')
+  else
+    call cursor(a:line1, 1)
+    normal! V
+    call cursor(a:line2, 1)
+    call CocAction('formatSelected', 'V')
+  endif
+endfunction
+command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
+vmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format)
+

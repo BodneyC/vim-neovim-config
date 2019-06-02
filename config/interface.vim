@@ -2,6 +2,8 @@
   let g:SuperTabDefaultCompletionType = "<c-n>"
   let g:indentLine_showFirstIndentLevel = 1
   let g:yats_host_keyword = 1
+  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  let g:WebDevIconsUnicodeDecorateFolderNodeDefaultSymbol = ''
 
 " General vim config
   " runtime! archlinux.vim
@@ -16,7 +18,7 @@
   set smartindent                " return ending brackets to proper locations
   set ruler                      " show cursor position at all times
   set hls                        " don't highlight the previous search term
-  set number                     " turn on line numbering
+  set nu rnu                     " turn on line numbering
   set wrap                       " turn on visual word wrapping
   set linebreak                  " only break lines on 'breakat' characters
   set laststatus=2               " Always display
@@ -58,9 +60,7 @@
   hi SpellCap cterm=underline,bold ctermfg=red
   hi SpellRare cterm=underline,bold ctermfg=red
   hi SpellLocal cterm=underline,bold ctermfg=red
-  autocmd BufRead,BufNewFile *.md setlocal spell
-  autocmd BufRead,BufNewFile *.tex setlocal spell
-  autocmd BufRead,BufNewFile *.txt setlocal spell
+  autocmd BufRead,BufNewFile *.md,*.tex setlocal spell
 
 " AStyle
   autocmd BufNewFile,BufRead *.C,*.java,*.c,*.H,*.h set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
@@ -71,6 +71,7 @@
   hi Normal guibg=NONE ctermbg=NONE
   hi NonText guibg=NONE ctermbg=NONE
   hi LineNr guibg=NONE ctermbg=NONE
+  hi CursorLineNr guibg=NONE ctermbg=NONE
   hi Search ctermbg=black ctermfg=white
 
 " Lightline
