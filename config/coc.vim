@@ -1,35 +1,45 @@
 set signcolumn=yes
 
-let g:coc_filetypes = []
+call coc#add_extension(
+      \ 'coc-lists',
+      \ 'coc-yank',
+      \ 'coc-post',
+      \ 'coc-diagnostic',
+      \ 'coc-calc',
+      \ 'coc-docker',
+      \ 'coc-sh',
+      \ 'coc-python', 
+      \ 'coc-json', 
+      \ 'coc-tsserver', 
+      \ 'coc-eslint', 
+      \ 'coc-prettier', 
+      \ 'coc-html', 
+      \ 'coc-emmet', 
+      \ 'coc-css')
+let g:coc_filetypes = [
+      \ 'Dockerfile',
+      \ 'sh',
+      \ 'python', 
+      \ 'yaml', 
+      \ 'markdown', 
+      \ 'json', 
+      \ 'javascript', 
+      \ 'javascript.jsx', 
+      \ 'typescript', 
+      \ 'typescript.jsx', 
+      \ 'html', 
+      \ 'css',]
 
-call coc#add_extension('coc-css')
-let g:coc_filetypes += ['css']
-
-call coc#add_extension('coc-html', 'coc-emmet')
-let g:coc_filetypes += ['html']
-
-call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier')
-let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
 call coc#config('eslint', {
-\ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-\ 'autoFixOnSave': v:true,
-\ })
+      \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+      \ 'autoFixOnSave': v:true,
+      \ })
 call coc#config('prettier', {
-\ 'singleQuote': v:true,
-\ 'trailingComma': 'all',
-\ 'jsxBracketSameLine': v:true,
-\ 'eslintIntegration': v:true,
-\ })
-
-call coc#add_extension('coc-json')
-let g:coc_filetypes += ['json']
-
-let g:coc_filetypes += ['markdown']
-
-let g:coc_filetypes += ['yaml']
-
-call coc#add_extension('coc-python')
-let g:coc_filetypes += ['python']
+      \ 'singleQuote': v:true,
+      \ 'trailingComma': 'all',
+      \ 'jsxBracketSameLine': v:true,
+      \ 'eslintIntegration': v:true,
+      \ })
 
 let g:python_highlight_all = 1
 

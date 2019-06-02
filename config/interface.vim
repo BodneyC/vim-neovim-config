@@ -86,7 +86,7 @@
         \                [ 'percent' ],
         \                [ 'WordCount', 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
         \     'left': [ [ 'mode' ],
-        \               [ 'paste', 'cocstatus', 'readonly', 'filename', 'Fugitive', 'modified' ] ]
+        \               [ 'git', 'paste', 'cocstatus', 'readonly', 'filename', 'Fugitive', 'modified' ] ]
         \   }, 
         \   'component' : {
         \	    'WordCount' : 'wc: %{wordCount#WordCount()}',
