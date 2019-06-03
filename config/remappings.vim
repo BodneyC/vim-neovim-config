@@ -122,7 +122,7 @@ let g:bclose_no_plugin_maps=1
 
 nnoremap <leader>b :call FZFOpen(':Buffer')<CR>
 nnoremap <leader>f :call FZFOpen(':Files')<CR>
-nnoremap <leader>r :call FZFOpen(':Rg')
+nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <leader>i :call FZFOpen(':IndentLinesToggle')<CR>
 
@@ -147,7 +147,6 @@ nnoremap <silent> <leader>c :CocList commands<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
 function s:CocFormat(range, line1, line2) abort
   if a:range == 0
