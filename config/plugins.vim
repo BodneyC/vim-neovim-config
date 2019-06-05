@@ -27,7 +27,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ChesleyTan/wordCount.vim'
   Plug 'junegunn/limelight.vim'
   Plug 'majutsushi/tagbar'
-  Plug 'justinmk/vim-syntax-extra'
+  "Plug 'justinmk/vim-syntax-extra'
   Plug 'rbgrouleff/bclose.vim'
   Plug 'moll/vim-bbye'
   Plug 'francoiscabrol/ranger.vim'
@@ -37,9 +37,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ryanoasis/vim-devicons'
 
 " Git
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
-  Plug 'shumphrey/fugitive-gitlab.vim'
+  "Plug 'tpope/vim-fugitive'
+  "Plug 'tpope/vim-rhubarb'
+  "Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Text manipulation
   Plug 'easymotion/vim-easymotion' " \\sX , \\wXX

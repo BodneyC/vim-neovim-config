@@ -6,6 +6,8 @@ command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 autocmd FileType nerdtree IndentLinesDisable
 autocmd FileType nerdtree setlocal signcolumn=no
 
+autocmd BufEnter,BufWinEnter,WinEnter *.md,*.tex setlocal conceallevel=0
+
 augroup vimrc-plugin-startify
   autocmd!
   autocmd User Startified IndentLinesDisable

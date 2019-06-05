@@ -16,3 +16,5 @@ source ~/.config/nvim/config/nerdtreeCFG.vim
 source ~/.config/nvim/config/goyo.vim
 source ~/.config/nvim/config/latex.vim
 source ~/.config/nvim/config/pandoc.vim
+
+source ~/.config/nvim/config/project-settings.vim

@@ -49,7 +49,6 @@ nnoremap gn :bn<CR>
 nnoremap gd :bn<CR>:bd#<CR>
 nnoremap g# :b#<CR>
 nnoremap gl :ls<CR>
-nnoremap gb :Buffers<CR>
 nnoremap gm :Map<CR>
 " Made a function for this but 'b' doesn't like being passed variables
 nnoremap g1 :b1<CR>
@@ -125,6 +124,7 @@ nnoremap <leader>f :call FZFOpen(':Files')<CR>
 nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <leader>i :call FZFOpen(':IndentLinesToggle')<CR>
+nnoremap <leader>o :e <cfile><CR>
 
 " Ranger
 nnoremap <silent> gx :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>
