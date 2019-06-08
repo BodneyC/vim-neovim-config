@@ -1,9 +1,11 @@
 let mapleader="\<Space>"
 
 " Tags
-nnoremap <leader>t :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags --tag-relative --extras=+f --exclude=.git --exclude=pkg --exclude=node_modules<CR>
+nnoremap <leader>t :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags $DIR<CR>
 
 " General leader
+nnoremap <leader>W :wqa<CR>
+nnoremap <leader>Q :qa!<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>* :s/\<<c-r><c-w>\>//<left>

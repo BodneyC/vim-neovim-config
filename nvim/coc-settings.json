@@ -3,5 +3,24 @@
   "git.addGlameToBufferVar": true,
   "python.linting.pylintPath": "/home/benjc/.local/bin/pylint",
   "diagnostic.virtualText": true,
-  "diagnostic.virtualTextPrefix": "| "
+  "diagnostic.virtualTextPrefix": "| ",
+  "languageserver": {
+    "groovy": {
+      "command": "java",
+      "args": [
+        "-jar",
+        "~/.config/nvim/addit-lang-servers/groovy-language-server-all.jar"
+      ],
+      "filetypes": ["groovy"]
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    }
+  },
+  "diagnostic-languageserver.filetypes": {
+    "vim": "vint",
+    "sh": "shellcheck"
+  }
 }
