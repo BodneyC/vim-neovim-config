@@ -8,6 +8,7 @@ source ~/.config/nvim/config/plugins.vim
 
 " Modular Config	
 source ~/.config/nvim/config/interface.vim
+source ~/.config/nvim/config/highlighting.vim
 source ~/.config/nvim/config/remappings.vim
 source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/files.vim
@@ -16,5 +17,6 @@ source ~/.config/nvim/config/nerdtreeCFG.vim
 source ~/.config/nvim/config/goyo.vim
 source ~/.config/nvim/config/latex.vim
 source ~/.config/nvim/config/pandoc.vim
+source ~/.config/nvim/config/conf-plugin.vim
 
 source ~/.config/nvim/config/project-settings.vim

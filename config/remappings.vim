@@ -125,8 +125,12 @@ nnoremap <leader>b :call FZFOpen(':Buffer')<CR>
 nnoremap <leader>f :call FZFOpen(':Files')<CR>
 nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
+nnoremap <leader>M :call FZFOpen(':Maps')<CR>
 nnoremap <leader>i :call FZFOpen(':IndentLinesToggle')<CR>
 nnoremap <leader>o :e <cfile><CR>
+
+nnoremap <leader><leader>u :MundoToggle<CR>
+nnoremap <leader><leader>v :Vista!!<CR>
 
 " Ranger
 nnoremap <silent> gx :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>

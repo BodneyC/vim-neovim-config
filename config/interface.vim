@@ -1,10 +1,3 @@
-" Plugin variable settings
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-  let g:indentLine_showFirstIndentLevel = 1
-  let g:yats_host_keyword = 1
-  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-  let g:WebDevIconsUnicodeDecorateFolderNodeDefaultSymbol = ''
-
 " General vim config
   " runtime! archlinux.vim
   set nocompatible               " run in vim mode
@@ -55,11 +48,6 @@
 
 " Spelling
   set spelllang=en_gb
-  hi clear SpellBad
-  hi SpellBad cterm=underline,bold ctermfg=red
-  hi SpellCap cterm=underline,bold ctermfg=red
-  hi SpellRare cterm=underline,bold ctermfg=red
-  hi SpellLocal cterm=underline,bold ctermfg=red
   autocmd BufRead,BufNewFile *.md,*.tex setlocal spell
 
 " AStyle
@@ -68,11 +56,6 @@
 " Colorscheme
   let g:onedark_termcolors = 256
   colorscheme space-vim-dark
-  hi Normal guibg=NONE ctermbg=NONE
-  hi NonText guibg=NONE ctermbg=NONE
-  hi LineNr guibg=NONE ctermbg=NONE
-  hi CursorLineNr guibg=NONE ctermbg=NONE
-  hi Search ctermbg=black ctermfg=white
 
 " Lightline
   set laststatus=2

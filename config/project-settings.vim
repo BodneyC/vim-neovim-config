@@ -5,8 +5,6 @@ function! ApplyLocalSettings(dirname)
   endif
   let l:settingsFile = a:dirname . "/.project.vim"
   if filereadable(l:settingsFile)
-    " Need to check this...
-    cd `=a:dirname`
     exec ":source " . l:settingsFile
     return
   endif

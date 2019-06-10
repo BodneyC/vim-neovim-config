@@ -6,17 +6,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Languages
-  " Typescript
-    "Plug 'Shougo/deoplete.nvim'
-    "Plug 'HerringtonDarkholme/yats.vim'
-    "Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
-  " Go
-    Plug 'fatih/vim-go', { 'tag': '*' }
-    Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-  " C++
-    Plug 'octol/vim-cpp-enhanced-highlight'
-  " Jekyll
-    Plug 'tpope/vim-liquid'
+  "Plug 'Shougo/deoplete.nvim'
+  "Plug 'HerringtonDarkholme/yats.vim'
+  "Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
+  Plug 'fatih/vim-go', { 'tag': '*' }
+  Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+  Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'tpope/vim-liquid'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
@@ -27,7 +23,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ChesleyTan/wordCount.vim'
   Plug 'junegunn/limelight.vim'
   Plug 'majutsushi/tagbar'
-  "Plug 'justinmk/vim-syntax-extra'
+  Plug 'justinmk/vim-syntax-extra'
   Plug 'rbgrouleff/bclose.vim'
   Plug 'moll/vim-bbye'
   Plug 'francoiscabrol/ranger.vim'
@@ -35,9 +31,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Yggdroot/indentLine'
   Plug 'itchyny/lightline.vim'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'yuttie/comfortable-motion.vim'
 
 " Git
-  "Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-fugitive'
   "Plug 'tpope/vim-rhubarb'
   "Plug 'shumphrey/fugitive-gitlab.vim'
 
@@ -46,7 +43,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'kien/ctrlp.vim'
   Plug 'jiangmiao/auto-pairs'
-  "Plug 'ervandew/supertab'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-repeat' " Better . functionality
   Plug 'tpope/vim-surround' " Surround with ys<w>
@@ -56,15 +52,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'andymass/vim-matchup'
   
 " Integrations
-  " Terminal
-    Plug 'wincent/terminus'
-    "Plug 'christoomey/vim-tmux-navigator'
-  " exCtags
-    "Plug 'xolox/vim-easytags'
-  " Tmux
-    Plug 'benmills/vimux'
-  " Git
-    Plug 'tpope/vim-fugitive'
+  "Plug 'christoomey/vim-tmux-navigator'
+  "Plug 'xolox/vim-easytags'
+  Plug 'benmills/vimux'
 
 " Colorschemes
   "Plug 'dim13/smyck.vim'
@@ -78,9 +68,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-notes'
   Plug 'rhysd/vim-grammarous'
-  "Plug 'lervag/vimtex'
   Plug 'junegunn/goyo.vim'
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'vim-pandoc/vim-pandoc-syntax'
+
+" Extras
+  Plug 'junegunn/vim-emoji'
+  Plug 'simnalamburt/vim-mundo'
+  Plug 'liuchengxu/vista.vim'
 
 call plug#end()

@@ -1,10 +1,25 @@
 {
-  "git.addGlameToVirtualText": true,
-  "git.addGlameToBufferVar": true,
+  "suggest.triggerAfterInsertEnter": false,
+  "suggest.noselect": false,
   "python.linting.pylintPath": "/home/benjc/.local/bin/pylint",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": "| ",
+  "git.enableGutters": true,
+  "git.addGlameToVirtualText": true,
+  "git.addGlameToBufferVar": true,
+  "git.virtualTextPrefix": "    | ",
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
     "groovy": {
       "command": "java",
       "args": [
