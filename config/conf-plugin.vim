@@ -15,7 +15,7 @@
   \  "variable": "\uf71b",
   \ }
 " Startify
-  let g:startify_padding_left = 9
+  let g:startify_padding_left = (&columns / 2) - (line('$') / 2)
   let s:header = [
         \ "",
         \ "                                       ,---._               ",
@@ -35,16 +35,14 @@
         \ ""]
   let s:footer = [
         \ "",
-        \ "+----------------------------+",
-        \ "|                            |",
-        \ "|      NeoVim - BodneyC      |",
-        \ "|                            |",
-        \ "+----------------------------+",
+        \ "               +----------------------------+",
+        \ "               |                            |",
+        \ "               |      NeoVim - BodneyC      |",
+        \ "               |                            |",
+        \ "               +----------------------------+",
         \ ""]
   function! s:center(lines) abort
-    let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-    let centered_lines = map(copy(a:lines),
-          \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    let centered_lines = map(copy(a:lines), 'repeat(" ", (&columns / 2) - (line("$") / 2)) . v:val')
     return centered_lines
   endfunction
   let g:startify_custom_header = s:center(s:header)
