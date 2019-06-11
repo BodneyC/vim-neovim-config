@@ -57,6 +57,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   "Plug 'christoomey/vim-tmux-navigator'
   "Plug 'xolox/vim-easytags'
   Plug 'benmills/vimux'
+  Plug 'honza/vim-snippets'
 
 " Colorschemes
   "Plug 'dim13/smyck.vim'

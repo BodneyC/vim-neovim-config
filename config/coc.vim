@@ -1,6 +1,7 @@
 set signcolumn=yes
 
 call coc#add_extension(
+      \ 'coc-snippets',
       \ 'coc-lists',
       \ 'coc-yank',
       \ 'coc-post',
