@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Interface
   "Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -35,6 +36,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Git
   Plug 'tpope/vim-fugitive'
+  Plug 'junegunn/gv.vim'
   "Plug 'tpope/vim-rhubarb'
   "Plug 'shumphrey/fugitive-gitlab.vim'
 

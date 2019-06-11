@@ -1,6 +1,6 @@
 {
   "suggest.triggerAfterInsertEnter": false,
-  "suggest.noselect": false,
+  "eslint.autoFixOnSave": true,
   "python.linting.pylintPath": "/home/benjc/.local/bin/pylint",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": "| ",
