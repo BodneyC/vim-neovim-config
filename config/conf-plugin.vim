@@ -7,6 +7,7 @@
   let g:mundo_right = 1
   let g:comfortable_motion_air_drag = 1
   let g:comfortable_motion_friction = 100
+  let g:indentLine_enabled = 0
 " Vista
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
   let g:vista_default_executive = 'coc'
@@ -81,3 +82,7 @@
   let g:vista_executive_for = {
         \   'vim': 'ctags'
         \ }
+" Ranger
+  let g:loaded_netrwPlugin = 1
+  let g:ranger_replace_netrw = 0
+  let g:ranger_map_keys = 0

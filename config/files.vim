@@ -1,36 +1,46 @@
-let g:loaded_netrwPlugin = 1
-let g:ranger_replace_netrw = 0
-let g:ranger_map_keys = 0
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
 augroup vimrc-nerdtree
   autocmd!
-  autocmd FileType nerdtree IndentLinesDisable
   autocmd FileType nerdtree setlocal signcolumn=no
   autocmd StdinReadPre * let s:std_in=1
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
-augroup vimrc-help
+" It's just effing easier than trying to blacklist...
+augroup vimrc-indentline-enable
   autocmd!
-  autocmd BufEnter * if &buftype == 'help' | IndentLinesDisable
-  autocmd! BufEnter,BufWinEnter,WinEnter *.md,*.tex setlocal conceallevel=0
-augroup END
-
-augroup vimrc-plugin-startify
-  autocmd!
-  autocmd User Startified IndentLinesDisable
-augroup END
-
-augroup vimrc-language-json
-  autocmd!
-  autocmd BufEnter,BufWinEnter,WinEnter *.json,*.JSON IndentLinesDisable
+  autocmd BufEnter,BufWinEnter,WinEnter 
+        \Dockerfile,
+        \Jenkinsfile,
+        \*.xml,
+        \*.groovy,
+        \*.java,
+        \*.scala,
+        \*.py,
+        \*.vim,
+        \*.html,
+        \*.css,
+        \*.scss,
+        \*.js,
+        \*.ts,
+        \*.rb,
+        \*.sh,
+        \*.zsh,
+        \*.yaml,
+        \*.toml,
+        \*.C,
+        \*.c,
+        \*.H,
+        \*.h,
+        \*.cpp,
+        \*.hpp 
+        \ IndentLinesEnable
 augroup END
 
 augroup vimrc-feature-terminal
   autocmd!
   autocmd TermOpen * setlocal nospell nobuflisted nonumber textwidth=0 winheight=1
-  autocmd TermOpen * IndentLinesDisable
   autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
 
@@ -64,7 +74,6 @@ function! ChangeIndent(n)
 	%retab!
   call SetIndent(a:n)
 endfunction
-
 command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
 
 function! SetIndent(n)
@@ -73,5 +82,4 @@ function! SetIndent(n)
   IndentLinesDisable
   IndentLinesEnable
 endfunction
-
 command! -nargs=1 SetIndent call SetIndent(<f-args>)
