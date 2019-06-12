@@ -20,6 +20,7 @@ call coc#add_extension(
 let g:coc_filetypes = [
       \ 'Dockerfile',
       \ 'sh',
+      \ 'groovy',
       \ 'python', 
       \ 'yaml', 
       \ 'markdown', 

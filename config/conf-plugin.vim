@@ -15,37 +15,67 @@
   \  "variable": "\uf71b",
   \ }
 " Startify
-  let g:startify_padding_left = (&columns / 2) - (line('$') / 2)
   let s:header = [
         \ "",
-        \ "                                       ,---._               ",
-        \ "    ,---,.                           .-- -.' \\   ,----..    ",
-        \ "  ,'  .'  \\                          |    |   : /   /   \\   ",
-        \ ",---.' .' |               ,---,      :    ;   ||   :     :  ",
-        \ "|   |  |: |           ,-+-. /  |     :    :   |.   |  ;. /  ",
-        \ ":   :  :  /   ,---.  ,--.'|'   |     |    :   :.   ; /--`   ",
-        \ ":   |    ;   /     \\|   |  ,\"' |     :    |    ;   | ;      ",
-        \ "|   :     \\ /    /  |   | /  | |     |    ;   ||   : |      ",
-        \ "|   |   . |.    ' / |   | |  | | ___ l    '    .   | '___   ",
-        \ "'   :  '; |'   ;   /|   | |  |//    /\\    J   :'   ; : .'|  ",
-        \ "|   |  | ; '   |  / |   | |--'/  ../  `..-    ,'   | '/  :  ",
-        \ "|   :   /  |   :    |   |/    \\    \\         ; |   :    /   ",
-        \ "|   | ,'    \\   \\  /'---'      \\    \\      ,'   \\   \\ .'    ",
-        \ "`----'       `----'             \"---....--'      `---`      ",
+        \ "                                       ,---._",
+        \ "    ,---,.                           .-- -.' \\   ,----..",
+        \ "  ,'  .'  \\                          |    |   : /   /   \\",
+        \ ",---.' .' |               ,---,      :    ;   ||   :     :",
+        \ "|   |  |: |           ,-+-. /  |     :    :   |.   |  ;. /",
+        \ ":   :  :  /   ,---.  ,--.'|'   |     |    :   :.   ; /--`",
+        \ ":   |    ;   /     \\|   |  ,\"' |     :    |    ;   | ;",
+        \ "|   :     \\ /    /  |   | /  | |     |    ;   ||   : |",
+        \ "|   |   . |.    ' / |   | |  | | ___ l    '    .   | '___",
+        \ "'   :  '; |'   ;   /|   | |  |//    /\\    J   :'   ; : .'|",
+        \ "|   |  | ; '   |  / |   | |--'/  ../  `..-    ,'   | '/  :",
+        \ "|   :   /  |   :    |   |/    \\    \\         ; |   :    /",
+        \ "|   | ,'    \\   \\  /'---'      \\    \\      ,'   \\   \\ .'",
+        \ "`----'       `----'             \"---....--'      `---`",
         \ ""]
   let s:footer = [
         \ "",
-        \ "               +----------------------------+",
-        \ "               |                            |",
-        \ "               |      NeoVim - BodneyC      |",
-        \ "               |                            |",
-        \ "               +----------------------------+",
+        \ "+----------------------------+",
+        \ "|                            |",
+        \ "|      NeoVim - BodneyC      |",
+        \ "|                            |",
+        \ "+----------------------------+",
         \ ""]
   function! s:center(lines) abort
-    let centered_lines = map(copy(a:lines), 'repeat(" ", (&columns / 2) - (line("$") / 2)) . v:val')
+    let longest_line = max(map(copy(a:lines), 'len(v:val)'))
+    let centered_lines = map(copy(a:lines), 'repeat(" ", (winwidth(0) / 2) - (longest_line / 2)) . v:val')
     return centered_lines
   endfunction
-  let g:startify_custom_header = s:center(s:header)
-  let g:startify_custom_footer = s:center(s:footer)
-  
-  set completefunc=emoji#complete
+  function! SetStartifyParams() abort
+    let g:startify_padding_left = (winwidth(0) / 3)
+    let g:startify_custom_header = s:center(s:header)
+    let g:startify_custom_footer = s:center(s:footer)
+  endfunction
+  autocmd VimEnter *
+        \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+        \ |   exe 'NERDTree' argv()[0]
+        \ |   setlocal nobuflisted
+        \ |   wincmd w
+        \ |   call SetStartifyParams()
+        \ |   Startify
+        \ | endif
+  autocmd VimEnter *
+        \   if argc() == 0
+        \ |   exe 'NERDTree'
+        \ |   setlocal nobuflisted
+        \ |   wincmd w
+        \ |   call SetStartifyParams()
+        \ |   Startify
+        \ | endif 
+" NERDCommenter
+  let g:NERDSpaceDelims=1
+  let g:NERDDefaultAlign = 'left'
+" NERDTree
+  let NERDTreeWinSize=25
+  let NERDTreeMinimalUI=1
+  let NERDTreeDirArrows=1
+  let NERDTreeShowBookmarks=0
+  let NERDTreeShowHidden=1    
+  let NERDTreeDirArrowExpandable = "\u00a0"
+  let NERDTreeDirArrowCollapsible = "\u00a0"
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

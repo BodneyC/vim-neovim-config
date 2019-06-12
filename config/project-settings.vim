@@ -5,6 +5,7 @@ function! ApplyLocalSettings(dirname)
   endif
   let l:settingsFile = a:dirname . "/.project.vim"
   if filereadable(l:settingsFile)
+    cd `=a:dirname`
     exec ":source " . l:settingsFile
     return
   endif
@@ -15,5 +16,5 @@ function! ApplyLocalSettings(dirname)
 endfunction
 augroup project-settings
   autocmd!
-  autocmd! BufEnter * call ApplyLocalSettings(expand("<afile>:p:h"))
+  autocmd! BufEnter * call ApplyLocalSettings(expand("%:p:h"))
 augroup END

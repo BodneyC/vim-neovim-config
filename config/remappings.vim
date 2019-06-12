@@ -1,5 +1,21 @@
 let mapleader="\<Space>"
 
+nnoremap <leader>nt :NERDTreeToggle<cr>
+
+" Goyo
+function! Goyo_e() abort
+  Goyo
+  Goyo!
+  Goyo 65%x75%
+endfunction
+function! Goyo_l() abort
+  Goyo!
+  so ~/.config/nvim/config/highlighting.vim
+endfunction
+
+map <leader>ge :call Goyo_e()<CR>
+map <leader>gl :call Goyo_l()<CR>
+
 " Tags
 nnoremap <leader>t :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags $DIR<CR>
 
@@ -167,4 +183,3 @@ endfunction
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
 vmap <leader>F  <Plug>(coc-format-selected)
 nmap <leader>F  <Plug>(coc-format)
-

@@ -1,6 +1,10 @@
 {
   "suggest.triggerAfterInsertEnter": false,
   "eslint.autoFixOnSave": true,
+  "eslint.options": {
+    "configFile": "/home/benjc/.eslintrc.json"
+  },
+  "coc.source.file.ignoreHidden": false,
   "python.linting.pylintPath": "/home/benjc/.local/bin/pylint",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": "| ",
