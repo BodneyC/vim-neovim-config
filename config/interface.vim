@@ -48,10 +48,10 @@
 
 " Spelling
   set spelllang=en_gb
-  autocmd BufRead,BufNewFile *.md,*.tex setlocal spell
+  " autocmd BufRead,BufNewFile *.md,*.tex setlocal spell
 
 " AStyle
-  autocmd BufNewFile,BufRead *.C,*.java,*.c,*.H,*.h set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
+"   autocmd BufNewFile,BufRead *.C,*.java,*.c,*.H,*.h set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
 
 " Colorscheme
   let g:onedark_termcolors = 256

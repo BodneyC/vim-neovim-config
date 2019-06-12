@@ -3,15 +3,19 @@ let g:ranger_replace_netrw = 0
 let g:ranger_map_keys = 0
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
-autocmd FileType nerdtree IndentLinesDisable
-autocmd FileType nerdtree setlocal signcolumn=no
+augroup vimrc-nerdtree
+  autocmd!
+  autocmd FileType nerdtree IndentLinesDisable
+  autocmd FileType nerdtree setlocal signcolumn=no
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
 augroup vimrc-help
   autocmd!
   autocmd BufEnter * if &buftype == 'help' | IndentLinesDisable
+  autocmd! BufEnter,BufWinEnter,WinEnter *.md,*.tex setlocal conceallevel=0
 augroup END
-
-autocmd! BufEnter,BufWinEnter,WinEnter *.md,*.tex setlocal conceallevel=0
 
 augroup vimrc-plugin-startify
   autocmd!
@@ -21,11 +25,6 @@ augroup END
 augroup vimrc-language-json
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter *.json,*.JSON IndentLinesDisable
-augroup END
-
-augroup vimrc-feature-directory
-  autocmd!
-  "autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == '' | setlocal nobuflisted nonumber | endif
 augroup END
 
 augroup vimrc-feature-terminal
@@ -57,7 +56,7 @@ augroup vimrc-language-shell
 augroup end
 
 " Four spaces to eight col tabs
-function! ToLin(n)
+function! ChangeIndent(n)
 	set noet
 	%retab!
   let &l:ts=a:n
@@ -66,9 +65,9 @@ function! ToLin(n)
   call SetIndent(a:n)
 endfunction
 
-command! -nargs=1 ChangeIndent call ToLin(<f-args>)
+command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
 
-function SetIndent(n)
+function! SetIndent(n)
   let &l:ts=a:n
   let &l:sw=a:n
   IndentLinesDisable

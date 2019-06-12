@@ -20,6 +20,7 @@ call coc#add_extension(
 let g:coc_filetypes = [
       \ 'Dockerfile',
       \ 'sh',
+      \ 'vim',
       \ 'groovy',
       \ 'python', 
       \ 'yaml', 
@@ -45,7 +46,7 @@ call coc#config('prettier', {
 
 let g:python_highlight_all = 1
 
-function IsCocEnabled()
+function! IsCocEnabled()
   return index(g:coc_filetypes, &filetype) >= 0
 endfunction
 

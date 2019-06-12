@@ -77,5 +77,7 @@
   let NERDTreeShowHidden=1    
   let NERDTreeDirArrowExpandable = "\u00a0"
   let NERDTreeDirArrowCollapsible = "\u00a0"
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Vista
+  let g:vista_executive_for = {
+        \   'vim': 'ctags'
+        \ }

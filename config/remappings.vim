@@ -13,8 +13,8 @@ function! Goyo_l() abort
   so ~/.config/nvim/config/highlighting.vim
 endfunction
 
-map <leader>ge :call Goyo_e()<CR>
-map <leader>gl :call Goyo_l()<CR>
+nnoremap <leader>ge :call Goyo_e()<CR>
+nnoremap <leader>gl :call Goyo_l()<CR>
 
 " Tags
 nnoremap <leader>t :!DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags $DIR<CR>
@@ -170,7 +170,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-function s:CocFormat(range, line1, line2) abort
+function! s:CocFormat(range, line1, line2) abort
   if a:range == 0
     call CocAction('format')
   else
