@@ -2,13 +2,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Intellisense
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-  "Plug 'w0rp/ale'
-  "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+  " Plug 'w0rp/ale'
+  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Languages
-  "Plug 'Shougo/deoplete.nvim'
-  "Plug 'HerringtonDarkholme/yats.vim'
-  "Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
+  " Plug 'Shougo/deoplete.nvim'
+  " Plug 'HerringtonDarkholme/yats.vim'
+  " Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
   Plug 'fatih/vim-go', { 'tag': '*' }
   Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
   Plug 'octol/vim-cpp-enhanced-highlight'
@@ -76,8 +76,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Extras
-  Plug 'junegunn/vim-emoji'
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
+
+" Workspace
+  Plug 'BodneyC/VirkSpaces', { 'branch': 'stable' }
 
 call plug#end()

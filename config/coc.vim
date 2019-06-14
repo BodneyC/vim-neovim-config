@@ -1,6 +1,9 @@
 set signcolumn=yes
 
 call coc#add_extension(
+      \ 'coc-tag',
+      \ 'coc-emoji',
+      \ 'coc-syntax',
       \ 'coc-snippets',
       \ 'coc-lists',
       \ 'coc-yank',

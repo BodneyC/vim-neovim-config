@@ -66,10 +66,9 @@
         \   'colorscheme': 'one',
         \   'active': {
         \     'right': [ [ 'lineinfo' ],
-        \                [ 'percent' ],
-        \                [ 'WordCount', 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
-        \     'left': [ [ 'mode' ],
-        \               [ 'git', 'paste', 'cocstatus', 'readonly', 'filename', 'Fugitive', 'modified' ] ]
+        \                [ 'fileformat', 'fileencoding', 'filetype' ] ],
+        \     'left': [ [ 'filename' ],
+        \               [ 'git', 'paste', 'cocstatus', 'readonly', 'Fugitive', 'modified' ] ]
         \   }, 
         \   'component' : {
         \	    'WordCount' : 'wc: %{wordCount#WordCount()}',
