@@ -48,7 +48,7 @@
     return centered_lines
   endfunction
   function! SetStartifyParams() abort
-    let g:startify_padding_left = (winwidth(0) / 3)
+    let g:startify_padding_left = (winwidth(0) / 4)
     let g:startify_custom_header = s:center(s:header)
     let g:startify_custom_footer = s:center(s:footer)
   endfunction

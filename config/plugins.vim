@@ -66,6 +66,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chr4/jellygrass.vim'
   Plug 'nanotech/jellybeans.vim'
   Plug 'liuchengxu/space-vim-dark' 
+  Plug 'dylanaraps/wal.vim'
 
 " Writing
   Plug 'xolox/vim-misc'
