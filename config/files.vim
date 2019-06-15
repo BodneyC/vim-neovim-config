@@ -4,7 +4,7 @@ augroup vimrc-nerdtree
   autocmd!
   autocmd FileType nerdtree setlocal signcolumn=no
   autocmd StdinReadPre * let s:std_in=1
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " It's just effing easier than trying to blacklist...

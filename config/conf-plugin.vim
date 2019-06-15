@@ -18,6 +18,7 @@
 " Startify
   let s:header = [
         \ "",
+        \ "",
         \ "                                       ,---._",
         \ "    ,---,.                           .-- -.' \\   ,----..",
         \ "  ,'  .'  \\                          |    |   : /   /   \\",
@@ -51,14 +52,14 @@
     let g:startify_custom_header = s:center(s:header)
     let g:startify_custom_footer = s:center(s:footer)
   endfunction
-  autocmd VimEnter *
-        \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-        \ |   exe 'NERDTree' argv()[0]
-        \ |   setlocal nobuflisted
-        \ |   wincmd w
-        \ |   call SetStartifyParams()
-        \ |   Startify
-        \ | endif
+  function! s:openNerdTreeIfNotAlreadyOpen()
+    if ! (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+      echom 100921
+      exe 'NERDTree' argv()[0]
+      setlocal nobuflisted
+      wincmd w
+    endif
+  endfunction
   autocmd VimEnter *
         \   if argc() == 0
         \ |   exe 'NERDTree'
@@ -67,6 +68,12 @@
         \ |   call SetStartifyParams()
         \ |   Startify
         \ | endif 
+  autocmd VimEnter *
+        \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+        \ |   call s:openNerdTreeIfNotAlreadyOpen()
+        \ |   call SetStartifyParams()
+        \ |   Startify
+        \ | endif
 " NERDCommenter
   let g:NERDSpaceDelims=1
   let g:NERDDefaultAlign = 'left'
