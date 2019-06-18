@@ -19,6 +19,10 @@
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "languageserver": {
+    "kotlin": {
+      "command": "/home/benjc/.config/nvim/addit-lang-servers/kotlin-language-server",
+      "filetypes": ["kotlin", "kt"]
+    },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],

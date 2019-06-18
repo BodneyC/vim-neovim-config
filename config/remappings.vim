@@ -70,6 +70,8 @@ nnoremap <leader>t :call MakeTagsFile()<CR>
 """"""" General leader
 nnoremap <leader>W :wqa<CR>
 nnoremap <leader>Q :qa!<CR>
+nnoremap <leader>e :e<CR>
+nnoremap <leader>E :e!<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>* :s/\<<c-r><c-w>\>//<left>
@@ -95,7 +97,6 @@ nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <leader>M :call FZFOpen(':Maps')<CR>
 nnoremap <leader>i :call FZFOpen(':IndentLinesToggle')<CR>
-nnoremap <leader>o :e <cfile><CR>
 
 """"""" Plugin panes
 nnoremap <Leader>R :Ranger<CR>
@@ -106,18 +107,18 @@ nnoremap <leader>T :TagbarToggle<CR>
 """"""""""""" Conquer of Completion """""""""""""""
 
 """"""" Definitions
-nnoremap <silent> <leader>gd <Plug>(coc-definition)
-nnoremap <silent> <leader>gt <Plug>(coc-type-definition)
-nnoremap <silent> <leader>gi <Plug>(coc-implementation)
-nnoremap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
 """"""" Commands
 nnoremap <silent> <leader>l :CocList<CR>
 nnoremap <silent> <leader>d :CocList --auto-preview diagnostics<CR>
-nnoremap <silent> <leader>c :CocList commands<CR>
+nnoremap <silent> <leader>s :CocList commands<CR>
 
-nnoremap <silent> [c <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 """"""" Tab completion
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -126,21 +127,25 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 """"""" Formatting
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
-vnoremap <leader>F  <Plug>(coc-format-selected)
-nnoremap <leader>F  <Plug>(coc-format)
+vmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format)
 
 """"""""""""""""" Function Keys """""""""""""""""""
 
 """"""" Help under cursor
 nnoremap <F1> :help <C-R><C-W><CR>
 
+""""""" Replaces
+nnoremap <F2> :s//g<Left><Left>
+nnoremap <F3> :%s//g<Left><Left>
+
 """"""" Paste from sys-clipboard
-nnoremap <F4> "*yy
-inoremap <F4> <esc>"*yya
-nnoremap <F5> "*p
-inoremap <F5> <esc>"*pa
-nnoremap <F6> gg"*yG``
-inoremap <F6> <esc>gg"*yG``a
+nnoremap <F4> "*Y
+inoremap <F4> <esc>"*Ya
+nnoremap <F5> mygg"*yG`y
+inoremap <F5> <esc>mygg"*yG`ya
+nnoremap <F6> "*p
+inoremap <F6> <esc>"*pa
 
 """"""" Spell checking
 nnoremap <F7> :set spell!<CR>
@@ -165,6 +170,7 @@ nnoremap g4 :b4<CR>
 """"""" Open file/links
 nnoremap <silent> gx :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>
 vnoremap <silent> gx :<C-u>call netrw#BrowseXVis()<CR>
+nnoremap <silent> <leader>o :e <cfile><CR>
 
 """"""""""""""""""" Movement """""""""""""""""""""
 

@@ -17,16 +17,27 @@ if [[ -f $INIT_VIM ]]; then
 fi
 
 echo "Curling vim-plug setup file"
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Moving init.vim to $INIT_VIM"
-mkdir -p ~/.config/nvim/{config,undo,.swapfiles,viminfo,addit-lang-servers}
+mkdir -p "$HOME"/.config/nvim/{config,undo,.swapfiles,viminfo,addit-lang-servers}
 chmod +x ./update-nvim.sh && ./update-nvim.sh
 
 # To install plugins
 nvim +PlugInstall
 # To install coc extensions
 nvim
+
+# Kotlin language server
+if hash gradle; then
+	mkdir -p "$HOME/gitclones" && cd "$HOME/gitclones" || exit
+	git clone https://github.com/fwcd/KotlinLanguageServer.git
+	cd KotlinLanguageServer || exit
+	./gradlew server:build
+	cd "$HOME/.config/nvim/addit-lang-servers" || exit
+	ln -s "$HOME/gitclones/KotlinLanguageServer/server/build/install/server/bin/server" \
+		"./kotlin-language-server"
+fi
 
 function inst_if_exists() {
     if hash "$1" 2>/dev/null; then

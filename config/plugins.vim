@@ -79,8 +79,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Extras
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
+  Plug 'sheerun/vim-polyglot'
 
 " Workspace
-  Plug 'BodneyC/VirkSpaces', { 'branch': 'stable' }
+  " Plug 'BodneyC/VirkSpaces', { 'branch': 'stable' }
 
 call plug#end()
