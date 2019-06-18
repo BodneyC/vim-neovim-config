@@ -13,6 +13,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'tpope/vim-liquid'
+  Plug 'dalov/kotlin-vim'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
