@@ -9,11 +9,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'Shougo/deoplete.nvim'
   " Plug 'HerringtonDarkholme/yats.vim'
   " Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
-  Plug 'fatih/vim-go', { 'tag': '*' }
-  Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-  Plug 'octol/vim-cpp-enhanced-highlight'
+  " Plug 'fatih/vim-go', { 'tag': '*' }
+  " Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+  " Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
-  Plug 'dalov/kotlin-vim'
+  Plug 'udalov/kotlin-vim'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
@@ -80,9 +81,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Extras
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
-  Plug 'sheerun/vim-polyglot'
 
 " Workspace
   " Plug 'BodneyC/VirkSpaces', { 'branch': 'stable' }
 
 call plug#end()
+
+let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/"

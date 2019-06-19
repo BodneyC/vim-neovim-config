@@ -6,7 +6,6 @@
   },
   "coc.source.file.ignoreHidden": false,
   "python.linting.enabled": true,
-  "python.linting.pylintPath": "/home/benjc/.local/bin/pylint",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": "| ",
   "git.enableGutters": true,

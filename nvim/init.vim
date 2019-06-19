@@ -16,5 +16,3 @@ source ~/.config/nvim/config/files.vim
 source ~/.config/nvim/config/coc.vim
 source ~/.config/nvim/config/latex.vim
 source ~/.config/nvim/config/pandoc.vim
-
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/"

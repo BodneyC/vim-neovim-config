@@ -8,13 +8,19 @@
   let g:comfortable_motion_air_drag = 1
   let g:comfortable_motion_friction = 100
   let g:indentLine_enabled = 0
+  let g:tagbar_auto_close = 1
+
 " Vista
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
   let g:vista_default_executive = 'coc'
   let g:vista#renderer#icons = {
-  \  "function": "\uf794",
-  \  "variable": "\uf71b",
-  \ }
+        \  "function": "\uf794",
+        \  "variable": "\uf71b",
+        \ }
+  let g:vista_executive_for = {
+        \   'vim': 'ctags'
+        \ }
+
 " Startify
   let s:header = [
         \ "",
@@ -60,6 +66,7 @@
       wincmd w
     endif
   endfunction
+
   autocmd VimEnter *
         \   if argc() == 0
         \ |   exe 'NERDTree'
@@ -74,9 +81,11 @@
         \ |   call SetStartifyParams()
         \ |   Startify
         \ | endif
+
 " NERDCommenter
   let g:NERDSpaceDelims=1
   let g:NERDDefaultAlign = 'left'
+
 " NERDTree
   let NERDTreeWinSize=25
   let NERDTreeMinimalUI=1
@@ -85,11 +94,26 @@
   let NERDTreeShowHidden=1    
   let NERDTreeDirArrowExpandable = "\u00a0"
   let NERDTreeDirArrowCollapsible = "\u00a0"
-" Vista
-  let g:vista_executive_for = {
-        \   'vim': 'ctags'
-        \ }
+
 " Ranger
   let g:loaded_netrwPlugin = 1
   let g:ranger_replace_netrw = 0
   let g:ranger_map_keys = 0
+
+" TagBar
+let g:tagbar_type_kotlin = {
+    \   'ctagstype' : 'kotlin',
+    \   'sro'       : '.',
+    \   'kinds'     : [
+    \     'p:packages',
+    \     'T:types:1',
+    \     't:traits',
+    \     'o:objects',
+    \     'O:case objects',
+    \     'c:classes',
+    \     'C:case classes',
+    \     'm:methods',
+    \     'V:values:1',
+    \     'v:variables:1'
+    \   ]
+    \ } 
