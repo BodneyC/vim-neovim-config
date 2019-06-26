@@ -83,8 +83,8 @@ nnoremap <silent> <leader>h :vertical resize +5<CR>
 nnoremap <silent> <leader>l :vertical resize -5<CR>
 
 """"""" Update .vimrc
-nnoremap <leader>rs :so $MYVIMRC<CR>
-nnoremap <leader>re :e $MYVIMRC<CR>
+nnoremap <leader>cs :so $MYVIMRC<CR>
+nnoremap <leader>ce :e $MYVIMRC<CR>
 
 """"""" Split
 nnoremap <leader>" :sbn<CR>

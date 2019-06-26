@@ -1,6 +1,6 @@
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
-augroup vimrc-nerdtree
+augroup vimrc_nerdtree
   autocmd!
   autocmd FileType nerdtree setlocal signcolumn=no
   autocmd StdinReadPre * let s:std_in=1
@@ -8,7 +8,7 @@ augroup vimrc-nerdtree
 augroup END
 
 " It's just effing easier than trying to blacklist...
-augroup vimrc-indentline-enable
+augroup vimrc_indentline_enable
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter 
         \Dockerfile,
@@ -38,32 +38,21 @@ augroup vimrc-indentline-enable
         \ IndentLinesEnable
 augroup END
 
-augroup vimrc-feature-terminal
+augroup vimrc_feature_terminal
   autocmd!
   autocmd TermOpen * setlocal nospell nobuflisted nonumber textwidth=0 winheight=1
   autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
 
-augroup vimrc-language-other
+augroup vimrc_language_other
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile,Dockerfile set ts=4 | set sw=4
 augroup END
 
-augroup vimrc-language-web
+augroup vimrc_language_web
   autocmd!
   autocmd FileType html,css,js set ts=4 | set sw=4
 augroup END
-
-augroup vimrc-language-python
-  autocmd!
-  autocmd FileType python set ts=4 | set sw=4
-augroup END
-
-augroup vimrc-language-shell
-  autocmd!
-  autocmd FileType sh,zsh set noexpandtab
-  autocmd FileType sh,zsh set ts=4 | set sw=4
-augroup end
 
 " Four spaces to eight col tabs
 function! ChangeIndent(n)

@@ -100,20 +100,24 @@
   let g:ranger_replace_netrw = 0
   let g:ranger_map_keys = 0
 
-" TagBar
-let g:tagbar_type_kotlin = {
-    \   'ctagstype' : 'kotlin',
-    \   'sro'       : '.',
-    \   'kinds'     : [
-    \     'p:packages',
-    \     'T:types:1',
-    \     't:traits',
-    \     'o:objects',
-    \     'O:case objects',
-    \     'c:classes',
-    \     'C:case classes',
-    \     'm:methods',
-    \     'V:values:1',
-    \     'v:variables:1'
-    \   ]
-    \ } 
+" Tagbar
+  let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
+  let g:tagbar_compact = 1
+  let g:tagbar_type_kotlin = {
+      \   'ctagstype' : 'kotlin',
+      \   'sro'       : '.',
+      \   'kinds'     : [
+      \     'p:packages',
+      \     'i:imports',
+      \     'T:types:1',
+      \     't:traits',
+      \     'o:objects',
+      \     'O:case objects',
+      \     'c:classes',
+      \     'C:case classes',
+      \     'm:methods',
+      \     'V:constants',
+      \     'v:variables',
+      \     'M:override_methods'
+      \   ]
+      \ } 

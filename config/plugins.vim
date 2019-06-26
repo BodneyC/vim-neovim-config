@@ -19,6 +19,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Interface
   "Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'scrooloose/nerdtree-project-plugin'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -75,12 +76,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'xolox/vim-notes'
   Plug 'rhysd/vim-grammarous'
   Plug 'junegunn/goyo.vim'
-  Plug 'vim-pandoc/vim-pandoc'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
+  " Plug 'vim-pandoc/vim-pandoc'
+  " Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Extras
   Plug 'simnalamburt/vim-mundo'
-  Plug 'liuchengxu/vista.vim'
+  " Plug 'liuchengxu/vista.vim'
 
 " Workspace
   " Plug 'BodneyC/VirkSpaces', { 'branch': 'stable' }
