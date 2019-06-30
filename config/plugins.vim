@@ -15,6 +15,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
   Plug 'udalov/kotlin-vim'
+  Plug 'junegunn/vader.vim'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
@@ -84,8 +85,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  " Plug 'BodneyC/VirkSpaces', { 'branch': 'stable' }
+  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+   Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
 
 call plug#end()
 
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/"
+let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"
