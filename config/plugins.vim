@@ -2,6 +2,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Intellisense
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+  Plug 'Shougo/neco-vim'
+  Plug 'neoclide/coc-neco'
   " Plug 'w0rp/ale'
   " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
@@ -16,6 +18,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-liquid'
   Plug 'udalov/kotlin-vim'
   Plug 'junegunn/vader.vim'
+  Plug 'stevearc/vim-arduino'
+  Plug 'z3t0/arduvim'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
@@ -37,6 +41,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'yuttie/comfortable-motion.vim'
+  Plug 'chrisbra/recover.vim'
 
 " Git
   Plug 'tpope/vim-fugitive'
@@ -71,6 +76,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nanotech/jellybeans.vim'
   Plug 'liuchengxu/space-vim-dark' 
   Plug 'dylanaraps/wal.vim'
+  Plug 'cocopon/iceberg.vim'
 
 " Writing
   Plug 'xolox/vim-misc'
@@ -82,12 +88,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Extras
   Plug 'simnalamburt/vim-mundo'
-  " Plug 'liuchengxu/vista.vim'
+  Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
-   Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
 
 call plug#end()
 
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"
+" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"

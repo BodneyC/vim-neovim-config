@@ -1,6 +1,8 @@
 " Plugin variable settings
   let g:SuperTabDefaultCompletionType = "<c-n>"
   let g:indentLine_showFirstIndentLevel = 1
+  let g:indentLine_char = '·'
+  let g:indentLine_first_char = '·'
   let g:yats_host_keyword = 1
   let g:WebDevIconsUnicodeDecorateFolderNodes = 1
   let g:WebDevIconsUnicodeDecorateFolderNodeDefaultSymbol = ''

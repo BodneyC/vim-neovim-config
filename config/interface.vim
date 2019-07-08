@@ -56,8 +56,9 @@
 " Colorscheme
   let g:onedark_termcolors = 256
   set termguicolors!
-  colorscheme space-vim-dark
+  " colorscheme space-vim-dark
   " colo wal
+  colo iceberg
 
 " Lightline
   set laststatus=2

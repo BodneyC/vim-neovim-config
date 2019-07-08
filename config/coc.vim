@@ -1,10 +1,9 @@
 set signcolumn=yes
 
 call coc#add_extension(
-      \ 'coc-tag',
-      \ 'coc-emoji',
-      \ 'coc-syntax',
       \ 'coc-snippets',
+      \ 'coc-tag',
+      \ 'coc-syntax',
       \ 'coc-lists',
       \ 'coc-yank',
       \ 'coc-post',
@@ -12,6 +11,7 @@ call coc#add_extension(
       \ 'coc-calc',
       \ 'coc-docker',
       \ 'coc-sh',
+      \ 'coc-rls',
       \ 'coc-python', 
       \ 'coc-json', 
       \ 'coc-tsserver', 

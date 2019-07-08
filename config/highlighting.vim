@@ -9,6 +9,7 @@ hi NonText guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 hi CursorLineNr guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 " hi Search ctermbg=white ctermfg=black
 hi GitGutterAdd ctermfg=22 guifg=#006000 ctermbg=NONE guibg=NONE
 hi GitGutterChange ctermfg=58 guifg=#5F6000 ctermbg=NONE guibg=NONE
