@@ -19,7 +19,7 @@
   set termguicolors              " Should probably check if available
   set tags=.git/tags;$HOME          " Search upwards to $HOME for tag file
   set bs=2                       " fix backspace on some consoles
-  set scrolloff=3                " # lines below cursor always
+  set scrolloff=1                " # lines below cursor always
   set backspace=indent,eol,start " Backspace behaviour
   set matchpairs+=<:>            " use % to jump between pairs
   set autowrite                  " Automatically write when switching buffers
@@ -102,6 +102,5 @@
 " Undo stuff
   set undofile
   set undodir=$HOME/.config/nvim/undo
-  set undolevels=100000
-  set undoreload=100000
-
+  set undolevels=10000
+  set undoreload=10000

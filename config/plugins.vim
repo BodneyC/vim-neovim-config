@@ -91,9 +91,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
-  Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
+  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  " Plug 'At-Zed-vim/VirkSpaces', { 'branch': 'master' }
 
 call plug#end()
 
-" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"
+let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"

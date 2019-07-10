@@ -59,7 +59,7 @@ endfunction
 """""""""""""""" Leader Remappings """"""""""""""""
 
 """"""" NERDTree
-nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 nnoremap <leader>ge :call Goyo_e()<CR>
 nnoremap <leader>gl :call Goyo_l()<CR>
@@ -74,7 +74,8 @@ nnoremap <leader>e :e<CR>
 nnoremap <leader>E :e!<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
-nnoremap <leader>* :s/\<<c-r><c-w>\>//<left>
+nnoremap <leader>* :%s/\<<C-r><C-w>\>//g<left><left>
+nnoremap <leader>/ :noh<CR>
 
 """"""" Resizing of slices
 nnoremap <silent> <leader>j :resize -5<CR>
@@ -123,7 +124,7 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 """"""" Tab completion
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 """"""" Formatting
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
