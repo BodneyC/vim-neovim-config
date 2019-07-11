@@ -92,7 +92,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Workspace
   " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
-  " Plug 'At-Zed-vim/VirkSpaces', { 'branch': 'master' }
+  " Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
 
 call plug#end()
 

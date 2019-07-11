@@ -16,7 +16,6 @@ call coc#add_extension(
       \ 'coc-json', 
       \ 'coc-tsserver', 
       \ 'coc-eslint', 
-      \ 'coc-prettier', 
       \ 'coc-html', 
       \ 'coc-emmet', 
       \ 'coc-css')
