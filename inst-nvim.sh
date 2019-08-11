@@ -20,8 +20,9 @@ echo "Curling vim-plug setup file"
 curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Moving init.vim to $INIT_VIM"
-mkdir -p "$HOME"/.config/nvim/{config,ftplugin,undo,.swapfiles,viminfo,addit-lang-servers}
-chmod +x ./update-nvim.sh && ./update-nvim.sh
+mkdir -p "$HOME"/.config/{nvim/{config,ftplugin,undo,.swapfiles,viminfo,addit-lang-servers},coc/extensions}
+
+chmod +x ./softlink_config.sh && ./softlink-configs.sh
 
 # To install plugins
 nvim +PlugInstall
@@ -40,16 +41,23 @@ if hash gradle; then
 fi
 
 function inst_if_exists() {
-    if hash "$1" 2>/dev/null; then
-        echo "Installing {$3} with {$1}..."
-        "$1" "$2" "$3"
+	prog="$1"; shift
+	switch="$1"; shift
+    if hash "$prog" 2>/dev/null; then
+        echo "Installing {$*} with {$prog}..."
+        "$prog" install "$switch" "$@"
     else
-        echo "No {$1} bin found..."
+        echo "No {$prog} bin found..."
     fi
 }
-inst_if_exists "pip3" "install --user" "pynvim vim-vint"
-inst_if_exists "npm" "i -g" "neovim bash-language-server dockerfile-language-server-nodejs"
-inst_if_exists "gem" "install" "neovim"
+
+
+inst_if_exists "pip3" "--user" \
+	"pynvim" "vim-vint"
+inst_if_exists "npm"  "-g" \
+	"neovim" "bash-language-server" "dockerfile-language-server-nodejs"
+inst_if_exists "gem"  "" \
+	"neovim"
 
 nvim +UpdateRemotePlugins
 nvim "+call coc#util#build()"

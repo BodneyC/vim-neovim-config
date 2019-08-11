@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -f ~/.vimrc ]]; then
-	read -p "~/.vimrc already exists, overwrite? [yn]" -n 1 -r
+	read -p "\$HOME/.vimrc already exists, overwrite? [yn]" -n 1 -r
 	if [[ $REPLY != ^[Yy]$ ]]; then
 		echo "Exiting script..."
 		exit

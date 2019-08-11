@@ -21,12 +21,18 @@
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "C", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
       "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
     },
     "kotlin": {
       "command": "/home/benjc/.config/nvim/addit-lang-servers/kotlin-language-server",
@@ -44,6 +50,15 @@
       "command": "docker-langserver",
       "filetypes": ["dockerfile"],
       "args": ["--stdio"]
+    },
+    "golang": {
+      "command": "go-langserver",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
     }
   },
   "diagnostic-languageserver.filetypes": {
