@@ -3,6 +3,7 @@ set signcolumn=yes
 call coc#add_extension(
       \ 'coc-snippets',
       \ 'coc-tag',
+      \ 'coc-tabnine',
       \ 'coc-syntax',
       \ 'coc-lists',
       \ 'coc-yank',

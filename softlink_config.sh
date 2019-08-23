@@ -1,8 +1,17 @@
 #!/bin/bash
 
 soft_link() {
-	ln -s "$(realpath "$1")" "$(realpath "$2")"
+	[[ -f "$(realpath "$1")" ]] \
+		&& ln -s "$(realpath "$1")" "$(realpath "$2")"
 }
+
+mkdir -p ~/.config/{nvim,coc}
+
+if [[ "$1" == "-f" ]]; then
+	rm -r ~/.config/{nvim,coc}
+fi
+
+mkdir -p ~/.config/{nvim,coc}
 
 soft_link nvim/init.vim          ~/.config/nvim/init.vim
 soft_link nvim/coc-settings.json ~/.config/nvim/coc-settings.json

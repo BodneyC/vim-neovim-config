@@ -11,6 +11,16 @@
   let g:comfortable_motion_friction = 100
   let g:indentLine_enabled = 0
   let g:tagbar_auto_close = 1
+  let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+  let g:pandoc#filetypes#pandoc_markdown = 0
+  let g:pandoc#command#latex_engine = "pdflatex"
+  let g:tex_conceal = ""
+  let g:tex_flavor = 'latex'
+  let g:vimtex_indent_enabled = 0
+  let g:vimtex_toc_width = 25
+  let g:vimtex_view_general_viewer = 'firefox'
+  let g:vimtex_view_general_options = '--unique @pdf\#src:@tex:@line:@col'
+  let g:vimtex_view_general_options_latexmk = '--unique'
 
 " Vista
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]

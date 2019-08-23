@@ -14,12 +14,14 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'fatih/vim-go', { 'tag': '*' }
   " Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
   " Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'bps/vim-textobj-python'
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
   Plug 'udalov/kotlin-vim'
   Plug 'junegunn/vader.vim'
   Plug 'stevearc/vim-arduino'
   Plug 'z3t0/arduvim'
+  Plug 'mgedmin/python-imports.vim'
 
 " Interface
   "Plug 'Shougo/denite.nvim'
@@ -42,6 +44,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ryanoasis/vim-devicons'
   Plug 'yuttie/comfortable-motion.vim'
   Plug 'chrisbra/recover.vim'
+  Plug 'frazrepo/vim-rainbow'
 
 " Git
   Plug 'tpope/vim-fugitive'
@@ -61,6 +64,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
   Plug 'terryma/vim-multiple-cursors'
   Plug 'andymass/vim-matchup'
+  Plug 'Konfekt/FastFold'
+  Plug 'tmhedberg/SimpylFold'
   
 " Integrations
   "Plug 'christoomey/vim-tmux-navigator'
@@ -74,7 +79,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   "Plug 'joshdick/onedark.vim'
   Plug 'chr4/jellygrass.vim'
   Plug 'nanotech/jellybeans.vim'
-  Plug 'liuchengxu/space-vim-dark' 
+  Plug 'liuchengxu/space-vim-dark'
   Plug 'dylanaraps/wal.vim'
   Plug 'cocopon/iceberg.vim'
 
@@ -91,9 +96,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
-  " Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
 
 call plug#end()
 
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"
+" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"

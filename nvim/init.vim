@@ -14,5 +14,3 @@ source ~/.config/nvim/config/remappings.vim
 source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/files.vim
 source ~/.config/nvim/config/coc.vim
-source ~/.config/nvim/config/latex.vim
-source ~/.config/nvim/config/pandoc.vim
