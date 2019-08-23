@@ -6,7 +6,19 @@ hi SpellLocal cterm=underline,bold ctermfg=red
 
 hi Normal guibg=NONE ctermbg=NONE
 hi NonText guibg=NONE ctermbg=NONE
-hi LineNr guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE ctermfg=red
+hi StatusLine guibg=NONE ctermbg=NONE
+hi StatusLineTerm guibg=NONE ctermbg=NONE
+hi VertSplit guibg=NONE ctermbg=NONE
+
+hi TabLine guibg=NONE ctermbg=NONE
+hi TabLineFill guibg=NONE ctermbg=NONE
+
+hi Pmenu guibg=NONE ctermbg=NONE
+hi PmenuSel guibg=NONE ctermbg=NONE
+hi PmenuSbar guibg=NONE ctermbg=NONE
+hi PmenuThumb guibg=NONE ctermbg=NONE
+
 hi SignColumn guibg=NONE ctermbg=NONE
 hi CursorLineNr guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE

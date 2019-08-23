@@ -14,7 +14,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'fatih/vim-go', { 'tag': '*' }
   " Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
   " Plug 'octol/vim-cpp-enhanced-highlight'
-  Plug 'bps/vim-textobj-python'
+  Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
   Plug 'udalov/kotlin-vim'
@@ -96,9 +96,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
-  Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
+  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  " Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
 
 call plug#end()
 
-" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"
+let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/"
