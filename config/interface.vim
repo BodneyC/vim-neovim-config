@@ -57,7 +57,7 @@
   set termguicolors!
   " colorscheme space-vim-dark
   " colo wal
-  colo iceberg
+  colo jellybeans
 
 " Lightline
   set laststatus=2
