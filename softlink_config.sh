@@ -19,4 +19,3 @@ soft_link ftplugin/              ~/.config/nvim/ftplugin
 soft_link config                 ~/.config/nvim/config
 soft_link addit-lang-servers     ~/.config/nvim/addit-lang-servers
 soft_link nvim/package.json      ~/.config/coc/extensions/package.json
-soft_link nvim/yarn.lock         ~/.config/coc/extensions/yarn.lock
