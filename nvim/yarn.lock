@@ -593,10 +593,10 @@ coc-syntax@>=1.2.4:
   resolved "https://registry.yarnpkg.com/coc-syntax/-/coc-syntax-1.2.4.tgz#1030f077f0f74c2d6a7176b462010613707b0d31"
   integrity sha512-XRCvFL8yjPvTID0XY0Y7JjzGk9Gl2g6NOEVezWIuoIE2Dk68upjOyldoCrm2rKBQC9ebTTK7xX9ZcWyKj7+Zcg==
 
-coc-tabnine@>=1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/coc-tabnine/-/coc-tabnine-1.2.0.tgz#139c0b02b45a48106444c4ee444b2c31ce1d17e6"
-  integrity sha512-omaGkuwcnJ9CGEAVuC/DJQy2HFIgHSAYO1UwnLN9g7a724MP09cSuJe7JmqjcOhvAks71jIJZH9GAIq2Yo/Oew==
+coc-tabnine@>=1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/coc-tabnine/-/coc-tabnine-1.2.1.tgz#c3cf96b7b1b76e82c3aec199e54bb595dde73399"
+  integrity sha512-Jp5LOWLURr8s3PoTd+eMNIjHBDDxbwFypRI7ds7ya6TXdNSPwwhst0A6eYoTyI8Vb87W2bXNgdgz3cA1ai4itA==
 
 coc-tag@>=1.2.4:
   version "1.2.4"
@@ -951,9 +951,9 @@ duplexer3@^0.1.4:
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
 electron-to-chromium@^1.3.30:
-  version "1.3.254"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.254.tgz#af9795b9b2af0729997331a033ddc767af758224"
-  integrity sha512-7I5/OkgR6JKy6RFLJeru0kc0RMmmMu1UnkHBKInFKRrg1/4EQKIqOaUqITSww/SZ1LqWwp1qc/LLoIGy449eYw==
+  version "1.3.257"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.257.tgz#35da0ad5833b27184c8298804c498a4d2f4ed27d"
+  integrity sha512-EcKVmUeHCZelPA0wnIaSmpAN8karKhKBwFb+xLUjSVZ8sGRE1l3fst1zQZ7KJUkyJ7H5edPd4RP94pzC9sG00A==
 
 entities@^1.1.1:
   version "1.1.2"
@@ -3737,7 +3737,7 @@ typescript-eslint-parser@^16.0.0:
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-typescript@3.6.2, typescript@^3, typescript@^3.6.2:
+typescript@3.6.2:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.2.tgz#105b0f1934119dde543ac8eb71af3a91009efe54"
   integrity sha512-lmQ4L+J6mnu3xweP8+rOrUwzmN+MRAj7TgtJtDaXE5PMyX2kCrklhg3rvOsOIfNeAWMQWO2F1GPc1kMD2vLAfw==
@@ -3746,6 +3746,11 @@ typescript@^2.5.1:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
   integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
+
+typescript@^3, typescript@^3.6.2:
+  version "3.6.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.3.tgz#fea942fabb20f7e1ca7164ff626f1a9f3f70b4da"
+  integrity sha512-N7bceJL1CtRQ2RiG0AQME13ksR7DiuQh/QehubYcghzv20tnh+MQnQIuJddTmsbqYj+dztchykemz0zFzlvdQw==
 
 unherit@^1.0.4:
   version "1.1.2"

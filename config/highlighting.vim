@@ -4,6 +4,11 @@ hi SpellCap cterm=underline,bold ctermfg=red
 hi SpellRare cterm=underline,bold ctermfg=red
 hi SpellLocal cterm=underline,bold ctermfg=red
 
+hi StatusLine ctermfg=blue
+hi TabLineSel ctermfg=blue
+hi TabLine ctermfg=blue
+hi PmenuSel ctermfg=blue
+
 hi Normal guibg=NONE ctermbg=NONE
 hi NonText guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE ctermfg=red
