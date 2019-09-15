@@ -80,6 +80,9 @@
         \     'cocstatus': 'coc#status'
         \   }
         \ }
+  let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+  let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+  let g:lightline.component_type   = {'buffers': 'tabsel'}
   let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   let s:palette.normal.middle   = [ [ 'NONE', '#111111', 'NONE', 'NONE' ] ]
   let s:palette.normal.left     = [ [ 'black', '#98c379', 'NONE', 'NONE' ] ]
