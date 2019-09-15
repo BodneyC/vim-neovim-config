@@ -16,7 +16,6 @@
   set linebreak                  " only break lines on 'breakat' characters
   set laststatus=2               " Always display
   set mouse=a                    " Enable mouse
-  set termguicolors              " Should probably check if available
   set tags=.git/tags;$HOME       " Search upwards to $HOME for tag file
   set bs=2                       " fix backspace on some consoles
   set scrolloff=1                " # lines below cursor always
@@ -54,10 +53,8 @@
 
 " Colorscheme
   let g:onedark_termcolors = 256
-  set termguicolors!
-  " colorscheme space-vim-dark
-  " colo wal
-  colo jellybeans
+  " set notermguicolors
+  colorscheme space-vim-dark
 
 " Lightline
   set laststatus=2
@@ -84,18 +81,24 @@
   let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
   let g:lightline.component_type   = {'buffers': 'tabsel'}
   let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-  let s:palette.normal.middle   = [ [ 'NONE', '#111111', 'NONE', 'NONE' ] ]
-  let s:palette.normal.left     = [ [ 'black', '#98c379', 'NONE', 'NONE' ] ]
+
+  let s:palette.normal.middle   = [ [ 'NONE', 'NONE', 'NONE', '235' ] ]
+  let s:palette.normal.left     = [ [ 'black', '#98c379', 'black', 'green' ] ]
   let s:palette.normal.right    = s:palette.normal.left
-  let s:palette.inactive.middle = [ [ 'NONE', '#111f23', 'NONE', 'NONE' ] ]
+
+  let s:palette.inactive.middle = [ [ 'NONE', 'NONE', 'NONE', '235' ] ]
   let s:palette.inactive.left   = s:palette.inactive.middle
   let s:palette.inactive.right  = s:palette.inactive.middle
-  let s:palette.insert.left     = [ [ 'black', '#61afef', 'NONE', 'NONE' ] ]
+
+  let s:palette.insert.left     = [ [ 'black', '#61afef', 'black', 'blue' ] ]
   let s:palette.insert.right    = s:palette.insert.left
-  let s:palette.visual.left     = [ [ 'black', '#c678dd', 'NONE', 'NONE' ] ]
+
+  let s:palette.visual.left     = [ [ 'black', '#c678dd', 'black', '140' ] ]
   let s:palette.visual.right    = s:palette.visual.left
+
+  let s:palette.replace.middle  = [ [ 'NONE', 'NONE', 'NONE', '235' ] ]
+  let s:palette.replace.left    = [ [ 'black', '#98c379', 'black', 'red' ] ]
   let s:palette.replace.right   = s:palette.replace.left
-  let s:palette.replace.left    = [ [ 'black', '#e06c75', 'NONE', 'NONE' ] ]
 
 " AutoPairs settings
   let g:AutoPairsMultilineClose=0
