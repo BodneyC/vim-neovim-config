@@ -1,4 +1,5 @@
 " Plugin variable settings
+  let g:virk_tags_enable = 0
   let g:SuperTabDefaultCompletionType = "<c-n>"
   let g:indentLine_showFirstIndentLevel = 1
   let g:indentLine_char = '·'
@@ -21,6 +22,20 @@
   let g:vimtex_view_general_viewer = 'firefox'
   let g:vimtex_view_general_options = '--unique @pdf\#src:@tex:@line:@col'
   let g:vimtex_view_general_options_latexmk = '--unique'
+
+" Gutentags
+  let g:gutentags_add_default_project_roots = 0
+  let g:gutentags_project_root = ['package.json', '.git', '.virkspace']
+  let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+  let g:gutentags_generate_on_write = 1
+  let g:gutentags_generate_on_new = 1
+  let g:gutentags_generate_on_missing = 1
+  let g:gutentags_generate_on_write = 1
+  let g:gutentags_generate_on_empty_buffer = 0
+  let g:gutentags_ctags_extra_args = [
+        \   '--tag-relative=yes',
+        \   '--fields=+ailmnS',
+        \ ]
 
 " Vista
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
@@ -86,7 +101,7 @@
         \ |   wincmd w
         \ |   call SetStartifyParams()
         \ |   Startify
-        \ | endif 
+        \ | endif
   autocmd VimEnter *
         \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
         \ |   call s:openNerdTreeIfNotAlreadyOpen()
@@ -103,7 +118,7 @@
   let NERDTreeMinimalUI=1
   let NERDTreeDirArrows=1
   let NERDTreeShowBookmarks=0
-  let NERDTreeShowHidden=1    
+  let NERDTreeShowHidden=1
   let NERDTreeDirArrowExpandable = "\u00a0"
   let NERDTreeDirArrowCollapsible = "\u00a0"
 
@@ -132,4 +147,4 @@
       \     'v:variables',
       \     'M:override_methods'
       \   ]
-      \ } 
+      \ }

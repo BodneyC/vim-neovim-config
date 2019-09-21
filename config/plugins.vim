@@ -73,6 +73,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   "Plug 'xolox/vim-easytags'
   Plug 'benmills/vimux'
   Plug 'honza/vim-snippets'
+  Plug 'ludovicchabant/vim-gutentags'
 
 " Colorschemes
   "Plug 'dim13/smyck.vim'
@@ -97,10 +98,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  "bin Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
   Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
   Plug 'BodneyC/pic-vim',    { 'branch': 'master' }
 
 call plug#end()
 
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/,/home/benjc/Documents/pic-vim"
+let &runtimepath.=",/home/benjc/gitclones/virkspaces/"
+" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/,/home/benjc/Documents/pic-vim"
