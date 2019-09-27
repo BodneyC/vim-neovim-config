@@ -4,16 +4,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
   Plug 'Shougo/neco-vim'
   Plug 'neoclide/coc-neco'
-  " Plug 'w0rp/ale'
-  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Languages
-  " Plug 'Shougo/deoplete.nvim'
-  " Plug 'HerringtonDarkholme/yats.vim'
-  " Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
-  " Plug 'fatih/vim-go', { 'tag': '*' }
-  " Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-  " Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
@@ -50,8 +42,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Git
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/gv.vim'
-  "Plug 'tpope/vim-rhubarb'
-  "Plug 'shumphrey/fugitive-gitlab.vim'
+  Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Text manipulation
   Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
@@ -70,14 +61,14 @@ call plug#begin('~/.local/share/nvim/plugged')
   
 " Integrations
   "Plug 'christoomey/vim-tmux-navigator'
-  "Plug 'xolox/vim-easytags'
   Plug 'benmills/vimux'
   Plug 'honza/vim-snippets'
+  Plug 'ludovicchabant/vim-gutentags'
 
 " Colorschemes
-  "Plug 'dim13/smyck.vim'
-  "Plug 'nightsense/carbonized'
-  "Plug 'joshdick/onedark.vim'
+  Plug 'dim13/smyck.vim'
+  Plug 'nightsense/carbonized'
+  Plug 'joshdick/onedark.vim'
   Plug 'chr4/jellygrass.vim'
   Plug 'nanotech/jellybeans.vim'
   Plug 'liuchengxu/space-vim-dark'
@@ -97,10 +88,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'liuchengxu/vista.vim'
 
 " Workspace
-  " Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
   Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
   Plug 'BodneyC/pic-vim',    { 'branch': 'master' }
 
 call plug#end()
 
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/,/home/benjc/Documents/pic-vim"
+" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim/,/home/benjc/Documents/at-z-vim/,/home/benjc/Documents/pic-vim"

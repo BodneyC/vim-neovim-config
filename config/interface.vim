@@ -2,7 +2,7 @@
   " runtime! archlinux.vim
   set nocompatible               " run in vim mode
   set expandtab                  " expand tabs into spaces
-  set tabstop=2                  " indentation leves of normal tabs
+  set tabstop=4                  " indentation leves of normal tabs
   set softtabstop=0              " indentation level of soft-tabs
   set shiftwidth=0               " how many columns to re-indent with << and >>
   set autoindent                 " auto-indent new lines
@@ -26,6 +26,7 @@
   set ttimeoutlen=50
   set splitbelow
   set splitright
+  set cul
   syntax on                      " turn on syntax highlighting
 
 " Folding
@@ -54,7 +55,7 @@
 " Colorscheme
   let g:onedark_termcolors = 256
   " set notermguicolors
-  colorscheme space-vim-dark
+  colorscheme iceberg
 
 " Lightline
   set laststatus=2

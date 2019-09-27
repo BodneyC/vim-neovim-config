@@ -22,6 +22,20 @@
   let g:vimtex_view_general_options = '--unique @pdf\#src:@tex:@line:@col'
   let g:vimtex_view_general_options_latexmk = '--unique'
 
+" Gutentags
+  let g:gutentags_add_default_project_roots = 0 
+  let g:gutentags_project_root = ['package.json', '.git', '.virkspace'] 
+  let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/') 
+  let g:gutentags_generate_on_write = 1
+  let g:gutentags_generate_on_new = 1 
+  let g:gutentags_generate_on_missing = 1
+  let g:gutentags_generate_on_write = 1
+  let g:gutentags_generate_on_empty_buffer = 0 
+  let g:gutentags_ctags_extra_args = [ 
+        \   '--tag-relative=yes', 
+        \   '--fields=+ailmnS', 
+        \ ] 
+
 " Vista
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
   let g:vista_default_executive = 'coc'
