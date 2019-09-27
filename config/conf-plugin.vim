@@ -1,4 +1,5 @@
 " Plugin variable settings
+  let g:virk_tags_enable = 0
   let g:SuperTabDefaultCompletionType = "<c-n>"
   let g:indentLine_showFirstIndentLevel = 1
   let g:indentLine_char = '·'
@@ -100,7 +101,7 @@
         \ |   wincmd w
         \ |   call SetStartifyParams()
         \ |   Startify
-        \ | endif 
+        \ | endif
   autocmd VimEnter *
         \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
         \ |   call s:openNerdTreeIfNotAlreadyOpen()
@@ -117,7 +118,7 @@
   let NERDTreeMinimalUI=1
   let NERDTreeDirArrows=1
   let NERDTreeShowBookmarks=0
-  let NERDTreeShowHidden=1    
+  let NERDTreeShowHidden=1
   let NERDTreeDirArrowExpandable = "\u00a0"
   let NERDTreeDirArrowCollapsible = "\u00a0"
 
@@ -146,4 +147,4 @@
       \     'v:variables',
       \     'M:override_methods'
       \   ]
-      \ } 
+      \ }
