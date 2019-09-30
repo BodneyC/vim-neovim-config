@@ -41,6 +41,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Git
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/gv.vim'
+  Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Text manipulation
   Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
