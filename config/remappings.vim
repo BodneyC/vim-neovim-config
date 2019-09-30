@@ -49,10 +49,12 @@ function! FZFOpen(command_str)
 endfunction
 
 function! MakeTagsFile()
-  if len(g:virk_root_dir) > 0
+  if len(g:virk_root_dir) > 0 && g:virk_tags_enable != 0
     VSMakeTagsFile
-  else
+  else if ! exists('g:gutentags_generate_on_write')
     !DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags $DIR
+  else
+    echom "VS tags disabled, gutentags in operation"
   endif
 endfunction
 
