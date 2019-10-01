@@ -38,12 +38,6 @@ augroup vimrc_indentline_enable
         \ IndentLinesEnable
 augroup END
 
-augroup vimrc_feature_terminal
-  autocmd!
-  autocmd TermOpen * setlocal nospell nobuflisted nonumber textwidth=0 winheight=1
-  autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
-augroup END
-
 augroup vimrc_language_other
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile,Dockerfile set ts=4 | set sw=4

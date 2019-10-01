@@ -28,3 +28,9 @@ inoremap <F10> <esc>:call ChooseTerm("term-split", 1)<CR>a
 
 tnoremap <C-q> <C-\><C-n>
 tnoremap <LeftRelease> <Nop>
+
+augroup vimrc_feature_terminal
+  autocmd!
+  autocmd TermOpen * setlocal nospell nobuflisted nonu nornu tw=0 wh=1 | resize 10
+  autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
+augroup END

@@ -88,6 +88,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
   Plug 'BodneyC/pic-vim',    { 'branch': 'master' }
 
+" Debug
+  Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+
 call plug#end()
 
 " let &runtimepath.=",/home/benjc/gitclones/virkspaces"
