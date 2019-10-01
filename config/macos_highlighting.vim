@@ -1,0 +1,2 @@
+if has('macunix')
+endif
