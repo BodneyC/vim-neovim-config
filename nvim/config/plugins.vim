@@ -83,13 +83,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
 
-" Workspace
-  Plug 'BodneyC/VirkSpaces', { 'branch': 'master' }
-  Plug 'BodneyC/At-Zed-vim', { 'branch': 'master' }
-  Plug 'BodneyC/pic-vim',    { 'branch': 'master' }
-
 " Debug
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+
+" Personal
+  Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/At-Zed-vim', { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/pic-vim',    { 'branch': 'master' }
 
 call plug#end()
 
