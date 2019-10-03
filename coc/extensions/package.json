@@ -19,7 +19,7 @@
     "coc-syntax": ">=1.2.4",
     "coc-tabnine": ">=1.2.1",
     "coc-tag": ">=1.2.4",
-    "coc-tsserver": ">=1.4.1",
+    "coc-tsserver": ">=1.4.2",
     "coc-yank": ">=1.1.2",
     "coc-go": ">=0.5.2",
     "coc-tslint-plugin": ">=1.1.1",

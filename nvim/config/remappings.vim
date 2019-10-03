@@ -66,6 +66,9 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>ge :call Goyo_e()<CR>
 nnoremap <leader>gl :call Goyo_l()<CR>
 
+""""""" NERDTreeCommenter
+map  <Plug>NERDCommenterToggle
+
 """"""" Tags
 nnoremap <leader>t :call MakeTagsFile()<CR>
 
