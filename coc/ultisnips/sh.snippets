@@ -93,17 +93,17 @@ snippet _simple_argparse "Simple BaSH argument parser" b
 _argparse() {
 	shopt -s extglob
 
-	while [[ -n "$1" ]]; do
-		case "$1" in
+	while [[ -n "\$1" ]]; do
+		case "\$1" in
 			--) arg_end=1 ;;
-			-*) case "$1" in
+			-*) case "\$1" in
 					-h)              func_help ;;
-					-n|--name)       REPO_NAME="$2"; shift ;;
-					-v|--visibility) REPO_VISI="$2"; shift ;;
-					-g|--group)      REPO_GROU="$2"; shift ;;
-					*)               _exit_msg "Unknown option: $1" "$EOPTN"
+					-n|--name)       REPO_NAME="\$2"; shift ;;
+					-v|--visibility) REPO_VISI="\$2"; shift ;;
+					-g|--group)      REPO_GROU="\$2"; shift ;;
+					*)               _exit_msg "Unknown option: \$1" "\$EOPTN"
 				esac ;;
-			*) _exit_msg "Unknown option: $1" "$EOPTN"
+			*) _exit_msg "Unknown option: \$1" "\$EOPTN"
 		esac
 		shift
 	done
