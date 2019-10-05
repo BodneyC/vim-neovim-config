@@ -58,7 +58,7 @@ _argparse() {
 	[[ \$# == 0 ]] && cmd="help"
 
 	shopt -s extglob
- 
+
 	while [[ -n "\$1" ]]; do
 		CHECK=\$(_argparse_done_check "\$cmd" "\$arg_end")
 		case "\$1" in
@@ -108,4 +108,8 @@ _argparse() {
 		shift
 	done
 }
+endsnippet
+
+snippet shellcheck "Shellcheck disable" i
+# shellcheck disable=
 endsnippet

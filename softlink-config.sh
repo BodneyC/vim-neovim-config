@@ -19,16 +19,18 @@ _yes_or_no() { # msg
 	done
 }
 
+# shellcheck disable=SC2164
 _process() {
 	realpath="$1"; basename="$2"; home_file="$3"
 	echo
-	cd "$(dirname "$home_file")" || { _msg_exit "Could not CD to $home_file dir"; return 1; }
-	if [[ -e "$basename" ]]; then
-		_yes_or_no "$home_file exists, delete?" || return 1
-		/bin/rm -rf "$basename" || { _msg_ext "Could not delete $basename"; cd -; return 1; }
-	fi
-	ln -s "$realpath" "$(realpath "$basename")"
-	cd - >& /dev/null || _msg_exit "Could not return to git repo" 1
+	(
+		cd "$(dirname "$home_file")"
+		if [[ -e "$basename" ]]; then
+			_yes_or_no "$home_file exists, delete?" || return 1
+			/bin/rm -rf "$basename" || { _msg_ext "Could not delete $basename"; cd -; return 1; }
+		fi
+		ln -s "$realpath" "$(realpath "$basename")"
+	)
 }
 
 if [[ "$1" == "-f" ]]; then

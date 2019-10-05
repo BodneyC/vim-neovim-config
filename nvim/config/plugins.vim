@@ -37,6 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chrisbra/recover.vim'
   Plug 'frazrepo/vim-rainbow'
   Plug 'mengelbrecht/lightline-bufferline'
+	Plug 'wsdjeg/notifications.vim'
 
 " Git
   Plug 'tpope/vim-fugitive'
@@ -64,14 +65,18 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ludovicchabant/vim-gutentags'
 
 " Colorschemes
-  Plug 'dim13/smyck.vim'
-  Plug 'nightsense/carbonized'
-  Plug 'joshdick/onedark.vim'
-  Plug 'chr4/jellygrass.vim'
-  Plug 'nanotech/jellybeans.vim'
-  Plug 'liuchengxu/space-vim-dark'
-  Plug 'dylanaraps/wal.vim'
-  Plug 'cocopon/iceberg.vim'
+  " Plug 'dim13/smyck.vim'
+  " Plug 'nightsense/carbonized'
+  " Plug 'joshdick/onedark.vim'
+  " Plug 'chr4/jellygrass.vim'
+  " Plug 'nanotech/jellybeans.vim'
+  " Plug 'liuchengxu/space-vim-dark'
+  " Plug 'dylanaraps/wal.vim'
+  " Plug 'cocopon/iceberg.vim'
+  Plug 'rakr/vim-two-firewatch'
+  " Plug 'sts10/vim-pink-moon'
+  " Plug 'scheakur/vim-scheakur'
+  " Plug 'NLKNguyen/papercolor-theme'
 
 " Writing
   Plug 'xolox/vim-misc'
