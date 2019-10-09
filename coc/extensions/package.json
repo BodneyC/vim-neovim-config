@@ -24,7 +24,8 @@
     "coc-go": ">=0.5.2",
     "coc-tslint-plugin": ">=1.1.1",
     "coc-tslint": ">=1.0.17",
-    "coc-sh": ">=0.2.1"
+    "coc-sh": ">=0.2.1",
+    "coc-vetur": ">=1.1.5"
   },
   "devDependencies": {
     "typescript": "^3.6.2"

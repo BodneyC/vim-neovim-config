@@ -96,7 +96,6 @@
 
   autocmd VimEnter *
         \   if argc() == 0
-        \ |   exe 'NERDTree'
         \ |   setlocal nobuflisted
         \ |   wincmd w
         \ |   call SetStartifyParams()
@@ -121,6 +120,7 @@
   let NERDTreeShowHidden=1
   let NERDTreeDirArrowExpandable = "\u00a0"
   let NERDTreeDirArrowCollapsible = "\u00a0"
+  let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace']
 
 " Ranger
   let g:loaded_netrwPlugin = 1

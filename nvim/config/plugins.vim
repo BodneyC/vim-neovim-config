@@ -37,7 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chrisbra/recover.vim'
   Plug 'frazrepo/vim-rainbow'
   Plug 'mengelbrecht/lightline-bufferline'
-	Plug 'wsdjeg/notifications.vim'
+	" Plug 'wsdjeg/notifications.vim'
 
 " Git
   Plug 'tpope/vim-fugitive'
