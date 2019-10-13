@@ -1,9 +1,17 @@
 {
   "suggest.triggerAfterInsertEnter": false,
+  "eslint.enable": false,
   "eslint.autoFixOnSave": true,
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "tslint.jsEnable": true,
+  "tslint.autoFixOnSave": true,
+  "tslint.packageManager": "npm",
   "coc.source.file.ignoreHidden": false,
   "python.linting.enabled": true,
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "| ",
   "git.enableGutters": true,
   "git.addGlameToVirtualText": true,

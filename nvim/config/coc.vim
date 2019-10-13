@@ -16,6 +16,7 @@ call coc#add_extension(
       \ 'coc-python', 
       \ 'coc-json', 
       \ 'coc-tsserver', 
+      \ 'coc-tslint-plugin',
       \ 'coc-eslint', 
       \ 'coc-html', 
       \ 'coc-emmet', 

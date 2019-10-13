@@ -82,12 +82,6 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>* :%s/\<<C-r><C-w>\>//g<left><left>
 nnoremap <leader>/ :noh<CR>
 
-""""""" Resizing of slices
-nnoremap <silent> <leader>j :resize -5<CR>
-nnoremap <silent> <leader>k :resize +5<CR>
-nnoremap <silent> <leader>h :vertical resize +5<CR>
-nnoremap <silent> <leader>l :vertical resize -5<CR>
-
 """"""" Update .vimrc
 nnoremap <leader>cs :so $MYVIMRC<CR>
 nnoremap <leader>ce :e $MYVIMRC<CR>
@@ -97,12 +91,11 @@ nnoremap <leader>" :sbn<CR>
 nnoremap <leader>% :vert sbn<CR>
 
 """"""" FZF
-nnoremap <leader>b :call FZFOpen(':Buffer')<CR>
 nnoremap <leader>f :call FZFOpen(':Files')<CR>
 nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <leader>M :call FZFOpen(':Maps')<CR>
-nnoremap <leader>i :call FZFOpen(':IndentLinesToggle')<CR>
+nnoremap <leader>i :IndentLinesToggle<CR>
 
 """"""" Plugin panes
 nnoremap <Leader>R :Ranger<CR>
@@ -139,44 +132,34 @@ nmap <leader>F  <Plug>(coc-format)
 """"""""""""""""" Function Keys """""""""""""""""""
 
 """"""" Help under cursor
-nnoremap <F1> :help <C-R><C-W><CR>
+nnoremap <F1> :help <C-r><C-w><CR>
 
 """"""" Replaces
 nnoremap <F2> :s//g<Left><Left>
 nnoremap <F3> :%s//g<Left><Left>
 
-""""""" Paste from sys-clipboard
-nnoremap <F4> "*Y
-inoremap <F4> <esc>"*Ya
-nnoremap <F5> mygg"*yG`y
-inoremap <F5> <esc>mygg"*yG`ya
-nnoremap <F6> "*p
-inoremap <F6> <esc>"*pa
-
 """"""" Spell checking
 nnoremap <F7> :set spell!<CR>
 inoremap <F7> <esc>:set spell!<CR>a
 
-""""""""""""""""""""" G-keys """"""""""""""""""""""
+""""""""""""""""" Buffer Control """""""""""""""""""
 
-""""""" Buffer Control
-nnoremap <Tab> :bn<CR>
+""""""" Buffers
+nnoremap <Tab>   :bn<CR>
 nnoremap <S-Tab> :bp<CR>
-nnoremap gp :bp<CR>
-nnoremap gn :bn<CR>
-nnoremap gd :bn<CR>:bd#<CR>
-nnoremap g# <C-^>
-nnoremap gl :ls<CR>
-nnoremap gm :Map<CR>
-nnoremap g1 :b1<CR>
-nnoremap g2 :b2<CR>
-nnoremap g3 :b3<CR>
-nnoremap g4 :b4<CR>
+nnoremap <leader>bd :bd<CR>
+nnoremap <leader>be :enew<CR>
+nnoremap <leader>bl :call FZFOpen(':Buffer')<CR>
+nnoremap <leader>b# <C-^>
+nnoremap <leader>b1 :b1<CR>
+nnoremap <leader>b2 :b2<CR>
+nnoremap <leader>b3 :b3<CR>
+nnoremap <leader>b4 :b4<CR>
 
 """"""" Open file/links
-nnoremap <silent> gx :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>
-vnoremap <silent> gx :<C-u>call netrw#BrowseXVis()<CR>
-nnoremap <silent> <leader>o :e <cfile><CR>
+nnoremap <silent> <leader>ox :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>
+vnoremap <silent> <leader>ox :<C-u>call netrw#BrowseXVis()<CR>
+nnoremap <silent> <leader>of :e <cfile><CR>
 
 """"""""""""""""""" Movement """""""""""""""""""""
 
@@ -193,10 +176,10 @@ nnoremap <silent> <C-h> :call WinMove('h')<CR>
 nnoremap <silent> <C-j> :call WinMove('j')<CR>
 nnoremap <silent> <C-k> :call WinMove('k')<CR>
 nnoremap <silent> <C-l> :call WinMove('l')<CR>
-inoremap <C-h> <Esc><C-w>h
-inoremap <C-j> <Esc><C-w>j
-inoremap <C-k> <Esc><C-w>k
-inoremap <C-l> <Esc><C-w>l
+inoremap <C-h> <Esc><C-h>
+inoremap <C-j> <Esc><C-j>
+inoremap <C-k> <Esc><C-k>
+inoremap <C-l> <Esc><C-l>
 
 """""""""""""""""""""" Misc """"""""""""""""""""""
 
