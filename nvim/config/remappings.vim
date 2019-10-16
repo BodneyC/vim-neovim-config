@@ -58,20 +58,21 @@ function! MakeTagsFile()
   endif
 endfunction
 
-function BenJCNTResize()
+function NERDTreeResize()
   let curWin = winnr()
   NERDTreeFocus
   silent! normal! gg"byG
-  let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 5
+  let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
   exec 'vertical resize' maxcol
   exec curWin 'wincmd w'
 endfunction
+command! -nargs=0 NERDTreeResize :call NERDTreeResize()
 
 """""""""""""""" Leader Remappings """"""""""""""""
 
 """"""" NERDTree
 nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <leader>nr :call BenJCNTResize()<CR>
+nnoremap <leader>nr :call NERDTreeResize()<CR>
 
 nnoremap <leader>ge :call Goyo_e()<CR>
 nnoremap <leader>gl :call Goyo_l()<CR>
@@ -157,7 +158,7 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""" Buffers
 nnoremap <Tab>   :bn<CR>
 nnoremap <S-Tab> :bp<CR>
-nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bd :bn<CR>:bd#<CR>
 nnoremap <leader>be :enew<CR>
 nnoremap <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <leader>b# <C-^>
