@@ -58,10 +58,20 @@ function! MakeTagsFile()
   endif
 endfunction
 
+function BenJCNTResize()
+  let curWin = winnr()
+  NERDTreeFocus
+  silent! normal! gg"byG
+  let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 5
+  exec 'vertical resize' maxcol
+  exec curWin 'wincmd w'
+endfunction
+
 """""""""""""""" Leader Remappings """"""""""""""""
 
 """"""" NERDTree
 nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>nr :call BenJCNTResize()<CR>
 
 nnoremap <leader>ge :call Goyo_e()<CR>
 nnoremap <leader>gl :call Goyo_l()<CR>
