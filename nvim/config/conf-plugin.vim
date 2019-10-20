@@ -122,6 +122,9 @@
   let NERDTreeDirArrowCollapsible = "\u00a0"
   let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace']
 
+" FZF
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
 " Ranger
   let g:loaded_netrwPlugin = 1
   let g:ranger_replace_netrw = 0
