@@ -90,6 +90,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Debug
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+  Plug 'sidorares/node-vim-debugger'
 
 " Personal
   Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
