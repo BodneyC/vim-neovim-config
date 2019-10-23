@@ -1,8 +1,8 @@
-hi clear SpellBad
-hi SpellBad cterm=bold ctermfg=red
-hi SpellCap cterm=bold ctermfg=red
-hi SpellRare cterm=bold ctermfg=red
-hi SpellLocal cterm=bold ctermfg=red
+" hi clear SpellBad
+" hi SpellBad cterm=bold ctermfg=red
+" hi SpellCap cterm=bold ctermfg=red
+" hi SpellRare cterm=bold ctermfg=red
+" hi SpellLocal cterm=bold ctermfg=red
 
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
