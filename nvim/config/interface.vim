@@ -27,6 +27,8 @@ set ttimeoutlen=50
 set splitbelow
 set splitright
 set cul
+set icm=split
+set winblend=16
 syntax on                      " turn on syntax highlighting
 
 " Folding

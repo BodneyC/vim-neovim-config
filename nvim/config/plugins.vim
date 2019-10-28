@@ -41,6 +41,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Git
   Plug 'tpope/vim-fugitive'
+  Plug 'oguzbilgic/vim-gdiff'
+  Plug 'rbong/vim-flog'
   Plug 'junegunn/gv.vim'
   Plug 'shumphrey/fugitive-gitlab.vim'
 

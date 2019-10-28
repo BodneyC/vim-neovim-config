@@ -52,11 +52,10 @@ function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
   call setbufvar(buf, '&signcolumn', 'no')
 
-  let height = 12
+  let height = float2nr(&lines / 2)
   let width = float2nr(&columns / 1.7)
   let horizontal = float2nr((&columns - width) / 2)
   let vertical = float2nr((&lines - height) / 2)
-
 
   let opts = {
         \ 'relative': 'editor',
@@ -124,7 +123,7 @@ nnoremap <leader>" :sbn<CR>
 nnoremap <leader>% :vert sbn<CR>
 
 """"""" FZF
-nnoremap <leader>f :call FZFOpen(':Files')<CR>
+nnoremap <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
 nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <leader>M :call FZFOpen(':Maps')<CR>

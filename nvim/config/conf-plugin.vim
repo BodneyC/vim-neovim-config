@@ -123,7 +123,19 @@
   let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace']
 
 " FZF
+  let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,3'
   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+" Flog
+  function! Flogdiff()
+    let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
+    let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
+    call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
+  endfunction
+
+  augroup flog
+    autocmd FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
+  augroup END
 
 " Ranger
   let g:loaded_netrwPlugin = 1

@@ -11,13 +11,14 @@ if g:colors_name == 'two-firewatch'
   hi SignifySignAdd       guibg=#45505d guifg=#43d08a
   hi SignifySignChange    guibg=#45505d guifg=#e0c285
   hi SignifySignDelete    guibg=#45505d guifg=#e05252
+  hi CocErrorSign         guibg=#45505d guifg=#ff8888
   hi link GitGutterAdd    SignifySignAdd
   hi link GitGutterChange SignifySignChange
   hi link GitGutterChangeDelete SignifySignChange
   hi link GitGutterDelete SignifySignDelete
 
   hi MatchParen guibg=#55606d guifg=#dcdfe4
-  hi MatchParenCur guibg=#55606d guifg=#dcdfe4
+  hi MatchParenCur guibg=#55606d guifg=#ee2000
 endif
 
 " hi StatusLine ctermfg=blue
