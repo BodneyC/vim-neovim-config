@@ -58,12 +58,12 @@ function! FloatingFZF()
   let vertical = float2nr((&lines - height) / 2)
 
   let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
+        \   'relative': 'editor',
+        \   'row': vertical,
+        \   'col': horizontal,
+        \   'width': width,
+        \   'height': height,
+        \   'style': 'minimal'
         \ }
 
   call nvim_open_win(buf, v:true, opts)
