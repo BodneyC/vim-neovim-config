@@ -87,8 +87,7 @@
   endfunction
   function! s:openNerdTreeIfNotAlreadyOpen()
     if ! (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-      echom 100921
-      exe 'NERDTree' argv()[0]
+      NERDTreeToggle
       setlocal nobuflisted
       wincmd w
     endif

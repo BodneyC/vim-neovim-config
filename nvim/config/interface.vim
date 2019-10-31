@@ -54,33 +54,6 @@ set spelllang=en_gb
 " AStyle
 "   autocmd BufNewFile,BufRead *.C,*.java,*.c,*.H,*.h set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
 
-" Colorscheme
-let g:onedark_termcolors = 256
-set termguicolors
-let g:two_firewatch_italics=1
-colorscheme two-firewatch
-
-" Lightline
-set laststatus=2
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-
-let g:lightline = { 
-      \   'colorscheme': 'twofirewatch',
-      \   'active': {
-      \     'right': [ [ 'lineinfo' ],
-      \                [ 'fileformat', 'fileencoding', 'filetype' ] ],
-      \     'left': [ [ 'filename' ],
-      \               [ 'git', 'paste', 'cocstatus', 'readonly', 'Fugitive', 'modified' ] ]
-      \   }, 
-      \   'component' : {
-      \	    'WordCount' : 'wc: %{wordCount#WordCount()}',
-      \     'Fugitive': '%{FugitiveStatusline()}',
-      \   },
-      \   'component_function': {
-      \     'cocstatus': 'coc#status'
-      \   }
-      \ }
 " AutoPairs settings
 let g:AutoPairsMultilineClose=0
 let g:AutoPairsFlyMode=0
