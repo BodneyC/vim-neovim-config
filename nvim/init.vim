@@ -1,6 +1,12 @@
 set nocompatible
 filetype off
 
+let g:term_theme = $TERMTHEME
+
+if empty(g:term_theme)
+  echoe "$TERMTHEME not set, theming results may vary"
+endif
+
 let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog='/usr/bin/python3'
 

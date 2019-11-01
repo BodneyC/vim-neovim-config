@@ -6,7 +6,14 @@ let g:vimspectrItalicComment = 'on'
 let g:onedark_termcolors = 256
 set termguicolors
 set background=dark
-colorscheme vimspectr300-light
+
+if g:term_theme == "dark"
+	let s:lightline_theme = "twofirewatch"
+	colorscheme two-firewatch
+elseif g:term_theme == "light"
+	let s:lightline_theme = "VimSpectre300light"
+	colorscheme vimspectr300-light
+endif
 
 " Lightline
 set laststatus=2
@@ -14,7 +21,7 @@ let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 
 let g:lightline = {
-      \   'colorscheme': 'VimSpectre300light',
+      \   'colorscheme': s:lightline_theme,
       \   'active': {
       \     'right': [ [ 'lineinfo' ],
       \                [ 'fileformat', 'fileencoding', 'filetype' ] ],
