@@ -60,10 +60,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'andymass/vim-matchup'
   Plug 'Konfekt/FastFold'
   Plug 'tmhedberg/SimpylFold'
-  
+
 " Integrations
   Plug 'benmills/vimux'
-  Plug 'honza/vim-snippets'
+"   Plug 'honza/vim-snippets'
   Plug 'ludovicchabant/vim-gutentags'
 
 " Colorschemes
@@ -75,10 +75,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'liuchengxu/space-vim-dark'
   " Plug 'dylanaraps/wal.vim'
   " Plug 'cocopon/iceberg.vim'
-  Plug 'rakr/vim-two-firewatch'
   " Plug 'sts10/vim-pink-moon'
   " Plug 'scheakur/vim-scheakur'
   " Plug 'NLKNguyen/papercolor-theme'
+  Plug 'rakr/vim-two-firewatch'
+  Plug 'nightsense/vimspectr'
 
 " Writing
   Plug 'xolox/vim-misc'
@@ -95,12 +96,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'sidorares/node-vim-debugger'
 
 " Personal
-  Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
+  " Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/At-Zed-vim', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/pic-vim',    { 'branch': 'master' }
 
 call plug#end()
 
-" let &runtimepath.=",/home/benjc/gitclones/virkspaces"
+let &runtimepath.=",/home/benjc/Documents/virkspaces-vim"
 " let &runtimepath.=",/home/benjc/gitclones/at-zed-vim"
 " let &runtimepath.=",/home/benjc/gitclones/pic-vim"

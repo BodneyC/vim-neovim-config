@@ -31,7 +31,6 @@ tnoremap <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
   autocmd!
-  autocmd TermOpen,TermEnter * setlocal nospell nobuflisted nonu nornu tw=0 wh=1 | hi Pmenu guibg=#151515
-  autocmd TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guibg=#3e4452
+  autocmd TermOpen,TermEnter * setlocal nospell nobuflisted nonu nornu tw=0 wh=1
   autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
