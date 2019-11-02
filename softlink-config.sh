@@ -42,3 +42,10 @@ mkdir -p ~/.config/{nvim,coc}
 for f in nvim/{init.vim,coc-settings.json,ftplugin,config,addit-lang-servers} coc/{ultisnips,extensions/{package.json,yarn.lock}}; do
 	_process "$(realpath "$f")" "$(basename "$f")" "$HOME/.config/$f"
 done
+
+LIGHTLINE_DIR="$HOME/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/"
+
+[[ -d "$LIGHTLINE_DIR" ]] && (
+	cd "$LIGHTLINE_DIR"
+	ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/VimSpectre300light.vim .
+)
