@@ -13,7 +13,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/vader.vim'
   Plug 'stevearc/vim-arduino'
   Plug 'z3t0/arduvim'
-  Plug 'mgedmin/python-imports.vim'
+  " Plug 'mgedmin/python-imports.vim'
 
 " Interface
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -47,15 +47,15 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Text manipulation
-  Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
+  " Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
   Plug 'junegunn/vim-easy-align'
   Plug 'kien/ctrlp.vim'
   Plug 'jiangmiao/auto-pairs'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-repeat' " Better . functionality
   Plug 'tpope/vim-surround' " Surround with ys<w>
-  Plug 'inkarkat/vim-ingo-library'  " required by LineJuggler
-  Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
+  " Plug 'inkarkat/vim-ingo-library'  " required by LineJuggler
+  " Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
   Plug 'terryma/vim-multiple-cursors'
   Plug 'andymass/vim-matchup'
   Plug 'Konfekt/FastFold'
@@ -82,8 +82,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nightsense/vimspectr'
 
 " Writing
-  Plug 'xolox/vim-misc'
-  Plug 'xolox/vim-notes'
+  " Plug 'xolox/vim-misc'
+  " Plug 'xolox/vim-notes'
   Plug 'rhysd/vim-grammarous'
   Plug 'junegunn/goyo.vim'
 

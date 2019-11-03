@@ -104,6 +104,10 @@ map  <Plug>NERDCommenterToggle
 """"""" Tags
 nnoremap <leader>t :call MakeTagsFile()<CR>
 
+""""""" LineJuggler
+nnoremap [<Space> mzO<Esc>`z
+nnoremap ]<Space> mzo<Esc>`z
+
 """"""" General leader
 nnoremap <leader>W :wqa<CR>
 nnoremap <leader>Q :qa!<CR>
