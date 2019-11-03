@@ -128,7 +128,6 @@ nnoremap <leader>% :vert sbn<CR>
 
 """"""" FZF
 nnoremap <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
-nnoremap <leader>B :call FZFOpen(':Buffer')<CR>
 nnoremap <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <leader>M :call FZFOpen(':Maps')<CR>
@@ -157,9 +156,9 @@ nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 """"""" Tab completion
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 """"""" Formatting
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
@@ -182,9 +181,11 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""""""""""""" Buffer Control """""""""""""""""""
 
 """"""" Buffers
-nnoremap <Tab>   :bn<CR>
-nnoremap <S-Tab> :bp<CR>
+nnoremap <Tab>      :bn<CR>
+nnoremap <S-Tab>    :bp<CR>
 nnoremap <leader>bd :bn<CR>:bd#<CR>
+nnoremap <leader>bl :call FZFOpen(':Buffer')<CR>
+nnoremap <leader>bD :%bd\|e#<CR>
 nnoremap <leader>be :enew<CR>
 nnoremap <leader>b# <C-^>
 nnoremap <leader>b1 :b1<CR>
@@ -220,19 +221,19 @@ inoremap <C-l> <Esc><C-l>
 """""""""""""""""""""" Misc """"""""""""""""""""""
 
 """"""" Indenting
-xnoremap < <gv
-xnoremap > >gv
+xnoremap <       <gv
+xnoremap >       >gv
 xnoremap <s-tab> <gv
-xnoremap <tab> >gv
+xnoremap <tab>   >gv
 
 """"""" Case beefs
-nnoremap Q q
-nnoremap Q! q!
+nnoremap Q   q
+nnoremap Q!  q!
 command! Wqa wqa
 command! WQa wqa
-command! WQ wq
-command! Wq wq
-command! W w
-command! Q q
+command! WQ  wq
+command! Wq  wq
+command! W   w
+command! Q   q
 
 command! -nargs=0 ConvLineEndings %s///g
