@@ -1,13 +1,13 @@
 set signcolumn=yes
 
 call coc#add_extension(
+      \ 'coc-explorer',
       \ 'coc-snippets',
       \ 'coc-tag',
       \ 'coc-tabnine',
       \ 'coc-syntax',
       \ 'coc-lists',
       \ 'coc-yank',
-      \ 'coc-post',
       \ 'coc-diagnostic',
       \ 'coc-calc',
       \ 'coc-docker',
@@ -40,12 +40,6 @@ let g:coc_filetypes = [
 call coc#config('eslint', {
       \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
       \ 'autoFixOnSave': v:true,
-      \ })
-call coc#config('prettier', {
-      \ 'singleQuote': v:true,
-      \ 'trailingComma': 'all',
-      \ 'jsxBracketSameLine': v:true,
-      \ 'eslintIntegration': v:true,
       \ })
 
 let g:python_highlight_all = 1

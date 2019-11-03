@@ -94,5 +94,30 @@
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck",
     "vim": "vint"
-  }
+  },
+  "explorer.sources": [
+    {
+      "name": "file",
+      "expand": true
+    },
+    {
+      "name": "buffer",
+      "expand": true
+    }
+  ],
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.columns": [
+    "selection",
+    "clip",
+    "diagnosticError",
+    "indent",
+    "icon",
+    "filename",
+    "git",
+    "size",
+    "modified",
+    "readonly"
+  ],
+  "explorer.file.column.git.showIgnored": true,
+  "explorer.file.column.filename.minWidth": 0
 }

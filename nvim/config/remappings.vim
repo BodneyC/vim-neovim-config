@@ -79,21 +79,22 @@ function! MakeTagsFile()
   endif
 endfunction
 
-function NERDTreeResize()
-  let curWin = winnr()
-  NERDTreeFocus
-  silent! normal! gg"byG
-  let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
-  exec 'vertical resize' maxcol
-  exec curWin 'wincmd w'
-endfunction
-command! -nargs=0 NERDTreeResize :call NERDTreeResize()
+" function NERDTreeResize()
+"   let curWin = winnr()
+"   NERDTreeFocus
+"   silent! normal! gg"byG
+"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
+"   exec 'vertical resize' maxcol
+"   exec curWin 'wincmd w'
+" endfunction
+" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
 
 """""""""""""""" Leader Remappings """"""""""""""""
 
 """"""" NERDTree
-nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <leader>nr :call NERDTreeResize()<CR>
+nnoremap <leader>ce :CocCommand explorer --toggle<CR>
+" nnoremap <leader>nt :NERDTreeToggle<CR>
+" nnoremap <leader>nr :call NERDTreeResize()<CR>
 
 nnoremap <leader>ge :call Goyo_e()<CR>
 nnoremap <leader>gl :call Goyo_l()<CR>
@@ -117,10 +118,6 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>* :%s/\<<C-r><C-w>\>//g<left><left>
 nnoremap <leader>/ :noh<CR>
-
-""""""" Update .vimrc
-nnoremap <leader>cs :so $MYVIMRC<CR>
-nnoremap <leader>ce :e $MYVIMRC<CR>
 
 """"""" Split
 nnoremap <leader>" :sbn<CR>

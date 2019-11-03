@@ -112,14 +112,14 @@
   let g:NERDDefaultAlign = 'left'
 
 " NERDTree
-  let NERDTreeWinSize=25
-  let NERDTreeMinimalUI=1
-  let NERDTreeDirArrows=1
-  let NERDTreeShowBookmarks=0
-  let NERDTreeShowHidden=1
-  let NERDTreeDirArrowExpandable = "\u00a0"
-  let NERDTreeDirArrowCollapsible = "\u00a0"
-  let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace']
+  " let NERDTreeWinSize=25
+  " let NERDTreeMinimalUI=1
+  " let NERDTreeDirArrows=1
+  " let NERDTreeShowBookmarks=0
+  " let NERDTreeShowHidden=1
+  " let NERDTreeDirArrowExpandable = "\u00a0"
+  " let NERDTreeDirArrowCollapsible = "\u00a0"
+  " let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace']
 
 " FZF
   let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,3'
