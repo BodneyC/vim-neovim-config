@@ -2,6 +2,7 @@
   let g:virk_tags_enable = 0
   let g:SuperTabDefaultCompletionType = "<c-n>"
   let g:indentLine_showFirstIndentLevel = 1
+  let g:indentLine_enabled = 1
   let g:indentLine_char = '·'
   let g:indentLine_first_char = '·'
   let g:yats_host_keyword = 1
@@ -10,7 +11,6 @@
   let g:mundo_right = 1
   let g:comfortable_motion_air_drag = 1
   let g:comfortable_motion_friction = 100
-  let g:indentLine_enabled = 0
   let g:tagbar_auto_close = 1
   let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
   let g:pandoc#filetypes#pandoc_markdown = 0

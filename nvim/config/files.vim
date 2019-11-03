@@ -8,35 +8,35 @@ augroup vimrc_nerdtree
 augroup END
 
 " It's just effing easier than trying to blacklist...
-augroup vimrc_indentline_enable
-  autocmd!
-  autocmd BufEnter,BufWinEnter,WinEnter 
-        \Dockerfile,
-        \Jenkinsfile,
-        \*.xml,
-        \*.groovy,
-        \*.java,
-        \*.scala,
-        \*.py,
-        \*.vim,
-        \*.html,
-        \*.css,
-        \*.scss,
-        \*.js,
-        \*.ts,
-        \*.rb,
-        \*.sh,
-        \*.zsh,
-        \*.yaml,
-        \*.toml,
-        \*.C,
-        \*.c,
-        \*.H,
-        \*.h,
-        \*.cpp,
-        \*.hpp 
-        \ IndentLinesEnable
-augroup END
+" augroup vimrc_indentline_enable
+"   autocmd!
+"   autocmd BufEnter,BufWinEnter,WinEnter 
+"         \Dockerfile,
+"         \Jenkinsfile,
+"         \*.xml,
+"         \*.groovy,
+"         \*.java,
+"         \*.scala,
+"         \*.py,
+"         \*.vim,
+"         \*.html,
+"         \*.css,
+"         \*.scss,
+"         \*.js,
+"         \*.ts,
+"         \*.rb,
+"         \*.sh,
+"         \*.zsh,
+"         \*.yaml,
+"         \*.toml,
+"         \*.C,
+"         \*.c,
+"         \*.H,
+"         \*.h,
+"         \*.cpp,
+"         \*.hpp 
+"         \ IndentLinesEnable
+" augroup END
 
 augroup vimrc_language_other
   autocmd!
@@ -66,3 +66,9 @@ function! SetIndent(n)
   IndentLinesEnable
 endfunction
 command! -nargs=1 SetIndent call SetIndent(<f-args>)
+
+function! GetHighlightTerm(group, ele)
+  let higroup = execute('hi ' . a:group)
+  return matchstr(higroup, a:ele.'=\zs\S*')
+endfunction
+command! -nargs=+ GetHighlightTerm call GetHighlightTerm(<f-args>)
