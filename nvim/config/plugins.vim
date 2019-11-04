@@ -50,7 +50,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
   Plug 'junegunn/vim-easy-align'
   Plug 'kien/ctrlp.vim'
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'tmsvg/pear-tree'
+  " Plug 'jiangmiao/auto-pairs'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-repeat' " Better . functionality
   Plug 'tpope/vim-surround' " Surround with ys<w>

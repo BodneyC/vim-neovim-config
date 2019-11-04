@@ -18,7 +18,7 @@ endfunction
 function! WinMove(k)
   let t:curwin = winnr()
   exec "wincmd " . a:k
-  if(a:k == 'h')
+  if(a:k == 'h' || expand('%') == '[coc-explorer]')
     return
   endif
   if(t:curwin == winnr())
