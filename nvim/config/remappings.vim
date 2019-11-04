@@ -91,6 +91,10 @@ endfunction
 
 """""""""""""""" Leader Remappings """"""""""""""""
 
+""""""" Pear-tree
+imap <Space> <Plug>(PearTreeSpace)
+imap ++ <Plug>(PearTreeJump)
+
 """"""" NERDTree
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
 " nnoremap <leader>nt :NERDTreeToggle<CR>
