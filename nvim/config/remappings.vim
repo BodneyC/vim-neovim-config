@@ -136,7 +136,6 @@ nnoremap <leader>M :call FZFOpen(':Maps')<CR>
 nnoremap <leader>i :IndentLinesToggle<CR>
 
 """"""" Plugin panes
-nnoremap <Leader>R :Ranger<CR>
 nnoremap <leader>U :MundoToggle<CR>
 nnoremap <leader>V :Vista!!<CR>
 nnoremap <leader>T :TagbarToggle<CR>
@@ -167,6 +166,10 @@ inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
 vmap <leader>F  <Plug>(coc-format-selected)
 nmap <leader>F  <Plug>(coc-format)
+
+""""""" Highlights
+command! RgbPicker :call CocAction('pickColor')<CR>
+command! RgbOptions :call CocAction('colorPresentation')<CR>
 
 """"""""""""""""" Function Keys """""""""""""""""""
 

@@ -20,5 +20,5 @@ source ~/.config/nvim/config/macos_highlighting.vim
 source ~/.config/nvim/config/remappings.vim
 source ~/.config/nvim/config/macos_remappings.vim
 source ~/.config/nvim/config/terminal.vim
-source ~/.config/nvim/config/files.vim
+source ~/.config/nvim/config/functions.vim
 source ~/.config/nvim/config/coc.vim

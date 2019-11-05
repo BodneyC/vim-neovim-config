@@ -5,11 +5,11 @@ augroup vimrc_nerdtree
   autocmd FileType nerdtree setlocal signcolumn=no
   autocmd StdinReadPre * let s:std_in=1
   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  autocmd BufEnter * if (winnr("$") == 1 && expand('%') == '[coc-explorer]') | enew | bd# | q | endif
 augroup END
 
 augroup vimrc_coc_explorer
   autocmd!
-  autocmd BufEnter * if (winnr("$") == 1 && expand('%') == '[coc-explorer]') | q | endif
 augroup END
 
 augroup vimrc_startify
@@ -51,3 +51,6 @@ function! GetHighlightTerm(group, ele)
   return matchstr(higroup, a:ele.'=\zs\S*')
 endfunction
 command! -nargs=+ GetHighlightTerm call GetHighlightTerm(<f-args>)
+
+command! -nargs=0 ConvLineEndings %s///g
+command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
