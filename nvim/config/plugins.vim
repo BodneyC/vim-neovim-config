@@ -33,7 +33,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Yggdroot/indentLine'
   Plug 'itchyny/lightline.vim'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'yuttie/comfortable-motion.vim'
+  " Plug 'yuttie/comfortable-motion.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'frazrepo/vim-rainbow'
   Plug 'mengelbrecht/lightline-bufferline'
@@ -97,12 +97,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'sidorares/node-vim-debugger'
 
 " Personal
-  " Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/At-Zed-vim', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/pic-vim',    { 'branch': 'master' }
 
 call plug#end()
 
-let &runtimepath.=",/home/benjc/Documents/virkspaces-vim"
+" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim"
 " let &runtimepath.=",/home/benjc/gitclones/at-zed-vim"
 " let &runtimepath.=",/home/benjc/gitclones/pic-vim"

@@ -1,6 +1,7 @@
 " General vim config
 " runtime! archlinux.vim
 set nocompatible               " run in vim mode
+set hidden
 set expandtab                  " expand tabs into spaces
 set tabstop=4                  " indentation leves of normal tabs
 set softtabstop=0              " indentation level of soft-tabs
@@ -29,6 +30,7 @@ set splitright
 set cul
 set icm=split
 set winblend=16
+set updatetime=200
 syntax on                      " turn on syntax highlighting
 
 " Folding

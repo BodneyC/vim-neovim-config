@@ -22,6 +22,8 @@
     "coc-tslint-plugin": ">=1.1.1",
     "coc-sh": ">=0.2.1",
     "coc-vetur": ">=1.1.6",
-    "coc-explorer": ">=0.0.37"
+    "coc-explorer": ">=0.0.37",
+    "coc-terminal": ">=0.2.0",
+    "coc-highlight": ">=1.2.5"
   }
 }

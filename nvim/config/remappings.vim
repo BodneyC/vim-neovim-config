@@ -94,6 +94,7 @@ endfunction
 """"""" Pear-tree
 imap <Space> <Plug>(PearTreeSpace)
 imap ++ <Plug>(PearTreeJump)
+inoremap jj <Esc>
 
 """"""" NERDTree
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
@@ -110,8 +111,8 @@ map  <Plug>NERDCommenterToggle
 nnoremap <leader>t :call MakeTagsFile()<CR>
 
 """"""" LineJuggler
-nnoremap [<Space> mzO<Esc>`z
-nnoremap ]<Space> mzo<Esc>`z
+nnoremap [<Leader> :<C-u>call append(line('.') - 1, repeat([''], v:count1))<CR>
+nnoremap ]<Leader> :<C-u>call append(line('.'), repeat([''], v:count1))<CR>
 
 """"""" General leader
 nnoremap <leader>W :wqa<CR>
@@ -143,6 +144,7 @@ nnoremap <leader>T :TagbarToggle<CR>
 """"""""""""" Conquer of Completion """""""""""""""
 
 """"""" Definitions
+" nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gt <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)

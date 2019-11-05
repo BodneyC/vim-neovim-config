@@ -21,6 +21,9 @@ call coc#add_extension(
       \ 'coc-html', 
       \ 'coc-emmet', 
       \ 'coc-css')
+call coc#add_extension(
+      \ 'coc-highlight',
+      \ 'coc-terminal')
 let g:coc_filetypes = [
       \ 'Dockerfile',
       \ 'sh',
@@ -57,6 +60,7 @@ augroup vimrc-coc
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 function! s:check_back_space() abort
@@ -68,3 +72,7 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
+nmap <silent>  <C-m> <Plug>(coc-cursors-position)
+xmap <silent>  <C-m> <Plug>(coc-cursors-range)
+nmap <leader>x <Plug>(coc-cursors-operator)
