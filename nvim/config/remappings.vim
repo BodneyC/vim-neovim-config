@@ -168,8 +168,8 @@ vmap <leader>F  <Plug>(coc-format-selected)
 nmap <leader>F  <Plug>(coc-format)
 
 """"""" Highlights
-command! RgbPicker :call CocAction('pickColor')<CR>
-command! RgbOptions :call CocAction('colorPresentation')<CR>
+command! RGBPicker :call CocAction('pickColor')<CR>
+command! RGBOptions :call CocAction('colorPresentation')<CR>
 
 """"""""""""""""" Function Keys """""""""""""""""""
 
