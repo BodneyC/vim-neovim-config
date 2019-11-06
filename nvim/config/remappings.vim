@@ -92,11 +92,13 @@ endfunction
 """""""""""""""" Leader Remappings """"""""""""""""
 
 """"""" Pear-tree
+imap <BS> <Plug>(PearTreeBackspace)
+imap <Esc> <Plug>(PearTreeFinishExpansion)
 imap <Space> <Plug>(PearTreeSpace)
 imap ++ <Plug>(PearTreeJump)
 inoremap jj <Esc>
 
-""""""" NERDTree
+""""""" Explorer
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
 " nnoremap <leader>nt :NERDTreeToggle<CR>
 " nnoremap <leader>nr :call NERDTreeResize()<CR>
@@ -157,10 +159,23 @@ nnoremap <silent> <leader>s :CocList commands<CR>
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-""""""" Tab completion
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+""""""" Pmenu
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <Tab>
+      \ pumvisible()
+      \   ? "\<C-n>"
+      \   : <SID>check_back_space()
+      \     ? "\<Tab>"
+      \     : coc#refresh()
+inoremap <silent><expr> <CR>
+      \ pumvisible()
+      \   ? "\<C-y>"
+      \   : pear_tree#insert_mode#PrepareExpansion()
 
 """"""" Formatting
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)

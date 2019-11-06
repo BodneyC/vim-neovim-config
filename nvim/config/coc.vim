@@ -63,16 +63,6 @@ augroup end
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
 nmap <silent>  <C-m> <Plug>(coc-cursors-position)
 xmap <silent>  <C-m> <Plug>(coc-cursors-range)
 nmap <leader>x <Plug>(coc-cursors-operator)
