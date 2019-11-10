@@ -18,7 +18,7 @@
     "coc-tabnine": ">=1.2.1",
     "coc-tsserver": ">=1.4.2",
     "coc-yank": ">=1.1.2",
-    "coc-go": ">=0.5.2",
+    "coc-go": ">=0.6.0",
     "coc-tslint-plugin": ">=1.1.1",
     "coc-sh": ">=0.2.1",
     "coc-vetur": ">=1.1.6",

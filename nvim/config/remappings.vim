@@ -91,10 +91,11 @@ endfunction
 
 """""""""""""""" Leader Remappings """"""""""""""""
 
-""""""" Pear-tree
+""""""" Interface
 imap <BS> <Plug>(PearTreeBackspace)
 imap <Esc> <Plug>(PearTreeFinishExpansion)
 imap <Space> <Plug>(PearTreeSpace)
+nmap <silent> <leader>R :RenameWord<CR>
 imap ++ <Plug>(PearTreeJump)
 inoremap jj <Esc>
 
@@ -103,8 +104,8 @@ nnoremap <leader>ce :CocCommand explorer --toggle<CR>
 " nnoremap <leader>nt :NERDTreeToggle<CR>
 " nnoremap <leader>nr :call NERDTreeResize()<CR>
 
-nnoremap <leader>ge :call Goyo_e()<CR>
-nnoremap <leader>gl :call Goyo_l()<CR>
+nnoremap <silent> <leader>ge :call Goyo_e()<CR>
+nnoremap <silent> <leader>gl :call Goyo_l()<CR>
 
 """"""" NERDTreeCommenter
 map  <Plug>NERDCommenterToggle
@@ -113,8 +114,8 @@ map  <Plug>NERDCommenterToggle
 nnoremap <leader>t :call MakeTagsFile()<CR>
 
 """"""" LineJuggler
-nnoremap [<Leader> :<C-u>call append(line('.') - 1, repeat([''], v:count1))<CR>
-nnoremap ]<Leader> :<C-u>call append(line('.'), repeat([''], v:count1))<CR>
+nnoremap <silent> [<Leader> :<C-u>call append(line('.') - 1, repeat([''], v:count1))<CR>
+nnoremap <silent> ]<Leader> :<C-u>call append(line('.'), repeat([''], v:count1))<CR>
 
 """"""" General leader
 nnoremap <leader>W :wqa<CR>
@@ -127,25 +128,24 @@ nnoremap <leader>* :%s/\<<C-r><C-w>\>//g<left><left>
 nnoremap <leader>/ :noh<CR>
 
 """"""" Split
-nnoremap <leader>" :sbn<CR>
-nnoremap <leader>% :vert sbn<CR>
+nnoremap <silent> <leader>" :sbn<CR>
+nnoremap <silent> <leader>% :vert sbn<CR>
 
 """"""" FZF
-nnoremap <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
-nnoremap <leader>r :call FZFOpen(':Rg')<CR>
-nnoremap <leader>m :call FZFOpen(':Marks')<CR>
-nnoremap <leader>M :call FZFOpen(':Maps')<CR>
-nnoremap <leader>i :IndentLinesToggle<CR>
+nnoremap <silent> <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
+nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
+nnoremap <silent> <leader>m :call FZFOpen(':Marks')<CR>
+nnoremap <silent> <leader>M :call FZFOpen(':Maps')<CR>
+nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
 """"""" Plugin panes
-nnoremap <leader>U :MundoToggle<CR>
-nnoremap <leader>V :Vista!!<CR>
-nnoremap <leader>T :TagbarToggle<CR>
+nnoremap <silent> <leader>U :MundoToggle<CR>
+nnoremap <silent> <leader>V :Vista!!<CR>
+nnoremap <silent> <leader>T :TagbarToggle<CR>
 
 """"""""""""" Conquer of Completion """""""""""""""
 
 """"""" Definitions
-" nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gt <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
@@ -179,8 +179,8 @@ inoremap <silent><expr> <CR>
 
 """"""" Formatting
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
-vmap <leader>F  <Plug>(coc-format-selected)
-nmap <leader>F  <Plug>(coc-format)
+vmap <silent> <leader>F  <Plug>(coc-format-selected)
+nmap <silent> <leader>F  <Plug>(coc-format)
 
 """"""" Highlights
 command! RGBPicker :call CocAction('pickColor')<CR>
@@ -204,15 +204,15 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""" Buffers
 nnoremap <Tab>      :bn<CR>
 nnoremap <S-Tab>    :bp<CR>
-nnoremap <leader>bd :bn<CR>:bd#<CR>
-nnoremap <leader>bl :call FZFOpen(':Buffer')<CR>
-nnoremap <leader>bD :%bd\|e#<CR>
-nnoremap <leader>be :enew<CR>
-nnoremap <leader>b# <C-^>
-nnoremap <leader>b1 :b1<CR>
-nnoremap <leader>b2 :b2<CR>
-nnoremap <leader>b3 :b3<CR>
-nnoremap <leader>b4 :b4<CR>
+nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>
+nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
+nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
+nnoremap <silent> <leader>be :enew<CR>
+nnoremap <silent> <leader>b# <C-^>
+nnoremap <silent> <leader>b1 :b1<CR>
+nnoremap <silent> <leader>b2 :b2<CR>
+nnoremap <silent> <leader>b3 :b3<CR>
+nnoremap <silent> <leader>b4 :b4<CR>
 
 """"""" Open file/links
 nnoremap <silent> <leader>ox :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>

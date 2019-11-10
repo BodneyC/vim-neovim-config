@@ -52,5 +52,15 @@ function! GetHighlightTerm(group, ele)
 endfunction
 command! -nargs=+ GetHighlightTerm call GetHighlightTerm(<f-args>)
 
+function! UpdateAll()
+  let l:cwd = getcwd()
+  PlugUpgrade
+  PlugUpdate
+  CocUpdateSync
+  UpdateRemotePlugins
+  exec 'cd ' . l:cwd
+endfunction
+command! -nargs=0 UpdateAll call UpdateAll()
+
 command! -nargs=0 ConvLineEndings %s///g
 command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
