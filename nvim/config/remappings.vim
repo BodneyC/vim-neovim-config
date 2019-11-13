@@ -165,7 +165,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-d>"
 inoremap <silent><expr> <Tab>
       \ pumvisible()
       \   ? "\<C-n>"
