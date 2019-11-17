@@ -4,7 +4,6 @@ call coc#add_extension(
       \ 'coc-explorer',
       \ 'coc-snippets',
       \ 'coc-tag',
-      \ 'coc-tabnine',
       \ 'coc-syntax',
       \ 'coc-lists',
       \ 'coc-yank',

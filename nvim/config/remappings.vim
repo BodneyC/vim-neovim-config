@@ -132,6 +132,7 @@ nnoremap <silent> <leader>" :sbn<CR>
 nnoremap <silent> <leader>% :vert sbn<CR>
 
 """"""" FZF
+nnoremap <silent> <silent>; :Commands<CR>
 nnoremap <silent> <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
 nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <silent> <leader>m :call FZFOpen(':Marks')<CR>
