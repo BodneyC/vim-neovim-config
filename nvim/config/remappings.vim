@@ -91,6 +91,9 @@ endfunction
 
 """""""""""""""" Leader Remappings """"""""""""""""
 
+nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
+
 """"""" Interface
 imap <BS> <Plug>(PearTreeBackspace)
 imap <Esc> <Plug>(PearTreeFinishExpansion)
@@ -204,7 +207,7 @@ inoremap <F7> <esc>:set spell!<CR>a
 
 """"""" Buffers
 nnoremap <Tab>      :bn<CR>
-nnoremap <S-Tab>    :bp<CR>
+noremap <S-Tab>    :bp<CR>
 nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>
 nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
@@ -241,6 +244,9 @@ inoremap <C-k> <Esc><C-k>
 inoremap <C-l> <Esc><C-l>
 
 """""""""""""""""""""" Misc """"""""""""""""""""""
+
+""""""" EasyAlign
+xnoremap <leader>E :EasyAlign<CR>
 
 """"""" Indenting
 xnoremap <       <gv

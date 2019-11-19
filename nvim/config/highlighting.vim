@@ -25,8 +25,8 @@ let g:lightline = {
       \   'active': {
       \     'right': [ [ 'lineinfo' ],
       \                [ 'fileformat', 'fileencoding', 'filetype' ] ],
-      \     'left': [ [ 'filename' ],
-      \               [ 'git', 'paste', 'cocstatus', 'readonly', 'Fugitive', 'modified' ] ]
+      \     'left':  [ [ 'filename' ],
+      \                [ 'git', 'paste', 'cocstatus', 'readonly', 'Fugitive', 'modified' ] ]
       \   },
       \   'component' : {
       \     'WordCount' : 'wc: %{wordCount#WordCount()}',
@@ -58,8 +58,8 @@ endfunc
 
 if g:colors_name == 'two-firewatch'
   call s:SetSignTheme('#45505d')
-  hi MatchParenCur guibg=#777777 guifg=#ffbfe4
-  hi MatchParen    guibg=#777777 guifg=#551144
+  hi MatchParenCur guibg=#3a3333 guifg=#ffbfe4
+  hi MatchParen    guibg=#595555 guifg=#c7c8e6
   hi CocHighlightWrite guibg=#3a3333 guifg=#d8b8df
   autocmd! TermOpen,TermEnter * hi Pmenu guibg=#151515
   autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guibg=#3e4452

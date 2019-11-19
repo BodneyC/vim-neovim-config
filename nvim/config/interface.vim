@@ -1,6 +1,7 @@
 " General vim config
 " runtime! archlinux.vim
 set nocompatible               " run in vim mode
+set noequalalways
 set hidden
 set expandtab                  " expand tabs into spaces
 set tabstop=4                  " indentation leves of normal tabs
