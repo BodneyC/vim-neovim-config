@@ -91,7 +91,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Extras
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
-  Plug 'hecal3/vim-leader-guide'
+  Plug 'bodneyc/vim-leader-guide'
 
 " Debug
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }

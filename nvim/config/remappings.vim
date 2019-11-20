@@ -135,7 +135,7 @@ nnoremap <silent> <leader>" :sbn<CR>
 nnoremap <silent> <leader>% :vert sbn<CR>
 
 """"""" FZF
-nnoremap <silent> <silent>; :Commands<CR>
+nnoremap <silent> <leader>; :Commands<CR>
 nnoremap <silent> <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
 nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
 nnoremap <silent> <leader>m :call FZFOpen(':Marks')<CR>
@@ -206,8 +206,8 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""""""""""""" Buffer Control """""""""""""""""""
 
 """"""" Buffers
-nnoremap <Tab>      :bn<CR>
-noremap <S-Tab>    :bp<CR>
+nnoremap <Tab>    :bn<CR>
+nnoremap <S-Tab>  :bp<CR>
 nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>
 nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
