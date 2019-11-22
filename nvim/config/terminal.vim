@@ -1,32 +1,27 @@
-function! ChooseTerm(termname, slider)
-  let pane = bufwinnr(a:termname)
-  let buf = bufexists(a:termname)
-  if pane > 0
-    if a:slider > 0
-      :exe pane . "wincmd c"
-    else
-      :exe "e #"
-    endif
-  elseif buf > 0
-    if a:slider
-      :exe "topleft split"
-    endif
-    :exe "buffer " . a:termname
+function! ChooseTerm(termname)
+  let winnr = bufwinnr(a:termname)
+  if winnr != -1
+    exec winnr . "wincmd q"
+    exec "e #"
   else
-    if a:slider
-      :exe "belowright split"
+    let bufnr = bufnr(a:termname)
+    if bufnr != -1
+      exec "bd!" . bufnr
     endif
-    :terminal
-    :resize 10
-    :exe "f " a:termname
-    :startinsert
+    vs
+    setlocal hidden
+    exec "wincmd J"
+    terminal
+    resize 10
+    exec "f " a:termname
+    startinsert
   endif
 endfunction
 
-nnoremap <F10> :call ChooseTerm("term-split", 1)<CR>
-inoremap <F10> <esc>:call ChooseTerm("term-split", 1)<CR>a
+nnoremap <F10> :call ChooseTerm("term-split")<CR>
+inoremap <F10> <esc>:call ChooseTerm("term-split")<CR>a
 
-tnoremap <C-q> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 tnoremap <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
