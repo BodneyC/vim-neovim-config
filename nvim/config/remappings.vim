@@ -99,8 +99,7 @@ imap <BS> <Plug>(PearTreeBackspace)
 imap <Esc> <Plug>(PearTreeFinishExpansion)
 imap <Space> <Plug>(PearTreeSpace)
 nmap <silent> <leader>R :RenameWord<CR>
-imap ++ <Plug>(PearTreeJump)
-inoremap jj <Esc>
+imap =- <Plug>(PearTreeJump)
 
 """"""" Explorer
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
