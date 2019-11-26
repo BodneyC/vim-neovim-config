@@ -11,7 +11,8 @@ cd neovim || exit
 git checkout master
 git pull
 
-make CMAKE_INSTALL_PREFIX="$(realpath ~/.local)"
+[[ -d build ]] && rm -r build
+make CMAKE_INSTALL_PREFIX="$(realpath ~/.local)" CMAKE_BUILD_TYPE=RelWithDebInfo
 
 NVIM_PATH=$(which nvim)
 [[ -n "$NVIM_PATH" ]] && cp "$NVIM_PATH"{,.BAK}
