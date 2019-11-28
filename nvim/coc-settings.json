@@ -119,5 +119,5 @@
     "readonly"
   ],
   "explorer.file.column.git.showIgnored": true,
-  "explorer.file.column.filename.minWidth": 0
+  "explorer.file.column.filename.width": 30
 }

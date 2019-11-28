@@ -5,11 +5,12 @@ augroup vimrc_nerdtree
   autocmd FileType nerdtree setlocal signcolumn=no
   autocmd StdinReadPre * let s:std_in=1
   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  autocmd BufEnter * if (winnr("$") == 1 && expand('%') == '[coc-explorer]') | enew | bd# | q | endif
+  autocmd BufEnter * if (winnr("$") == 1 && expand('%') =~ '.*\[coc-explorer\].*') | enew | bd# | q | endif
 augroup END
 
 augroup vimrc_coc_explorer
   autocmd!
+  autocmd FileType coc-explorer setlocal wrapmargin=0
 augroup END
 
 augroup vimrc_startify
