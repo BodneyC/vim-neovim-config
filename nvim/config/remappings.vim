@@ -95,11 +95,11 @@ nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
 xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
 """"""" Interface
-imap <BS> <Plug>(PearTreeBackspace)
-imap <Esc> <Plug>(PearTreeFinishExpansion)
-imap <Space> <Plug>(PearTreeSpace)
+imap <BS>     <Plug>(PearTreeBackspace)
+imap <Esc>    <Plug>(PearTreeFinishExpansion)
+imap <Space>  <Plug>(PearTreeSpace)
+imap <C-f>    <Plug>(PearTreeJump)
 nmap <silent> <leader>R :RenameWord<CR>
-imap =- <Plug>(PearTreeJump)
 
 """"""" Explorer
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
@@ -237,10 +237,6 @@ nnoremap <silent> <C-h> :call WinMove('h')<CR>
 nnoremap <silent> <C-j> :call WinMove('j')<CR>
 nnoremap <silent> <C-k> :call WinMove('k')<CR>
 nnoremap <silent> <C-l> :call WinMove('l')<CR>
-inoremap <C-h> <Esc><C-h>
-inoremap <C-j> <Esc><C-j>
-inoremap <C-k> <Esc><C-k>
-inoremap <C-l> <Esc><C-l>
 
 """""""""""""""""""""" Misc """"""""""""""""""""""
 

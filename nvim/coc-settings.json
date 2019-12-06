@@ -92,7 +92,6 @@
     }
   },
   "diagnostic-languageserver.filetypes": {
-    "sh": "shellcheck",
     "vim": "vint"
   },
   "explorer.sources": [
