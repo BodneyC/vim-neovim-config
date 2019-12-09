@@ -241,7 +241,7 @@ nnoremap <silent> <C-l> :call WinMove('l')<CR>
 """""""""""""""""""""" Misc """"""""""""""""""""""
 
 """"""" EasyAlign
-xnoremap <leader>E :EasyAlign<CR>
+xnoremap <leader>e :EasyAlign<CR>
 
 """"""" Indenting
 xnoremap <       <gv

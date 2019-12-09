@@ -38,6 +38,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'frazrepo/vim-rainbow'
   Plug 'mengelbrecht/lightline-bufferline'
 	" Plug 'wsdjeg/notifications.vim'
+  Plug 'wellle/visual-split.vim'
+  Plug 'bronson/vim-visual-star-search'
 
 " Git
   Plug 'tpope/vim-fugitive'
@@ -61,6 +63,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'andymass/vim-matchup'
   Plug 'Konfekt/FastFold'
   Plug 'tmhedberg/SimpylFold'
+  Plug 'wellle/targets.vim'
 
 " Integrations
   Plug 'benmills/vimux'
