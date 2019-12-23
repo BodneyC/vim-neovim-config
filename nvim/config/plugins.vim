@@ -104,7 +104,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/At-Zed-vim', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/pic-vim',    { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/togool.vim',  { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/togool.vim', { 'branch': 'master' }
 
 call plug#end()
 
