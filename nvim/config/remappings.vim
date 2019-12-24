@@ -214,7 +214,7 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""" Buffers
 nnoremap <Tab>    :bn<CR>
 nnoremap <S-Tab>  :bp<CR>
-nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>
+nnoremap <silent> <leader>bd :Bdelete<CR>
 nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
 nnoremap <silent> <leader>be :enew<CR>

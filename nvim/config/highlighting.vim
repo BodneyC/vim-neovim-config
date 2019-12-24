@@ -8,8 +8,10 @@ set termguicolors
 set background=dark
 
 if g:term_theme == "dark"
-	let s:lightline_theme = "twofirewatch"
-	colorscheme two-firewatch
+	" let s:lightline_theme = "twofirewatch"
+	" colorscheme two-firewatch
+	let s:lightline_theme = "1989"
+  colo 1989
 elseif g:term_theme == "light"
 	let s:lightline_theme = "VimSpectre300light"
 	colorscheme vimspectr300-light
@@ -65,23 +67,34 @@ if g:colors_name == 'two-firewatch'
   autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guibg=#3e4452
 endif
 
+if g:colors_name == '1989'
+  let bg = '#303030'
+  call s:SetSignTheme(bg)
+  hi Pmenu guibg=bg
+  exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
+  exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
+endif
+
 if g:colors_name == 'vimspectr150-light'
-  call s:SetSignTheme('#d8ebe1')
-  hi Pmenu guibg=#d8ebe1
-  autocmd! TermOpen,TermEnter * hi Pmenu guibg=#d8ebe1
-  autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=#d8ebe1
+  let bg = '#d8ebe1'
+  call s:SetSignTheme(bg)
+  hi Pmenu guibg=bg
+  autocmd! TermOpen,TermEnter * hi Pmenu guibg=bg
+  autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=bg
 endif
 
 if g:colors_name == 'vimspectr180-light'
-  call s:SetSignTheme('#d8ebeb')
-  hi Pmenu guibg=#d8ebeb
-  autocmd! TermOpen,TermEnter * hi Pmenu guibg=#d8ebeb
-  autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=#d8ebeb
+  let bg = '#d8ebeb'
+  call s:SetSignTheme(bg)
+  hi Pmenu guibg=bg
+  exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
+  exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
 endif
 
 if g:colors_name == 'vimspectr300-light'
-  call s:SetSignTheme('#f0ddf0')
-  hi Pmenu guibg=#f0ddf0
-  autocmd! TermOpen,TermEnter * hi Pmenu guibg=#f0ddf0
-  autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=#f0ddf0
+  let bg = '#f0ddf0'
+  call s:SetSignTheme(bg)
+  hi Pmenu guibg=bg
+  exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
+  exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
 endif

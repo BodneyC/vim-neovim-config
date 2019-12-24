@@ -22,22 +22,15 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'ChesleyTan/wordCount.vim'
   Plug 'junegunn/limelight.vim'
   Plug 'majutsushi/tagbar'
   Plug 'justinmk/vim-syntax-extra'
   Plug 'rbgrouleff/bclose.vim'
   Plug 'moll/vim-bbye'
-  Plug 'francoiscabrol/ranger.vim'
-  Plug 'tpope/vim-eunuch'
   Plug 'Yggdroot/indentLine'
   Plug 'itchyny/lightline.vim'
   Plug 'ryanoasis/vim-devicons'
-  " Plug 'yuttie/comfortable-motion.vim'
   Plug 'chrisbra/recover.vim'
-  Plug 'frazrepo/vim-rainbow'
-  Plug 'mengelbrecht/lightline-bufferline'
-	" Plug 'wsdjeg/notifications.vim'
   Plug 'wellle/visual-split.vim'
   Plug 'bronson/vim-visual-star-search'
 
@@ -82,6 +75,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'sts10/vim-pink-moon'
   " Plug 'scheakur/vim-scheakur'
   " Plug 'NLKNguyen/papercolor-theme'
+  Plug 'sonjapeterson/1989.vim'
   Plug 'rakr/vim-two-firewatch'
   Plug 'nightsense/vimspectr'
 
@@ -95,10 +89,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
   Plug 'bodneyc/vim-leader-guide'
-
-" Debug
-  Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-  Plug 'sidorares/node-vim-debugger'
 
 " Personal
   Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }

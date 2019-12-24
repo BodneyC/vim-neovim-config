@@ -6,6 +6,7 @@
     "javascript",
     "javascriptreact"
   ],
+  "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "tslint.jsEnable": true,
   "tslint.autoFixOnSave": true,
   "tslint.packageManager": "npm",
