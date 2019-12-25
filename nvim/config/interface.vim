@@ -30,7 +30,7 @@ set splitbelow
 set splitright
 set cul
 set icm=split
-set winblend=16
+set winblend=10
 set updatetime=200
 syntax on                      " turn on syntax highlighting
 

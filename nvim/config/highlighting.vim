@@ -71,8 +71,9 @@ if g:colors_name == '1989'
   let bg = '#303030'
   call s:SetSignTheme(bg)
   hi Pmenu guibg=bg
-  exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
-  exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
+  exec 'hi PmenuSel guibg=#ffffff guifg='.bg
+  " exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
+  " exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
 endif
 
 if g:colors_name == 'vimspectr150-light'

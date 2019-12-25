@@ -13,6 +13,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/vader.vim'
   Plug 'stevearc/vim-arduino'
   Plug 'z3t0/arduvim'
+  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
   " Plug 'mgedmin/python-imports.vim'
 
 " Interface
@@ -33,6 +34,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chrisbra/recover.vim'
   Plug 'wellle/visual-split.vim'
   Plug 'bronson/vim-visual-star-search'
+
+" Projects
+  Plug 'brooth/far.vim'
 
 " Git
   Plug 'tpope/vim-fugitive'
@@ -85,10 +89,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'rhysd/vim-grammarous'
   Plug 'junegunn/goyo.vim'
 
-" Extras
+" Utils
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
   Plug 'bodneyc/vim-leader-guide'
+  Plug 'vim-utils/vim-troll-stopper'
+  Plug 'vim-utils/vim-all'
 
 " Personal
   Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
