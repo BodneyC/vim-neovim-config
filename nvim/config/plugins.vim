@@ -10,16 +10,16 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
   Plug 'udalov/kotlin-vim'
-  Plug 'junegunn/vader.vim'
-  Plug 'stevearc/vim-arduino'
-  Plug 'z3t0/arduvim'
+  " Plug 'junegunn/vader.vim'
+  " Plug 'stevearc/vim-arduino'
+  " Plug 'z3t0/arduvim'
   Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
   " Plug 'mgedmin/python-imports.vim'
 
 " Interface
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'scrooloose/nerdtree-project-plugin'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  " Plug 'scrooloose/nerdtree-project-plugin'
+  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -34,6 +34,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chrisbra/recover.vim'
   Plug 'wellle/visual-split.vim'
   Plug 'bronson/vim-visual-star-search'
+  Plug 'skywind3000/vim-quickui'
 
 " Projects
   Plug 'brooth/far.vim'
@@ -80,8 +81,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'scheakur/vim-scheakur'
   " Plug 'NLKNguyen/papercolor-theme'
   Plug 'sonjapeterson/1989.vim'
-  Plug 'rakr/vim-two-firewatch'
-  Plug 'nightsense/vimspectr'
+  " Plug 'rakr/vim-two-firewatch'
+  " Plug 'nightsense/vimspectr'
 
 " Writing
   " Plug 'xolox/vim-misc'
