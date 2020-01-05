@@ -33,7 +33,7 @@ call quickui#menu#install('&Plugin', [
 call quickui#menu#install('&Git', [
 			\ [ '&Browse in github', 'Gbrowse'    ],
 			\ [ 'B&lame',            'Gblame'     ],
-			\ [ '&Diff split',       'GdiffSplit' ],
+			\ [ '&Diff split',       'Gdiffsplit' ],
 			\ [ '&Flog',             'Flog'       ],
       \ ])
 
