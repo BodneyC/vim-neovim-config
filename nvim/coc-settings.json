@@ -1,4 +1,5 @@
 {
+  "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
   "suggest.triggerAfterInsertEnter": false,
   "eslint.enable": false,
   "eslint.autoFixOnSave": true,

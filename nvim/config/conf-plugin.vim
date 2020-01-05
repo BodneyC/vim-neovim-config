@@ -126,6 +126,9 @@
   let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,3'
   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+" Fugitive
+  command Gadd Git add %
+
 " Flog
   function! Flogdiff()
     let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
