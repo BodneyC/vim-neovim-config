@@ -38,6 +38,7 @@ call quickui#menu#install('&Git', [
 			\ [ 'Git &Pull',   'Gpull'                            ],
 			\ [ 'Git Pu&sh',   'Gpush'                            ],
       \ [ '--',          ''                                 ],
+      \ [ 'La&zyGit',    'ToggleLazyGit'                    ],
 			\ [ '&WWW browse', 'Gbrowse'                          ],
 			\ [ '&Blame',      'Gblame'                           ],
 			\ [ '&Diff split', 'Gdiffsplit'                       ],
