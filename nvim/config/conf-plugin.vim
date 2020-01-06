@@ -122,10 +122,6 @@
   " let NERDTreeDirArrowCollapsible = "\u00a0"
   " let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace', '\.vim']
 
-" FZF
-  let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,3'
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
 " Fugitive
   command Gadd Git add %
 
@@ -141,9 +137,9 @@
   augroup END
 
 " Ranger
-  let g:loaded_netrwPlugin = 1
-  let g:ranger_replace_netrw = 0
-  let g:ranger_map_keys = 0
+  " let g:loaded_netrwPlugin = 1
+  " let g:ranger_replace_netrw = 0
+  " let g:ranger_map_keys = 0
 
 " Tagbar
   let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
@@ -168,19 +164,19 @@
       \ }
 
 " Nvim-GDB
-  function! NvimGdbNoTKeymaps()
-    tnoremap <silent> <buffer> <esc> <c-\><c-n>
-  endfunction
+  " function! NvimGdbNoTKeymaps()
+  "   tnoremap <silent> <buffer> <esc> <c-\><c-n>
+  " endfunction
 
-  let g:nvimgdb_config_override = {
-    \ 'key_next': 'n',
-    \ 'key_step': 's',
-    \ 'key_finish': 'f',
-    \ 'key_continue': 'c',
-    \ 'key_until': 'u',
-    \ 'key_breakpoint': 'b',
-    \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
-    \ }
+  " let g:nvimgdb_config_override = {
+  "   \   'key_next': 'n',
+  "   \   'key_step': 's',
+  "   \   'key_finish': 'f',
+  "   \   'key_continue': 'c',
+  "   \   'key_until': 'u',
+  "   \   'key_breakpoint': 'b',
+  "   \   'set_tkeymaps': "NvimGdbNoTKeymaps",
+  "   \ }
 
 " Pear-tree
   let g:pear_tree_map_special_keys = 0

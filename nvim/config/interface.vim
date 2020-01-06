@@ -13,6 +13,7 @@ set breakindentopt=shift:1     " Wrap indent of 1
 set smartindent                " return ending brackets to proper locations
 set ruler                      " show cursor position at all times
 set hls                        " don't highlight the previous search term
+set cursorline                 " highlihgts the line the cursor is on
 set nu rnu                     " turn on line numbering
 set wrap                       " turn on visual word wrapping
 set linebreak                  " only break lines on 'breakat' characters

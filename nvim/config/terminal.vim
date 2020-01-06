@@ -25,6 +25,64 @@ tnoremap <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
   autocmd!
+  autocmd TermOpen * startinsert
   autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
-  autocmd BufEnter,BufWinEnter,WinEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
+
+function! BorderedFloat(opts)
+  let top = "╭" . repeat("─", a:opts.width - 2) . "╮"
+  let mid = "│" . repeat(" ", a:opts.width - 2) . "│"
+  let bot = "╰" . repeat("─", a:opts.width - 2) . "╯"
+  let lines = [top] + repeat([mid], a:opts.height - 2) + [bot]
+
+  let buf = nvim_create_buf(v:false, v:true)
+  call nvim_buf_set_lines(buf, 0, -1, v:true, lines)
+  call nvim_open_win(buf, v:true, a:opts)
+  set winhl=Normal:Floating
+
+  return buf
+endfunction
+
+function! FloatingCentred()
+  let height = float2nr(&lines / 1.2)
+  let width = float2nr(&columns / 1.2)
+  let col = float2nr((&columns - width) / 2)
+  let row = float2nr((&lines - height) / 2)
+
+  let opts = {
+        \   'relative': 'editor',
+        \   'row': row,
+        \   'col': col,
+        \   'width': width,
+        \   'height': height,
+        \   'style': 'minimal'
+        \ }
+
+  let s:buf = BorderedFloat(opts)
+
+  let opts.row    += 1
+  let opts.height -= 2
+  let opts.col    += 2
+  let opts.width  -= 4
+
+  call nvim_open_win(
+        \ nvim_create_buf(v:false, v:true),
+        \ v:true, opts)
+  au BufWipeout <buffer> exe 'bw ' . s:buf
+endfunction
+
+function! OpenTerm(cmd)
+  call FloatingCentred()
+  call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
+endfunction
+
+function! OnTermExit(job_id, code, event) dict
+  if a:code == 0 | bd! | endif
+endfunction
+
+command! -nargs=0 ToggleLazyGit call OpenTerm('lazygit')
+nnoremap <silent> <leader>gl :ToggleLazyGit<CR>
+
+" FZF
+  let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
+  let g:fzf_layout = { 'window': 'call FloatingCentred()' }

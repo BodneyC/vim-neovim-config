@@ -48,27 +48,6 @@ function! FZFOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
-
-  let height = float2nr(&lines / 1.2)
-  let width = float2nr(&columns / 1.2)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = float2nr((&lines - height) / 2)
-
-  let opts = {
-        \   'relative': 'editor',
-        \   'row': vertical,
-        \   'col': horizontal,
-        \   'width': width,
-        \   'height': height,
-        \   'style': 'minimal'
-        \ }
-
-  call nvim_open_win(buf, v:true, opts)
-endfunction
-
 function! MakeTagsFile()
   if len(g:virk_root_dir) > 0 && g:virk_tags_enable != 0
     VSMakeTagsFile

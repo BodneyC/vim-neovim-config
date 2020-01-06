@@ -72,6 +72,8 @@ if g:colors_name == '1989'
   call s:SetSignTheme(bg)
   hi Pmenu guibg=bg
   exec 'hi PmenuSel guibg=#ffffff guifg='.bg
+  hi clear CursorLine
+  hi CursorLine guibg='#272727'
   " exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
   " exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
 endif
