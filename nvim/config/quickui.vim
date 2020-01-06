@@ -6,7 +6,7 @@ call quickui#menu#install('&File', [
       \ [ '&Write',      'w'                                                          ],
       \ [ 'Write &All',  'wa'                                                         ],
       \ [ '&Save As',    'call feedkey(":sav ")'                                      ],
-      \ [ '--',          ''                                                           ],
+      \ [ '-',           ''                                                           ],
       \ [ '&Quit',       'q'                                                          ],
       \ [ '&Force Quit', 'q!'                                                         ],
       \ ] )
@@ -14,7 +14,7 @@ call quickui#menu#install('&File', [
 call quickui#menu#install('&Plugin', [
 			\ [ 'Coc &Restart',         'CocRestart'                   ],
 			\ [ 'Coc E&xplorer',        'CocCommand explorer --toggle' ],
-      \ [ '--',                   ''                             ],
+      \ [ '-',                    ''                             ],
 			\ [ '&Vista',               'Vista!!'                      ],
 			\ [ '&Mundo',               'MundoToggle'                  ],
 			\ [ '&Tagbar',              'TagbarToggle'                 ],
@@ -32,28 +32,28 @@ call quickui#menu#install('&Vim-plug', [
 			\ ] )
 
 call quickui#menu#install('&Git', [
-			\ [ 'Git &Add',    'Git add %'                        ],
-			\ [ 'Git Add &.',  'Git add .'                        ],
-			\ [ 'Git &Commit', 'call feedkeys(":Gcommit -am \"")' ],
-			\ [ 'Git &Pull',   'Gpull'                            ],
-			\ [ 'Git Pu&sh',   'Gpush'                            ],
-      \ [ '--',          ''                                 ],
-      \ [ 'La&zyGit',    'ToggleLazyGit'                    ],
-			\ [ '&WWW browse', 'Gbrowse'                          ],
-			\ [ '&Blame',      'Gblame'                           ],
-			\ [ '&Diff split', 'Gdiffsplit'                       ],
-			\ [ '&Flog',       'Flog'                             ],
+			\ [ 'Git &Add',    'Git add %'                                 ],
+			\ [ 'Git Add &.',  'Git add .'                                 ],
+			\ [ 'Git &Commit', 'call feedkeys(":Gcommit -am \"\"\<Left>")' ],
+			\ [ 'Git &Pull',   'Gpull'                                     ],
+			\ [ 'Git Pu&sh',   'Gpush'                                     ],
+      \ [ '-',           ''                                          ],
+      \ [ 'La&zyGit',    'ToggleLazyGit'                             ],
+			\ [ '&WWW browse', 'Gbrowse'                                   ],
+			\ [ '&Blame',      'Gblame'                                    ],
+			\ [ '&Diff split', 'Gdiffsplit'                                ],
+			\ [ '&Flog',       'Flog'                                      ],
       \ ] )
 
 call quickui#menu#install('&Tools', [
-			\ [ 'Switch &Buffer',                              'call quickui#tools#list_buffer("e")'   ],
-			\ [ 'Show &Messages',                              'call quickui#tools#display_messages()' ],
-			\ [ '&Diff Screen',                                'windo diffthis'                        ],
-			\ [ 'Diff &Off',                                   'windo diffoff'                         ],
-			\ [ '-',                                           ''                                      ],
-			\ [ '&Spell %{&spell? "Off":"On"}',                'set spell!'                            ],
-			\ [ '&Cursor Line %{&cursorline? "Off":"On"}',     'set cursorline!'                       ],
-			\ [ 'Cursor &Column %{&cursorcolumn? "Off":"On"}', 'set cursorcolumn!'                     ],
+			\ [ 'Switch &Buffer',                                'call quickui#tools#list_buffer("e")'   ],
+			\ [ 'Show &Messages',                                'call quickui#tools#display_messages()' ],
+			\ [ '&Diff Screen',                                  'windo diffthis'                        ],
+			\ [ 'Diff &Off',                                     'windo diffoff'                         ],
+			\ [ '-',                                             ''                                      ],
+      \ [ '&Spell (%{&spell? "On":"Off"})',                'set spell!'                            ],
+			\ [ '&Cursor Line (%{&cursorline? "On":"Off"})',     'set cursorline!'                       ],
+			\ [ 'Cursor &Column (%{&cursorcolumn? "On":"Off"})', 'set cursorcolumn!'                     ],
 			\ ] )
 
 let g:quickui_show_tip = 1
