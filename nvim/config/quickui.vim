@@ -50,10 +50,11 @@ call quickui#menu#install('&Tools', [
 			\ [ 'Show &Messages',                                'call quickui#tools#display_messages()' ],
 			\ [ '&Diff Screen',                                  'windo diffthis'                        ],
 			\ [ 'Diff &Off',                                     'windo diffoff'                         ],
+      \ [ 'Spell &Checker',                                'call SpellChecker()'                   ],
 			\ [ '-',                                             ''                                      ],
       \ [ '&Spell (%{&spell? "On":"Off"})',                'set spell!'                            ],
-			\ [ '&Cursor Line (%{&cursorline? "On":"Off"})',     'set cursorline!'                       ],
-			\ [ 'Cursor &Column (%{&cursorcolumn? "On":"Off"})', 'set cursorcolumn!'                     ],
+			\ [ 'C&ursor Line (%{&cursorline? "On":"Off"})',     'set cursorline!'                       ],
+			\ [ 'Cursor Co&lumn (%{&cursorcolumn? "On":"Off"})', 'set cursorcolumn!'                     ],
 			\ ] )
 
 let g:quickui_show_tip = 1

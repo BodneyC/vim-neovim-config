@@ -7,7 +7,7 @@
     "coc-docker": ">=0.2.1",
     "coc-emmet": ">=1.1.4",
     "coc-eslint": ">=1.2.3",
-    "coc-explorer": ">=0.2.11",
+    "coc-explorer": ">=0.2.12",
     "coc-git": ">=1.6.16",
     "coc-go": ">=0.6.2",
     "coc-highlight": ">=1.2.5",

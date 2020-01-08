@@ -66,35 +66,41 @@
         "diagnosticsEnabled": true,
         "lintTool": "golint"
       }
-    }
-  },
-  "diagnostic-languageserver.linters": {
-    "shellcheck": {
-      "command": "shellcheck",
-      "debounce": 100,
-      "args": ["--format=gcc", "-x", "-"],
-      "offsetLine": 0,
-      "offsetColumn": 0,
-      "sourceName": "shellcheck",
-      "formatLines": 1,
-      "formatPattern": [
-        "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
-        {
-          "line": 1,
-          "column": 2,
-          "message": 4,
-          "security": 3
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "vimls": {
+      "command": "vim-language-server",
+      "args": ["--node-ipc"],
+      "initializationOptions": {
+        "iskeyword": "@,48-57,_,192-255,-#",
+        "diagnostic": { "enable": true },
+        "indexes": {
+          "runtimepath": true,
+          "gap": 100,
+          "count": 3,
+          "projectRootPatterns" : [".vim", ".git", "autoload", "plugin"]
+        },
+        "suggest": {
+          "fromVimruntime": true,
+          "fromRuntimepath": false
         }
-      ],
-      "securities": {
-        "error": "error",
-        "warning": "warning",
-        "note": "info"
-      }
+      },
+      "filetypes": [ "vim" ]
     }
   },
-  "diagnostic-languageserver.filetypes": {
-    "vim": "vint"
+  "diagnostic-languageserver.formatFiletypes": {
+    "sh": "shfmt"
+  },
+  "diagnostic-languageserver.formatters": {
+    "shfmt": {
+      "command": "shfmt",
+      "args": ["-i", "0", "-bn", "-ci", "-sr", "-kp"]
+    }
   },
   "explorer.sources": [
     {

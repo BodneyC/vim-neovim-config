@@ -193,7 +193,7 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""" Buffers
 nnoremap <Tab>    :bn<CR>
 nnoremap <S-Tab>  :bp<CR>
-nnoremap <silent> <leader>bd :Bdelete<CR>
+nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>
 nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
 nnoremap <silent> <leader>be :enew<CR>
@@ -202,11 +202,6 @@ nnoremap <silent> <leader>b1 :b1<CR>
 nnoremap <silent> <leader>b2 :b2<CR>
 nnoremap <silent> <leader>b3 :b3<CR>
 nnoremap <silent> <leader>b4 :b4<CR>
-
-""""""" Open file/links
-nnoremap <silent> <leader>ox :call netrw#BrowseX(expand('<cfile>'),netrw#CheckIfRemote())<CR>
-vnoremap <silent> <leader>ox :<C-u>call netrw#BrowseXVis()<CR>
-nnoremap <silent> <leader>of :e <cfile><CR>
 
 """"""""""""""""""" Movement """""""""""""""""""""
 

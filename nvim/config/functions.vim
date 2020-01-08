@@ -65,3 +65,42 @@ command! -nargs=0 UpdateAll call UpdateAll()
 
 command! -nargs=0 ConvLineEndings %s///g
 command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
+
+function! SpellChecker()
+  let l:spell = &spell
+  if ! l:spell | set spell | endif
+  normal! mzgg]S
+  while spellbadword()[0] != ''
+    let l:cnt = 0
+    redraw
+    let l:ch = ''
+    while index(['y', 'n', 'f', 'r', 'a', 'q'], l:ch) == -1
+      if l:cnt > 0
+        echom "Incorrect input"
+      endif
+      let l:cnt += 1
+      echom "Word: " . expand("<cword>") . " ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit) "
+      let l:ch = nr2char(getchar())
+      redraw
+    endwhile
+    if l:ch == 'n'
+    elseif l:ch == 'y'
+      normal! z=
+      let l:nu = input("Make you selection: ")
+      exec "normal! ". l:nu . "z="
+    elseif l:ch == 'r'
+      spellrepall
+    elseif l:ch == 'f'
+      normal! 1z=
+    elseif l:ch == 'a'
+      normal! zG
+    else
+      break
+    endif
+    echom fish
+    normal! ]S
+  endwhile
+  normal! `z
+  if ! l:spell | set nospell | endif
+  echo "Spell checker complete"
+endfunction

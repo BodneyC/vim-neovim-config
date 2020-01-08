@@ -10,7 +10,6 @@ call coc#add_extension(
       \ 'coc-diagnostic',
       \ 'coc-calc',
       \ 'coc-docker',
-      \ 'coc-sh',
       \ 'coc-rls',
       \ 'coc-python', 
       \ 'coc-json', 
@@ -20,9 +19,11 @@ call coc#add_extension(
       \ 'coc-html', 
       \ 'coc-emmet', 
       \ 'coc-css')
+" Max args reached...
 call coc#add_extension(
       \ 'coc-highlight',
       \ 'coc-terminal')
+
 let g:coc_filetypes = [
       \ 'Dockerfile',
       \ 'sh',
