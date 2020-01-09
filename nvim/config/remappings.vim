@@ -1,73 +1,5 @@
 ﻿let mapleader="\<Space>"
 
-""""""""""""""" Assisting Functions """""""""""""""
-
-let g:bclose_no_plugin_maps=1
-
-function! s:CocFormat(range, line1, line2) abort
-  if a:range == 0
-    call CocAction('format')
-  else
-    call cursor(a:line1, 1)
-    normal! V
-    call cursor(a:line2, 1)
-    call CocAction('formatSelected', 'V')
-  endif
-endfunction
-
-function! WinMove(k)
-  let t:curwin = winnr()
-  exec "wincmd " . a:k
-  if(a:k == 'h' || expand('%') == '[coc-explorer]')
-    return
-  endif
-  if(t:curwin == winnr())
-    if(match(a:k, '[jk]'))
-      wincmd v
-    else
-      wincmd s
-    endif
-    exec "wincmd " . a:k
-  endif
-endfunction
-
-function! Goyo_e() abort
-  Goyo
-  Goyo!
-  Goyo 65%x75%
-endfunction
-function! Goyo_l() abort
-  Goyo!
-  so ~/.config/nvim/config/highlighting.vim
-endfunction
-
-function! FZFOpen(command_str)
-  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
-    exe "normal! \<c-w>\<c-w>"
-  endif
-  exe 'normal! ' . a:command_str . "\<cr>"
-endfunction
-
-function! MakeTagsFile()
-  if len(g:virk_root_dir) > 0 && g:virk_tags_enable != 0
-    VSMakeTagsFile
-  elseif ! exists('g:gutentags_generate_on_write')
-    !DIR=$(git rev-parse --show-toplevel) && ctags -Rf $DIR/.git/tags $DIR
-  else
-    echom "VS tags disabled, gutentags in operation"
-  endif
-endfunction
-
-" function NERDTreeResize()
-"   let curWin = winnr()
-"   NERDTreeFocus
-"   silent! normal! gg"byG
-"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
-"   exec 'vertical resize' maxcol
-"   exec curWin 'wincmd w'
-" endfunction
-" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
-
 """""""""""""""" Leader Remappings """"""""""""""""
 
 nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
@@ -239,5 +171,3 @@ command! WQ  wq
 command! Wq  wq
 command! W   w
 command! Q   q
-
-command! -nargs=0 ConvLineEndings %s///g

@@ -1,4 +1,5 @@
 " Plugin variable settings
+  let g:bclose_no_plugin_maps=1
   let g:virk_tags_enable = 0
   let g:virk_dirname = '.vim'
   let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -26,7 +27,7 @@
 
 " Gutentags
   let g:gutentags_add_default_project_roots = 0 
-  let g:gutentags_project_root = ['package.json', '.git', '.virkspace', '.vim']
+  let g:gutentags_project_root = ['.git', '.virkspace', '.vim']
   let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/') 
   let g:gutentags_generate_on_write = 1
   let g:gutentags_generate_on_new = 1 
@@ -37,6 +38,11 @@
         \   '--tag-relative=yes', 
         \   '--fields=+ailmnS', 
         \ ] 
+
+  let s:notags = expand("$HOME/.notags")
+  if !filereadable(s:notags) |
+    call writefile([], s:notags)
+  endif
 
 " Vista
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
