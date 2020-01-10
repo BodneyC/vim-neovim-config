@@ -9,7 +9,8 @@ if [[ -f ~/.vimrc ]]; then
 fi
 
 echo "Curling vim-plug setup file"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim \
+	--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Moving .vimrc to ~/"
 cp .vimrc ~

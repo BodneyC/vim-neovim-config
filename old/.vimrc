@@ -116,9 +116,9 @@ set matchpairs+=<:> " use % to jump between pairs
 
 " For NERDTree
 "autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif "Open if directory
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "Close if last window
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Folding
 set nofoldenable
@@ -134,9 +134,6 @@ hi SpellLocal cterm=underline,bold ctermfg=red
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
-
-" AStyle
-autocmd BufNewFile,BufRead *.* set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
 
 let g:onedark_termcolors = 256
 colorscheme jellybeans

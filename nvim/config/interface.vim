@@ -53,14 +53,6 @@ autocmd BufWritePre *.html :%s/\s\+$//e
 
 " Spelling
 set spelllang=en_gb
-" autocmd BufRead,BufNewFile *.md,*.tex setlocal spell
-
-" AStyle
-"   autocmd BufNewFile,BufRead *.C,*.java,*.c,*.H,*.h set formatprg=astyle\ --style=linux\ --indent=spaces\ -f\ -xb\ -xg\ -p
-
-" AutoPairs settings
-let g:AutoPairsMultilineClose=0
-let g:AutoPairsFlyMode=0
 
 " Undo stuff
 set undofile

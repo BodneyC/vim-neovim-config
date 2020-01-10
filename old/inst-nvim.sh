@@ -17,10 +17,12 @@ if [[ -f $INIT_VIM ]]; then
 fi
 
 echo "Curling vim-plug setup file"
-curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" \
+	--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Moving init.vim to $INIT_VIM"
-mkdir -p "$HOME"/.config/{nvim/{config,ftplugin,undo,.swapfiles,viminfo,addit-lang-servers},coc/extensions}
+mkdir -p "$HOME"/.config/nvim/{config,ftplugin,undo,.swapfiles,viminfo,addit-lang-servers}
+mkdir -p "$HOME"/.config/coc/extensions
 
 chmod +x ./softlink_config.sh && ./softlink-configs.sh
 

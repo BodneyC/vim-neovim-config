@@ -12,6 +12,7 @@ if g:term_theme == "dark"
 	" colorscheme two-firewatch
 	let s:lightline_theme = "1989"
   colo 1989
+  hi OverLength guibg=#995959 guifg=#ffffff
 elseif g:term_theme == "light"
 	let s:lightline_theme = "VimSpectre300light"
 	colorscheme vimspectr300-light

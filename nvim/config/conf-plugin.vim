@@ -1,4 +1,6 @@
 " Plugin variable settings
+	let g:AutoPairsMultilineClose=0
+	let g:AutoPairsFlyMode=0
   let g:bclose_no_plugin_maps=1
   let g:virk_tags_enable = 0
   let g:virk_dirname = '.vim'
@@ -84,7 +86,10 @@
         \ ""]
   function! s:center(lines) abort
     let longest_line = max(map(copy(a:lines), 'len(v:val)'))
-    let centered_lines = map(copy(a:lines), 'repeat(" ", (winwidth(0) / 2) - (longest_line / 2)) . v:val')
+    let centered_lines = map(
+          \   copy(a:lines),
+          \   'repeat(" ", (winwidth(0) / 2) - (longest_line / 2)) . v:val'
+          \ )
     return centered_lines
   endfunction
   function! SetStartifyParams() abort

@@ -43,9 +43,14 @@ function! BorderedFloat(opts)
   return buf
 endfunction
 
-function! FloatingCentred()
-  let height = float2nr(&lines / 1.2)
-  let width = float2nr(&columns / 1.2)
+let s:terminal_divisor = 0.9
+
+function! FloatingCentred(...)
+	let height_divisor = get(a:, 1, s:terminal_divisor)
+	let width_divisor = get(a:, 2, s:terminal_divisor)
+
+  let height = float2nr(&lines * height_divisor)
+  let width = float2nr(&columns * width_divisor)
   let col = float2nr((&columns - width) / 2)
   let row = float2nr((&lines - height) / 2)
 
@@ -66,9 +71,10 @@ function! FloatingCentred()
   let opts.width  -= 4
 
   call nvim_open_win(
-        \ nvim_create_buf(v:false, v:true),
-        \ v:true, opts)
-  au BufWipeout <buffer> exe 'bw ' . s:buf
+        \   nvim_create_buf(v:false, v:true),
+        \   v:true, opts
+        \ )
+  au BufLeave <buffer> exe 'bw ' . s:buf
 endfunction
 
 function! OpenTerm(cmd)
@@ -80,7 +86,7 @@ function! OnTermExit(job_id, code, event) dict
   if a:code == 0 | bd! | endif
 endfunction
 
-command! -nargs=0 ToggleLazyGit call OpenTerm('lazygit')
+command! -nargs=0 ToggleLazyGit w | call OpenTerm('lazygit')
 nnoremap <silent> <leader>gl :ToggleLazyGit<CR>
 
 " FZF

@@ -47,14 +47,17 @@ nnoremap <silent> <leader>% :vert sbn<CR>
 """"""" FZF
 
 command! -bang -nargs=* Rg
-      \ call fzf#vim#grep('rg --hidden --column --no-heading --line-number --color=always ' . shellescape(<q-args>),
+      \ call fzf#vim#grep(
+			\   'rg --hidden --column --no-heading --line-number --color=always ' 
+      \   . shellescape(<q-args>),
       \ 0,
       \ { 'options': $FZF_COMPLETION_OPTS . '--delimiter : --nth 4..' },
       \ <bang>0)
 nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
 
 nnoremap <silent> <leader>; :Commands<CR>
-nnoremap <silent> <leader>f :call FZFOpen(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
+nnoremap <silent> <leader>f :call FZFOpen(
+      \   ":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
 nnoremap <silent> <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <silent> <leader>M :call FZFOpen(':Maps')<CR>
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>

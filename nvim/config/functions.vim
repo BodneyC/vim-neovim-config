@@ -1,4 +1,46 @@
 """"""""""""""" Assisting Functions """""""""""""""
+function! ChangeIndent(n)
+	set noet
+	%retab!
+  let &l:ts=a:n
+  set expandtab
+	%retab!
+  call SetIndent(a:n)
+endfunction
+command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
+
+function! SetIndent(n)
+  let &l:ts=a:n
+  let &l:sw=a:n
+  IndentLinesToggle
+  IndentLinesToggle
+endfunction
+command! -nargs=1 SetIndent call SetIndent(<f-args>)
+
+function! GetHighlightTerm(group, ele)
+  let higroup = execute('hi ' . a:group)
+  return matchstr(higroup, a:ele.'=\zs\S*')
+endfunction
+command! -nargs=+ GetHighlightTerm call GetHighlightTerm(<f-args>)
+
+function! UpdateAll()
+  let l:cwd = getcwd()
+  PlugUpgrade
+  PlugUpdate
+  CocUpdateSync
+  UpdateRemotePlugins
+  exec 'cd ' . l:cwd
+endfunction
+command! -nargs=0 UpdateAll call UpdateAll()
+
+function! HighlightAfterGlobalTextWidth(...)
+  let gtw = get(a:, 1, "")
+  if gtw == ""
+    let gtw = input("Width: ")
+  endif
+  echom gtw
+  exec "match OverLength /\\%" . gtw . "v.\\+/"
+endfunction
 
 function! SpellChecker()
   let l:spell = &spell
@@ -105,13 +147,13 @@ endfunction
 
 """"""""""""""" AuGroups """""""""""""""
 
-augroup vimrc_nerdtree
-  autocmd!
-  autocmd FileType nerdtree setlocal signcolumn=no
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  autocmd BufEnter * if (winnr("$") == 1 && expand('%') =~ '.*\[coc-explorer\].*') | enew | bd# | q | endif
-augroup END
+" augroup vimrc_nerdtree
+"   autocmd!
+"   autocmd FileType nerdtree setlocal signcolumn=no
+"   autocmd StdinReadPre * let s:std_in=1
+"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"   autocmd BufEnter * if (winnr("$") == 1 && expand('%') =~ '.*\[coc-explorer\].*') | enew | bd# | q | endif
+" augroup END
 
 augroup vimrc_coc_explorer
   autocmd!
@@ -127,41 +169,6 @@ augroup vimrc_language_other
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile,Dockerfile set ts=4 | set sw=4
 augroup END
-
-" Four spaces to eight col tabs
-function! ChangeIndent(n)
-	set noet
-	%retab!
-  let &l:ts=a:n
-  set expandtab
-	%retab!
-  call SetIndent(a:n)
-endfunction
-command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
-
-function! SetIndent(n)
-  let &l:ts=a:n
-  let &l:sw=a:n
-  IndentLinesToggle
-  IndentLinesToggle
-endfunction
-command! -nargs=1 SetIndent call SetIndent(<f-args>)
-
-function! GetHighlightTerm(group, ele)
-  let higroup = execute('hi ' . a:group)
-  return matchstr(higroup, a:ele.'=\zs\S*')
-endfunction
-command! -nargs=+ GetHighlightTerm call GetHighlightTerm(<f-args>)
-
-function! UpdateAll()
-  let l:cwd = getcwd()
-  PlugUpgrade
-  PlugUpdate
-  CocUpdateSync
-  UpdateRemotePlugins
-  exec 'cd ' . l:cwd
-endfunction
-command! -nargs=0 UpdateAll call UpdateAll()
 
 command! -nargs=0 ConvLineEndings %s/<CR>//g
 command! -nargs=0 RenameWord CocCommand document.renameCurrentWord

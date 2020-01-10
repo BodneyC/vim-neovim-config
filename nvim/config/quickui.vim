@@ -55,6 +55,7 @@ call quickui#menu#install('&Tools', [
       \ [ '&Spell (%{&spell? "On":"Off"})',                'set spell!'                            ],
 			\ [ 'C&ursor Line (%{&cursorline? "On":"Off"})',     'set cursorline!'                       ],
 			\ [ 'Cursor Co&lumn (%{&cursorcolumn? "On":"Off"})', 'set cursorcolumn!'                     ],
+      \ [ 'H&ighlight at Column',                          'call HighlightAfterGlobalTextWidth()'  ],
 			\ ] )
 
 let g:quickui_show_tip = 1
