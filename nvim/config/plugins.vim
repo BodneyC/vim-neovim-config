@@ -94,7 +94,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
   Plug 'bodneyc/vim-leader-guide'
-  Plug 'vim-utils/vim-troll-stopper'
+  " Plug 'vim-utils/vim-troll-stopper'
   Plug 'vim-utils/vim-all'
 
 " Personal
