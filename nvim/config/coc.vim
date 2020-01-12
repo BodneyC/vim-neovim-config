@@ -66,4 +66,4 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 nmap <silent>  <C-m> <Plug>(coc-cursors-position)
 xmap <silent>  <C-m> <Plug>(coc-cursors-range)
 nmap <leader>x <Plug>(coc-cursors-operator)
-
+nmap <silent> <leader>R :RenameWord<CR>

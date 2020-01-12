@@ -9,11 +9,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
-  Plug 'udalov/kotlin-vim'
+  Plug 'udalov/kotlin-vim', {'for': 'kotlin'}
   " Plug 'junegunn/vader.vim'
   " Plug 'stevearc/vim-arduino'
   " Plug 'z3t0/arduvim'
-  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
   " Plug 'mgedmin/python-imports.vim'
 
 " Interface
@@ -24,13 +24,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/limelight.vim'
-  Plug 'majutsushi/tagbar'
+  " Plug 'majutsushi/tagbar'
   Plug 'justinmk/vim-syntax-extra'
   Plug 'rbgrouleff/bclose.vim'
   Plug 'moll/vim-bbye'
   Plug 'Yggdroot/indentLine'
   Plug 'itchyny/lightline.vim'
-  Plug 'ryanoasis/vim-devicons'
+  " Plug 'ryanoasis/vim-devicons'
   Plug 'chrisbra/recover.vim'
   Plug 'wellle/visual-split.vim'
   Plug 'bronson/vim-visual-star-search'
@@ -41,15 +41,15 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Git
   Plug 'tpope/vim-fugitive'
-  Plug 'oguzbilgic/vim-gdiff'
+  Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
   Plug 'rbong/vim-flog'
-  Plug 'junegunn/gv.vim'
+  Plug 'junegunn/gv.vim', {'on': 'GV'}
   Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Text manipulation
   " Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
   Plug 'junegunn/vim-easy-align'
-  Plug 'kien/ctrlp.vim'
+  " Plug 'kien/ctrlp.vim'
   Plug 'tmsvg/pear-tree'
   " Plug 'jiangmiao/auto-pairs'
   Plug 'scrooloose/nerdcommenter'
@@ -57,7 +57,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-surround' " Surround with ys<w>
   " Plug 'inkarkat/vim-ingo-library'  " required by LineJuggler
   " Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
-  Plug 'terryma/vim-multiple-cursors'
+  " Plug 'terryma/vim-multiple-cursors'
   Plug 'andymass/vim-matchup'
   Plug 'Konfekt/FastFold'
   Plug 'tmhedberg/SimpylFold'
@@ -87,13 +87,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Writing
   " Plug 'xolox/vim-misc'
   " Plug 'xolox/vim-notes'
-  Plug 'rhysd/vim-grammarous'
-  Plug 'junegunn/goyo.vim'
+  Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
+  Plug 'junegunn/goyo.vim', {'for': ['markdown', 'tex']}
 
 " Utils
   Plug 'simnalamburt/vim-mundo'
   Plug 'liuchengxu/vista.vim'
-  Plug 'bodneyc/vim-leader-guide'
+  " Plug 'bodneyc/vim-leader-guide'
   " Plug 'vim-utils/vim-troll-stopper'
   Plug 'vim-utils/vim-all'
 

@@ -2,15 +2,14 @@
 
 """""""""""""""" Leader Remappings """"""""""""""""
 
-nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
-xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
+" nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+" xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
 """"""" Interface
 imap <BS>     <Plug>(PearTreeBackspace)
 imap <Esc>    <Plug>(PearTreeFinishExpansion)
 imap <Space>  <Plug>(PearTreeSpace)
 imap <C-f>    <Plug>(PearTreeJump)
-nmap <silent> <leader>R :RenameWord<CR>
 
 """"""" Explorer
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
