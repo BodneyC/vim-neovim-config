@@ -80,7 +80,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'sts10/vim-pink-moon'
   " Plug 'scheakur/vim-scheakur'
   " Plug 'NLKNguyen/papercolor-theme'
-  Plug 'sonjapeterson/1989.vim'
+  Plug 'bodneyc/1989.vim'
   " Plug 'rakr/vim-two-firewatch'
   " Plug 'nightsense/vimspectr'
 
@@ -106,5 +106,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 call plug#end()
 
 " let &runtimepath.=",/home/benjc/Documents/virkspaces-vim"
+" let &runtimepath.=",/home/benjc/gitclones/1989.vim"
 " let &runtimepath.=",/home/benjc/gitclones/at-zed-vim"
 " let &runtimepath.=",/home/benjc/gitclones/pic-vim"

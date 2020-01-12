@@ -1,7 +1,5 @@
 #!/bin/bash
 
-mkdir -p ~/.config/{nvim,coc}
-
 _msg_exit() { # msg[, ret_val]
 	echo "$1, exiting..."
 	[[ -n "$2" ]] && exit "$2"
@@ -46,8 +44,9 @@ for f in \
 done
 
 LIGHTLINE_DIR="$HOME/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/"
-
-[[ -d "$LIGHTLINE_DIR" ]] && (
-	cd "$LIGHTLINE_DIR"
+mkdir -p "$LIGHTLINE_DIR"
+(
+	cd "$LIGHTLINE_DIR" || exit
+	ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/1989.vim .
 	ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/VimSpectre300light.vim .
 )

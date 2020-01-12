@@ -64,6 +64,7 @@ call quickui#menu#install('&Tools', [
 call quickui#menu#install('&Plugin', [
 			\ [ 'Coc &Restart',         'CocRestart'                   ],
 			\ [ 'Coc E&xplorer',        'CocCommand explorer --toggle' ],
+      \ [ 'Coc &Update',          'CocUpdate'                    ],
       \ [ '-',                    ''                             ],
 			\ [ '&Vista',               'Vista!!'                      ],
 			\ [ '&Mundo',               'MundoToggle'                  ],
