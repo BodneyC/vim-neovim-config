@@ -73,7 +73,6 @@ function! SpellChecker()
     else
       break
     endif
-    echom fish
     normal! ]S
   endwhile
   normal! `z

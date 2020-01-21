@@ -29,7 +29,7 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 
 " Gutentags
 let g:gutentags_add_default_project_roots = 0 
-let g:gutentags_project_root = ['.git', '.virkspace', '.vim']
+let g:gutentags_project_root = ['.git', '.vim']
 let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/') 
 let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_new = 1 

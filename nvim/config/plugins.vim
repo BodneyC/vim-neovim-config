@@ -13,7 +13,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'junegunn/vader.vim'
   " Plug 'stevearc/vim-arduino'
   " Plug 'z3t0/arduvim'
-  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
+  " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
   " Plug 'mgedmin/python-imports.vim'
 
 " Interface

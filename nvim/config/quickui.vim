@@ -82,6 +82,16 @@ call quickui#menu#install('&Vim-plug', [
 			\ [ 'Plug &Clean',   'PlugClean'   ],
 			\ ] )
 
+let g:context_opts = [ 
+      \ [ '&Help word',    'call feedkeys(":H ")'  ],
+      \ [ '&Spell',        'call feedkeys("z=")'         ],
+      \ [ '-',             ''                            ],
+      \ [ 'Find in &file', 'call feedkeys("/")'    ],
+      \ [ 'Find in &dir',  'call feedkeys(":Rg ")' ],
+      \ ]
+
+map <RightMouse> <LeftMouse>:call quickui#context#open(g:context_opts, { 'index': g:quickui#context#cursor })<CR>
+
 let g:quickui_show_tip = 1
 let g:quickui_border_style = 2
 let g:quickui_color_scheme = 'papercol dark'

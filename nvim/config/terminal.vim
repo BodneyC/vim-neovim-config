@@ -63,32 +63,55 @@ function! FloatingCentred(...)
         \   'style': 'minimal'
         \ }
 
-  let s:buf = BorderedFloat(opts)
+  let l:buf = BorderedFloat(opts)
 
   let opts.row    += 1
   let opts.height -= 2
   let opts.col    += 2
   let opts.width  -= 4
 
-  call nvim_open_win(
-        \   nvim_create_buf(v:false, v:true),
-        \   v:true, opts
-        \ )
-  au BufLeave <buffer> exe 'bw ' . s:buf
-endfunction
+  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
 
-function! OpenTerm(cmd)
-  call FloatingCentred()
-  call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
+  return l:buf
 endfunction
 
 function! OnTermExit(job_id, code, event) dict
   if a:code == 0 | bd! | endif
 endfunction
 
-command! -nargs=0 ToggleLazyGit w | call OpenTerm('lazygit')
+function! FloatingTerm(cmd)
+  let s:buf = FloatingCentred()
+  call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
+  au BufLeave <buffer> exe 'bw ' . s:buf
+endfunction
+
+function! FloatingHelp(...)
+  let l:not_in_tags = 0
+  let l:query = get(a:, 1, '')
+  let s:buf = FloatingCentred()
+  setlocal ft=help bt=help
+  try
+    exec 'help ' . l:query
+  catch E149
+    let l:not_in_tags = 1
+  endtry
+  map <buffer> <Esc> :q<CR>
+  au BufLeave <buffer> ++once exe 'bw ' . s:buf
+  if l:not_in_tags == 1
+    bw
+    echoe '"' . l:query . '" not in helptags'
+  endif
+endfunction
+command! -nargs=? -complete=help H call FloatingHelp(<f-args>)
+command! -nargs=? -complete=help Help call FloatingHelp(<f-args>)
+
+function! FloatingFzf()
+  let s:buf = FloatingCentred()
+  au BufLeave <buffer> exe 'bw ' . s:buf
+endfunction
+
+command! -nargs=0 ToggleLazyGit w | call FloatingTerm('lazygit')
 nnoremap <silent> <leader>gl :ToggleLazyGit<CR>
 
-" FZF
-  let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
-  let g:fzf_layout = { 'window': 'call FloatingCentred()' }
+let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
+let g:fzf_layout = { 'window': 'call FloatingFzf()' }

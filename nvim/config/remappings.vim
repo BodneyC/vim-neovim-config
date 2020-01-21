@@ -112,7 +112,7 @@ command! RGBOptions :call CocAction('colorPresentation')<CR>
 """"""""""""""""" Function Keys """""""""""""""""""
 
 """"""" Help under cursor
-nnoremap <F1> :help <C-r><C-w><CR>
+nnoremap <F1> :H <C-r><C-w><CR>
 
 """"""" Replaces
 nnoremap <F2> :s//g<Left><Left>
