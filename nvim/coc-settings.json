@@ -1,4 +1,7 @@
 {
+  "java.import.maven.enabled": true,
+  "java.maven.downloadSources": true,
+  "java.contentProvider.preferred": "fernflower",
   "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
   "suggest.triggerAfterInsertEnter": false,
   "eslint.enable": false,

@@ -1,4 +1,5 @@
 " Plugin variable settings
+let g:vimspector_enable_mappings = 'HUMAN'
 let g:AutoPairsMultilineClose=0
 let g:AutoPairsFlyMode=0
 let g:bclose_no_plugin_maps=1

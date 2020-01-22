@@ -22,6 +22,7 @@
     "coc-snippets": ">=2.1.17",
     "coc-syntax": ">=1.2.4",
     "coc-tabnine": ">=1.2.2",
+    "coc-tag": ">=1.2.4",
     "coc-terminal": ">=0.2.0",
     "coc-tslint-plugin": ">=1.1.1",
     "coc-tsserver": ">=1.4.9",

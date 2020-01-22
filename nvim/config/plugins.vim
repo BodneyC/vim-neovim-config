@@ -96,6 +96,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'bodneyc/vim-leader-guide'
   " Plug 'vim-utils/vim-troll-stopper'
   Plug 'vim-utils/vim-all'
+  Plug 'puremourning/vimspector'
 
 " Personal
   Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
