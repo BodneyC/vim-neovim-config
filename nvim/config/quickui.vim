@@ -91,6 +91,7 @@ let g:context_opts = [
       \ ]
 
 map <RightMouse> <LeftMouse>:call quickui#context#open(g:context_opts, { 'index': g:quickui#context#cursor })<CR>
+map <M-0> :call quickui#context#open(g:context_opts, { 'index': g:quickui#context#cursor })<CR>
 
 let g:quickui_show_tip = 1
 let g:quickui_border_style = 2

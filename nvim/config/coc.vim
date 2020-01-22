@@ -19,10 +19,10 @@ call coc#add_extension(
       \ 'coc-html', 
       \ 'coc-emmet', 
       \ 'coc-css')
-" Max args reached...
 call coc#add_extension(
       \ 'coc-highlight',
-      \ 'coc-terminal')
+      \ 'coc-terminal',
+      \ 'coc-java')
 
 let g:coc_filetypes = [
       \ 'Dockerfile',
@@ -54,9 +54,9 @@ endfunction
 augroup vimrc-coc
   autocmd!
   autocmd FileType * if IsCocEnabled()
-    \|let &l:formatexpr = "CocAction('formatSelected')"
-    \|let &l:keywordprg = ":call CocAction('doHover')"
-    \|endif
+    \|  let &l:formatexpr = "CocAction('formatSelected')"
+    \|  let &l:keywordprg = ":call CocAction('doHover')"
+    \| endif
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 

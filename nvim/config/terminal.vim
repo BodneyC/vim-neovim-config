@@ -70,7 +70,9 @@ function! FloatingCentred(...)
   let opts.col    += 2
   let opts.width  -= 4
 
-  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+  let s:cur_float_win = nvim_create_buf(v:false, v:true)
+
+  call nvim_open_win(s:cur_float_win, v:true, opts)
 
   return l:buf
 endfunction
@@ -85,7 +87,12 @@ function! FloatingTerm(cmd)
   au BufLeave <buffer> exe 'bw ' . s:buf
 endfunction
 
+let s:cur_float_win = -1
 function! FloatingHelp(...)
+  if bufexists(s:cur_float_win)
+    exec 'bw ' . s:cur_float_win
+    let s:cur_float_win = -1
+  endif
   let l:not_in_tags = 0
   let l:query = get(a:, 1, '')
   let s:buf = FloatingCentred()
