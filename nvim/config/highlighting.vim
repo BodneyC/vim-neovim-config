@@ -57,6 +57,12 @@ func! s:SetSignTheme(bg)
   exec 'hi GitGutterDelete       guibg=' . a:bg
   exec 'hi CocErrorSign          guibg=' . a:bg
   exec 'hi CocWarningSign        guibg=' . a:bg
+
+  hi clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign 
+  hi link CocGitAddedSign GitGutterAdd
+  hi link CocGitChangedSign GitGutterChange
+  hi link CocGitChangeRemovedSign GitGutterChangeDelete
+  hi link CocGitRemovedSign GitGutterDelete
 endfunc
 
 if g:colors_name == 'two-firewatch'
