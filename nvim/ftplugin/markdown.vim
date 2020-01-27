@@ -1,3 +1,4 @@
 let @t = "mzvip:EasyAlign *|\<CR>`z"
 let @h = "YpVr="
-set conceallevel=2 concealcursor=v
+setlocal conceallevel=2 concealcursor=
+setlocal spell

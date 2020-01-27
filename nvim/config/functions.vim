@@ -12,8 +12,9 @@ command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
 function! SetIndent(n)
   let &l:ts=a:n
   let &l:sw=a:n
-  IndentLinesToggle
-  IndentLinesToggle
+  if exists('*IndentLinesReset')
+    IndentLinesReset
+  endif
 endfunction
 command! -nargs=1 SetIndent call SetIndent(<f-args>)
 

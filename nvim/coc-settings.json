@@ -127,6 +127,7 @@
       "args": ["-i", "0", "-bn", "-ci", "-sr", "-kp"]
     }
   },
+  "explorer.file.showHiddenFiles": true,
   "explorer.sources": [
     {
       "name": "file",
