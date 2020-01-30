@@ -135,28 +135,19 @@ function! MakeTagsFile()
   endif
 endfunction
 
-" function NERDTreeResize()
-"   let curWin = winnr()
-"   NERDTreeFocus
-"   silent! normal! gg"byG
-"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
-"   exec 'vertical resize' maxcol
-"   exec curWin 'wincmd w'
-" endfunction
-" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
-
-""""""""""""""" AuGroups """""""""""""""
-
-" augroup vimrc_nerdtree
-"   autocmd!
-"   autocmd FileType nerdtree setlocal signcolumn=no
-"   autocmd StdinReadPre * let s:std_in=1
-"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"   autocmd BufEnter * if (winnr("$") == 1 && expand('%') =~ '.*\[coc-explorer\].*') | enew | bd# | q | endif
-" augroup END
+function! s:CocExplorerOnClose()
+  if (winnr("$") == 1 && expand('%') =~ '\[coc-explorer\].*')
+    if exists('*virkspaces#virkvoncewrite')
+      call virkspaces#virkvoncewrite('CocCommand explorer --toggle', 1)
+    endif
+    bw
+    q
+  endif
+endfunction
 
 augroup vimrc_coc_explorer
   autocmd!
+  autocmd BufEnter * call s:CocExplorerOnClose()
   autocmd FileType coc-explorer setlocal wrapmargin=0
 augroup END
 
@@ -170,7 +161,47 @@ augroup vimrc_language_other
   autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile,Dockerfile set ts=4 | set sw=4
 augroup END
 
+augroup vimrc_general
+  autocmd!
+  autocmd BufWritePre * :%s/ \+$//e
+augroup END
+
 command! -nargs=0 ConvLineEndings %s/<CR>//g
 command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
+" Old
+
+" function NERDTreeResize()
+"   let curWin = winnr()
+"   NERDTreeFocus
+"   silent! normal! gg"byG
+"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
+"   exec 'vertical resize' maxcol
+"   exec curWin 'wincmd w'
+" endfunction
+" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
+
+" augroup vimrc_nerdtree
+"   autocmd!
+"   autocmd FileType nerdtree setlocal signcolumn=no
+"   autocmd StdinReadPre * let s:std_in=1
+"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" augroup END
+
+" function NERDTreeResize()
+"   let curWin = winnr()
+"   NERDTreeFocus
+"   silent! normal! gg"byG
+"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
+"   exec 'vertical resize' maxcol
+"   exec curWin 'wincmd w'
+" endfunction
+" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
+
+" augroup vimrc_nerdtree
+"   autocmd!
+"   autocmd FileType nerdtree setlocal signcolumn=no
+"   autocmd StdinReadPre * let s:std_in=1
+"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" augroup END

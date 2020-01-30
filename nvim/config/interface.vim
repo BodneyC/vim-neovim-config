@@ -34,22 +34,15 @@ set icm=split
 set winblend=10
 set updatetime=200
 syntax on                      " turn on syntax highlighting
-
-" Folding
-set nofoldenable
-set foldmethod=syntax
+set foldenable
+set foldmethod=manual
 
 " Last position when opening file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-  \| exe "normal g'\"" | endif
+        \ | exe "normal g'\""
+        \ | endif
 endif
-
-" Strip trailing whitespace on save
-autocmd BufWritePre *.conf :%s/\s\+$//e
-autocmd BufWritePre *.py :%s/\s\+$//e
-autocmd BufWritePre *.css :%s/\s\+$//e
-autocmd BufWritePre *.html :%s/\s\+$//e
 
 " Spelling
 set spelllang=en_gb
