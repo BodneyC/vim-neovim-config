@@ -33,22 +33,17 @@ set cul
 set icm=split
 set winblend=10
 set updatetime=200
-syntax on                      " turn on syntax highlighting
 set foldenable
 set foldmethod=manual
-
-" Last position when opening file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \ | exe "normal g'\""
-        \ | endif
-endif
-
-" Spelling
 set spelllang=en_gb
 
-" Undo stuff
+let s:undodir = expand('$HOME/.config/nvim/undo')
+if ! isdirectory(s:undodir)
+  call mkdir(s:undodir, 'p')
+endif
+exec 'set undodir='.s:undodir
 set undofile
-set undodir=$HOME/.config/nvim/undo
 set undolevels=10000
 set undoreload=10000
+
+syntax on                      " turn on syntax highlighting

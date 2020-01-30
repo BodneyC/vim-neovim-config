@@ -1,20 +1,25 @@
 ﻿let mapleader="\<Space>"
 
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'H '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 """""""""""""""" Leader Remappings """"""""""""""""
 
-" nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
-" xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
-
 """"""" Interface
-imap <BS>     <Plug>(PearTreeBackspace)
-imap <Esc>    <Plug>(PearTreeFinishExpansion)
-imap <Space>  <Plug>(PearTreeSpace)
-imap <C-f>    <Plug>(PearTreeJump)
+imap <BS> <Plug>(PearTreeBackspace)
+imap <Esc> <Plug>(PearTreeFinishExpansion)
+imap <Space> <Plug>(PearTreeSpace)
+imap <C-f> <Plug>(PearTreeJump)
 
 """"""" Explorer
 nnoremap <leader>ce :CocCommand explorer --toggle<CR>
-" nnoremap <leader>nt :NERDTreeToggle<CR>
-" nnoremap <leader>nr :call NERDTreeResize()<CR>
 
 nnoremap <silent> <leader>ge :call Goyo_e()<CR>
 nnoremap <silent> <leader>gl :call Goyo_l()<CR>
@@ -47,7 +52,7 @@ nnoremap <silent> <leader>% :vert sbn<CR>
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-			\   'rg --hidden --column --no-heading --line-number --color=always ' 
+			\   'rg --hidden --column --no-heading --line-number --color=always '
       \   . shellescape(<q-args>),
       \ 0,
       \ { 'options': $FZF_COMPLETION_OPTS . '--delimiter : --nth 4..' },
@@ -132,6 +137,7 @@ nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
 nnoremap <silent> <leader>be :enew<CR>
 nnoremap <silent> <leader>b# <C-^>
+nnoremap <silent> <leader>#  <C-^>
 nnoremap <silent> <leader>b1 :b1<CR>
 nnoremap <silent> <leader>b2 :b2<CR>
 nnoremap <silent> <leader>b3 :b3<CR>
@@ -173,3 +179,11 @@ command! WQ  wq
 command! Wq  wq
 command! W   w
 command! Q   q
+
+" Old
+
+" nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+" xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
+
+" nnoremap <leader>nt :NERDTreeToggle<CR>
+" nnoremap <leader>nr :call NERDTreeResize()<CR>

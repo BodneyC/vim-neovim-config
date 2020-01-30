@@ -164,6 +164,9 @@ augroup END
 augroup vimrc_general
   autocmd!
   autocmd BufWritePre * :%s/ \+$//e
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+        \ | exe "normal g'\""
+        \ | endif
 augroup END
 
 command! -nargs=0 ConvLineEndings %s/<CR>//g
