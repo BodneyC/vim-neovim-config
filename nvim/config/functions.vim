@@ -208,3 +208,11 @@ command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 "   autocmd StdinReadPre * let s:std_in=1
 "   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " augroup END
+
+" function! s:openNerdTreeIfNotAlreadyOpen()
+"   if ! (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+"     NERDTreeToggle
+"     setlocal nobuflisted
+"     wincmd w
+"   endif
+" endfunction

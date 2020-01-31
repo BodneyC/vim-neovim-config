@@ -30,18 +30,18 @@ let g:vimtex_view_general_options = '--unique @pdf\#src:@tex:@line:@col'
 let g:vimtex_view_general_options_latexmk = '--unique'
 
 " Gutentags
-let g:gutentags_add_default_project_roots = 0 
+let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['.git', '.vim']
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/') 
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_new = 1 
+let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0 
-let g:gutentags_ctags_extra_args = [ 
-      \   '--tag-relative=yes', 
-      \   '--fields=+ailmnS', 
-      \ ] 
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_extra_args = [
+      \   '--tag-relative=yes',
+      \   '--fields=+ailmnS',
+      \ ]
 
 let s:notags = expand("$HOME/.notags")
 if !filereadable(s:notags) |
@@ -99,13 +99,6 @@ function! SetStartifyParams() abort
   let g:startify_custom_header = s:center(s:header)
   let g:startify_custom_footer = s:center(s:footer)
 endfunction
-function! s:openNerdTreeIfNotAlreadyOpen()
-  if ! (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-    NERDTreeToggle
-    setlocal nobuflisted
-    wincmd w
-  endif
-endfunction
 
 autocmd VimEnter *
       \   if argc() == 0
@@ -116,7 +109,6 @@ autocmd VimEnter *
       \ | endif
 autocmd VimEnter *
       \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-      \ |   call s:openNerdTreeIfNotAlreadyOpen()
       \ |   call SetStartifyParams()
       \ |   Startify
       \ | endif
