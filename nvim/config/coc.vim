@@ -8,7 +8,6 @@ call coc#add_extension(
       \ 'coc-lists',
       \ 'coc-yank',
       \ 'coc-diagnostic',
-      \ 'coc-calc',
       \ 'coc-docker',
       \ 'coc-rls',
       \ 'coc-python',
@@ -18,14 +17,21 @@ call coc#add_extension(
       \ 'coc-eslint',
       \ 'coc-html',
       \ 'coc-emmet',
-      \ 'coc-css')
+      \ 'coc-css'
+      \ )
 call coc#add_extension(
       \ 'coc-highlight',
       \ 'coc-terminal',
-      \ 'coc-java')
+      \ 'coc-java',
+      \ 'coc-vimlsp'
+      \ )
 
 let g:coc_filetypes = [
       \ 'Dockerfile',
+      \ 'Jenkinsfile',
+      \ 'java',
+      \ 'kotlin',
+      \ 'xml',
       \ 'sh',
       \ 'vim',
       \ 'groovy',
@@ -38,12 +44,10 @@ let g:coc_filetypes = [
       \ 'typescript',
       \ 'typescript.jsx',
       \ 'html',
-      \ 'css',]
-
-call coc#config('eslint', {
-      \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-      \ 'autoFixOnSave': v:true,
-      \ })
+      \ 'css',
+      \ 'rust',
+      \ 'go'
+      \ ]
 
 let g:python_highlight_all = 1
 

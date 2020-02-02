@@ -4,12 +4,6 @@
   "java.contentProvider.preferred": "fernflower",
   "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
   "suggest.triggerAfterInsertEnter": false,
-  "eslint.enable": false,
-  "eslint.autoFixOnSave": true,
-  "eslint.filetypes": [
-    "javascript",
-    "javascriptreact"
-  ],
   "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "tslint.jsEnable": true,
   "tslint.autoFixOnSave": true,
@@ -70,24 +64,10 @@
         "lintTool": "golint"
       }
     },
-    "vimls": {
-      "command": "vim-language-server",
-      "args": ["--node-ipc"],
-      "initializationOptions": {
-        "iskeyword": "@,48-57,_,192-255,-#",
-        "diagnostic": { "enable": true },
-        "indexes": {
-          "runtimepath": true,
-          "gap": 100,
-          "count": 3,
-          "projectRootPatterns" : [".vim", ".git", "autoload", "plugin"]
-        },
-        "suggest": {
-          "fromVimruntime": true,
-          "fromRuntimepath": false
-        }
-      },
-      "filetypes": [ "vim" ]
+    "markdown": {
+      "command": "markdownlint",
+      "args": ["--stdin"],
+      "filetypes": ["markdown"]
     }
   },
 	"diagnostic-languageserver.filetypes": {

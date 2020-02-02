@@ -1,1 +1,1 @@
-set noexpandtab
+set et

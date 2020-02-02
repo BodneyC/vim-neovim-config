@@ -44,7 +44,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
   Plug 'rbong/vim-flog'
   Plug 'junegunn/gv.vim', {'on': 'GV'}
-  Plug 'shumphrey/fugitive-gitlab.vim'
+  " Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Text manipulation
   " Plug 'easymotion/vim-easymotion' " \\sX , \\wXX

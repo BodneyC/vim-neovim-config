@@ -1,4 +1,13 @@
 """"""""""""""" Assisting Functions """""""""""""""
+function! SetIndent(n)
+  let &l:ts=a:n
+  let &l:sw=a:n
+  if exists('*IndentLinesReset')
+    IndentLinesReset
+  endif
+endfunction
+command! -nargs=1 SetIndent call SetIndent(<f-args>)
+
 function! ChangeIndent(n)
 	set noet
 	%retab!
@@ -8,15 +17,6 @@ function! ChangeIndent(n)
   call SetIndent(a:n)
 endfunction
 command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
-
-function! SetIndent(n)
-  let &l:ts=a:n
-  let &l:sw=a:n
-  if exists('*IndentLinesReset')
-    IndentLinesReset
-  endif
-endfunction
-command! -nargs=1 SetIndent call SetIndent(<f-args>)
 
 function! GetHighlightTerm(group, ele)
   let higroup = execute('hi ' . a:group)
@@ -108,12 +108,13 @@ function! WinMove(k)
   endif
 endfunction
 
-function! Goyo_e() abort
+function! GoyoEnter() abort
   Goyo
   Goyo!
   Goyo 65%x75%
 endfunction
-function! Goyo_l() abort
+
+function! GoyoLeave() abort
   Goyo!
   so ~/.config/nvim/config/highlighting.vim
 endfunction
@@ -163,7 +164,11 @@ augroup END
 
 augroup vimrc_general
   autocmd!
-  autocmd BufWritePre * :%s/ \+$//e
+  autocmd BufWritePre * if search(' \+$', 'n') != 0
+        \ | let cursor = getcurpos()
+        \ | %s/ \+$//e|''
+        \ | call setpos('.', cursor)
+        \ | endif
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
         \ | exe "normal g'\""
         \ | endif

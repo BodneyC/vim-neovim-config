@@ -10,19 +10,15 @@ endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-"""""""""""""""" Leader Remappings """"""""""""""""
-
-""""""" Interface
 imap <BS> <Plug>(PearTreeBackspace)
 imap <Esc> <Plug>(PearTreeFinishExpansion)
 imap <Space> <Plug>(PearTreeSpace)
 imap <C-f> <Plug>(PearTreeJump)
 
-""""""" Explorer
-nnoremap <leader>ce :CocCommand explorer --toggle<CR>
+nnoremap <silent> <leader>ce :CocCommand explorer --toggle<CR>
 
-nnoremap <silent> <leader>ge :call Goyo_e()<CR>
-nnoremap <silent> <leader>gl :call Goyo_l()<CR>
+nnoremap <silent> <leader>ge :call GoyoEnter()<CR>
+nnoremap <silent> <leader>gl :call GoyoLeave()<CR>
 
 """"""" NERDTreeCommenter
 map  <Plug>NERDCommenterToggle
