@@ -58,7 +58,7 @@ func! s:SetSignTheme(bg)
   exec 'hi CocErrorSign          guibg=' . a:bg
   exec 'hi CocWarningSign        guibg=' . a:bg
 
-  hi clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign 
+  hi clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign
   hi link CocGitAddedSign GitGutterAdd
   hi link CocGitChangedSign GitGutterChange
   hi link CocGitChangeRemovedSign GitGutterChangeDelete
@@ -77,7 +77,7 @@ endif
 if g:colors_name == '1989'
   let bg = '#303030'
   call s:SetSignTheme(bg)
-  hi Pmenu guibg=bg
+  hi Pmenu guibg='#808080'
   exec 'hi PmenuSel guibg=#ffffff guifg='.bg
   hi clear CursorLine CocHighlightText
   hi CursorLine guibg='#272727'

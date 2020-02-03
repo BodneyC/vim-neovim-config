@@ -178,11 +178,12 @@ augroup END
 
 augroup vimrc_general
   autocmd!
-  autocmd BufWritePre * if search(' \+$', 'n') != 0
-        \ | let cursor = getcurpos()
-        \ | %s/ \+$//e|''
-        \ | call setpos('.', cursor)
-        \ | endif
+  " autocmd BufWritePre * if search(' \+$', 'n') != 0
+  "       \ | echom "fish"
+  "       \ | let cursor = getcurpos()
+  "       \ | %s/ \+$//e|''
+  "       \ | call setpos('.', cursor)
+  "       \ | endif
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
         \ | exe "normal g'\""
         \ | endif

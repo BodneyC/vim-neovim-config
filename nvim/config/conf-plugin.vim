@@ -38,7 +38,7 @@ let g:gutentags_cache_dir = expand('$HOME/.cache/vim/tags')
 if ! isdirectory(g:gutentags_cache_dir)
   call mkdir(g:gutentags_cache_dir, 'p')
 endif
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_modules = ['ctags']
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_ctags_auto_set_tags = 1
 let g:gutentags_project_root = ['.git']
