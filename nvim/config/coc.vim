@@ -51,9 +51,28 @@ let g:coc_filetypes = [
 
 let g:python_highlight_all = 1
 
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'H ' . expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 function! IsCocEnabled()
   return index(g:coc_filetypes, &filetype) >= 0
 endfunction
+
+function! s:go_to_definition()
+  if IsCocEnabled()
+    call CocAction('jumpDefinition')
+  else
+    execute 'tag ' . expand('<cword>')
+  endif
+endfunction
+nnoremap <C-]> :call <SID>go_to_definition()<CR>
 
 augroup vimrc-coc
   autocmd!
