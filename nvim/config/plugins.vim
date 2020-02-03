@@ -15,6 +15,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'z3t0/arduvim'
   " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
   " Plug 'mgedmin/python-imports.vim'
+  Plug 'alvan/vim-closetag', {'for': ['html', 'xml']}
 
 " Interface
   " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }

@@ -46,8 +46,8 @@ endfunction
 let s:terminal_divisor = 0.9
 
 function! FloatingCentred(...)
-	let height_divisor = get(a:, 1, s:terminal_divisor)
-	let width_divisor = get(a:, 2, s:terminal_divisor)
+  let height_divisor = get(a:, 1, s:terminal_divisor)
+  let width_divisor = get(a:, 2, s:terminal_divisor)
 
   let height = float2nr(&lines * height_divisor)
   let width = float2nr(&columns * width_divisor)

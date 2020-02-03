@@ -43,12 +43,13 @@ nnoremap <leader>/ :noh<CR>
 """"""" Split
 nnoremap <silent> <leader>" :sbn<CR>
 nnoremap <silent> <leader>% :vert sbn<CR>
+nnoremap <silent> <leader>z :ZoomToggle<CR>
 
 """"""" FZF
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-			\   'rg --hidden --column --no-heading --line-number --color=always '
+      \   'rg --hidden --column --no-heading --line-number --color=always '
       \   . shellescape(<q-args>),
       \ 0,
       \ { 'options': $FZF_COMPLETION_OPTS . '--delimiter : --nth 4..' },

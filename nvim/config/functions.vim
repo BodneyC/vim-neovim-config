@@ -9,11 +9,11 @@ endfunction
 command! -nargs=1 SetIndent call SetIndent(<f-args>)
 
 function! ChangeIndent(n)
-	set noet
-	%retab!
+  set noet
+  %retab!
   let &l:ts=a:n
   set expandtab
-	%retab!
+  %retab!
   call SetIndent(a:n)
 endfunction
 command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
@@ -145,6 +145,20 @@ function! s:CocExplorerOnClose()
     q
   endif
 endfunction
+
+" https://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
 
 augroup vimrc_coc_explorer
   autocmd!

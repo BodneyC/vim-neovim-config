@@ -1,4 +1,7 @@
 " Plugin variable settings
+let g:togool_extras =
+      \ [['<', '+'],
+      \  ['>', '-']]
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:AutoPairsMultilineClose=0
 let g:AutoPairsFlyMode=0
@@ -30,14 +33,20 @@ let g:vimtex_view_general_options = '--unique @pdf\#src:@tex:@line:@col'
 let g:vimtex_view_general_options_latexmk = '--unique'
 
 " Gutentags
+" let g:gutentags_trace = 1
+let g:gutentags_cache_dir = expand('$HOME/.cache/vim/tags')
+if ! isdirectory(g:gutentags_cache_dir)
+  call mkdir(g:gutentags_cache_dir, 'p')
+endif
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
 let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['.git', '.vim']
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+let g:gutentags_ctags_auto_set_tags = 1
+let g:gutentags_project_root = ['.git']
 let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_plus_switch = 1
 let g:gutentags_ctags_extra_args = [
       \   '--tag-relative=yes',
       \   '--fields=+ailmnS',

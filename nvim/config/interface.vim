@@ -36,6 +36,7 @@ set updatetime=200
 set foldenable
 set foldmethod=manual
 set spelllang=en_gb
+set autoread
 
 let s:undodir = expand('$HOME/.config/nvim/undo')
 if ! isdirectory(s:undodir)
