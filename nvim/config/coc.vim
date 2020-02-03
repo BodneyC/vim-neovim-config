@@ -72,7 +72,7 @@ function! s:go_to_definition()
     execute 'tag ' . expand('<cword>')
   endif
 endfunction
-nnoremap <C-]> :call <SID>go_to_definition()<CR>
+nnoremap <silent> <C-]> :call <SID>go_to_definition()<CR>
 
 augroup vimrc-coc
   autocmd!
