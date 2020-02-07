@@ -1,15 +1,5 @@
 ﻿let mapleader="\<Space>"
 
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'H '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 imap <BS> <Plug>(PearTreeBackspace)
 imap <Esc> <Plug>(PearTreeFinishExpansion)
 imap <Space> <Plug>(PearTreeSpace)
