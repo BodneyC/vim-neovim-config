@@ -107,7 +107,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 call plug#end()
 
-" let &runtimepath.=",/home/benjc/Documents/virkspaces-vim"
+" let &runtimepath.=",/home/benjc/gitclones/virkspaces"
 " let &runtimepath.=",/home/benjc/gitclones/1989.vim"
 " let &runtimepath.=",/home/benjc/gitclones/at-zed-vim"
 " let &runtimepath.=",/home/benjc/gitclones/pic-vim"

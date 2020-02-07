@@ -19,6 +19,10 @@ elseif g:term_theme == "light"
 endif
 
 " Lightline
+function! LightlineFn()
+  return (expand('%:t') !=# '' ? expand('%:t') : '[No Name]') . (&modified ? '*' : '')
+endfunction
+
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
@@ -28,7 +32,7 @@ let g:lightline = {
       \   'active': {
       \     'right': [ [ 'lineinfo' ],
       \                [ 'fileformat', 'fileencoding', 'filetype' ] ],
-      \     'left':  [ [ 'filename' ],
+      \     'left':  [ [ 'fn' ],
       \                [ 'git', 'paste', 'cocstatus', 'readonly', 'Fugitive', 'modified' ] ]
       \   },
       \   'component' : {
@@ -36,6 +40,7 @@ let g:lightline = {
       \     'Fugitive': '%{FugitiveStatusline()}',
       \   },
       \   'component_function': {
+      \     'fn': 'LightlineFn',
       \     'cocstatus': 'coc#status'
       \   }
       \ }
