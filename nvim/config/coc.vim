@@ -54,6 +54,10 @@ let g:python_highlight_all = 1
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'H ' . expand('<cword>')
+  elseif &filetype == 'sh' || &filetype == 'zsh'
+    if ! CocAction('doHover')
+      call FloatingMan(expand('<cword>'))
+    endif
   else
     call CocAction('doHover')
   endif

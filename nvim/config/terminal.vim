@@ -18,7 +18,7 @@ function! ChooseTerm(termname)
 endfunction
 
 nnoremap <F10> :call ChooseTerm("term-split")<CR>
-inoremap <F10> <esc>:call ChooseTerm("term-split")<CR>a
+inoremap <F10> <Esc>:call ChooseTerm("term-split")<CR>a
 
 tnoremap <C-q> <C-\><C-n>
 tnoremap <LeftRelease> <Nop>
@@ -86,6 +86,12 @@ function! FloatingTerm(cmd)
   call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
   au BufLeave <buffer> exe 'bw ' . s:buf
 endfunction
+
+function! FloatingMan(...)
+  let l:cmd = 'man ' . join(a:000, ' ')
+  call FloatingTerm(l:cmd)
+endfunction
+command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
 let s:cur_float_win = -1
 function! FloatingHelp(...)

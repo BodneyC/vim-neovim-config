@@ -9,6 +9,7 @@
   "tslint.autoFixOnSave": true,
   "tslint.packageManager": "npm",
   "coc.source.file.ignoreHidden": false,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "python.linting.enabled": true,
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "| ",

@@ -61,6 +61,7 @@ nnoremap <silent> <leader>T :TagbarToggle<CR>
 """"""""""""" Conquer of Completion """""""""""""""
 
 """"""" Definitions
+nmap <silent> gc :CocCommand git.chunkInfo<CR>
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gt <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)

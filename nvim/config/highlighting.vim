@@ -23,25 +23,47 @@ function! LightlineFn()
   return (expand('%:t') !=# '' ? expand('%:t') : '[No Name]') . (&modified ? '*' : '')
 endfunction
 
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, '⚈ ' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, '⚆ ' . info['warning'])
+  endif
+  return join(msgs, ' ')
+endfunction
+ 
+function! CurrentFunction()
+  return get(b:, 'coc_current_function', 'NONE')
+endfunction
+ 
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-
+ 
 let g:lightline = {
       \   'colorscheme': s:lightline_theme,
       \   'active': {
       \     'right': [ [ 'lineinfo' ],
-      \                [ 'fileformat', 'fileencoding', 'filetype' ] ],
+      \                [ 'CurrentFunction', 'fileformat', 'filetype' ] ],
       \     'left':  [ [ 'fn' ],
-      \                [ 'git', 'paste', 'cocstatus', 'readonly', 'Fugitive', 'modified' ] ]
+      \                [ 'paste', 'CocStatus', 'readonly', 'Fugitive' ] ]
       \   },
       \   'component' : {
       \     'WordCount' : 'wc: %{wordCount#WordCount()}',
-      \     'Fugitive': '%{FugitiveStatusline()}',
+      \     'Fugitive': ' %{fugitive#Head(7)}',
+      \     'CocStatus': '%{StatusDiagnostic()}',
+      \     'CurrentFunction': '%{CurrentFunction()}'
       \   },
       \   'component_function': {
       \     'fn': 'LightlineFn',
-      \     'cocstatus': 'coc#status'
+      \   },
+      \   'subseparator': {
+      \     'right': '',
+      \     'left': ''
       \   }
       \ }
 
@@ -86,7 +108,7 @@ if g:colors_name == '1989'
   exec 'hi PmenuSel guibg=#ffffff guifg='.bg
   hi clear CursorLine CocHighlightText
   hi CursorLine guibg='#272727'
-  hi CocHighlightText guibg='#111121' guifg='#ffffdf'
+  hi CocHighlightText guibg='#111121'
   " exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
   " exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
 endif
