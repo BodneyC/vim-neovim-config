@@ -60,8 +60,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'inkarkat/vim-LineJuggler', { 'rev': 'stable' }
   " Plug 'terryma/vim-multiple-cursors'
   Plug 'andymass/vim-matchup'
-  Plug 'Konfekt/FastFold'
-  Plug 'tmhedberg/SimpylFold'
+  " Plug 'Konfekt/FastFold'
+  " Plug 'tmhedberg/SimpylFold'
   Plug 'wellle/targets.vim'
 
 " Integrations
@@ -81,7 +81,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'sts10/vim-pink-moon'
   " Plug 'scheakur/vim-scheakur'
   " Plug 'NLKNguyen/papercolor-theme'
-  Plug 'bodneyc/1989.vim'
+  Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
   " Plug 'rakr/vim-two-firewatch'
   " Plug 'nightsense/vimspectr'
 
