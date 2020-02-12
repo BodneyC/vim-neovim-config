@@ -24,20 +24,34 @@ function! LightlineFn()
 endfunction
 
 function! StatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, '⚈ ' . info['error'])
+  let l:status = substitute(get(g:, 'coc_status', ''), '^\s*\(.\{-}\)\s*$', '\1', '')
+  let l:info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return l:status | endif
+  let l:msgs = []
+  if get(l:info, 'error', 0)
+    let l:status .= ' ⚉ ' . l:info['error']
   endif
-  if get(info, 'warning', 0)
-    call add(msgs, '⚆ ' . info['warning'])
+  if get(l:info, 'warning', 0)
+    let l:status .= ' ⚇ ' . l:info['warning']
   endif
-  return join(msgs, ' ')
+  return l:status
 endfunction
  
 function! CurrentFunction()
   return get(b:, 'coc_current_function', 'NONE')
+endfunction
+
+function! FileInfo()
+  if     &ff == 'unix'
+    let l:ff = '🐧'
+  elseif &ff == 'mac'
+    let l:ff = '🍎'
+  elseif &ff == 'dos'
+    let l:ff = '🚽'
+  endif
+  let l:ro = ''
+  if &ro | let l:ro = '⏹️' | endif
+  return l:ff . &ft . l:ro
 endfunction
  
 set laststatus=2
@@ -47,23 +61,23 @@ let g:limelight_conceal_guifg = '#777777'
 let g:lightline = {
       \   'colorscheme': s:lightline_theme,
       \   'active': {
-      \     'right': [ [ 'lineinfo' ],
-      \                [ 'CurrentFunction', 'fileformat', 'filetype' ] ],
       \     'left':  [ [ 'fn' ],
-      \                [ 'paste', 'CocStatus', 'readonly', 'Fugitive' ] ]
+      \                [ 'paste', 'cocStatus', 'Fugitive' ] ],
+      \     'right': [ [ 'lineinfo' ],
+      \                [ 'currentFunction', 'fileInfo' ] ],
       \   },
-      \   'component' : {
-      \     'WordCount' : 'wc: %{wordCount#WordCount()}',
+      \   'component': {
       \     'Fugitive': ' %{fugitive#Head(7)}',
-      \     'CocStatus': '%{StatusDiagnostic()}',
-      \     'CurrentFunction': '%{CurrentFunction()}'
       \   },
       \   'component_function': {
+      \     'fileInfo': 'FileInfo',
+      \     'cocStatus': 'StatusDiagnostic',
+      \     'currentFunction': 'CocCurrentFunction',
       \     'fn': 'LightlineFn',
       \   },
       \   'subseparator': {
       \     'right': '',
-      \     'left': ''
+      \     'left': '',
       \   }
       \ }
 
