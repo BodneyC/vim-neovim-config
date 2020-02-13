@@ -42,7 +42,7 @@ function! CurrentFunction()
 endfunction
 
 function! FileInfo()
-  if     &ff == 'unix'
+  if &ff == 'unix'
     let l:ff = '🐧 '
   elseif &ff == 'mac'
     let l:ff = '🍎 '
