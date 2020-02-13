@@ -43,15 +43,14 @@ endfunction
 
 function! FileInfo()
   if     &ff == 'unix'
-    let l:ff = '🐧'
+    let l:ff = '🐧 '
   elseif &ff == 'mac'
-    let l:ff = '🍎'
+    let l:ff = '🍎 '
   elseif &ff == 'dos'
-    let l:ff = '🚽'
+    let l:ff = '🚽 '
   endif
   let l:ro = ''
-  if &ro | let l:ro = '⏹️' | endif
-  return l:ff . &ft . l:ro
+  return l:ff . &ft . (&ro ? '🚫' : '')
 endfunction
  
 set laststatus=2
