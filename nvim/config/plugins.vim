@@ -100,10 +100,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'puremourning/vimspector'
 
 " Personal
-  Plug 'https://gitlab.com/BodneyC/VirkSpaces', { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/At-Zed-vim', { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/pic-vim',    { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/togool.vim', { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/At-Zed-vim',   { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
 
 call plug#end()
 
@@ -111,3 +112,4 @@ call plug#end()
 " let &runtimepath.=",/home/benjc/gitclones/1989.vim"
 " let &runtimepath.=",/home/benjc/gitclones/at-zed-vim"
 " let &runtimepath.=",/home/benjc/gitclones/pic-vim"
+" let &runtimepath.=",/home/benjc/gitclones/hex-this-vim"

@@ -1,4 +1,4 @@
-" Color conf
+"*Color conf
 let g:two_firewatch_italics=1
 let g:vimspectrItalicComment = 'on'
 
