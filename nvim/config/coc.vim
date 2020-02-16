@@ -49,6 +49,10 @@ let g:coc_filetypes = [
       \ 'go'
       \ ]
 
+function! IsCocEnabled()
+  return index(g:coc_filetypes, &filetype) >= 0
+endfunction
+
 let g:python_highlight_all = 1
 
 function! s:show_documentation()
@@ -64,10 +68,6 @@ function! s:show_documentation()
 endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! IsCocEnabled()
-  return index(g:coc_filetypes, &filetype) >= 0
-endfunction
 
 function! s:go_to_definition()
   if IsCocEnabled()

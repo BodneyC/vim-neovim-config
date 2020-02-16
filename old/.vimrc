@@ -170,3 +170,47 @@ set guioptions-=m
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
+
+" Old
+
+" function NERDTreeResize()
+"   let curWin = winnr()
+"   NERDTreeFocus
+"   silent! normal! gg"byG
+"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
+"   exec 'vertical resize' maxcol
+"   exec curWin 'wincmd w'
+" endfunction
+" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
+
+" augroup vimrc_nerdtree
+"   autocmd!
+"   autocmd FileType nerdtree setlocal signcolumn=no
+"   autocmd StdinReadPre * let s:std_in=1
+"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" augroup END
+
+" function NERDTreeResize()
+"   let curWin = winnr()
+"   NERDTreeFocus
+"   silent! normal! gg"byG
+"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
+"   exec 'vertical resize' maxcol
+"   exec curWin 'wincmd w'
+" endfunction
+" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
+
+" augroup vimrc_nerdtree
+"   autocmd!
+"   autocmd FileType nerdtree setlocal signcolumn=no
+"   autocmd StdinReadPre * let s:std_in=1
+"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" augroup END
+
+" function! s:openNerdTreeIfNotAlreadyOpen()
+"   if ! (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+"     NERDTreeToggle
+"     setlocal nobuflisted
+"     wincmd w
+"   endif
+" endfunction

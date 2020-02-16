@@ -46,4 +46,9 @@ set undofile
 set undolevels=10000
 set undoreload=10000
 
+let s:notags = expand("$HOME/.notags")
+if !filereadable(s:notags) |
+  call writefile([], s:notags)
+endif
+
 syntax on                      " turn on syntax highlighting

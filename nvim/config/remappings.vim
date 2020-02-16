@@ -36,19 +36,23 @@ nnoremap <silent> <leader>% :vert sbn<CR>
 nnoremap <silent> <leader>z :ZoomToggle<CR>
 
 """"""" FZF
+let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
+let g:fzf_layout = { 'window': 'call FloatingFzf()' }
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-      \   'rg --hidden --column --no-heading --line-number --color=always '
+      \ 'rg -g "!{node_modules,.git,package-lock.json,yarn.lock}" --hidden '
+      \   . '--ignore-vcs --column --no-heading --line-number --color=always '
       \   . shellescape(<q-args>),
       \ 0,
       \ { 'options': $FZF_COMPLETION_OPTS . '--delimiter : --nth 4..' },
       \ <bang>0)
+
 nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
 
 nnoremap <silent> <leader>; :Commands<CR>
 nnoremap <silent> <leader>f :call FZFOpen(
-      \   ":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
+      \ ":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
 nnoremap <silent> <leader>m :call FZFOpen(':Marks')<CR>
 nnoremap <silent> <leader>M :call FZFOpen(':Maps')<CR>
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
@@ -83,15 +87,9 @@ endfunction
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-d>"
 inoremap <silent><expr> <Tab>
-      \ pumvisible()
-      \   ? "\<C-n>"
-      \   : <SID>check_back_space()
-      \     ? "\<Tab>"
-      \     : coc#refresh()
+      \ pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<Tab>" : coc#refresh()
 inoremap <silent><expr> <CR>
-      \ pumvisible()
-      \   ? "\<C-y>"
-      \   : pear_tree#insert_mode#PrepareExpansion()
+      \ pumvisible() ? "\<C-y>" : pear_tree#insert_mode#PrepareExpansion()
 
 """"""" Formatting
 command! -nargs=0 -range -bar CocFormat call s:CocFormat(<range>, <line1>, <line2>)
@@ -118,8 +116,8 @@ inoremap <F7> <esc>:set spell!<CR>a
 """"""""""""""""" Buffer Control """""""""""""""""""
 
 """"""" Buffers
-nnoremap <Tab>    :bn<CR>
-nnoremap <S-Tab>  :bp<CR>
+nnoremap <Tab>    :w \| bn<CR>
+nnoremap <S-Tab>  :w \| bp<CR>
 nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>
 nnoremap <silent> <leader>bl :call FZFOpen(':Buffer')<CR>
 nnoremap <silent> <leader>bD :%bd\|e#\|bn\|bd<CR>
@@ -167,11 +165,3 @@ command! WQ  wq
 command! Wq  wq
 command! W   w
 command! Q   q
-
-" Old
-
-" nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
-" xnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
-
-" nnoremap <leader>nt :NERDTreeToggle<CR>
-" nnoremap <leader>nr :call NERDTreeResize()<CR>

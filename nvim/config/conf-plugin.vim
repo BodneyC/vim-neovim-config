@@ -52,11 +52,6 @@ let g:gutentags_ctags_extra_args = [
       \   '--fields=+ailmnS',
       \ ]
 
-let s:notags = expand("$HOME/.notags")
-if !filereadable(s:notags) |
-  call writefile([], s:notags)
-endif
-
 " Vista
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'

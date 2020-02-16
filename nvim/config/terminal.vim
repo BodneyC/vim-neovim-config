@@ -125,6 +125,3 @@ endfunction
 
 command! -nargs=0 ToggleLazyGit w | call FloatingTerm('lazygit')
 nnoremap <silent> <leader>gl :ToggleLazyGit<CR>
-
-let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
-let g:fzf_layout = { 'window': 'call FloatingFzf()' }

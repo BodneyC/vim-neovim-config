@@ -25,14 +25,17 @@ endfunction
 
 function! StatusDiagnostic() abort
   let l:status = substitute(get(g:, 'coc_status', ''), '^\s*\(.\{-}\)\s*$', '\1', '')
+  if ! l:status && IsCocEnabled()
+    let l:status = 'coc-' . &ft
+  endif
   let l:info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return l:status | endif
   let l:msgs = []
   if get(l:info, 'error', 0)
-    let l:status .= ' ⚉ ' . l:info['error']
+    let l:status .= '  ' . l:info['error']
   endif
   if get(l:info, 'warning', 0)
-    let l:status .= ' ⚇ ' . l:info['warning']
+    let l:status .= '  ' . l:info['warning']
   endif
   return l:status
 endfunction
@@ -43,14 +46,14 @@ endfunction
 
 function! FileInfo()
   if &ff == 'unix'
-    let l:ff = '🐧 '
+    let l:ff = ' '
   elseif &ff == 'mac'
-    let l:ff = '🍎 '
+    let l:ff = ' '
   elseif &ff == 'dos'
-    let l:ff = '🚽 '
+    let l:ff = ' '
   endif
   let l:ro = ''
-  return l:ff . &ft . (&ro ? '🚫' : '')
+  return l:ff . &ft . (&ro ? ' ' : '')
 endfunction
  
 set laststatus=2

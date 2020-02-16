@@ -148,15 +148,15 @@ endfunction
 
 " https://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
 function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
+  if exists('t:zoomed') && t:zoomed
+    execute t:zoom_winrestcmd
+    let t:zoomed = 0
+  else
+    let t:zoom_winrestcmd = winrestcmd()
+    resize
+    vertical resize
+    let t:zoomed = 1
+  endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 
@@ -173,17 +173,11 @@ augroup END
 
 augroup vimrc_language_other
   autocmd!
-  autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile,Dockerfile set ts=4 | set sw=4
+  autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile*,Dockerfile* set ts=4 | set sw=4
 augroup END
 
 augroup vimrc_general
   autocmd!
-  " autocmd BufWritePre * if search(' \+$', 'n') != 0
-  "       \ | echom "fish"
-  "       \ | let cursor = getcurpos()
-  "       \ | %s/ \+$//e|''
-  "       \ | call setpos('.', cursor)
-  "       \ | endif
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
         \ | exe "normal g'\""
         \ | endif
@@ -192,47 +186,3 @@ augroup END
 command! -nargs=0 ConvLineEndings %s/<CR>//g
 command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
-
-" Old
-
-" function NERDTreeResize()
-"   let curWin = winnr()
-"   NERDTreeFocus
-"   silent! normal! gg"byG
-"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
-"   exec 'vertical resize' maxcol
-"   exec curWin 'wincmd w'
-" endfunction
-" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
-
-" augroup vimrc_nerdtree
-"   autocmd!
-"   autocmd FileType nerdtree setlocal signcolumn=no
-"   autocmd StdinReadPre * let s:std_in=1
-"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" augroup END
-
-" function NERDTreeResize()
-"   let curWin = winnr()
-"   NERDTreeFocus
-"   silent! normal! gg"byG
-"   let maxcol = max(map(split(@b, "\n"), 'strlen(v:val)')) - 3
-"   exec 'vertical resize' maxcol
-"   exec curWin 'wincmd w'
-" endfunction
-" command! -nargs=0 NERDTreeResize :call NERDTreeResize()
-
-" augroup vimrc_nerdtree
-"   autocmd!
-"   autocmd FileType nerdtree setlocal signcolumn=no
-"   autocmd StdinReadPre * let s:std_in=1
-"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" augroup END
-
-" function! s:openNerdTreeIfNotAlreadyOpen()
-"   if ! (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-"     NERDTreeToggle
-"     setlocal nobuflisted
-"     wincmd w
-"   endif
-" endfunction
