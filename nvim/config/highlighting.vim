@@ -25,7 +25,7 @@ endfunction
 
 function! StatusDiagnostic() abort
   let l:status = substitute(get(g:, 'coc_status', ''), '^\s*\(.\{-}\)\s*$', '\1', '')
-  if ! l:status && IsCocEnabled()
+  if ! len(l:status) && IsCocEnabled()
     let l:status = 'coc-' . &ft
   endif
   let l:info = get(b:, 'coc_diagnostic_info', {})

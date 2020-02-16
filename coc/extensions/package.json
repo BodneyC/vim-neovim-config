@@ -8,7 +8,7 @@
     "coc-emmet": ">=1.1.4",
     "coc-eslint": ">=1.2.6",
     "coc-explorer": ">=0.2.18",
-    "coc-git": ">=1.7.0",
+    "coc-git": ">=1.7.1",
     "coc-go": ">=0.6.2",
     "coc-highlight": ">=1.2.5",
     "coc-html": ">=1.2.3",
