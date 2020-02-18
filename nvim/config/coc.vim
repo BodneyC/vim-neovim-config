@@ -69,19 +69,36 @@ endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+function s:go_to_tag()
+  try
+    exec 'tag ' . expand('<cword>')
+    return
+  catch
+  endtry
+  try
+    exec 'tag ' . expand('<cWORD>')
+    return
+  catch
+  endtry
+  echom "Tag not found"
+endfunction
+
 function! s:go_to_definition()
-  if IsCocEnabled()
-    call CocAction('jumpDefinition')
-  else
-    execute 'tag ' . expand('<cword>')
+  if IsCocEnabled() 
+    if CocAction('jumpDefinition')
+      return
+    endif
+    redraw
+    echo ''
   endif
+  call <SID>go_to_tag()
 endfunction
 nnoremap <silent> <C-]> :call <SID>go_to_definition()<CR>
 
 augroup vimrc-coc
   autocmd!
   autocmd FileType * if IsCocEnabled()
-    \|  let &l:formatexpr = "CocAction('formatSelected')"
+    \| let &l:formatexpr = "CocAction('formatSelected')"
     \| endif
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -89,7 +106,7 @@ augroup end
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-nmap <silent>  <C-m> <Plug>(coc-cursors-position)
-xmap <silent>  <C-m> <Plug>(coc-cursors-range)
-nmap <leader>x <Plug>(coc-cursors-operator)
+nmap <silent> <C-m> <Plug>(coc-cursors-position)
+xmap <silent> <C-m> <Plug>(coc-cursors-range)
+nmap <silent> <leader>x <Plug>(coc-cursors-operator)
 nmap <silent> <leader>R :RenameWord<CR>
