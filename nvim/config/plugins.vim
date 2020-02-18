@@ -108,8 +108,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 call plug#end()
 
-" let &runtimepath.=",/home/benjc/gitclones/virkspaces"
-" let &runtimepath.=",/home/benjc/gitclones/1989.vim"
-" let &runtimepath.=",/home/benjc/gitclones/at-zed-vim"
-" let &runtimepath.=",/home/benjc/gitclones/pic-vim"
-" let &runtimepath.=",/home/benjc/gitclones/hex-this-vim"
+" let &runtimepath .= "," . $HOME . "/gitclones/virkspaces"
+" let &runtimepath .= "," . $HOME . "/gitclones/1989.vim"
+" let &runtimepath .= "," . $HOME . "/gitclones/at-zed-vim"
+" let &runtimepath .= "," . $HOME . "/gitclones/pic-vim"
+" let &runtimepath .= "," . $HOME . "/gitclones/hex-this-vim"

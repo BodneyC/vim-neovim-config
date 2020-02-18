@@ -8,14 +8,14 @@ set termguicolors
 set background=dark
 
 if g:term_theme == "dark"
-	" let s:lightline_theme = "twofirewatch"
-	" colorscheme two-firewatch
-	let s:lightline_theme = "1989"
+  " let s:lightline_theme = "twofirewatch"
+  " colorscheme two-firewatch
+  let s:lightline_theme = "1989"
   colo 1989
   hi OverLength guibg=#995959 guifg=#ffffff
 elseif g:term_theme == "light"
-	let s:lightline_theme = "VimSpectre300light"
-	colorscheme vimspectr300-light
+  let s:lightline_theme = "VimSpectre300light"
+  colorscheme vimspectr300-light
 endif
 
 " Lightline
@@ -119,8 +119,8 @@ endif
 if g:colors_name == '1989'
   let bg = '#303030'
   call s:SetSignTheme(bg)
-  hi! Pmenu guibg='#657075'
-  exec 'hi PmenuSel guibg=#ffffff guifg='.bg
+  " hi! Pmenu guibg='#657075'
+  " exec 'hi PmenuSel guibg=#ffffff guifg='.bg
   hi clear CursorLine CocHighlightText
   hi CursorLine guibg='#272727'
   hi CocHighlightText guibg='#111121'

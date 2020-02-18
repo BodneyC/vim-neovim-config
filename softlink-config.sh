@@ -50,3 +50,5 @@ mkdir -p "$LIGHTLINE_DIR"
   ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/1989.vim .
   ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/VimSpectre300light.vim .
 )
+
+cd / && sudo -E ln -s "$HOME" home-link

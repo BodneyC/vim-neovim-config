@@ -41,14 +41,14 @@
       }
     },
     "kotlin": {
-      "command": "/home/benjc/.config/nvim/addit-lang-servers/kotlin-language-server",
+      "command": "/home-link/.config/nvim/addit-lang-servers/kotlin-language-server",
       "filetypes": ["kotlin", "kt"]
     },
     "groovy": {
       "command": "java",
       "args": [
         "-jar",
-        "~/.config/nvim/addit-lang-servers/groovy-language-server-all.jar"
+        "/home-link/gitclones/groovy-language-server/build/libs/groovy-language-server.jar"
       ],
       "filetypes": ["groovy"]
     },
