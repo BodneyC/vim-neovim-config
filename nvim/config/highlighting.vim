@@ -20,13 +20,13 @@ endif
 
 " Lightline
 function! LightlineFn()
-  return (expand('%:t') !=# '' ? expand('%:t') : '[No Name]') . (&modified ? '*' : '')
+  return (&modified ? '  ' : '') . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
 endfunction
 
 function! StatusDiagnostic() abort
   let l:status = substitute(get(g:, 'coc_status', ''), '^\s*\(.\{-}\)\s*$', '\1', '')
   if ! len(l:status) && IsCocEnabled()
-    let l:status = 'coc-' . &ft
+    let l:status = '  ' . substitute(&ft, '.*', '\u&', '')
   endif
   let l:info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return l:status | endif
@@ -45,21 +45,20 @@ function! CurrentFunction()
 endfunction
 
 function! FileInfo()
-  if &ff == 'unix'
-    let l:ff = ' '
-  elseif &ff == 'mac'
-    let l:ff = ' '
-  elseif &ff == 'dos'
-    let l:ff = ' '
-  endif
+  let l:ff = {
+        \ 'unix': ' ',
+        \ 'mac':  ' ',
+        \ 'dos':  ' ',
+        \ }
   let l:ro = ''
-  return l:ff . &ft . (&ro ? ' ' : '')
+  return l:ff[&ff] . &ft . ' ' . (&ro ? '  ' : '')
 endfunction
  
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
  
+
 let g:lightline = {
       \   'colorscheme': s:lightline_theme,
       \   'active': {
