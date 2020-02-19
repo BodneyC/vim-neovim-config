@@ -34,7 +34,7 @@ endsnippet
 snippet _yes_or_no "_yes_or_no function" b
 _yes_or_no() { # msg
 	# shellcheck disable=SC2050
-	while [[ 1 == 1 ]]; do
+	while true; do
 		read -rp "\$1 [yn] "
 		case "$REPLY" in
 			[yY]*) return 0 ;;
@@ -114,6 +114,6 @@ snippet shellcheck "Shellcheck disable" i
 # shellcheck disable=
 endsnippet
 
-snippet bash "env shebang" b
+snippet #! "env shebang" b
 #!/usr/bin/env bash
 endsnippet
