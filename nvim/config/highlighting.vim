@@ -19,11 +19,11 @@ elseif g:term_theme == "light"
 endif
 
 " Lightline
-function! LightlineFn()
+function! SlLightlineFn()
   return (&modified ? '  ' : '') . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
 endfunction
 
-function! StatusDiagnostic() abort
+function! SlStatusDiagnostic() abort
   if ! IsCocEnabled()
     return ''
   endif
@@ -44,18 +44,27 @@ function! StatusDiagnostic() abort
   return l:status
 endfunction
  
-function! CurrentFunction()
+function! SlCurrentFunction()
   return get(b:, 'coc_current_function', 'NONE')
 endfunction
 
-function! FileInfo()
+function! SlVirkLine()
+  let l:status = virkspaces#status()
+  if ! len(l:status) | return '' | endif
+  if l:status =~# '.*(moved)$'
+    return ''
+  endif
+  return ''
+endfunction
+
+function! SlFileInfo()
   let l:ff = {
         \ 'unix': ' ',
         \ 'mac':  ' ',
         \ 'dos':  ' ',
         \ }
   let l:ro = ''
-  return l:ff[&ff] . &ft . ' ' . (&ro ? '  ' : '')
+  return l:ff[&ff] . &ft . ' ' . (&ro ? '  ' : '') . SlVirkLine()
 endfunction
  
 set laststatus=2
@@ -75,10 +84,11 @@ let g:lightline = {
       \     'Fugitive': ' %{fugitive#Head(7)}',
       \   },
       \   'component_function': {
-      \     'fileInfo': 'FileInfo',
-      \     'cocStatus': 'StatusDiagnostic',
-      \     'currentFunction': 'CocCurrentFunction',
-      \     'fn': 'LightlineFn',
+      \     'fileInfo': 'SlFileInfo',
+      \     'cocStatus': 'SlStatusDiagnostic',
+      \     'currentFunction': 'SlCocCurrentFunction',
+      \     'fn': 'SlLightlineFn',
+      \     'virkspaces': 'SlVirkLine',
       \   },
       \   'subseparator': {
       \     'right': '',
