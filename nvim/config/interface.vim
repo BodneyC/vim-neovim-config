@@ -20,7 +20,7 @@ set linebreak                  " only break lines on 'breakat' characters
 set laststatus=2               " Always display
 set mouse=a                    " Enable mouse
 set bs=2                       " fix backspace on some consoles
-set tags^=.git/tags
+" set tags^=.git/tags
 set scrolloff=1                " # lines below cursor always
 set backspace=indent,eol,start " Backspace behaviour
 set matchpairs+=<:>            " use % to jump between pairs

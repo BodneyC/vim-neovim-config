@@ -24,10 +24,14 @@ function! LightlineFn()
 endfunction
 
 function! StatusDiagnostic() abort
+  if ! IsCocEnabled()
+    return ''
+  endif
   let l:status = substitute(get(g:, 'coc_status', ''), '^\s*\(.\{-}\)\s*$', '\1', '')
   if ! len(l:status) && IsCocEnabled()
-    let l:status = '  ' . substitute(&ft, '.*', '\u&', '')
+    let l:status = substitute(&ft, '.*', '\u&', '')
   endif
+  let l:status = '  ' . l:status
   let l:info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return l:status | endif
   let l:msgs = []

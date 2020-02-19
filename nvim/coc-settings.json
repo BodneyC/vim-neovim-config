@@ -41,14 +41,14 @@
       }
     },
     "kotlin": {
-      "command": "/home-link/.config/nvim/addit-lang-servers/kotlin-language-server",
-      "filetypes": ["kotlin", "kt"]
+      "command": "/link-home/gitclones/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
+      "filetypes": ["kotlin"]
     },
     "groovy": {
       "command": "java",
       "args": [
         "-jar",
-        "/home-link/gitclones/groovy-language-server/build/libs/groovy-language-server.jar"
+        "/link-home/gitclones/groovy-language-server/build/libs/groovy-language-server.jar"
       ],
       "filetypes": ["groovy"]
     },
@@ -109,6 +109,7 @@
       "args": ["-i", "0", "-bn", "-ci", "-sr", "-kp"]
     }
   },
+  "explorer.autoCollapseChildren": false,
   "explorer.file.showHiddenFiles": true,
   "explorer.sources": [
     {
