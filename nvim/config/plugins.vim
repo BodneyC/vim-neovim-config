@@ -26,6 +26,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'wellle/visual-split.vim'
   Plug 'bronson/vim-visual-star-search'
   Plug 'skywind3000/vim-quickui'
+  Plug 'michaeljsmith/vim-indent-object'
 
 " Projects
   Plug 'brooth/far.vim'

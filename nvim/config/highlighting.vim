@@ -43,7 +43,7 @@ function! SlStatusDiagnostic() abort
   endif
   return l:status
 endfunction
- 
+
 function! SlCurrentFunction()
   return get(b:, 'coc_current_function', 'NONE')
 endfunction
@@ -132,11 +132,14 @@ endif
 
 if g:colors_name == '1989'
   let bg = '#303030'
-  call s:SetSignTheme(bg)
+  if exists('g:bg_1989')
+    let bg=g:bg_1989
+  endif
+  call s:SetSignTheme(g:bg_1989)
   " hi! Pmenu guibg='#657075'
   " exec 'hi PmenuSel guibg=#ffffff guifg='.bg
   hi clear CursorLine CocHighlightText
-  hi CursorLine guibg='#272727'
+  hi CursorLine guibg='#3d3944'
   hi CocHighlightText guibg='#111121'
   " exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
   " exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg

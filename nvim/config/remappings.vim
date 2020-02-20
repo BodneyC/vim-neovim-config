@@ -33,7 +33,9 @@ nnoremap <leader>/ :noh<CR>
 """"""" Split
 nnoremap <silent> <leader>" :sbn<CR>
 nnoremap <silent> <leader>% :vert sbn<CR>
-nnoremap <silent> <leader>z :ZoomToggle<CR>
+
+""""""" Folds
+nnoremap <leader>zf :normal zfaI<CR>
 
 """"""" FZF
 let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
