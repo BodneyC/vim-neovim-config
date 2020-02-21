@@ -38,7 +38,7 @@ fi
 mkdir -p ~/.config/{nvim,coc}
 
 for f in \
-    nvim/{init.vim,coc-settings.json,ftplugin,config,addit-lang-servers} \
+    nvim/{init.vim,coc-settings.json,ftplugin,config,syntax} \
     coc/{ultisnips,extensions/{package.json,yarn.lock}}; do
   _process "$(realpath "$f")" "$(basename "$f")" "$HOME/.config/$f"
 done

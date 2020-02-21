@@ -36,10 +36,7 @@ command! -nargs=0 UpdateAll call UpdateAll()
 
 function! HighlightAfterGlobalTextWidth(...)
   let gtw = get(a:, 1, "")
-  if gtw == ""
-    let gtw = input("Width: ")
-  endif
-  echom gtw
+  if gtw == "" | let gtw = input("Width: ") | endif
   exec "match OverLength /\\%" . gtw . "v.\\+/"
 endfunction
 
@@ -56,7 +53,8 @@ function! SpellChecker()
         echom "Incorrect input"
       endif
       let l:cnt += 1
-      echom "Word: " . expand("<cword>") . " ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit) "
+      echom "Word: " . expand("<cword>")
+            \ . " ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit) "
       let l:ch = nr2char(getchar())
       redraw
     endwhile

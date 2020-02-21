@@ -8,8 +8,6 @@ set termguicolors
 set background=dark
 
 if g:term_theme == "dark"
-  " let s:lightline_theme = "twofirewatch"
-  " colorscheme two-firewatch
   let s:lightline_theme = "1989"
   colo 1989
   hi OverLength guibg=#995959 guifg=#ffffff
@@ -98,11 +96,6 @@ let g:lightline = {
 
 let lightline#colorscheme#background = 'light'
 
-" hi SpellBad cterm=bold ctermfg=red
-" hi SpellCap cterm=bold ctermfg=red
-" hi SpellRare cterm=bold ctermfg=red
-" hi SpellLocal cterm=bold ctermfg=red
-
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
 func! s:SetSignTheme(bg)
@@ -128,21 +121,6 @@ if g:colors_name == 'two-firewatch'
   hi CocHighlightWrite guibg=#3a3333 guifg=#d8b8df
   autocmd! TermOpen,TermEnter * hi Pmenu guibg=#151515
   autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guibg=#3e4452
-endif
-
-if g:colors_name == '1989'
-  let bg = '#303030'
-  if exists('g:bg_1989')
-    let bg=g:bg_1989
-  endif
-  call s:SetSignTheme(g:bg_1989)
-  " hi! Pmenu guibg='#657075'
-  " exec 'hi PmenuSel guibg=#ffffff guifg='.bg
-  hi clear CursorLine CocHighlightText
-  hi CursorLine guibg='#3d3944'
-  hi CocHighlightText guibg='#111121'
-  " exec 'autocmd! TermOpen,TermEnter * hi Pmenu guibg='.bg
-  " exec 'autocmd! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg='.bg
 endif
 
 if g:colors_name == 'vimspectr150-light'
