@@ -33,9 +33,7 @@ nnoremap <leader>/ :noh<CR>
 """"""" Split
 nnoremap <silent> <leader>" :sbn<CR>
 nnoremap <silent> <leader>% :vert sbn<CR>
-
-""""""" Folds
-nnoremap <leader>zf :normal zfaI<CR>
+nnoremap <silent> <leader>z :ZoomToggle<CR>
 
 """"""" FZF
 let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
@@ -67,6 +65,7 @@ nnoremap <silent> <leader>T :TagbarToggle<CR>
 """"""""""""" Conquer of Completion """""""""""""""
 
 """"""" Definitions
+nnoremap <silent> <leader>gg :Git<CR>
 nmap <silent> gK :CocCommand git.chunkInfo<CR>
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gt <Plug>(coc-type-definition)

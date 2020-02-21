@@ -48,17 +48,13 @@
       "command": "java",
       "args": [
         "-jar",
-        "/link-home/gitclones/groovy-language-server/build/libs/groovy-language-server.jar",
-        "-cp",
-            "/link-home/.m2/repository/org/codehaus/groovy/groovy/2.5.8/groovy-2.5.8.jar",
-            "/link-home/.m2/repository/org/codehaus/groovy/groovy-all/2.4.17/groovy-all-2.4.17.jar"
+        "/link-home/gitclones/groovy-language-server/build/libs/groovy-language-server.jar"
       ],
       "filetypes": [ "groovy" ],
       "settings": {
-        "grrovy": {
-          "groovy.classpath": [
-            "/link-home/.m2/repository/org/codehaus/groovy/groovy/2.5.8/groovy-2.5.8.jar",
-            "/link-home/.m2/repository/org/codehaus/groovy/groovy-all/2.4.17/groovy-all-2.4.17.jar"
+        "groovy": {
+          "classpath": [
+            "/link-home/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4"
           ]
         }
       }
