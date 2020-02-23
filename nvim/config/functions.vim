@@ -156,12 +156,12 @@ function! s:ZoomToggle() abort
     let t:zoomed = 1
   endif
 endfunction
-command! ZoomToggle call s:ZoomToggle()
+command! ZoomToggle call <SID>ZoomToggle()
 
 augroup vimrc_coc_explorer
   autocmd!
-  autocmd BufEnter * call s:CocExplorerOnClose()
-  autocmd FileType coc-explorer setlocal wrapmargin=0
+  autocmd BufEnter * call <SID>CocExplorerOnClose()
+  autocmd FileType coc-explorer setlocal wrapmargin=0 winhl=Normal:CocFloating
 augroup END
 
 augroup vimrc_startify

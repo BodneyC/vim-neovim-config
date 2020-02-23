@@ -39,7 +39,6 @@ function! BorderedFloat(opts)
   call nvim_buf_set_lines(buf, 0, -1, v:true, lines)
   call nvim_open_win(buf, v:true, a:opts)
   set winhl=Normal:Floating
-
   return buf
 endfunction
 

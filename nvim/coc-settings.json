@@ -1,56 +1,144 @@
 {
-  "java.import.maven.enabled": true,
-  "java.maven.downloadSources": true,
-  "java.contentProvider.preferred": "fernflower",
-  "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
-  "suggest.triggerAfterInsertEnter": false,
-  "tslint.alwaysShowRuleFailuresAsWarnings": true,
-  "tslint.jsEnable": true,
-  "tslint.autoFixOnSave": true,
-  "tslint.packageManager": "npm",
-  "coc.source.file.ignoreHidden": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "python.jediEnabled": false,
-  "python.linting.enabled": true,
+  "coc.source.file.ignoreHidden": false,
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": "",
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "sh": "shfmt",
+    "zsh": "shfmt"
+  },
+  "diagnostic-languageserver.formatters": {
+    "shfmt": {
+      "args": [
+        "-i",
+        "0",
+        "-bn",
+        "-ci",
+        "-sr",
+        "-kp"
+      ],
+      "command": "shfmt"
+    }
+  },
+  "diagnostic-languageserver.linters": {
+    "shellcheck": {
+      "args": [
+        "--format=gcc",
+        "-x",
+        "-"
+      ],
+      "command": "shellcheck",
+      "debounce": 100,
+      "formatLines": 1,
+      "formatPattern": [
+        "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+        {
+          "column": 2,
+          "endColumn": 2,
+          "endLine": 1,
+          "line": 1,
+          "message": [
+            4
+          ],
+          "security": 3
+        }
+      ],
+      "offsetColumn": 0,
+      "offsetLine": 0,
+      "securities": {
+        "error": "error",
+        "note": "info",
+        "warning": "warning"
+      },
+      "sourceName": "shellcheck"
+    }
+  },
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "| ",
-  "git.enableGutters": true,
-  "git.addGBlameToVirtualText": true,
+  "explorer.autoCollapseChildren": false,
+  "explorer.file.child.template": "  [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][readonly] [git | 1] [selection | clip | 1] [linkIcon & 1][link growRight 1 omitCenter 5][size]",
+  "explorer.file.column.git.showIgnored": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.sources": [
+    {
+      "expand": true,
+      "name": "file"
+    },
+    {
+      "expand": true,
+      "name": "buffer"
+    }
+  ],
   "git.addGBlameToBufferVar": true,
-  "git.virtualTextPrefix": "    | ",
+  "git.addGBlameToVirtualText": true,
   "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "git.changedSign.hlGroup": "GitGutterChange",
+  "git.enableGutters": true,
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "git.virtualTextPrefix": "    | ",
+  "java.contentProvider.preferred": "fernflower",
+  "java.import.maven.enabled": true,
+  "java.maven.downloadSources": true,
   "languageserver": {
     "ccls": {
       "command": "ccls",
-      "filetypes": ["c", "cpp", "C", "objc", "objcpp"],
+      "filetypes": [
+        "c",
+        "cpp",
+        "C",
+        "objc",
+        "objcpp"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      },
       "rootPatterns": [
         ".ccls",
         "compile_commands.json",
         ".vim/",
         ".git/",
         ".hg/"
+      ]
+    },
+    "dockerfile": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "docker-langserver",
+      "filetypes": [
+        "dockerfile"
+      ]
+    },
+    "golang": {
+      "command": "go-langserver",
+      "filetypes": [
+        "go"
       ],
       "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
-        }
+        "diagnosticsEnabled": true,
+        "gocodeCompletionEnabled": true,
+        "lintTool": "golint"
       }
     },
-    "kotlin": {
-      "command": "/link-home/gitclones/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
-      "filetypes": ["kotlin"]
-    },
     "groovy": {
-      "command": "java",
       "args": [
         "-jar",
         "/link-home/gitclones/groovy-language-server/build/libs/groovy-language-server.jar"
       ],
-      "filetypes": [ "groovy" ],
+      "command": "java",
+      "filetypes": [
+        "groovy"
+      ],
       "settings": {
         "groovy": {
           "classpath": [
@@ -59,91 +147,28 @@
         }
       }
     },
-    "dockerfile": {
-      "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
-    },
-    "golang": {
-      "command": "go-langserver",
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "gocodeCompletionEnabled": true,
-        "diagnosticsEnabled": true,
-        "lintTool": "golint"
-      }
+    "kotlin": {
+      "command": "/link-home/gitclones/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
+      "filetypes": [
+        "kotlin"
+      ]
     },
     "markdown": {
-      "command": "markdownlint",
-      "args": ["--stdin"],
-      "filetypes": ["markdown"]
-    }
-  },
-	"diagnostic-languageserver.filetypes": {
-		"sh": "shellcheck"
-	},
-	"diagnostic-languageserver.linters": {
-    "shellcheck": {
-      "command": "shellcheck",
-      "debounce": 100,
-      "args": ["--format=gcc", "-x", "-"],
-      "offsetLine": 0,
-      "offsetColumn": 0,
-      "sourceName": "shellcheck",
-      "formatLines": 1,
-      "formatPattern": [
-        "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
-        {
-          "line": 1,
-          "column": 2,
-          "endLine": 1,
-          "endColumn": 2,
-          "message": [4],
-          "security": 3
-        }
+      "args": [
+        "--stdin"
       ],
-      "securities": {
-        "error": "error",
-        "warning": "warning",
-        "note": "info"
-      }
+      "command": "markdownlint",
+      "filetypes": [
+        "markdown"
+      ]
     }
   },
-  "diagnostic-languageserver.formatFiletypes": {
-    "sh": "shfmt",
-    "zsh": "shfmt"
-  },
-  "diagnostic-languageserver.formatters": {
-    "shfmt": {
-      "command": "shfmt",
-      "args": ["-i", "0", "-bn", "-ci", "-sr", "-kp"]
-    }
-  },
-  "explorer.autoCollapseChildren": false,
-  "explorer.file.showHiddenFiles": true,
-  "explorer.sources": [
-    {
-      "name": "file",
-      "expand": true
-    },
-    {
-      "name": "buffer",
-      "expand": true
-    }
-  ],
-  "explorer.icon.enableNerdfont": true,
-  "explorer.file.columns": [
-    "selection",
-    "clip",
-    "diagnosticError",
-    "indent",
-    "icon",
-    "filename",
-    "git",
-    "size",
-    "modified",
-    "readonly"
-  ],
-  "explorer.file.column.git.showIgnored": true,
-  "explorer.file.column.filename.width": 50
+  "python.jediEnabled": false,
+  "python.linting.enabled": true,
+  "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
+  "suggest.triggerAfterInsertEnter": false,
+  "tslint.alwaysShowRuleFailuresAsWarnings": true,
+  "tslint.autoFixOnSave": true,
+  "tslint.jsEnable": true,
+  "tslint.packageManager": "npm"
 }
