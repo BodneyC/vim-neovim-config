@@ -123,14 +123,14 @@ let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
 
 " NERDTree
-" let NERDTreeWinSize=25
-" let NERDTreeMinimalUI=1
-" let NERDTreeDirArrows=1
-" let NERDTreeShowBookmarks=0
-" let NERDTreeShowHidden=1
+let NERDTreeWinSize=25
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let NERDTreeShowBookmarks=0
+let NERDTreeShowHidden=1
 " let NERDTreeDirArrowExpandable = "\u00a0"
 " let NERDTreeDirArrowCollapsible = "\u00a0"
-" let NERDTreeIgnore = ['\.git$', 'node_modules', 'vendor', '\.virkspace', '\.vim']
+let NERDTreeIgnore = ['\.git$', 'target', 'build', 'node_modules', 'vendor']
 
 " Fugitive
 command Gadd Git add %

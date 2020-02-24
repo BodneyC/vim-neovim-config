@@ -6,6 +6,7 @@ imap <Space> <Plug>(PearTreeSpace)
 imap <C-f> <Plug>(PearTreeJump)
 
 nnoremap <silent> <leader>ce :CocCommand explorer --toggle<CR>
+nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 
 nnoremap <silent> <leader>ge :call GoyoEnter()<CR>
 nnoremap <silent> <leader>gl :call GoyoLeave()<CR>

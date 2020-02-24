@@ -49,6 +49,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'benmills/vimux'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'soywod/iris.vim'
+  " NERDTree
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'scrooloose/nerdtree-project-plugin'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'ryanoasis/vim-devicons'
 
 " Colorschemes
   Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
@@ -68,7 +73,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
-
 call plug#end()
 
 " let &runtimepath .= "," . $HOME . "/gitclones/virkspaces"
@@ -83,11 +87,7 @@ call plug#end()
   " Plug 'z3t0/arduvim'
   " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
   " Plug 'mgedmin/python-imports.vim'
-  " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  " Plug 'scrooloose/nerdtree-project-plugin'
-  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   " Plug 'majutsushi/tagbar'
-  " Plug 'ryanoasis/vim-devicons'
   " Plug 'shumphrey/fugitive-gitlab.vim'
   " Plug 'easymotion/vim-easymotion' " \\sX , \\wXX
   " Plug 'kien/ctrlp.vim'

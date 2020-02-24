@@ -134,16 +134,6 @@ function! MakeTagsFile()
   endif
 endfunction
 
-function! s:CocExplorerOnClose()
-  if (winnr("$") == 1 && expand('%') =~ '\[coc-explorer\].*')
-    if exists('*virkspaces#virkvoncewrite')
-      call virkspaces#virkvoncewrite('CocCommand explorer --toggle', 1)
-    endif
-    bw
-    q
-  endif
-endfunction
-
 " https://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
 function! s:ZoomToggle() abort
   if exists('t:zoomed') && t:zoomed
@@ -158,10 +148,31 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call <SID>ZoomToggle()
 
+function! s:close_if_last(ft, cmd)
+  if winnr("$") == 1 && a:ft == &ft
+    if a:ft == &ft
+      if exists('*virkspaces#vonce_write')
+        call virkspaces#vonce_write(a:cmd, 1)
+      endif
+      bw | q
+    else
+      if exists('*virkspaces#vonce_remove')
+        call virkspaces#vonce_remove(a:cmd)
+      endif
+    endif
+  endif
+endfunction
+
 augroup vimrc_coc_explorer
   autocmd!
-  autocmd BufEnter * call <SID>CocExplorerOnClose()
-  autocmd FileType coc-explorer setlocal wrapmargin=0
+  " Find a way to source these commands better
+  autocmd BufEnter * call <SID>close_if_last(
+        \ 'nerdtree',
+        \ 'tabn 1 | NERDTreeToggle | exec "NERDTreeProjectLoadFromCWD" | normal! <C-w><C-l>')
+  autocmd BufEnter * call <SID>close_if_last(
+        \ 'coc-explorer',
+        \ 'CocCommand explorer --toggle')
+  autocmd FileType coc-explorer,nerdtree setlocal wrapmargin=0 signcolumn=no
 augroup END
 
 augroup vimrc_startify

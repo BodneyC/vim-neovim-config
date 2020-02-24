@@ -4,7 +4,7 @@ set nocompatible               " run in vim mode
 set noequalalways
 set hidden
 set expandtab                  " expand tabs into spaces
-set tabstop=4                  " indentation leves of normal tabs
+set tabstop=2                  " indentation leves of normal tabs
 set softtabstop=0              " indentation level of soft-tabs
 set shiftwidth=0               " how many columns to re-indent with << and >>
 set autoindent                 " auto-indent new lines
