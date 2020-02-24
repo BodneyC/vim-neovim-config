@@ -9,7 +9,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-liquid'
-  Plug 'udalov/kotlin-vim', {'for': 'kotlin'}
   Plug 'alvan/vim-closetag', {'for': ['html', 'xml']}
 
 " Interface
@@ -52,7 +51,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'soywod/iris.vim'
 
 " Colorschemes
-  " Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
+  Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
 
 " Writing
   Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
@@ -73,7 +72,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 call plug#end()
 
 " let &runtimepath .= "," . $HOME . "/gitclones/virkspaces"
-let &runtimepath .= "," . $HOME . "/gitclones/1989.vim"
+" let &runtimepath .= "," . $HOME . "/gitclones/1989.vim"
 " let &runtimepath .= "," . $HOME . "/gitclones/at-zed-vim"
 " let &runtimepath .= "," . $HOME . "/gitclones/pic-vim"
 " let &runtimepath .= "," . $HOME . "/gitclones/hex-this-vim"

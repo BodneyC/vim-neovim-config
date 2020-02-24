@@ -161,7 +161,7 @@ command! ZoomToggle call <SID>ZoomToggle()
 augroup vimrc_coc_explorer
   autocmd!
   autocmd BufEnter * call <SID>CocExplorerOnClose()
-  autocmd FileType coc-explorer setlocal wrapmargin=0 winhl=Normal:CocFloating
+  autocmd FileType coc-explorer setlocal wrapmargin=0
 augroup END
 
 augroup vimrc_startify
@@ -171,7 +171,8 @@ augroup END
 
 augroup vimrc_language_other
   autocmd!
-  autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile*,Dockerfile* set ts=4 | set sw=4
+  " autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile*,Dockerfile* set ts=2 sw=2
+  autocmd BufEnter,BufWinEnter *.kt,*.kts setlocal comments=s1:/*,mb:*,ex:*/,:// formatoptions+=cro
 augroup END
 
 augroup vimrc_general
@@ -184,3 +185,30 @@ augroup END
 command! -nargs=0 ConvLineEndings %s/<CR>//g
 command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
+
+
+""""" TMP
+
+" function! _UsesOfSymb(symb)
+"     let l:space = substitute(getline('.'), '^\( *\).*$', '\1', '')
+"     exec "-1r!{echo -e \"" . l:space . "/**\\n" 
+"                 \ . l:space . " * Name: " . a:symb . "\\n" 
+"                 \ . l:space . " * \\n" 
+"                 \ . l:space . " * Desc: \\n" 
+"                 \ . l:space . " * \\n" 
+"                 \ . l:space . " * Used in:\"; rg -l '[^A-Za-z0-9]" 
+"                 \ . a:symb 
+"                 \ . "[^A-Za-z0-9]' | rg -v -i test | awk -F'/' '{print \"" 
+"                 \ . l:space . " *   \"$(NF-1)\"/\"$NF}' | sort; echo \"" 
+"                 \ . l:space . " */\"}"
+" endfunction
+
+function! _UsesOfSymb()
+    let l:space = substitute(getline('.'), '^\( *\).*$', '\1', '')
+    exec "-1r!echo -e \"" 
+                \ . l:space . "/**\\n" 
+                \ . l:space . " * \\n" 
+                \ . l:space . " */"
+endfunction
+
+nnoremap <C-e> :call _UsesOfSymb()<CR>

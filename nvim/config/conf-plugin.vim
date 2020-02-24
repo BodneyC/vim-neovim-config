@@ -1,4 +1,5 @@
 " Plugin variable settings
+" let g:polyglot_disabled = ['kotlin']
 let g:togool_extras =
       \ [['<', '+'],
       \  ['>', '-']]
