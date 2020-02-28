@@ -1,8 +1,7 @@
-" Color conf
+let g:python_highlight_all = 1
 let g:two_firewatch_italics=1
 let g:vimspectrItalicComment = 'on'
 
-" Colorscheme
 let g:onedark_termcolors = 256
 set termguicolors
 set background=dark
@@ -16,9 +15,8 @@ elseif g:term_theme == "light"
   colorscheme vimspectr300-light
 endif
 
-" Lightline
 function! SlLightlineFn()
-  return (&modified ? '  ' : '') . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
+  return (&modified ? ' ' : ' ') . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
 endfunction
 
 function! SlStatusDiagnostic() abort
@@ -69,7 +67,6 @@ set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
  
-
 let g:lightline = {
       \   'colorscheme': s:lightline_theme,
       \   'active': {
@@ -94,8 +91,6 @@ let g:lightline = {
       \   }
       \ }
 
-let lightline#colorscheme#background = 'light'
-
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
 func! s:SetSignTheme(bg)
@@ -106,8 +101,7 @@ func! s:SetSignTheme(bg)
   exec 'hi GitGutterDelete       guibg=' . a:bg
   exec 'hi CocErrorSign          guibg=' . a:bg
   exec 'hi CocWarningSign        guibg=' . a:bg
-
-  hi clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign
+  hi! clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign
   hi link CocGitAddedSign GitGutterAdd
   hi link CocGitChangedSign GitGutterChange
   hi link CocGitChangeRemovedSign GitGutterChangeDelete

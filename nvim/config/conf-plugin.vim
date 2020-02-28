@@ -1,39 +1,22 @@
-" Plugin variable settings
-" let g:polyglot_disabled = ['kotlin']
 let g:togool_extras =
       \ [['<', '+'],
       \  ['>', '-']]
-let g:vimspector_enable_mappings = 'HUMAN'
-let g:AutoPairsMultilineClose=0
-let g:AutoPairsFlyMode=0
-let g:bclose_no_plugin_maps=1
+
 let g:virk_tags_enable = 0
-" let g:virk_dirname = '.git'
-let g:SuperTabDefaultCompletionType = "<c-n>"
+
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_enabled = 1
 let g:indentLine_char = '·'
 let g:indentLine_first_char = '·'
 let g:indentLine_fileTypeExclude = [ "markdown" ]
-let g:yats_host_keyword = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeDecorateFolderNodeDefaultSymbol = ''
+
 let g:mundo_right = 1
+
 let g:comfortable_motion_air_drag = 1
 let g:comfortable_motion_friction = 100
-let g:tagbar_auto_close = 1
-let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
-let g:pandoc#filetypes#pandoc_markdown = 0
-let g:pandoc#command#latex_engine = "pdflatex"
-let g:tex_conceal = ""
-let g:tex_flavor = 'latex'
-let g:vimtex_indent_enabled = 0
-let g:vimtex_toc_width = 25
-let g:vimtex_view_general_viewer = 'firefox'
-let g:vimtex_view_general_options = '--unique @pdf\#src:@tex:@line:@col'
-let g:vimtex_view_general_options_latexmk = '--unique'
 
-" Gutentags
+let g:tagbar_auto_close = 1
+
 " let g:gutentags_trace = 1
 let g:gutentags_cache_dir = expand('$HOME/.cache/vim/tags')
 if ! isdirectory(g:gutentags_cache_dir)
@@ -53,16 +36,13 @@ let g:gutentags_ctags_extra_args = [
       \ ]
 let g:gutentags_ctags_exclude = ['*.json']
 
-" Vista
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
 let g:vista#renderer#icons = {
       \  "function": "\uf794",
       \  "variable": "\uf71b",
       \ }
-let g:vista_executive_for = {
-      \   'vim': 'ctags'
-      \ }
+let g:vista_executive_for = { 'vim': 'ctags' }
 
 " Startify
 let s:header = [
@@ -99,7 +79,7 @@ function! s:center(lines) abort
         \ )
   return centered_lines
 endfunction
-function! SetStartifyParams() abort
+function! s:set_startify_params() abort
   let g:startify_padding_left = (winwidth(0) / 4)
   let g:startify_custom_header = s:center(s:header)
   let g:startify_custom_footer = s:center(s:footer)
@@ -109,49 +89,27 @@ autocmd VimEnter *
       \   if argc() == 0
       \ |   setlocal nobuflisted
       \ |   wincmd w
-      \ |   call SetStartifyParams()
+      \ |   call <SID>set_startify_params()
       \ |   Startify
       \ | endif
 autocmd VimEnter *
       \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-      \ |   call SetStartifyParams()
+      \ |   call <SID>set_startify_params()
       \ |   Startify
       \ | endif
 
-" NERDCommenter
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
 
-" NERDTree
-let NERDTreeWinSize=25
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-let NERDTreeShowBookmarks=0
-let NERDTreeShowHidden=1
-" let NERDTreeDirArrowExpandable = "\u00a0"
-" let NERDTreeDirArrowCollapsible = "\u00a0"
-let NERDTreeIgnore = ['\.git$', 'target', 'build', 'node_modules', 'vendor']
-
-" Fugitive
-command Gadd Git add %
-
-" Flog
 function! Flogdiff()
   let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
   let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
   call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
 endfunction
-
 augroup flog
   autocmd FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
 augroup END
 
-" Ranger
-" let g:loaded_netrwPlugin = 1
-" let g:ranger_replace_netrw = 0
-" let g:ranger_map_keys = 0
-
-" Tagbar
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
 let g:tagbar_compact = 1
 let g:tagbar_type_kotlin = {
@@ -173,22 +131,6 @@ let g:tagbar_type_kotlin = {
     \   ]
     \ }
 
-" Nvim-GDB
-" function! NvimGdbNoTKeymaps()
-"   tnoremap <silent> <buffer> <esc> <c-\><c-n>
-" endfunction
-
-" let g:nvimgdb_config_override = {
-"   \   'key_next': 'n',
-"   \   'key_step': 's',
-"   \   'key_finish': 'f',
-"   \   'key_continue': 'c',
-"   \   'key_until': 'u',
-"   \   'key_breakpoint': 'b',
-"   \   'set_tkeymaps': "NvimGdbNoTKeymaps",
-"   \ }
-
-" Pear-tree
 let g:pear_tree_map_special_keys = 0
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1

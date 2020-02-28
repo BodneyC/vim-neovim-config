@@ -25,25 +25,11 @@ tnoremap <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
   autocmd!
-  autocmd TermOpen * startinsert
+  autocmd TermOpen,TermEnter * startinsert
   autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
 augroup END
 
-function! BorderedFloat(opts)
-  let top = "╭" . repeat("─", a:opts.width - 2) . "╮"
-  let mid = "│" . repeat(" ", a:opts.width - 2) . "│"
-  let bot = "╰" . repeat("─", a:opts.width - 2) . "╯"
-  let lines = [top] + repeat([mid], a:opts.height - 2) + [bot]
-
-  let buf = nvim_create_buf(v:false, v:true)
-  call nvim_buf_set_lines(buf, 0, -1, v:true, lines)
-  call nvim_open_win(buf, v:true, a:opts)
-  set winhl=Normal:Floating
-  return buf
-endfunction
-
 let s:terminal_divisor = 0.9
-
 function! FloatingCentred(...)
   let height_divisor = get(a:, 1, s:terminal_divisor)
   let width_divisor = get(a:, 2, s:terminal_divisor)
@@ -62,33 +48,24 @@ function! FloatingCentred(...)
         \   'style': 'minimal'
         \ }
 
-  let l:buf = BorderedFloat(opts)
-
-  let opts.row    += 1
-  let opts.height -= 2
-  let opts.col    += 2
-  let opts.width  -= 4
-
   let s:cur_float_win = nvim_create_buf(v:false, v:true)
-
   call nvim_open_win(s:cur_float_win, v:true, opts)
 
-  return l:buf
+  setlocal winhl=Normal:NormalFloat
 endfunction
 
-function! OnTermExit(job_id, code, event) dict
+function! s:on_term_exit(job_id, code, event) dict
   if a:code == 0 | bd! | endif
 endfunction
 
-function! FloatingTerm(cmd)
-  let s:buf = FloatingCentred()
-  call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
-  au BufLeave <buffer> exe 'bw ' . s:buf
+function! FloatingTerm(...)
+  let l:cmd = get(a:, 1, $SHELL)
+  call FloatingCentred()
+  call termopen(l:cmd, { 'on_exit': function('s:on_term_exit') })
 endfunction
 
 function! FloatingMan(...)
-  let l:cmd = 'man ' . join(a:000, ' ')
-  call FloatingTerm(l:cmd)
+  call FloatingTerm('man ' .join(a:000, ' '))
 endfunction
 command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
@@ -100,7 +77,7 @@ function! FloatingHelp(...)
   endif
   let l:not_in_tags = 0
   let l:query = get(a:, 1, '')
-  let s:buf = FloatingCentred()
+  call FloatingCentred()
   setlocal ft=help bt=help
   try
     exec 'help ' . l:query
@@ -108,7 +85,6 @@ function! FloatingHelp(...)
     let l:not_in_tags = 1
   endtry
   map <buffer> <Esc> :q<CR>
-  au BufLeave <buffer> ++once exe 'bw ' . s:buf
   if l:not_in_tags == 1
     bw
     echoe '"' . l:query . '" not in helptags'
@@ -116,11 +92,3 @@ function! FloatingHelp(...)
 endfunction
 command! -nargs=? -complete=help H call FloatingHelp(<f-args>)
 command! -nargs=? -complete=help Help call FloatingHelp(<f-args>)
-
-function! FloatingFzf()
-  let s:buf = FloatingCentred()
-  au BufLeave <buffer> exe 'bw ' . s:buf
-endfunction
-
-command! -nargs=0 ToggleLazyGit w | call FloatingTerm('lazygit')
-nnoremap <silent> <leader>gl :ToggleLazyGit<CR>

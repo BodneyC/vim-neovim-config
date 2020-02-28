@@ -1,3 +1,9 @@
+function! HighlightAfterGlobalTextWidth(...)
+  let gtw = get(a:, 1, "")
+  if gtw == "" | let gtw = input("Width: ") | endif
+  exec "match OverLength /\\%" . gtw . "v.\\+/"
+endfunction
+
 call quickui#menu#reset()
 
 call quickui#menu#install('&File', [
