@@ -13,6 +13,7 @@ function! ChooseTerm(termname)
     terminal
     resize 10
     exec "f " a:termname
+    autocmd! TermClose <buffer> close
     startinsert
   endif
 endfunction
