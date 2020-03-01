@@ -13,7 +13,7 @@ function! ChooseTerm(termname)
     terminal
     resize 10
     exec "f " a:termname
-    autocmd! TermClose <buffer> close
+    autocmd! TermClose <buffer> if exists('b:terminal_job_pid') | close | endif
     startinsert
   endif
 endfunction
