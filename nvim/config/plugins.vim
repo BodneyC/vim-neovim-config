@@ -40,6 +40,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'benmills/vimux'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'soywod/iris.vim'
+  Plug 'bodneyc/Comrade'
 
   Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
 
@@ -62,3 +63,4 @@ call plug#end()
 " let &runtimepath .= "," . $HOME . "/gitclones/at-zed-vim"
 " let &runtimepath .= "," . $HOME . "/gitclones/pic-vim"
 " let &runtimepath .= "," . $HOME . "/gitclones/hex-this-vim"
+" let &runtimepath .= "," . $HOME . "/gitclones/Comrade"
