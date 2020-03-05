@@ -37,6 +37,7 @@ nnoremap <F7> :set spell!<CR>
 inoremap <F7> <esc>:set spell!<CR>a
 
 " Buffers
+nnoremap <C-q> <C-i>
 nnoremap <Tab>    :w\|bn<CR>
 nnoremap <S-Tab>  :w\|bp<CR>
 nnoremap <silent> <leader>bd :bn<CR>:bd#<CR>

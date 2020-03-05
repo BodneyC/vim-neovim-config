@@ -86,14 +86,7 @@ function! s:set_startify_params() abort
 endfunction
 
 autocmd VimEnter *
-      \   if argc() == 0
-      \ |   setlocal nobuflisted
-      \ |   wincmd w
-      \ |   call <SID>set_startify_params()
-      \ |   Startify
-      \ | endif
-autocmd VimEnter *
-      \   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+      \   if argc() == 0 || (argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in"))
       \ |   call <SID>set_startify_params()
       \ |   Startify
       \ | endif
