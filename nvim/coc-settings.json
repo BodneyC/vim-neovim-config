@@ -1,10 +1,6 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.source.file.ignoreHidden": false,
-  "diagnostic.infoSign": "",
-  "diagnostic.hintSign": "",
-  "diagnostic.errorSign": "",
-  "diagnostic.warningSign": "",
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
   },
@@ -58,8 +54,13 @@
       "sourceName": "shellcheck"
     }
   },
+  "diagnostic.errorSign": "",
+  "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "| ",
+  "diagnostic.warningSign": "",
+  "eslint.autoFixOnSave": true,
   "explorer.autoCollapseChildren": false,
   "explorer.file.child.template": "  [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][readonly] [git | 1] [selection | clip | 1] [linkIcon & 1][link growRight 1 omitCenter 5][size]",
   "explorer.file.column.git.showIgnored": true,
@@ -166,9 +167,5 @@
   "python.jediEnabled": false,
   "python.linting.enabled": true,
   "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
-  "suggest.triggerAfterInsertEnter": false,
-  "tslint.alwaysShowRuleFailuresAsWarnings": true,
-  "tslint.autoFixOnSave": true,
-  "tslint.jsEnable": true,
-  "tslint.packageManager": "npm"
+  "suggest.triggerAfterInsertEnter": false
 }
