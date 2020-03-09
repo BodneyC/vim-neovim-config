@@ -1,9 +1,20 @@
+function! s:close_if_terminal_job()
+  if exists('b:terminal_job_pid')
+    try
+      close
+    catch /E444.*/
+      echom "Could not close terminal"
+    endtry
+  endif
+endfunction
+
 function! ChooseTerm(termname)
-  let winnr = bufwinnr(a:termname)
+  let l:termname = "term://" . a:termname
+  let winnr = bufwinnr(l:termname)
   if winnr != -1
     exec winnr . "wincmd q"
   else
-    let bufnr = bufnr(a:termname)
+    let bufnr = bufnr(l:termname)
     if bufnr != -1
       exec "bd!" . bufnr
     endif
@@ -12,21 +23,22 @@ function! ChooseTerm(termname)
     exec "wincmd J"
     terminal
     resize 10
-    exec "f " a:termname
-    autocmd! TermClose <buffer> if exists('b:terminal_job_pid') | close | endif
+    exec "f " . l:termname
+    autocmd! TermClose <buffer> call <SID>close_if_terminal_job()
     startinsert
   endif
 endfunction
 
 nnoremap <F10> :call ChooseTerm("term-split")<CR>
 inoremap <F10> <Esc>:call ChooseTerm("term-split")<CR>a
+tnoremap <F10> <C-\><C-n>:call ChooseTerm("term-split")<CR>
 
-tnoremap <C-q> <C-\><C-n>
+tnoremap <C-q> <C-\><C-n>:wincmd w<CR>
 tnoremap <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
   autocmd!
-  autocmd TermOpen,TermEnter * startinsert
+  autocmd TermOpen,TermEnter,BufNew,BufEnter term://* startinsert
   autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
 augroup END
 

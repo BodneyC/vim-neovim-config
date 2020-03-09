@@ -54,8 +54,8 @@ xnoremap <S-up>   :m-2<CR>gv=gv
 xnoremap <S-down> :m'>+<CR>gv=gv
 nnoremap <S-up>   :m-2<CR>
 nnoremap <S-down> :m+<CR>
-inoremap <S-up>   <Esc>:m-2<CR>
-inoremap <S-down> <Esc>:m+<CR>
+inoremap <S-up>   <Esc>:m-2<CR>a
+inoremap <S-down> <Esc>:m+<CR>a
 
 " Navigation
 function! s:win_move(k)
@@ -144,7 +144,7 @@ command! -bang -nargs=* Rg
       \ <bang>0)
 
 function! FZFOpen(command_str)
-  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+  if expand('%') =~# 'NERD_tree' && winnr('$') > 1
     exe "normal! \<c-w>\<c-w>"
   endif
   exe 'normal! ' . a:command_str . "\<cr>"
@@ -164,10 +164,10 @@ map  <Plug>NERDCommenterToggle
 nnoremap <silent> <leader>ce :CocCommand explorer --toggle<CR>
 nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 
-imap <BS> <Plug>(PearTreeBackspace)
-imap <Esc> <Plug>(PearTreeFinishExpansion)
-imap <Space> <Plug>(PearTreeSpace)
-imap <C-f> <Plug>(PearTreeJump)
+inoremap <silent><expr> <BS>    pear_tree#insert_mode#Backspace()
+inoremap <silent><expr> <Esc>   pear_tree#insert_mode#Expand()
+inoremap <silent><expr> <Space> pear_tree#insert_mode#Space()
+inoremap <silent><expr> <C-f>   pear_tree#insert_mode#JumpOut()
 
 nnoremap <silent> <leader>gg :Git<CR>
 

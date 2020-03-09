@@ -1,9 +1,3 @@
-function! HighlightAfterGlobalTextWidth(...)
-  let gtw = get(a:, 1, "")
-  if gtw == "" | let gtw = input("Width: ") | endif
-  exec "match OverLength /\\%" . gtw . "v.\\+/"
-endfunction
-
 call quickui#menu#reset()
 
 call quickui#menu#install('&File', [
@@ -51,7 +45,7 @@ call quickui#menu#install('&Git', [
 call quickui#menu#install('&Settings', [
       \ [ '&Set Indent',          'call SetIndent(input("Indent: ")'     ],
       \ [ '&Change Indent',       'call ChangeIndent(input("Indent: ")'  ],
-      \ [ 'H&ighlight at Column', 'call HighlightAfterGlobalTextWidth()' ],
+      \ [ 'H&ighlight at Column', 'call MatchOver()' ],
       \ ] )
 
 call quickui#menu#install('&Tools', [

@@ -45,6 +45,7 @@ function! SlCurrentFunction()
 endfunction
 
 function! SlVirkLine()
+  if ! exists('*virkspaces#status') | return '' | endif
   let l:status = virkspaces#status()
   if ! len(l:status) | return '' | endif
   if l:status =~# '.*(moved)$'

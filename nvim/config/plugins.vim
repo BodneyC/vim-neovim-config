@@ -50,9 +50,21 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'wellle/visual-split.vim'
 call plug#end()
 
-" let &runtimepath .= "," . $HOME . "/gitclones/virkspaces"
-" let &runtimepath .= "," . $HOME . "/gitclones/1989.vim"
-" let &runtimepath .= "," . $HOME . "/gitclones/at-zed-vim"
-" let &runtimepath .= "," . $HOME . "/gitclones/pic-vim"
-" let &runtimepath .= "," . $HOME . "/gitclones/hex-this-vim"
-" let &runtimepath .= "," . $HOME . "/gitclones/Comrade"
+function! s:add_to_rtp(p, back)
+  let l:dir = $HOME . "/" . a:p
+  if ! isdirectory(l:dir)
+    echoe l:dir . " not found"
+  endif
+  if a:back
+    let &rtp .= "," . l:dir
+  else
+    let &rtp = l:dir . "," . &rtp
+  endif
+endfunction
+
+" call <SID>add_to_rtp("gitclones/virkspaces", v:true)
+" call <SID>add_to_rtp("gitclones/1989.vim", v:true)
+" call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
+" call <SID>add_to_rtp("gitclones/pic-vim", v:true)
+" call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
+" call <SID>add_to_rtp("gitclones/Comrade", v:true)

@@ -49,6 +49,12 @@ function! SpellChecker()
   echo "Spell checker complete"
 endfunction
 
+function! MatchOver(...)
+  let l:gtw = get(a:, 1, &tw)
+  exec "match OverLength /\\%" . l:gtw . "v.\\+/"
+endfunction
+command! -nargs=? MatchOver call MatchOver(<f-args>)
+
 function! s:zoom_toggle() abort
   if exists('t:zoomed') && t:zoomed
     execute t:zoom_winrestcmd

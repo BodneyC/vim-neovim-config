@@ -5,6 +5,7 @@ set expandtab
 set tabstop=2
 set softtabstop=0
 set shiftwidth=0
+set textwidth=100
 set autoindent
 set breakindent
 set breakindentopt=shift:1

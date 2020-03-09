@@ -71,6 +71,7 @@ let s:footer = [
       \ "|                            |",
       \ "+----------------------------+",
       \ ""]
+
 function! s:center(lines) abort
   let longest_line = max(map(copy(a:lines), 'len(v:val)'))
   let centered_lines = map(
@@ -79,8 +80,9 @@ function! s:center(lines) abort
         \ )
   return centered_lines
 endfunction
+
 function! s:set_startify_params() abort
-  let g:startify_padding_left = (winwidth(0) / 4)
+  let g:startify_padding_left = winwidth(0) / 4
   let g:startify_custom_header = s:center(s:header)
   let g:startify_custom_footer = s:center(s:footer)
 endfunction
@@ -99,30 +101,13 @@ function! Flogdiff()
   let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
   call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
 endfunction
+
 augroup flog
   autocmd FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
 augroup END
 
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
 let g:tagbar_compact = 1
-let g:tagbar_type_kotlin = {
-    \   'ctagstype' : 'kotlin',
-    \   'sro'       : '.',
-    \   'kinds'     : [
-    \     'p:packages',
-    \     'i:imports',
-    \     'T:types:1',
-    \     't:traits',
-    \     'o:objects',
-    \     'O:case objects',
-    \     'c:classes',
-    \     'C:case classes',
-    \     'm:methods',
-    \     'V:constants',
-    \     'v:variables',
-    \     'M:override_methods'
-    \   ]
-    \ }
 
 let g:pear_tree_map_special_keys = 0
 let g:pear_tree_smart_openers = 1
