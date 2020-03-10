@@ -27,7 +27,7 @@ function! SlStatusDiagnostic() abort
   if ! len(l:status) && IsCocEnabled()
     let l:status = substitute(&ft, '.*', '\u&', '')
   endif
-  let l:status = '  ' . l:status
+  let l:status = '  ' . l:status
   let l:info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return l:status | endif
   let l:msgs = []
