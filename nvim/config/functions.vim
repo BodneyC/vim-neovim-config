@@ -68,29 +68,6 @@ function! s:zoom_toggle() abort
 endfunction
 command! ZoomToggle call <SID>zoom_toggle()
 
-function! s:close_if_last(ft, cmd)
-  if winnr("$") == 1 && a:ft == &ft
-    if a:ft == &ft
-      if exists('*virkspaces#vonce_write')
-        call virkspaces#vonce_write(a:cmd, 1)
-      endif
-      bw | q
-    else
-      if exists('*virkspaces#vonce_remove')
-        call virkspaces#vonce_remove(a:cmd)
-      endif
-    endif
-  endif
-endfunction
-
-augroup vimrc_coc_explorer
-  autocmd!
-  autocmd BufEnter * call <SID>close_if_last(
-        \ 'coc-explorer',
-        \ 'CocCommand explorer --toggle')
-  autocmd FileType coc-explorer,nerdtree setlocal wrapmargin=0 signcolumn=no
-augroup END
-
 augroup vimrc_startify
   autocmd!
   autocmd FileType startify IndentLinesDisable
@@ -110,5 +87,4 @@ augroup vimrc_general
 augroup END
 
 command! -nargs=0 ConvLineEndings %s/<CR>//g
-command! -nargs=0 RenameWord CocCommand document.renameCurrentWord
 command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>

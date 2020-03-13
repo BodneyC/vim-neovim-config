@@ -1,5 +1,4 @@
 let g:python_highlight_all = 1
-let g:two_firewatch_italics=1
 let g:vimspectrItalicComment = 'on'
 
 let g:onedark_termcolors = 256
@@ -55,29 +54,22 @@ function! SlVirkLine()
 endfunction
 
 function! SlFileInfo()
-  let l:ff = {
-        \ 'unix': ' ',
-        \ 'mac':  ' ',
-        \ 'dos':  ' ',
-        \ }
-  let l:ro = ''
+  let l:ff = { 'unix': ' ', 'mac':  ' ', 'dos':  ' ', }
   return l:ff[&ff] . &ft . ' ' . (&ro ? '  ' : '') . SlVirkLine()
 endfunction
  
-set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
- 
 let g:lightline = {
       \   'colorscheme': s:lightline_theme,
       \   'active': {
       \     'left':  [ [ 'fn' ],
-      \                [ 'paste', 'cocStatus', 'Fugitive' ] ],
+      \                [ 'paste', 'cocStatus', 'fugitive' ] ],
       \     'right': [ [ 'lineinfo' ],
       \                [ 'currentFunction', 'fileInfo' ] ],
       \   },
       \   'component': {
-      \     'Fugitive': ' %{fugitive#Head(7)}',
+      \     'fugitive': ' %{fugitive#Head(7)}',
       \   },
       \   'component_function': {
       \     'fileInfo': 'SlFileInfo',
@@ -110,6 +102,7 @@ func! s:SetSignTheme(bg)
 endfunc
 
 if g:colors_name == 'two-firewatch'
+  let g:two_firewatch_italics = 1
   call s:SetSignTheme('#45505d')
   hi MatchParenCur guibg=#3a3333 guifg=#ffbfe4
   hi MatchParen    guibg=#595555 guifg=#c7c8e6

@@ -1,5 +1,7 @@
 set nocompatible
+set signcolumn=yes
 set noequalalways
+set laststatus=2
 set hidden
 set expandtab
 set tabstop=2
