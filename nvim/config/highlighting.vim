@@ -58,7 +58,6 @@ function! SlFileInfo()
   return l:ff[&ff] . &ft . ' ' . (&ro ? '  ' : '') . SlVirkLine()
 endfunction
  
-let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 let g:lightline = {
       \   'colorscheme': s:lightline_theme,

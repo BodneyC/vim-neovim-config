@@ -62,7 +62,7 @@ nnoremap    <silent>        <leader>b2     :b2<CR>
 nnoremap    <silent>        <leader>b3     :b3<CR>
 nnoremap    <silent>        <leader>b4     :b4<CR>
 nnoremap    <silent>        <leader>bD     :%bd\|e#\|bn\|bd<CR>
-nnoremap    <silent>        <leader>bd     :bn<CR>:bd#<CR>
+nnoremap    <silent>        <leader>bd     :if len(getbufinfo({'buflisted':1})) > 1 \| bd! \| endif<CR>
 nnoremap    <silent>        <leader>be     :enew<CR>
 nnoremap    <silent>        <leader>bl     :call FzfOpenNotExplorer(':Buffer')<CR>
 nnoremap                    <S-down>       :m+<CR>
@@ -100,13 +100,10 @@ command!                    WQ             wq
 command!                    Wq             wq
 command!                    W              w
 command!                    Q              q
-
-" Mode ----| Arguments ----| Name --------| Action ----------------------------------------------------- "
-command!    -bang -nargs=*   Rg             call fzf#vim#grep(
-      \ 'rg -g "!{node_modules,.git,package-lock.json,yarn.lock}" --hidden '
-      \   . '--ignore-vcs --column --no-heading --line-number --color=always '
-      \   . shellescape(<q-args>),
-      \ 0,
-      \ { 'options': $FZF_COMPLETION_OPTS . '--delimiter : --nth 4..' },
-      \ <bang>0)
-
+command!    -bang -nargs=*  Rg             call fzf#vim#grep(
+                                                \ 'rg -g "!{node_modules,.git,package-lock.json,yarn.lock}" --hidden '
+                                                \   . '--ignore-vcs --column --no-heading --line-number --color=always '
+                                                \   . shellescape(<q-args>),
+                                                \ 0,
+                                                \ { 'options': $FZF_COMPLETION_OPTS . '--delimiter : --nth 4..' },
+                                                \ <bang>0)

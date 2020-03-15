@@ -1,26 +1,25 @@
-function! SetIndent(n)
+function! s:set_indent(n)
   let &l:ts=a:n | let &l:sw=a:n
-  if exists('*IndentLinesReset')
+  if exists(":IndentLinesReset")
     IndentLinesReset
   endif
 endfunction
-command! -nargs=1 SetIndent call SetIndent(<f-args>)
 
-function! ChangeIndent(n)
-  set noet | %retab! | let &l:ts=a:n | set expandtab | %retab!
+function! s:change_indent(n)
+  set noet | %retab! | let &l:ts=a:n
+  set expandtab | %retab!
   call SetIndent(a:n)
 endfunction
-command! -nargs=1 ChangeIndent call ChangeIndent(<f-args>)
 
-function! SpellChecker()
+function! s:spell_checker()
   let l:spell = &spell
   if ! l:spell | set spell | endif
   normal! mzgg]S
-  while spellbadword()[0] != ''
+  while spellbadword()[0] != ""
     let l:cnt = 0
     redraw
-    let l:ch = ''
-    while index(['y', 'n', 'f', 'r', 'a', 'q'], l:ch) == -1
+    let l:ch = ""
+    while index(["y", "n", "f", "r", "a", "q"], l:ch) == -1
       if l:cnt > 0 | echom "Incorrect input" | endif
       let l:cnt += 1
       echom "Word: " . expand("<cword>")
@@ -28,16 +27,16 @@ function! SpellChecker()
       let l:ch = nr2char(getchar())
       redraw
     endwhile
-    if l:ch == 'n'
-    elseif l:ch == 'y'
+    if l:ch == "n"
+    elseif l:ch == "y"
       normal! z=
       let l:nu = input("Make you selection: ")
       exec "normal! ". l:nu . "z="
-    elseif l:ch == 'r'
+    elseif l:ch == "r"
       spellrepall
-    elseif l:ch == 'f'
+    elseif l:ch == "f"
       normal! 1z=
-    elseif l:ch == 'a'
+    elseif l:ch == "a"
       normal! zG
     else
       break
@@ -49,14 +48,13 @@ function! SpellChecker()
   echo "Spell checker complete"
 endfunction
 
-function! MatchOver(...)
+function! s:match_over(...)
   let l:gtw = get(a:, 1, &tw)
   exec "match OverLength /\\%" . l:gtw . "v.\\+/"
 endfunction
-command! -nargs=? MatchOver call MatchOver(<f-args>)
 
 function! s:zoom_toggle() abort
-  if exists('t:zoomed') && t:zoomed
+  if exists("t:zoomed") && t:zoomed
     execute t:zoom_winrestcmd
     let t:zoomed = 0
   else
@@ -66,25 +64,18 @@ function! s:zoom_toggle() abort
     let t:zoomed = 1
   endif
 endfunction
-command! ZoomToggle call <SID>zoom_toggle()
 
-augroup vimrc_startify
+augroup config_general
   autocmd!
-  autocmd FileType startify IndentLinesDisable
-augroup END
-
-augroup vimrc_language_other
-  autocmd!
-  " autocmd BufEnter,BufWinEnter,WinEnter Jenkinsfile*,Dockerfile* set ts=2 sw=2
   autocmd BufEnter,BufWinEnter *.kt,*.kts setlocal comments=s1:/*,mb:*,ex:*/,:// formatoptions+=cro
+  autocmd BufReadPost          *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+  autocmd FileType             startify   if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
 augroup END
 
-augroup vimrc_general
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \ | exe "normal g'\""
-        \ | endif
-augroup END
-
-command! -nargs=0 ConvLineEndings %s/<CR>//g
-command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
+" Mode -| Args ---| Name ---------| Action ----------------------------------------------------- "
+command! -nargs=0  ConvLineEndings %s/<CR>//g
+command! -nargs=0  SpellChecker    call <SID>spell_checker()
+command! -nargs=0  ZoomToggle      call <SID>zoom_toggle()
+command! -nargs=1  ChangeIndent    call <SID>change_indent(<f-args>)
+command! -nargs=1  SetIndent       call <SID>set_indent(<f-args>)
+command! -nargs=?  MatchOver       call <SID>match_over(<f-args>)
