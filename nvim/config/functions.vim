@@ -8,7 +8,7 @@ endfunction
 function! s:change_indent(n)
   set noet | %retab! | let &l:ts=a:n
   set expandtab | %retab!
-  call SetIndent(a:n)
+  call <SID>set_indent(a:n)
 endfunction
 
 function! s:spell_checker()
@@ -48,6 +48,25 @@ function! s:spell_checker()
   echo "Spell checker complete"
 endfunction
 
+" WIP
+function! Jump(loc)
+  let l:jumps = getjumplist()
+  let l:len = len(l:jumps[0])
+  let l:loc = l:jumps[1] + a:loc
+  echom l:loc
+  let l:j = {}
+  if l:loc >= l:len
+    return l:j
+  elseif l:loc < 0
+    let l:j = l:jumps[0][0]
+  else
+    let l:j = l:jumps[0][l:loc]
+  endif
+  echo l:j
+  call setpos('.', [l:j.bufnr, l:j.lnum, l:j.col, l:j.coladd])
+  normal! m`
+endfunction
+
 function! s:match_over(...)
   let l:gtw = get(a:, 1, &tw)
   exec "match OverLength /\\%" . l:gtw . "v.\\+/"
@@ -68,6 +87,7 @@ endfunction
 augroup config_general
   autocmd!
   autocmd BufEnter,BufWinEnter *.kt,*.kts setlocal comments=s1:/*,mb:*,ex:*/,:// formatoptions+=cro
+  autocmd BufLeave,BufWinLeave *          silent! w
   autocmd BufReadPost          *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   autocmd FileType             startify   if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
 augroup END

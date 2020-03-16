@@ -31,7 +31,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-neco'
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
-  " Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
   Plug 'scrooloose/nerdcommenter'

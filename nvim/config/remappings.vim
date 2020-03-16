@@ -41,9 +41,9 @@ inoremap    <silent><expr>  <Esc>          pear_tree#insert_mode#Expand()
 inoremap    <silent><expr>  <Space>        pear_tree#insert_mode#Space()
 
 map                                      <Plug>NERDCommenterToggle
-nnoremap                    <C-q>          <C-i>
+nnoremap                    <C-q>          <Tab>
 nnoremap                    <leader>*      :%s/\<<C-r><C-w>\>//g<left><left>
-nnoremap                    <leader>/      :noh<CR>
+nnoremap    <silent>        <leader>/      :noh<CR>
 nnoremap    <silent>        <leader>;      :Commands<CR>
 nnoremap    <silent>        <leader>M      :call FzfOpenNotExplorer(':Maps')<CR>
 nnoremap    <silent>        <leader>T      :TagbarToggle<CR>
@@ -62,13 +62,13 @@ nnoremap    <silent>        <leader>b2     :b2<CR>
 nnoremap    <silent>        <leader>b3     :b3<CR>
 nnoremap    <silent>        <leader>b4     :b4<CR>
 nnoremap    <silent>        <leader>bD     :%bd\|e#\|bn\|bd<CR>
-nnoremap    <silent>        <leader>bd     :if len(getbufinfo({'buflisted':1})) > 1 \| bd! \| endif<CR>
+nnoremap    <silent>        <leader>bd     :if len(getbufinfo({'buflisted':1})) > 1 \| bn\|bd# \| endif<CR>
 nnoremap    <silent>        <leader>be     :enew<CR>
 nnoremap    <silent>        <leader>bl     :call FzfOpenNotExplorer(':Buffer')<CR>
-nnoremap                    <S-down>       :m+<CR>
-nnoremap                    <S-up>         :m-2<CR>
-nnoremap                    <S-Tab>        :w\|bp<CR>
-nnoremap                    <Tab>          :w\|bn<CR>
+nnoremap    <silent>        <S-down>       :m+<CR>
+nnoremap    <silent>        <S-up>         :m-2<CR>
+nnoremap    <silent>        <S-Tab>        :bp<CR>
+nnoremap    <silent>        <Tab>          :bn<CR>
 
 nnoremap    <silent>        <leader>ce     :CocCommand explorer --toggle<CR>
 nnoremap    <silent>        <leader>f      :call FzfOpenNotExplorer(":call fzf#vim#files('', fzf#vim#with_preview({}, 'up:70%'))")<CR>
