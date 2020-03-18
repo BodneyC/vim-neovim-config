@@ -22,12 +22,12 @@ function! FzfOpenNotExplorer(command_str)
 endfunction
 
 " Mode ----| Modifiers ----| Key(s) ------| Action ----------------------------------------------------- "
-nnoremap                    <leader>E      :e!<CR>
-nnoremap                    <leader>Q      :qa!<CR>
-nnoremap                    <leader>W      :wqa<CR>
-nnoremap                    <leader>e      :e<CR>
-nnoremap                    <leader>q      :q<CR>
-nnoremap                    <leader>w      :w<CR>
+nnoremap    <silent>        <leader>E      :e!<CR>
+nnoremap    <silent>        <leader>Q      :qa!<CR>
+nnoremap    <silent>        <leader>W      :wqa<CR>
+nnoremap    <silent>        <leader>e      :e<CR>
+nnoremap    <silent>        <leader>q      :q<CR>
+nnoremap    <silent>        <leader>w      :w<CR>
 nnoremap                    Q              q
 nnoremap                    Q!             q!
 
@@ -100,6 +100,8 @@ command!                    WQ             wq
 command!                    Wq             wq
 command!                    W              w
 command!                    Q              q
+command!    -nargs=0        DiffThis       windo diffthis
+command!    -nargs=0        DiffOff        windo diffoff
 command!    -bang -nargs=*  Rg             call fzf#vim#grep(
                                                 \ 'rg -g "!{node_modules,.git,package-lock.json,yarn.lock}" --hidden '
                                                 \   . '--ignore-vcs --column --no-heading --line-number --color=always '
