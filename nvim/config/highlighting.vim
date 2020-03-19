@@ -15,7 +15,7 @@ elseif g:term_theme == "light"
 endif
 
 function! SlLightlineFn()
-  return (&modified ? ' ' : ' ') . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
+  return (&modified ? ' ' : ' ') . ' ' . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
 endfunction
 
 function! SlStatusDiagnostic() abort
@@ -48,14 +48,14 @@ function! SlVirkLine()
   let l:status = virkspaces#status()
   if ! len(l:status) | return '' | endif
   if l:status =~# '.*(moved)$'
-    return ''
+    return ''
   endif
-  return ''
+  return ''
 endfunction
 
 function! SlFileInfo()
-  let l:ff = { 'unix': ' ', 'mac':  ' ', 'dos':  ' ', }
-  return l:ff[&ff] . &ft . ' ' . (&ro ? '  ' : '') . SlVirkLine()
+  let l:ff = { 'unix': '', 'mac':  '', 'dos':  '', }
+  return l:ff[&ff] . ' ' . &ft . ' ' . (&ro ? '' : '') . SlVirkLine() . ' '
 endfunction
  
 let g:limelight_conceal_guifg = '#777777'
@@ -76,6 +76,10 @@ let g:lightline = {
       \     'currentFunction': 'SlCocCurrentFunction',
       \     'fn': 'SlLightlineFn',
       \     'virkspaces': 'SlVirkLine',
+      \   },
+      \   'separator': {
+      \     'left': '',
+      \     'right': ''
       \   },
       \   'subseparator': {
       \     'right': '',

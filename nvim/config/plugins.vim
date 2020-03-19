@@ -47,6 +47,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
+  Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 
 function! s:add_to_rtp(p, back)
