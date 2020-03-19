@@ -84,6 +84,10 @@ function! s:zoom_toggle() abort
   endif
 endfunction
 
+function! s:highlight_under_cursor()
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
+
 augroup config_general
   autocmd!
   autocmd BufEnter,BufWinEnter *.kt,*.kts setlocal comments=s1:/*,mb:*,ex:*/,:// formatoptions+=cro
@@ -92,10 +96,11 @@ augroup config_general
   autocmd FileType             startify   if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
 augroup END
 
-" Mode -| Args ---| Name ---------| Action ----------------------------------------------------- "
-command! -nargs=0  ConvLineEndings %s/<CR>//g
-command! -nargs=0  SpellChecker    call <SID>spell_checker()
-command! -nargs=0  ZoomToggle      call <SID>zoom_toggle()
-command! -nargs=1  ChangeIndent    call <SID>change_indent(<f-args>)
-command! -nargs=1  SetIndent       call <SID>set_indent(<f-args>)
-command! -nargs=?  MatchOver       call <SID>match_over(<f-args>)
+" Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "
+command! -nargs=0  ConvLineEndings       %s/<CR>//g
+command! -nargs=0  HighlightUnderCursor  call <SID>highlight_under_cursor()
+command! -nargs=0  SpellChecker          call <SID>spell_checker()
+command! -nargs=0  ZoomToggle            call <SID>zoom_toggle()
+command! -nargs=1  ChangeIndent          call <SID>change_indent(<f-args>)
+command! -nargs=1  SetIndent             call <SID>set_indent(<f-args>)
+command! -nargs=?  MatchOver             call <SID>match_over(<f-args>)
