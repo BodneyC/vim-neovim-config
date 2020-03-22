@@ -5,6 +5,7 @@ let g:togool_extras =
       \  ['>', '-']]
 
 let g:virk_tags_enable = 0
+let g:virk_close_regexes = ["^$", "FAR.*", "MERGE MSG", "git-rebase*"]
 
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_enabled = 1

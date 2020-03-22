@@ -48,14 +48,14 @@ function! SlVirkLine()
   let l:status = virkspaces#status()
   if ! len(l:status) | return '' | endif
   if l:status =~# '.*(moved)$'
-    return ''
+    return '· ·'
   endif
-  return ''
+  return '· ·'
 endfunction
 
 function! SlFileInfo()
   let l:ff = { 'unix': '', 'mac':  '', 'dos':  '', }
-  return l:ff[&ff] . ' ' . &ft . ' ' . (&ro ? '' : '') . SlVirkLine() . ' '
+  return l:ff[&ff] . ' ' . &ft . (&ro ? ' ' : '')
 endfunction
  
 let g:limelight_conceal_guifg = '#777777'
@@ -65,7 +65,7 @@ let g:lightline = {
       \     'left':  [ [ 'fn' ],
       \                [ 'paste', 'cocStatus', 'fugitive' ] ],
       \     'right': [ [ 'lineinfo' ],
-      \                [ 'currentFunction', 'fileInfo' ] ],
+      \                [ 'currentFunction', 'fileInfo', 'virkspaces' ] ],
       \   },
       \   'component': {
       \     'fugitive': ' %{fugitive#Head(7)}',
@@ -86,7 +86,7 @@ let g:lightline = {
       \     'left': '',
       \   }
       \ }
-
+·
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
 func! s:SetSignTheme(bg)
