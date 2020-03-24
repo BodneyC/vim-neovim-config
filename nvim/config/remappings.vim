@@ -47,9 +47,9 @@ nnoremap    <silent>        <leader>w      :w<CR>
 nnoremap                    Q              q
 nnoremap                    Q!             q!
 
-nnoremap                    <F1>           :H <C-r><C-w><CR>
-inoremap                    <F7>           <esc>:set spell!<CR>a
-nnoremap                    <F7>           :set spell!<CR>
+nnoremap    <silent>        <F1>           :H <C-r><C-w><CR>
+inoremap    <silent>        <F7>           <esc>:set spell!<CR>a
+nnoremap    <silent>        <F7>           :set spell!<CR>
 
 inoremap    <silent><expr>  <BS>           pear_tree#insert_mode#Backspace()
 inoremap    <silent><expr>  <C-f>          pear_tree#insert_mode#JumpOut()
@@ -79,7 +79,7 @@ nnoremap    <silent>        <leader>b2     :b2<CR>
 nnoremap    <silent>        <leader>b3     :b3<CR>
 nnoremap    <silent>        <leader>b4     :b4<CR>
 nnoremap    <silent>        <leader>bD     :%bd\|e#\|bn\|bd<CR>
-nnoremap    <silent>        <leader>bd     :if len(getbufinfo({'buflisted':1})) > 1 \| bn\|bd# \| endif<CR>
+nnoremap    <silent><expr>  <leader>bd     Bclose
 nnoremap    <silent>        <leader>be     :enew<CR>
 nnoremap    <silent>        <leader>bl     :call FzfOpenNotExplorer(':Buffer')<CR>
 nnoremap    <silent>        <S-down>       :m+<CR>
