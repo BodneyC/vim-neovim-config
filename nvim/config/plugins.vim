@@ -15,6 +15,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'itchyny/lightline.vim'
+  Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'

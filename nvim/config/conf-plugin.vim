@@ -1,3 +1,5 @@
+let g:test#java#maventest#file_pattern = '\v([Tt]est.*|.*[Tt]est(s|Case)?)\.(java|kt)$'
+
 let g:matchup_matchparen_offscreen = { 'method': 'popup' }
 
 let g:togool_extras =
