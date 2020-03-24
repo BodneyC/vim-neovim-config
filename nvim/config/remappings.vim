@@ -1,5 +1,21 @@
 ﻿let mapleader="\<Space>"
 
+let g:resize_increment = get(g:, 'resize_increment', 2)
+
+function! s:edge_of_screen(dir)
+  let w = winnr()
+  silent! exec "normal! \<C-w>" . a:dir
+  let n = winnr()
+  silent! exec w . 'wincmd w'
+  return w == n
+endfunction
+
+function! s:resize_in_direction(dir)
+  if winnr('$') == 1 | return | endif
+  exec (index(['h', 'l'], a:dir) != -1 ? 'vertical ' : '') . 'resize ' 
+        \ . (<SID>edge_of_screen(a:dir) ? '-' : '+') . g:resize_increment
+endfunction
+
 function! s:win_move(k)
   let t:curwin = winnr()
   exec "wincmd " . a:k
@@ -50,10 +66,11 @@ nnoremap    <silent>        <leader>T      :TagbarToggle<CR>
 nnoremap    <silent>        <leader>U      :MundoToggle<CR>
 nnoremap    <silent>        <leader>V      :Vista!!<CR>
 
-" nnoremap    <silent>        <C-h>          :call <SID>win_move('h')<CR>
-" nnoremap    <silent>        <C-j>          :call <SID>win_move('j')<CR>
-" nnoremap    <silent>        <C-k>          :call <SID>win_move('k')<CR>
-" nnoremap    <silent>        <C-l>          :call <SID>win_move('l')<CR>
+nnoremap    <silent>        <C-M-h>        :call <SID>resize_in_direction('h')<CR>
+nnoremap    <silent>        <C-M-j>        :call <SID>resize_in_direction('j')<CR>
+nnoremap    <silent>        <C-M-k>        :call <SID>resize_in_direction('k')<CR>
+nnoremap    <silent>        <C-M-l>        :call <SID>resize_in_direction('l')<CR>
+
 nnoremap    <silent>        <leader>"      :sbn<CR>
 nnoremap    <silent>        <leader>#      <C-^>
 nnoremap    <silent>        <leader>%      :vert sbn<CR>
