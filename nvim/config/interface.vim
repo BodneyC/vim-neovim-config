@@ -18,14 +18,13 @@ set cursorline
 set nu rnu
 set wrap
 set linebreak
-set laststatus=2
 set mouse=a
 set bs=2
 " set tags^=.git/tags
 set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>
-set autowrite
+set noautowrite
 set ttimeout
 set ttimeoutlen=50
 set splitbelow

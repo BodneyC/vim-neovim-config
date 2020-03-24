@@ -86,7 +86,7 @@ let g:lightline = {
       \     'left': '',
       \   }
       \ }
-·
+
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
 func! s:SetSignTheme(bg)
