@@ -50,10 +50,10 @@ nnoremap    <silent>        <leader>T      :TagbarToggle<CR>
 nnoremap    <silent>        <leader>U      :MundoToggle<CR>
 nnoremap    <silent>        <leader>V      :Vista!!<CR>
 
-nnoremap    <silent>        <C-h>          :call <SID>win_move('h')<CR>
-nnoremap    <silent>        <C-j>          :call <SID>win_move('j')<CR>
-nnoremap    <silent>        <C-k>          :call <SID>win_move('k')<CR>
-nnoremap    <silent>        <C-l>          :call <SID>win_move('l')<CR>
+" nnoremap    <silent>        <C-h>          :call <SID>win_move('h')<CR>
+" nnoremap    <silent>        <C-j>          :call <SID>win_move('j')<CR>
+" nnoremap    <silent>        <C-k>          :call <SID>win_move('k')<CR>
+" nnoremap    <silent>        <C-l>          :call <SID>win_move('l')<CR>
 nnoremap    <silent>        <leader>"      :sbn<CR>
 nnoremap    <silent>        <leader>#      <C-^>
 nnoremap    <silent>        <leader>%      :vert sbn<CR>

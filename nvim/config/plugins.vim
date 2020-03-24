@@ -9,6 +9,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'bronson/vim-visual-star-search'
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
+  Plug 'christoomey/vim-tmux-navigator'
   Plug 'https://gitlab.com/BodneyC/At-Zed-vim',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
