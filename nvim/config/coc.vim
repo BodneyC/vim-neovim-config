@@ -28,18 +28,17 @@ endfunction
 
 function! s:go_to_definition()
   if IsCocEnabled() && CocAction('jumpDefinition') | return | endif
+  redraw | echo
   for l:expr in ['<cword>', '<cWORD>', '<cexpr>']
     let l:tag = expand(l:expr)
     if len(taglist('^' . l:tag . '$'))
-      echom l:tag
-      echom taglist(l:tag)
       try
         exec 'tag ' . expand('<cword>')
         return
       catch | endtry
     endif
   endfor
-  echo | redraw | echo "Tag not found"
+  redraw | echo "Tag not found"
 endfunction
 
 function! s:close_if_last(ft, cmd)
