@@ -60,6 +60,7 @@
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "| ",
   "diagnostic.warningSign": "",
+  // "eslint.enable": false,
   "eslint.autoFixOnSave": false,
   "explorer.autoCollapseChildren": false,
   "explorer.file.child.template": "  [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][readonly] [git | 1] [selection | clip | 1] [linkIcon & 1][link growRight 1 omitCenter 5][size]",

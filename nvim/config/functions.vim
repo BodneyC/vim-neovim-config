@@ -6,8 +6,9 @@ function! s:set_indent(n)
 endfunction
 
 function! s:change_indent(n)
-  set noet | %retab! | let &l:ts=a:n
-  set expandtab | %retab!
+  set et! | %retab!
+	let &l:ts=a:n
+  set et! | %retab!
   call <SID>set_indent(a:n)
 endfunction
 
@@ -90,10 +91,8 @@ endfunction
 
 augroup config_general
   autocmd!
-  autocmd BufEnter,BufWinEnter *.kt,*.kts setlocal comments=s1:/*,mb:*,ex:*/,:// formatoptions+=cro
-  autocmd BufLeave,BufWinLeave *          silent! w
-  autocmd BufReadPost          *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-  autocmd FileType             startify   if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
+  autocmd BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+  autocmd FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
 augroup END
 
 " Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "

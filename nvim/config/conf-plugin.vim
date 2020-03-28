@@ -1,9 +1,14 @@
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <M-h>      :TmuxNavigateLeft<CR>
+nnoremap <silent> <M-j>      :TmuxNavigateDown<CR>
+nnoremap <silent> <M-k>      :TmuxNavigateUp<CR>
+nnoremap <silent> <M-l>      :TmuxNavigateRight<CR>
+nnoremap <silent> <M-\>      :TmuxNavigatePrevious<CR>
+inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>a
+inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>a
+inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>a
+inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>a
+inoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>a
 
 let g:test#java#maventest#file_pattern = '\v([Tt]est.*|.*[Tt]est(s|Case)?)\.(java|kt)$'
 
@@ -99,7 +104,8 @@ function! s:set_startify_params() abort
   let g:startify_custom_footer = s:center(s:footer)
 endfunction
 
-autocmd VimEnter *
+" Needs to remain here for startify stuff
+autocmd! VimEnter *
       \   if argc() == 0 || (argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in"))
       \ |   call <SID>set_startify_params()
       \ |   Startify

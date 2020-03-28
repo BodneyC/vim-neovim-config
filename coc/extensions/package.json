@@ -25,8 +25,8 @@
     "coc-tslint": ">=1.0.17",
     "coc-tslint-plugin": ">=1.1.1",
     "coc-tsserver": ">=1.4.12",
-    "coc-vetur": ">=1.1.9",
-    "coc-vimlsp": ">=0.4.5",
+    "coc-vetur": ">=1.1.10",
+    "coc-vimlsp": ">=0.5.1",
     "coc-yaml": ">=1.0.4",
     "coc-yank": ">=1.1.4"
   }

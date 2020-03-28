@@ -7,10 +7,10 @@ set expandtab
 set tabstop=2
 set softtabstop=0
 set shiftwidth=0
-set textwidth=100
+set textwidth=0
 set autoindent
 set breakindent
-set breakindentopt=shift:1
+set breakindentopt=shift:3
 set smartindent
 set ruler
 set hls
