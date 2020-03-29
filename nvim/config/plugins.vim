@@ -27,6 +27,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'justinmk/vim-syntax-extra'
   Plug 'liuchengxu/vista.vim'
   Plug 'ludovicchabant/vim-gutentags'
+  Plug 'machakann/vim-swap'
   Plug 'mhinz/vim-startify'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
@@ -70,4 +71,4 @@ endfunction
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
-" call <SID>add_to_rtp("gitclones/Comrade", v:true)
+

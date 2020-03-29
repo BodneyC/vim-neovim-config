@@ -30,7 +30,7 @@ function! ChooseTerm(termname)
 endfunction
 
 nnoremap <F10> :call ChooseTerm("term-split")<CR>
-inoremap <F10> <Esc>:call ChooseTerm("term-split")<CR>a
+inoremap <F10> <C-o>:call ChooseTerm("term-split")<CR>
 tnoremap <F10> <C-\><C-n>:call ChooseTerm("term-split")<CR>
 
 tnoremap <C-q> <C-\><C-n>:wincmd w<CR>

@@ -4,11 +4,11 @@ nnoremap <silent> <M-j>      :TmuxNavigateDown<CR>
 nnoremap <silent> <M-k>      :TmuxNavigateUp<CR>
 nnoremap <silent> <M-l>      :TmuxNavigateRight<CR>
 nnoremap <silent> <M-\>      :TmuxNavigatePrevious<CR>
-inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>a
-inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>a
-inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>a
-inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>a
-inoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>a
+inoremap <silent> <M-h> <C-o>:TmuxNavigateLeft<CR>
+inoremap <silent> <M-j> <C-o>:TmuxNavigateDown<CR>
+inoremap <silent> <M-k> <C-o>:TmuxNavigateUp<CR>
+inoremap <silent> <M-l> <C-o>:TmuxNavigateRight<CR>
+inoremap <silent> <M-\> <C-o>:TmuxNavigatePrevious<CR>
 
 let g:test#java#maventest#file_pattern = '\v([Tt]est.*|.*[Tt]est(s|Case)?)\.(java|kt)$'
 

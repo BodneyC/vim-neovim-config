@@ -48,7 +48,7 @@ nnoremap                    Q              q
 nnoremap                    Q!             q!
 
 nnoremap    <silent>        <F1>           :H <C-r><C-w><CR>
-inoremap    <silent>        <F7>           <esc>:set spell!<CR>a
+inoremap    <silent>        <F7>           <C-o>:set spell!<CR>
 nnoremap    <silent>        <F7>           :set spell!<CR>
 
 inoremap    <silent><expr>  <BS>           pear_tree#insert_mode#Backspace()
@@ -104,8 +104,8 @@ xnoremap                    >              >gv
 xnoremap                    <leader>e      :EasyAlign<CR>
 xnoremap                    <S-tab>        <gv
 xnoremap                    <Tab>          >gv
-inoremap                    <S-down>       <Esc>:m+<CR>a
-inoremap                    <S-up>         <Esc>:m-2<CR>a
+inoremap                    <S-down>       <C-o>:m+<CR>
+inoremap                    <S-up>         <C-o>:m-2<CR>
 xnoremap                    <S-down>       :m'>+<CR>gv=gv
 xnoremap                    <S-up>         :m-2<CR>gv=gv
 
