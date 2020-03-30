@@ -1,1 +1,2 @@
-let @t="mzvipoj e* `z"
+let @t="mzvipo |j e* `z"
+let @j="Ji |"

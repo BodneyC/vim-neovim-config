@@ -15,6 +15,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/flocho',       { 'branch': 'master' }
   Plug 'itchyny/lightline.vim'
   Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
@@ -71,4 +72,4 @@ endfunction
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
-
+call <SID>add_to_rtp("gitclones/flocho", v:true)
