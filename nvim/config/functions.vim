@@ -93,8 +93,8 @@ augroup config_general
   autocmd!
   autocmd BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   autocmd FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
-  autocmd WinEnter    *        setlocal rnu
-  autocmd WinLeave    *        setlocal nornu
+  autocmd WinEnter    *        if &nu && ! &rnu | setlocal rnu   | endif
+  autocmd WinLeave    *        if &nu && &rnu   | setlocal nornu | endif
 augroup END
 
 " Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "

@@ -72,4 +72,4 @@ endfunction
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
-call <SID>add_to_rtp("gitclones/flocho", v:true)
+" call <SID>add_to_rtp("gitclones/flocho", v:true)

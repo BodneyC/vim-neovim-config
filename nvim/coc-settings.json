@@ -85,7 +85,7 @@
   "git.enableGutters": true,
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.virtualTextPrefix": "    | ",
+  "git.virtualTextPrefix": "  ",
   "java.contentProvider.preferred": "fernflower",
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,
