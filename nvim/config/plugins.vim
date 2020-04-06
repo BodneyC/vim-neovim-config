@@ -4,7 +4,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'alvan/vim-closetag', {'for': ['html', 'xml']}
   Plug 'andymass/vim-matchup'
   Plug 'benmills/vimux'
-  Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
+  " Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
   Plug 'bodneyc/Comrade'
   Plug 'bronson/vim-visual-star-search'
   Plug 'brooth/far.vim'
@@ -16,6 +16,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/flocho',       { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/boloscheme',   { 'branch': 'master' }
   Plug 'itchyny/lightline.vim'
   Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
@@ -73,3 +74,4 @@ endfunction
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
+" call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
