@@ -31,7 +31,7 @@ set splitbelow
 set splitright
 set cul
 set icm=split
-set winblend=10
+set winblend=3
 set updatetime=200
 set foldenable
 set foldmethod=manual

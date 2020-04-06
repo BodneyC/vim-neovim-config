@@ -1,4 +1,5 @@
 ﻿let mapleader="\<Space>"
+nmap <leader> <NOP>
 
 let g:resize_increment = get(g:, 'resize_increment', 2)
 

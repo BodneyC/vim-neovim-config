@@ -5,6 +5,8 @@ let g:onedark_termcolors = 256
 set termguicolors
 set background=dark
 
+highlight link JavaIdentifier NONE
+
 if g:term_theme == "dark"
   let s:lightline_theme = "bolorscheme"
   colo subdued

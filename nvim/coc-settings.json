@@ -165,7 +165,7 @@
       ]
     }
   },
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
   "python.linting.enabled": true,
   "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",
   "suggest.triggerAfterInsertEnter": false
