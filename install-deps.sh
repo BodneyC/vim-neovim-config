@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+sudo pacman -S \
+  xclip \
+  shellcheck \
+  python{,2}-pip \
+  nodejs npm \
+  ruby \
+  ripgrep jq bat exa
+
 if hash npm; then
   npm i -g \
     yarn \
@@ -25,8 +33,4 @@ fi
 
 if hash gem; then
   gem install neovim
-fi
-
-if hash pacman; then
-  ! hash xclip && sudo pacman -S --no-confirm xclip
 fi
