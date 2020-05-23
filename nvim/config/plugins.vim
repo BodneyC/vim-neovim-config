@@ -1,7 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
-  Plug 'alvan/vim-closetag', {'for': ['html', 'xml']}
+  Plug 'alvan/vim-closetag', {'for': ['html', 'xml', 'markdown']}
   Plug 'andymass/vim-matchup'
   Plug 'benmills/vimux'
   " Plug 'bodneyc/1989.vim', { 'branch': 'personal-touches' }
@@ -17,7 +17,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/flocho',       { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/boloscheme',   { 'branch': 'master' }
-  Plug 'itchyny/lightline.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  " Plug 'itchyny/lightline.vim'
   Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -30,6 +32,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'liuchengxu/vista.vim'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'machakann/vim-swap'
+  Plug 'majutsushi/tagbar'
   Plug 'mhinz/vim-startify'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
@@ -53,7 +56,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
-  Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 
 function! s:add_to_rtp(p, back)

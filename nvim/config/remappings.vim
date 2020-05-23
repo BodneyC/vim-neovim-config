@@ -58,7 +58,7 @@ inoremap    <silent><expr>  <Esc>          pear_tree#insert_mode#Expand()
 inoremap    <silent><expr>  <Space>        pear_tree#insert_mode#Space()
 
 map                                      <Plug>NERDCommenterToggle
-nnoremap                    <C-q>          <Tab>
+nnoremap                    <C-p>          <Tab>
 nnoremap                    <leader>*      :%s/\<<C-r><C-w>\>//g<left><left>
 nnoremap    <silent>        <leader>/      :noh<CR>
 nnoremap    <silent>        <leader>;      :Commands<CR>

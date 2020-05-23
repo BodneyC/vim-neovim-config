@@ -8,13 +8,23 @@ function! s:close_if_terminal_job()
   endif
 endfunction
 
-function! ChooseTerm(termname)
-  let l:termname = "term://" . a:termname
-  let winnr = bufwinnr(l:termname)
+function! <SID>ctrl_q()
+  let l:term_name = "term://" . s:term_name
+  let winnr = bufwinnr(l:term_name)
+  if winnr != -1
+    exec winnr . "wincmd w"
+  else
+    call ChooseTerm()
+  endif
+endfunction
+
+function! ChooseTerm()
+  let l:term_name = "term://" . s:term_name
+  let winnr = bufwinnr(l:term_name)
   if winnr != -1
     exec winnr . "wincmd q"
   else
-    let bufnr = bufnr(l:termname)
+    let bufnr = bufnr(l:term_name)
     if bufnr != -1
       exec "bd!" . bufnr
     endif
@@ -23,16 +33,19 @@ function! ChooseTerm(termname)
     exec "wincmd J"
     terminal
     resize 10
-    exec "f " . l:termname
+    exec "f " . l:term_name
     autocmd! TermClose <buffer> call <SID>close_if_terminal_job()
     startinsert
   endif
 endfunction
 
-nnoremap <F10> :call ChooseTerm("term-split")<CR>
-inoremap <F10> <C-o>:call ChooseTerm("term-split")<CR>
-tnoremap <F10> <C-\><C-n>:call ChooseTerm("term-split")<CR>
+let s:term_name = "term-split"
 
+nnoremap <F10> :call ChooseTerm()<CR>
+inoremap <F10> <C-o>:call ChooseTerm()<CR>
+tnoremap <F10> <C-\><C-n>:call ChooseTerm()<CR>
+
+nnoremap <C-q> :call <SID>ctrl_q()<CR>
 tnoremap <C-q> <C-\><C-n>:wincmd w<CR>
 tnoremap <LeftRelease> <Nop>
 
@@ -74,7 +87,7 @@ endfunction
 function! FloatingTerm(...)
   let l:cmd = get(a:, 1, $SHELL)
   call FloatingCentred()
-  call termopen(l:cmd, { 'on_exit': function('s:on_term_exit') })
+  call termopen(l:cmd, { 'on_exit': function('<SID>on_term_exit') })
 endfunction
 
 function! FloatingMan(...)

@@ -29,11 +29,13 @@ let g:indentLine_fileTypeExclude = [ "markdown" ]
 
 let g:mundo_right = 1
 
-let g:comfortable_motion_no_default_key_mappings=1
-let g:comfortable_motion_air_drag = 1
-let g:comfortable_motion_friction = 100
-nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+if exists('*comfortable_motion#flick')
+  let g:comfortable_motion_no_default_key_mappings=1
+  let g:comfortable_motion_air_drag = 1
+  let g:comfortable_motion_friction = 100
+  nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
+  nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+endif
 
 let g:tagbar_auto_close = 1
 

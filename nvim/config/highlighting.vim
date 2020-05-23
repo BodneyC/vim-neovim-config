@@ -1,3 +1,8 @@
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
+
 let g:python_highlight_all = 1
 let g:vimspectrItalicComment = 'on'
 
@@ -15,79 +20,6 @@ elseif g:term_theme == "light"
   let s:lightline_theme = "VimSpectre300light"
   colorscheme vimspectr300-light
 endif
-
-function! SlLightlineFn()
-  return (&modified ? ' ' : ' ') . ' ' . (expand('%:t') !=# '' ? expand('%:t') : '[No Name]')
-endfunction
-
-function! SlStatusDiagnostic() abort
-  if ! IsCocEnabled()
-    return ''
-  endif
-  let l:status = substitute(get(g:, 'coc_status', ''), '^\s*\(.\{-}\)\s*$', '\1', '')
-  if ! len(l:status) && IsCocEnabled()
-    let l:status = substitute(&ft, '.*', '\u&', '')
-  endif
-  let l:status = '  ' . l:status
-  let l:info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return l:status | endif
-  let l:msgs = []
-  if get(l:info, 'error', 0)
-    let l:status .= '  ' . l:info['error']
-  endif
-  if get(l:info, 'warning', 0)
-    let l:status .= '  ' . l:info['warning']
-  endif
-  return l:status
-endfunction
-
-function! SlCurrentFunction()
-  return get(b:, 'coc_current_function', 'NONE')
-endfunction
-
-function! SlVirkLine()
-  if ! exists('*virkspaces#status') | return '' | endif
-  let l:status = virkspaces#status()
-  if ! len(l:status) | return '' | endif
-  if l:status =~# '.*(moved)$'
-    return '· ·'
-  endif
-  return '· ·'
-endfunction
-
-function! SlFileInfo()
-  let l:ff = { 'unix': '', 'mac':  '', 'dos':  '', }
-  return l:ff[&ff] . ' ' . &ft . (&ro ? ' ' : '')
-endfunction
- 
-let g:limelight_conceal_guifg = '#777777'
-let g:lightline = {
-      \   'colorscheme': s:lightline_theme,
-      \   'active': {
-      \     'left':  [ [ 'fn' ],
-      \                [ 'paste', 'cocStatus', 'fugitive' ] ],
-      \     'right': [ [ 'lineinfo' ],
-      \                [ 'currentFunction', 'fileInfo', 'virkspaces' ] ],
-      \   },
-      \   'component': {
-      \     'fugitive': ' %{fugitive#Head(7)}',
-      \   },
-      \   'component_function': {
-      \     'fileInfo': 'SlFileInfo',
-      \     'cocStatus': 'SlStatusDiagnostic',
-      \     'currentFunction': 'SlCocCurrentFunction',
-      \     'fn': 'SlLightlineFn',
-      \     'virkspaces': 'SlVirkLine',
-      \   },
-      \   'separator': {
-      \     'left': '',
-      \     'right': ''
-      \   },
-      \   'subseparator': {
-      \     'right': '',
-      \     'left': '',
-      \   }
-      \ }
 
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 

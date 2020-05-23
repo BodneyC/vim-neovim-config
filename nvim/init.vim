@@ -15,6 +15,7 @@ source ~/.config/nvim/config/plugins.vim
 source ~/.config/nvim/config/conf-plugin.vim
 
 source ~/.config/nvim/config/interface.vim
+source ~/.config/nvim/config/airline.vim
 source ~/.config/nvim/config/highlighting.vim
 source ~/.config/nvim/config/remappings.vim
 source ~/.config/nvim/config/quickui.vim
