@@ -37,7 +37,7 @@ function! AlFileInfo()
 endfunction
 
 function! AlMode()
-  return airline#util#shorten(get(w:, 'airline_current_mode', ''), 79, 1)[0]
+  return airline#util#shorten(get(w:, 'airline_current_mode', ''), 79, 1)[0:3]
 endfunction
 
 function! AlModified()

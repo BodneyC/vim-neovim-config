@@ -14,7 +14,7 @@ highlight link JavaIdentifier NONE
 
 if g:term_theme == "dark"
   let s:lightline_theme = "bolorscheme"
-  colo subdued
+  colo plint
   hi OverLength guibg=#995959 guifg=#ffffff
 elseif g:term_theme == "light"
   let s:lightline_theme = "VimSpectre300light"
