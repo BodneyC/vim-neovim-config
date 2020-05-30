@@ -3,6 +3,7 @@ set signcolumn=yes
 set noequalalways
 set laststatus=2
 set hidden
+set noshowmode
 set expandtab
 set tabstop=2
 set softtabstop=0
@@ -47,7 +48,7 @@ set undolevels=10000
 set undoreload=10000
 
 let s:notags = expand("$HOME/.notags")
-if !filereadable(s:notags) |
+if ! filereadable(s:notags) |
   call writefile([], s:notags)
 endif
 

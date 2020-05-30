@@ -89,12 +89,18 @@ function! s:highlight_under_cursor()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
+let g:large_file = 10485760 " 10MB
 augroup config_general
   autocmd!
   autocmd BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   autocmd FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
   autocmd WinEnter    *        if &nu && ! &rnu | setlocal rnu   | endif
   autocmd WinLeave    *        if &nu && &rnu   | setlocal nornu | endif
+  autocmd BufReadPre  *
+        \ if getfsize(expand("<afile>")) > g:large_file |
+                \ set eventignore+=FileType |
+                \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+        \ endif
 augroup END
 
 " Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "

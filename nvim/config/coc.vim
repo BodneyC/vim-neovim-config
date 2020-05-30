@@ -41,21 +41,6 @@ function! s:go_to_definition()
   redraw | echo "Tag not found"
 endfunction
 
-function! s:close_if_last(ft, cmd)
-  if winnr("$") == 1 && a:ft == &ft
-    if a:ft == &ft
-      if exists('*virkspaces#vonce_write')
-        call virkspaces#vonce_write(a:cmd, 1)
-      endif
-      bw | q
-    else
-      if exists('*virkspaces#vonce_remove')
-        call virkspaces#vonce_remove(a:cmd)
-      endif
-    endif
-  endif
-endfunction
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1] =~ '\s'
@@ -95,7 +80,6 @@ augroup vimrc-coc
   autocmd   FileType        *                  if IsCocEnabled() | let &l:formatexpr = "CocAction('formatSelected')" | endif
   autocmd   CursorHold      *                  silent call CocActionAsync('highlight')
   autocmd   CompleteDone    *                  if pumvisible() == 0 | pclose | endif
-  autocmd   BufEnter        *                  call <SID>close_if_last('coc-explorer', 'CocCommand explorer --toggle')
   autocmd   User            CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   autocmd   FileType        coc-explorer       setlocal wrapmargin=0 signcolumn=no
 augroup end

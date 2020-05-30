@@ -72,4 +72,4 @@ endfunction
 augroup __AIRLINE__
   autocmd!
   autocmd VimEnter * call AirlineInit()
-augroup end
+augroup END

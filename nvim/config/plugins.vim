@@ -11,12 +11,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'https://gitlab.com/BodneyC/At-Zed-vim',   { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
+  " Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/flocho',       { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/boloscheme',   { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/bolorscheme',  { 'branch': 'master' }
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " Plug 'itchyny/lightline.vim'
@@ -70,7 +70,7 @@ function! s:add_to_rtp(p, back)
   endif
 endfunction
 
-" call <SID>add_to_rtp("gitclones/virkspaces", v:true)
+call <SID>add_to_rtp("gitclones/virkspaces", v:true)
 " call <SID>add_to_rtp("gitclones/1989.vim", v:true)
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
