@@ -11,7 +11,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'https://gitlab.com/BodneyC/At-Zed-vim',   { 'branch': 'master' }
-  " Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
+  Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
@@ -70,7 +70,7 @@ function! s:add_to_rtp(p, back)
   endif
 endfunction
 
-call <SID>add_to_rtp("gitclones/virkspaces", v:true)
+" call <SID>add_to_rtp("gitclones/virkspaces", v:true)
 " call <SID>add_to_rtp("gitclones/1989.vim", v:true)
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
