@@ -37,7 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
   Plug 'neoclide/coc-neco'
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
@@ -53,6 +53,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'uiiaoo/java-syntax.vim'
+  Plug 'vim-scripts/AnsiEsc.vim'
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'

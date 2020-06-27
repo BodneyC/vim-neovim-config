@@ -1,7 +1,7 @@
 let s:coc_extensions = [ 'coc-css', 'coc-diagnostic', 'coc-docker', 'coc-emmet', 'coc-eslint',
       \ 'coc-explorer', 'coc-html', 'coc-json', 'coc-lists', 'coc-python', 'coc-rls',
       \ 'coc-snippets', 'coc-syntax', 'coc-tag', 'coc-tslint-plugin', 'coc-tsserver',
-      \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml']
+      \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml', 'coc-markdownlint']
 for s:ext in s:coc_extensions
   exe 'call coc#add_extension("' . s:ext . '")'
 endfor

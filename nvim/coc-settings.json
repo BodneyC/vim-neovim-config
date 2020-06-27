@@ -154,15 +154,15 @@
       "filetypes": [
         "kotlin"
       ]
-    },
-    "markdown": {
-      "args": [
-        "--stdin"
-      ],
-      "command": "markdownlint",
-      "filetypes": [
-        "markdown"
-      ]
+    // },
+    // "markdown": {
+    //   "args": [
+    //     "--stdin"
+    //   ],
+    //   "command": "markdownlint",
+    //   "filetypes": [
+    //     "markdown"
+    //   ]
     }
   },
   "python.jediEnabled": true,
