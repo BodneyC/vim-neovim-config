@@ -1,4 +1,3 @@
-set nocompatible
 set signcolumn=yes
 set noequalalways
 set laststatus=2

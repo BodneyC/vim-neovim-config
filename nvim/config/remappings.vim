@@ -60,7 +60,7 @@ function! FilesFzf(query)
 endfunction
 
 function! RipgrepFzf(query, bang)
-  let l:rg_cmd = 'rg -g "!{node_modules,.git,package-lock.json,yarn.lock}" '
+  let l:rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock}" '
         \  . '--hidden '
         \  . '--ignore-vcs '
         \  . '--column '

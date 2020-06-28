@@ -1,4 +1,11 @@
-let s:coc_extensions = [ 'coc-css', 'coc-diagnostic', 'coc-docker', 'coc-emmet', 'coc-eslint',
+" exists(...) returns false for autoloaded functions apparently
+try
+  silent call coc#add_extension()
+catch /E117/
+  finish
+endtry
+
+let s:coc_extensions = [ 'coc-css', 'coc-diagnostic', 'coc-docker', 'coc-eslint',
       \ 'coc-explorer', 'coc-html', 'coc-json', 'coc-lists', 'coc-python', 'coc-rls',
       \ 'coc-snippets', 'coc-syntax', 'coc-tag', 'coc-tslint-plugin', 'coc-tsserver',
       \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml', 'coc-markdownlint']
