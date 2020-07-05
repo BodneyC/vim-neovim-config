@@ -30,6 +30,7 @@ set ttimeoutlen=50
 set splitbelow
 set splitright
 set cul
+set wildmode=longest,full
 set icm=split
 set winblend=3
 set updatetime=200

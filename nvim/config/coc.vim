@@ -9,9 +9,15 @@ let s:coc_extensions = [ 'coc-css', 'coc-diagnostic', 'coc-docker', 'coc-eslint'
       \ 'coc-explorer', 'coc-html', 'coc-json', 'coc-lists', 'coc-python', 'coc-rls',
       \ 'coc-snippets', 'coc-syntax', 'coc-tag', 'coc-tslint-plugin', 'coc-tsserver',
       \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml', 'coc-markdownlint']
-for s:ext in s:coc_extensions
-  exe 'call coc#add_extension("' . s:ext . '")'
-endfor
+
+function! s:AddCocExtensions()
+  for s:ext in s:coc_extensions
+    exe 'call coc#add_extension("' . s:ext . '")'
+  endfor
+  echom "Done"
+endfunction
+
+command! -nargs=0 AddCocExtensions call <SID>AddCocExtensions()
 
 let g:coc_filetypes = [ 'Dockerfile', 'Jenkinsfile', 'css', 'go', 'groovy', 'html', 'java',
       \ 'javascript', 'javascript.jsx', 'json', 'kotlin', 'markdown', 'python', 'rust', 'sh',
@@ -86,7 +92,7 @@ augroup vimrc-coc
   autocmd!
   autocmd   FileType        *                  if IsCocEnabled() | let &l:formatexpr = "CocAction('formatSelected')" | endif
   autocmd   CursorHold      *                  silent call CocActionAsync('highlight')
-  autocmd   CompleteDone    *                  if pumvisible() == 0 | pclose | endif
+  " autocmd   CompleteDone    *                  if pumvisible() == 0 | pclose | endif
   autocmd   User            CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   autocmd   FileType        coc-explorer       setlocal wrapmargin=0 signcolumn=no
 augroup end

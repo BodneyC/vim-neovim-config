@@ -6,7 +6,6 @@
     "coc-eslint": ">=1.2.7",
     "coc-explorer": ">=0.7.4",
     "coc-git": ">=1.7.15",
-    "coc-go": ">=0.8.0",
     "coc-highlight": ">=1.2.5",
     "coc-html": ">=1.2.4",
     "coc-java": ">=1.4.11",
