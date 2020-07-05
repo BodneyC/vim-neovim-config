@@ -28,8 +28,11 @@ function! s:win_move(k)
   endif
 endfunction
 
+let $FZF_PREVIEW_COMMAND = "bat --italic-text=always --style=numbers --decorations=never --theme='Sublime Snazzy' --color=always {} ||"
+      \ . " highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
 let g:fzf_layout = { 'window': 'call FloatingCentred()' }
+let g:fzf_history_dir = expand("$HOME/.fzf/.fzf_history_dir")
 
 function! FzfOpenNotExplorer(command_str)
   if expand('%') =~# 'coc-explorer' && winnr('$') > 1
@@ -38,22 +41,10 @@ function! FzfOpenNotExplorer(command_str)
   exe 'normal! ' . a:command_str . "\<CR>"
 endfunction
 
-let g:fzf_history_file = expand("$HOME/.fzf/.fzf_vim_history")
-let g:rg_history_file = expand("$HOME/.fzf/.fzf_rg_vim_history")
-
 function! FilesFzf(query)
-  let l:query = a:query
-  if ! l:query && filereadable(g:fzf_history_file)
-    let l:file = readfile(g:fzf_history_file)
-    if len(l:file)
-      let l:query = l:file[-1]
-    endif
-  endif
   let l:fzf_opts = {
         \   'options': [
-        \     '--query', l:query,
-        \     '--history', g:fzf_history_file,
-        \     '--history-size', 10,
+        \     '--query', a:query,
         \   ]
         \ }
   call fzf#vim#files('', fzf#vim#with_preview(l:fzf_opts, 'up:70%'))
@@ -68,20 +59,11 @@ function! RipgrepFzf(query, bang)
         \  . '--line-number '
         \  . '--color=always '
         \  . '-- ' . shellescape(a:query)
-  let l:query = a:query
-  if ! l:query && filereadable(g:rg_history_file)
-    let l:file = readfile(g:rg_history_file)
-    if len(l:file)
-      let l:query = l:file[-1]
-    endif
-  endif
   let l:fzf_opts = {
         \   'options': [
         \     '--delimiter', ':',
         \     '--nth', '4..',
-        \     '--query', l:query,
-        \     '--history', g:rg_history_file,
-        \     '--history-size', 10,
+        \     '--query', a:query,
         \   ]
         \ }
   call fzf#vim#grep(l:rg_cmd, 1, fzf#vim#with_preview(l:fzf_opts), a:bang)

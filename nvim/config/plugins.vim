@@ -53,7 +53,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'uiiaoo/java-syntax.vim'
-  Plug 'vim-scripts/AnsiEsc.vim'
+  " Plug 'vim-scripts/AnsiEsc.vim'
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
