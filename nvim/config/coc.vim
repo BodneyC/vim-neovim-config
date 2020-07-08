@@ -17,8 +17,6 @@ function! s:AddCocExtensions()
   echom "Done"
 endfunction
 
-command! -nargs=0 AddCocExtensions call <SID>AddCocExtensions()
-
 let g:coc_filetypes = [ 'Dockerfile', 'Jenkinsfile', 'css', 'go', 'groovy', 'html', 'java',
       \ 'javascript', 'javascript.jsx', 'json', 'kotlin', 'markdown', 'python', 'rust', 'sh',
       \ 'typescript', 'typescript.jsx', 'vim', 'xml', 'yaml', ]
@@ -82,13 +80,15 @@ nnoremap    <silent>        <leader>s      :CocList commands<CR>
 vmap        <silent>        <leader>F      <Plug>(coc-format-selected)
 xmap        <silent>        <C-m>          <Plug>(coc-cursors-range)
 
-" Mode ----| Arguments ----| Name --------| Action ----------------------------------------------------- "
-command!                    RGBPicker      :call CocAction('pickColor')<CR>
-command!                    RGBOptions     :call CocAction('colorPresentation')<CR>
-command!    -nargs=0        RenameWord     CocCommand document.renameCurrentWord
+" Mode ----| Arguments ----| Name ----------| Action ----------------------------------------------------- "
+command!                    RGBPicker        call CocAction('pickColor')
+command!                    RGBOptions       call CocAction('colorPresentation')
+command!    -nargs=0        AddCocExtensions call <SID>AddCocExtensions()
+command!    -nargs=0        RenameWord       CocCommand document.renameCurrentWord
+
 
 " Autocmd -| Event --------| Condition -------| Action ------------------------------------------------- "
-augroup vimrc-coc
+augroup coc-autocmds
   autocmd!
   autocmd   FileType        *                  if IsCocEnabled() | let &l:formatexpr = "CocAction('formatSelected')" | endif
   autocmd   CursorHold      *                  silent call CocActionAsync('highlight')
