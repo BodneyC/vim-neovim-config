@@ -49,25 +49,6 @@ function! s:spell_checker()
   echo "Spell checker complete"
 endfunction
 
-" WIP
-function! Jump(loc)
-  let l:jumps = getjumplist()
-  let l:len = len(l:jumps[0])
-  let l:loc = l:jumps[1] + a:loc
-  echom l:loc
-  let l:j = {}
-  if l:loc >= l:len
-    return l:j
-  elseif l:loc < 0
-    let l:j = l:jumps[0][0]
-  else
-    let l:j = l:jumps[0][l:loc]
-  endif
-  echo l:j
-  call setpos('.', [l:j.bufnr, l:j.lnum, l:j.col, l:j.coladd])
-  normal! m`
-endfunction
-
 function! s:match_over(...)
   let l:gtw = get(a:, 1, &tw)
   exec "match OverLength /\\%" . l:gtw . "v.\\+/"

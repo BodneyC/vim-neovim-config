@@ -23,6 +23,9 @@ endif
 
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
+set fillchars=vert:\|
+hi! VertSplit guibg=NONE
+
 func! s:SetSignTheme(bg)
   exec 'hi SignColumn            guibg=' . a:bg
   exec 'hi GitGutterAdd          guibg=' . a:bg

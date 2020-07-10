@@ -3,7 +3,6 @@ let @h = "YpVr="
 nnoremap o A<CR>
 nnoremap <leader>S 1z=
 setlocal conceallevel=2 concealcursor=
-setlocal spell
 
 " This is a repeat, but it's easier than making is public
 function! s:check_back_space() abort
