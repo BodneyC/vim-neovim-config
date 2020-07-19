@@ -8,23 +8,20 @@ let g:vimspectrItalicComment = 'on'
 
 let g:onedark_termcolors = 256
 set termguicolors
-set background=dark
-
-highlight link JavaIdentifier NONE
 
 if g:term_theme == "dark"
   let s:lightline_theme = "bolorscheme"
   colo subdued
-  hi OverLength guibg=#995959 guifg=#ffffff
 elseif g:term_theme == "light"
   let s:lightline_theme = "VimSpectre300light"
   colorscheme vimspectr300-light
 endif
 
-hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-
 set fillchars=vert:\|
+
+hi! OverLength guibg=#995959 guifg=#ffffff
 hi! VertSplit guibg=NONE
+hi! link JavaIdentifier NONE
 
 func! s:SetSignTheme(bg)
   exec 'hi SignColumn            guibg=' . a:bg

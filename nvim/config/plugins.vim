@@ -10,13 +10,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'https://gitlab.com/BodneyC/At-Zed-vim',   { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/VirkSpaces',   { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/hex-this-vim', { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/pic-vim',      { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/togool.vim',   { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/flocho',       { 'branch': 'master' }
-  Plug 'https://gitlab.com/BodneyC/bolorscheme',  { 'branch': 'master' }
+  Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
+  Plug 'BodneyC/hex-this-vim', { 'branch': 'master' }
+  Plug 'BodneyC/pic-vim',      { 'branch': 'master' }
+  Plug 'BodneyC/togool.vim',   { 'branch': 'master' }
+  Plug 'BodneyC/flocho',       { 'branch': 'master' }
+  Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'janko/vim-test'
