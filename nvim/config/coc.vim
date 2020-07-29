@@ -8,13 +8,14 @@ endtry
 let s:coc_extensions = [ 'coc-css', 'coc-diagnostic', 'coc-docker', 'coc-eslint',
       \ 'coc-explorer', 'coc-html', 'coc-json', 'coc-lists', 'coc-python', 'coc-rls',
       \ 'coc-snippets', 'coc-syntax', 'coc-tag', 'coc-tslint-plugin', 'coc-tsserver',
-      \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml', 'coc-markdownlint']
+      \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml', 'coc-markdownlint',
+      \ 'coc-go', 'coc-actions'
+      \ ]
 
 function! s:AddCocExtensions()
   for s:ext in s:coc_extensions
     exe 'call coc#add_extension("' . s:ext . '")'
   endfor
-  echom "Done"
 endfunction
 
 let g:coc_filetypes = [ 'Dockerfile', 'Jenkinsfile', 'css', 'go', 'groovy', 'html', 'java',
@@ -57,10 +58,17 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1] =~ '\s'
 endfunction
 
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+
 " Mode ----| Modifiers ----| Key(s) ------| Action ----------------------------------------------------- "
 inoremap            <expr>  <S-Tab>        pumvisible() ? "\<C-p>" : "\<C-d>"
 inoremap    <silent><expr>  <CR>           pumvisible() ? "\<C-y>" : pear_tree#insert_mode#PrepareExpansion()
 inoremap    <silent><expr>  <Tab>          pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<Tab>" : coc#refresh()
+xmap        <silent>        <leader>a      :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap        <silent>        <leader>a      :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+nmap        <silent>        [c             <Plug>(coc-diagnostic-prev)
 nmap        <silent>        [c             <Plug>(coc-diagnostic-prev)
 nmap        <silent>        ]c             <Plug>(coc-diagnostic-next)
 nmap        <silent>        gK             :CocCommand git.chunkInfo<CR>

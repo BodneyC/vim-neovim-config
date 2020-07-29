@@ -123,17 +123,6 @@
         "dockerfile"
       ]
     },
-    "golang": {
-      "command": "go-langserver",
-      "filetypes": [
-        "go"
-      ],
-      "initializationOptions": {
-        "diagnosticsEnabled": true,
-        "gocodeCompletionEnabled": true,
-        "lintTool": "golint"
-      }
-    },
     "groovy": {
       "args": [
         "-jar",

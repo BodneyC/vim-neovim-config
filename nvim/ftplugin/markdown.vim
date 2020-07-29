@@ -15,4 +15,10 @@ function! s:in_markdown_list()
   return getline('.')[:col - 1] =~ '^\s*-\s*'
 endfunction
 
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-N>" : <SID>check_back_space() ? <SID>in_markdown_list() ? "<C-o>>><C-o>A" : "\<Tab>" : coc#refresh()
+inoremap <silent><expr> <Tab> pumvisible() 
+      \ ? "\<C-N>"
+      \ : <SID>check_back_space()
+      \     ? <SID>in_markdown_list()
+      \         ? "<C-o>>><C-o>l<C-o>a"
+      \         : "\<Tab>"
+      \     : coc#refresh()

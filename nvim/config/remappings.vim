@@ -13,7 +13,7 @@ endfunction
 
 function! s:resize_in_direction(dir)
   if winnr('$') == 1 | return | endif
-  exec (index(['h', 'l'], a:dir) != -1 ? 'vertical ' : '') . 'resize ' 
+  exec (index(['h', 'l'], a:dir) != -1 ? 'vertical ' : '') . 'resize '
         \ . (<SID>edge_of_screen(a:dir) ? '-' : '+') . g:resize_increment
 endfunction
 
@@ -69,6 +69,11 @@ function! RipgrepFzf(query, bang)
   call fzf#vim#grep(l:rg_cmd, 1, fzf#vim#with_preview(l:fzf_opts), a:bang)
 endfunction
 
+function! s:only_whitespace()
+  let col = col('.') - 1
+  return getline('.')[:col - 1] =~ '^\s*$'
+endfunction
+
 " Mode ----| Modifiers ----| Key(s) ------| Action ----------------------------------------------------- "
 nnoremap    <silent>        <leader>E      :e!<CR>
 nnoremap    <silent>        <leader>Q      :qa!<CR>
@@ -80,10 +85,10 @@ nnoremap                    Q              q
 nnoremap                    Q!             q!
 
 nnoremap    <silent>        <F1>           :H <C-r><C-w><CR>
-inoremap    <silent>        <F7>           <C-o>:set spell!<CR>
 nnoremap    <silent>        <F7>           :set spell!<CR>
+inoremap    <silent>        <F7>           <C-o>:set spell!<CR>
 
-inoremap    <silent><expr>  <BS>           pear_tree#insert_mode#Backspace()
+inoremap    <silent><expr>  <BS>           <SID>only_whitespace() ? "<C-w><BS>" : pear_tree#insert_mode#Backspace()
 inoremap    <silent><expr>  <C-f>          pear_tree#insert_mode#JumpOut()
 inoremap    <silent><expr>  <Esc>          pear_tree#insert_mode#Expand()
 inoremap    <silent><expr>  <Space>        pear_tree#insert_mode#Space()
