@@ -69,11 +69,6 @@ function! RipgrepFzf(query, bang)
   call fzf#vim#grep(l:rg_cmd, 1, fzf#vim#with_preview(l:fzf_opts), a:bang)
 endfunction
 
-function! s:only_whitespace()
-  let col = col('.') - 1
-  return getline('.')[:col - 1] =~ '^\s*$'
-endfunction
-
 " Mode ----| Modifiers ----| Key(s) ------| Action ----------------------------------------------------- "
 nnoremap    <silent>        <leader>E      :e!<CR>
 nnoremap    <silent>        <leader>Q      :qa!<CR>
@@ -88,7 +83,7 @@ nnoremap    <silent>        <F1>           :H <C-r><C-w><CR>
 nnoremap    <silent>        <F7>           :set spell!<CR>
 inoremap    <silent>        <F7>           <C-o>:set spell!<CR>
 
-inoremap    <silent><expr>  <BS>           <SID>only_whitespace() ? "<C-w><BS>" : pear_tree#insert_mode#Backspace()
+inoremap    <silent><expr>  <BS>           getline('.')[:col('.') - 2] =~ '^\s\+$' ? "<C-w><BS>" : pear_tree#insert_mode#Backspace()
 inoremap    <silent><expr>  <C-f>          pear_tree#insert_mode#JumpOut()
 inoremap    <silent><expr>  <Esc>          pear_tree#insert_mode#Expand()
 inoremap    <silent><expr>  <Space>        pear_tree#insert_mode#Space()
