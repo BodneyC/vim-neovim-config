@@ -20,10 +20,15 @@ endfunction
 function! s:win_move(k)
   let t:curwin = winnr()
   exec "wincmd " . a:k
-  if(a:k == 'h' || expand('%') =~# 'coc-explorer') | return | endif
+  if(a:k == 'h' || expand('%') =~# 'coc-explorer')
+    return
+  endif
   if(t:curwin == winnr())
-    if(match(a:k, '[jk]')) | wincmd v
-    else | wincmd s | endif
+    if(match(a:k, '[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
     exec "wincmd " . a:k
   endif
 endfunction
@@ -83,7 +88,14 @@ nnoremap    <silent>        <F1>           :H <C-r><C-w><CR>
 nnoremap    <silent>        <F7>           :set spell!<CR>
 inoremap    <silent>        <F7>           <C-o>:set spell!<CR>
 
-inoremap    <silent><expr>  <BS>           getline('.')[:col('.') - 2] =~ '^\s\+$' ? "<C-w><BS>" : pear_tree#insert_mode#Backspace()
+inoremap    <silent><expr>  <BS>
+      \ getline('.')[:col('.') - 2] =~ '^\s\+$'
+      \ ? getline(line('.') - 1) =~ '^\s*$'
+      \   ? getline('.') =~ '^\s*$'
+      \     ? "<Esc>ck"
+      \     : "<C-o>:exec line('.') - 1 . 'delete'<CR>"
+      \   : "<C-w><BS>"
+      \ : pear_tree#insert_mode#Backspace()
 inoremap    <silent><expr>  <C-f>          pear_tree#insert_mode#JumpOut()
 inoremap    <silent><expr>  <Esc>          pear_tree#insert_mode#Expand()
 inoremap    <silent><expr>  <Space>        pear_tree#insert_mode#Space()
