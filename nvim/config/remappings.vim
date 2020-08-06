@@ -122,7 +122,7 @@ nnoremap    <silent>        <leader>b1     :b1<CR>
 nnoremap    <silent>        <leader>b2     :b2<CR>
 nnoremap    <silent>        <leader>b3     :b3<CR>
 nnoremap    <silent>        <leader>b4     :b4<CR>
-nnoremap    <silent>        <leader>bD     :%bd\|e#\|bn\|bd<CR>
+nnoremap    <silent>        <leader>bD     :BufOnly<CR>
 nnoremap    <silent><expr>  <leader>bd     Bclose
 nnoremap    <silent>        <leader>be     :enew<CR>
 nnoremap    <silent>        <leader>bl     :call FzfOpenNotExplorer(':Buffer')<CR>

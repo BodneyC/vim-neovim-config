@@ -82,6 +82,7 @@ augroup config_general
                 \ set eventignore+=FileType |
                 \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
         \ endif
+  autocmd BufRead,BufNewFile *.MD set ft=markdown
 augroup END
 
 " Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "

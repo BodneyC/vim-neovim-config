@@ -156,6 +156,10 @@
       //   ]
     }
   },
+  "markdownlint.config": {
+    "line-length": false,
+    "no-inline-html": false
+  },
   "python.jediEnabled": true,
   "python.linting.enabled": true,
   "rust-client.rlsPath": "/home/benjc/.cargo/bin/rls",

@@ -14,11 +14,11 @@ function! <SID>ctrl_q()
   if winnr != -1
     exec winnr . "wincmd w"
   else
-    call ChooseTerm()
+    call TermSplit()
   endif
 endfunction
 
-function! ChooseTerm()
+function! TermSplit(bang)
   let l:term_name = "term://" . s:term_name
   let winnr = bufwinnr(l:term_name)
   if winnr != -1
@@ -28,9 +28,16 @@ function! ChooseTerm()
     if bufnr != -1
       exec "bd!" . bufnr
     endif
-    vs
+    if(a:bang)
+      vsplit
+    else
+      10 wincmd j
+      split
+    endif
     setlocal hidden
-    exec "wincmd J"
+    if(a:bang)
+      wincmd J
+    endif
     terminal
     resize 10
     exec "f " . l:term_name
@@ -38,14 +45,15 @@ function! ChooseTerm()
     startinsert
   endif
 endfunction
+command! -bang -nargs=1 TermSplit :call TermSplit(<bang>0)
 
 let s:term_name = "term-split"
 
-nnoremap <F10> :call ChooseTerm()<CR>
-inoremap <F10> <C-o>:call ChooseTerm()<CR>
-tnoremap <F10> <C-\><C-n>:call ChooseTerm()<CR>
+nnoremap <F10> :TermSplit!<CR>
+inoremap <F10> <C-o>:TermSplit!<CR>
+tnoremap <F10> <C-\><C-n>:TermSplit!<CR>
 
-nnoremap <C-q> :call <SID>ctrl_q()<CR>
+nnoremap <C-q> :TermSplit<CR>
 tnoremap <C-q> <C-\><C-n>:wincmd w<CR>
 tnoremap <LeftRelease> <Nop>
 
