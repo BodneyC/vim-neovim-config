@@ -45,17 +45,17 @@ function! TermSplit(bang)
     startinsert
   endif
 endfunction
-command! -bang -nargs=1 TermSplit :call TermSplit(<bang>0)
+command! -bang TermSplit call TermSplit(<bang>0)
 
 let s:term_name = "term-split"
 
-nnoremap <F10> :TermSplit!<CR>
-inoremap <F10> <C-o>:TermSplit!<CR>
-tnoremap <F10> <C-\><C-n>:TermSplit!<CR>
+nnoremap <silent> <F10> :TermSplit!<CR>
+inoremap <silent> <F10> <C-o>:TermSplit!<CR>
+tnoremap <silent> <F10> <C-\><C-n>:TermSplit!<CR>
 
-nnoremap <C-q> :TermSplit<CR>
-tnoremap <C-q> <C-\><C-n>:wincmd w<CR>
-tnoremap <LeftRelease> <Nop>
+nnoremap <silent> <C-q> :TermSplit<CR>
+tnoremap <silent> <C-q> <C-\><C-n>:wincmd w<CR>
+tnoremap <silent> <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
   autocmd!
