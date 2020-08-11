@@ -58,6 +58,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
+  Plug 'RRethy/vim-hexokinase'
 call plug#end()
 
 function! s:add_to_rtp(p, back)

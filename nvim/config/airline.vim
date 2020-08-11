@@ -22,6 +22,7 @@ let g:airline_symbols.maxlinenr  = ''
 let g:airline_symbols.dirty=     ' ⚡'
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_min_count = 2
 

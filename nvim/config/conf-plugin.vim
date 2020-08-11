@@ -1,3 +1,13 @@
+let g:Hexokinase_highlighters = ['virtual']
+let g:Hexokinase_optInPatterns = [
+      \ 'full_hex',
+      \ 'triple_hex',
+      \ 'rgb',
+      \ 'rgba',
+      \ 'hsl',
+      \ 'hsla',
+      \ ]
+
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-h>      :TmuxNavigateLeft<CR>
 nnoremap <silent> <M-j>      :TmuxNavigateDown<CR>

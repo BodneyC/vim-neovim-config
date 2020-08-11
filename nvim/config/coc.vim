@@ -5,25 +5,34 @@ catch /E117/
   finish
 endtry
 
-let s:coc_extensions = [ 'coc-css', 'coc-diagnostic', 'coc-docker', 'coc-eslint',
-      \ 'coc-explorer', 'coc-html', 'coc-json', 'coc-lists', 'coc-python', 'coc-rls',
-      \ 'coc-snippets', 'coc-syntax', 'coc-tag', 'coc-tslint-plugin', 'coc-tsserver',
-      \ 'coc-highlight', 'coc-java', 'coc-vimlsp', 'coc-yaml', 'coc-markdownlint',
-      \ 'coc-go', 'coc-actions'
-      \ ]
+let s:coc_extensions = [[
+      \ 'coc-actions',
+      \ 'coc-css',
+      \ 'coc-diagnostic',
+      \ 'coc-docker',
+      \ 'coc-eslint',
+      \ 'coc-explorer',
+      \ 'coc-go',
+      \ 'coc-html',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-lists',
+      \ ], [
+      \ 'coc-markdownlint',
+      \ 'coc-python',
+      \ 'coc-rls',
+      \ 'coc-snippets',
+      \ 'coc-tag',
+      \ 'coc-tslint-plugin',
+      \ 'coc-tsserver',
+      \ 'coc-vimlsp',
+      \ 'coc-yaml',
+      \ ]]
 
 function! s:AddCocExtensions()
-  for s:ext in s:coc_extensions
-    exe 'call coc#add_extension("' . s:ext . '")'
+  for l:ext_lst in s:coc_extensions
+    exe 'CocInstall ' . join(l:ext_lst, ' ')
   endfor
-endfunction
-
-let g:coc_filetypes = [ 'Dockerfile', 'Jenkinsfile', 'css', 'go', 'groovy', 'html', 'java',
-      \ 'javascript', 'javascript.jsx', 'json', 'kotlin', 'markdown', 'python', 'rust', 'sh',
-      \ 'typescript', 'typescript.jsx', 'vim', 'xml', 'yaml', ]
-
-function! IsCocEnabled()
-  return index(g:coc_filetypes, &filetype) >= 0
 endfunction
 
 function! s:show_documentation()
@@ -39,7 +48,7 @@ function! s:show_documentation()
 endfunction
 
 function! s:go_to_definition()
-  if IsCocEnabled() && CocAction('jumpDefinition') | return | endif
+  if CocAction('jumpDefinition') | return | endif
   redraw | echo
   for l:expr in ['<cword>', '<cWORD>', '<cexpr>']
     let l:tag = expand(l:expr)
@@ -98,7 +107,7 @@ command!    -nargs=0        RenameWord       CocCommand document.renameCurrentWo
 " Autocmd -| Event --------| Condition -------| Action ------------------------------------------------- "
 augroup coc-autocmds
   autocmd!
-  autocmd   FileType        *                  if IsCocEnabled() | let &l:formatexpr = "CocAction('formatSelected')" | endif
+  autocmd   FileType        *                  let &l:formatexpr = "CocAction('formatSelected')"
   autocmd   CursorHold      *                  silent call CocActionAsync('highlight')
   " autocmd   CompleteDone    *                  if pumvisible() == 0 | pclose | endif
   autocmd   User            CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
