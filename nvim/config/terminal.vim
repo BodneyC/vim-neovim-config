@@ -63,16 +63,36 @@ augroup vimrc_feature_terminal
   autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
 augroup END
 
+function! s:border_box(h, w, c, r)
+  let bar = repeat("─", a:w) 
+  let top = "╭" . bar . "╮"
+  let mid = "│" . repeat(" ", a:w) . "│"
+  let bot = "╰" . bar . "╯"
+  let lines = [top] + repeat([mid], a:h) + [bot]
+  let buf = nvim_create_buf(v:false, v:true)
+  call nvim_buf_set_lines(buf, 0, -1, v:true, lines)
+  let opts = {
+        \   'relative': 'editor',
+        \   'row': a:r - 1,
+        \   'col': a:c - 1,
+        \   'width': a:w + 2,
+        \   'height': a:h + 2,
+        \   'style': 'minimal'
+        \ }
+  call nvim_open_win(buf, v:true, opts)
+  return buf
+endfunction
+
 let s:terminal_divisor = 0.9
+
 function! FloatingCentred(...)
   let height_divisor = get(a:, 1, s:terminal_divisor)
   let width_divisor = get(a:, 2, s:terminal_divisor)
-
   let height = float2nr(&lines * height_divisor)
   let width = float2nr(&columns * width_divisor)
   let col = float2nr((&columns - width) / 2)
   let row = float2nr((&lines - height) / 2)
-
+  let buf = s:border_box(height, width, col, row)
   let opts = {
         \   'relative': 'editor',
         \   'row': row,
@@ -81,10 +101,13 @@ function! FloatingCentred(...)
         \   'height': height,
         \   'style': 'minimal'
         \ }
-
-  let s:cur_float_win = nvim_create_buf(v:false, v:true)
-  call nvim_open_win(s:cur_float_win, v:true, opts)
-
+  let l:cur_float_win = nvim_create_buf(v:false, v:true)
+  call nvim_open_win(l:cur_float_win, v:true, opts)
+  augroup float
+    au!
+    " exe 'au BufWipeout <buffer=' . l:cur_float_win . '> bd!'
+    exe 'au BufWipeout <buffer=' . l:cur_float_win . '> bd! ' . buf
+  augroup END
   setlocal winhl=Normal:NormalFloat
 endfunction
 
@@ -103,22 +126,22 @@ function! FloatingMan(...)
 endfunction
 command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
-let s:cur_float_win = -1
+" let s:cur_float_win = -1
 function! FloatingHelp(...)
-  if bufexists(s:cur_float_win)
-    exec 'bw ' . s:cur_float_win
-    let s:cur_float_win = -1
-  endif
-  let l:not_in_tags = 0
+  " if bufexists(s:cur_float_win)
+  "   exec 'bw ' . s:cur_float_win
+  "   let s:cur_float_win = -1
+  " endif
   let l:query = get(a:, 1, '')
   call FloatingCentred()
   setlocal ft=help bt=help
+  let l:not_in_tags = 0
   try
     exec 'help ' . l:query
   catch E149
     let l:not_in_tags = 1
   endtry
-  map <buffer> <Esc> :q<CR>
+  map <buffer> <Esc> :bw<CR>
   if l:not_in_tags == 1
     bw
     echoe '"' . l:query . '" not in helptags'

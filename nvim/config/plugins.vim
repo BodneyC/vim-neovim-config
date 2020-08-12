@@ -59,6 +59,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
   Plug 'RRethy/vim-hexokinase'
+  Plug 'dylanaraps/fff.vim'
 call plug#end()
 
 function! s:add_to_rtp(p, back)
@@ -81,3 +82,4 @@ endfunction
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
 " call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
+call <SID>add_to_rtp("gitclones/wal.vim", v:true)
