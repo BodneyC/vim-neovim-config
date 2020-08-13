@@ -53,7 +53,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'uiiaoo/java-syntax.vim'
-  " Plug 'vim-scripts/AnsiEsc.vim'
   Plug 'vim-scripts/BufOnly.vim'
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
@@ -82,4 +81,4 @@ endfunction
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
 " call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
-call <SID>add_to_rtp("gitclones/wal.vim", v:true)
+" call <SID>add_to_rtp("gitclones/wal.vim", v:true)

@@ -38,6 +38,8 @@ set foldenable
 set foldmethod=manual
 set spelllang=en_gb
 
+set guifont=VictorMono\ Nerd\ Font:h11
+
 let s:undodir = expand('$HOME/.config/nvim/undo')
 if ! isdirectory(s:undodir)
   call mkdir(s:undodir, 'p')

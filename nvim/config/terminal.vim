@@ -63,6 +63,7 @@ augroup vimrc_feature_terminal
   autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
 augroup END
 
+let s:border_buf = -1
 function! s:border_box(h, w, c, r)
   let bar = repeat("─", a:w) 
   let top = "╭" . bar . "╮"
@@ -80,6 +81,7 @@ function! s:border_box(h, w, c, r)
         \   'style': 'minimal'
         \ }
   call nvim_open_win(buf, v:true, opts)
+  let s:border_buf = buf
   return buf
 endfunction
 
@@ -105,10 +107,10 @@ function! FloatingCentred(...)
   call nvim_open_win(l:cur_float_win, v:true, opts)
   augroup float
     au!
-    " exe 'au BufWipeout <buffer=' . l:cur_float_win . '> bd!'
     exe 'au BufWipeout <buffer=' . l:cur_float_win . '> bd! ' . buf
   augroup END
   setlocal winhl=Normal:NormalFloat
+  return l:cur_float_win
 endfunction
 
 function! s:on_term_exit(job_id, code, event) dict
@@ -126,14 +128,12 @@ function! FloatingMan(...)
 endfunction
 command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
-" let s:cur_float_win = -1
 function! FloatingHelp(...)
-  " if bufexists(s:cur_float_win)
-  "   exec 'bw ' . s:cur_float_win
-  "   let s:cur_float_win = -1
-  " endif
   let l:query = get(a:, 1, '')
-  call FloatingCentred()
+  let buf = FloatingCentred()
+  augroup float
+    au!
+  augroup END
   setlocal ft=help bt=help
   let l:not_in_tags = 0
   try
@@ -141,6 +141,11 @@ function! FloatingHelp(...)
   catch E149
     let l:not_in_tags = 1
   endtry
+  augroup float
+    au!
+    exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
+  augroup END
+  let s:border_buf = -1
   map <buffer> <Esc> :bw<CR>
   if l:not_in_tags == 1
     bw

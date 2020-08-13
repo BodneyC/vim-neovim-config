@@ -19,9 +19,10 @@ endif
 
 set fillchars=vert:\|
 
+hi! SpelunkerSpellBad gui=undercurl
 hi! OverLength guibg=#995959 guifg=#ffffff
-hi! VertSplit guibg=NONE
 hi! link JavaIdentifier NONE
+hi! VertSplit guibg=NONE
 
 func! s:SetSignTheme(bg)
   exec 'hi SignColumn            guibg=' . a:bg
