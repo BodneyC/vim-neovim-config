@@ -37,6 +37,7 @@ set updatetime=200
 set foldenable
 set foldmethod=manual
 set spelllang=en_gb
+set shortmess+=c
 
 set guifont=VictorMono\ Nerd\ Font:h11
 

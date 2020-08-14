@@ -19,18 +19,24 @@ let g:airline_symbols.branch     = ''
 let g:airline_symbols.readonly   = ''
 let g:airline_symbols.linenr     = '☰'
 let g:airline_symbols.maxlinenr  = ''
-let g:airline_symbols.dirty=     ' ⚡'
+let g:airline_symbols.dirty      = ' ⚡'
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_min_count = 2
 
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#coc#error_symbol = ' '
-let g:airline#extensions#coc#warning_symbol = ' '
+let airline#extensions#whitespace#trailing_format = 'Tra[%sL]'
+let airline#extensions#whitespace#mixed_indent_format = 'Ind[%sL]'
+let airline#extensions#whitespace#mixed_indent_file_format = 'FIn[%sL]'
+let airline#extensions#whitespace#long_format = 'Lng[%sL]'
+let airline#extensions#whitespace#conflicts_format = 'Con[%sL]'
 
 let g:airline#extensions#vista#enabled = 0
+
+let g:airline#extensions#nvimlsp#enabled = 1
+let g:airline#extensions#nvimlsp#error_symbol = ' '
+let g:airline#extensions#nvimlsp#warning_symbol = ' '
 
 function! AlFileInfo()
   let l:ff = { 'unix': '', 'mac':  '', 'dos':  '' }
@@ -45,6 +51,13 @@ function! AlModified()
   return &modified ? ' ' : ''
 endfunction
 
+" function! LspStatus() abort
+"   if luaeval('#vim.lsp.buf_get_clients() > 0')
+"     return luaeval("require('lsp-status').status()")
+"   endif
+"   return ''
+" endfunction
+
 call airline#parts#define_function('FileInfo', 'AlFileInfo')
 call airline#parts#define_function('Mode', 'AlMode')
 call airline#parts#define_function('Modified', 'AlModified')
@@ -54,19 +67,15 @@ call airline#parts#define_raw('MaxLineNr', '%L')
 
 function! AirlineInit() abort
   let spc = g:airline_symbols.space
-  let g:airline_section_a = airline#section#create([
-        \ 'Mode', 'crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'])
-  let g:airline_section_c = airline#section#create([
-        \ '%<', 'Fn', 'Modified', spc, 'readonly', 'coc_status'])
-  let g:airline_section_x = airline#section#create_right([
-        \ 'bookmark', 'vista', 'gutentags', 'grepper', 'tagbar'])
+  let g:airline_section_a = airline#section#create(['Mode', 'crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'])
+  let g:airline_section_b = airline#section#create(['branch'])
+  let g:airline_section_c = airline#section#create(['%<', 'Fn', 'Modified', spc, 'readonly'])
+  let g:airline_section_x = airline#section#create_right(['bookmark', 'vista', 'gutentags', 'grepper', 'tagbar'])
   let g:airline_section_y = airline#section#create(['FileInfo'])
   if airline#util#winwidth() > 79
-    let g:airline_section_z = airline#section#create([
-          \ 'windowswap', 'obsession', '%p%%'.spc, 'Position'])
+    let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%p%%'.spc, 'Position'])
   else
-    let g:airline_section_z = airline#section#create([
-          \ '%p%%'.spc, 'LineNr',  ':%v'])
+    let g:airline_section_z = airline#section#create(['%p%%'.spc, 'LineNr', ':%v'])
   endif
 endfunction
 

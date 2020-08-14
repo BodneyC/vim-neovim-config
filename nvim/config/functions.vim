@@ -85,7 +85,7 @@ augroup config_general
   autocmd BufRead,BufNewFile *.MD set ft=markdown
 augroup END
 
-" Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "
+" Mode -| Args ---| Name ---------------| Action ---------------------------- "
 command! -nargs=0  ConvLineEndings       %s/<CR>//g
 command! -nargs=0  HighlightUnderCursor  call <SID>highlight_under_cursor()
 command! -nargs=0  SpellChecker          call <SID>spell_checker()

@@ -32,7 +32,8 @@ let g:togool_extras =
       \  ['>', '-']]
 
 let g:virk_tags_enable = 0
-let g:virk_close_regexes = ["^$", "FAR.*", "MERGE MSG", "git-.*", "COMMIT.*", ".*Plugins.*"]
+let g:virk_close_regexes = [
+      \ "^$", "FAR.*", "MERGE MSG", "git-.*", "COMMIT.*", ".*Plugins.*", "runtime\/docs"]
 
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_enabled = 1
@@ -72,7 +73,7 @@ let g:gutentags_ctags_extra_args = [
 let g:gutentags_ctags_exclude = ['*.json']
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
+let g:vista_default_executive = 'nvim_lsp'
 let g:vista#renderer#icons = {
       \  "function": "\uf794",
       \  "variable": "\uf71b",

@@ -146,9 +146,10 @@ function! FloatingHelp(...)
     exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
   augroup END
   let s:border_buf = -1
-  map <buffer> <Esc> :bw<CR>
+  map <buffer> <Esc> :silent bw<CR>
+  map <buffer> <Space>q :silent bw<CR>
   if l:not_in_tags == 1
-    bw
+    silent bw
     echoe '"' . l:query . '" not in helptags'
   endif
 endfunction

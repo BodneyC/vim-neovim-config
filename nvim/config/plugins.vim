@@ -1,4 +1,17 @@
 call plug#begin('~/.local/share/nvim/plugged')
+  Plug 'neovim/nvim-lsp'
+  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+  Plug 'haorenW1025/completion-nvim'
+  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/completion-treesitter'
+  Plug 'steelsojka/completion-buffers'
+  Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'KabbAmine/vCoolor.vim'
+  Plug 'airblade/vim-gitgutter'
+
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
   Plug 'alvan/vim-closetag', {'for': ['html', 'xml', 'markdown']}
@@ -36,8 +49,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'mhinz/vim-startify'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
-  Plug 'neoclide/coc-neco'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
