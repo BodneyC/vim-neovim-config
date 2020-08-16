@@ -10,7 +10,7 @@ let g:airline_symbols.paste      = 'Þ'
 let g:airline_symbols.paste      = '∥'
 let g:airline_symbols.spell      = 'Ꞩ'
 let g:airline_symbols.notexists  = ' Ɇ'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.whitespace = ''
 let g:airline_left_sep           = ''
 let g:airline_left_alt_sep       = ''
 let g:airline_right_sep          = ''
@@ -26,11 +26,11 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_min_count = 2
 
-let airline#extensions#whitespace#trailing_format = 'Tra[%sL]'
-let airline#extensions#whitespace#mixed_indent_format = 'Ind[%sL]'
-let airline#extensions#whitespace#mixed_indent_file_format = 'FIn[%sL]'
-let airline#extensions#whitespace#long_format = 'Lng[%sL]'
-let airline#extensions#whitespace#conflicts_format = 'Con[%sL]'
+let airline#extensions#whitespace#trailing_format = 'Tra(%s)'
+let airline#extensions#whitespace#mixed_indent_format = 'Ind(%s)'
+let airline#extensions#whitespace#mixed_indent_file_format = 'FIn(%s)'
+let airline#extensions#whitespace#long_format = 'Lng(%s)'
+let airline#extensions#whitespace#conflicts_format = 'Con(%s)'
 
 let g:airline#extensions#vista#enabled = 0
 

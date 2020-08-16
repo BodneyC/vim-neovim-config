@@ -23,12 +23,6 @@ vim.fn.sign_define(
   "LspDiagnosticsHintSign",        { text = "ﯦ ", texthl = "LspDiagnosticsHint" })
 
 --- Vars
--- vim.g.diagnostic_enable_virtual_text = 1
--- vim.g.diagnostic_virtual_text_prefix = ' '
-vim.g.space_before_virtual_text = 3
-vim.g.diagnostic_auto_popup_while_jump = 0
-vim.g.completion_enable_auto_signature = 0
-
 --- Status
 lsp_status.register_progress()
 lsp_status.config({

@@ -1,7 +1,8 @@
 hi! HoverMatch guibg=#382832
+
 function! s:hover_match()
   let w = expand('<cword>')
-  if (w =~ '^[_a-zA-Z0-9]*$')
+  if (w =~ '^[#_a-zA-Z0-9]*$')
     exe '2match HoverMatch "' . w . '"'
   else
     2match none
@@ -22,7 +23,7 @@ function! s:show_documentation()
   if &filetype == 'vim'
     exe 'H ' . expand('<cword>')
   elseif &filetype == 'sh' || &filetype == 'zsh'
-    if lua("vim.lsp.buf.hover()")
+    if luaeval("vim.lsp.buf.hover()") == v:null
       call FloatingMan(expand('<cword>'))
     endif
   else
@@ -31,7 +32,7 @@ function! s:show_documentation()
 endfunction
 
 function! s:go_to_definition()
-  if luaeval("vim.lsp.buf.definition()")
+  if luaeval("vim.lsp.buf.definition()") == v:null
     redraw | echo
     for l:expr in ['<cword>', '<cWORD>', '<cexpr>']
       let l:tag = expand(l:expr)
@@ -74,6 +75,12 @@ inoremap <silent><expr> <S-Tab> pumvisible()
       \   ? "\<S-Tab>"
       \   : completion#trigger_completion()
 
+let g:diagnostic_auto_popup_while_jump = 0
+let g:completion_enable_auto_signature = 0
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_virtual_text_prefix = ' '
+let g:space_before_virtual_text = 2
+let g:diagnostic_enable_underline = 1
 let g:UltiSnipsExpandTrigger="<M-U>"
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_tabnine_max_num_results=3
