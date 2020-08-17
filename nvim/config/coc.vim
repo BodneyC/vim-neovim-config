@@ -5,6 +5,8 @@ catch /E117/
   finish
 endtry
 
+set shortmess+=c
+
 let s:coc_extensions = [[
       \ 'coc-actions',
       \ 'coc-css',
@@ -18,6 +20,7 @@ let s:coc_extensions = [[
       \ 'coc-json',
       \ 'coc-lists',
       \ ], [
+      \ 'coc-highlight',
       \ 'coc-markdownlint',
       \ 'coc-python',
       \ 'coc-rls',

@@ -1,4 +1,6 @@
 {
+  "coc.preferences.colorSupport": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.source.file.ignoreHidden": false,
   "diagnostic-languageserver.filetypes": {
@@ -57,8 +59,8 @@
   "diagnostic.errorSign": "",
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
-  "diagnostic.virtualText": false,
-  "diagnostic.virtualTextPrefix": "| ",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": " ",
   "diagnostic.warningSign": "",
   // "eslint.enable": false,
   "eslint.autoFixOnSave": false,

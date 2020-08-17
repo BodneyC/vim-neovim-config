@@ -39,6 +39,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-neco'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
+  Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}

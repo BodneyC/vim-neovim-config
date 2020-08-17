@@ -32,7 +32,7 @@ set splitright
 set cul
 set wildmode=longest,full
 set icm=split
-set winblend=3
+set winblend=9
 set updatetime=200
 set foldenable
 set foldmethod=manual

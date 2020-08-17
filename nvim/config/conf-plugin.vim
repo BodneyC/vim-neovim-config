@@ -149,3 +149,20 @@ let g:pear_tree_map_special_keys = 0
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
+
+" ... well, I'm never going to type those in I suppose...
+imap 䙛 <Plug>(PearTreeCloser_]) 
+imap 𭕫 <Plug>(PearTreeCloser_)) 
+imap 𔂈 <Plug>(PearTreeCloser_}) 
+
+function! s:pear_tree_close(c)
+  if (pear_tree#GetSurroundingPair() != [] && pear_tree#GetSurroundingPair()[1] == a:c)
+    return pear_tree#insert_mode#JumpOut()
+  else
+    return pear_tree#insert_mode#HandleCloser(a:c)
+  endif
+endfunction
+
+inoremap <silent><expr> ]  <SID>pear_tree_close(']')
+inoremap <silent><expr> )  <SID>pear_tree_close(')')
+inoremap <silent><expr> }  <SID>pear_tree_close('}')

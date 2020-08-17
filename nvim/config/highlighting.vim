@@ -24,6 +24,8 @@ hi! OverLength guibg=#995959 guifg=#ffffff
 hi! link JavaIdentifier NONE
 hi! VertSplit guibg=NONE
 
+hi! HoverMatch guibg=#382832
+
 func! s:SetSignTheme(bg)
   exec 'hi SignColumn            guibg=' . a:bg
   exec 'hi GitGutterAdd          guibg=' . a:bg

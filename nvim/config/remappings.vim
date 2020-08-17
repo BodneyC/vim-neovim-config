@@ -33,7 +33,7 @@ function! s:win_move(k)
   endif
 endfunction
 
-let $FZF_PREVIEW_COMMAND = "bat --italic-text=always --style=numbers --decorations=never --theme='Sublime Snazzy' --color=always {} ||"
+let $FZF_PREVIEW_COMMAND = "bat --italic-text=always --style=numbers --color=always {} ||"
       \ . " highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,1'
 let g:fzf_layout = { 'window': 'call FloatingCentred()' }
@@ -47,16 +47,16 @@ function! FzfOpenNotExplorer(command_str)
 endfunction
 
 function! FilesFzf(query)
-  let l:fzf_opts = {
+  let fzf_opts = {
         \   'options': [
         \     '--query', a:query,
         \   ]
         \ }
-  call fzf#vim#files('', fzf#vim#with_preview(l:fzf_opts, 'up:70%'))
+  call fzf#vim#files('', fzf#vim#with_preview(fzf_opts, 'up:70%'))
 endfunction
 
 function! RipgrepFzf(query, bang)
-  let l:rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock}" '
+  let rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock}" '
         \  . '--hidden '
         \  . '--ignore-vcs '
         \  . '--column '
@@ -64,14 +64,32 @@ function! RipgrepFzf(query, bang)
         \  . '--line-number '
         \  . '--color=always '
         \  . '-- ' . shellescape(a:query)
-  let l:fzf_opts = {
+  let fzf_opts = {
         \   'options': [
         \     '--delimiter', ':',
         \     '--nth', '4..',
         \     '--query', a:query,
         \   ]
         \ }
-  call fzf#vim#grep(l:rg_cmd, 1, fzf#vim#with_preview(l:fzf_opts), a:bang)
+  call fzf#vim#grep(rg_cmd, 1, fzf#vim#with_preview(fzf_opts), a:bang)
+endfunction
+
+function! RipgrepFzfUnderCursor()
+  let w = expand('<cword>')
+  if w =~ "^[_a-zA-Z0-9]\\+$"
+    let rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock}" '
+          \  . '--hidden '
+          \  . '--ignore-vcs '
+          \  . '--column '
+          \  . '--no-heading '
+          \  . '--line-number '
+          \  . '--color=always '
+          \  . '-- ' . shellescape(w)
+    let fzf_opts = { 'down': '20%', 'options': [ '--margin', '0,0' ] }
+    call fzf#vim#grep(rg_cmd, 1, fzf#vim#with_preview(fzf_opts), 0)
+  else
+    echo '"' . w . '" does not match /^[_a-za-Z0-9]+/'
+  endif
 endfunction
 
 " Mode ----| Modifiers ----| Key(s) ------| Action ----------------------------------------------------- "
@@ -88,6 +106,7 @@ nnoremap    <silent>        <F1>           :H <C-r><C-w><CR>
 nnoremap    <silent>        <F7>           :set spell!<CR>
 inoremap    <silent>        <F7>           <C-o>:set spell!<CR>
 
+" WIP
 inoremap    <silent><expr>  <BS>
       \ getline('.')[:col('.') - 2] =~ '^\s\+$'
       \ ? getline(line('.') - 1) =~ '^\s*$'
@@ -96,6 +115,7 @@ inoremap    <silent><expr>  <BS>
       \     : "<C-o>:exec line('.') - 1 . 'delete'<CR>"
       \   : "<C-w><BS>"
       \ : pear_tree#insert_mode#Backspace()
+
 inoremap    <silent><expr>  <C-f>          pear_tree#insert_mode#JumpOut()
 inoremap    <silent><expr>  <Esc>          pear_tree#insert_mode#Expand()
 inoremap    <silent><expr>  <Space>        pear_tree#insert_mode#Space()
@@ -142,6 +162,7 @@ nnoremap    <silent>        <leader>r      :call FzfOpenNotExplorer(':Rg')<CR>
 nnoremap    <silent>        <leader>z      :ZoomToggle<CR>
 nnoremap    <silent>        [<Leader>      :<C-u>call append(line('.') - 1, repeat([''], v:count1))<CR>
 nnoremap    <silent>        ]<Leader>      :<C-u>call append(line('.'), repeat([''], v:count1))<CR>
+nnoremap    <silent>        <M-]>          :call RipgrepFzfUnderCursor()<CR>
 
 xnoremap                    <              <gv
 xnoremap                    >              >gv
