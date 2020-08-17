@@ -35,45 +35,17 @@ lsp_status.config({
 })
 
 --- LSPs
-nvim_lsp.pyls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.sumneko_lua.setup {
-  on_attach = on_attach,
-}
-nvim_lsp.vimls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.html.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.rls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.dockerls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.gopls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.kotlin_language_server.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
-nvim_lsp.yamlls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities
-}
+nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.sumneko_lua.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.html.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.dockerls.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.kotlin_language_server.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
+
 -- nvim_lsp.diagnosticls.setup {
 --   on_attach = on_attach,
 --   capabilities = lsp_status.capabilities,

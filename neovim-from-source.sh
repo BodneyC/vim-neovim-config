@@ -9,9 +9,11 @@ cd "$HOME/gitclones" || exit
 cd neovim || exit
 
 git checkout master
+git clean -dfX
 git pull
+git checkout nightly
 
-[[ -d build ]] && rm -r build
+make clean
 make CMAKE_INSTALL_PREFIX="$(realpath ~/.local)" CMAKE_BUILD_TYPE=RelWithDebInfo
 
 NVIM_PATH=$(command -v nvim)

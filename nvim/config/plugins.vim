@@ -11,6 +11,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'KabbAmine/vCoolor.vim'
   Plug 'airblade/vim-gitgutter'
+  Plug 'preservim/nerdtree'
+  Plug 'scrooloose/nerdtree-project-plugin'
 
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
@@ -70,6 +72,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'wellle/visual-split.vim'
   Plug 'RRethy/vim-hexokinase'
   Plug 'dylanaraps/fff.vim'
+  Plug 'metakirby5/codi.vim'
 call plug#end()
 
 function! s:add_to_rtp(p, back)

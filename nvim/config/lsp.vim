@@ -52,24 +52,25 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-nnoremap <silent>       gd      :lua vim.lsp.buf.definition()<CR>
-nnoremap <silent>       gh      :lua vim.lsp.buf.hover()<CR>
-nnoremap <silent>       gD      :lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent>       <C-k>   :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent>       1gD     :lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent>       gr      :lua vim.lsp.buf.references()<CR>
-nnoremap <silent>       g0      :lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent>       gW      :lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent>       ]c      :NextDiagnosticCycle<CR>
-nnoremap <silent>       [c      :PrevDiagnosticCycle<CR>
-nnoremap <silent>       K       :call <SID>show_documentation()<CR>
-nnoremap <silent>       <C-]>   :call <SID>go_to_definition()<CR>
-inoremap <silent><expr> <Tab>   pumvisible()
+nnoremap <silent>       gd        :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent>       gh        :lua vim.lsp.buf.hover()<CR>
+nnoremap <silent>       gD        :lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent>       <C-k>     :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent>       1gD       :lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent>       gr        :lua vim.lsp.buf.references()<CR>
+nnoremap <silent>       g0        :lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent>       gW        :lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent>       ]c        :NextDiagnosticCycle<CR>
+nnoremap <silent>       [c        :PrevDiagnosticCycle<CR>
+nnoremap <silent>       K         :call <SID>show_documentation()<CR>
+nnoremap <silent>       <C-]>     :call <SID>go_to_definition()<CR>
+nnoremap <silent>       <leader>F :lua vim.lsp.buf.formatting()<CR>
+inoremap <silent><expr> <Tab>     pumvisible()
       \ ? "\<C-n>"
       \ : <SID>check_back_space()
       \   ? "\<Tab>"
       \   : completion#trigger_completion()
-inoremap <silent><expr> <S-Tab> pumvisible()
+inoremap <silent><expr> <S-Tab>   pumvisible()
       \ ? "\<C-p>"
       \ : <SID>check_back_space()
       \   ? "\<S-Tab>"
@@ -87,7 +88,7 @@ let g:completion_tabnine_max_num_results=3
 let g:completion_auto_change_source = 1
 let g:completion_chain_complete_list = {
     \  'default': [
-    \    { 'complete_items': [ 'lsp', 'ts', 'snippet', 'buffers', 'tabnine'  ] },
+    \    { 'complete_items': [ 'lsp', 'path', 'ts', 'snippet', 'buffers', 'tabnine'  ] },
     \    { 'mode': '<C-p>' }, { 'mode': '<C-n>' }
     \  ]
     \ }
