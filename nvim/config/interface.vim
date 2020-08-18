@@ -20,7 +20,6 @@ set wrap
 set linebreak
 set mouse=a
 set bs=2
-" set tags^=.git/tags
 set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>
@@ -37,6 +36,8 @@ set updatetime=200
 set foldenable
 set foldmethod=manual
 set spelllang=en_gb
+set shortmess+=c
+" set tags^=.git/tags
 
 set guifont=VictorMono\ Nerd\ Font:h11
 

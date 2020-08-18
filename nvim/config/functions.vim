@@ -7,37 +7,37 @@ endfunction
 
 function! s:change_indent(n)
   set et! | %retab!
-	let &l:ts=a:n
+  let &l:ts=a:n
   set et! | %retab!
   call <SID>set_indent(a:n)
 endfunction
 
 function! s:spell_checker()
-  let l:spell = &spell
-  if ! l:spell | set spell | endif
+  let spell = &spell
+  if ! spell | set spell | endif
   normal! mzgg]S
   while spellbadword()[0] != ""
-    let l:cnt = 0
+    let cnt = 0
     redraw
-    let l:ch = ""
-    while index(["y", "n", "f", "r", "a", "q"], l:ch) == -1
-      if l:cnt > 0 | echom "Incorrect input" | endif
-      let l:cnt += 1
+    let ch = ""
+    while index(["y", "n", "f", "r", "a", "q"], ch) == -1
+      if cnt > 0 | echom "Incorrect input" | endif
+      let cnt += 1
       echom "Word: " . expand("<cword>")
             \ . " ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit) "
-      let l:ch = nr2char(getchar())
+      let ch = nr2char(getchar())
       redraw
     endwhile
-    if l:ch == "n"
-    elseif l:ch == "y"
+    if ch == "n"
+    elseif ch == "y"
       normal! z=
-      let l:nu = input("Make you selection: ")
-      exec "normal! ". l:nu . "z="
-    elseif l:ch == "r"
+      let nu = input("Make your selection: ")
+      exec "normal! ". nu . "z="
+    elseif ch == "r"
       spellrepall
-    elseif l:ch == "f"
+    elseif ch == "f"
       normal! 1z=
-    elseif l:ch == "a"
+    elseif ch == "a"
       normal! zG
     else
       break
@@ -45,13 +45,13 @@ function! s:spell_checker()
     normal! ]S
   endwhile
   normal! `z
-  if ! l:spell | set nospell | endif
+  if ! spell | set nospell | endif
   echo "Spell checker complete"
 endfunction
 
 function! s:match_over(...)
-  let l:gtw = get(a:, 1, &tw)
-  exec "match OverLength /\\%" . l:gtw . "v.\\+/"
+  let gtw = get(a:, 1, &tw)
+  exec "match OverLength /\\%" . gtw . "v.\\+/"
 endfunction
 
 function! s:zoom_toggle() abort
@@ -79,8 +79,8 @@ augroup config_general
   autocmd WinLeave    *        if &nu && &rnu   | setlocal nornu | endif
   autocmd BufReadPre  *
         \ if getfsize(expand("<afile>")) > g:large_file |
-                \ set eventignore+=FileType |
-                \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+        \ set eventignore+=FileType |
+        \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
         \ endif
   autocmd BufRead,BufNewFile *.MD set ft=markdown
 augroup END

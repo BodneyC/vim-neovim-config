@@ -63,14 +63,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 call plug#end()
 
 function! s:add_to_rtp(p, back)
-  let l:dir = $HOME . "/" . a:p
-  if ! isdirectory(l:dir)
-    echoe l:dir . " not found"
+  let dir = $HOME . "/" . a:p
+  if ! isdirectory(dir)
+    echoe dir . " not found"
   endif
   if a:back
-    let &rtp .= "," . l:dir
+    let &rtp .= "," . dir
   else
-    let &rtp = l:dir . "," . &rtp
+    let &rtp = dir . "," . &rtp
   endif
 endfunction
 

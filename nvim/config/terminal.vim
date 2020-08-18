@@ -8,23 +8,17 @@ function! s:close_if_terminal_job()
   endif
 endfunction
 
-function! <SID>ctrl_q()
-  let l:term_name = "term://" . s:term_name
-  let winnr = bufwinnr(l:term_name)
-  if winnr != -1
-    exec winnr . "wincmd w"
-  else
-    call TermSplit()
-  endif
-endfunction
-
 function! TermSplit(bang)
-  let l:term_name = "term://" . s:term_name
-  let winnr = bufwinnr(l:term_name)
+  let term_name = "term://" . s:term_name
+  let winnr = bufwinnr(term_name)
   if winnr != -1
-    exec winnr . "wincmd q"
+    if(a:bang)
+      exec winnr . "wincmd q"
+    else
+      exec winnr . "wincmd w"
+    endif
   else
-    let bufnr = bufnr(l:term_name)
+    let bufnr = bufnr(term_name)
     if bufnr != -1
       exec "bd!" . bufnr
     endif
@@ -33,6 +27,7 @@ function! TermSplit(bang)
     else
       10 wincmd j
       split
+      wincmd j
     endif
     setlocal hidden
     if(a:bang)
@@ -40,7 +35,7 @@ function! TermSplit(bang)
     endif
     terminal
     resize 10
-    exec "f " . l:term_name
+    exec "f " . term_name
     autocmd! TermClose <buffer> call <SID>close_if_terminal_job()
     startinsert
   endif
@@ -54,7 +49,7 @@ inoremap <silent> <F10> <C-o>:TermSplit!<CR>
 tnoremap <silent> <F10> <C-\><C-n>:TermSplit!<CR>
 
 nnoremap <silent> <C-q> :TermSplit<CR>
-tnoremap <silent> <C-q> <C-\><C-n>:wincmd w<CR>
+tnoremap <silent> <C-q> <C-\><C-n>:wincmd p<CR>
 tnoremap <silent> <LeftRelease> <Nop>
 
 augroup vimrc_feature_terminal
@@ -103,14 +98,14 @@ function! FloatingCentred(...)
         \   'height': height,
         \   'style': 'minimal'
         \ }
-  let l:cur_float_win = nvim_create_buf(v:false, v:true)
-  call nvim_open_win(l:cur_float_win, v:true, opts)
+  let cur_float_win = nvim_create_buf(v:false, v:true)
+  call nvim_open_win(cur_float_win, v:true, opts)
   augroup float
     au!
-    exe 'au BufWipeout <buffer=' . l:cur_float_win . '> bd! ' . buf
+    exe 'au BufWipeout <buffer=' . cur_float_win . '> bd! ' . buf
   augroup END
   setlocal winhl=Normal:NormalFloat
-  return l:cur_float_win
+  return cur_float_win
 endfunction
 
 function! s:on_term_exit(job_id, code, event) dict
@@ -118,9 +113,9 @@ function! s:on_term_exit(job_id, code, event) dict
 endfunction
 
 function! FloatingTerm(...)
-  let l:cmd = get(a:, 1, $SHELL)
+  let cmd = get(a:, 1, $SHELL)
   call FloatingCentred()
-  call termopen(l:cmd, { 'on_exit': function('<SID>on_term_exit') })
+  call termopen(cmd, { 'on_exit': function('<SID>on_term_exit') })
 endfunction
 
 function! FloatingMan(...)
@@ -128,28 +123,32 @@ function! FloatingMan(...)
 endfunction
 command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
+let s:help_buf = 0
 function! FloatingHelp(...)
-  let l:query = get(a:, 1, '')
+  if s:help_buf != -1 && bufexists(s:help_buf)
+    exe 'bw! ' . s:help_buf
+    let s:help_buf = -1
+  endif
+  let query = get(a:, 1, '')
   let buf = FloatingCentred()
+  let s:help_buf = buf
   augroup float
     au!
   augroup END
   setlocal ft=help bt=help
-  let l:not_in_tags = 0
+  let not_in_tags = 0
   try
-    exec 'help ' . l:query
+    exec 'help ' . query
   catch E149
-    let l:not_in_tags = 1
+    let not_in_tags = 1
   endtry
   augroup float
-    au!
     exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
   augroup END
-  let s:border_buf = -1
   map <buffer> <Esc> :bw<CR>
-  if l:not_in_tags == 1
+  if not_in_tags == 1
     bw
-    echoe '"' . l:query . '" not in helptags'
+    echoe '"' . query . '" not in helptags'
   endif
 endfunction
 command! -nargs=? -complete=help H call FloatingHelp(<f-args>)
