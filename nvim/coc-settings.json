@@ -4,7 +4,8 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.source.file.ignoreHidden": false,
   "diagnostic-languageserver.filetypes": {
-    "sh": "shellcheck"
+    "sh": "shellcheck",
+    "pkgbuild": "pkgbuild"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "sh": "shfmt",
@@ -24,6 +25,27 @@
     }
   },
   "diagnostic-languageserver.linters": {
+    "pkgbuild": {
+      "formatPattern": [
+        "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+        {
+          "security": 3,
+          "column": 2,
+          "line": 1,
+          "message": 4
+        }
+      ],
+      "args": [
+        "%file"
+      ],
+      "sourceName": "shellcheck",
+      "securities": {
+        "note": "info",
+        "warning": "warning",
+        "error": "error"
+      },
+      "command": "/home-link/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh"
+    },
     "shellcheck": {
       "args": [
         "--format=gcc",

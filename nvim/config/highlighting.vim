@@ -17,12 +17,12 @@ elseif g:term_theme == "light"
   colorscheme vimspectr300-light
 endif
 
-set fillchars=vert:\|
-
 hi! SpelunkerSpellBad gui=undercurl
 hi! OverLength guibg=#995959 guifg=#ffffff
 hi! link JavaIdentifier NONE
-hi! VertSplit guibg=NONE
+
+" set fillchars=vert:\|
+" hi! VertSplit guibg=NONE
 
 hi! HoverMatch guibg=#382832
 

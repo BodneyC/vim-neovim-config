@@ -55,7 +55,7 @@ tnoremap <silent> <LeftRelease> <Nop>
 augroup vimrc_feature_terminal
   autocmd!
   autocmd TermOpen,TermEnter,BufNew,BufEnter term://* startinsert
-  autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
+  autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
 augroup END
 
 let s:border_buf = -1

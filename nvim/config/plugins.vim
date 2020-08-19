@@ -16,7 +16,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'BodneyC/flocho',       { 'branch': 'master' }
-  Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
+  " Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'janko/vim-test'
@@ -60,6 +60,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'wellle/visual-split.vim'
   Plug 'RRethy/vim-hexokinase'
   Plug 'dylanaraps/fff.vim'
+  Plug 'm-pilia/vim-pkgbuild'
 call plug#end()
 
 function! s:add_to_rtp(p, back)
@@ -80,6 +81,6 @@ endfunction
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
-" call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
+call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
 " call <SID>add_to_rtp("gitclones/wal.vim", v:true)

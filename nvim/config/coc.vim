@@ -111,5 +111,5 @@ augroup coc-autocmds
   autocmd   CursorHold      *                  silent call CocActionAsync('highlight')
   " autocmd   CompleteDone    *                  if pumvisible() == 0 | pclose | endif
   autocmd   User            CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  autocmd   FileType        coc-explorer       setlocal wrapmargin=0 signcolumn=no | silent! IndentLinesDisable
+  autocmd   FileType        coc-explorer       setlocal wrapmargin=0 signcolumn=no winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl | silent! IndentLinesDisable
 augroup end
