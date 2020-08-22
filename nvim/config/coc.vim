@@ -1,11 +1,11 @@
-" exists(...) returns false for autoloaded functions apparently
+" exists(...) returns false for autoloaded funcs apparently
 try
   silent call coc#add_extension()
 catch /E117/
   finish
 endtry
 
-let s:coc_extensions = [[
+let s:coc_extensions = [
       \ 'coc-actions',
       \ 'coc-css',
       \ 'coc-diagnostic',
@@ -13,12 +13,11 @@ let s:coc_extensions = [[
       \ 'coc-eslint',
       \ 'coc-explorer',
       \ 'coc-go',
+      \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-lists',
-      \ ], [
-      \ 'coc-highlight',
       \ 'coc-markdownlint',
       \ 'coc-python',
       \ 'coc-rls',
@@ -28,15 +27,18 @@ let s:coc_extensions = [[
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
       \ 'coc-yaml',
-      \ ]]
+      \ ]
 
-function! s:AddCocExtensions()
-  for ext_lst in s:coc_extensions
-    exe 'CocInstall ' . join(ext_lst, ' ')
+func! s:AddCocExtensions()
+  for r in range(0, len(s:coc_extensions), 15)
+    let ext_lst = s:coc_extensions[r:r + 15]
+    if len(ext_lst)
+      exe 'CocInstall ' . join(ext_lst, ' ')
+    endif
   endfor
-endfunction
+endfunc
 
-function! s:show_documentation()
+func! s:show_documentation()
   if &filetype == 'vim'
     exe 'H ' . expand('<cword>')
   elseif &filetype == 'sh' || &filetype == 'zsh'
@@ -46,31 +48,31 @@ function! s:show_documentation()
   else
     call CocAction('doHover')
   endif
-endfunction
+endfunc
 
-function! s:go_to_definition()
+func! s:go_to_definition()
   if CocAction('jumpDefinition') | return | endif
   redraw | echo
   for expr in ['<cword>', '<cWORD>', '<cexpr>']
     let tag = expand(expr)
     if len(taglist('^' . tag . '$'))
       try
-        exec 'tag ' . expand('<cword>')
+        exe 'tag ' . expand('<cword>')
         return
       catch | endtry
     endif
   endfor
   redraw | echo "Tag not found"
-endfunction
+endfunc
 
-function! s:check_back_space() abort
+func! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1] =~ '\s'
-endfunction
+endfunc
 
-function! s:cocActionsOpenFromSelected(type) abort
+func! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
-endfunction
+endfunc
 
 " Mode -| Modifiers ---| Key(s) --| Action ----------------------------------------------------- "
 inoremap         <expr> <S-Tab>    pumvisible() ? "\<C-p>" : "\<C-d>"
@@ -98,18 +100,19 @@ nnoremap <silent>       <leader>s  :CocList commands<CR>
 vmap     <silent>       <leader>F  <Plug>(coc-format-selected)
 xmap     <silent>       <C-m>      <Plug>(coc-cursors-range)
 
-" Mode --| Arguments -| Name ----------| Action ----------------------------------------------------- "
-command!               RGBPicker        call CocAction('pickColor')
-command!               RGBOptions       call CocAction('colorPresentation')
-command!  -nargs=0     AddCocExtensions call <SID>AddCocExtensions()
-command!  -nargs=0     RenameWord       CocCommand document.renameCurrentWord
+" Mode -| Args --| Name ----------| Action ----------------------------- "
+command!          RGBPicker        call CocAction('pickColor')
+command!          RGBOptions       call CocAction('colorPresentation')
+command! -nargs=0 AddCocExtensions call <SID>AddCocExtensions()
+command! -nargs=0 RenameWord       CocCommand document.renameCurrentWord
 
-" Autocmd -| Event --------| Condition -------| Action ------------------------------------------------- "
-augroup coc-autocmds
-  autocmd!
-  autocmd   FileType        *                  let &formatexpr = "CocAction('formatSelected')"
-  autocmd   CursorHold      *                  silent call CocActionAsync('highlight')
-  " autocmd   CompleteDone    *                  if pumvisible() == 0 | pclose | endif
-  autocmd   User            CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  autocmd   FileType        coc-explorer       setlocal wrapmargin=0 signcolumn=no winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl | silent! IndentLinesDisable
+augroup __COC__
+  " Event -----| Condition -------| Action ------------------------------------- "
+  au!
+  au FileType   *                  let &formatexpr = "CocAction('formatSelected')"
+  au CursorHold *                  silent call CocActionAsync('highlight')
+  au User       CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  au FileType   coc-explorer       setlocal wrapmargin=0 signcolumn=no
+        \ winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl | silent! IndentLinesDisable
+  " au CompleteDone    *                  if pumvisible() == 0 | pclose | endif
 augroup end

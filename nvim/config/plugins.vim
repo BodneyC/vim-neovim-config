@@ -39,7 +39,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-neco'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
-  Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+  " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
@@ -58,12 +58,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
-  Plug 'RRethy/vim-hexokinase'
   Plug 'dylanaraps/fff.vim'
   Plug 'm-pilia/vim-pkgbuild'
 call plug#end()
 
-function! s:add_to_rtp(p, back)
+func! s:add_to_rtp(p, back)
   let dir = $HOME . "/" . a:p
   if ! isdirectory(dir)
     echoe dir . " not found"
@@ -73,7 +72,7 @@ function! s:add_to_rtp(p, back)
   else
     let &rtp = dir . "," . &rtp
   endif
-endfunction
+endfunc
 
 " call <SID>add_to_rtp("gitclones/virkspaces", v:true)
 " call <SID>add_to_rtp("gitclones/1989.vim", v:true)

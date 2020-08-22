@@ -107,23 +107,23 @@ let s:footer = [
       \ "+----------------------------+",
       \ ""]
 
-function! s:center(lines) abort
+func! s:center(lines) abort
   let longest_line = max(map(copy(a:lines), 'len(v:val)'))
   let centered_lines = map(
         \   copy(a:lines),
         \   'repeat(" ", (winwidth(0) / 2) - (longest_line / 2)) . v:val'
         \ )
   return centered_lines
-endfunction
+endfunc
 
-function! s:set_startify_params() abort
+func! s:set_startify_params() abort
   let g:startify_padding_left = winwidth(0) / 4
   let g:startify_custom_header = s:center(s:header)
   let g:startify_custom_footer = s:center(s:footer)
-endfunction
+endfunc
 
 " Needs to remain here for startify stuff
-autocmd! VimEnter *
+au! VimEnter *
       \   if argc() == 0 || (argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in"))
       \ |   call <SID>set_startify_params()
       \ |   Startify
@@ -132,14 +132,14 @@ autocmd! VimEnter *
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
 
-function! Flogdiff()
+func! Flogdiff()
   let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
   let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
   call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
-endfunction
+endfunc
 
 augroup flog
-  autocmd FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
+  au FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
 augroup END
 
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
@@ -155,13 +155,13 @@ imap 䙛 <Plug>(PearTreeCloser_])
 imap 𭕫 <Plug>(PearTreeCloser_)) 
 imap 𔂈 <Plug>(PearTreeCloser_}) 
 
-function! s:pear_tree_close(c)
+func! s:pear_tree_close(c)
   if (pear_tree#GetSurroundingPair() != [] && pear_tree#GetSurroundingPair()[1] == a:c)
     return pear_tree#insert_mode#JumpOut()
   else
     return pear_tree#insert_mode#HandleCloser(a:c)
   endif
-endfunction
+endfunc
 
 inoremap <silent><expr> ]  <SID>pear_tree_close(']')
 inoremap <silent><expr> )  <SID>pear_tree_close(')')

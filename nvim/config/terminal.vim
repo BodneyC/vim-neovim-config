@@ -1,4 +1,4 @@
-function! s:close_if_terminal_job()
+func! s:close_if_terminal_job()
   if exists('b:terminal_job_pid')
     try
       close
@@ -6,21 +6,21 @@ function! s:close_if_terminal_job()
       echom "Could not close terminal"
     endtry
   endif
-endfunction
+endfunc
 
-function! TermSplit(bang)
+func! TermSplit(bang)
   let term_name = "term://" . s:term_name
   let winnr = bufwinnr(term_name)
   if winnr != -1
     if(a:bang)
-      exec winnr . "wincmd q"
+      exe winnr . "wincmd q"
     else
-      exec winnr . "wincmd w"
+      exe winnr . "wincmd w"
     endif
   else
     let bufnr = bufnr(term_name)
     if bufnr != -1
-      exec "bd!" . bufnr
+      exe "bd!" . bufnr
     endif
     if(a:bang)
       vsplit
@@ -35,11 +35,11 @@ function! TermSplit(bang)
     endif
     terminal
     resize 10
-    exec "f " . term_name
-    autocmd! TermClose <buffer> call <SID>close_if_terminal_job()
+    exe "f " . term_name
+    au! TermClose <buffer> call <SID>close_if_terminal_job()
     startinsert
   endif
-endfunction
+endfunc
 command! -bang TermSplit call TermSplit(<bang>0)
 
 let s:term_name = "term-split"
@@ -52,14 +52,14 @@ nnoremap <silent> <C-q> :TermSplit<CR>
 tnoremap <silent> <C-q> <C-\><C-n>:wincmd p<CR>
 tnoremap <silent> <LeftRelease> <Nop>
 
-augroup vimrc_feature_terminal
-  autocmd!
-  autocmd TermOpen,TermEnter,BufNew,BufEnter term://* startinsert
-  autocmd TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
-augroup END
+augroup __TERMINAL__
+  au!
+  au TermOpen,TermEnter,BufNew,BufEnter term://* startinsert
+  au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
+augroup end
 
 let s:border_buf = -1
-function! s:border_box(h, w, c, r)
+func! s:border_box(h, w, c, r)
   let bar = repeat("─", a:w) 
   let top = "╭" . bar . "╮"
   let mid = "│" . repeat(" ", a:w) . "│"
@@ -78,11 +78,11 @@ function! s:border_box(h, w, c, r)
   call nvim_open_win(buf, v:true, opts)
   let s:border_buf = buf
   return buf
-endfunction
+endfunc
 
 let s:terminal_divisor = 0.9
 
-function! FloatingCentred(...)
+func! FloatingCentred(...)
   let height_divisor = get(a:, 1, s:terminal_divisor)
   let width_divisor = get(a:, 2, s:terminal_divisor)
   let height = float2nr(&lines * height_divisor)
@@ -100,31 +100,31 @@ function! FloatingCentred(...)
         \ }
   let cur_float_win = nvim_create_buf(v:false, v:true)
   call nvim_open_win(cur_float_win, v:true, opts)
-  augroup float
+  augroup __FLOAT__
     au!
     exe 'au BufWipeout <buffer=' . cur_float_win . '> bd! ' . buf
-  augroup END
+  augroup end
   setlocal winhl=Normal:NormalFloat
   return cur_float_win
-endfunction
+endfunc
 
-function! s:on_term_exit(job_id, code, event) dict
+func! s:on_term_exit(job_id, code, event) dict
   if a:code == 0 | bd! | endif
-endfunction
+endfunc
 
-function! FloatingTerm(...)
+func! FloatingTerm(...)
   let cmd = get(a:, 1, $SHELL)
   call FloatingCentred()
   call termopen(cmd, { 'on_exit': function('<SID>on_term_exit') })
-endfunction
+endfunc
 
-function! FloatingMan(...)
+func! FloatingMan(...)
   call FloatingTerm('man ' .join(a:000, ' '))
-endfunction
+endfunc
 command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
 let s:help_buf = 0
-function! FloatingHelp(...)
+func! FloatingHelp(...)
   if s:help_buf != -1 && bufexists(s:help_buf)
     exe 'bw! ' . s:help_buf
     let s:help_buf = -1
@@ -132,24 +132,24 @@ function! FloatingHelp(...)
   let query = get(a:, 1, '')
   let buf = FloatingCentred()
   let s:help_buf = buf
-  augroup float
+  augroup __FLOAT__
     au!
-  augroup END
+  augroup end
   setlocal ft=help bt=help
   let not_in_tags = 0
   try
-    exec 'help ' . query
+    exe 'help ' . query
   catch E149
     let not_in_tags = 1
   endtry
-  augroup float
+  augroup __FLOAT__
     exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
-  augroup END
+  augroup end
   map <buffer> <Esc> :bw<CR>
   if not_in_tags == 1
     bw
     echoe '"' . query . '" not in helptags'
   endif
-endfunction
+endfunc
 command! -nargs=? -complete=help H call FloatingHelp(<f-args>)
 command! -nargs=? -complete=help Help call FloatingHelp(<f-args>)

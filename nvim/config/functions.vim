@@ -1,18 +1,18 @@
-function! s:set_indent(n)
+func! s:set_indent(n)
   let &l:ts=a:n | let &l:sw=a:n
   if exists(":IndentLinesReset")
     IndentLinesReset
   endif
-endfunction
+endfunc
 
-function! s:change_indent(n)
+func! s:change_indent(n)
   set et! | %retab!
   let &l:ts=a:n
   set et! | %retab!
   call <SID>set_indent(a:n)
-endfunction
+endfunc
 
-function! s:spell_checker()
+func! s:spell_checker()
   let spell = &spell
   if ! spell | set spell | endif
   normal! mzgg]S
@@ -32,7 +32,7 @@ function! s:spell_checker()
     elseif ch == "y"
       normal! z=
       let nu = input("Make your selection: ")
-      exec "normal! ". nu . "z="
+      exe "normal! ". nu . "z="
     elseif ch == "r"
       spellrepall
     elseif ch == "f"
@@ -47,14 +47,14 @@ function! s:spell_checker()
   normal! `z
   if ! spell | set nospell | endif
   echo "Spell checker complete"
-endfunction
+endfunc
 
-function! s:match_over(...)
+func! s:match_over(...)
   let gtw = get(a:, 1, &tw)
-  exec "match OverLength /\\%" . gtw . "v.\\+/"
-endfunction
+  exe "match OverLength /\\%" . gtw . "v.\\+/"
+endfunc
 
-function! s:zoom_toggle() abort
+func! s:zoom_toggle() abort
   if exists("t:zoomed") && t:zoomed
     execute t:zoom_winrestcmd
     let t:zoomed = 0
@@ -64,26 +64,26 @@ function! s:zoom_toggle() abort
     vertical resize
     let t:zoomed = 1
   endif
-endfunction
+endfunc
 
-function! s:highlight_under_cursor()
+func! s:highlight_under_cursor()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunction
+endfunc
 
 let g:large_file = 10485760 " 10MB
-augroup config_general
-  autocmd!
-  autocmd BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-  autocmd FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
-  autocmd WinEnter    *        if &nu && ! &rnu | setlocal rnu   | endif
-  autocmd WinLeave    *        if &nu && &rnu   | setlocal nornu | endif
-  autocmd BufReadPre  *
+augroup __CONFIG_GENERAL__
+  au!
+  au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+  au FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | endif
+  au WinEnter    *        if &nu && ! &rnu | setlocal rnu   | endif
+  au WinLeave    *        if &nu &&   &rnu | setlocal nornu | endif
+  au BufReadPre  *
         \ if getfsize(expand("<afile>")) > g:large_file |
-        \ set eventignore+=FileType |
-        \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+        \   set eventignore+=FileType |
+        \   setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
         \ endif
-  autocmd BufRead,BufNewFile *.MD set ft=markdown
-augroup END
+  au BufRead,BufNewFile *.MD set ft=markdown
+augroup end
 
 " Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "
 command! -nargs=0  ConvLineEndings       %s/<CR>//g

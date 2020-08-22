@@ -1,43 +1,43 @@
-set signcolumn=yes
-set noequalalways
-set laststatus=2
-set hidden
-set noshowmode
-set expandtab
-set tabstop=2
-set softtabstop=0
-set shiftwidth=0
-set textwidth=0
 set autoindent
+set backspace=indent,eol,start
 set breakindent
 set breakindentopt=shift:3
-set smartindent
-set ruler
-set hls
-set cursorline
-set nu rnu
-set wrap
-set linebreak
-set mouse=a
 set bs=2
-set scrolloff=1
-set backspace=indent,eol,start
-set matchpairs+=<:>
-set noautowrite
-set ttimeout
-set ttimeoutlen=50
-set splitbelow
-set splitright
 set cul
-set wildmode=longest,full
-set icm=split
-set winblend=6
-set updatetime=200
+set cursorcolumn
+set cursorline
+set expandtab
 set foldenable
 set foldmethod=manual
-set spelllang=en_gb
+set hidden
+set hls
+set icm=split
+set laststatus=2
+set linebreak
+set matchpairs+=<:>
+set mouse=a
+set noautowrite
+set noequalalways
+set noshowmode
+set nu rnu
+set ruler
+set scrolloff=1
+set shiftwidth=0
 set shortmess+=c
-" set tags^=.git/tags
+set signcolumn=yes
+set smartindent
+set softtabstop=0
+set spelllang=en_gb
+set splitbelow
+set splitright
+set tabstop=2
+set textwidth=0
+set ttimeout
+set ttimeoutlen=50
+set updatetime=200
+set wildmode=longest,full
+set winblend=6
+set wrap
 
 set guifont=VictorMono\ Nerd\ Font:h11
 
@@ -45,7 +45,7 @@ let s:undodir = expand('$HOME/.config/nvim/undo')
 if ! isdirectory(s:undodir)
   call mkdir(s:undodir, 'p')
 endif
-exec 'set undodir='.s:undodir
+exe 'set undodir='.s:undodir
 set undofile
 set undolevels=10000
 set undoreload=10000
