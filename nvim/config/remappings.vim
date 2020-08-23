@@ -152,7 +152,6 @@ inoremap                <S-up>     <C-o>:m-2<CR>
 xnoremap                <S-down>   :m'>+<CR>gv=gv
 xnoremap                <S-up>     :m-2<CR>gv=gv
 
-
 nnoremap <silent>       <leader>ce :CocCommand explorer --toggle<CR>
 nnoremap <silent>       <leader>f  :call FzfOpenNotExplorer(":FilesFzf")<CR>
 nnoremap <silent>       <leader>gg :Git<CR>
@@ -166,6 +165,7 @@ nnoremap <silent>       [<Leader>  :<C-u>call append(line('.') - 1, repeat([''],
 nnoremap <silent>       ]<Leader>  :<C-u>call append(line('.'), repeat([''], v:count1))<CR>
 nnoremap <silent>       <M-]>      :call RipgrepFzfUnderCursor()<CR>
 nnoremap <silent>       ‘          :call RipgrepFzfUnderCursor()<CR>
+nnoremap <silent>       <leader>}  zf}
 
 " Mode -| Arguments ---| Name -------| Action -------------------------- "
 command! -nargs=0       ToggleLazyGit w | call FloatingTerm('lazygit')

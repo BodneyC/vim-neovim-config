@@ -4,7 +4,8 @@
   "coc.source.file.ignoreHidden": false,
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck",
-    "pkgbuild": "pkgbuild"
+    "pkgbuild": "pkgbuild",
+    "terraform": "terraform"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "sh": "shfmt",
@@ -116,6 +117,11 @@
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,
   "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    },
     "ccls": {
       "command": "ccls",
       "filetypes": [

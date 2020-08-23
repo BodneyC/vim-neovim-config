@@ -142,9 +142,11 @@ func! FloatingHelp(...)
   catch E149
     let not_in_tags = 1
   endtry
-  augroup __FLOAT__
-    exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
-  augroup end
+  if s:border_buf != -1
+    augroup __FLOAT__
+      exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
+    augroup end
+  endif
   map <buffer> <Esc> :bw<CR>
   if not_in_tags == 1
     bw
