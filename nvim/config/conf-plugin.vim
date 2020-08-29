@@ -1,6 +1,7 @@
 let g:fff#split = "call FloatingCentred(0.4, 0.4)"
 let g:fff#split_direction = "nosb sbr"
 
+let g:Hexokinase_virtualText = " "
 let g:Hexokinase_highlighters = ['virtual']
 let g:Hexokinase_optInPatterns = [
       \ 'full_hex',

@@ -3,6 +3,7 @@
 sudo ln -s "$HOME" /home-link
 sudo pacman -S \
   xclip ripgrep jq bat exa \
+  zenity \
   python{,2}-pip \
   nodejs npm \
   ruby{,gems} \

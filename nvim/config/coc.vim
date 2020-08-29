@@ -7,25 +7,29 @@ endtry
 
 let s:coc_extensions = [
       \ 'coc-actions',
-      \ 'coc-css',
       \ 'coc-diagnostic',
-      \ 'coc-docker',
-      \ 'coc-eslint',
       \ 'coc-explorer',
-      \ 'coc-go',
       \ 'coc-highlight',
+      \ 'coc-lists',
+      \ 'coc-tag',
+      \ 'coc-snippets',
+      \
+      \ 'coc-go',
+      \ 'coc-vimlsp',
       \ 'coc-html',
       \ 'coc-java',
-      \ 'coc-json',
-      \ 'coc-lists',
-      \ 'coc-markdownlint',
       \ 'coc-python',
       \ 'coc-rls',
-      \ 'coc-snippets',
-      \ 'coc-tag',
+      \
+      \ 'coc-eslint',
+      \ 'coc-tsserver',
       \ 'coc-tslint-plugin',
       \ 'coc-tsserver',
-      \ 'coc-vimlsp',
+      \
+      \ 'coc-markdownlint',
+      \ 'coc-docker',
+      \ 'coc-css',
+      \ 'coc-json',
       \ 'coc-yaml',
       \ ]
 
@@ -101,10 +105,11 @@ vmap     <silent>       <leader>F  <Plug>(coc-format-selected)
 xmap     <silent>       <C-m>      <Plug>(coc-cursors-range)
 
 " Mode -| Args --| Name ----------| Action ----------------------------- "
-command!          RGBPicker        call CocAction('pickColor')
-command!          RGBOptions       call CocAction('colorPresentation')
 command! -nargs=0 AddCocExtensions call <SID>AddCocExtensions()
 command! -nargs=0 RenameWord       CocCommand document.renameCurrentWord
+" Using vCoolor
+" command!          RGBPicker        call CocAction('pickColor')
+" command!          RGBOptions       call CocAction('colorPresentation')
 
 augroup __COC__
   " Event -----| Condition -------| Action ------------------------------------- "

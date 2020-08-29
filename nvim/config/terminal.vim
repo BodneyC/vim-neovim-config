@@ -8,21 +8,63 @@ func! s:close_if_terminal_job()
   endif
 endfunc
 
-func! TermSplit(bang)
-  let term_name = "term://" . s:term_name
-  let winnr = bufwinnr(term_name)
+let s:term_height = 11
+let s:term_name = "INIT_VALUE"
+
+func! NextTermSplit(bang)
+  let cur_win = bufwinnr('%')
+  let winnr = bufwinnr(s:term_name)
   if winnr != -1
-    if(a:bang)
+    exe winnr . "wincmd w"
+    vsplit
+    setlocal hidden
+    terminal
+    let new_win = bufwinnr('%')
+    if a:bang
+      wincmd =
+      exe 'resize ' . s:term_height
+    endif
+    au! TermClose <buffer> call <SID>close_if_terminal_job()
+    exe cur_win . "wincmd w"
+    exe new_win . "wincmd w"
+    startinsert
+  else
+    call TermSplit(1)
+  endif
+endfunc
+command! -bang NextTermSplit call NextTermSplit(<bang>0)
+
+func! s:get_open_term_buffer_name()
+  " Terms aren't listed
+  let blist = getbufinfo({'bufloaded': 1, 'buflisted': 0})
+  for item in blist
+    if empty(item.name) || item.hidden
+      continue
+    endif
+    if item.name =~ "^term://.*"
+      let s:term_name = item.name
+      break
+    endif
+  endfor
+endfunc
+
+func! TermSplit(bang)
+  if s:term_name == "INIT_VALUE"
+    call s:get_open_term_buffer_name()
+  endif
+  let winnr = bufwinnr(s:term_name)
+  if winnr != -1
+    if a:bang
       exe winnr . "wincmd q"
     else
       exe winnr . "wincmd w"
     endif
   else
-    let bufnr = bufnr(term_name)
-    if bufnr != -1
+    let bufnr = bufnr(s:term_name)
+    if bufnr != -1 && bufexists(bufnr) && bufloaded(bufnr)
       exe "bd!" . bufnr
     endif
-    if(a:bang)
+    if a:bang
       vsplit
     else
       10 wincmd j
@@ -30,19 +72,19 @@ func! TermSplit(bang)
       wincmd j
     endif
     setlocal hidden
-    if(a:bang)
+    if a:bang
       wincmd J
     endif
     terminal
-    resize 10
-    exe "f " . term_name
+    exe 'resize ' . s:term_height
+    let s:term_name = bufname('%')
     au! TermClose <buffer> call <SID>close_if_terminal_job()
     startinsert
   endif
 endfunc
 command! -bang TermSplit call TermSplit(<bang>0)
 
-let s:term_name = "term-split"
+nnoremap <silent> <leader>' :call NextTermSplit(1) \| wincmd p<CR>
 
 nnoremap <silent> <F10> :TermSplit!<CR>
 inoremap <silent> <F10> <C-o>:TermSplit!<CR>
@@ -52,9 +94,16 @@ nnoremap <silent> <C-q> :TermSplit<CR>
 tnoremap <silent> <C-q> <C-\><C-n>:wincmd p<CR>
 tnoremap <silent> <LeftRelease> <Nop>
 
+tnoremap <silent> <M-h> <C-\><C-n>:TmuxNavigateLeft<CR>
+tnoremap <silent> <M-j> <C-\><C-n>:TmuxNavigateDown<CR>
+tnoremap <silent> <M-k> <C-\><C-n>:TmuxNavigateUp<CR>
+tnoremap <silent> <M-l> <C-\><C-n>:TmuxNavigateRight<CR>
+tnoremap <silent> <M-\> <C-\><C-n>:TmuxNavigatePrevious<CR>
+
 augroup __TERMINAL__
   au!
-  au TermOpen,TermEnter,BufNew,BufEnter term://* startinsert
+  au TermEnter,BufNew,BufEnter term://* startinsert
+  au TermLeave,BufLeave term://* stopinsert
   au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
 augroup end
 
@@ -125,7 +174,7 @@ command! -nargs=+ -complete=shellcmd M call FloatingMan(<f-args>)
 
 let s:help_buf = 0
 func! FloatingHelp(...)
-  if s:help_buf != -1 && bufexists(s:help_buf)
+  if s:help_buf > 0 && bufloaded(s:help_buf)
     exe 'bw! ' . s:help_buf
     let s:help_buf = -1
   endif
@@ -142,7 +191,7 @@ func! FloatingHelp(...)
   catch E149
     let not_in_tags = 1
   endtry
-  if s:border_buf != -1
+  if s:border_buf > 0
     augroup __FLOAT__
       exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
     augroup end

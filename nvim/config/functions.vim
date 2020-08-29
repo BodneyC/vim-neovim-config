@@ -70,7 +70,7 @@ func! s:highlight_under_cursor()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-let g:large_file = 10485760 " 10MB
+let g:large_file = 1048576 " 1MB
 augroup __CONFIG_GENERAL__
   au!
   au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
@@ -80,7 +80,7 @@ augroup __CONFIG_GENERAL__
   au BufReadPre  *
         \ if getfsize(expand("<afile>")) > g:large_file |
         \   set eventignore+=FileType |
-        \   setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+        \   setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 completeopt-=preview nowrap |
         \ endif
   au BufRead,BufNewFile *.MD set ft=markdown
 augroup end

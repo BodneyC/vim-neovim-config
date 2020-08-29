@@ -1,4 +1,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
+  Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
+  Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
+  Plug 'BodneyC/flocho',       { 'branch': 'master' }
+  Plug 'BodneyC/hex-this-vim', { 'branch': 'master' }
+  Plug 'BodneyC/pic-vim',      { 'branch': 'master' }
+  Plug 'BodneyC/togool.vim',   { 'branch': 'master' }
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
   Plug 'alvan/vim-closetag', {'for': ['html', 'xml', 'markdown']}
@@ -10,15 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
-  Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
-  Plug 'BodneyC/hex-this-vim', { 'branch': 'master' }
-  Plug 'BodneyC/pic-vim',      { 'branch': 'master' }
-  Plug 'BodneyC/togool.vim',   { 'branch': 'master' }
-  Plug 'BodneyC/flocho',       { 'branch': 'master' }
-  Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  Plug 'dylanaraps/fff.vim'
   Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -28,9 +27,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/limelight.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'justinmk/vim-syntax-extra'
+  Plug 'KabbAmine/vCoolor.vim'
   Plug 'leafgarland/typescript-vim'
   Plug 'liuchengxu/vista.vim'
   Plug 'ludovicchabant/vim-gutentags'
+  Plug 'm-pilia/vim-pkgbuild'
   Plug 'machakann/vim-swap'
   Plug 'majutsushi/tagbar'
   Plug 'mhinz/vim-startify'
@@ -39,10 +40,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-neco'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
-  " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
+  Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
   Plug 'simnalamburt/vim-mundo'
@@ -54,12 +55,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'uiiaoo/java-syntax.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-scripts/BufOnly.vim'
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
-  Plug 'dylanaraps/fff.vim'
-  Plug 'm-pilia/vim-pkgbuild'
 call plug#end()
 
 func! s:add_to_rtp(p, back)
@@ -74,7 +75,7 @@ func! s:add_to_rtp(p, back)
   endif
 endfunc
 
-" call <SID>add_to_rtp("gitclones/virkspaces", v:true)
+" call <SID>add_to_rtp("gitclones/VirkSpaces", v:true)
 " call <SID>add_to_rtp("gitclones/1989.vim", v:true)
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
