@@ -102,7 +102,7 @@ tnoremap <silent> <M-\> <C-\><C-n>:TmuxNavigatePrevious<CR>
 
 augroup __TERMINAL__
   au!
-  au TermEnter,BufNew,BufEnter term://* startinsert
+  au TermEnter,TermOpen,BufNew,BufEnter term://* startinsert
   au TermLeave,BufLeave term://* stopinsert
   au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
 augroup end
