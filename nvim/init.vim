@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 
-let g:term_theme = $TERMTHEME
+let g:term_theme = "light"
 if empty(g:term_theme)
   echoe "$TERMTHEME not set, theming results may vary"
 endif

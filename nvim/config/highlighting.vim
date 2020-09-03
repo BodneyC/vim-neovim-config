@@ -5,11 +5,10 @@ let g:onedark_termcolors = 256
 set termguicolors
 
 if g:term_theme == "dark"
-  let s:lightline_theme = "bolorscheme"
   colo subdued
 elseif g:term_theme == "light"
-  let s:lightline_theme = "VimSpectre300light"
-  colo vimspectr300-light
+  " colo vimspectr300-light
+  colo solarized-light
 endif
 
 func! s:additional_highlights()
@@ -19,8 +18,14 @@ func! s:additional_highlights()
   hi! HoverMatch guibg=#382832
   " hi! VertSplit guibg=NONE
   " set fillchars=vert:\|
+  if g:term_theme == "light"
+    hi! Visual guifg=bg
+    set nocursorcolumn
+  endif
 endfunc
 call <SID>additional_highlights()
+
+command! -nargs=0 HiTest :so $VIMRUNTIME/syntax/hitest.vim<CR>
 
 augroup __HIGHLIGHT__
   au!

@@ -2,10 +2,10 @@
   "dependencies": {
     "coc-actions": ">=1.4.1",
     "coc-css": ">=1.2.4",
-    "coc-diagnostic": ">=0.7.0",
+    "coc-diagnostic": ">=0.8.2",
     "coc-docker": ">=0.3.0",
     "coc-eslint": ">=1.2.7",
-    "coc-explorer": ">=0.7.27",
+    "coc-explorer": ">=0.7.28",
     "coc-git": ">=1.8.3",
     "coc-go": ">=0.10.0",
     "coc-highlight": ">=1.2.5",

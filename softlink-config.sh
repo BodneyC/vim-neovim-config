@@ -43,12 +43,4 @@ for f in \
   _process "$(realpath "$f")" "$(basename "$f")" "$HOME/.config/$f"
 done
 
-LIGHTLINE_DIR="$HOME/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/"
-mkdir -p "$LIGHTLINE_DIR"
-(
-  cd "$LIGHTLINE_DIR" || exit
-  ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/1989.vim .
-  ln -s ~/gitclones/vim-neovim-config/nvim/autoload/lightline/colorscheme/VimSpectre300light.vim .
-)
-
 cd / && sudo -E ln -s "$HOME" home-link
