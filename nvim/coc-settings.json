@@ -89,7 +89,11 @@
   "explorer.autoCollapseOptions": [
     "recursive"
   ],
-  "explorer.file.child.template": "  [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][readonly] [git | 1] [selection | clip | 1] [linkIcon & 1][link growRight 1 omitCenter 5][size]",
+  "explorer.file.child.template": "[indent][git | 2] [icon | 1] [diagnosticError & 1][filename omitCenter 1][readonly] [selection | clip | 1] [linkIcon & 1][link growRight 1 omitCenter 5][size]",
+  "explorer.file.column.git.icon.added": "+",
+  "explorer.file.column.git.icon.modified": "~",
+  "explorer.file.column.git.icon.unmerged": "?",
+  "explorer.file.column.git.icon.untracked": "-",
   "explorer.file.column.git.showIgnored": true,
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
@@ -112,7 +116,7 @@
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.virtualTextPrefix": "  ",
-  "highlight.colors.enable": false, // hexokinase covers this
+  "highlight.colors.enable": false,
   "java.contentProvider.preferred": "fernflower",
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,

@@ -4,11 +4,10 @@ let g:onedark_termcolors = 256
 
 set termguicolors
 
-if g:term_theme == "dark"
-  colo subdued
-elseif g:term_theme == "light"
-  " colo vimspectr300-light
+if g:term_theme == "light"
   colo solarized-light
+else
+  colo subdued
 endif
 
 func! s:additional_highlights()
@@ -16,22 +15,21 @@ func! s:additional_highlights()
   hi! OverLength guibg=#995959 guifg=#ffffff
   hi! link JavaIdentifier NONE
   hi! HoverMatch guibg=#382832
-  " hi! VertSplit guibg=NONE
-  " set fillchars=vert:\|
   if g:term_theme == "light"
     hi! Visual guifg=bg
-    set nocursorcolumn
+    hi! VertSplit guibg=NONE
+    set fillchars=vert:\|
   endif
 endfunc
 call <SID>additional_highlights()
-
-command! -nargs=0 HiTest :so $VIMRUNTIME/syntax/hitest.vim<CR>
 
 augroup __HIGHLIGHT__
   au!
   au TextYankPost * silent! lua require'vim.highlight'.on_yank()
   au ColorScheme  * call <SID>additional_highlights()
 augroup end
+
+command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim
 
 func! s:SetSignTheme(bg)
   exe 'hi SignColumn            guibg=' . a:bg
@@ -47,37 +45,3 @@ func! s:SetSignTheme(bg)
   hi link CocGitChangeRemovedSign GitGutterChangeDelete
   hi link CocGitRemovedSign GitGutterDelete
 endfunc
-
-if g:colors_name == 'two-firewatch'
-  let g:two_firewatch_italics = 1
-  call s:SetSignTheme('#45505d')
-  hi MatchParenCur guibg=#3a3333 guifg=#ffbfe4
-  hi MatchParen    guibg=#595555 guifg=#c7c8e6
-  hi CocHighlightWrite guibg=#3a3333 guifg=#d8b8df
-  au! TermOpen,TermEnter * hi Pmenu guibg=#151515
-  au! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guibg=#3e4452
-endif
-
-if g:colors_name == 'vimspectr150-light'
-  let bg = '#d8ebe1'
-  call s:SetSignTheme(bg)
-  hi Pmenu guibg=bg
-  au! TermOpen,TermEnter * hi Pmenu guibg=bg
-  au! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=bg
-endif
-
-if g:colors_name == 'vimspectr180-light'
-  let bg = '#d8ebeb'
-  call s:SetSignTheme(bg)
-  hi Pmenu guibg=bg
-  exe 'au! TermOpen,TermEnter * hi Pmenu guibg='.bg
-  exe 'au! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=' . bg
-endif
-
-if g:colors_name == 'vimspectr300-light'
-  let bg = '#f0ddf0'
-  call s:SetSignTheme(bg)
-  hi Pmenu guibg=bg
-  exe 'au! TermOpen,TermEnter * hi Pmenu guibg='.bg
-  exe 'au! TermClose,TermLeave * hi Pmenu ctermfg=0 ctermbg=17 guifg=#1f2e26 guibg=' . bg
-endif
