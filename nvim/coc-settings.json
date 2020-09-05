@@ -5,7 +5,8 @@
   "diagnostic-languageserver.filetypes": {
     "pkgbuild": "pkgbuild",
     "sh": "shellcheck",
-    "terraform": "terraform"
+    "terraform": "terraform",
+    "zsh": "shellcheck-zsh"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "sh": "shfmt",
@@ -44,7 +45,7 @@
         "note": "info",
         "warning": "warning"
       },
-      "sourceName": "shellcheck"
+      "sourceName": "pkgbuild"
     },
     "shellcheck": {
       "args": [
@@ -62,9 +63,37 @@
           "endColumn": 2,
           "endLine": 1,
           "line": 1,
-          "message": [
-            4
-          ],
+          "message": 4,
+          "security": 3
+        }
+      ],
+      "offsetColumn": 0,
+      "offsetLine": 0,
+      "securities": {
+        "error": "error",
+        "note": "info",
+        "warning": "warning"
+      },
+      "sourceName": "shellcheck"
+    },
+    "shellcheck-zsh": {
+      "args": [
+        "--shell=bash",
+        "--format=gcc",
+        "-x",
+        "-"
+      ],
+      "command": "shellcheck",
+      "debounce": 100,
+      "formatLines": 1,
+      "formatPattern": [
+        "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+        {
+          "column": 2,
+          "endColumn": 2,
+          "endLine": 1,
+          "line": 1,
+          "message": 4,
           "security": 3
         }
       ],

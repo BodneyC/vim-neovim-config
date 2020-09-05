@@ -1,7 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
-  Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
+  " Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
   Plug 'BodneyC/flocho',       { 'branch': 'master' }
   Plug 'BodneyC/hex-this-vim', { 'branch': 'master' }
   Plug 'BodneyC/pic-vim',      { 'branch': 'master' }
@@ -81,6 +81,6 @@ endfunc
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
-" call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
+call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
 " call <SID>add_to_rtp("gitclones/wal.vim", v:true)
