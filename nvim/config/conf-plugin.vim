@@ -1,3 +1,5 @@
+let g:conjure#mapping#prefix = '\'
+
 let g:fff#split = "call FloatingCentred(0.4, 0.4)"
 let g:fff#split_direction = "nosb sbr"
 

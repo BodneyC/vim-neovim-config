@@ -21,3 +21,5 @@ source ~/.config/nvim/config/quickui.vim
 source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/functions.vim
 source ~/.config/nvim/config/coc.vim
+
+luafile ~/.config/nvim/config/ts.lua

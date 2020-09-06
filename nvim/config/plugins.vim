@@ -1,11 +1,14 @@
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
-  " Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
+  Plug 'BodneyC/bolorscheme',  { 'branch': 'master' }
   Plug 'BodneyC/flocho',       { 'branch': 'master' }
   Plug 'BodneyC/hex-this-vim', { 'branch': 'master' }
   Plug 'BodneyC/pic-vim',      { 'branch': 'master' }
   Plug 'BodneyC/togool.vim',   { 'branch': 'master' }
+  Plug 'Olical/conjure', {'tag': 'v4.3.1'}
+  Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
+  Plug 'bakpakin/fennel.vim'
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
   Plug 'alvan/vim-closetag', {'for': ['html', 'xml', 'markdown']}
@@ -39,6 +42,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'moll/vim-bbye'
   Plug 'neoclide/coc-neco'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
@@ -81,6 +85,6 @@ endfunc
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
-call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
+" call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
 " call <SID>add_to_rtp("gitclones/wal.vim", v:true)
