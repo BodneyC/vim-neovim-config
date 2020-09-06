@@ -1,17 +1,17 @@
-hi! HoverMatch guibg=#382832
+hi! link HoverMatch MatchParen
 
 function! s:hover_match()
   let w = expand('<cword>')
-  if (w =~ '^[#_a-zA-Z0-9]*$')
-    exe '2match HoverMatch "' . w . '"'
+  if (w =~ '^[#_a-zA-Z0-9]\+$')
+    exe '2match HoverMatch "\([^a-zA-z]\|^\)\zs' . w . '\ze\([^a-zA-z]\|$\)"'
   else
     2match none
   endif
 endfunction
 
-augroup lsp
+augroup __LSP__
   au!
-  au BufEnter   * lua    require'completion'.on_attach()
+  au BufEnter   * silent lua require'completion'.on_attach()
   au CursorHold * silent lua vim.lsp.util.show_line_diagnostics()
   au CursorHold * silent call <SID>hover_match()
 augroup END
@@ -78,17 +78,23 @@ inoremap <silent><expr> <S-Tab>   pumvisible()
 
 let g:diagnostic_auto_popup_while_jump = 0
 let g:completion_enable_auto_signature = 0
-let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_virtual_text_prefix = ' '
 let g:space_before_virtual_text = 2
 let g:diagnostic_enable_underline = 1
 let g:UltiSnipsExpandTrigger="<M-U>"
+let g:completion_sorting = "length"
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_tabnine_max_num_results=3
 let g:completion_auto_change_source = 1
 let g:completion_chain_complete_list = {
     \  'default': [
-    \    { 'complete_items': [ 'lsp', 'path', 'ts', 'snippet', 'buffers', 'tabnine'  ] },
+    \    { 'complete_items': [ 'path' ] },
+    \    { 'complete_items': [ 'lsp' ] },
+    \    { 'complete_items': [ 'ts' ]},
+    \    { 'complete_items': [ 'snippet' ]},
+    \    { 'complete_items': [ 'buffers' ]},
+    \    { 'complete_items': [ 'tabnine' ]},
     \    { 'mode': '<C-p>' }, { 'mode': '<C-n>' }
     \  ]
     \ }

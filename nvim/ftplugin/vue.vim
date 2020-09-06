@@ -7,20 +7,20 @@ endif
 let b:last_wrap_tag_used = ""
 let b:last_wrap_atts_used = ""
 
-" Strlen -> A strlen function with multi-byte support                {{{1
+" Strlen -> A strlen func with multi-byte support                {{{1
 " Luc Hermitte: Suggested this trickery.
 if !exists("*s:Strlen")
-function s:Strlen(text)
+func s:Strlen(text)
   return strlen(substitute(a:text, '.', 'a', 'g'))
-endfunction
+endfunc
 endif
 
 " WrapTag -> Places an XML tag around a visual selection.            {{{1
 " Brad Phelan: Wrap the argument in an XML tag
 " Added nice GUI support to the dialogs.
-" Rewrote function to implement new algorythem that addresses several bugs.
+" Rewrote func to implement new algorythem that addresses several bugs.
 if !exists("*s:WrapTag")
-function s:WrapTag(text)
+func s:WrapTag(text)
     if (line(".") < line("'<"))
         let insert_cmd = "o"
     elseif (col(".") < col("'<"))
@@ -71,25 +71,25 @@ function s:WrapTag(text)
         let b:last_wrap_atts_used = atts
     endif
     execute "normal! ".insert_cmd.text.eol_cmd
-endfunction
+endfunc
 endif
 
 " NewFileXML -> Inserts <?xml?> at top of new file.                  {{{1
 if !exists("*s:NewFileXML")
-function s:NewFileXML( )
+func s:NewFileXML( )
     " Where is g:did_xhtmlcf_inits defined?
     if &filetype == 'docbk' || &filetype == 'xml' || (!exists ("g:did_xhtmlcf_inits") && exists ("g:xml_use_xhtml") && (&filetype == 'html' || &filetype == 'xhtml'))
         if append (0, '<?xml version="1.0"?>')
             normal! G
         endif
     endif
-endfunction
+endfunc
 endif
 
 
 " IncreaseCommentLevel -> Wrap selection in comments, fix nested comments. {{{1
 if !exists("*s:IncreaseCommentLevel")
-function s:IncreaseCommentLevel( )
+func s:IncreaseCommentLevel( )
     " Visual block mode is not supported yet.
     if (visualmode() !=# 'v' && visualmode() !=# 'V')
         return
@@ -120,13 +120,13 @@ function s:IncreaseCommentLevel( )
     endif
     call setreg("v", oldvreg, oldvregtype)
     set report&
-endfunction
+endfunc
 endif
 
 
 " DecreaseCommentLevel -> Removes comment tags from selection, fix nested comments. {{{1
 if !exists("*s:DecreaseCommentLevel")
-function s:DecreaseCommentLevel( )
+func s:DecreaseCommentLevel( )
     " Visual block mode is not supported yet.
     if (visualmode() !=# 'v' && visualmode() !=# 'V')
         return
@@ -159,14 +159,14 @@ function s:DecreaseCommentLevel( )
     endif
     call setreg("v", oldvreg, oldvregtype)
     set report&
-endfunction
+endfunc
 endif
 
 
 
 " Callback -> Checks for tag callbacks and executes them.            {{{1
 if !exists("*s:Callback")
-function s:Callback( xml_tag, isHtml )
+func s:Callback( xml_tag, isHtml )
     let text = 0
     if a:isHtml == 1 && exists ("*HtmlAttribCallback")
         let text = HtmlAttribCallback (a:xml_tag)
@@ -176,13 +176,13 @@ function s:Callback( xml_tag, isHtml )
     if text != '0'
         execute "normal! i " . text ."\<Esc>l"
     endif
-endfunction
+endfunc
 endif
 
 
 " IsParsableTag -> Check to see if the tag is a real tag.            {{{1
 if !exists("*s:IsParsableTag")
-function s:IsParsableTag( tag )
+func s:IsParsableTag( tag )
     " The "Should I parse?" flag.
     let parse = 1
 
@@ -197,13 +197,13 @@ function s:IsParsableTag( tag )
     endif
 
     return parse
-endfunction
+endfunc
 endif
 
 
 " ParseTag -> The major work hourse for tag completion.              {{{1
 if !exists("*s:ParseTag")
-function s:ParseTag( )
+func s:ParseTag( )
     " Save registers
     let old_reg_save = @"
     let old_save_x   = @x
@@ -294,40 +294,40 @@ function s:ParseTag( )
             startinsert
         endif
     endif
-endfunction
+endfunc
 endif
 
 
-" ParseTag2 -> Experimental function to replace ParseTag             {{{1
+" ParseTag2 -> Experimental func to replace ParseTag             {{{1
 "if !exists("*s:ParseTag2")
-"function s:ParseTag2( )
+"func s:ParseTag2( )
     " My thought is to pull the tag out and reformat it to a normalized tag
     " and put it back.
-"endfunction
+"endfunc
 "endif
 
 
 " BuildTagName -> Grabs the tag's name for tag matching.             {{{1
 if !exists("*s:BuildTagName")
-function s:BuildTagName( )
+func s:BuildTagName( )
   "First check to see if we Are allready on the end of the tag. The / search
   "forwards command will jump to the next tag otherwise
 
   " Store contents of register x in a variable
   let b:xreg = @x
 
-  exec "normal! v\"xy"
+  exe "normal! v\"xy"
   if @x=='>'
      " Don't do anything
   else
-     exec "normal! />/\<Cr>"
+     exe "normal! />/\<Cr>"
   endif
 
   " Now we head back to the < to reach the beginning.
-  exec "normal! ?<?\<Cr>"
+  exe "normal! ?<?\<Cr>"
 
   " Capture the tag (a > will be catured by the /$/ match)
-  exec "normal! v/\\s\\|$/\<Cr>\"xy"
+  exe "normal! v/\\s\\|$/\<Cr>\"xy"
 
   " We need to strip off any junk at the end.
   let @x=strpart(@x, 0, match(@x, "[[:blank:]>\<C-J>]"))
@@ -343,13 +343,13 @@ function s:BuildTagName( )
   let temp = @x
   let @x = b:xreg
   let b:xreg = temp
-endfunction
+endfunc
 endif
 
 " TagMatch1 -> First step in tag matching.                           {{{1
 " Brad Phelan: First step in tag matching.
 if !exists("*s:TagMatch1")
-function s:TagMatch1()
+func s:TagMatch1()
   " Save registers
   let old_reg_save = @"
 
@@ -383,18 +383,18 @@ function s:TagMatch1()
  endif
  " Restore registers
  let @" = old_reg_save
-endfunction
+endfunc
 endif
 
 
 " TagMatch2 -> Second step in tag matching.                          {{{1
 " Brad Phelan: Second step in tag matching.
 if !exists("*s:TagMatch2")
-function s:TagMatch2(tag,endtag)
+func s:TagMatch2(tag,endtag)
   let match_type=''
 
   " Build the pattern for searching for XML tags based
-  " on the 'tag' type passed into the function.
+  " on the 'tag' type passed into the func.
   " Note we search forwards for end tags and
   " backwards for start tags
   if a:endtag==0
@@ -434,9 +434,9 @@ function s:TagMatch2(tag,endtag)
 
   "Loop until stk == 0.
   while 1
-     " exec search.
+     " exe search.
      " Make sure to avoid />$/ as well as /\s$/ and /$/.
-     exec "normal! " . match_type . '<\s*\/*\s*' . a:tag . '\([[:blank:]>]\|$\)' . "\<Cr>"
+     exe "normal! " . match_type . '<\s*\/*\s*' . a:tag . '\([[:blank:]>]\|$\)' . "\<Cr>"
 
      " Check to see if our match makes sence.
      if a:endtag == 0
@@ -473,12 +473,12 @@ function s:TagMatch2(tag,endtag)
   endwhile
 
   let &wrapscan = wrapval
-endfunction
+endfunc
 endif
 
 " MisMatchedTag -> What to do if a tag is mismatched.                {{{1
 if !exists("*s:MisMatchedTag")
-function s:MisMatchedTag( id, tag )
+func s:MisMatchedTag( id, tag )
     "Jump back to our formor spot
     normal! `z
     normal zz
@@ -488,13 +488,13 @@ function s:MisMatchedTag( id, tag )
     " For release
     echo "Mismatched tag <" . a:tag . ">"
     echohl None
-endfunction
+endfunc
 endif
 
 " DeleteTag -> Deletes surrounding tags from cursor.                 {{{1
 " Modifies mark z
 if !exists("*s:DeleteTag")
-function s:DeleteTag( )
+func s:DeleteTag( )
     if strpart (getline ("."), col (".") - 1, 1) == "<"
         normal! l
     endif
@@ -504,13 +504,13 @@ function s:DeleteTag( )
     normal! mz
     call s:TagMatch1()
     normal! d%`zd%
-endfunction
+endfunc
 endif
 
 " VisualTag -> Selects Tag body in a visual selection.                {{{1
 " Modifies mark z
 if !exists("*s:VisualTag")
-function s:VisualTag( )
+func s:VisualTag( )
     if strpart (getline ("."), col (".") - 1, 1) == "<"
         normal! l
     endif
@@ -522,13 +522,13 @@ function s:VisualTag( )
     normal! %
     exe "normal! " . visualmode()
     normal! `z
-endfunction
+endfunc
 endif
 
 " InsertGt -> close tags only if the cursor is in a HTML or XML context {{{1
 " Else continue editing
 if !exists("*s:InsertGt")
-function s:InsertGt( )
+func s:InsertGt( )
   let save_matchpairs = &matchpairs
   set matchpairs-=<:>
   
@@ -571,32 +571,32 @@ function s:InsertGt( )
       startinsert
     endif
   endif
-endfunction
+endfunc
 endif
 
 " InitEditFromJump -> Set some needed autocommands and syntax highlights for EditFromJump. {{{1
 if !exists("*s:InitEditFromJump")
-function s:InitEditFromJump( )
+func s:InitEditFromJump( )
     " Add a syntax highlight for the xml_jump_string.
     execute "syntax match Error /\\V" . g:xml_jump_string . "/"
-endfunction
+endfunc
 endif
 
 " ClearJumpMarks -> Clean out extranious left over xml_jump_string garbage. {{{1
 if !exists("*s:ClearJumpMarks")
-function s:ClearJumpMarks( )
+func s:ClearJumpMarks( )
     if exists("g:xml_jump_string")
        if g:xml_jump_string != ""
            execute ":%s/" . g:xml_jump_string . "//ge"
        endif
     endif
-endfunction
+endfunc
 endif
 
 " EditFromJump -> Jump to the end of the tag and continue editing. {{{1
 " g:xml_jump_string must be set.
 if !exists("*s:EditFromJump")
-function s:EditFromJump( )
+func s:EditFromJump( )
     if exists("g:xml_jump_string")
         if g:xml_jump_string != ""
             let foo = search(g:xml_jump_string, 'csW') " Moves cursor by default
@@ -612,23 +612,23 @@ function s:EditFromJump( )
         echo "Function disabled. xml_jump_string not defined."
         echohl None
     endif
-endfunction
+endfunc
 endif
 
 " Gets the current HTML tag by the cursor.
 if !exists("*s:GetCurrentTag")
-	function s:GetCurrentTag()
+	func s:GetCurrentTag()
 		return matchstr(matchstr(getline('.'),
 		\ '<\zs\(\w\|=\| \|''\|"\)*>\%'.col('.').'c'), '^\a*')
-	endfunction
+	endfunc
 endif
 
 " Cleanly return after autocompleting an html/xml tag.
 if !exists("*s:MoveCursor")
-	function s:MoveCursor()
+	func s:MoveCursor()
 		let tag = s:GetCurrentTag()
 		return (tag != '') && (match(getline('.'), '</'.tag.'>') > -1) ? "\<cr>\<cr>\<up>" : "\<cr>"
-	endfunction
+	endfunc
 endif
 
 " Mappings and Settings.                                             {{{1
@@ -637,7 +637,7 @@ setlocal matchpairs+=<:>
 setlocal commentstring=<!--%s-->
 
 " Have this as an escape incase you want a literal '>' not to run the
-" ParseTag function.
+" ParseTag func.
 if !exists("g:xml_tag_completion_map")
     inoremap <buffer> <LocalLeader>. >
     inoremap <buffer> <LocalLeader>> >
@@ -685,11 +685,11 @@ nnoremap <buffer> <LocalLeader>w :call <SID>ClearJumpMarks()<Cr>
 " The syntax files clear out any predefined syntax definitions. Recreate
 " this when ever a xml_jump_string is created. (in ParseTag)
 
-augroup xml
+augroup __XML__
     au!
     au BufNewFile * call <SID>NewFileXML()
     " Remove left over garbage from xml_jump_string on file save.
     au BufWritePre <buffer> call <SID>ClearJumpMarks()
-augroup END
+augroup end
 "}}}1
 finish

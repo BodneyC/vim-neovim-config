@@ -5,15 +5,15 @@ nnoremap <leader>S 1z=
 setlocal conceallevel=2 concealcursor=
 
 " This is a repeat, but it's easier than making is public
-function! s:check_back_space() abort
+func! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1] =~ '\s'
-endfunction
+endfunc
 
-function! s:in_markdown_list()
+func! s:in_markdown_list()
   let col = col('.') - 1
   return getline('.')[:col - 1] =~ '^\s*-\s*'
-endfunction
+endfunc
 
 inoremap <silent><expr> <Tab> pumvisible() 
       \ ? "\<C-N>"

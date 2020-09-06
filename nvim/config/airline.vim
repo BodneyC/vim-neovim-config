@@ -17,7 +17,7 @@ let g:airline_right_sep          = ''
 let g:airline_right_alt_sep      = ''
 let g:airline_symbols.branch     = ''
 let g:airline_symbols.readonly   = ''
-let g:airline_symbols.linenr     = '☰'
+let g:airline_symbols.linenr     = ''
 let g:airline_symbols.maxlinenr  = ''
 let g:airline_symbols.dirty      = ' ⚡'
 
@@ -34,29 +34,22 @@ let airline#extensions#whitespace#conflicts_format = 'Con(%s)'
 
 let g:airline#extensions#vista#enabled = 0
 
-let g:airline#extensions#nvimlsp#enabled = 1
-let g:airline#extensions#nvimlsp#error_symbol = ' '
-let g:airline#extensions#nvimlsp#warning_symbol = ' '
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#error_symbol = ' '
+let g:airline#extensions#coc#warning_symbol = ' '
 
-function! AlFileInfo()
+func! AlFileInfo()
   let l:ff = { 'unix': '', 'mac':  '', 'dos':  '' }
   return l:ff[&ff] . ' ' . &ft
-endfunction
+endfunc
 
-function! AlMode()
+func! AlMode()
   return airline#util#shorten(get(w:, 'airline_current_mode', ''), 79, 1)[0:3]
-endfunction
+endfunc
 
-function! AlModified()
+func! AlModified()
   return &modified ? ' ' : ''
-endfunction
-
-" function! LspStatus() abort
-"   if luaeval('#vim.lsp.buf_get_clients() > 0')
-"     return luaeval("require('lsp-status').status()")
-"   endif
-"   return ''
-" endfunction
+endfunc
 
 call airline#parts#define_function('FileInfo', 'AlFileInfo')
 call airline#parts#define_function('Mode', 'AlMode')
@@ -65,7 +58,7 @@ call airline#parts#define_raw('Fn', '%f')
 call airline#parts#define_raw('Position', '%l:%v')
 call airline#parts#define_raw('MaxLineNr', '%L')
 
-function! AirlineInit() abort
+func! AirlineInit() abort
   let spc = g:airline_symbols.space
   let g:airline_section_a = airline#section#create(['Mode', 'crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'])
   let g:airline_section_b = airline#section#create(['branch'])
@@ -77,9 +70,9 @@ function! AirlineInit() abort
   else
     let g:airline_section_z = airline#section#create(['%p%%'.spc, 'LineNr', ':%v'])
   endif
-endfunction
+endfunc
 
 augroup __AIRLINE__
-  autocmd!
-  autocmd VimEnter * call AirlineInit()
-augroup END
+  au!
+  au VimEnter * call AirlineInit()
+augroup end

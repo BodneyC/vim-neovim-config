@@ -15,17 +15,17 @@ setlocal cindent cinoptions& cinoptions+=j1
 " The "extends" and "implements" lines start off with the wrong indent.
 setlocal indentkeys& indentkeys+=0=extends indentkeys+=0=implements
 
-" Set the function to do the work.
+" Set the func to do the work.
 setlocal indentexpr=GetGroovyIndent()
 
 let b:undo_indent = "set cin< cino< indentkeys< indentexpr<"
 
-" Only define the function once.
+" Only define the func once.
 if exists("*GetGroovyIndent")
   finish
 endif
 
-function! SkipGroovyBlanksAndComments(startline)
+func! SkipGroovyBlanksAndComments(startline)
   let lnum = a:startline
   while lnum > 1
     let lnum = prevnonblank(lnum)
@@ -45,9 +45,9 @@ function! SkipGroovyBlanksAndComments(startline)
     endif
   endwhile
   return lnum
-endfunction
+endfunc
 
-function GetGroovyIndent()
+func GetGroovyIndent()
 
   " Groovy is just like C; use the built-in C indenting and then correct a few
   " specific cases.
@@ -158,6 +158,6 @@ function GetGroovyIndent()
   endif
 
   return theIndent
-endfunction
+endfunc
 
 " vi: sw=2 et

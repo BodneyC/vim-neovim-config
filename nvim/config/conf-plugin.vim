@@ -1,6 +1,9 @@
+let g:conjure#mapping#prefix = '\'
+
 let g:fff#split = "call FloatingCentred(0.4, 0.4)"
 let g:fff#split_direction = "nosb sbr"
 
+let g:Hexokinase_virtualText = " "
 let g:Hexokinase_highlighters = ['virtual']
 let g:Hexokinase_optInPatterns = [
       \ 'full_hex',
@@ -32,14 +35,13 @@ let g:togool_extras =
       \  ['>', '-']]
 
 let g:virk_tags_enable = 0
-let g:virk_close_regexes = [
-      \ "^$", "FAR.*", "MERGE MSG", "git-.*", "COMMIT.*", ".*Plugins.*", "runtime\/docs"]
+let g:virk_close_regexes = ["^$", "FAR.*", "MERGE MSG", "git-.*", "COMMIT.*", ".*Plugins.*"]
 
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_enabled = 1
 let g:indentLine_char = '·'
 let g:indentLine_first_char = '·'
-let g:indentLine_fileTypeExclude = [ "markdown" ]
+let g:indentLine_fileTypeExclude = [ "markdown", "nerdtree" ]
 
 let g:mundo_right = 1
 
@@ -73,7 +75,7 @@ let g:gutentags_ctags_extra_args = [
 let g:gutentags_ctags_exclude = ['*.json']
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'nvim_lsp'
+let g:vista_default_executive = 'coc'
 let g:vista#renderer#icons = {
       \  "function": "\uf794",
       \  "variable": "\uf71b",
@@ -108,23 +110,23 @@ let s:footer = [
       \ "+----------------------------+",
       \ ""]
 
-function! s:center(lines) abort
+func! s:center(lines) abort
   let longest_line = max(map(copy(a:lines), 'len(v:val)'))
   let centered_lines = map(
         \   copy(a:lines),
         \   'repeat(" ", (winwidth(0) / 2) - (longest_line / 2)) . v:val'
         \ )
   return centered_lines
-endfunction
+endfunc
 
-function! s:set_startify_params() abort
+func! s:set_startify_params() abort
   let g:startify_padding_left = winwidth(0) / 4
   let g:startify_custom_header = s:center(s:header)
   let g:startify_custom_footer = s:center(s:footer)
-endfunction
+endfunc
 
 " Needs to remain here for startify stuff
-autocmd! VimEnter *
+au! VimEnter *
       \   if argc() == 0 || (argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in"))
       \ |   call <SID>set_startify_params()
       \ |   Startify
@@ -132,15 +134,24 @@ autocmd! VimEnter *
 
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
+let NERDTreeWinSize=25
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let NERDTreeShowBookmarks=0
+let NERDTreeShowHidden=1    
+let NERDTreeDirArrowExpandable = "\u00a0"
+let NERDTreeDirArrowCollapsible = "\u00a0"
 
-function! Flogdiff()
+func! Flogdiff()
   let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
   let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
   call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
-endfunction
+endfunc
 
-augroup flog
-  autocmd FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
+augroup __PLUGINS__
+  au!
+  au FileType nerdtree setlocal signcolumn=no
+  au FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
 augroup END
 
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
@@ -150,3 +161,22 @@ let g:pear_tree_map_special_keys = 0
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
+
+" ... well, I'm never going to type those in I suppose...
+imap 䙛 <Plug>(PearTreeCloser_]) 
+imap 𭕫 <Plug>(PearTreeCloser_)) 
+imap 𔂈 <Plug>(PearTreeCloser_}) 
+
+func! s:pear_tree_close(c)
+  if (pear_tree#GetSurroundingPair() != [] && pear_tree#GetSurroundingPair()[1] == a:c)
+    return pear_tree#insert_mode#JumpOut()
+  else
+    return pear_tree#insert_mode#HandleCloser(a:c)
+  endif
+endfunc
+
+inoremap <silent><expr> ]  <SID>pear_tree_close(']')
+inoremap <silent><expr> )  <SID>pear_tree_close(')')
+inoremap <silent><expr> }  <SID>pear_tree_close('}')
+
+" vim: sw=0

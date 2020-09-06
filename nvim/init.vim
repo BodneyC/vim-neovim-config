@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 
-let g:term_theme = $TERMTHEME
+let g:term_theme = "light"
 if empty(g:term_theme)
   echoe "$TERMTHEME not set, theming results may vary"
 endif
@@ -21,5 +21,6 @@ source ~/.config/nvim/config/quickui.vim
 source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/functions.vim
 
-source  ~/.config/nvim/config/lsp.vim
+source ~/.config/nvim/config/lsp.vim
 luafile ~/.config/nvim/config/lsp.lua
+luafile ~/.config/nvim/config/ts.lua
