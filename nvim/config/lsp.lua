@@ -30,6 +30,7 @@ nvim_lsp.sumneko_lua.setup { on_attach = on_attach, capabilities = lsp_status.ca
 nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.jsonls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
@@ -39,13 +40,14 @@ nvim_lsp.kotlin_language_server.setup { on_attach = on_attach, capabilities = ls
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
-  filetypes = { 'groovy', 'pkgbuild', 'terraform', 'zsh' },
+  filetypes = { 'groovy', 'pkgbuild', 'terraform', 'zsh', 'markdown' },
   init_options = {
     filetypes = {
       pkgbuild = 'pkgbuild',
       terraform = 'terraform',
       zsh = 'shellcheck_zsh',
       groovy = 'groovy',
+      markdown = 'markdown',
     },
     formatFiletypes = {
       sh = 'shfmt',
@@ -58,6 +60,21 @@ nvim_lsp.diagnosticls.setup {
       }
     },
     linters = {
+      markdown = {
+        command = 'markdownlint',
+        args = { '--stdin' },
+        isStderr = true,
+        isStdout = false,
+        formatPattern = {
+          -- README.md:3:81 MD013/line-length Line length [Expected: 80; Actual: 282]
+          '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$',
+          { security = 1, line = 2, column = 3, message = 4 }
+        },
+        offsetColumn = 0,
+        offsetLine = 0,
+        securities = { error = 'error', note = 'info', warning = ':' },
+        sourceName = 'markdown',
+      },
       pkgbuild  = {
         args  = { '%file' },
         command = '/home-link/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',

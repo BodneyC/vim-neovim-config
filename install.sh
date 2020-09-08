@@ -33,8 +33,14 @@ command -v npm && npm i -g \
 ./softlink-config.sh
 curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"$HOME/.local/bin/nvim" -u "$HOME/.config/nvim/config/plugins.vim" \
-  -c "PlugInstall | qall"
+
+run_vim_cmd() {
+  "$HOME/.local/bin/nvim" -u "$HOME/.config/nvim/config/plugins.vim" -c "$1"
+}
+
+run_vim_cmd "PlugInstall | qall"
+run_vim_cmd "TSInstall all | qall"
+run_vim_cmd "TSUninstall markdown json | qall"
 
 FZF_PREVIEW_SCRIPT="$HOME/.local/share/nvim/plugged/fzf.vim/bin/preview.sh"
 [[ -f "$FZF_PREVIEW_SCRIPT" ]] && \

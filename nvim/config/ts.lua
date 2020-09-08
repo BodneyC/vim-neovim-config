@@ -1,6 +1,5 @@
 -- local ts_utils = require 'nvim-treesitter.ts_utils'
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,
   },

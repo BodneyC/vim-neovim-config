@@ -1,18 +1,20 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-   Plug 'neovim/nvim-lsp'
-   Plug 'nvim-lua/lsp-status.nvim'
-   Plug 'nvim-lua/diagnostic-nvim'
-   Plug 'haorenW1025/completion-nvim'
-   Plug 'nvim-treesitter/completion-treesitter'
-   Plug 'steelsojka/completion-buffers'
-   Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-   Plug 'SirVer/ultisnips'
-   Plug 'honza/vim-snippets'
-   Plug 'KabbAmine/vCoolor.vim'
-   Plug 'airblade/vim-gitgutter'
-   Plug 'preservim/nerdtree'
-   Plug 'scrooloose/nerdtree-project-plugin'
+  Plug 'neovim/nvim-lsp'
+  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+  Plug 'haorenW1025/completion-nvim'
+  Plug 'nvim-treesitter/completion-treesitter'
+  Plug 'steelsojka/completion-buffers'
+  Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'KabbAmine/vCoolor.vim'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'kristijanhusak/defx-icons'
+  Plug 'kristijanhusak/defx-git'
+  " Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 
   Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
@@ -55,16 +57,15 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'mhinz/vim-startify'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
-  " Plug 'neoclide/coc-neco'
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'vigoux/treesitter-context.nvim'
   Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
-  Plug 'sheerun/vim-polyglot'
+  "Plug 'sheerun/vim-polyglot'
   Plug 'simnalamburt/vim-mundo'
   Plug 'skywind3000/vim-quickui'
   Plug 'soywod/iris.vim'

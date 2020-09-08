@@ -86,6 +86,8 @@ command! -bang TermSplit call TermSplit(<bang>0)
 
 nnoremap <silent> <leader>' :call NextTermSplit(1) \| wincmd p<CR>
 
+tnoremap <expr> <C-R> '<C-\><C-N>"' . nr2char(getchar()) . 'pi'
+
 nnoremap <silent> <F10> :TermSplit!<CR>
 inoremap <silent> <F10> <C-o>:TermSplit!<CR>
 tnoremap <silent> <F10> <C-\><C-n>:TermSplit!<CR>

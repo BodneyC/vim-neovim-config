@@ -1,19 +1,7 @@
-hi! link HoverMatch MatchParen
-
-function! s:hover_match()
-  let w = expand('<cword>')
-  if (w =~ '^[#_a-zA-Z0-9]\+$')
-    exe '2match HoverMatch "\([^a-zA-z]\|^\)\zs' . w . '\ze\([^a-zA-z]\|$\)"'
-  else
-    2match none
-  endif
-endfunction
-
 augroup __LSP__
   au!
   au BufEnter   * silent lua require'completion'.on_attach()
   au CursorHold * silent lua vim.lsp.util.show_line_diagnostics()
-  au CursorHold * silent call <SID>hover_match()
 augroup END
 
 set completeopt=menuone,noinsert,noselect
@@ -89,12 +77,8 @@ let g:completion_tabnine_max_num_results=3
 let g:completion_auto_change_source = 1
 let g:completion_chain_complete_list = {
     \  'default': [
-    \    { 'complete_items': [ 'path' ] },
-    \    { 'complete_items': [ 'lsp' ] },
-    \    { 'complete_items': [ 'ts' ]},
-    \    { 'complete_items': [ 'snippet' ]},
-    \    { 'complete_items': [ 'buffers' ]},
-    \    { 'complete_items': [ 'tabnine' ]},
+    \    { 'complete_items': [ 'lsp', 'ts', 'path', 'snippet' ] },
+    \    { 'complete_items': [ 'buffers', 'tabnine' ]},
     \    { 'mode': '<C-p>' }, { 'mode': '<C-n>' }
     \  ]
     \ }

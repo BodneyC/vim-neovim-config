@@ -20,6 +20,7 @@ source ~/.config/nvim/config/remappings.vim
 source ~/.config/nvim/config/quickui.vim
 source ~/.config/nvim/config/terminal.vim
 source ~/.config/nvim/config/functions.vim
+source ~/.config/nvim/config/defx.vim
 
 source ~/.config/nvim/config/lsp.vim
 luafile ~/.config/nvim/config/lsp.lua

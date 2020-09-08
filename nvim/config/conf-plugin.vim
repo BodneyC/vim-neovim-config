@@ -1,3 +1,11 @@
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 14
+
+let g:polyglot_disabled = ['markdown']
+
 let g:conjure#mapping#prefix = '\'
 
 let g:fff#split = "call FloatingCentred(0.4, 0.4)"
@@ -35,13 +43,16 @@ let g:togool_extras =
       \  ['>', '-']]
 
 let g:virk_tags_enable = 0
-let g:virk_close_regexes = ["^$", "FAR.*", "MERGE MSG", "git-.*", "COMMIT.*", ".*Plugins.*"]
+let g:virk_close_regexes = ["^$", "FAR.*", "MERGE MSG", "git-.*", "COMMIT.*", ".*Plugins.*", "^.defx].*"]
 
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_enabled = 1
 let g:indentLine_char = '·'
 let g:indentLine_first_char = '·'
-let g:indentLine_fileTypeExclude = [ "markdown", "nerdtree" ]
+let g:indentLine_fileTypeExclude = [ "markdown", "nerdtree", "defx" ]
+
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign = 'left'
 
 let g:mundo_right = 1
 
@@ -75,7 +86,7 @@ let g:gutentags_ctags_extra_args = [
 let g:gutentags_ctags_exclude = ['*.json']
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
+let g:vista_default_executive = 'ctags'
 let g:vista#renderer#icons = {
       \  "function": "\uf794",
       \  "variable": "\uf71b",
@@ -132,16 +143,6 @@ au! VimEnter *
       \ |   Startify
       \ | endif
 
-let g:NERDSpaceDelims=1
-let g:NERDDefaultAlign = 'left'
-let NERDTreeWinSize=25
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-let NERDTreeShowBookmarks=0
-let NERDTreeShowHidden=1    
-let NERDTreeDirArrowExpandable = "\u00a0"
-let NERDTreeDirArrowCollapsible = "\u00a0"
-
 func! Flogdiff()
   let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
   let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
@@ -150,17 +151,11 @@ endfunc
 
 augroup __PLUGINS__
   au!
-  au FileType nerdtree setlocal signcolumn=no
   au FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
 augroup END
 
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
 let g:tagbar_compact = 1
-
-let g:pear_tree_map_special_keys = 0
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
 
 " ... well, I'm never going to type those in I suppose...
 imap 䙛 <Plug>(PearTreeCloser_]) 
@@ -178,5 +173,3 @@ endfunc
 inoremap <silent><expr> ]  <SID>pear_tree_close(']')
 inoremap <silent><expr> )  <SID>pear_tree_close(')')
 inoremap <silent><expr> }  <SID>pear_tree_close('}')
-
-" vim: sw=0

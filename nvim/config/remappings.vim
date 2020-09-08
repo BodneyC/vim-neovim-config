@@ -158,7 +158,6 @@ nnoremap <silent>       <leader>gg :Git<CR>
 nnoremap <silent>       <leader>gl :ToggleLazyGit<CR>
 nnoremap <silent>       <leader>i  :IndentLinesToggle<CR>
 nnoremap <silent>       <leader>m  :call FzfOpenNotExplorer(':Marks')<CR>
-nnoremap <silent>       <leader>nt :NERDTreeToggle<CR>
 nnoremap <silent>       <leader>r  :call FzfOpenNotExplorer(':Rg')<CR>
 nnoremap <silent>       <leader>z  :ZoomToggle<CR>
 nnoremap <silent>       [<Leader>  :<C-u>call append(line('.') - 1, repeat([''], v:count1))<CR>
