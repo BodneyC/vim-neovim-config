@@ -121,6 +121,7 @@ nnoremap                <leader>*  :%s/\<<C-r><C-w>\>//g<left><left>
 nnoremap <silent>       <leader>/  :noh<CR>
 nnoremap <silent>       <leader>;  :Commands<CR>
 nnoremap <silent>       <leader>M  :call FzfOpenNotExplorer(':Maps')<CR>
+nnoremap <silent>       <leader>t  :Twiggy<CR>
 nnoremap <silent>       <leader>T  :TagbarToggle<CR>
 nnoremap <silent>       <leader>U  :MundoToggle<CR>
 nnoremap <silent>       <leader>V  :Vista!!<CR>
@@ -165,6 +166,9 @@ nnoremap <silent>       ]<Leader>  :<C-u>call append(line('.'), repeat([''], v:c
 nnoremap <silent>       <M-]>      :call RipgrepFzfUnderCursor()<CR>
 nnoremap <silent>       ‘          :call RipgrepFzfUnderCursor()<CR>
 nnoremap <silent>       <leader>}  zf}
+
+map ; <Plug>(clever-f-repeat-forward)
+map , <Plug>(clever-f-repeat-back)
 
 " Mode -| Arguments ---| Name -------| Action -------------------------- "
 command! -nargs=0       ToggleLazyGit w | call FloatingTerm('lazygit')

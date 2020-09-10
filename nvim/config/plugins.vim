@@ -1,5 +1,4 @@
 call plug#begin('~/.local/share/nvim/plugged')
-
   Plug 'neovim/nvim-lsp'
   Plug 'nvim-lua/lsp-status.nvim'
   Plug 'nvim-lua/diagnostic-nvim'
@@ -14,7 +13,15 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'kristijanhusak/defx-icons'
   Plug 'kristijanhusak/defx-git'
-  " Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+  " Plug 'michaelb/sniprun', { 'do': 'bash install.sh' }
+
+  Plug 'rhysd/clever-f.vim'
+  Plug 'sodapopcan/vim-twiggy'
+  Plug 'tadaa/vimade'
+  Plug 'nicwest/vim-http'
+  Plug 'axelf4/vim-strip-trailing-whitespace'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn' }
+  Plug 'yuttie/comfortable-motion.vim'
 
   Plug 'BodneyC/At-Zed-vim',   { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',   { 'branch': 'master' }
@@ -59,13 +66,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'moll/vim-bbye'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'vigoux/treesitter-context.nvim'
-  Plug 'oguzbilgic/vim-gdiff', {'on': ['Gdiff', 'Gdiffsplit']}
+  Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
-  Plug 'rhysd/vim-grammarous', {'for': ['markdown', 'tex']}
+  Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
-  "Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
   Plug 'simnalamburt/vim-mundo'
   Plug 'skywind3000/vim-quickui'
   Plug 'soywod/iris.vim'

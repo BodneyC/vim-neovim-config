@@ -37,6 +37,22 @@ nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.ca
 nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.kotlin_language_server.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
 
+local lombok_path = ''
+nvim_lsp.jdtls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+  init_options = {
+    jvm_args = {
+      "-noverify",
+      "-Xmx1G",
+      "-XX:+UseG1GC",
+      "-XX:+UseStringDeduplication",
+      "-javaagent:" .. lombok_path,
+      "-Xbootclasspath/a:" .. lombok_path,
+    }
+  }
+}
+
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,

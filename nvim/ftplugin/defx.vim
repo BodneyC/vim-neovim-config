@@ -6,6 +6,10 @@ nnoremap <silent><buffer> O
       \ defx#is_directory() ?
       \   defx#do_action('open_tree', 'recursive:10') :
       \   defx#do_action('open', 'wincmd p \| e')
+nnoremap <silent><buffer><expr> <2-LeftMouse>
+      \ defx#is_directory() ?
+      \   defx#do_action('open_tree') :
+      \   defx#do_action('open', 'wincmd p \| e')
 nnoremap <silent><buffer><expr> o
       \ defx#is_directory() ?
       \   defx#do_action('open_tree') :
