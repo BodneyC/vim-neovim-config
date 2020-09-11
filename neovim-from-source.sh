@@ -6,8 +6,9 @@ cd "$HOME/gitclones" || exit
 
 cd neovim || exit
 
-git checkout nightly
+git checkout master
 git pull
+git checkout nightly
 
 make clean
 

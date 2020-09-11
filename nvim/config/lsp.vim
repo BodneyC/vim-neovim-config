@@ -65,16 +65,22 @@ inoremap <silent><expr> <S-Tab>   pumvisible()
       \   : completion#trigger_completion()
 
 let g:diagnostic_auto_popup_while_jump = 0
-let g:completion_enable_auto_signature = 0
 let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_virtual_text_prefix = ' '
 let g:space_before_virtual_text = 2
 let g:diagnostic_enable_underline = 1
+
 let g:UltiSnipsExpandTrigger="<M-U>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 let g:completion_sorting = "length"
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_tabnine_max_num_results=3
 let g:completion_auto_change_source = 1
+let g:completion_enable_auto_signature = 1
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+let g:completion_enable_auto_paren = 1
 let g:completion_chain_complete_list = {
     \  'default': [
     \    { 'complete_items': [ 'lsp', 'ts', 'path', 'snippet' ] },

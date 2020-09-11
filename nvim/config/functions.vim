@@ -81,9 +81,10 @@ augroup __CONFIG_GENERAL__
         \ if getfsize(expand("<afile>")) > g:large_file |
         \   set eventignore+=FileType |
         \   setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 completeopt-=preview nowrap |
+        \   if exists(':AirlineToggle') | exe 'AirlineToggle' | endif |
         \ endif
   au BufRead,BufNewFile *.MD set ft=markdown
-augroup end
+augroup END
 
 " Mode -| Args ---| Name ---------------| Action ----------------------------------------------------- "
 command! -nargs=0  ConvLineEndings       %s/<CR>//g

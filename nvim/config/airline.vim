@@ -75,4 +75,4 @@ endfunc
 augroup __AIRLINE__
   au!
   au VimEnter * call AirlineInit()
-augroup end
+augroup END

@@ -1,8 +1,6 @@
 ﻿let mapleader="\<Space>"
 nmap <leader> <NOP>
 
-let g:resize_increment = get(g:, 'resize_increment', 2)
-
 func! s:edge_of_screen(dir)
   let w = winnr()
   silent! exe "normal! \<C-w>" . a:dir
@@ -11,6 +9,7 @@ func! s:edge_of_screen(dir)
   return w == n
 endfunc
 
+let g:resize_increment = get(g:, 'resize_increment', 2)
 func! s:resize_in_direction(dir)
   if winnr('$') == 1 | return | endif
   exe (index(['h', 'l'], a:dir) != -1 ? 'vertical ' : '') . 'resize '
@@ -47,11 +46,7 @@ func! FzfOpenNotExplorer(command_str)
 endfunc
 
 func! FilesFzf(query)
-  let fzf_opts = {
-        \   'options': [
-        \     '--query', a:query,
-        \   ]
-        \ }
+  let fzf_opts = { 'options': [ '--query', a:query, ] }
   call fzf#vim#files('', fzf#vim#with_preview(fzf_opts, 'up:70%'))
 endfunc
 

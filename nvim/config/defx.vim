@@ -13,7 +13,7 @@ augroup __DEFX__
   au!
   au BufEnter * if (winnr("$") == 1 && &ft == 'defx') | silent call defx#call_action('add_session') | bd! | q | endif
   au BufLeave * if &ft == 'defx' | silent call defx#call_action('add_session') | endif
-augroup end
+augroup END
 
 func! s:defx_open()
   let opts = [

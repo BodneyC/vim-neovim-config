@@ -107,7 +107,7 @@ augroup __TERMINAL__
   au TermEnter,TermOpen,BufNew,BufEnter term://* startinsert
   au TermLeave,BufLeave term://* stopinsert
   au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
-augroup end
+augroup END
 
 let s:border_buf = -1
 func! s:border_box(h, w, c, r)
@@ -154,7 +154,7 @@ func! FloatingCentred(...)
   augroup __FLOAT__
     au!
     exe 'au BufWipeout <buffer=' . cur_float_win . '> bd! ' . buf
-  augroup end
+  augroup END
   setlocal winhl=Normal:NormalFloat
   return cur_float_win
 endfunc
@@ -185,7 +185,7 @@ func! FloatingHelp(...)
   let s:help_buf = buf
   augroup __FLOAT__
     au!
-  augroup end
+  augroup END
   setlocal ft=help bt=help
   let not_in_tags = 0
   try
@@ -196,7 +196,7 @@ func! FloatingHelp(...)
   if s:border_buf > 0
     augroup __FLOAT__
       exe 'au BufWipeout <buffer=' . buf . '> bd! ' . s:border_buf
-    augroup end
+    augroup END
   endif
   map <buffer> <Esc> :bw<CR>
   if not_in_tags == 1

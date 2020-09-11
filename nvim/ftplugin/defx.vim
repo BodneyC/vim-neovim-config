@@ -2,6 +2,10 @@ nnoremap <silent><buffer><expr> <CR>
       \ defx#is_directory() ?
       \   defx#do_action('open_tree', 'recursive:10') :
       \   defx#do_action('open', 'botright vsplit')
+nnoremap <silent><buffer><expr> gl
+      \ defx#is_directory() ?
+      \   defx#do_action('open_tree', 'recursive:10') :
+      \   defx#do_action('open', 'botright vsplit')
 nnoremap <silent><buffer> O
       \ defx#is_directory() ?
       \   defx#do_action('open_tree', 'recursive:10') :

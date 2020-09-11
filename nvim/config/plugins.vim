@@ -44,7 +44,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'dylanaraps/fff.vim'
   Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -72,7 +71,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
-  " Plug 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot'
   Plug 'simnalamburt/vim-mundo'
   Plug 'skywind3000/vim-quickui'
   Plug 'soywod/iris.vim'

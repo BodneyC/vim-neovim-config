@@ -156,6 +156,12 @@ au! VimEnter *
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
 let g:tagbar_compact = 1
 
+" Needed for <BS> mapping
+let g:pear_tree_map_special_keys = 0
+" let g:pear_tree_smart_openers = 1
+" let g:pear_tree_smart_closers = 1
+" let g:pear_tree_smart_backspace = 1
+
 " ... well, I'm never going to type those in I suppose...
 imap 䙛 <Plug>(PearTreeCloser_])
 imap 𭕫 <Plug>(PearTreeCloser_))
