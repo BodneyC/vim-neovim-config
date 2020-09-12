@@ -34,7 +34,7 @@ set tabstop=2
 set textwidth=0
 set ttimeout
 set ttimeoutlen=50
-set updatetime=200
+set updatetime=20
 set wildmode=longest,full
 set winblend=6
 set wrap

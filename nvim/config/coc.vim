@@ -20,6 +20,7 @@ let s:coc_extensions = [
       \ 'coc-java',
       \ 'coc-python',
       \ 'coc-rls',
+      \ 'coc-lua',
       \
       \ 'coc-eslint',
       \ 'coc-tsserver',

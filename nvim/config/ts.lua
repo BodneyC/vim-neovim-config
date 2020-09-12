@@ -1,6 +1,5 @@
 -- local ts_utils = require 'nvim-treesitter.ts_utils'
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,
   },
@@ -23,7 +22,7 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
-  -- Currently unsupported
+  -- Currently unsupported by most
   textobjects = {
     swap = {
       enable = true,
@@ -34,9 +33,6 @@ require'nvim-treesitter.configs'.setup {
         ["<leader>A"] = "@parameter.inner",
       },
     },
-  },
-  -- Currently unsupported
-  textobjects = {
     move = {
       enable = true,
       goto_next_start = {

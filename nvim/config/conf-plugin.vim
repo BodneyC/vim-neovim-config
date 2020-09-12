@@ -41,17 +41,9 @@ let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_enabled = 1
 let g:indentLine_char = '·'
 let g:indentLine_first_char = '·'
-let g:indentLine_fileTypeExclude = [ "markdown" ]
+let g:indentLine_fileTypeExclude = [ "markdown", "nerdtree", "defx", "twiggy" ]
 
 let g:mundo_right = 1
-
-if exists('*comfortable_motion#flick')
-  let g:comfortable_motion_no_default_key_mappings=1
-  let g:comfortable_motion_air_drag = 1
-  let g:comfortable_motion_friction = 100
-  nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-  nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
-endif
 
 let g:tagbar_auto_close = 1
 
@@ -68,11 +60,11 @@ let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_exclude = ['*.json']
 let g:gutentags_ctags_extra_args = [
       \   '--tag-relative=always',
       \   '--fields=+ailmnS',
       \ ]
-let g:gutentags_ctags_exclude = ['*.json']
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
@@ -135,23 +127,23 @@ au! VimEnter *
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
 
-func! Flogdiff()
-  let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
-  let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
-  call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
-endfunc
+" func! Flogdiff()
+"   let first_commit = flog#get_commit_data(line("'<")).short_commit_hash
+"   let last_commit = flog#get_commit_data(line("'>")).short_commit_hash
+"   call flog#git('vertical belowright', '!', 'diff ' . first_commit . ' ' . last_commit)
+" endfunc
 
-augroup flog
-  au FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
-augroup END
+" augroup flog
+"   au FileType floggraph vno gd :<C-U>call Flogdiff()<CR>
+" augroup END
 
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
 let g:tagbar_compact = 1
 
 let g:pear_tree_map_special_keys = 0
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
+" let g:pear_tree_smart_openers = 1
+" let g:pear_tree_smart_closers = 1
+" let g:pear_tree_smart_backspace = 1
 
 " ... well, I'm never going to type those in I suppose...
 imap 䙛 <Plug>(PearTreeCloser_]) 
