@@ -1,7 +1,7 @@
 local vim = vim
-local nvim_lsp = require('nvim_lsp')
-local diagnostic = require('diagnostic')
-local lsp_status = require('lsp-status')
+local nvim_lsp = require'nvim_lsp'
+local diagnostic = require'diagnostic'
+local lsp_status = require'lsp-status'
 
 vim.fn.sign_define('LspDiagnosticsErrorSign',       { text = ' ', texthl = 'LspDiagnosticsError' })
 vim.fn.sign_define('LspDiagnosticsWarningSign',     { text = ' ', texthl = 'LspDiagnosticsWarning' })
@@ -30,12 +30,13 @@ nvim_lsp.sumneko_lua.setup { on_attach = on_attach, capabilities = lsp_status.ca
 nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.jsonls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.kotlin_language_server.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
+
+nvim_lsp.jsonls.setup { on_attach = diagnostic.on_attach }
 
 local lombok_path = ''
 nvim_lsp.jdtls.setup {

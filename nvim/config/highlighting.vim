@@ -4,10 +4,10 @@ let g:onedark_termcolors = 256
 
 set termguicolors
 
-if g:term_theme == "light"
+if $TERMTHEME == "light"
   colo plint-light
 else
-  colo subdued
+  colo unicorn
 endif
 
 func! s:additional_highlights()
@@ -17,24 +17,23 @@ func! s:additional_highlights()
   hi! link JavaIdentifier NONE
   hi! link CleverFChar ErrorMsg
   hi! link CleverFCursor ErrorMsg
-  if g:term_theme == "light"
+  if $TERMTHEME == "light"
     hi! Visual guifg=bg
     hi! VertSplit guibg=NONE
-    set fillchars=vert:\|
   endif
 endfunc
 call <SID>additional_highlights()
 
-let s:hover_match = -1
+let s:hover_match_id = -1
 func! s:hover_match()
   for match in getmatches()
-    if get(match, 'id', '-1') == s:hover_match
-      call matchdelete(s:hover_match)
+    if get(match, 'id', '-1') == s:hover_match_id
+      call matchdelete(s:hover_match_id)
     end
   endfor
   let w = expand('<cword>')
   if (w =~ '^[0-9]*[#_a-zA-Z][#_a-zA-Z0-9]*$')
-    let s:hover_match = matchadd(
+    let s:hover_match_id = matchadd(
           \ 'HoverMatch', '\([^a-zA-z]\|^\)\zs' . w . '\ze\([^a-zA-z]\|$\)')
   endif
 endfunc

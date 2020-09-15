@@ -1,3 +1,5 @@
+let g:vsnip_snippet_dir = expand('$HOME/.config/nvim/vsnip')
+
 let g:vimade = {
       \ 'fadelevel': 0.6,
       \ 'enablesigns': 0
@@ -11,8 +13,6 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 14
-
-let g:polyglot_disabled = ['markdown']
 
 let g:conjure#mapping#prefix = '\'
 
@@ -155,26 +155,3 @@ au! VimEnter *
 
 let g:tagbar_iconchars = ["\u00a0", "\u00a0"]
 let g:tagbar_compact = 1
-
-" Needed for <BS> mapping
-let g:pear_tree_map_special_keys = 0
-" let g:pear_tree_smart_openers = 1
-" let g:pear_tree_smart_closers = 1
-" let g:pear_tree_smart_backspace = 1
-
-" ... well, I'm never going to type those in I suppose...
-imap 䙛 <Plug>(PearTreeCloser_])
-imap 𭕫 <Plug>(PearTreeCloser_))
-imap 𔂈 <Plug>(PearTreeCloser_})
-
-func! s:pear_tree_close(c)
-  if (pear_tree#GetSurroundingPair() != [] && pear_tree#GetSurroundingPair()[1] == a:c)
-    return pear_tree#insert_mode#JumpOut()
-  else
-    return pear_tree#insert_mode#HandleCloser(a:c)
-  endif
-endfunc
-
-inoremap <silent><expr> ]  <SID>pear_tree_close(']')
-inoremap <silent><expr> )  <SID>pear_tree_close(')')
-inoremap <silent><expr> }  <SID>pear_tree_close('}')

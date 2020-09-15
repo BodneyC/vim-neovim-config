@@ -38,6 +38,7 @@ set updatetime=50
 set wildmode=longest,full
 set winblend=6
 set wrap
+set fillchars=vert:\|
 
 set guifont=VictorMono\ Nerd\ Font:h11
 

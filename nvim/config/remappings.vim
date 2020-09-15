@@ -97,19 +97,6 @@ nnoremap <silent>       <F7>       :set spell!<CR>
 inoremap <silent>       <F7>       <C-o>:set spell!<CR>
 
 " WIP
-inoremap <silent><expr>  <BS>
-      \ getline('.')[:col('.') - 2] =~ '^\s\+$'
-      \ ? getline(line('.') - 1) =~ '^\s*$'
-      \   ? getline('.') =~ '^\s*$'
-      \     ? "<Esc>ck"
-      \     : "<C-o>:exe line('.') - 1 . 'delete'<CR>"
-      \   : "<C-w><BS>"
-      \ : pear_tree#insert_mode#Backspace()
-
-inoremap <silent><expr> <C-f>      pear_tree#insert_mode#JumpOut()
-inoremap <silent><expr> <Esc>      pear_tree#insert_mode#Expand()
-inoremap <silent><expr> <Space>    pear_tree#insert_mode#Space()
-
 map                              <Plug>NERDCommenterToggle
 nnoremap                <C-p>      <Tab>
 nnoremap                <leader>*  :%s/\<<C-r><C-w>\>//g<left><left>
@@ -177,3 +164,8 @@ command! -nargs=0       DiffThis      windo diffthis
 command! -nargs=0       DiffOff       windo diffoff
 command! -bang -nargs=* Rg            call RipgrepFzf(<q-args>, <bang>0)
 command! -bang -nargs=* FilesFzf      call FilesFzf(<q-args>)
+
+cabbrev pluginstall PlugInstall
+cabbrev PLugInstall PlugInstall
+cabbrev plugupdate PlugUpdate
+cabbrev PLugUpdate PlugUpdate

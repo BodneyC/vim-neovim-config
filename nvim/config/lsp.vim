@@ -7,7 +7,7 @@ augroup END
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
-function! s:show_documentation()
+func! s:show_documentation()
   if &filetype == 'vim'
     exe 'H ' . expand('<cword>')
   elseif &filetype == 'sh' || &filetype == 'zsh'
@@ -17,9 +17,9 @@ function! s:show_documentation()
   else
     lua vim.lsp.buf.hover()
   endif
-endfunction
+endfunc
 
-function! s:go_to_definition()
+func! s:go_to_definition()
   if luaeval("vim.lsp.buf.definition()") == v:null
     redraw | echo
     for l:expr in ['<cword>', '<cWORD>', '<cexpr>']
@@ -33,12 +33,12 @@ function! s:go_to_definition()
     endfor
     redraw | echo "Tag not found"
   endif
-endfunction
+endfunc
 
-function! s:check_back_space() abort
+func! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+endfunc
 
 nnoremap <silent>       gd        :lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>       gh        :lua vim.lsp.buf.hover()<CR>
@@ -64,18 +64,20 @@ inoremap <silent><expr> <S-Tab>   pumvisible()
       \   ? "\<S-Tab>"
       \   : completion#trigger_completion()
 
+imap <expr> <C-j> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+imap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
+smap <expr> <C-j> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+smap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
+
 let g:diagnostic_auto_popup_while_jump = 0
 let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_virtual_text_prefix = ' '
 let g:space_before_virtual_text = 2
 let g:diagnostic_enable_underline = 1
 
-let g:UltiSnipsExpandTrigger="<M-U>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-let g:completion_sorting = "length"
-let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_confirm_key = "\<C-y>"
+let g:completion_sorting = "none"
+let g:completion_enable_snippet = 'vim-vsnip'
 let g:completion_tabnine_max_num_results=3
 let g:completion_auto_change_source = 1
 let g:completion_enable_auto_signature = 1
@@ -83,8 +85,8 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 let g:completion_enable_auto_paren = 1
 let g:completion_chain_complete_list = {
     \  'default': [
-    \    { 'complete_items': [ 'lsp', 'ts', 'path', 'snippet' ] },
-    \    { 'complete_items': [ 'buffers', 'tabnine' ]},
+    \    { 'complete_items': [ 'lsp', 'path', 'snippet' ] },
+    \    { 'complete_items': [ 'buffers', 'ts', 'tabnine' ]},
     \    { 'mode': '<C-p>' }, { 'mode': '<C-n>' }
     \  ]
     \ }

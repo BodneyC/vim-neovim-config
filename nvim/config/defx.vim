@@ -5,7 +5,7 @@ call defx#custom#column('git', 'indicators', {
       \ 'Renamed'   : '➜',
       \ 'Unmerged'  : '═',
       \ 'Ignored'   : 'i',
-      \ 'Deleted'   : 'X',
+      \ 'Deleted'   : '×',
       \ 'Unknown'   : '?'
       \ })
 
