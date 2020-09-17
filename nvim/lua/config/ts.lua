@@ -10,8 +10,8 @@ require'nvim-treesitter.configs'.setup {
         smart_rename = "<Leader>R",
       },
     },
-    highlight_current_scope = { enable = true },
-    highlight_definitions = { enable = true },
+    highlight_current_scope = { enable = false },
+    highlight_definitions = { enable = false },
     navigation = {
       enable = true,
       keymaps = {

@@ -1,8 +1,121 @@
 local vim = vim
+local log = vim.lsp.log
+local util = vim.lsp.util
+local skm = vim.api.nvim_set_keymap
+local cfg = require'util.cfg'
+
 local nvim_lsp = require'nvim_lsp'
 local diagnostic = require'diagnostic'
 local lsp_status = require'lsp-status'
 
+-- Options for LSP
+vim.o.completeopt = 'menuone,noinsert,noselect'
+vim.o.shortmess = vim.o.shortmess .. 'c'
+
+vim.g.diagnostic_auto_popup_while_jump = 0
+vim.g.diagnostic_enable_virtual_text = 0
+vim.g.diagnostic_virtual_text_prefix = ' '
+vim.g.space_before_virtual_text = 2
+vim.g.diagnostic_enable_underline = 1
+vim.g.completion_confirm_key = '<C-y>'
+vim.g.completion_sorting = 'none'
+vim.g.completion_enable_snippet = 'vim-vsnip'
+vim.g.completion_tabnine_max_num_results=3
+vim.g.completion_trigger_keyword_length = 3
+vim.g.completion_auto_change_source = 1
+vim.g.completion_enable_auto_signature = 1
+vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy', 'all' }
+vim.g.completion_enable_auto_paren = 1
+vim.g.completion_chain_complete_list = {
+  default = {
+    { complete_items = { 'lsp', 'path', 'snippet' } },
+    { complete_items = { 'buffers', 'ts', 'tabnine' } },
+    { mode = '<C-p>' }, { mode = '<C-n>' }
+  }
+}
+
+
+cfg.augroup([[
+  augroup __LSP__
+    au!
+    au BufEnter   * silent lua require'completion'.on_attach()
+    au CursorHold * silent lua vim.lsp.util.show_line_diagnostics()
+  augroup END
+]])
+
+-- LSP Mappings
+
+skm('n', 'K',     "<cmd>lua require'util.cfg'.show_documentation()<CR>", { noremap = true, silent = true })
+skm('n', '<C-]>', "<cmd>lua require'util.cfg'.go_to_definition()<CR>",   { noremap = true, silent = true })
+
+skm('n', 'gd',       '<CMD>lua vim.lsp.buf.definition()<CR>',       { noremap = true, silent = true })
+skm('n', 'gh',       '<CMD>lua vim.lsp.buf.hover()<CR>',            { noremap = true, silent = true })
+skm('n', 'gD',       '<CMD>lua vim.lsp.buf.implementation()<CR>',   { noremap = true, silent = true })
+skm('n', '<C-k>',    '<CMD>lua vim.lsp.buf.signature_help()<CR>',   { noremap = true, silent = true })
+skm('n', '1gD',      '<CMD>lua vim.lsp.buf.type_definition()<CR>',  { noremap = true, silent = true })
+skm('n', 'gr',       '<CMD>lua vim.lsp.buf.references()<CR>',       { noremap = true, silent = true })
+skm('n', 'g0',       '<CMD>lua vim.lsp.buf.document_symbol()<CR>',  { noremap = true, silent = true })
+skm('n', 'gW',       '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = true, silent = true })
+skm('n', ']c',       '<CMD>NextDiagnosticCycle<CR>',                { noremap = true, silent = true })
+skm('n', '[c',       '<CMD>PrevDiagnosticCycle<CR>',                { noremap = true, silent = true })
+skm('n', '<Leader>F','<CMD>lua vim.lsp.buf.formatting()<CR>',       { noremap = true, silent = true })
+-- Well, this is awful
+local function tab_string(e, k)
+  return [[ pumvisible() ? "\]] .. e .. [[" ]] ..
+    [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] ..
+    [[   ? "\]] .. k .. [[" : completion#trigger_completion() ]]
+end
+skm('i', '<Tab>',   tab_string("<C-n>", "<Tab>"),   { noremap = true, silent = true, expr = true })
+skm('i', '<S-Tab>', tab_string("<C-p>", "<S-Tab>"), { noremap = true, silent = true, expr = true })
+
+skm('i', '<C-j>', "vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'", { silent = true, expr = true })
+skm('i', '<C-k>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", { silent = true, expr = true })
+skm('s', '<C-j>', "vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'", { silent = true, expr = true })
+skm('s', '<C-k>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", { silent = true, expr = true })
+
+-- LSP callbacks
+vim.lsp.callbacks['textDocument/hover'] = function(_, method, result)
+  vim.b.textDocument_hover = false
+  util.focusable_float(method, function()
+    if not (result and result.contents) then return end
+    local markdown_lines = util.convert_input_to_markdown_lines(result.contents)
+    markdown_lines = util.trim_empty_lines(markdown_lines)
+    if vim.tbl_isempty(markdown_lines) then return end
+    local bufnr, winnr = util.fancy_floating_markdown(markdown_lines, {
+      pad_left = 1; pad_right = 1;
+    })
+    util.close_preview_autocmd({"CursorMoved", "BufHidden", "InsertCharPre"}, winnr)
+    vim.b.textDocument_hover = true
+    return bufnr, winnr
+  end)
+end
+
+local function location_callback(_, method, result)
+  vim.b.textDocument_location = false
+  if result == nil or vim.tbl_isempty(result) then
+    local _ = log.info() and log.info(method, 'No location found')
+    return nil
+  end
+  vim.b.textDocument_location = true
+  if vim.tbl_islist(result) then
+    util.jump_to_location(result[1])
+    if #result > 1 then
+      util.set_qflist(util.locations_to_items(result))
+      vim.api.nvim_command("copen")
+      vim.api.nvim_command("wincmd p")
+    end
+  else
+    util.jump_to_location(result)
+  end
+end
+
+vim.lsp.callbacks['textDocument/declaration'] = location_callback
+vim.lsp.callbacks['textDocument/definition'] = location_callback
+vim.lsp.callbacks['textDocument/typeDefinition'] = location_callback
+vim.lsp.callbacks['textDocument/implementation'] = location_callback
+
+
+-- Diagnostics
 vim.fn.sign_define('LspDiagnosticsErrorSign',       { text = ' ', texthl = 'LspDiagnosticsError' })
 vim.fn.sign_define('LspDiagnosticsWarningSign',     { text = ' ', texthl = 'LspDiagnosticsWarning' })
 vim.fn.sign_define('LspDiagnosticsInformationSign', { text = ' ', texthl = 'LspDiagnosticsInformation' })
@@ -124,7 +237,8 @@ nvim_lsp.diagnosticls.setup {
           groovy = {
             classpath = { '/link-home/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4' }
           }
-        }
+        },
+        sourceName = 'groovy'
       }
     },
   }
