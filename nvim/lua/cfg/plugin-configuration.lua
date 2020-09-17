@@ -1,7 +1,7 @@
 local vim = vim
 local skm = vim.api.nvim_set_keymap
 
-local cfg = require'util.cfg'
+local util = require'utl.util'
 
 vim.g.vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip'
 
@@ -21,7 +21,7 @@ vim.g.netrw_winsize = 14
 
 vim.g['conjure#mapping#prefix'] = '\\'
 
-vim.g['fff#split'] = "lua require'util.terminal'.floating_centred(0.4, 0.4)"
+vim.g['fff#split'] = "lua require'mod.terminal'.floating_centred(0.4, 0.4)"
 vim.g['fff#split_direction'] = "nosb sbr"
 
 vim.g.Hexokinase_virtualText = " "
@@ -38,7 +38,7 @@ vim.g.Hexokinase_optInPatterns = {
 -- Weird behaviour with os.setenv...
 vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"')
 vim.fn.execute('let $FZF_DEFAULT_OPTS="--layout=reverse --margin=1,1"')
-vim.g.fzf_layout = { window = "lua require'util.terminal'.floating_centred()" }
+vim.g.fzf_layout = { window = "lua require'mod.terminal'.floating_centred()" }
 vim.g.fzf_history_dir = os.getenv('HOME') .. '/.fzf/.fzf_history_dir'
 
 vim.g.tmux_navigator_no_mappings = 1
@@ -94,10 +94,10 @@ vim.g['vista#renderer#icons'] = { variable = '\\u71b' }
 vim.g['vista#renderer#icons']['function'] = "\\uf794"
 vim.g.vista_executive_for = { vim = 'ctags' }
 
-cfg.augroup([[
+util.augroup([[
   augroup __STARTIFY__
     au!
-    au VimEnter * lua require'config.startify'.init()
+    au VimEnter * lua require'cfg.startify'.init()
   augroup END
 ]])
 

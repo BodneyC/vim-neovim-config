@@ -2,7 +2,6 @@ local vim = vim
 local log = vim.lsp.log
 local util = vim.lsp.util
 local skm = vim.api.nvim_set_keymap
-local cfg = require'util.cfg'
 
 local nvim_lsp = require'nvim_lsp'
 local diagnostic = require'diagnostic'
@@ -34,8 +33,7 @@ vim.g.completion_chain_complete_list = {
   }
 }
 
-
-cfg.augroup([[
+require'utl.util'.augroup([[
   augroup __LSP__
     au!
     au BufEnter   * silent lua require'completion'.on_attach()
@@ -45,8 +43,8 @@ cfg.augroup([[
 
 -- LSP Mappings
 
-skm('n', 'K',     "<cmd>lua require'util.cfg'.show_documentation()<CR>", { noremap = true, silent = true })
-skm('n', '<C-]>', "<cmd>lua require'util.cfg'.go_to_definition()<CR>",   { noremap = true, silent = true })
+skm('n', 'K',     "<cmd>lua require'utl.util'.show_documentation()<CR>", { noremap = true, silent = true })
+skm('n', '<C-]>', "<cmd>lua require'utl.util'.go_to_definition()<CR>",   { noremap = true, silent = true })
 
 skm('n', 'gd',       '<CMD>lua vim.lsp.buf.definition()<CR>',       { noremap = true, silent = true })
 skm('n', 'gh',       '<CMD>lua vim.lsp.buf.hover()<CR>',            { noremap = true, silent = true })

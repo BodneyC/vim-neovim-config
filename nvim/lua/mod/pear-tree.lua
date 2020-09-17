@@ -40,9 +40,9 @@ function M.init()
   skm('i', '𭕫', '<Plug>(PearTreeCloser_))', {})
   skm('i', '𔂈' , '<Plug>(PearTreeCloser_})', {})
 
-  skm('i', ']', [[luaeval("require'util.pear-tree'.pear_tree_close(']')")]], { noremap = true, silent = true, expr = true })
-  skm('i', ')', [[luaeval("require'util.pear-tree'.pear_tree_close(')')")]], { noremap = true, silent = true, expr = true })
-  skm('i', '}', [[luaeval("require'util.pear-tree'.pear_tree_close('}')")]], { noremap = true, silent = true, expr = true })
+  skm('i', ']', [[luaeval("require'mod.pear-tree'.pear_tree_close(']')")]], { noremap = true, silent = true, expr = true })
+  skm('i', ')', [[luaeval("require'mod.pear-tree'.pear_tree_close(')')")]], { noremap = true, silent = true, expr = true })
+  skm('i', '}', [[luaeval("require'mod.pear-tree'.pear_tree_close('}')")]], { noremap = true, silent = true, expr = true })
 end
 
 return M

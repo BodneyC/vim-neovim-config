@@ -1,5 +1,4 @@
 local vim = vim
-local cfg = require'util.cfg'
 
 local M = {}
 
@@ -17,7 +16,7 @@ function M.open()
 end
 
 function M.init()
-  cfg.augroup([[
+  require'utl.util'.augroup([[
     augroup __DEFX__
       au!
       au BufEnter * if (winnr("$") == 1 && &ft == 'defx') | silent call defx#call_action('add_session') | bd! | q | endif
@@ -34,7 +33,7 @@ function M.init()
     Deleted   = '×',
     Unknown   = '?'
   })
-  vim.fn.execute("command! DefxOpen lua require'util.defx'.open()")
+  vim.fn.execute("command! DefxOpen lua require'mod.defx'.open()")
   vim.api.nvim_set_keymap(
     'n', '<Leader>D', '<CMD>DefxOpen<CR>', { silent = true, noremap = true })
 end

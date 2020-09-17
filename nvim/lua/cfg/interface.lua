@@ -1,5 +1,5 @@
 local vim = vim
-local cfg = require'util.cfg'
+local util = require'utl.util'
 
 vim.o.nu = true
 vim.o.cul = true
@@ -45,14 +45,14 @@ vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 
 vim.g.large_file = 1048576 -- 1MB
-cfg.augroup([[
+util.augroup([[
   augroup __CONFIG_GENERAL__
     au!
     au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
     au FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | end
     au WinEnter    *        if &nu && ! &rnu | setlocal rnu   | end
     au WinLeave    *        if &nu &&   &rnu | setlocal nornu | end
-    au BufReadPre  *        lua require'util.functions'.handle_large_file()
+    au BufReadPre  *        lua require'mod.functions'.handle_large_file()
     au BufRead,BufNewFile *.MD set ft=markdown
   augroup END
 ]])

@@ -83,25 +83,6 @@ function M.resize_window(d)
   vim.fn.execute(dir .. ' resize ' .. edge .. inc)
 end
 
-function M.file_exists(fn)
-  local f = io.open(fn, 'r')
-  if f == nil then
-    return false
-  end
-  io.close(f)
-  return true
-end
-
-function M.dir_exists(fn)
-  local f = io.open(fn, 'r')
-  if f == nil then
-    return false
-  end
-  local _, _, c = f:read()
-  io.close(f)
-  return c == 21
-end
-
 function M.elem_in_array(a, e)
   for _, v in ipairs(a) do
     if v == e then
@@ -109,13 +90,6 @@ function M.elem_in_array(a, e)
     end
   end
   return false
-end
-
-function M.fsize(fn)
-  local f = assert(io.open(fn, 'r'))
-  local size = f:seek('end')
-  io.close(f)
-  return size
 end
 
 return M

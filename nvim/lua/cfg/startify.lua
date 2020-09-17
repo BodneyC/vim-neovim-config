@@ -1,6 +1,7 @@
 local vim = vim
 
-local cfg = require'util.cfg'
+local util = require'utl.util'
+local fs = require'utl.fs'
 
 local header = [[
 
@@ -53,7 +54,7 @@ return {
   init = function()
     if vim.fn.argc() == 0 or (
       vim.fn.argc() == 1 and
-        cfg.dir_exists(vim.fn.argv(0)) and
+        fs.dir_exists(vim.fn.argv(0)) and
         not vim.fn.exists('s:stdin')
     ) then
       vim.g.startify_padding_left = math.floor(vim.fn.winwidth(0) / 4)

@@ -1,6 +1,6 @@
 local vim = vim
 
-local cfg = require'util.cfg'
+local util = require'utl.util'
 
 vim.g.airline_symbols = {
   crypt      = ' 🔒',
@@ -36,18 +36,18 @@ vim.g['airline#extensions#nvimlsp#enabled']                     = 0
 vim.g['airline#extensions#nvimlsp#error_symbol']                = ' '
 vim.g['airline#extensions#nvimlsp#warning_symbol']              = ' '
 
-cfg.exec([[
+util.exec([[
   func! AlFileInfo()
-    return luaeval("require'util.airline'.file_info()")
+    return luaeval("require'mod.airline'.file_info()")
   endfunc
   func! AlMode()
-    return luaeval("require'util.airline'.mode()")
+    return luaeval("require'mod.airline'.mode()")
   endfunc
   func! AlModified()
-    return luaeval("require'util.airline'.modified()")
+    return luaeval("require'mod.airline'.modified()")
   endfunc
   func! AlNvimLsp()
-    return luaeval("require'util.airline'.nvim_lsp()")
+    return luaeval("require'mod.airline'.nvim_lsp()")
   endfunc
 ]])
 
@@ -59,9 +59,9 @@ vim.fn['airline#parts#define_raw']('Fn', '%f')
 vim.fn['airline#parts#define_raw']('Position', '%l:%v')
 vim.fn['airline#parts#define_raw']('MaxLineNr', '%L')
 
-cfg.augroup([[
+util.augroup([[
   augroup __AIRLINE__
     au!
-    au VimEnter * lua require'util.airline'.init()
+    au VimEnter * lua require'mod.airline'.init()
   augroup END
 ]])

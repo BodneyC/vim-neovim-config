@@ -1,6 +1,6 @@
 local vim = vim
 
-local cfg = require'util.cfg'
+local util = require'utl.util'
 
 local rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock,.git}" ' ..
   '--hidden ' ..
@@ -14,7 +14,7 @@ local rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock,.git}" ' ..
 local M = {}
 
 function M.run_cmd(cmd)
-  if vim.fn.winnr('$') > 1 and cfg.elem_in_array({'defx', 'coc-explorer'}, vim.bo.ft) then
+  if vim.fn.winnr('$') > 1 and util.elem_in_array({'defx', 'coc-explorer'}, vim.bo.ft) then
     vim.fn.execute('wincmd p')
   end
   vim.fn.execute(cmd)

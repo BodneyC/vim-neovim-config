@@ -1,12 +1,12 @@
-require'config.interface'
-require'config.plugin-configuration'
-require'config.remappings'
-require'config.airline'
-require'config.ts'
-require'config.lsp'
+require'cfg.interface'
+require'cfg.plugin-configuration'
+require'cfg.remappings'
+require'cfg.airline'
+require'cfg.ts'
+require'cfg.lsp'
 
-require'util.terminal'.init()
-require'util.highlight'.init()
-require'util.pear-tree'.init()
-require'util.defx'.init()
-require'util.quickui'.init()
+require'mod.terminal'.init()
+require'mod.highlight'.init()
+require'mod.pear-tree'.init()
+require'mod.defx'.init()
+require'mod.quickui'.init()

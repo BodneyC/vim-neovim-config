@@ -1,6 +1,6 @@
 local vim = vim
 local skm = vim.api.nvim_set_keymap
-local cfg = require'util.cfg'
+local util = require'utl.util'
 
 vim.fn.execute('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
@@ -29,10 +29,10 @@ skm('n', '<leader>T', '<CMD>TagbarToggle<CR>',                   { noremap = tru
 skm('n', '<leader>U', '<CMD>MundoToggle<CR>',                    { noremap = true, silent = true })
 skm('n', '<leader>V', '<CMD>Vista!!<CR>',                        { noremap = true, silent = true })
 
-skm('n', '<C-M-h>', ":lua require'util.cfg'.resize_window('h')<CR>", { noremap = true, silent = true })
-skm('n', '<C-M-j>', ":lua require'util.cfg'.resize_window('j')<CR>", { noremap = true, silent = true })
-skm('n', '<C-M-k>', ":lua require'util.cfg'.resize_window('k')<CR>", { noremap = true, silent = true })
-skm('n', '<C-M-l>', ":lua require'util.cfg'.resize_window('l')<CR>", { noremap = true, silent = true })
+skm('n', '<C-M-h>', ":lua require'utl.util'.resize_window('h')<CR>", { noremap = true, silent = true })
+skm('n', '<C-M-j>', ":lua require'utl.util'.resize_window('j')<CR>", { noremap = true, silent = true })
+skm('n', '<C-M-k>', ":lua require'utl.util'.resize_window('k')<CR>", { noremap = true, silent = true })
+skm('n', '<C-M-l>', ":lua require'utl.util'.resize_window('l')<CR>", { noremap = true, silent = true })
 
 skm('n', '<leader>"',  '<CMD>sbn<CR>',      { noremap = true, silent = true })
 skm('n', '<leader>#',  '<C-^>',             { noremap = true, silent = true })
@@ -82,21 +82,21 @@ vim.fn.execute('cabbrev PLugInstall PlugInstall')
 vim.fn.execute('cabbrev plugupdate PlugUpdate')
 vim.fn.execute('cabbrev PLugUpdate PlugUpdate')
 
-skm('n', '<leader>m',  ":lua require'util.fzf'.run_cmd('Marks')<CR>",    { noremap = true, silent = true })
-skm('n', '<leader>r',  ":lua require'util.fzf'.run_cmd('Rg')<CR>",       { noremap = true, silent = true })
-skm('n', '<leader>f',  ":lua require'util.fzf'.run_cmd('FilesFzf')<CR>", { noremap = true, silent = true })
-skm('n', '<leader>M',  ":lua require'util.fzf'.run_cmd('Maps')<CR>",     { noremap = true, silent = true })
-skm('n', '<leader>bl', ":lua require'util.fzf'.run_cmd('Buffer')<CR>",   { noremap = true, silent = true })
-skm('n', '<M-]>',      ":lua require'util.fzf'.rg_under_cursor()<CR>",         { noremap = true, silent = true })
-skm('n', '‘',          ":lua require'util.fzf'.rg_under_cursor()<CR>",         { noremap = true, silent = true })
-vim.fn.execute("command! -bang -nargs=* Rg            lua require'util.fzf'.rg(<q-args>, <bang>0)")
-vim.fn.execute("command! -bang -nargs=* FilesFzf      lua require'util.fzf'.files(<q-args>)")
+skm('n', '<leader>m',  ":lua require'mod.fzf'.run_cmd('Marks')<CR>",    { noremap = true, silent = true })
+skm('n', '<leader>r',  ":lua require'mod.fzf'.run_cmd('Rg')<CR>",       { noremap = true, silent = true })
+skm('n', '<leader>f',  ":lua require'mod.fzf'.run_cmd('FilesFzf')<CR>", { noremap = true, silent = true })
+skm('n', '<leader>M',  ":lua require'mod.fzf'.run_cmd('Maps')<CR>",     { noremap = true, silent = true })
+skm('n', '<leader>bl', ":lua require'mod.fzf'.run_cmd('Buffer')<CR>",   { noremap = true, silent = true })
+skm('n', '<M-]>',      ":lua require'mod.fzf'.rg_under_cursor()<CR>",         { noremap = true, silent = true })
+skm('n', '‘',          ":lua require'mod.fzf'.rg_under_cursor()<CR>",         { noremap = true, silent = true })
+vim.fn.execute("command! -bang -nargs=* Rg            lua require'mod.fzf'.rg(<q-args>, <bang>0)")
+vim.fn.execute("command! -bang -nargs=* FilesFzf      lua require'mod.fzf'.files(<q-args>)")
 
 
-cfg.command('ConvLineEndings',      '%s/<CR>//g',                         { nargs = '0' })
-cfg.command('HighlightUnderCursor', "lua require'util.functions'.highlight_under_cursor()", { nargs = '0' })
-cfg.command('SpellChecker',         "lua require'util.functions'.spell_checker()",          { nargs = '0' })
-cfg.command('ZoomToggle',           "lua require'util.functions'.zoom_toggle()",            { nargs = '0' })
-cfg.command('ChangeIndent',         "lua require'util.functions'.change_indent(<f-args>)",  { nargs = '1' })
-cfg.command('SetIndent',            "lua require'util.functions'.set_indent(<f-args>)",     { nargs = '1' })
-cfg.command('MatchOver',            "lua require'util.functions'.match_over(<f-args>)",     { nargs = '?' })
+util.command('ConvLineEndings',      '%s/<CR>//g',                         { nargs = '0' })
+util.command('HighlightUnderCursor', "lua require'mod.functions'.highlight_under_cursor()", { nargs = '0' })
+util.command('SpellChecker',         "lua require'mod.functions'.spell_checker()",          { nargs = '0' })
+util.command('ZoomToggle',           "lua require'mod.functions'.zoom_toggle()",            { nargs = '0' })
+util.command('ChangeIndent',         "lua require'mod.functions'.change_indent(<f-args>)",  { nargs = '1' })
+util.command('SetIndent',            "lua require'mod.functions'.set_indent(<f-args>)",     { nargs = '1' })
+util.command('MatchOver',            "lua require'mod.functions'.match_over(<f-args>)",     { nargs = '?' })

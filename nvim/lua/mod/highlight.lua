@@ -1,5 +1,5 @@
 local vim = vim
-local cfg = require'util.cfg'
+local util = require'utl.util'
 
 local M = {}
 
@@ -11,35 +11,35 @@ function M.init()
   vim.o.termguicolors = true
 
   if os.getenv('TERMTHEME') == "light" then
-    cfg.exec('colo plint-light')
+    util.exec('colo plint-light')
   else
-    cfg.exec('colo unicorn')
+    util.exec('colo unicorn')
   end
 
   M.additional_highlights()
 
-  cfg.augroup([[
+  util.augroup([[
     augroup __HIGHLIGHT__
       au!
       au TextYankPost * silent! lua require'vim.highlight'.on_yank()
-      au ColorScheme  * lua require'util.highlight'.additional_highlights()
-      au CursorHold   * lua require'util.highlight'.hover_match()
+      au ColorScheme  * lua require'mod.highlight'.additional_highlights()
+      au CursorHold   * lua require'mod.highlight'.hover_match()
     augroup END
   ]])
 
-  cfg.exec('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
+  util.exec('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
 end
 
 function M.additional_highlights()
-  cfg.exec('hi! link HoverMatch MatchParen')
-  cfg.exec('hi! SpelunkerSpellBad gui=undercurl')
-  cfg.exec('hi! OverLength guibg=#995959 guifg=#ffffff')
-  cfg.exec('hi! link JavaIdentifier NONE')
-  cfg.exec('hi! link CleverFChar ErrorMsg')
-  cfg.exec('hi! link CleverFCursor ErrorMsg')
+  util.exec('hi! link HoverMatch MatchParen')
+  util.exec('hi! SpelunkerSpellBad gui=undercurl')
+  util.exec('hi! OverLength guibg=#995959 guifg=#ffffff')
+  util.exec('hi! link JavaIdentifier NONE')
+  util.exec('hi! link CleverFChar ErrorMsg')
+  util.exec('hi! link CleverFCursor ErrorMsg')
   if os.getenv('TERMTHEME') == "light" then
-    cfg.exec('hi! Visual guifg=bg')
-    cfg.exec('hi! VertSplit guibg=NONE')
+    util.exec('hi! Visual guifg=bg')
+    util.exec('hi! VertSplit guibg=NONE')
   end
 end
 
@@ -71,7 +71,7 @@ function M.SetSignTheme(bg)
   vim.fn.execute('hi! GitGutterDelete       guibg=' .. bg)
   vim.fn.execute('hi! CocErrorSign          guibg=' .. bg)
   vim.fn.execute('hi! CocWarningSign        guibg=' .. bg)
-  cfg.exec([[
+  util.exec([[
     hi! clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign
     hi link CocGitAddedSign GitGutterAdd
     hi link CocGitChangedSign GitGutterChange
