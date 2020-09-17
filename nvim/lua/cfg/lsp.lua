@@ -17,20 +17,28 @@ vim.g.diagnostic_virtual_text_prefix = ' '
 vim.g.space_before_virtual_text = 2
 vim.g.diagnostic_enable_underline = 1
 vim.g.completion_confirm_key = '<C-y>'
-vim.g.completion_sorting = 'none'
 vim.g.completion_enable_snippet = 'vim-vsnip'
 vim.g.completion_tabnine_max_num_results=3
 vim.g.completion_trigger_keyword_length = 3
 vim.g.completion_auto_change_source = 1
 vim.g.completion_enable_auto_signature = 1
-vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy', 'all' }
+vim.g.completion_sorting = 'none'
+vim.g.completion_matching_strategy_list = { 'exact', 'substring' }
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_chain_complete_list = {
   default = {
     { complete_items = { 'lsp', 'path', 'snippet' } },
-    { complete_items = { 'buffers', 'ts', 'tabnine' } },
+    -- { complete_items = { 'buffers', 'ts', 'tabnine' } },
     { mode = '<C-p>' }, { mode = '<C-n>' }
-  }
+  },
+  sh = {
+    { complete_items = { 'buffers', 'ts', 'path', 'snippet' } },
+    { mode = '<C-p>' }, { mode = '<C-n>' }
+  },
+  zsh = {
+    { complete_items = { 'buffers', 'ts', 'path', 'snippet' } },
+    { mode = '<C-p>' }, { mode = '<C-n>' }
+  },
 }
 
 require'utl.util'.augroup([[
