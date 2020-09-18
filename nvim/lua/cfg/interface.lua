@@ -1,6 +1,7 @@
 local vim = vim
 local util = require'utl.util'
 
+vim.o.tags = ''
 vim.o.hls = true
 vim.o.mouse = 'a'
 vim.o.tabstop = 2

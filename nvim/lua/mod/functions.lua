@@ -4,7 +4,8 @@ local fs = require'utl.fs'
 
 local M = {}
 
-function M.set_indent(n)
+function M.set_indent(ns)
+  local n = tonumber(ns)
   vim.bo.ts = n
   vim.bo.sw = n
   if vim.fn.exists(":IndentLinesReset") then
@@ -28,29 +29,39 @@ function M.spell_checker()
   end
   util.exec('normal! mzgg]S')
   while vim.fn.spellbadword()[0] ~= '' do
-    local cnt = 0
     util.exec('redraw')
     local ch = ''
-    while util.elem_in_array({ 'y', 'n', 'f', 'r', 'a', 'q' }, ch) == -1 do
-      if cnt > 0 then print('Incorrect input') end
-      cnt = cnt + 1
-      print('Word: ' ..  vim.fn.expand('<cword>') ..
-        ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit) ')
-      ch = io.read(1)
+    local draw = true
+    while not util.elem_in_array({ 'y', 'n', 'f', 'r', 'a', 'q' }, ch) do
+      if draw then
+        print('Word: ' ..  vim.fn.expand('<cword>') ..
+          ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
+      end
+      draw = false
       util.exec('redraw')
+      ch = vim.fn.nr2char(vim.fn.getchar())
     end
     local dic = {
       n = '',
       y = [[
-        normal! z=
-        normal! ]] .. vim.fn.input('Make your selection: ') .. [[z=
+        let tmp_file = tempname()
+        call writefile(spellsuggest(expand('<cword>')), tmp_file)
+        exe 'split ' . tmp_file
+        redraw
+        setl buftype=nofile bufhidden=wipe nobuflisted ro hidden nornu nu
+        let choice = input('Make your selection: ')
+        q
+        exe 'normal! ' . choice . 'z='
+        mode
+        redraw
       ]],
       r = 'spellrepall',
       f = 'normal! 1z=',
       a = 'normal! zG',
     }
+    if ch == 'q' then break end
     if dic[ch] then
-      util.exec(dic[ch])
+      util.exec_lines(dic[ch])
     end
     util.exec('normal! ]S')
   end
@@ -58,7 +69,7 @@ function M.spell_checker()
   if not spell_pre then
     vim.wo.spell = false
   end
-  print('Spell checker complete')
+  print('Spell checker end')
 end
 
 function M.match_over(...)
@@ -93,13 +104,13 @@ end
 
 function M.handle_large_file()
   if fs.fsize(vim.fn.expand("<afile>")) > vim.g.large_file then
-    vim.o.eventignore = vim.o.eventignore .. ',FileType'
+    vim.o.wrap = false
+    vim.o.completeopt = ''
     vim.o.swapfile = false
+    vim.o.eventignore = vim.o.eventignore .. ',FileType'
+    vim.wo.undolevels = 1
     vim.bo.bufhidden = true
     vim.bo.buftype = 'nowrite'
-    vim.wo.undolevels = 1
-    vim.o.completeopt = ''
-    vim.o.wrap = false
     if vim.fn.exists(':AirlineToggle') then
       util.exec('AirlineToggle')
     end

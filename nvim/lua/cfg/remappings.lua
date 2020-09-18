@@ -67,7 +67,7 @@ skm('n', ',',          '<Plug>(clever-f-repeat-back)',          {})
 skm('n', '[<Leader>',  '<CMD>call append(line(".") - 1, repeat([""], v:count1))<CR>', { noremap = true, silent = true })
 skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     { noremap = true, silent = true })
 
-vim.fn.execute('command! -nargs=0       ToggleLazyGit w | call FloatingTerm("lazygit")')
+vim.fn.execute("command! -nargs=0       ToggleLazyGit w | lua require'mod.terminal'.floating_term('lazygit')")
 vim.fn.execute('command!                Wqa           wqa')
 vim.fn.execute('command!                WQa           wqa')
 vim.fn.execute('command!                WQ            wq')
@@ -87,11 +87,11 @@ skm('n', '<leader>r',  ":lua require'mod.fzf'.run_cmd('Rg')<CR>",       { norema
 skm('n', '<leader>f',  ":lua require'mod.fzf'.run_cmd('FilesFzf')<CR>", { noremap = true, silent = true })
 skm('n', '<leader>M',  ":lua require'mod.fzf'.run_cmd('Maps')<CR>",     { noremap = true, silent = true })
 skm('n', '<leader>bl', ":lua require'mod.fzf'.run_cmd('Buffer')<CR>",   { noremap = true, silent = true })
-skm('n', '<M-]>',      ":lua require'mod.fzf'.rg_under_cursor()<CR>",         { noremap = true, silent = true })
-skm('n', '‘',          ":lua require'mod.fzf'.rg_under_cursor()<CR>",         { noremap = true, silent = true })
+skm('n', '<M-]>',      ":lua require'mod.fzf'.rg_under_cursor()<CR>",   { noremap = true, silent = true })
+skm('n', '‘',          ":lua require'mod.fzf'.rg_under_cursor()<CR>",   { noremap = true, silent = true })
+
 vim.fn.execute("command! -bang -nargs=* Rg            lua require'mod.fzf'.rg(<q-args>, <bang>0)")
 vim.fn.execute("command! -bang -nargs=* FilesFzf      lua require'mod.fzf'.files(<q-args>)")
-
 
 util.command('ConvLineEndings',      '%s/<CR>//g',                         { nargs = '0' })
 util.command('HighlightUnderCursor', "lua require'mod.functions'.highlight_under_cursor()", { nargs = '0' })

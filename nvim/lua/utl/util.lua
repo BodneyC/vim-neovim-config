@@ -36,6 +36,7 @@ local function vim_run_all_lines_separately(s)
   end
 end
 M.augroup = vim_run_all_lines_separately
+M.exec_lines = vim_run_all_lines_separately
 
 M.func = vim.fn.execute
 M.funcs = vim.fn.execute
