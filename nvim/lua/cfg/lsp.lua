@@ -71,8 +71,8 @@ local function tab_string(e, k)
     [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] ..
     [[   ? "\]] .. k .. [[" : completion#trigger_completion() ]]
 end
-skm('i', '<Tab>',   tab_string("<C-n>", "<Tab>"),   { noremap = true, silent = true, expr = true })
-skm('i', '<S-Tab>', tab_string("<C-p>", "<S-Tab>"), { noremap = true, silent = true, expr = true })
+skm('i', '<Tab>',   tab_string("<C-n>", "<Tab>"), { noremap = true, silent = true, expr = true })
+skm('i', '<S-Tab>', tab_string("<C-p>", "<C-d>"), { noremap = true, silent = true, expr = true })
 
 skm('i', '<C-j>', "vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'", { silent = true, expr = true })
 skm('i', '<C-k>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", { silent = true, expr = true })

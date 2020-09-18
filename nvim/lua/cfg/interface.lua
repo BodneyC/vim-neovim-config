@@ -6,7 +6,7 @@ vim.o.hls = true
 vim.o.mouse = 'a'
 vim.o.tabstop = 2
 vim.o.ruler = true
-vim.o.hidden = true
+vim.o.hidden = false
 vim.o.icm = 'split'
 vim.o.scrolloff = 1
 vim.o.textwidth = 0
@@ -32,6 +32,13 @@ vim.o.backspace = 'indent,eol,start'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+
+-- Maybe a bug, but opening a file from the command line (e.g. 
+--   `nvim .eslintrc.json`) causes the `.o.` options to be
+--   ignored...
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 0
+vim.bo.softtabstop = 0
 
 vim.wo.nu = true
 vim.wo.cul = true

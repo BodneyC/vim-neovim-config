@@ -10,6 +10,9 @@ git checkout master
 git pull
 git checkout nightly
 
+unset LUA_PATH
+unset LUA_CPATH
+
 make clean
 
 make CMAKE_INSTALL_PREFIX="$(realpath ~/.local)" CMAKE_BUILD_TYPE=RelWithDebInfo
