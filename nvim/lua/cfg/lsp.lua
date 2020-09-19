@@ -1,7 +1,11 @@
 local vim = vim
 local log = vim.lsp.log
-local util = vim.lsp.util
 local skm = vim.api.nvim_set_keymap
+
+-- Note: For the rest of the config `util` refers to 'utl.util' however, as I
+--   didn't write the callbacks and merely added to them slightly, I feel it
+--   would be easier to allow them to use whatever locals they define
+local util = vim.lsp.util
 
 local nvim_lsp = require'nvim_lsp'
 local diagnostic = require'diagnostic'
@@ -11,24 +15,19 @@ local lsp_status = require'lsp-status'
 vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 
-vim.g.diagnostic_auto_popup_while_jump = 0
-vim.g.diagnostic_enable_virtual_text = 0
-vim.g.diagnostic_virtual_text_prefix = ' '
-vim.g.space_before_virtual_text = 2
-vim.g.diagnostic_enable_underline = 1
+vim.g.completion_auto_change_source = 1
 vim.g.completion_confirm_key = '<C-y>'
+vim.g.completion_enable_auto_paren = 1
+vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_snippet = 'vim-vsnip'
+vim.g.completion_matching_strategy_list = { 'exact', 'substring' }
+vim.g.completion_sorting = 'none'
 vim.g.completion_tabnine_max_num_results=3
 vim.g.completion_trigger_keyword_length = 3
-vim.g.completion_auto_change_source = 1
-vim.g.completion_enable_auto_signature = 1
-vim.g.completion_sorting = 'none'
-vim.g.completion_matching_strategy_list = { 'exact', 'substring' }
-vim.g.completion_enable_auto_paren = 1
 vim.g.completion_chain_complete_list = {
   default = {
-    { complete_items = { 'lsp', 'path', 'snippet' } },
-    -- { complete_items = { 'buffers', 'ts', 'tabnine' } },
+    { complete_items = { 'lsp', 'path', 'snippet', 'buffers' } },
+    -- { complete_items = { 'ts', 'tabnine' } },
     { mode = '<C-p>' }, { mode = '<C-n>' }
   },
   sh = {
@@ -40,6 +39,12 @@ vim.g.completion_chain_complete_list = {
     { mode = '<C-p>' }, { mode = '<C-n>' }
   },
 }
+
+vim.g.diagnostic_auto_popup_while_jump = 0
+vim.g.diagnostic_enable_underline = 1
+vim.g.diagnostic_enable_virtual_text = 0
+vim.g.diagnostic_virtual_text_prefix = ' '
+vim.g.space_before_virtual_text = 2
 
 require'utl.util'.augroup([[
   augroup __LSP__
@@ -176,12 +181,13 @@ nvim_lsp.jdtls.setup {
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
-  filetypes = { 'groovy', 'pkgbuild', 'terraform', 'zsh', 'markdown' },
+  filetypes = { 'groovy', 'pkgbuild', 'terraform', 'sh', 'zsh', 'markdown' },
   init_options = {
     filetypes = {
       pkgbuild = 'pkgbuild',
       terraform = 'terraform',
       zsh = 'shellcheck_zsh',
+      sh = 'shellcheck',
       groovy = 'groovy',
       markdown = 'markdown',
     },
@@ -220,6 +226,20 @@ nvim_lsp.diagnosticls.setup {
         },
         securities = { error = 'error', note = 'info', warning = 'warning' },
         sourceName = 'pkgbuild'
+      },
+      shellcheck = {
+        args = { '--format=gcc', '-x', '-' },
+        command = 'shellcheck',
+        debounce = 100,
+        formatLines = 1,
+        formatPattern = {
+          '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
+          { column = 2, endColumn = 2, endLine = 1, line = 1, message = 4, security = 3 }
+        },
+        offsetColumn = 0,
+        offsetLine = 0,
+        securities = { error = 'error', note = 'info', warning = 'warning' },
+        sourceName = 'shellcheck'
       },
       shellcheck_zsh = {
         args = { '--shell=bash', '--format=gcc', '-x', '-' },

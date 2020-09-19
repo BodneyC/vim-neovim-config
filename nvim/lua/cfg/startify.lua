@@ -57,7 +57,6 @@ return {
         fs.dir_exists(vim.fn.argv(0)) and
         not vim.fn.exists('s:stdin')
     ) then
-  print("wank")
       vim.g.startify_padding_left = math.floor(vim.fn.winwidth(0) / 4)
       vim.g.startify_custom_header = center(header)
       vim.g.startify_custom_footer = center(footer)

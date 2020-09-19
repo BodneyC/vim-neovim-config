@@ -59,7 +59,6 @@ util.augroup([[
   augroup __CONFIG_GENERAL__
     au!
     au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
-    au FileType    startify if exists(":IndentLinesDisable") | exe "IndentLinesDisable" | end
     au WinEnter    *        if &nu && ! &rnu | setlocal rnu   | end
     au WinLeave    *        if &nu &&   &rnu | setlocal nornu | end
     au BufReadPre  *        lua require'mod.functions'.handle_large_file()

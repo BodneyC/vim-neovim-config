@@ -43,7 +43,6 @@ function M.additional_highlights()
   end
 end
 
-
 function M.hover_match()
   local id = vim.b.hover_match_id
   if id then
