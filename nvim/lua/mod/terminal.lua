@@ -3,6 +3,8 @@ local skm = vim.api.nvim_set_keymap
 local bskm = vim.api.nvim_buf_set_keymap
 local util = require'utl.util'
 
+local some_init_val = 'SOME_INIT_VALUE'
+
 local M = {}
 
 local function get_open_term_buffer_name()
@@ -48,7 +50,7 @@ function M.next_term_split(b)
 end
 
 function M.term_split(b)
-  if vim.g.tmp_term_name == "SOME INIT VALUE" then
+  if vim.g.tmp_term_name == some_init_val then
     get_open_term_buffer_name()
   end
   local ttn = vim.g.tmp_term_name
@@ -121,13 +123,12 @@ function M.floating_centred(...)
   }
   local cur_float_win = vim.fn.nvim_create_buf(false, true)
   vim.fn.nvim_open_win(cur_float_win, true, opts)
-  util.augroup([[
+  util.augroup(string.format([[
     augroup __FLOAT__
       au!
-      au BufWipeout <buffer=]] .. cur_float_win .. [[> bd! ]] .. buf .. [[
-
+      au BufWipeout <buffer=%d> bd! %d
     augroup END
-  ]])
+  ]], cur_float_win, buf))
   vim.o.winhl = 'Normal:NormalFloat'
   return cur_float_win
 end
@@ -181,7 +182,7 @@ end
 function M.init()
   vim.g.term_height = vim.g.term_height or 12
   vim.g.floating_term_divisor = '0.9'
-  vim.g.tmp_term_name = 'SOME INIT VALUE'
+  vim.g.tmp_term_name = some_init_val
   vim.g.tmp_border_buf = -1
   vim.g.tmp_help_buf = 0
 
@@ -190,15 +191,15 @@ function M.init()
   util.command('H',         "lua require'mod.terminal'.floating_help(<f-args>)", { nargs = '?', complete = 'help' })
   util.command('Help',      "lua require'mod.terminal'.floating_help(<f-args>)", { nargs = '?', complete = 'help' })
 
-  skm('n', "<Leader>'", ":lua require'mod.terminal'.next_term_split(false)<CR>",
-    { silent = true, noremap = true })
+  skm('n', "<Leader>'", ":lua require'mod.terminal'.next_term_split(false)<CR>", { silent = true, noremap = true })
 
-  skm('t', '<C-R>', '<C-\\><C-N>""pi', { expr = true, silent = true, noremap = true })
+  skm('t', '<C-R>', "'<C-\\><C-N>\"' . nr2char(getchar()) . 'pi'", { expr = true, silent = true, noremap = true })
 
   skm('n', '<F10>', ":lua require'mod.terminal'.term_split(true)<CR>",            { silent = true, noremap = true })
   skm('i', '<F10>', "<C-o>:lua require'mod.terminal'.term_split(true)<CR>",       { silent = true, noremap = true })
   skm('t', '<F10>', "<C-\\><C-n>:lua require'mod.terminal'.term_split(true)<CR>", { silent = true, noremap = true })
 
+  skm('i', '<C-q>', "<C-o>:lua require'mod.terminal'.term_split(false)<CR>", { silent = true, noremap = true })
   skm('n', '<C-q>', ":lua require'mod.terminal'.term_split(false)<CR>", { silent = true, noremap = true })
   skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', { silent = true, noremap = true })
   skm('t', '<LeftRelease>', '<Nop>', { silent = true, noremap = true })

@@ -16,7 +16,7 @@ vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 
 vim.g.completion_auto_change_source = 1
-vim.g.completion_confirm_key = '<C-y>'
+vim.g.completion_confirm_key = '\\<C-y>'
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_snippet = 'vim-vsnip'
@@ -40,9 +40,9 @@ vim.g.completion_chain_complete_list = {
   },
 }
 
-vim.g.diagnostic_auto_popup_while_jump = 0
+vim.g.diagnostic_auto_popup_while_jump = false
 vim.g.diagnostic_enable_underline = 1
-vim.g.diagnostic_enable_virtual_text = 0
+vim.g.diagnostic_enable_virtual_text = false
 vim.g.diagnostic_virtual_text_prefix = ' '
 vim.g.space_before_virtual_text = 2
 
@@ -83,6 +83,9 @@ skm('i', '<C-j>', "vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'", { 
 skm('i', '<C-k>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", { silent = true, expr = true })
 skm('s', '<C-j>', "vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'", { silent = true, expr = true })
 skm('s', '<C-k>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", { silent = true, expr = true })
+
+require'utl.util'.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
+require'utl.util'.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 -- LSP callbacks
 vim.lsp.callbacks['textDocument/hover'] = function(_, method, result)
@@ -154,7 +157,7 @@ nvim_lsp.sumneko_lua.setup { on_attach = on_attach, capabilities = lsp_status.ca
 nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+-- nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }

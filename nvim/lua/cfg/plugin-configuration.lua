@@ -21,9 +21,6 @@ vim.g.netrw_winsize = 14
 
 vim.g['conjure#mapping#prefix'] = '\\'
 
-vim.g['fff#split'] = "lua require'mod.terminal'.floating_centred(0.4, 0.4)"
-vim.g['fff#split_direction'] = "nosb sbr"
-
 vim.g.Hexokinase_virtualText = " "
 vim.g.Hexokinase_highlighters = { 'virtual' }
 vim.g.Hexokinase_optInPatterns = {

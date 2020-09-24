@@ -3,10 +3,5 @@
     "prefix": ["get"],
     "body": [ "let ${1:g}:$2 = get($1:, \"$2\", \"\")" ],
     "description": "Call to get"
-  },
-  "magic": {
-    "prefix": ["vim:"],
-    "body": [ "$LINE_COMMENT vim: et ts=${1:2} sw=$1" ],
-    "description": "Magicline"
   }
 }

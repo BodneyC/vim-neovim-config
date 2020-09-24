@@ -6,7 +6,8 @@ local M = {}
 function M.pear_tree_close(c)
   if #vim.fn['pear_tree#GetSurroundingPair']() ~= 0 and
       vim.fn['pear_tree#GetSurroundingPair']()[2] == c and
-      string.match(string.sub(vim.fn.getline('.'), vim.fn.col('.')), '^%s*%' .. c) then
+      string.match(string.sub(
+        vim.fn.getline('.'), vim.fn.col('.')), '^%s*%' .. c) then
     return vim.fn['pear_tree#insert_mode#JumpOut']()
   else
     return vim.fn['pear_tree#insert_mode#HandleCloser'](c)
@@ -18,10 +19,10 @@ function M.init()
   skm('i', '<CR>', '' ..
     [[ pumvisible()                                 ]] ..
     [[ ? complete_info()["selected"] != "-1"        ]] ..
-    [[   ? completion#wrap_completion()             ]] ..
-    [[   : "\<C-e>\<CR>"                            ]] ..
-    [[ : pear_tree#insert_mode#PrepareExpansion()   ]],
-    { noremap = true, silent = true, expr = true })
+    [[   ? "<Plug>(completion_confirm_completion)"  ]] ..
+    [[   : "<C-e><CR>"                              ]] ..
+    [[ : "<Plug>(PearTreeExpand)"                   ]],
+    { noremap = false, silent = true, expr = true })
   skm('i', '<BS>', '' ..
     [[ getline('.')[:col('.') - 2] =~ '^\s\+$'        ]] ..
     [[ ? getline(line('.') - 1) =~ '^\s*$'            ]] ..
@@ -31,18 +32,24 @@ function M.init()
     [[   : "<C-w><BS>"                                ]] ..
     [[ : pear_tree#insert_mode#Backspace()            ]],
     { noremap = true, silent = true, expr = true })
-  skm('i', '<C-f>',   'pear_tree#insert_mode#JumpOut()', { silent = true, noremap = true,expr=true })
-  skm('i', '<Esc>',   'pear_tree#insert_mode#Expand()',  { silent = true, noremap = true,expr=true })
-  skm('i', '<Space>', 'pear_tree#insert_mode#Space()',   { silent = true, noremap = true,expr=true })
+  skm('i', '<C-f>',   'pear_tree#insert_mode#JumpOut()',
+    { silent = true, noremap = true, expr = true })
+  skm('i', '<Esc>',   'pear_tree#insert_mode#Expand()',
+    { silent = true, noremap = true, expr = true })
+  skm('i', '<Space>', 'pear_tree#insert_mode#Space()',
+    { silent = true, noremap = true, expr = true })
 
   -- ... well, I'm never going to type these in I suppose...
   skm('i', '䙛', '<Plug>(PearTreeCloser_])', {})
   skm('i', '𭕫', '<Plug>(PearTreeCloser_))', {})
   skm('i', '𔂈' , '<Plug>(PearTreeCloser_})', {})
 
-  skm('i', ']', [[luaeval("require'mod.pear-tree'.pear_tree_close(']')")]], { noremap = true, silent = true, expr = true })
-  skm('i', ')', [[luaeval("require'mod.pear-tree'.pear_tree_close(')')")]], { noremap = true, silent = true, expr = true })
-  skm('i', '}', [[luaeval("require'mod.pear-tree'.pear_tree_close('}')")]], { noremap = true, silent = true, expr = true })
+  skm('i', ']', [[luaeval("require'mod.pear-tree'.pear_tree_close(']')")]],
+    { noremap = true, silent = true, expr = true })
+  skm('i', ')', [[luaeval("require'mod.pear-tree'.pear_tree_close(')')")]],
+{ noremap = true, silent = true, expr = true })
+  skm('i', '}', [[luaeval("require'mod.pear-tree'.pear_tree_close('}')")]],
+  { noremap = true, silent = true, expr = true })
 end
 
 return M
