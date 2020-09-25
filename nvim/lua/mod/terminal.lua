@@ -169,18 +169,16 @@ function M.floating_help(...)
     error('"' .. query .. '" not in helptags')
   else
     bskm(vim.g.tmp_help_buf, 'n', '<Esc>', ':bw<CR>', {})
-    util.augroup([[
+    util.augroup(string.format([[
       augroup __FLOAT__
-        au BufWipeout <buffer=]] .. vim.g.tmp_help_buf ..
-          [[> bd! ]] .. vim.g.tmp_border_buf .. [[
-
+        au BufWipeout <buffer=%s> bd! %s
       augroup END
-    ]])
+    ]]), vim.g.tmp_help_buf, vim.g.tmp_border_buf)
   end
 end
 
 function M.init()
-  vim.g.term_height = vim.g.term_height or 12
+  vim.g.term_height = vim.g.term_height or 15
   vim.g.floating_term_divisor = '0.9'
   vim.g.tmp_term_name = some_init_val
   vim.g.tmp_border_buf = -1

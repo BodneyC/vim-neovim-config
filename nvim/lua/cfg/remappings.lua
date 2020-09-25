@@ -34,6 +34,11 @@ skm('n', '<C-M-j>', ":lua require'utl.util'.resize_window('j')<CR>", { noremap =
 skm('n', '<C-M-k>', ":lua require'utl.util'.resize_window('k')<CR>", { noremap = true, silent = true })
 skm('n', '<C-M-l>', ":lua require'utl.util'.resize_window('l')<CR>", { noremap = true, silent = true })
 
+skm('t', '<C-M-h>', "<C-\\><C-n>:lua require'utl.util'.resize_window('h')<CR>", { noremap = true, silent = true })
+skm('t', '<C-M-j>', "<C-\\><C-n>:lua require'utl.util'.resize_window('j')<CR>", { noremap = true, silent = true })
+skm('t', '<C-M-k>', "<C-\\><C-n>:lua require'utl.util'.resize_window('k')<CR>", { noremap = true, silent = true })
+skm('t', '<C-M-l>', "<C-\\><C-n>:lua require'utl.util'.resize_window('l')<CR>", { noremap = true, silent = true })
+
 skm('n', '<leader>"',  '<CMD>sbn<CR>',      { noremap = true, silent = true })
 skm('n', '<leader>#',  '<C-^>',             { noremap = true, silent = true })
 skm('n', '<leader>%',  '<CMD>vert sbn<CR>', { noremap = true, silent = true })
