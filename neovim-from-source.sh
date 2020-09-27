@@ -8,6 +8,7 @@ cd neovim || exit
 
 git checkout master
 git pull
+git fetch --tags --all -f
 git checkout nightly
 
 unset LUA_PATH

@@ -102,18 +102,28 @@ function M.highlight_under_cursor()
   print(vim.inspect(hl_groups))
 end
 
+local function call_if_fn_exists(fn)
+  if vim.fn.exists(':' .. fn) then
+    util.exec(fn)
+  end
+end
+
 function M.handle_large_file()
   if fs.fsize(vim.fn.expand("<afile>")) > vim.g.large_file then
     vim.o.wrap = false
     vim.o.completeopt = ''
     vim.o.swapfile = false
     vim.o.eventignore = vim.o.eventignore .. ',FileType'
-    vim.wo.undolevels = 1
+    vim.wo.undolevels = -1
+    vim.wo.signcolumn = 'no'
     vim.bo.bufhidden = true
     vim.bo.buftype = 'nowrite'
-    if vim.fn.exists(':AirlineToggle') then
-      util.exec('AirlineToggle')
-    end
+    vim.bo.syntax = 'off'
+    call_if_fn_exists('AirlineToggle')
+    call_if_fn_exists('TSBufDisable')
+    call_if_fn_exists('LspBufStopAll')
+    call_if_fn_exists('GitGutterDisable')
+    call_if_fn_exists('PearTreeDisable')
   end
 end
 

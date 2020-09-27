@@ -44,7 +44,7 @@ vim.wo.nu = true
 vim.wo.cul = true
 vim.wo.rnu = true
 vim.wo.wrap = true
-vim.wo.winblend = 6
+vim.wo.winblend = 20
 vim.wo.linebreak = true
 vim.wo.foldenable = true
 vim.wo.cursorline = true
@@ -54,7 +54,8 @@ vim.wo.cursorcolumn = true
 vim.wo.foldmethod = 'manual'
 vim.wo.breakindentopt = 'shift:3'
 
-vim.g.large_file = 1048576 -- 1MB
+vim.g.large_file = 524288 -- 512k
+
 util.augroup([[
   augroup __CONFIG_GENERAL__
     au!
@@ -62,7 +63,7 @@ util.augroup([[
     au WinEnter    *        if &nu && ! &rnu | setlocal rnu   | end
     au WinLeave    *        if &nu &&   &rnu | setlocal nornu | end
     au BufReadPre  *        lua require'mod.functions'.handle_large_file()
-    au BufRead,BufNewFile *.MD set ft=markdown
+    au BufRead,BufNewFile *.MD,*.md set ft=markdown
   augroup END
 ]])
 

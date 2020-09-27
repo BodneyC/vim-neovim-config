@@ -48,6 +48,7 @@ function M.command(lhs, rhs, opts)
     '-nargs=' .. (opts.nargs or '0'),
     opts.complete and '-complete=' .. opts.complete or '',
     opts.bang and '-bang' or '',
+    opts.range and '-range' or '',
     lhs, rhs
   }
   M.exec(table.concat(parts, ' '))

@@ -173,7 +173,7 @@ function M.floating_help(...)
       augroup __FLOAT__
         au BufWipeout <buffer=%s> bd! %s
       augroup END
-    ]]), vim.g.tmp_help_buf, vim.g.tmp_border_buf)
+    ]], vim.g.tmp_help_buf, vim.g.tmp_border_buf))
   end
 end
 

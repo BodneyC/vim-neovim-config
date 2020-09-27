@@ -86,6 +86,15 @@ util.command('FilesFzf', "lua require'mod.fzf'.files(<q-args>, <bang>0)", { bang
 
 util.command('ToggleLazyGit', "w | lua require'mod.terminal'.floating_term('lazygit')", { nargs = '0' })
 
+util.exec([[
+  func! CopyForTerminal() range
+    let lines = getline(a:firstline, a:lastline)
+    call map(lines, { i, l -> substitute(l, '^ *\(.*\)\\ *$', '\1 ', '') })
+    let @" = join(lines, ' ')
+  endfunc
+]])
+util.command('CopyForTerminal', '<line1>,<line2>call CopyForTerminal()', { range = true })
+
 util.command('Wqa',      'wqa',            { nargs = '0' })
 util.command('WQa',      'wqa',            { nargs = '0' })
 util.command('WQ',       'wq',             { nargs = '0' })
