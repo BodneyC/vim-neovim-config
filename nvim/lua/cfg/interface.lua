@@ -64,6 +64,8 @@ util.augroup([[
     au WinLeave    *        if &nu &&   &rnu | setlocal nornu | end
     au BufReadPre  *        lua require'mod.functions'.handle_large_file()
     au BufRead,BufNewFile *.MD,*.md set ft=markdown
+    au BufRead,BufNewFile *	setfiletype &ft
+    au FileType    *        lua require'ftplugin'(vim.bo.ft)
   augroup END
 ]])
 

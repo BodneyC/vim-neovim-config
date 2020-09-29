@@ -2,6 +2,7 @@ local vim = vim
 local skm = vim.api.nvim_set_keymap
 
 local util = require'utl.util'
+local lang = require'utl.lang'
 
 vim.g.vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip'
 
@@ -58,6 +59,13 @@ vim.g.togool_extras = {{ '<', '+' }, { '>', '-' }}
 
 vim.g.virk_tags_enable = 0
 vim.g.virk_close_regexes = { '^$', 'FAR.*', 'MERGE MSG', 'git-.*', 'COMMIT.*', '.*Plugins.*', '^.defx].*' }
+vim.g.virk_close_by_ft = {
+  -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
+  tagbar = "TagbarOpen",
+  vista = "Vista!! | wincmd p",
+  defx = "exe 'DefxOpen' | setlocal nobuflisted | wincmd p",
+  Mundo = "MundoShow",
+}
 
 vim.g.indentLine_showFirstIndentLevel = 1
 vim.g.indentLine_enabled = 1
@@ -98,5 +106,5 @@ util.augroup([[
   augroup END
 ]])
 
-vim.g.tagbar_iconchars = { '\\u00a0', '\\u00a0' }
+vim.g.tagbar_iconchars = { lang.utf8(0x00a0), lang.utf8(0x00a0) }
 vim.g.tagbar_compact = 1

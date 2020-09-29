@@ -1,5 +1,6 @@
 local vim = vim
 local util = require'utl.util'
+local lang = require'utl.lang'
 local fs = require'utl.fs'
 
 local M = {}
@@ -32,7 +33,7 @@ function M.spell_checker()
     util.exec('redraw')
     local ch = ''
     local draw = true
-    while not util.elem_in_array({ 'y', 'n', 'f', 'r', 'a', 'q' }, ch) do
+    while not lang.elem_in_array({ 'y', 'n', 'f', 'r', 'a', 'q' }, ch) do
       if draw then
         print('Word: ' ..  vim.fn.expand('<cword>') ..
           ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')

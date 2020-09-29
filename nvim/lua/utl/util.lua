@@ -85,13 +85,4 @@ function M.resize_window(d)
   vim.fn.execute(dir .. ' resize ' .. edge .. inc)
 end
 
-function M.elem_in_array(a, e)
-  for _, v in ipairs(a) do
-    if v == e then
-      return true
-    end
-  end
-  return false
-end
-
 return M

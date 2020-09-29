@@ -1,1 +1,0 @@
-set tags^=~/go/src
