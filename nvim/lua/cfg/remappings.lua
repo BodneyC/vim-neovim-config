@@ -18,8 +18,10 @@ skm('n', '<F2>',      '<CMD>syn sync fromstart<CR>', { noremap = true, silent = 
 skm('n', '<F7>',      '<CMD>set spell!<CR>',         { noremap = true, silent = true })
 skm('i', '<F7>',      '<C-o>:set spell!<CR>',        { noremap = true, silent = true })
 
-skm('n', '',        '<Plug>NERDCommenterToggle',           {})
-skm('x', '',        '<Plug>NERDCommenterToggle',           {})
+skm('n', '', '<Plug>NERDCommenterToggle', {})
+skm('x', '', '<Plug>NERDCommenterToggle', {})
+skm('i', '', '<C-o><C-_>',                {})
+
 skm('n', '<C-p>',     '<Tab>',                               { noremap = true })
 skm('n', '<leader>*', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { noremap = true })
 skm('n', '<leader>/', '<CMD>noh<CR>',                        { noremap = true, silent = true })
@@ -87,13 +89,14 @@ util.command('FilesFzf', "lua require'mod.fzf'.files(<q-args>, <bang>0)", { bang
 util.command('ToggleLazyGit', "w | lua require'mod.terminal'.floating_term('lazygit')", { nargs = '0' })
 
 util.exec([[
-  func! CopyForTerminal() range
+  func! CopyForTerminal(...) range
+    let reg = get(a:, 1, '"')
     let lines = getline(a:firstline, a:lastline)
     call map(lines, { i, l -> substitute(l, '^ *\(.*\)\\ *$', '\1 ', '') })
-    let @" = join(lines, ' ')
+    exe "let @" . reg . " = join(lines, ' ')"
   endfunc
 ]])
-util.command('CopyForTerminal', '<line1>,<line2>call CopyForTerminal()', { range = true })
+util.command('CopyForTerminal', '<line1>,<line2>call CopyForTerminal(<f-args>)', { range = true, nargs = '?' })
 
 util.command('Wqa',      'wqa',            { nargs = '0' })
 util.command('WQa',      'wqa',            { nargs = '0' })

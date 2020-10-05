@@ -5,10 +5,9 @@ local fs = require'utl.fs'
 
 local M = {}
 
-function M.set_indent(ns)
-  local n = tonumber(ns)
-  vim.bo.ts = n
-  vim.bo.sw = n
+function M.set_indent(n)
+  vim.bo.ts = tonumber(n)
+  vim.bo.sw = tonumber(n)
   if vim.fn.exists(":IndentLinesReset") then
     util.exec('IndentLinesReset')
   end
@@ -17,7 +16,7 @@ end
 function M.change_indent(n)
   util.toggle_bool_option('bo', 'et')
   util.exec('%retab!')
-  vim.bo.ts = n
+  vim.bo.ts = tonumber(n)
   util.toggle_bool_option('bo', 'et')
   util.exec('%retab!')
   M.set_indent(n)

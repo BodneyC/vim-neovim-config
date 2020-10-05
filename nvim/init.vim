@@ -28,7 +28,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/pic-vim',       { 'branch': 'master' }
   Plug 'bodneyc/spelunker.vim', { 'branch': 'feature/quickui_support' }
   Plug 'BodneyC/togool.vim',    { 'branch': 'master' }
-  " Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
   Plug 'bronson/vim-visual-star-search'
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
@@ -78,6 +78,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Shougo/neco-vim'
   Plug 'simnalamburt/vim-mundo'
   Plug 'skywind3000/vim-quickui'
+  Plug 'skywind3000/asynctasks.vim'
+  Plug 'skywind3000/asyncrun.vim'
   Plug 'sodapopcan/vim-twiggy'
   Plug 'soywod/iris.vim'
   Plug 'steelsojka/completion-buffers'
@@ -111,7 +113,7 @@ func! s:add_to_rtp(p, back)
   endif
 endfunc
 
-call <SID>add_to_rtp("gitclones/VirkSpaces", v:true)
+" call <SID>add_to_rtp("gitclones/VirkSpaces", v:true)
 " call <SID>add_to_rtp("gitclones/1989.vim", v:true)
 " call <SID>add_to_rtp("gitclones/at-zed-vim", v:true)
 " call <SID>add_to_rtp("gitclones/pic-vim", v:true)

@@ -1,5 +1,5 @@
 local vim = vim
-local log = vim.lsp.log
+local log = require 'vim.lsp.log'
 local skm = vim.api.nvim_set_keymap
 
 -- Note: For the rest of the config `util` refers to 'utl.util' however, as I
@@ -59,6 +59,7 @@ require'utl.util'.augroup([[
 skm('n', 'K',     "<cmd>lua require'utl.util'.show_documentation()<CR>", { noremap = true, silent = true })
 skm('n', '<C-]>', "<cmd>lua require'utl.util'.go_to_definition()<CR>",   { noremap = true, silent = true })
 
+skm('n', 'ga',       '<CMD>lua vim.lsp.buf.code_action()<CR>',      { noremap = true, silent = true })
 skm('n', 'gd',       '<CMD>lua vim.lsp.buf.definition()<CR>',       { noremap = true, silent = true })
 skm('n', 'gh',       '<CMD>lua vim.lsp.buf.hover()<CR>',            { noremap = true, silent = true })
 skm('n', 'gD',       '<CMD>lua vim.lsp.buf.implementation()<CR>',   { noremap = true, silent = true })
@@ -91,10 +92,16 @@ require'utl.util'.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_
 vim.lsp.callbacks['textDocument/hover'] = function(_, method, result)
   vim.b.textDocument_hover = false
   util.focusable_float(method, function()
-    if not (result and result.contents) then return end
+    if not (result and result.contents) then
+      -- return { 'No information available' }
+      return
+    end
     local markdown_lines = util.convert_input_to_markdown_lines(result.contents)
     markdown_lines = util.trim_empty_lines(markdown_lines)
-    if vim.tbl_isempty(markdown_lines) then return end
+    if vim.tbl_isempty(markdown_lines) then
+      -- return { 'No information available' }
+      return
+    end
     local bufnr, winnr = util.fancy_floating_markdown(markdown_lines, {
       pad_left = 1; pad_right = 1;
     })
@@ -157,6 +164,7 @@ nvim_lsp.sumneko_lua.setup { on_attach = on_attach, capabilities = lsp_status.ca
 nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.clangd.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 -- nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }

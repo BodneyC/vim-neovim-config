@@ -35,7 +35,7 @@ function M.init()
   })
   vim.fn.execute("command! -nargs=0 DefxOpen lua require'mod.defx'.open()")
   vim.api.nvim_set_keymap(
-    'n', '<Leader>D', '<CMD>DefxOpen<CR>', { silent = true, noremap = true })
+    'n', '<Leader>d', '<CMD>DefxOpen<CR>', { silent = true, noremap = true })
 end
 
 return M
