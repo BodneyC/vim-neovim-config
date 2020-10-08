@@ -64,6 +64,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-lua/lsp-status.nvim'
   Plug 'nvim-treesitter/completion-treesitter'
   Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter-refactor'
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'nvim-treesitter/playground'
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
   Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
   Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
@@ -89,6 +92,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-liquid'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
   Plug 'uiiaoo/java-syntax.vim'
   Plug 'vigoux/treesitter-context.nvim'
   Plug 'vim-airline/vim-airline'

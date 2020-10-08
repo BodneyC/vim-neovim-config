@@ -3,8 +3,9 @@ local vim = vim
 local M = {}
 
 function M.show_documentation()
-  vim.lsp.buf.hover()
-  if not vim.b.textDocument_hover then
+  if #vim.lsp.buf_get_clients() ~= 0 then
+    vim.lsp.buf.hover()
+  else
     if vim.bo.ft == 'vim' then
       vim.fn.execute('H ' .. vim.fn.expand('<cword>'))
     elseif string.match(vim.bo.ft, 'z?sh') then
@@ -16,8 +17,9 @@ function M.show_documentation()
 end
 
 function M.go_to_definition()
-  vim.lsp.buf.definition()
-  if not vim.b.textDocument_location then
+  if #vim.lsp.buf_get_clients() ~= 0 then
+    vim.lsp.buf.definition()
+  else
     for _, wrd in ipairs({'<cword>', '<cWORD>', '<cexpr>'}) do
       local word = vim.fn.expand(wrd)
       if #(vim.fn.taglist('^' .. word .. '$')) then
@@ -76,7 +78,7 @@ function M.resize_window(d)
   if d == 'h' or d == 'l' then
     dir = 'vertical'
   end
-  local edge = edge_of_screen(d) and '-' or '+'
+  local edge = edge_of_screen(d) and '-' or ' '
   if dir == '' and edge == '-' then
     if edge_of_screen((d == 'j') and 'k' or 'j') then
 	    return

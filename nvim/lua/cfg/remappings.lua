@@ -86,6 +86,8 @@ skm('n', '‘',          "<CMD>lua require'mod.fzf'.rg_under_cursor()<CR>",   { 
 util.command('Rg',       "lua require'mod.fzf'.rg(<q-args>,    <bang>0)", { bang = true, nargs = '*' })
 util.command('FilesFzf', "lua require'mod.fzf'.files(<q-args>, <bang>0)", { bang = true, nargs = '*' })
 
+skm('n', '<leader>h',  "<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>",    { noremap = true, silent = true })
+
 util.command('ToggleLazyGit', "w | lua require'mod.terminal'.floating_term('lazygit')", { nargs = '0' })
 
 util.exec([[
@@ -104,10 +106,11 @@ util.command('WQ',       'wq',             { nargs = '0' })
 util.command('Wq',       'wq',             { nargs = '0' })
 util.command('W',        'w',              { nargs = '0' })
 util.command('Q',        'q',              { nargs = '0' })
-util.command('DiffThis', 'windo diffthis', { nargs = '0' })
-util.command('DiffOff',  'window diffoff', { nargs = '0' })
 
-util.command('ConvLineEndings',      '%s/<CR>//g',                         { nargs = '0' })
+util.command('DiffThis',        'windo diffthis', { nargs = '0' })
+util.command('DiffOff',         'window diffoff', { nargs = '0' })
+util.command('ConvLineEndings', '%s/<CR>//g',     { nargs = '0' })
+
 util.command('HighlightUnderCursor', "lua require'mod.functions'.highlight_under_cursor()", { nargs = '0' })
 util.command('SpellChecker',         "lua require'mod.functions'.spell_checker()",          { nargs = '0' })
 util.command('ZoomToggle',           "lua require'mod.functions'.zoom_toggle()",            { nargs = '0' })
@@ -115,7 +118,6 @@ util.command('ChangeIndent',         "lua require'mod.functions'.change_indent(<
 util.command('SetIndent',            "lua require'mod.functions'.set_indent(<f-args>)",     { nargs = '1' })
 util.command('MatchOver',            "lua require'mod.functions'.match_over(<f-args>)",     { nargs = '?' })
 
-util.exec('cabbrev pluginstall PlugInstall')
-util.exec('cabbrev PLugInstall PlugInstall')
-util.exec('cabbrev plugupdate PlugUpdate')
-util.exec('cabbrev PLugUpdate PlugUpdate')
+util.exec('cabbrev PI PlugInstall')
+util.exec('cabbrev PU PlugUpdate')
+util.exec('cabbrev PC PlugClean')

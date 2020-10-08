@@ -43,7 +43,8 @@ function M.spell_checker()
     end
     local dic = {
       n = '',
-      y = [[
+      y = -- bit of a dirty hack to be honest
+      [[
         let tmp_file = tempname()
         call writefile(spellsuggest(expand('<cword>')), tmp_file)
         exe 'split ' . tmp_file
@@ -110,6 +111,7 @@ end
 
 function M.handle_large_file()
   if fs.fsize(vim.fn.expand("<afile>")) > vim.g.large_file then
+    vim.o.updatetime = 1000
     vim.o.wrap = false
     vim.o.completeopt = ''
     vim.o.swapfile = false

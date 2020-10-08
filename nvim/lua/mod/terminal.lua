@@ -27,19 +27,19 @@ function M.close_if_term_job()
   end
 end
 
-function M.next_term_split(b)
+function M.next_term_split()
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
   if winnr ~= -1 then
     util.exec(winnr .. 'wincmd w')
-    util.exec('vsplit')
+    if vim.g.term_direction == 'horz' then
+      util.exec('split')
+    else
+      util.exec('vsplit')
+    end
     vim.o.hidden = true
     util.exec('terminal')
     local new_win = vim.fn.bufwinnr('%')
-    if b then
-      util.exec('wincmd =')
-      util.exec('resize' .. vim.g.term_height)
-    end
     util.exec("au! TermClose <buffer> lua require'mod.terminal'.close_if_term_job()")
     util.exec(cur_win .. 'wincmd w')
     util.exec(new_win .. 'wincmd w')
@@ -63,18 +63,40 @@ function M.term_split(b)
       util.exec('bd!' .. bufnr)
     end
     if b then
-      util.exec('vsplit')
+      if vim.g.term_direction == 'horz' then
+        util.exec('vsplit')
+      else
+        util.exec('split')
+      end
     else
-      util.exec([[
-        10 wincmd j
-        split
-        wincmd j
-      ]])
+      if vim.g.term_direction == 'horz' then
+        util.exec([[
+          10 wincmd l
+          vsplit
+          wincmd l
+        ]])
+      else
+        util.exec([[
+          10 wincmd j
+          split
+          wincmd j
+        ]])
+      end
     end
     vim.o.hidden = true
-    if b then util.exec('wincmd J') end
+    if b then
+      if vim.g.term_direction == 'horz' then
+        util.exec('wincmd L')
+      else
+        util.exec('wincmd J')
+      end
+    end
     util.exec('terminal')
-    util.exec('resize ' .. vim.g.term_height)
+    if vim.g.term_direction == 'horz' then
+      util.exec('vertical resize ' .. vim.g.term_width)
+    else
+      util.exec('resize ' .. vim.g.term_height)
+    end
     vim.g.tmp_term_name = vim.fn.bufname('%')
     util.exec("au! TermClose <buffer> lua require'mod.terminal'.close_if_term_job()")
     util.exec('startinsert')
@@ -177,12 +199,29 @@ function M.floating_help(...)
   end
 end
 
+function M.set_terminal_direction(...)
+  local args = { ... }
+  if args[1] then
+    vim.g.term_direction = args[1]
+    return
+  end
+  if vim.o.lines > vim.o.columns then
+    vim.g.term_direction = vim.g.term_direction or 'vert'
+  else
+    vim.g.term_direction = vim.g.term_direction or 'horz'
+  end
+end
+
 function M.init()
-  vim.g.term_height = vim.g.term_height or 15
-  vim.g.floating_term_divisor = '0.9'
+  M.set_terminal_direction()
+  vim.g.term_height = vim.g.term_height or math.floor(vim.o.lines * 0.3)
+  vim.g.term_width = vim.g.term_width or math.floor(vim.o.columns * 0.4)
+  vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
   vim.g.tmp_term_name = some_init_val
   vim.g.tmp_border_buf = -1
   vim.g.tmp_help_buf = 0
+
+  util.command('SetTerminalDirection', "lua require'mod.terminal'.set_terminal_direction(<f-args>)", { nargs = '?' })
 
   util.command('TermSplit', "lua require'mod.terminal'.term_split(<bang>0)",     { bang = true })
   util.command('M',         "lua require'mod.terminal'.floating_man(<f-args>)",  { nargs = '+', complete = 'shellcmd' })

@@ -1,11 +1,6 @@
 local vim = vim
-local log = require 'vim.lsp.log'
 local skm = vim.api.nvim_set_keymap
-
--- Note: For the rest of the config `util` refers to 'utl.util' however, as I
---   didn't write the callbacks and merely added to them slightly, I feel it
---   would be easier to allow them to use whatever locals they define
-local util = vim.lsp.util
+local util = require'utl.util'
 
 local nvim_lsp = require'nvim_lsp'
 local diagnostic = require'diagnostic'
@@ -20,7 +15,7 @@ vim.g.completion_confirm_key = '\\<C-y>'
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_snippet = 'vim-vsnip'
-vim.g.completion_matching_strategy_list = { 'exact', 'substring' }
+vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' } -- Order is important here
 vim.g.completion_sorting = 'none'
 vim.g.completion_tabnine_max_num_results=3
 vim.g.completion_trigger_keyword_length = 3
@@ -28,14 +23,6 @@ vim.g.completion_chain_complete_list = {
   default = {
     { complete_items = { 'lsp', 'path', 'snippet', 'buffers' } },
     -- { complete_items = { 'ts', 'tabnine' } },
-    { mode = '<C-p>' }, { mode = '<C-n>' }
-  },
-  sh = {
-    { complete_items = { 'buffers', 'ts', 'path', 'snippet' } },
-    { mode = '<C-p>' }, { mode = '<C-n>' }
-  },
-  zsh = {
-    { complete_items = { 'buffers', 'ts', 'path', 'snippet' } },
     { mode = '<C-p>' }, { mode = '<C-n>' }
   },
 }
@@ -46,7 +33,7 @@ vim.g.diagnostic_enable_virtual_text = false
 vim.g.diagnostic_virtual_text_prefix = ' '
 vim.g.space_before_virtual_text = 2
 
-require'utl.util'.augroup([[
+util.augroup([[
   augroup __LSP__
     au!
     au BufEnter   * silent lua require'completion'.on_attach()
@@ -71,6 +58,7 @@ skm('n', 'gW',       '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = 
 skm('n', ']c',       '<CMD>NextDiagnosticCycle<CR>',                { noremap = true, silent = true })
 skm('n', '[c',       '<CMD>PrevDiagnosticCycle<CR>',                { noremap = true, silent = true })
 skm('n', '<Leader>F','<CMD>lua vim.lsp.buf.formatting()<CR>',       { noremap = true, silent = true })
+
 -- Well, this is awful
 local function tab_string(e, k)
   return [[ pumvisible() ? "\]] .. e .. [[" ]] ..
@@ -87,54 +75,6 @@ skm('s', '<C-k>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", { 
 
 require'utl.util'.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
 require'utl.util'.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
-
--- LSP callbacks
-vim.lsp.callbacks['textDocument/hover'] = function(_, method, result)
-  vim.b.textDocument_hover = false
-  util.focusable_float(method, function()
-    if not (result and result.contents) then
-      -- return { 'No information available' }
-      return
-    end
-    local markdown_lines = util.convert_input_to_markdown_lines(result.contents)
-    markdown_lines = util.trim_empty_lines(markdown_lines)
-    if vim.tbl_isempty(markdown_lines) then
-      -- return { 'No information available' }
-      return
-    end
-    local bufnr, winnr = util.fancy_floating_markdown(markdown_lines, {
-      pad_left = 1; pad_right = 1;
-    })
-    util.close_preview_autocmd({"CursorMoved", "BufHidden", "InsertCharPre"}, winnr)
-    vim.b.textDocument_hover = true
-    return bufnr, winnr
-  end)
-end
-
-local function location_callback(_, method, result)
-  vim.b.textDocument_location = false
-  if result == nil or vim.tbl_isempty(result) then
-    local _ = log.info() and log.info(method, 'No location found')
-    return nil
-  end
-  vim.b.textDocument_location = true
-  if vim.tbl_islist(result) then
-    util.jump_to_location(result[1])
-    if #result > 1 then
-      util.set_qflist(util.locations_to_items(result))
-      vim.api.nvim_command("copen")
-      vim.api.nvim_command("wincmd p")
-    end
-  else
-    util.jump_to_location(result)
-  end
-end
-
-vim.lsp.callbacks['textDocument/declaration'] = location_callback
-vim.lsp.callbacks['textDocument/definition'] = location_callback
-vim.lsp.callbacks['textDocument/typeDefinition'] = location_callback
-vim.lsp.callbacks['textDocument/implementation'] = location_callback
-
 
 -- Diagnostics
 vim.fn.sign_define('LspDiagnosticsErrorSign',       { text = ' ', texthl = 'LspDiagnosticsError' })
@@ -165,13 +105,13 @@ nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.ca
 nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.clangd.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.jdtls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 -- nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.jsonls.setup      { on_attach = diagnostic.on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.kotlin_language_server.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
-
-nvim_lsp.jsonls.setup { on_attach = diagnostic.on_attach }
 
 local lombok_path = ''
 nvim_lsp.jdtls.setup {
@@ -179,12 +119,12 @@ nvim_lsp.jdtls.setup {
   capabilities = lsp_status.capabilities,
   init_options = {
     jvm_args = {
-      "-noverify",
-      "-Xmx1G",
-      "-XX:+UseG1GC",
-      "-XX:+UseStringDeduplication",
-      "-javaagent:" .. lombok_path,
-      "-Xbootclasspath/a:" .. lombok_path,
+      '-noverify',
+      '-Xmx1G',
+      '-XX:+UseG1GC',
+      '-XX:+UseStringDeduplication',
+      lombok_path and '-javaagent:' .. lombok_path or '',
+      lombok_path and '-Xbootclasspath/a:' .. lombok_path or '',
     }
   }
 }
