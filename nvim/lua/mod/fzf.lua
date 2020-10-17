@@ -3,7 +3,7 @@ local vim = vim
 local util = require'utl.util'
 local lang = require'utl.lang'
 
-local rg_cmd = 'rg -g "!{node_modules,package-lock.json,yarn.lock,.git}" ' ..
+local rg_cmd = 'rg -g "!{.lsp,.clj-kondo,node_modules,package-lock.json,yarn.lock,.git}" ' ..
   '--hidden ' ..
   '--ignore-vcs ' ..
   '--column ' ..

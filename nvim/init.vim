@@ -14,7 +14,7 @@ let g:polyglot_disabled = ['autoindent']
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
-  Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+  " Plug 'aca/completion-tabnine', { 'do': './install.sh' }
   Plug 'airblade/vim-gitgutter'
   Plug 'alvan/vim-closetag', { 'for': ['html', 'xml', 'markdown'] }
   Plug 'andymass/vim-matchup'
@@ -46,7 +46,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'justinmk/vim-syntax-extra'
   Plug 'KabbAmine/vCoolor.vim'
-  Plug 'KabbAmine/vCoolor.vim'
   Plug 'kristijanhusak/defx-git'
   Plug 'kristijanhusak/defx-icons'
   Plug 'leafgarland/typescript-vim'
@@ -68,12 +67,18 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-treesitter/playground'
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
-  Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
+
+  " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
   Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
+  Plug 'clojure-vim/vim-jack-in'
+  Plug 'tpope/vim-dispatch'
+  Plug 'radenling/vim-dispatch-neovim'
+
   Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/clever-f.vim'
   Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
+  Plug 'rhysd/vim-llvm'
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
@@ -124,6 +129,7 @@ endfunc
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
 " call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
+call <SID>add_to_rtp("Documents/sood-vim", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
 " call <SID>add_to_rtp("gitclones/wal.vim", v:true)
 

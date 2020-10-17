@@ -60,12 +60,13 @@ util.augroup([[
   augroup __CONFIG_GENERAL__
     au!
     au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
-    au WinEnter    *        if &nu && ! &rnu | setlocal rnu   | end
-    au WinLeave    *        if &nu &&   &rnu | setlocal nornu | end
     au BufReadPre  *        lua require'mod.functions'.handle_large_file()
     au BufRead,BufNewFile *.MD,*.md set ft=markdown
     au BufRead,BufNewFile *	setfiletype &ft
     au FileType    *        lua require'ftplugin'(vim.bo.ft)
+
+    " TMP
+    au BufRead,BufNewFile *.sood setf sood
   augroup END
 ]])
 

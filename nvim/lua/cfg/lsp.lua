@@ -11,7 +11,7 @@ vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 
 vim.g.completion_auto_change_source = 1
-vim.g.completion_confirm_key = '\\<C-y>'
+vim.g.completion_confirm_key = '<C-y>'
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_snippet = 'vim-vsnip'
@@ -21,8 +21,8 @@ vim.g.completion_tabnine_max_num_results=3
 vim.g.completion_trigger_keyword_length = 3
 vim.g.completion_chain_complete_list = {
   default = {
-    { complete_items = { 'lsp', 'path', 'snippet', 'buffers' } },
-    -- { complete_items = { 'ts', 'tabnine' } },
+    { complete_items = { 'ts', 'lsp', 'path', 'snippet', } },
+    { complete_items = { 'buffers', } }, -- with fuzzy, tabnine is garbage - or vice versa
     { mode = '<C-p>' }, { mode = '<C-n>' }
   },
 }
@@ -43,8 +43,8 @@ util.augroup([[
 
 -- LSP Mappings
 
-skm('n', 'K',     "<cmd>lua require'utl.util'.show_documentation()<CR>", { noremap = true, silent = true })
-skm('n', '<C-]>', "<cmd>lua require'utl.util'.go_to_definition()<CR>",   { noremap = true, silent = true })
+skm('n', 'K',     "<CMD>lua require'utl.util'.show_documentation()<CR>", { noremap = true, silent = true })
+skm('n', '<C-]>', "<CMD>lua require'utl.util'.go_to_definition()<CR>",   { noremap = true, silent = true })
 
 skm('n', 'ga',       '<CMD>lua vim.lsp.buf.code_action()<CR>',      { noremap = true, silent = true })
 skm('n', 'gd',       '<CMD>lua vim.lsp.buf.definition()<CR>',       { noremap = true, silent = true })
@@ -98,19 +98,21 @@ local on_attach = function(client, bufnr)
 end
 
 --- LSPs
+-- nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.clangd.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.clojure_lsp.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.dockerls.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.html.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.jdtls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.jsonls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
+nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.sumneko_lua.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.tsserver.setup    { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.vimls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
 nvim_lsp.yamlls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.clangd.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.jdtls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
--- nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.pyls.setup        { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.rls.setup         { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.gopls.setup       { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.jsonls.setup      { on_attach = diagnostic.on_attach, capabilities = lsp_status.capabilities }
+
 nvim_lsp.kotlin_language_server.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
 
 local lombok_path = ''
@@ -170,7 +172,7 @@ nvim_lsp.diagnosticls.setup {
       },
       pkgbuild  = {
         args  = { '%file' },
-        command = '/home-link/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
+        command = os.getenv('HOME') .. '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
           { column = 2, line = 1, message = 4, security = 3 }
@@ -207,7 +209,7 @@ nvim_lsp.diagnosticls.setup {
         sourceName = 'shellcheck_zsh'
       },
       groovy = {
-        args = { '-jar', '/link-home/gitclones/groovy-language-server/build/libs/groovy-language-server.jar' },
+        args = { '-jar', os.getenv('HOME') .. '/gitclones/groovy-language-server/build/libs/groovy-language-server.jar' },
         command = 'java',
         filetypes = { 'groovy' },
         settings = {

@@ -45,8 +45,8 @@ skm('n', '<leader>"',  '<CMD>sbn<CR>',      { noremap = true, silent = true })
 skm('n', '<leader>#',  '<C-^>',             { noremap = true, silent = true })
 skm('n', '<leader>%',  '<CMD>vert sbn<CR>', { noremap = true, silent = true })
 skm('n', '<leader>bD', '<CMD>BufOnly<CR>',  { noremap = true, silent = true })
-skm('n', '<leader>bd', 'Bclose',            { noremap = true, silent = true, expr = true })
 skm('n', '<leader>be', '<CMD>enew<CR>',     { noremap = true, silent = true })
+skm('n', '<leader>bd', 'Bclose',            { noremap = true, silent = true, expr = true })
 
 skm('n', '<S-down>',  '<CMD>m+<CR>',     { noremap = true, silent = true })
 skm('n', '<S-up>',    '<CMD>m-2<CR>',    { noremap = true, silent = true })
@@ -54,7 +54,6 @@ skm('n', '<S-Tab>',   '<CMD>bp<CR>',     { noremap = true, silent = true })
 skm('n', '<Tab>',     '<CMD>bn<CR>',     { noremap = true, silent = true })
 skm('x', '<',         '<gv',             { noremap = true })
 skm('x', '>',         '>gv',             { noremap = true })
-skm('x', '<leader>e', ':EasyAlign<CR>',  { noremap = true })
 skm('x', '<S-tab>',   '<gv',             { noremap = true })
 skm('x', '<Tab>',     '>gv',             { noremap = true })
 skm('i', '<S-down>',  '<C-o>:m+<CR>',    { noremap = true })
@@ -69,11 +68,15 @@ skm('n', '<leader>i',  '<CMD>IndentLinesToggle<CR>',            { noremap = true
 skm('n', '<leader>z',  '<CMD>ZoomToggle<CR>',                   { noremap = true, silent = true })
 skm('n', '<leader>}',  'zf}',                                   { noremap = true, silent = true })
 
-skm('n', ';',          '<Plug>(clever-f-repeat-forward)',       {})
-skm('n', ',',          '<Plug>(clever-f-repeat-back)',          {})
+skm('n', ';', '<Plug>(clever-f-repeat-forward)', {})
+skm('n', ',', '<Plug>(clever-f-repeat-back)',    {})
 
-skm('n', '[<Leader>',  '<CMD>call append(line(".") - 1, repeat([""], v:count1))<CR>', { noremap = true, silent = true })
-skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     { noremap = true, silent = true })
+skm('n', '<leader>ea', 'vip:EasyAlign<CR>', { noremap = true, silent = true })
+skm('x', '<leader>ea', ':EasyAlign<CR>',    { noremap = true, silent = true })
+
+-- Unimpaired covers this
+-- skm('n', '[<Leader>',  '<CMD>call append(line(".") - 1, repeat([""], v:count1))<CR>', { noremap = true, silent = true })
+-- skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     { noremap = true, silent = true })
 
 skm('n', '<leader>m',  "<CMD>lua require'mod.fzf'.run_cmd('Marks')<CR>",    { noremap = true, silent = true })
 skm('n', '<leader>r',  "<CMD>lua require'mod.fzf'.run_cmd('Rg')<CR>",       { noremap = true, silent = true })

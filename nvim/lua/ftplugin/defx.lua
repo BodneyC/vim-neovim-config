@@ -45,6 +45,9 @@ function M.init()
     endfunc
   ]])
 
+  vim.wo.number = false
+  vim.wo.relativenumber = false
+
   bskm(0, 'n', 'u',  "defx#do_action('call', '__DEFX_REM_RS')", { noremap = true, silent = true, expr = true })
   bskm(0, 'n', 'dd', "defx#do_action('call', '__DEFX_REM_RM')", { noremap = true, silent = true, expr = true })
 

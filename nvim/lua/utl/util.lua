@@ -78,7 +78,8 @@ function M.resize_window(d)
   if d == 'h' or d == 'l' then
     dir = 'vertical'
   end
-  local edge = edge_of_screen(d) and '-' or ' '
+  print(edge_of_screen(d))
+  local edge = edge_of_screen(d) and '-' or '+'
   if dir == '' and edge == '-' then
     if edge_of_screen((d == 'j') and 'k' or 'j') then
 	    return
