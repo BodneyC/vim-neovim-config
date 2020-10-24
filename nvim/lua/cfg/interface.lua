@@ -32,6 +32,7 @@ vim.o.backspace = 'indent,eol,start'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+vim.o.showtabline = 2
 
 -- Maybe a bug, but opening a file from the command line (e.g. 
 --   `nvim .eslintrc.json`) causes the `.o.` options to be
@@ -67,6 +68,7 @@ util.augroup([[
 
     " TMP
     au BufRead,BufNewFile *.sood setf sood
+    au BufRead,BufNewFile *.sood.ast setf sood-ast
   augroup END
 ]])
 

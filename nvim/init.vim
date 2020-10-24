@@ -12,29 +12,42 @@ let g:python3_host_prog = systemlist('command -v python3')[0]
 let g:polyglot_disabled = ['autoindent']
 
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'hrsh7th/vim-vsnip-integ'
+  " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
+  Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
+  Plug 'clojure-vim/vim-jack-in'
+  Plug 'tpope/vim-dispatch'
+  Plug 'radenling/vim-dispatch-neovim'
+
   " Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+  " Plug 'rbgrouleff/bclose.vim'
+  " Plug 'tadaa/vimade'
+  " Plug 'yuttie/comfortable-motion.vim'
+  Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
+  Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
+  Plug 'BodneyC/bolorscheme',   { 'branch': 'master' }
+  Plug 'BodneyC/flocho',        { 'branch': 'master' }
+  Plug 'BodneyC/hex-this-vim',  { 'branch': 'master' }
+  Plug 'BodneyC/pic-vim',       { 'branch': 'master' }
+  Plug 'BodneyC/togool.vim',    { 'branch': 'master' }
+  Plug 'KabbAmine/vCoolor.vim'
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/neco-vim'
+  Plug 'Yggdroot/indentLine'
   Plug 'airblade/vim-gitgutter'
   Plug 'alvan/vim-closetag', { 'for': ['html', 'xml', 'markdown'] }
   Plug 'andymass/vim-matchup'
   Plug 'bakpakin/fennel.vim'
   Plug 'benmills/vimux'
-  Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
-  Plug 'BodneyC/bolorscheme',   { 'branch': 'master' }
   Plug 'bodneyc/Comrade',       { 'branch': 'master' }
-  Plug 'BodneyC/flocho',        { 'branch': 'master' }
-  Plug 'BodneyC/hex-this-vim',  { 'branch': 'master' }
-  Plug 'BodneyC/pic-vim',       { 'branch': 'master' }
   Plug 'bodneyc/spelunker.vim', { 'branch': 'feature/quickui_support' }
-  Plug 'BodneyC/togool.vim',    { 'branch': 'master' }
-  Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
   Plug 'bronson/vim-visual-star-search'
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'haorenW1025/completion-nvim'
   Plug 'honza/vim-snippets'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn' }
   Plug 'janko/vim-test'
   Plug 'jeetsukumaran/vim-pythonsense'
@@ -45,18 +58,18 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/limelight.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'justinmk/vim-syntax-extra'
-  Plug 'KabbAmine/vCoolor.vim'
   Plug 'kristijanhusak/defx-git'
   Plug 'kristijanhusak/defx-icons'
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'leafgarland/typescript-vim'
   Plug 'liuchengxu/vista.vim'
   Plug 'ludovicchabant/vim-gutentags'
+  Plug 'm-pilia/vim-pkgbuild'
   Plug 'machakann/vim-swap'
   Plug 'majutsushi/tagbar'
   Plug 'mhinz/vim-startify'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
-  Plug 'm-pilia/vim-pkgbuild'
   Plug 'neovim/nvim-lsp'
   Plug 'nicwest/vim-http'
   Plug 'nvim-lua/diagnostic-nvim'
@@ -67,31 +80,23 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-treesitter/playground'
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
-
-  " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
-  Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
-  Plug 'clojure-vim/vim-jack-in'
-  Plug 'tpope/vim-dispatch'
-  Plug 'radenling/vim-dispatch-neovim'
-
-  Plug 'rbgrouleff/bclose.vim'
+  Plug 'qpkorr/vim-bufkill'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/clever-f.vim'
   Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
   Plug 'rhysd/vim-llvm'
+  Plug 'romgrk/barbar.nvim'
+  Plug 'romgrk/lib.kom'
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/neco-vim'
   Plug 'simnalamburt/vim-mundo'
-  Plug 'skywind3000/vim-quickui'
-  Plug 'skywind3000/asynctasks.vim'
   Plug 'skywind3000/asyncrun.vim'
+  Plug 'skywind3000/asynctasks.vim'
+  Plug 'skywind3000/vim-quickui'
   Plug 'sodapopcan/vim-twiggy'
   Plug 'soywod/iris.vim'
   Plug 'steelsojka/completion-buffers'
-  " Plug 'tadaa/vimade'
   Plug 'tmsvg/pear-tree'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-liquid'
@@ -106,8 +111,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'
   Plug 'wellle/visual-split.vim'
-  Plug 'Yggdroot/indentLine'
-  Plug 'yuttie/comfortable-motion.vim'
+
 call plug#end()
 
 func! s:add_to_rtp(p, back)

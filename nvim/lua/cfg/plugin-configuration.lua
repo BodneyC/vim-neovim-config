@@ -4,6 +4,8 @@ local skm = vim.api.nvim_set_keymap
 local util = require'utl.util'
 local lang = require'utl.lang'
 
+vim.g.vcoolor_disable_mappings = false
+
 vim.g.move_map_keys = false
 vim.g.asynctasks_term_pos = 'bottom'
 vim.g.asyncrun_open = 15
