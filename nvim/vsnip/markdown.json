@@ -1,0 +1,7 @@
+{
+  "get": {
+    "prefix": ["markdownlint-disable", "<!-- markdownlint-disable"],
+    "body": [ "<!-- markdownlint-disable $1 -->" ],
+    "description": "Markdown rule disable"
+  }
+}
