@@ -19,10 +19,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'radenling/vim-dispatch-neovim'
 
   " Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-  " Plug 'rbgrouleff/bclose.vim'
+  Plug 'rbgrouleff/bclose.vim'
   " Plug 'tadaa/vimade'
   " Plug 'yuttie/comfortable-motion.vim'
   Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
+  Plug 'BodneyC/barbar.nvim',   { 'branch': 'playing-around' }
   Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
   Plug 'BodneyC/bolorscheme',   { 'branch': 'master' }
   Plug 'BodneyC/flocho',        { 'branch': 'master' }
@@ -80,12 +81,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-treesitter/playground'
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
-  Plug 'qpkorr/vim-bufkill'
+  " Plug 'qpkorr/vim-bufkill'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/clever-f.vim'
   Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
   Plug 'rhysd/vim-llvm'
-  Plug 'romgrk/barbar.nvim'
+  " Plug 'romgrk/barbar.nvim'
   Plug 'romgrk/lib.kom'
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
@@ -117,7 +118,7 @@ call plug#end()
 func! s:add_to_rtp(p, back)
   let dir = $HOME . "/" . a:p
   if ! isdirectory(dir)
-    echoe dir . " not found"
+    echom "add_to_rtp '" . dir . "' not found"
   endif
   if a:back
     let &rtp .= "," . dir
@@ -134,6 +135,7 @@ endfunc
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
 " call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
 call <SID>add_to_rtp("Documents/sood-vim", v:true)
+" call <SID>add_to_rtp("gitclones/nvim-treesitter", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
 " call <SID>add_to_rtp("gitclones/wal.vim", v:true)
 

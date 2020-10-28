@@ -4,6 +4,22 @@ local skm = vim.api.nvim_set_keymap
 local util = require'utl.util'
 local lang = require'utl.lang'
 
+vim.g.bufferline = {
+  icons = true,
+  closable = false,
+  letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
+  clickable = true,
+  shadow = true,
+  semantic_letters = true,
+  padding = 300
+}
+
+vim.g.icons = {
+  bufferline_default_file = '',
+  bufferline_separator_active =   '',
+  bufferline_separator_inactive = ' ',
+}
+
 vim.g.vcoolor_disable_mappings = false
 
 vim.g.move_map_keys = false

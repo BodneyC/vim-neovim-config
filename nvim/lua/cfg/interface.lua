@@ -34,7 +34,7 @@ vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 vim.o.showtabline = 2
 
--- Maybe a bug, but opening a file from the command line (e.g. 
+-- Maybe a bug, but opening a file from the command line (e.g.
 --   `nvim .eslintrc.json`) causes the `.o.` options to be
 --   ignored...
 vim.bo.tabstop = 2
@@ -45,13 +45,13 @@ vim.wo.nu = true
 vim.wo.cul = true
 vim.wo.rnu = true
 vim.wo.wrap = true
-vim.wo.winblend = 20
+vim.wo.winblend = 15
 vim.wo.linebreak = true
 vim.wo.foldenable = true
 vim.wo.cursorline = true
 vim.wo.breakindent = true
 vim.wo.signcolumn = 'yes'
-vim.wo.cursorcolumn = true
+vim.wo.cursorcolumn = false
 vim.wo.foldmethod = 'manual'
 vim.wo.breakindentopt = 'shift:3'
 
