@@ -13,7 +13,7 @@ function M.init()
   if os.getenv('TERMTHEME') == "light" then
     util.exec('colo plint-light')
   else
-    util.exec('colo unicorn')
+    util.exec('colo spacegray')
   end
 
   M.additional_highlights()
@@ -31,12 +31,14 @@ function M.init()
 end
 
 function M.additional_highlights()
-  util.exec('hi! link HoverMatch MatchParen')
-  util.exec('hi! SpelunkerSpellBad gui=undercurl')
-  util.exec('hi! OverLength guibg=#995959 guifg=#ffffff')
-  util.exec('hi! link JavaIdentifier NONE')
-  util.exec('hi! link CleverFChar ErrorMsg')
-  util.exec('hi! link CleverFCursor ErrorMsg')
+  util.exec([[
+    hi! link HoverMatch MatchParen
+    hi! SpelunkerSpellBad gui=undercurl
+    hi! OverLength guibg=#995959 guifg=#ffffff
+    hi! link JavaIdentifier NONE
+    hi! link CleverFChar ErrorMsg
+    hi! link CleverFCursor ErrorMsg
+  ]])
   if os.getenv('TERMTHEME') == "light" then
     util.exec('hi! Visual guifg=bg')
     util.exec('hi! VertSplit guibg=NONE')

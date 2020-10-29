@@ -66,9 +66,10 @@ function M.init()
   bskm(0, 'n', 'r',       "defx#do_action('rename')",          { noremap = true, silent = true, expr = true })
   bskm(0, 'n', 'R',       "defx#redraw()",                     { noremap = true, silent = true, expr = true })
   bskm(0, 'n', '<Space>', "defx#do_action('toggle_select')",   { noremap = true, silent = true, expr = true })
-  bskm(0, 'n', 'Y',       "defx#do_action('yank_path')",       { noremap = true, silent = true, expr = true })
-  bskm(0, 'n', 'c',       "defx#do_action('copy')",            { noremap = true, silent = true, expr = true })
-  bskm(0, 'n', 'C',       "defx#do_action('move')",            { noremap = true, silent = true, expr = true })
+  bskm(0, 'n', 'cc',      "defx#do_action('yank_path')",       { noremap = true, silent = true, expr = true })
+  bskm(0, 'n', 'yy',      "defx#do_action('copy')",            { noremap = true, silent = true, expr = true })
+  bskm(0, 'n', 'Y',       "defx#do_action('copy')",            { noremap = true, silent = true, expr = true })
+  bskm(0, 'n', 'x',       "defx#do_action('move')",            { noremap = true, silent = true, expr = true })
   bskm(0, 'n', 'p',       "defx#do_action('paste')",           { noremap = true, silent = true, expr = true })
 end
 
