@@ -6,31 +6,35 @@ if empty($TERMTHEME)
   let $TERMTHEME = 'dark'
 endif
 
-let g:python_host_prog = systemlist('command -v python2')[0]
-let g:python3_host_prog = systemlist('command -v python3')[0]
+try
+  let g:python_host_prog = systemlist('command -v python2')[0]
+  let g:python3_host_prog = systemlist('command -v python3')[0]
+catch /E\(15\|684\).*/
+  echo "Python (2 and 3) not found on PATH"
+endtry
 
 let g:polyglot_disabled = ['autoindent']
 
 call plug#begin('~/.local/share/nvim/plugged')
-  " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
-  Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
-  Plug 'clojure-vim/vim-jack-in'
-  Plug 'tpope/vim-dispatch'
-  Plug 'radenling/vim-dispatch-neovim'
 
+  " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
   " Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-  Plug 'rbgrouleff/bclose.vim'
+  " Plug 'qpkorr/vim-bufkill'
+  " Plug 'romgrk/barbar.nvim'
   " Plug 'tadaa/vimade'
   " Plug 'yuttie/comfortable-motion.vim'
+
   Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
-  Plug 'BodneyC/barbar.nvim',   { 'branch': 'playing-around' }
   Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
+  Plug 'BodneyC/barbar.nvim',   { 'branch': 'playing-around' }
   Plug 'BodneyC/bolorscheme',   { 'branch': 'master' }
   Plug 'BodneyC/flocho',        { 'branch': 'master' }
   Plug 'BodneyC/hex-this-vim',  { 'branch': 'master' }
   Plug 'BodneyC/pic-vim',       { 'branch': 'master' }
+  Plug 'BodneyC/sood-vim',      { 'branch': 'master' }
   Plug 'BodneyC/togool.vim',    { 'branch': 'master' }
   Plug 'KabbAmine/vCoolor.vim'
+  Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
@@ -45,6 +49,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'clojure-vim/vim-jack-in'
   Plug 'haorenW1025/completion-nvim'
   Plug 'honza/vim-snippets'
   Plug 'hrsh7th/vim-vsnip'
@@ -81,12 +86,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-treesitter/playground'
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
-  " Plug 'qpkorr/vim-bufkill'
+  Plug 'radenling/vim-dispatch-neovim'
+  Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/clever-f.vim'
   Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
   Plug 'rhysd/vim-llvm'
-  " Plug 'romgrk/barbar.nvim'
   Plug 'romgrk/lib.kom'
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
@@ -99,6 +104,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'soywod/iris.vim'
   Plug 'steelsojka/completion-buffers'
   Plug 'tmsvg/pear-tree'
+  Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-liquid'
   Plug 'tpope/vim-repeat'
@@ -134,7 +140,8 @@ endfunc
 " call <SID>add_to_rtp("gitclones/hex-this-vim", v:true)
 " call <SID>add_to_rtp("gitclones/flocho", v:true)
 " call <SID>add_to_rtp("gitclones/bolorscheme", v:true)
-call <SID>add_to_rtp("Documents/sood-vim", v:true)
+" call <SID>add_to_rtp("Documents/sood-vim", v:true)
+" call <SID>add_to_rtp("gitclones/barbar.nvim", v:true)
 " call <SID>add_to_rtp("gitclones/nvim-treesitter", v:true)
 " call <SID>add_to_rtp("gitclones/spelunker.vim", v:true)
 " call <SID>add_to_rtp("gitclones/wal.vim", v:true)

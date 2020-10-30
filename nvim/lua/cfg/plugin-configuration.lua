@@ -6,12 +6,12 @@ local lang = require'utl.lang'
 
 vim.g.bufferline = {
   icons = true,
-  closable = false,
+  closable = true,
   letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
   clickable = true,
   shadow = true,
   semantic_letters = true,
-  padding = 300
+  maximum_padding = 300
 }
 
 vim.g.icons = {
@@ -56,7 +56,9 @@ vim.g.Hexokinase_optInPatterns = {
 }
 
 -- Weird behaviour with os.setenv...
-vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"')
+vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always ' ..
+  '--style=numbers --color=always {} || highlight -O ansi -l {} || '..
+  'coderay {} || rougify {} || cat {}"')
 vim.fn.execute('let $FZF_DEFAULT_OPTS="--layout=reverse --margin=1,1"')
 vim.g.fzf_layout = { window = "lua require'mod.terminal'.floating_centred()" }
 vim.g.fzf_history_dir = os.getenv('HOME') .. '/.fzf/.fzf_history_dir'

@@ -28,6 +28,7 @@ function M.close_if_term_job()
 end
 
 function M.next_term_split()
+  M.set_terminal_direction()
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
   if winnr ~= -1 then
@@ -50,6 +51,7 @@ function M.next_term_split()
 end
 
 function M.term_split(b)
+  M.set_terminal_direction()
   if vim.g.tmp_term_name == some_init_val then
     get_open_term_buffer_name()
   end
@@ -151,7 +153,7 @@ function M.floating_centred(...)
       au BufWipeout <buffer=%d> bd! %d
     augroup END
   ]], cur_float_win, buf))
-  vim.o.winhl = 'Normal:NormalFloat'
+  -- vim.o.winhl = 'Normal:NormalFloat'
   return cur_float_win
 end
 
@@ -191,6 +193,7 @@ function M.floating_help(...)
     error('"' .. query .. '" not in helptags')
   else
     bskm(vim.g.tmp_help_buf, 'n', '<Esc>', ':bw<CR>', {})
+    bskm(vim.g.tmp_help_buf, 'n', '<leader>q', ':bw<CR>', {})
     util.augroup(string.format([[
       augroup __FLOAT__
         au BufWipeout <buffer=%s> bd! %s
@@ -205,10 +208,11 @@ function M.set_terminal_direction(...)
     vim.g.term_direction = args[1]
     return
   end
-  if vim.o.lines > vim.o.columns then
-    vim.g.term_direction = vim.g.term_direction or 'vert'
+  local winnr = vim.fn.winnr('$')
+  if (vim.fn.winheight(winnr) * 2.4) > vim.fn.winwidth(winnr) then
+    vim.g.term_direction = 'vert'
   else
-    vim.g.term_direction = vim.g.term_direction or 'horz'
+    vim.g.term_direction = 'horz'
   end
 end
 
@@ -252,7 +256,8 @@ function M.init()
       au!
       au TermEnter,TermOpen,BufNew,BufEnter term://* startinsert
       au TermLeave,BufLeave term://* stopinsert
-      au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1 winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
+      au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
+        " winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
     augroup END
   ]])
 
