@@ -57,7 +57,7 @@ skm('n', 'g0',       '<CMD>lua vim.lsp.buf.document_symbol()<CR>',  { noremap = 
 skm('n', 'gW',       '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = true, silent = true })
 skm('n', ']c',       '<CMD>NextDiagnosticCycle<CR>',                { noremap = true, silent = true })
 skm('n', '[c',       '<CMD>PrevDiagnosticCycle<CR>',                { noremap = true, silent = true })
-skm('n', '<Leader>F','<CMD>lua vim.lsp.buf.formatting()<CR>',       { noremap = true, silent = true })
+skm('n', '<Leader>F', "<CMD>lua require'utl.util'.document_formatting()<CR>",       { noremap = true, silent = true })
 
 -- Well, this is awful
 local function tab_string(e, k)

@@ -94,16 +94,16 @@ skm('x', '<leader>ea', ':EasyAlign<CR>',    { noremap = true, silent = true })
 -- skm('n', '[<Leader>',  '<CMD>call append(line(".") - 1, repeat([""], v:count1))<CR>', { noremap = true, silent = true })
 -- skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     { noremap = true, silent = true })
 
+util.command('Rg',       "lua require'mod.fzf'.rg(<q-args>,    <bang>0)", { bang = true, nargs = '*' })
+util.command('FilesFzf', "lua require'mod.fzf'.files(<q-args>, <bang>0)", { bang = true, nargs = '*' })
+
 skm('n', '<leader>m',  "<CMD>lua require'mod.fzf'.run_cmd('Marks')<CR>",    { noremap = true, silent = true })
 skm('n', '<leader>r',  "<CMD>lua require'mod.fzf'.run_cmd('Rg')<CR>",       { noremap = true, silent = true })
 skm('n', '<leader>f',  "<CMD>lua require'mod.fzf'.run_cmd('FilesFzf')<CR>", { noremap = true, silent = true })
 skm('n', '<leader>M',  "<CMD>lua require'mod.fzf'.run_cmd('Maps')<CR>",     { noremap = true, silent = true })
 skm('n', '<leader>bl', "<CMD>lua require'mod.fzf'.run_cmd('Buffers')<CR>",  { noremap = true, silent = true })
-skm('n', '<M-]>',      "<CMD>lua require'mod.fzf'.rg_under_cursor()<CR>",   { noremap = true, silent = true })
-skm('n', '‘',          "<CMD>lua require'mod.fzf'.rg_under_cursor()<CR>",   { noremap = true, silent = true })
-
-util.command('Rg',       "lua require'mod.fzf'.rg(<q-args>,    <bang>0)", { bang = true, nargs = '*' })
-util.command('FilesFzf', "lua require'mod.fzf'.files(<q-args>, <bang>0)", { bang = true, nargs = '*' })
+skm('n', '<M-]>',      "<CMD>lua require'mod.fzf'.rg(vim.fn.expand('<cword>'), 0)<CR>",   { noremap = true, silent = true })
+skm('n', '‘',          "<CMD>lua require'mod.fzf'.rg(vim.fn.expand('<cword>'), 0)<CR>",   { noremap = true, silent = true })
 
 skm('n', '<leader>h',  "<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>",    { noremap = true, silent = true })
 

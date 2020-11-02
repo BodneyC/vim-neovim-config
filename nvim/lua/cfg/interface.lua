@@ -62,6 +62,7 @@ util.augroup([[
     au BufRead,BufNewFile *.MD,*.md set ft=markdown
     au BufRead,BufNewFile *	setfiletype &ft
     au FileType    *        lua require'ftplugin'(vim.bo.ft)
+    au TermEnter   * startinsert
 
     " TMP
     au BufRead,BufNewFile *.sood setf sood

@@ -1,5 +1,5 @@
 local vim = vim
-local util = require'utl.util'
+local util = require 'utl.util'
 
 local M = {}
 
@@ -10,7 +10,7 @@ function M.init()
 
   vim.o.termguicolors = true
 
-  if os.getenv('TERMTHEME') == "light" then
+  if os.getenv('TERMTHEME') == 'light' then
     util.exec('colo plint-light')
   else
     util.exec('colo spacegray')
@@ -27,6 +27,8 @@ function M.init()
     augroup END
   ]])
 
+  util.exec('hi! link NormalFloat Normal')
+
   util.exec('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
 end
 
@@ -39,7 +41,7 @@ function M.additional_highlights()
     hi! link CleverFChar ErrorMsg
     hi! link CleverFCursor ErrorMsg
   ]])
-  if os.getenv('TERMTHEME') == "light" then
+  if os.getenv('TERMTHEME') == 'light' then
     util.exec('hi! Visual guifg=bg')
     util.exec('hi! VertSplit guibg=NONE')
   end
@@ -57,11 +59,9 @@ function M.hover_match()
   end
   local w = vim.fn.expand('<cword>')
   if string.match(w, '^[0-9]*[#_a-zA-Z][#_a-zA-Z0-9]*$') then
-    vim.b.hover_match_id = vim.fn.matchadd(
-      'HoverMatch',
-      '\\([^a-zA-z]\\|^\\)\\zs' .. w .. '\\ze\\([^a-zA-z]\\|$\\)',
-      0
-    )
+    vim.b.hover_match_id = vim.fn.matchadd('HoverMatch',
+                                           '\\([^a-zA-z]\\|^\\)\\zs' .. w ..
+                                               '\\ze\\([^a-zA-z]\\|$\\)', 0)
   end
 end
 
@@ -81,6 +81,5 @@ function M.SetSignTheme(bg)
     hi link CocGitRemovedSign GitGutterDelete
   ]])
 end
-
 
 return M

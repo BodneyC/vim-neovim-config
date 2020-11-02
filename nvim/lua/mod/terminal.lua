@@ -7,7 +7,7 @@ local some_init_val = 'SOME_INIT_VALUE'
 
 local M = {}
 
-local function get_open_term_buffer_name()
+local function set_open_term_buffer_name()
   local blist = vim.fn.getbufinfo({ bufloaded = 1, buflisted = 0 })
   for _, e in ipairs(blist) do
     if e.name ~= '' and not e.hidden then
@@ -28,7 +28,7 @@ function M.close_if_term_job()
 end
 
 function M.next_term_split()
-  M.set_terminal_direction()
+  -- M.set_terminal_direction()
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
   if winnr ~= -1 then
@@ -53,7 +53,7 @@ end
 function M.term_split(b)
   M.set_terminal_direction()
   if vim.g.tmp_term_name == some_init_val then
-    get_open_term_buffer_name()
+    set_open_term_buffer_name()
   end
   local ttn = vim.g.tmp_term_name
   local winnr = vim.fn.bufwinnr(ttn)
@@ -153,7 +153,6 @@ function M.floating_centred(...)
       au BufWipeout <buffer=%d> bd! %d
     augroup END
   ]], cur_float_win, buf))
-  -- vim.o.winhl = 'Normal:NormalFloat'
   return cur_float_win
 end
 

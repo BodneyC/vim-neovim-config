@@ -10,7 +10,7 @@ try
   let g:python_host_prog = systemlist('command -v python2')[0]
   let g:python3_host_prog = systemlist('command -v python3')[0]
 catch /E\(15\|684\).*/
-  echo "Python (2 and 3) not found on PATH"
+  echo "Python (2 or 3) not found on PATH"
 endtry
 
 let g:polyglot_disabled = ['autoindent']
@@ -20,13 +20,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
   " Plug 'aca/completion-tabnine', { 'do': './install.sh' }
   " Plug 'qpkorr/vim-bufkill'
-  " Plug 'romgrk/barbar.nvim'
+  Plug 'romgrk/barbar.nvim'
   " Plug 'tadaa/vimade'
   " Plug 'yuttie/comfortable-motion.vim'
 
   Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
-  Plug 'BodneyC/barbar.nvim',   { 'branch': 'playing-around' }
+  " Plug 'BodneyC/barbar.nvim',   { 'branch': 'playing-around' }
   Plug 'BodneyC/bolorscheme',   { 'branch': 'master' }
   Plug 'BodneyC/flocho',        { 'branch': 'master' }
   Plug 'BodneyC/hex-this-vim',  { 'branch': 'master' }
@@ -34,7 +34,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/sood-vim',      { 'branch': 'master' }
   Plug 'BodneyC/togool.vim',    { 'branch': 'master' }
   Plug 'KabbAmine/vCoolor.vim'
-  Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
+  " Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
@@ -49,7 +49,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'clojure-vim/vim-jack-in'
+  " Plug 'clojure-vim/vim-jack-in'
   Plug 'haorenW1025/completion-nvim'
   Plug 'honza/vim-snippets'
   Plug 'hrsh7th/vim-vsnip'
@@ -70,6 +70,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'leafgarland/typescript-vim'
   Plug 'liuchengxu/vista.vim'
   Plug 'ludovicchabant/vim-gutentags'
+  Plug 'lukas-reineke/format.nvim'
   Plug 'm-pilia/vim-pkgbuild'
   Plug 'machakann/vim-swap'
   Plug 'majutsushi/tagbar'
