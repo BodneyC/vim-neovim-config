@@ -3,10 +3,13 @@ require'format'.setup {
   lua = {
     {
       cmd = {
-        'lua-format -i --no-keep-simple-control-block-one-line ' ..
+        -- Should probably just have a config file for this
+        'lua-format -i --no-keep-simple-control-block-one-line --column-limit=90 ' ..
             '--no-keep-simple-function-one-line ' ..
-            '--break-after-table-lb --break-before-table-rb ' ..
-            '--no-chop-down-table ' .. '--extra-sep-at-table-end ' ..
+            '--break-after-table-lb --break-before-table-rb --no-chop-down-table ' ..
+            '--extra-sep-at-table-end ' ..
+            '--no-align-parameter ' ..
+            '--no-align-args ' ..
             '--double-quote-to-single-quote --indent-width=2 ',
       },
     },

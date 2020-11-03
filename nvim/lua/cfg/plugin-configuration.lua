@@ -4,6 +4,8 @@ local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 local lang = require 'utl.lang'
 
+-- Bufferline <3
+
 vim.g.bufferline = {
   icons = true,
   closable = true,
@@ -46,9 +48,7 @@ vim.g['conjure#mapping#prefix'] = '\\'
 
 vim.g.Hexokinase_virtualText = ' '
 vim.g.Hexokinase_highlighters = {'virtual'}
-vim.g.Hexokinase_optInPatterns = {
-  'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla',
-}
+vim.g.Hexokinase_optInPatterns = {'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla'}
 
 -- Weird behaviour with os.setenv...
 vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always ' ..
@@ -68,11 +68,9 @@ skm('i', '<M-k>', '<C-o>:TmuxNavigateUp<CR>', {noremap = true, silent = true})
 skm('i', '<M-h>', '<C-o>:TmuxNavigateLeft<CR>', {noremap = true, silent = true})
 skm('i', '<M-j>', '<C-o>:TmuxNavigateDown<CR>', {noremap = true, silent = true})
 skm('i', '<M-l>', '<C-o>:TmuxNavigateRight<CR>', {noremap = true, silent = true})
-skm('i', '<M-\\>', '<C-o>:TmuxNavigatePrevious<CR>',
-    {noremap = true, silent = true})
+skm('i', '<M-\\>', '<C-o>:TmuxNavigatePrevious<CR>', {noremap = true, silent = true})
 
-vim.g['test#java#maventest#file_pattern'] =
-    '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
+vim.g['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
 
 vim.g.matchup_matchparen_offscreen = {method = 'popup'}
 
@@ -91,7 +89,7 @@ vim.g.virk_close_by_ft = {
 }
 
 vim.g.indentLine_showFirstIndentLevel = 1
-vim.g.indentLine_enabled = 1
+vim.g.indentLine_enabled = 0
 vim.g.indentLine_char = '·'
 vim.g.indentLine_first_char = '·'
 vim.g.indentLine_fileTypeExclude = {

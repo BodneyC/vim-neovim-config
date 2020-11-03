@@ -17,13 +17,6 @@ let g:polyglot_disabled = ['autoindent']
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-  " Plug 'Olical/aniseed', { 'tag': 'v3.6.2' }
-  " Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-  " Plug 'qpkorr/vim-bufkill'
-  Plug 'romgrk/barbar.nvim'
-  " Plug 'tadaa/vimade'
-  " Plug 'yuttie/comfortable-motion.vim'
-
   Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
   " Plug 'BodneyC/barbar.nvim',   { 'branch': 'playing-around' }
@@ -34,14 +27,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'BodneyC/sood-vim',      { 'branch': 'master' }
   Plug 'BodneyC/togool.vim',    { 'branch': 'master' }
   Plug 'KabbAmine/vCoolor.vim'
-  " Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/neco-vim'
   Plug 'Yggdroot/indentLine'
   Plug 'airblade/vim-gitgutter'
-  Plug 'alvan/vim-closetag', { 'for': ['html', 'xml', 'markdown'] }
+  Plug 'alvan/vim-closetag', { 'for': ['html', 'xml'] }
   Plug 'andymass/vim-matchup'
-  Plug 'bakpakin/fennel.vim'
   Plug 'benmills/vimux'
   Plug 'bodneyc/Comrade',       { 'branch': 'master' }
   Plug 'bodneyc/spelunker.vim', { 'branch': 'feature/quickui_support' }
@@ -49,7 +39,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
-  " Plug 'clojure-vim/vim-jack-in'
   Plug 'haorenW1025/completion-nvim'
   Plug 'honza/vim-snippets'
   Plug 'hrsh7th/vim-vsnip'
@@ -88,33 +77,26 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/playground'
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
   Plug 'radenling/vim-dispatch-neovim'
-  Plug 'rbgrouleff/bclose.vim'
   Plug 'rbong/vim-flog'
   Plug 'rhysd/clever-f.vim'
   Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'tex'] }
-  Plug 'rhysd/vim-llvm'
+  Plug 'romgrk/barbar.nvim'
   Plug 'romgrk/lib.kom'
   Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
   Plug 'simnalamburt/vim-mundo'
-  Plug 'skywind3000/asyncrun.vim'
-  Plug 'skywind3000/asynctasks.vim'
-  Plug 'skywind3000/vim-quickui'
   Plug 'sodapopcan/vim-twiggy'
-  Plug 'soywod/iris.vim'
   Plug 'steelsojka/completion-buffers'
   Plug 'tmsvg/pear-tree'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-liquid'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'uiiaoo/java-syntax.vim'
   Plug 'vigoux/treesitter-context.nvim'
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-scripts/BufOnly.vim'
   Plug 'vim-utils/vim-all'
   Plug 'wellle/targets.vim'

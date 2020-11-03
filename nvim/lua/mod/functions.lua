@@ -1,14 +1,14 @@
 local vim = vim
-local util = require'utl.util'
-local lang = require'utl.lang'
-local fs = require'utl.fs'
+local fs = require 'utl.fs'
+local util = require 'utl.util'
+local lang = require 'utl.lang'
 
 local M = {}
 
 function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(":IndentLinesReset") then
+  if vim.fn.exists(':IndentLinesReset') then
     util.exec('IndentLinesReset')
   end
 end
@@ -32,10 +32,10 @@ function M.spell_checker()
     util.exec('redraw')
     local ch = ''
     local draw = true
-    while not lang.elem_in_array({ 'y', 'n', 'f', 'r', 'a', 'q' }, ch) do
+    while not lang.elem_in_array({'y', 'n', 'f', 'r', 'a', 'q'}, ch) do
       if draw then
-        print('Word: ' ..  vim.fn.expand('<cword>') ..
-          ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
+        print('Word: ' .. vim.fn.expand('<cword>') ..
+                  ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
       end
       draw = false
       util.exec('redraw')
@@ -60,7 +60,9 @@ function M.spell_checker()
       f = 'normal! 1z=',
       a = 'normal! zG',
     }
-    if ch == 'q' then break end
+    if ch == 'q' then
+      break
+    end
     if dic[ch] then
       util.exec_lines(dic[ch])
     end
@@ -74,13 +76,15 @@ function M.spell_checker()
 end
 
 function M.match_over(...)
-  local args = { ... }
+  local args = {...}
   print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then
     error('More than one argument')
   end
   local w = vim.g.match_over_width or 80
-  if args[1] then w = args[1] end
+  if args[1] then
+    w = args[1]
+  end
   util.exec('match OverLength /\\%' .. w .. 'v.\\+/')
 end
 
@@ -103,6 +107,19 @@ function M.highlight_under_cursor()
   print(vim.inspect(hl_groups))
 end
 
+-- Requires barbar at the minute, but not necessary I suppose...
+function M.buffer_close_all_but_visible()
+  local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
+      'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'), 'bufname(v:val)')
+  if #bs > 0 then
+    for _, buf in ipairs(bs) do
+      vim.fn.execute('BufferClose ' .. buf)
+    end
+  else
+    print('No buffers to delete')
+  end
+end
+
 local function call_if_fn_exists(fn)
   if vim.fn.exists(':' .. fn) then
     util.exec(fn)
@@ -110,7 +127,7 @@ local function call_if_fn_exists(fn)
 end
 
 function M.handle_large_file()
-  if fs.fsize(vim.fn.expand("<afile>")) > vim.g.large_file then
+  if fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
     vim.o.updatetime = 1000
     vim.o.wrap = false
     vim.o.completeopt = ''
