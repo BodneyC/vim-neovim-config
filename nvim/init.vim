@@ -18,9 +18,11 @@ let g:polyglot_disabled = ['autoindent']
 call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'Olical/conjure', {'tag': 'v4.8.0'}
-  Plug 'guns/vim-sexp'
-  Plug 'tpope/vim-sexp-mappings-for-regular-people'
   Plug 'amdt/vim-niji'
+  Plug 'gregsexton/gitv', {'on': ['Gitv']}
+  Plug 'guns/vim-sexp'
+  Plug 'itchyny/calendar.vim'
+  Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
   Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }

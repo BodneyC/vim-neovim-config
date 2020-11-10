@@ -127,7 +127,8 @@ local function call_if_fn_exists(fn)
 end
 
 function M.handle_large_file()
-  if fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
+  local fn = vim.fn.expand('<afile>')
+  if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
     vim.o.updatetime = 1000
     vim.o.wrap = false
     vim.o.completeopt = ''
