@@ -64,4 +64,5 @@ util.augroup([[
     au!
     au VimEnter * lua require'mod.airline'.init()
   augroup END
-]])
+]]) 
+    

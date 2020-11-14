@@ -60,9 +60,10 @@ skm('t', '<C-M-l>', '<C-\\><C-n>:lua require\'utl.util\'.resize_window(\'l\')<CR
 skm('n', '<leader>"', '<CMD>sbn<CR>', n_s)
 skm('n', '<leader>#', '<C-^>', n_s)
 skm('n', '<leader>%', '<CMD>vert sbn<CR>', n_s)
-skm('n', '<leader>bD', "<CMD>lua require'mod.functions'.buffer_close_all_but_visible()<CR>", n_s)
+skm('n', '<leader>bD',
+    '<CMD>lua require\'mod.functions\'.buffer_close_all_but_visible()<CR>', n_s)
 skm('n', '<leader>be', '<CMD>enew<CR>', n_s)
-skm('n', '<leader>bd', "<CMD>BufferClose<CR>", n_s)
+skm('n', '<leader>bd', '<CMD>BufferClose<CR>', n_s)
 
 skm('n', '<S-down>', '<CMD>m+<CR>', n_s)
 skm('n', '<S-up>', '<CMD>m-2<CR>', n_s)
@@ -97,9 +98,9 @@ skm('x', '<leader>ea', ':EasyAlign<CR>', n_s)
 -- skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     n_s)
 
 util.command('Rg', 'lua require\'mod.fzf\'.rg(<q-args>,    <bang>0)',
-             {bang = true, nargs = '*'})
+    {bang = true, nargs = '*'})
 util.command('FilesFzf', 'lua require\'mod.fzf\'.files(<q-args>, <bang>0)',
-             {bang = true, nargs = '*'})
+    {bang = true, nargs = '*'})
 
 skm('n', '<leader>m', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Marks\')<CR>', n_s)
 skm('n', '<leader>r', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Rg\')<CR>', n_s)
@@ -113,7 +114,7 @@ skm('n', '<leader>h',
     '<CMD>lua require\'mod.terminal\'.floating_help(vim.fn.expand(\'<cword>\'))<CR>', n_s)
 
 util.command('ToggleLazyGit',
-             'w | lua require\'mod.terminal\'.floating_term(\'lazygit\')', {nargs = '0'})
+    'w | lua require\'mod.terminal\'.floating_term(\'lazygit\')', {nargs = '0'})
 
 util.exec([[
   func! CopyForTerminal(...) range
@@ -124,7 +125,7 @@ util.exec([[
   endfunc
 ]])
 util.command('CopyForTerminal', '<line1>,<line2>call CopyForTerminal(<f-args>)',
-             {range = true, nargs = '?'})
+    {range = true, nargs = '?'})
 
 util.command('Wqa', 'wqa', {nargs = '0'})
 util.command('WQa', 'wqa', {nargs = '0'})
@@ -138,15 +139,15 @@ util.command('DiffOff', 'window diffoff', {nargs = '0'})
 util.command('ConvLineEndings', '%s/<CR>//g', {nargs = '0'})
 
 util.command('HighlightUnderCursor',
-             'lua require\'mod.functions\'.highlight_under_cursor()', {nargs = '0'})
+    'lua require\'mod.functions\'.highlight_under_cursor()', {nargs = '0'})
 util.command('SpellChecker', 'lua require\'mod.functions\'.spell_checker()', {nargs = '0'})
 util.command('ZoomToggle', 'lua require\'mod.functions\'.zoom_toggle()', {nargs = '0'})
 util.command('ChangeIndent', 'lua require\'mod.functions\'.change_indent(<f-args>)',
-             {nargs = '1'})
+    {nargs = '1'})
 util.command('SetIndent', 'lua require\'mod.functions\'.set_indent(<f-args>)',
-             {nargs = '1'})
+    {nargs = '1'})
 util.command('MatchOver', 'lua require\'mod.functions\'.match_over(<f-args>)',
-             {nargs = '?'})
+    {nargs = '?'})
 
 util.exec('cabbrev PI PlugInstall')
 util.exec('cabbrev PU PlugUpdate')

@@ -4,7 +4,13 @@ require'nvim-treesitter.configs'.setup {
     'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html', 'typescript',
     'query', 'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
   },
-  highlight = {enable = true},
+  indent = {
+    enable = true,
+  },
+  highlight = {
+    enable = true,
+    disable = {}
+  },
   incremental_selection = {
     enable = true,
     keymaps = {

@@ -75,7 +75,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'moll/vim-bbye'
   Plug 'neovim/nvim-lsp'
   Plug 'nicwest/vim-http'
-  Plug 'nvim-lua/diagnostic-nvim'
+  " Plug 'nvim-lua/diagnostic-nvim'
   Plug 'nvim-lua/lsp-status.nvim'
   Plug 'nvim-treesitter/completion-treesitter'
   Plug 'nvim-treesitter/nvim-treesitter'
