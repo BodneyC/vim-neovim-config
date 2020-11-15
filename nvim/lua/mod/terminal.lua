@@ -208,7 +208,7 @@ function M.set_terminal_direction(...)
     return
   end
   local winnr = vim.fn.winnr('$')
-  if (vim.fn.winheight(winnr) * 2.4) > vim.fn.winwidth(winnr) then
+  if (vim.fn.winheight(winnr) * 3.2) > vim.fn.winwidth(winnr) then
     vim.g.term_direction = 'vert'
   else
     vim.g.term_direction = 'horz'

@@ -59,7 +59,8 @@ util.augroup([[
     au!
     au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
     au BufReadPre  *        lua require'mod.functions'.handle_large_file()
-    au BufRead,BufNewFile *.MD,*.md set ft=markdown
+    au BufRead,BufNewFile *.MD,*.md setf markdown
+    au BufRead,BufNewFile  *.rasi   setf css
     au BufRead,BufNewFile *	setfiletype &ft
     au FileType    *        lua require'ftplugin'(vim.bo.ft)
     au TermEnter   * startinsert
