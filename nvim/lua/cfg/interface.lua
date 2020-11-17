@@ -57,13 +57,12 @@ vim.g.large_file = 524288 -- 512k
 util.augroup([[
   augroup __CONFIG_GENERAL__
     au!
-    au BufReadPost *        if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
-    au BufReadPre  *        lua require'mod.functions'.handle_large_file()
+    au BufReadPost        *         if   line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
+    au BufReadPre         *         lua  require'mod.functions'.handle_large_file()
     au BufRead,BufNewFile *.MD,*.md setf markdown
-    au BufRead,BufNewFile  *.rasi   setf css
-    au BufRead,BufNewFile *	setfiletype &ft
-    au FileType    *        lua require'ftplugin'(vim.bo.ft)
-    au TermEnter   * startinsert
+    au BufRead,BufNewFile *.rasi    setf css
+    au FileType           *         lua  require'ftplugin'(vim.bo.ft)
+    au TermEnter          *         startinsert
 
     " TMP
     au BufRead,BufNewFile *.sood setf sood

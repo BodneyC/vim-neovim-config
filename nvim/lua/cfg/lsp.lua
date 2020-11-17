@@ -2,7 +2,7 @@ local vim = vim
 local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 
-local nvim_lsp = require 'nvim_lsp'
+local lspconfig = require 'lspconfig'
 -- local diagnostic = require'diagnostic'
 local lsp_status = require 'lsp-status'
 
@@ -79,8 +79,7 @@ local function tab_string(e, k)
              [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] ..
              [[   ? "\]] .. k .. [[" : completion#trigger_completion() ]]
 end
-skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'),
-    {noremap = true, silent = true, expr = true})
+skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'), {noremap = true, silent = true, expr = true})
 skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'),
     {noremap = true, silent = true, expr = true})
 
@@ -124,27 +123,27 @@ local on_attach = function(client, bufnr)
 end
 
 --- LSPs
--- nvim_lsp.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.clojure_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.gopls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.sumneko_lua.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-nvim_lsp.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+-- lspconfig.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
+lspconfig.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.clojure_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.gopls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.sumneko_lua.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
-nvim_lsp.kotlin_language_server.setup {
+lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
 }
 
 -- local lombok_path = ''
-nvim_lsp.jdtls.setup {
+lspconfig.jdtls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
   init_options = {
@@ -156,7 +155,7 @@ nvim_lsp.jdtls.setup {
   },
 }
 
-nvim_lsp.diagnosticls.setup {
+lspconfig.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
   filetypes = {'groovy', 'pkgbuild', 'terraform', 'sh', 'zsh', 'markdown'},

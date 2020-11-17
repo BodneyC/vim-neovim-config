@@ -202,6 +202,8 @@ function M.floating_help(...)
 end
 
 function M.set_terminal_direction(...)
+  vim.g.term_height = vim.g.term_height or math.floor(vim.o.lines * 0.3)
+  vim.g.term_width = vim.g.term_width or math.floor(vim.o.columns * 0.4)
   local args = { ... }
   if args[1] then
     vim.g.term_direction = args[1]
@@ -217,8 +219,6 @@ end
 
 function M.init()
   M.set_terminal_direction()
-  vim.g.term_height = vim.g.term_height or math.floor(vim.o.lines * 0.3)
-  vim.g.term_width = vim.g.term_width or math.floor(vim.o.columns * 0.4)
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
   vim.g.tmp_term_name = some_init_val
   vim.g.tmp_border_buf = -1
