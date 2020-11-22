@@ -8,6 +8,6 @@ require'cfg.format'
 
 require'mod.terminal'.init()
 require'mod.highlight'.init()
-require'mod.pear-tree'.init()
+-- require'mod.pear-tree'.init()
 require'mod.defx'.init()
 -- require'mod.quickui'.init()

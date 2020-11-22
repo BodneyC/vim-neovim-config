@@ -7,6 +7,9 @@ local n_s = {noremap = true, silent = true}
 util.exec('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
 
+skm('n', 'j', 'gj', n_s)
+skm('n', 'k', 'gk', n_s)
+
 skm('n', '<leader>E', '<CMD>e!<CR>', n_s)
 skm('n', '<leader>Q', '<CMD>qa!<CR>', n_s)
 skm('n', '<leader>W', '<CMD>wqa<CR>', n_s)
@@ -112,6 +115,30 @@ skm('n', '‘', '<CMD>lua require\'mod.fzf\'.rg(vim.fn.expand(\'<cword>\'), 0)<C
 
 skm('n', '<leader>h',
     '<CMD>lua require\'mod.terminal\'.floating_help(vim.fn.expand(\'<cword>\'))<CR>', n_s)
+
+util.func([[
+  function! MasterBS()
+    let ln = line('.')
+    let l = getline(ln)
+    let pl = getline(ln - 1)
+    if l[:col('.') - 2] =~ '^\s\+$'
+      if pl =~ '^\s*$'
+        if l =~ '^\s*$'
+          return "\<Esc>:silent exe line('.') - 1 . 'delete'\<CR>S"
+        else
+          return "\<C-o>:silent exe line('.') - 1 . 'delete'\<CR>"
+        endif
+      else
+        return "\<C-w>\<BS>"
+      endif
+    else
+      return AutoPairsDelete()
+    endif
+  endfunc
+]])
+
+skm('i', '<BS>', '<C-r>=MasterBS()<CR>', n_s)
+skm('i', '´', '<C-r>=AutoPairsFastWrap()<CR>', n_s)
 
 util.command('ToggleLazyGit',
     'w | lua require\'mod.terminal\'.floating_term(\'lazygit\')', {nargs = '0'})

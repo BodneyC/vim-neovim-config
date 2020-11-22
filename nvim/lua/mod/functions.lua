@@ -5,6 +5,26 @@ local lang = require 'utl.lang'
 
 local M = {}
 
+function M.bs()
+  local getline = vim.fn.getline
+  local ln = vim.fn.line('.')
+  local l = getline(ln)
+  local pl = getline(ln - 1)
+  if string.match(string.sub(l, 1, vim.fn.col('.') - 1), '^%s+$') then
+    if string.match(pl, '^%s*$') then
+      if string.match(l, '^%s*$') then
+        return '<Esc>:silent exe line(\'.\') - 1 . \'delete\'<CR>S'
+      else
+        return '<C-o>:exe line(\'.\') - 1 . \'delete\'<CR>'
+      end
+    else
+      return '<C-w><BS>'
+    end
+  else
+    return vim.fn.AutoPairsDelete()
+  end
+end
+
 function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)

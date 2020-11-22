@@ -4,6 +4,9 @@ local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 local lang = require 'utl.lang'
 
+vim.g.AutoPairsMapBS = false
+vim.g.AutoPairsMultilineClose = false
+
 vim.g.sexp_mappings = {
   sexp_outer_list = 'af',
   sexp_inner_list = 'if',

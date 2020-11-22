@@ -39,7 +39,7 @@ util.augroup([[
   augroup __LSP__
     au!
     au BufEnter   * silent lua require'completion'.on_attach()
-    au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
+    " au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
   augroup END
 ]])
 
