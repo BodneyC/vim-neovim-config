@@ -17,12 +17,13 @@ let g:polyglot_disabled = ['autoindent']
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-  Plug 'Olical/conjure', {'tag': 'v4.8.0'}
+  " Plug 'Olical/conjure', { 'tag': 'v4.8.0' }
   Plug 'amdt/vim-niji'
-  Plug 'gregsexton/gitv', {'on': ['Gitv']}
-  Plug 'guns/vim-sexp'
-  Plug 'itchyny/calendar.vim'
-  Plug 'tpope/vim-sexp-mappings-for-regular-people'
+  Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+  " Plug 'guns/vim-sexp'
+  Plug 'itchyny/calendar.vim', { 'on': 'Cal' }
+  " Plug 'tpope/vim-sexp-mappings-for-regular-people'
+  Plug 'dominikduda/vim_current_word'
 
   Plug 'BodneyC/At-Zed-vim',    { 'branch': 'master' }
   Plug 'BodneyC/VirkSpaces',    { 'branch': 'master' }
@@ -41,11 +42,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'andymass/vim-matchup'
   Plug 'benmills/vimux'
   Plug 'bodneyc/Comrade',       { 'branch': 'master' }
-  Plug 'bodneyc/spelunker.vim', { 'branch': 'feature/quickui_support' }
+  Plug 'kamykn/spelunker.vim'
   Plug 'bronson/vim-visual-star-search'
   Plug 'brooth/far.vim'
   Plug 'chrisbra/recover.vim'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'knubie/vim-kitty-navigator'
   Plug 'haorenW1025/completion-nvim'
   Plug 'honza/vim-snippets'
   Plug 'hrsh7th/vim-vsnip'
@@ -69,7 +71,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'lukas-reineke/format.nvim'
   Plug 'm-pilia/vim-pkgbuild'
   Plug 'machakann/vim-swap'
-  Plug 'majutsushi/tagbar'
+  Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
   Plug 'mhinz/vim-startify'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'moll/vim-bbye'
@@ -81,7 +83,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'nvim-treesitter/nvim-treesitter-refactor'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-  Plug 'nvim-treesitter/playground'
+  Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
   Plug 'oguzbilgic/vim-gdiff', { 'on': ['Gdiff', 'Gdiffsplit'] }
   Plug 'radenling/vim-dispatch-neovim'
   Plug 'rbong/vim-flog'

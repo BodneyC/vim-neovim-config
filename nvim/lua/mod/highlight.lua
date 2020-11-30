@@ -23,11 +23,9 @@ function M.init()
       au!
       au TextYankPost * silent! lua require'vim.highlight'.on_yank()
       au ColorScheme  * lua require'mod.highlight'.additional_highlights()
-      au CursorHold   * lua require'mod.highlight'.hover_match()
+      " au CursorHold   * lua require'mod.highlight'.hover_match()
     augroup END
   ]])
-
-  util.exec('hi! link NormalFloat Normal')
 
   util.exec('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
 end
@@ -40,6 +38,9 @@ function M.additional_highlights()
     hi! link JavaIdentifier NONE
     hi! link CleverFChar ErrorMsg
     hi! link CleverFCursor ErrorMsg
+    hi! CurrentWord gui=bold
+    hi! link CurrentWordTwins CurrentWord
+    hi! link NormalFloat Normal " Still unsure of this
   ]])
   if os.getenv('TERMTHEME') == 'light' then
     util.exec('hi! Visual guifg=bg')

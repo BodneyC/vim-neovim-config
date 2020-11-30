@@ -15,7 +15,7 @@ vim.o.laststatus = 2
 vim.o.shiftwidth = 0
 vim.o.softtabstop = 0
 vim.o.ttimeout = true
-vim.o.updatetime = 0
+vim.o.updatetime = 250
 vim.o.expandtab = true
 vim.o.showmode = false
 vim.o.ttimeoutlen = 50
@@ -26,12 +26,16 @@ vim.o.splitright = true
 vim.o.smartindent = true
 vim.o.equalalways = false
 vim.o.spelllang = 'en_gb'
+vim.o.spell = false
 vim.o.fillchars = 'vert:|'
 vim.o.wildmode = 'longest,full'
 vim.o.backspace = 'indent,eol,start'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+
+vim.o.title = true
+vim.o.titlestring = '%t - nvim'
 
 vim.o.showtabline = 2
 vim.bo.tabstop = 2

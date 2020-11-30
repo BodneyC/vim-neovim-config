@@ -24,6 +24,7 @@ GetGroovyIndent	nvim/indent/groovy.vim	/^func GetGroovyIndent()$/;"	f
 M.SetSignTheme	nvim/lua/mod/highlight.lua	/^function M.SetSignTheme(bg)$/;"	f
 M.additional_highlights	nvim/lua/mod/highlight.lua	/^function M.additional_highlights()$/;"	f
 M.border_box	nvim/lua/mod/terminal.lua	/^function M.border_box(h, w, c, r)$/;"	f
+M.bs	nvim/lua/mod/functions.lua	/^function M.bs()$/;"	f
 M.buffer_close_all_but_visible	nvim/lua/mod/functions.lua	/^function M.buffer_close_all_but_visible()$/;"	f
 M.change_indent	nvim/lua/mod/functions.lua	/^function M.change_indent(n)$/;"	f
 M.close_if_term_job	nvim/lua/mod/terminal.lua	/^function M.close_if_term_job()$/;"	f
@@ -81,6 +82,7 @@ M.term_split	nvim/lua/mod/terminal.lua	/^function M.term_split(b)$/;"	f
 M.toggle_bool_option	nvim/lua/utl/util.lua	/^function M.toggle_bool_option(scope, opt)$/;"	f
 M.utf8	nvim/lua/utl/lang.lua	/^function M.utf8(decimal)$/;"	f
 M.zoom_toggle	nvim/lua/mod/functions.lua	/^function M.zoom_toggle()$/;"	f
+MasterBS	nvim/lua/cfg/remappings.lua	/^  function! MasterBS()$/;"	f
 SkipGroovyBlanksAndComments	nvim/indent/groovy.vim	/^func! SkipGroovyBlanksAndComments(startline)$/;"	f
 Vim and Neovim Configuration Files	README.md	/^# Vim and Neovim Configuration Files$/;"	c
 \\'.buffer_close_all_but_visible	nvim/lua/cfg/remappings.lua	/^    '<CMD>lua require\\'mod.functions\\'.buffer_close_all_but_visible()<CR>', n_s)$/;"	f

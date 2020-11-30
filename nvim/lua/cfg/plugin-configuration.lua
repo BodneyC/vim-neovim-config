@@ -118,17 +118,33 @@ vim.fn.execute('let $FZF_DEFAULT_OPTS="--layout=reverse --margin=1,1"')
 vim.g.fzf_layout = {window = 'lua require\'mod.terminal\'.floating_centred()'}
 vim.g.fzf_history_dir = os.getenv('HOME') .. '/.fzf/.fzf_history_dir'
 
-vim.g.tmux_navigator_no_mappings = 1
-skm('n', '<M-k>', ':TmuxNavigateUp<CR>', {noremap = true, silent = true})
-skm('n', '<M-h>', ':TmuxNavigateLeft<CR>', {noremap = true, silent = true})
-skm('n', '<M-j>', ':TmuxNavigateDown<CR>', {noremap = true, silent = true})
-skm('n', '<M-l>', ':TmuxNavigateRight<CR>', {noremap = true, silent = true})
-skm('n', '<M-\\>', ':TmuxNavigatePrevious<CR>', {noremap = true, silent = true})
-skm('i', '<M-k>', '<C-o>:TmuxNavigateUp<CR>', {noremap = true, silent = true})
-skm('i', '<M-h>', '<C-o>:TmuxNavigateLeft<CR>', {noremap = true, silent = true})
-skm('i', '<M-j>', '<C-o>:TmuxNavigateDown<CR>', {noremap = true, silent = true})
-skm('i', '<M-l>', '<C-o>:TmuxNavigateRight<CR>', {noremap = true, silent = true})
-skm('i', '<M-\\>', '<C-o>:TmuxNavigatePrevious<CR>', {noremap = true, silent = true})
+local pane_manager = 'Tmux'
+if os.getenv('KITTY_WINDOW_ID') then
+  pane_manager = 'Kitty'
+  local kitty_listen = os.getenv('KITTY_LISTEN_ON')
+  if kitty_listen then
+    vim.g.kitty_navigator_listening_on_address = kitty_listen
+  else
+    print('KittyNavigate will not work, no KITTY_LISTEN_ON')
+  end
+end
+vim.g[string.lower(pane_manager) .. '_navigator_no_mappings'] = 1
+local n_s = {noremap = true, silent = true}
+skm('n', '<M-k>', ':' .. pane_manager .. 'NavigateUp<CR>', n_s)
+skm('n', '<M-h>', ':' .. pane_manager .. 'NavigateLeft<CR>', n_s)
+skm('n', '<M-j>', ':' .. pane_manager .. 'NavigateDown<CR>', n_s)
+skm('n', '<M-l>', ':' .. pane_manager .. 'NavigateRight<CR>', n_s)
+skm('n', '<M-\\>', ':' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
+skm('i', '<M-k>', '<C-o>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
+skm('i', '<M-h>', '<C-o>:' .. pane_manager .. 'NavigateLeft<CR>', n_s)
+skm('i', '<M-j>', '<C-o>:' .. pane_manager .. 'NavigateDown<CR>', n_s)
+skm('i', '<M-l>', '<C-o>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
+skm('i', '<M-\\>', '<C-o>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
+skm('t', '<M-h>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateLeft<CR>', n_s)
+skm('t', '<M-j>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateDown<CR>', n_s)
+skm('t', '<M-k>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
+skm('t', '<M-l>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
+skm('t', '<M-\\>', '<C-\\><C-n>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
 
 vim.g['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
 

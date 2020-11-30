@@ -244,12 +244,6 @@ function M.init()
   skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', { silent = true, noremap = true })
   skm('t', '<LeftRelease>', '<Nop>', { silent = true, noremap = true })
 
-  skm('t', '<M-h>', '<C-\\><C-n>:TmuxNavigateLeft<CR>', { silent = true, noremap = true })
-  skm('t', '<M-j>', '<C-\\><C-n>:TmuxNavigateDown<CR>', { silent = true, noremap = true })
-  skm('t', '<M-k>', '<C-\\><C-n>:TmuxNavigateUp<CR>', { silent = true, noremap = true })
-  skm('t', '<M-l>', '<C-\\><C-n>:TmuxNavigateRight<CR>', { silent = true, noremap = true })
-  skm('t', '<M-\\>', '<C-\\><C-n>:TmuxNavigatePrevious<CR>', { silent = true, noremap = true })
-
   util.augroup([[
     augroup __TERMINAL__
       au!
