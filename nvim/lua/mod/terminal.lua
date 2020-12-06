@@ -57,6 +57,10 @@ function M.term_split(b)
   end
   local ttn = vim.g.tmp_term_name
   local winnr = vim.fn.bufwinnr(ttn)
+  local dir_char = 'j'
+  if vim.g.term_direction == 'horz' then
+    dir_char = 'l'
+  end
   if winnr ~= -1 then
     util.exec(winnr .. 'wincmd ' .. (b and 'q' or 'w'))
   else
@@ -71,27 +75,15 @@ function M.term_split(b)
         util.exec('split')
       end
     else
-      if vim.g.term_direction == 'horz' then
-        util.exec([[
-          10 wincmd l
-          vsplit
-          wincmd l
-        ]])
-      else
-        util.exec([[
-          10 wincmd j
-          split
-          wincmd j
-        ]])
-      end
+      util.exec(string.format([[
+        10 wincmd %s
+        vsplit
+        wincmd %s
+      ]], dir_char, dir_char))
     end
     vim.o.hidden = true
     if b then
-      if vim.g.term_direction == 'horz' then
-        util.exec('wincmd L')
-      else
-        util.exec('wincmd J')
-      end
+      util.exec('wincmd ' .. string.upper(dir_char))
     end
     util.exec('terminal')
     if vim.g.term_direction == 'horz' then
@@ -217,6 +209,11 @@ function M.set_terminal_direction(...)
   end
 end
 
+function M.setup_terms_from_session()
+  vim.g.tmp_term_name = vim.fn.expand('%') -- I know this will pick one at random... but they have no real order anyway...
+  util.exec("au! TermClose <buffer> lua require'mod.terminal'.close_if_term_job()")
+end
+
 function M.init()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
@@ -251,6 +248,7 @@ function M.init()
       au TermLeave,BufLeave term://* stopinsert
       au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
         " winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
+      au SessionLoadPost term://* lua require'mod.terminal'.setup_terms_from_session()
     augroup END
   ]])
 
