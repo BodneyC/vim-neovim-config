@@ -76,6 +76,7 @@ M.rg_under_cursor	nvim/lua/mod/fzf.lua	/^function M.rg_under_cursor()$/;"	f
 M.run_cmd	nvim/lua/mod/fzf.lua	/^function M.run_cmd(cmd)$/;"	f
 M.set_indent	nvim/lua/mod/functions.lua	/^function M.set_indent(n)$/;"	f
 M.set_terminal_direction	nvim/lua/mod/terminal.lua	/^function M.set_terminal_direction(...)$/;"	f
+M.setup_terms_from_session	nvim/lua/mod/terminal.lua	/^function M.setup_terms_from_session()$/;"	f
 M.show_documentation	nvim/lua/utl/util.lua	/^function M.show_documentation()$/;"	f
 M.spell_checker	nvim/lua/mod/functions.lua	/^function M.spell_checker()$/;"	f
 M.term_split	nvim/lua/mod/terminal.lua	/^function M.term_split(b)$/;"	f
@@ -203,6 +204,8 @@ s:tabline_inactive_fg	nvim/autoload/lightline/colorscheme/1989.vim	/^let s:tabli
 s:tabline_inactive_fg	nvim/autoload/lightline/colorscheme/VimSpectre300light.vim	/^let s:tabline_inactive_fg = s:background$/;"	v
 s:window	nvim/autoload/lightline/colorscheme/1989.vim	/^let s:window         = '#efefef'$/;"	v
 s:window	nvim/autoload/lightline/colorscheme/VimSpectre300light.vim	/^let s:window         = '#efefef'$/;"	v
+safe_require	nvim/lua/nvim-init.lua	/^local function safe_require(module)$/;"	f
+safe_require_and_init	nvim/lua/nvim-init.lua	/^local function safe_require_and_init(module)$/;"	f
 set_open_term_buffer_name	nvim/lua/mod/terminal.lua	/^local function set_open_term_buffer_name()$/;"	f
 shebang	nvim/vsnip/python.json	/^  "shebang": {$/;"	o
 str_tree_or_open	nvim/lua/ftplugin/defx.lua	/^local function str_tree_or_open(if_dir, if_file)$/;"	f

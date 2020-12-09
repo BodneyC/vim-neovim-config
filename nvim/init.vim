@@ -8,15 +8,21 @@ endif
 
 try
   let g:python_host_prog = systemlist('command -v python2')[0]
+catch /E\(15\|684\).*/
+  echo "Python 2 not found on PATH"
+endtry
+
+try
   let g:python3_host_prog = systemlist('command -v python3')[0]
 catch /E\(15\|684\).*/
-  echo "Python (2 or 3) not found on PATH"
+  echo "Python 3 not found on PATH"
 endtry
 
 let g:polyglot_disabled = ['autoindent']
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+  Plug 'drmingdrmer/vim-indent-lua'
   " Plug 'Olical/conjure', { 'tag': 'v4.8.0' }
   Plug 'amdt/vim-niji'
   Plug 'gregsexton/gitv', { 'on': 'Gitv' }

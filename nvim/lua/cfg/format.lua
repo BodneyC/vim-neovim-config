@@ -4,7 +4,7 @@ require'format'.setup {
     {
       cmd = {
         -- Should probably just have a config file for this
-        'lua-format -i --no-keep-simple-control-block-one-line --column-limit=90 ' ..
+        'lua-format -i --keep-simple-control-block-one-line --column-limit=100 ' ..
             '--no-keep-simple-function-one-line ' ..
             '--break-after-table-lb --break-before-table-rb --no-chop-down-table ' ..
             '--extra-sep-at-table-end ' ..
