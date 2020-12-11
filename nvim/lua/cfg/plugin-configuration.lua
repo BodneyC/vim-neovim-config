@@ -56,8 +56,14 @@ vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always ' ..
                    '--style=numbers --color=always {} || highlight -O ansi -l {} || ' ..
                    'coderay {} || rougify {} || cat {}"')
 vim.fn.execute('let $FZF_DEFAULT_OPTS="--layout=reverse --margin=1,1"')
+vim.g.fzf_preview_command = 'bat --color=always --plain {-1}'
 vim.g.fzf_layout = {window = 'lua require\'mod.terminal\'.floating_centred()'}
 vim.g.fzf_history_dir = os.getenv('HOME') .. '/.fzf/.fzf_history_dir'
+vim.g.fzf_preview_git_status_preview_command = '' ..
+  "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} | delta || " ..
+  "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} | delta || " ..
+  vim.g.fzf_preview_command
+
 
 local pane_manager = 'Tmux'
 if os.getenv('KITTY_WINDOW_ID') then

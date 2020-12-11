@@ -31,8 +31,8 @@ command -v npm && npm i -g \
 
 ./neovim-from-source.sh
 ./softlink-config.sh
-curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+#        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 run_vim_cmd() {
   "$HOME/.local/bin/nvim" -u "$HOME/.config/nvim/config/plugins.vim" -c "$1"

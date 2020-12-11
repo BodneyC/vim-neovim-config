@@ -63,8 +63,7 @@ skm('t', '<C-M-l>', '<C-\\><C-n>:lua require\'utl.util\'.resize_window(\'l\')<CR
 skm('n', '<leader>"', '<CMD>sbn<CR>', n_s)
 skm('n', '<leader>#', '<C-^>', n_s)
 skm('n', '<leader>%', '<CMD>vert sbn<CR>', n_s)
-skm('n', '<leader>bD',
-    '<CMD>lua require\'mod.functions\'.buffer_close_all_but_visible()<CR>', n_s)
+skm('n', '<leader>bD', '<CMD>lua require\'mod.functions\'.buffer_close_all_but_visible()<CR>', n_s)
 skm('n', '<leader>be', '<CMD>enew<CR>', n_s)
 skm('n', '<leader>bd', '<CMD>BufferClose<CR>', n_s)
 
@@ -87,8 +86,8 @@ skm('n', '<leader>gl', '<CMD>ToggleLazyGit<CR>', n_s)
 skm('n', '<leader>z', '<CMD>ZoomToggle<CR>', n_s)
 skm('n', '<leader>}', 'zf}', n_s)
 
-skm('n', '<leader>i',
-    '<CMD>lua require\'utl.util\'.toggle_bool_option(\'o\', \'ignorecase\')<CR>', n_s)
+skm('n', '<leader>i', '<CMD>lua require\'utl.util\'.toggle_bool_option(\'o\', \'ignorecase\')<CR>',
+    n_s)
 
 skm('n', ';', '<Plug>(clever-f-repeat-forward)', {})
 skm('n', ',', '<Plug>(clever-f-repeat-back)', {})
@@ -100,8 +99,7 @@ skm('x', '<leader>ea', ':EasyAlign<CR>', n_s)
 -- skm('n', '[<Leader>',  '<CMD>call append(line(".") - 1, repeat([""], v:count1))<CR>', n_s)
 -- skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     n_s)
 
-util.command('Rg', 'lua require\'mod.fzf\'.rg(<q-args>,    <bang>0)',
-    {bang = true, nargs = '*'})
+util.command('Rg', 'lua require\'mod.fzf\'.rg(<q-args>,    <bang>0)', {bang = true, nargs = '*'})
 util.command('FilesFzf', 'lua require\'mod.fzf\'.files(<q-args>, <bang>0)',
     {bang = true, nargs = '*'})
 
@@ -140,8 +138,8 @@ util.func([[
 skm('i', '<BS>', '<C-r>=MasterBS()<CR>', n_s)
 skm('i', '´', '<C-r>=AutoPairsFastWrap()<CR>', n_s)
 
-util.command('ToggleLazyGit',
-    'w | lua require\'mod.terminal\'.floating_term(\'lazygit\')', {nargs = '0'})
+util.command('ToggleLazyGit', 'w | lua require\'mod.terminal\'.floating_term(\'lazygit\')',
+    {nargs = '0'})
 
 util.exec([[
   func! CopyForTerminal(...) range
@@ -165,17 +163,15 @@ util.command('DiffThis', 'windo diffthis', {nargs = '0'})
 util.command('DiffOff', 'window diffoff', {nargs = '0'})
 util.command('ConvLineEndings', '%s/<CR>//g', {nargs = '0'})
 
-util.command('HighlightUnderCursor',
-    'lua require\'mod.functions\'.highlight_under_cursor()', {nargs = '0'})
+util.command('HighlightUnderCursor', 'lua require\'mod.functions\'.highlight_under_cursor()',
+    {nargs = '0'})
 util.command('SpellChecker', 'lua require\'mod.functions\'.spell_checker()', {nargs = '0'})
 util.command('ZoomToggle', 'lua require\'mod.functions\'.zoom_toggle()', {nargs = '0'})
-util.command('ChangeIndent', 'lua require\'mod.functions\'.change_indent(<f-args>)',
-    {nargs = '1'})
-util.command('SetIndent', 'lua require\'mod.functions\'.set_indent(<f-args>)',
-    {nargs = '1'})
-util.command('MatchOver', 'lua require\'mod.functions\'.match_over(<f-args>)',
-    {nargs = '?'})
+util.command('ChangeIndent', 'lua require\'mod.functions\'.change_indent(<f-args>)', {nargs = '1'})
+util.command('SetIndent', 'lua require\'mod.functions\'.set_indent(<f-args>)', {nargs = '1'})
+util.command('MatchOver', 'lua require\'mod.functions\'.match_over(<f-args>)', {nargs = '?'})
 
-util.exec('cabbrev PI PlugInstall')
-util.exec('cabbrev PU PlugUpdate')
-util.exec('cabbrev PC PlugClean')
+util.exec('cabbrev PC PackerClean')
+util.exec('cabbrev PI PackerInstall')
+util.exec('cabbrev PS PackerSync')
+util.exec('cabbrev PU PackerUpdate')

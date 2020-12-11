@@ -1,3 +1,25 @@
+local vim = vim
+
+vim.o.compatible = false
+vim.cmd 'filetype off'
+
+if not os.getenv 'TERMTHEME' then
+  print '$TERMTHEME not set, defaulting to \'dark\''
+  vim.cmd [[let $TERMTHEME = 'dark']]
+end
+
+local function command_v(b)
+  local h = io.popen('command -v ' .. b)
+  local s = h:read('*a'):match('^%s*(.-)%s*$')
+  h:close()
+  return s
+end
+
+vim.g.python_host_prog = command_v 'python2'
+vim.g.python3_host_prog = command_v 'python3'
+
+vim.g.polyglot_disabled = {'autoload'}
+
 local function safe_require(module)
   local ok, err = pcall(require, module)
   if not ok then
@@ -12,6 +34,7 @@ local function safe_require_and_init(module)
   if mod then mod.init() end
 end
 
+safe_require 'cfg.plugins'
 safe_require 'cfg.interface'
 safe_require 'cfg.plugin-configuration'
 safe_require 'cfg.remappings'
