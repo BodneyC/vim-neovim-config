@@ -1,5 +1,5 @@
 local vim = vim
-local util = require'utl.util'
+local util = require 'utl.util'
 
 vim.o.tags = ''
 vim.o.hls = true

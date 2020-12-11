@@ -45,67 +45,48 @@ util.augroup([[
 
 -- LSP Mappings
 
-skm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>',
-    {noremap = true, silent = true})
-skm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>',
-    {noremap = true, silent = true})
+local n_s = {noremap = true, silent = true}
+local s_e = {silent = true, expr = true}
 
-skm('n', 'ga', '<CMD>lua vim.lsp.buf.code_action()<CR>', {noremap = true, silent = true})
-skm('n', 'gd', '<CMD>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
-skm('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-skm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>',
-    {noremap = true, silent = true})
-skm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>',
-    {noremap = true, silent = true})
-skm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>',
-    {noremap = true, silent = true})
-skm('n', 'gr', '<CMD>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
-skm('n', 'g0', '<CMD>lua vim.lsp.buf.document_symbol()<CR>',
-    {noremap = true, silent = true})
-skm('n', 'gW', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>',
-    {noremap = true, silent = true})
-skm('n', ']c',
-    '<CMD>lua vim.lsp.diagnostic.goto_next {wrap = true, show_config = true}<CR>',
-    {noremap = true, silent = true})
-skm('n', '[c',
-    '<CMD>lua vim.lsp.diagnostic.goto_prev {wrap = true, show_config = true}<CR>',
-    {noremap = true, silent = true})
-skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>',
-    {noremap = true, silent = true})
+skm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', n_s)
+skm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', n_s)
+
+skm('n', 'ga', '<CMD>lua vim.lsp.buf.code_action()<CR>', n_s)
+skm('n', 'gd', '<CMD>lua vim.lsp.buf.definition()<CR>', n_s)
+skm('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
+skm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', n_s)
+skm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', n_s)
+skm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', n_s)
+skm('n', 'gr', '<CMD>lua vim.lsp.buf.references()<CR>', n_s)
+skm('n', 'g0', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
+skm('n', 'gW', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
+skm('n', ']c', '<CMD>lua vim.lsp.diagnostic.goto_next {wrap = true, show_config = true}<CR>', n_s)
+skm('n', '[c', '<CMD>lua vim.lsp.diagnostic.goto_prev {wrap = true, show_config = true}<CR>', n_s)
+skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
 
 -- Well, this is awful
 local function tab_string(e, k)
   return [[ pumvisible() ? "\]] .. e .. [[" ]] ..
-             [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] ..
-             [[   ? "\]] .. k .. [[" : completion#trigger_completion() ]]
+             [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] .. [[   ? "\]] .. k ..
+             [[" : completion#trigger_completion() ]]
 end
 skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'), {noremap = true, silent = true, expr = true})
-skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'),
-    {noremap = true, silent = true, expr = true})
+skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'), {noremap = true, silent = true, expr = true})
 
-skm('i', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'',
-    {silent = true, expr = true})
-skm('i', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'',
-    {silent = true, expr = true})
-skm('s', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'',
-    {silent = true, expr = true})
-skm('s', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'',
-    {silent = true, expr = true})
+skm('i', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'', s_e)
+skm('i', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'', s_e)
+skm('s', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'', s_e)
+skm('s', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'', s_e)
 
-require'utl.util'.command('LspStopAll',
-    'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-require'utl.util'.command('LspBufStopAll',
-    'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
+require'utl.util'.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
+require'utl.util'.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 -- Diagnostics
-vim.fn.sign_define('LspDiagnosticsSignError',
-    {text = ' ', texthl = 'LspDiagnosticsError'})
-vim.fn.sign_define('LspDiagnosticsSignWarning',
-    {text = ' ', texthl = 'LspDiagnosticsWarning'})
+vim.fn.sign_define('LspDiagnosticsSignError', {text = ' ', texthl = 'LspDiagnosticsError'})
+vim.fn.sign_define('LspDiagnosticsSignWarning', {text = ' ', texthl = 'LspDiagnosticsWarning'})
 vim.fn.sign_define('LspDiagnosticsSignInformation',
     {text = ' ', texthl = 'LspDiagnosticsInformation'})
-vim.fn.sign_define('LspDiagnosticsSignHint',
-    {text = 'ﯦ ', texthl = 'LspDiagnosticsHint'})
+vim.fn.sign_define('LspDiagnosticsSignHint', {text = 'ﯦ ', texthl = 'LspDiagnosticsHint'})
 
 lsp_status.register_progress()
 lsp_status.config({
@@ -169,9 +150,7 @@ lspconfig.diagnosticls.setup {
       markdown = 'markdown',
     },
     formatFiletypes = {sh = 'shfmt', zsh = 'shfmt'},
-    formatters = {
-      shfmt = {args = {'-i', 0, '-bn', '-ci', '-sr', '-kp'}, command = 'shfmt'},
-    },
+    formatters = {shfmt = {args = {'-i', 0, '-bn', '-ci', '-sr', '-kp'}, command = 'shfmt'}},
     linters = {
       markdown = {
         command = 'markdownlint',
@@ -180,8 +159,7 @@ lspconfig.diagnosticls.setup {
         isStdout = false,
         formatPattern = {
           -- README.md:3:81 MD013/line-length Line length [Expected: 80; Actual: 282]
-          '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$',
-          {security = 1, line = 2, column = 3, message = 4},
+          '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$', {security = 1, line = 2, column = 3, message = 4},
         },
         offsetColumn = 0,
         offsetLine = 0,
@@ -229,16 +207,15 @@ lspconfig.diagnosticls.setup {
       },
       groovy = {
         args = {
-          '-jar', os.getenv('HOME') ..
+          '-jar',
+          os.getenv('HOME') ..
               '/gitclones/groovy-language-server/build/libs/groovy-language-server.jar',
         },
         command = 'java',
         filetypes = {'groovy'},
         settings = {
           groovy = {
-            classpath = {
-              '/link-home/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4',
-            },
+            classpath = {'/link-home/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4'},
           },
         },
         sourceName = 'groovy',

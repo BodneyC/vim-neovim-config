@@ -51,7 +51,7 @@ return packer.startup(function()
   use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
   use {'jiangmiao/auto-pairs'}
   use {'junegunn/fzf', run = 'cd ~/.fzf && ./install --all'}
-  use {'yuki-ycino/fzf-preview.vim', branch = 'release', run = ':FzfPreviewInstall' }
+  use {'yuki-ycino/fzf-preview.vim', branch = 'release', run = ':FzfPreviewInstall'}
   use {'junegunn/fzf.vim'}
   use {'junegunn/goyo.vim', cmd = 'Goyo'}
   use {'junegunn/gv.vim', cmd = 'GV'}

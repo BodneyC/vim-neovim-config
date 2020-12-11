@@ -1,16 +1,11 @@
 -- local ts_utils = require 'nvim-treesitter.ts_utils'
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {
-    'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html', 'typescript',
-    'query', 'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
+    'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html', 'typescript', 'query',
+    'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
   },
-  indent = {
-    enable = true,
-  },
-  highlight = {
-    enable = true,
-    disable = {}
-  },
+  indent = {enable = true},
+  highlight = {enable = true, disable = {}},
   incremental_selection = {
     enable = true,
     keymaps = {

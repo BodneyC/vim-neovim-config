@@ -4,13 +4,9 @@ local M = {}
 
 function M.open()
   local opts = {
-    '-columns=indent:git:icons:filename:type',
-    '-split=vertical',
-    '-winwidth=32',
-    '-no-auto-cd',
-    '-direction=topleft',
-    '-show-ignored-files',
-    '-session-file=' .. os.getenv('HOME') .. '/.config/defx/sessions/defx-sessions.json'
+    '-columns=indent:git:icons:filename:type', '-split=vertical', '-winwidth=32', '-no-auto-cd',
+    '-direction=topleft', '-show-ignored-files',
+    '-session-file=' .. os.getenv('HOME') .. '/.config/defx/sessions/defx-sessions.json',
   }
   vim.fn.execute('Defx ' .. table.concat(opts, ' '))
 end
@@ -24,18 +20,17 @@ function M.init()
     augroup END
   ]])
   vim.fn['defx#custom#column']('git', 'indicators', {
-    Modified  = '~',
-    Staged    = '+',
+    Modified = '~',
+    Staged = '+',
     Untracked = '✭',
-    Renamed   = '➜',
-    Unmerged  = '═',
-    Ignored   = 'i',
-    Deleted   = '×',
-    Unknown   = '?'
+    Renamed = '➜',
+    Unmerged = '═',
+    Ignored = 'i',
+    Deleted = '×',
+    Unknown = '?',
   })
-  vim.fn.execute("command! -nargs=0 DefxOpen lua require'mod.defx'.open()")
-  vim.api.nvim_set_keymap(
-    'n', '<Leader>d', '<CMD>DefxOpen<CR>', { silent = true, noremap = true })
+  vim.fn.execute('command! -nargs=0 DefxOpen lua require\'mod.defx\'.open()')
+  vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>', {silent = true, noremap = true})
 end
 
 return M
