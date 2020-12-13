@@ -63,10 +63,7 @@ return packer.startup(function()
   use {'kristijanhusak/defx-git'}
   use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
-  use {
-    'leafgarland/typescript-vim',
-    ft = {'tsx', 'typescript', 'typescriptreact', 'typescriptcommon'},
-  }
+  use {'leafgarland/typescript-vim'}
   use {'liuchengxu/vista.vim', cmd = 'Vista'}
   use {'ludovicchabant/vim-gutentags'}
   use {'lukas-reineke/format.nvim'}

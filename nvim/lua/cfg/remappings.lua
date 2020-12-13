@@ -66,6 +66,7 @@ skm('n', '<leader>%', '<CMD>vert sbn<CR>', n_s)
 skm('n', '<leader>bD', '<CMD>lua require\'mod.functions\'.buffer_close_all_but_visible()<CR>', n_s)
 skm('n', '<leader>be', '<CMD>enew<CR>', n_s)
 skm('n', '<leader>bd', '<CMD>BufferClose<CR>', n_s)
+skm('n', '<leader>bb', '<CMD>BufferPick<CR>', n_s)
 
 skm('n', '<S-down>', '<CMD>m+<CR>', n_s)
 skm('n', '<S-up>', '<CMD>m-2<CR>', n_s)
@@ -103,11 +104,13 @@ util.command('Rg', 'lua require\'mod.fzf\'.rg(<q-args>,    <bang>0)', {bang = tr
 util.command('FilesFzf', 'lua require\'mod.fzf\'.files(<q-args>, <bang>0)',
     {bang = true, nargs = '*'})
 
-skm('n', '<leader>m', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Marks\')<CR>', n_s)
+skm('n', '<leader>gs', '<CMD>FzfPreviewGitStatus<CR>', n_s)
+skm('n', '<leader>ga', '<CMD>FzfPreviewGitActions<CR>', n_s)
+skm('n', '<leader>M', '<CMD>FzfPreviewMarks<CR>', n_s)
 skm('n', '<leader>r', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Rg\')<CR>', n_s)
 skm('n', '<leader>f', '<CMD>lua require\'mod.fzf\'.run_cmd(\'FilesFzf\')<CR>', n_s)
-skm('n', '<leader>M', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Maps\')<CR>', n_s)
-skm('n', '<leader>bl', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Buffers\')<CR>', n_s)
+skm('n', '<leader>m', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Maps\')<CR>', n_s)
+skm('n', '<leader>bl', '<CMD>FzfPreviewBuffers<CR>', n_s)
 skm('n', '<M-]>', '<CMD>lua require\'mod.fzf\'.rg(vim.fn.expand(\'<cword>\'), 0)<CR>', n_s)
 skm('n', '‘', '<CMD>lua require\'mod.fzf\'.rg(vim.fn.expand(\'<cword>\'), 0)<CR>', n_s)
 

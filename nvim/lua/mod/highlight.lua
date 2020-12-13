@@ -40,7 +40,8 @@ function M.additional_highlights()
     hi! link CleverFCursor ErrorMsg
     hi! CurrentWord gui=bold
     hi! link CurrentWordTwins CurrentWord
-    hi! link NormalFloat Normal " Still unsure of this
+    exec 'hi! NormalFloat guibg=' . g:color_dict.highlight[1]
+    " hi! link NormalFloat Normal " Still unsure of this
   ]])
   if os.getenv('TERMTHEME') == 'light' then
     util.exec('hi! Visual guifg=bg')

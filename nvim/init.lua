@@ -18,7 +18,7 @@ end
 vim.g.python_host_prog = command_v 'python2'
 vim.g.python3_host_prog = command_v 'python3'
 
-vim.g.polyglot_disabled = {'autoload'}
+vim.g.polyglot_disabled = {'autoload', 'typescript'}
 
 local function safe_require(module)
   local ok, err = pcall(require, module)
