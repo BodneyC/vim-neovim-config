@@ -39,7 +39,7 @@ safe_require 'cfg.interface'
 safe_require 'cfg.plugin-configuration'
 safe_require 'cfg.remappings'
 safe_require 'cfg.airline'
-safe_require 'cfg.ts'
+-- safe_require 'cfg.ts'
 safe_require 'cfg.lsp'
 safe_require 'cfg.format'
 

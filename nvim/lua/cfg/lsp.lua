@@ -21,8 +21,10 @@ vim.g.completion_tabnine_max_num_results = 3
 vim.g.completion_trigger_keyword_length = 3
 vim.g.completion_chain_complete_list = {
   default = {
-    {complete_items = {'ts', 'lsp', 'path', 'snippet'}}, {complete_items = {'buffers'}}, -- with fuzzy, tabnine is garbage - or vice versa
-    {mode = '<C-p>'}, {mode = '<C-n>'},
+    -- with fuzzy, tabnine is garbage - or vice versa
+    -- ts is being weird... hopefully this isn't too big of a drop
+    {complete_items = {'lsp', 'path', 'snippet'}}, {complete_items = {'buffers'}}, {mode = '<C-p>'},
+    {mode = '<C-n>'},
   },
 }
 
@@ -103,27 +105,53 @@ local on_attach = function(client, bufnr)
   -- diagnostic.on_attach(client, bufnr)
 end
 
---- LSPs
--- lspconfig.bashls.setup      { on_attach = on_attach, capabilities = lsp_status.capabilities }
-lspconfig.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.clojure_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.gopls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-lspconfig.sumneko_lua.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+-- npm i -g {typescript,}-language-server
 lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g docker-language-server
+lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g bash-language-server
+-- lspconfig.bashls.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
+
+-- package-manager - clang
+lspconfig.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- manual - https://github.com/snoe/clojure-lsp
+lspconfig.clojure_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- go get golang.org/x/tools/gopls@latest
+lspconfig.gopls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g vscode-html-languageserver-bin
+lspconfig.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g vscode-json-languageserver
+lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- LspInstall sumneko_lua
+lspconfig.sumneko_lua.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g vim-language-server
 lspconfig.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g yaml-language-server
 lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
+-- rustup component add rls rust-{analysis,src}
+lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- pip3 i --user 'python-language-sever[all]'
+lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- manual - https://github.com/fwcd/kotlin-language-server
 lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
 }
 
--- local lombok_path = ''
+-- LspInstall jdtls
+local lombok_path = nil
 lspconfig.jdtls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
@@ -136,6 +164,7 @@ lspconfig.jdtls.setup {
   },
 }
 
+-- npm i -g diagnostic-languageserver
 lspconfig.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
@@ -150,9 +179,11 @@ lspconfig.diagnosticls.setup {
       markdown = 'markdown',
     },
     formatFiletypes = {sh = 'shfmt', zsh = 'shfmt'},
+    -- package-manager - shfmt
     formatters = {shfmt = {args = {'-i', 0, '-bn', '-ci', '-sr', '-kp'}, command = 'shfmt'}},
     linters = {
       markdown = {
+        -- npm i -g markdownlint
         command = 'markdownlint',
         args = {'--stdin'},
         isStderr = true,
@@ -168,6 +199,7 @@ lspconfig.diagnosticls.setup {
       },
       pkgbuild = {
         args = {'%file'},
+        -- manual - vim-pkgbuild
         command = os.getenv('HOME') ..
             '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
@@ -179,6 +211,7 @@ lspconfig.diagnosticls.setup {
       },
       shellcheck = {
         args = {'--format=gcc', '-x', '-'},
+        -- package-manager - shellcheck
         command = 'shellcheck',
         debounce = 100,
         formatLines = 1,
@@ -193,6 +226,7 @@ lspconfig.diagnosticls.setup {
       },
       shellcheck_zsh = {
         args = {'--shell=bash', '--format=gcc', '-x', '-'},
+        -- package-manager - shellcheck
         command = 'shellcheck',
         debounce = 100,
         formatLines = 1,

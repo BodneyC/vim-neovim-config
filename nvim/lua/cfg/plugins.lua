@@ -48,7 +48,7 @@ return packer.startup(function()
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', cmd = 'MarkdownPreview'}
   use {'itchyny/calendar.vim', cmd = 'Cal'}
   use {'janko/vim-test', cmd = 'TestFile'}
-  use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
+  -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
   use {'jiangmiao/auto-pairs'}
   use {'junegunn/fzf', run = 'cd ~/.fzf && ./install --all'}
   use {'yuki-ycino/fzf-preview.vim', branch = 'release', run = ':FzfPreviewInstall'}
