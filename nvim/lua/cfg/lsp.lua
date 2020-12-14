@@ -41,7 +41,7 @@ util.augroup([[
   augroup __LSP__
     au!
     au BufEnter   * silent lua require'completion'.on_attach()
-    " au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
+    au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
   augroup END
 ]])
 
@@ -112,7 +112,7 @@ lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capab
 lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 -- npm i -g bash-language-server
--- lspconfig.bashls.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
+lspconfig.bashls.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
 
 -- package-manager - clang
 lspconfig.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
@@ -180,7 +180,7 @@ lspconfig.diagnosticls.setup {
     },
     formatFiletypes = {sh = 'shfmt', zsh = 'shfmt'},
     -- package-manager - shfmt
-    formatters = {shfmt = {args = {'-i', 0, '-bn', '-ci', '-sr', '-kp'}, command = 'shfmt'}},
+    formatters = {shfmt = {args = {'-i=2', '-bn', '-ci', '-sr'}, command = 'shfmt'}},
     linters = {
       markdown = {
         -- npm i -g markdownlint

@@ -1,5 +1,7 @@
 require'format'.setup {
   ['*'] = {{cmd = {'sed -i \'s/[ \t]*$//\''}}},
+  -- sh = {{cmd = {'shfmt -w -i=2 -bn -ci -sr'}}},
+  -- zsh = {{cmd = {'shfmt -w -i=2 -bn -ci -sr'}}},
   lua = {
     {
       cmd = {

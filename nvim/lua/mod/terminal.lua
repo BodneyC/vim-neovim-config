@@ -245,6 +245,7 @@ function M.init()
     augroup __TERMINAL__
       au!
       au TermEnter,TermOpen,BufNew,BufEnter term://* startinsert
+      " au TermEnter term://* if winnr('$') == 1 | q | endif
       au TermOpen term://* nnoremap <buffer> <LeftRelease> <LeftRelease>i
       au TermLeave,BufLeave term://* stopinsert
       au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
