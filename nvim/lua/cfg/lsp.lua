@@ -41,7 +41,7 @@ util.augroup([[
   augroup __LSP__
     au!
     au BufEnter   * silent lua require'completion'.on_attach()
-    au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
+    " au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
   augroup END
 ]])
 
@@ -55,7 +55,8 @@ skm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', n_s)
 
 skm('n', 'ga', '<CMD>lua vim.lsp.buf.code_action()<CR>', n_s)
 skm('n', 'gd', '<CMD>lua vim.lsp.buf.definition()<CR>', n_s)
-skm('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
+skm('n', 'gh', '<CMD>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', n_s)
+skm('n', 'gH', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
 skm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', n_s)
 skm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', n_s)
 skm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', n_s)
