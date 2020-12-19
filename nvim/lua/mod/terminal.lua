@@ -217,9 +217,6 @@ function M.init()
   local mod_terminal = 'lua require\'mod.terminal\''
 
   -- `table.unpack` not in 5.1, use `unpack`
-  local f_unpack = unpack
-  if not unpack then f_unpack = table.unpack end
-
   util.command('SetTerminalDirection', mod_terminal .. '.set_terminal_direction(<f-args>)',
       {nargs = '?'})
 
@@ -230,7 +227,7 @@ function M.init()
 
   skm('n', '<Leader>\'', ':' .. mod_terminal .. '.next_term_split(false)<CR>', n_s)
 
-  skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {expr = true, f_unpack(n_s)})
+  skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {expr = true, unpack(n_s)})
 
   skm('n', '<F10>', ':' .. mod_terminal .. '.term_split(true)<CR>', n_s)
   skm('i', '<F10>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', n_s)

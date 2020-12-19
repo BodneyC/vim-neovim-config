@@ -39,12 +39,6 @@ vim.g.vimade = {fadelevel = 0.6, enablesigns = 0}
 vim.g.twiggy_local_branch_sort = 'mru'
 vim.g.twiggy_remote_branch_sort = 'date'
 
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = 14
-
 vim.g['conjure#mapping#prefix'] = '\\'
 
 vim.g.Hexokinase_virtualText = ' '

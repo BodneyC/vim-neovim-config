@@ -61,9 +61,14 @@ M.exec = vim.fn.execute
 
 function M.command(lhs, rhs, opts)
   local parts = {
-    'command!', '-nargs=' .. (opts.nargs or '0'),
+    'command!',
+    '-nargs=' .. (opts.nargs or '0'),
     opts.complete and '-complete=' .. opts.complete or '',
-    opts.bang and '-bang' or '', opts.range and '-range' or '', lhs, rhs,
+    opts.bang and '-bang' or '',
+    opts.range and '-range' or '',
+    opts.buffer and '-buffer' or '',
+    lhs,
+    rhs,
   }
   M.exec(table.concat(parts, ' '))
 end

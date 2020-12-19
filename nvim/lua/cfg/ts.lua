@@ -46,4 +46,4 @@ require'nvim-treesitter.configs'.setup {
   --   },
   -- },
 }
-require'nvim-treesitter.parsers'.get_parser_configs().markdown = nil
+-- require'nvim-treesitter.parsers'.get_parser_configs().markdown = nil

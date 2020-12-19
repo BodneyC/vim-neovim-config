@@ -56,6 +56,12 @@ vim.wo.cursorcolumn = false
 vim.wo.foldmethod = 'manual'
 vim.wo.breakindentopt = 'shift:3'
 
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 4
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 14
+
 vim.g.large_file = 524288 -- 512k
 
 util.augroup([[

@@ -42,6 +42,7 @@ util.augroup([[
     au!
     au BufEnter   * silent lua require'completion'.on_attach()
     " au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
+    au FileType java lua require'mod.jdtls'.init()
   augroup END
 ]])
 
@@ -151,19 +152,19 @@ lspconfig.kotlin_language_server.setup {
   capabilities = lsp_status.capabilities,
 }
 
--- LspInstall jdtls
-local lombok_path = nil
-lspconfig.jdtls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-  init_options = {
-    jvm_args = {
-      '-noverify', '-Xmx1G', '-XX:+UseG1GC', '-XX:+UseStringDeduplication',
-      lombok_path and '-javaagent:' .. lombok_path or '',
-      lombok_path and '-Xbootclasspath/a:' .. lombok_path or '',
-    },
-  },
-}
+-- -- LspInstall jdtls
+-- local lombok_path = nil
+-- lspconfig.jdtls.setup {
+--   on_attach = on_attach,
+--   capabilities = lsp_status.capabilities,
+--   init_options = {
+--     jvm_args = {
+--       '-noverify', '-Xmx1G', '-XX:+UseG1GC', '-XX:+UseStringDeduplication',
+--       lombok_path and '-javaagent:' .. lombok_path or '',
+--       lombok_path and '-Xbootclasspath/a:' .. lombok_path or '',
+--     },
+--   },
+-- }
 
 -- npm i -g diagnostic-languageserver
 lspconfig.diagnosticls.setup {

@@ -13,8 +13,13 @@ local packer = require 'packer'
 return packer.startup(function()
   local use = packer.use
 
+  -- java
+    use {'mfussenegger/nvim-dap'}
+  use {'mfussenegger/nvim-jdtls'}
+
   use {'wbthomason/packer.nvim', opt = true}
 
+  use {'f-person/git-blame.nvim'}
   use {'BodneyC/At-Zed-vim', branch = 'master'}
   use {'BodneyC/VirkSpaces', branch = 'master'}
   -- use {'BodneyC/barbar.nvim',   branch = 'playing-around' }
@@ -36,7 +41,12 @@ return packer.startup(function()
   use {'bronson/vim-visual-star-search'}
   use {'brooth/far.vim'}
   use {'chrisbra/recover.vim'}
-  use {'christoomey/vim-tmux-navigator'}
+  use {
+    'christoomey/vim-tmux-navigator',
+    cond = function()
+      return os.getenv('TMUX')
+    end,
+  }
   use {'dominikduda/vim_current_word'}
   use {'drmingdrmer/vim-indent-lua'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {'tpope/vim-fugitive'}}
@@ -59,7 +69,12 @@ return packer.startup(function()
   use {'junegunn/vim-easy-align'}
   use {'justinmk/vim-syntax-extra'}
   use {'kamykn/spelunker.vim'}
-  use {'knubie/vim-kitty-navigator'}
+  use {
+    'knubie/vim-kitty-navigator',
+    cond = function()
+      return os.getenv('KITTY_WINDOW_ID')
+    end,
+  }
   use {'kristijanhusak/defx-git'}
   use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
