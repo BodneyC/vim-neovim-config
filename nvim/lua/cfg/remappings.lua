@@ -68,6 +68,14 @@ skm('n', '<leader>be', '<CMD>enew<CR>', n_s)
 skm('n', '<leader>bd', '<CMD>BufferClose<CR>', n_s)
 skm('n', '<leader>bb', '<CMD>BufferPick<CR>', n_s)
 
+skm('i', '<CR>', string.gsub([[
+  pumvisible()
+  ? complete_info()["selected"] != "-1"
+    ? "<Plug>(completion_confirm_completion)"
+    : "<C-e><CR>"
+  : "<CR><Plug>AutoPairsReturn"
+]], '\n', ''), {noremap = false, silent = true, expr = true})
+
 skm('n', '<S-down>', '<CMD>m+<CR>', n_s)
 skm('n', '<S-up>', '<CMD>m-2<CR>', n_s)
 skm('n', '<S-Tab>', '<CMD>bp<CR>', n_s)
