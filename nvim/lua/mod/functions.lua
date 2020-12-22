@@ -5,6 +5,20 @@ local lang = require 'utl.lang'
 
 local M = {}
 
+-- `wqa` with a terminal open comes with E948 and the "no matching autocommands
+--  for acwrite buffer" - I can't find a solution, this is a bodge, I hate it,
+--  but it works.
+function M.wqa()
+  util.exec([[
+    try
+      wqa
+    catch
+      wa
+      qa
+    endtry
+  ]])
+end
+
 function M.order_by_bufnr()
   local blstate = require 'bufferline.state'
   table.sort(blstate.buffers, function(a, b)

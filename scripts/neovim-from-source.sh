@@ -1,9 +1,9 @@
 #!/bin/bash
 
+! test -d "$HOME/gitclones" && mkdir -p "$HOME/gitclones"
 cd "$HOME/gitclones" || exit
 
-[[ ! -d neovim ]] && git clone https://github.com/neovim/neovim.git
-
+! test -d neovim && git clone https://github.com/neovim/neovim.git
 cd neovim || exit
 
 git checkout master
@@ -11,8 +11,7 @@ git pull
 git fetch --tags --all -f
 # git checkout nightly
 
-unset LUA_PATH
-unset LUA_CPATH
+unset LUA_PATH LUA_CPATH
 
 make clean
 

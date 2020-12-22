@@ -12,7 +12,7 @@ skm('n', 'k', 'gk', n_s)
 
 skm('n', '<leader>E', '<CMD>e!<CR>', n_s)
 skm('n', '<leader>Q', '<CMD>qa!<CR>', n_s)
-skm('n', '<leader>W', '<CMD>wqa<CR>', n_s)
+skm('n', '<leader>W', [[<CMD>lua require'mod.functions'.wqa()<CR>]], n_s)
 skm('n', '<leader>e', '<CMD>e<CR>', n_s)
 skm('n', '<leader>q', '<CMD>q<CR>', n_s)
 skm('n', '<leader>w', '<CMD>w<CR>', n_s)

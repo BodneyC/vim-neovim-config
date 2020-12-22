@@ -48,45 +48,51 @@ function M.next_term_split()
   end
 end
 
+local function split()
+  if vim.g.term_direction == 'vert' then
+    util.exec('vsplit')
+  elseif vim.g.term_direction == 'horz' then
+    util.exec('split')
+  else
+    print('Invalid term_direction: ' .. vim.g.term_direction)
+  end
+end
+
 function M.term_split(b)
   M.set_terminal_direction()
   if vim.g.tmp_term_name == some_init_val then set_open_term_buffer_name() end
-  local ttn = vim.g.tmp_term_name
-  local winnr = vim.fn.bufwinnr(ttn)
+  local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
   local dir_char = 'j'
-  if vim.g.term_direction == 'horz' then dir_char = 'l' end
+  if vim.g.term_direction == 'vert' then dir_char = 'l' end
+
   if winnr ~= -1 then
     util.exec(winnr .. 'wincmd ' .. (b and 'q' or 'w'))
-  else
-    local bufnr = vim.fn.bufnr(ttn)
-    if bufnr ~= -1 and vim.fn.bufexists(bufnr) and vim.fn.bufloaded(bufnr) then
-      util.exec('bd!' .. bufnr)
-    end
-    if b then
-      if vim.g.term_direction == 'horz' then
-        util.exec('vsplit')
-      else
-        util.exec('split')
-      end
-    else
-      util.exec(string.format([[
-        10 wincmd %s
-        vsplit
-        wincmd %s
-      ]], dir_char, dir_char))
-    end
-    vim.o.hidden = true
-    if b then util.exec('wincmd ' .. string.upper(dir_char)) end
-    util.exec('terminal')
-    if vim.g.term_direction == 'horz' then
-      util.exec('vertical resize ' .. vim.g.term_width)
-    else
-      util.exec('resize ' .. vim.g.term_height)
-    end
-    vim.g.tmp_term_name = vim.fn.bufname('%')
-    util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
-    util.exec('startinsert')
+    return
   end
+
+  local bufnr = vim.fn.bufnr(vim.g.tmp_term_name)
+  if bufnr ~= -1 and vim.fn.bufexists(bufnr) and vim.fn.bufloaded(bufnr) then
+    util.exec('bd!' .. bufnr)
+  end
+
+  if not b then util.exec('10 wincmd ' .. dir_char) end
+  split()
+  if not b then util.exec('wincmd ' .. dir_char) end
+
+  vim.o.hidden = true
+
+  if b then util.exec('wincmd ' .. string.upper(dir_char)) end
+  util.exec('terminal')
+
+  if vim.g.term_direction == 'vert' then
+    util.exec('vertical resize ' .. vim.g.term_width)
+  else
+    util.exec('resize ' .. vim.g.term_height)
+  end
+
+  vim.g.tmp_term_name = vim.fn.bufname('%')
+  util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+  util.exec('startinsert')
 end
 
 function M.border_box(h, w, c, r)
@@ -195,9 +201,9 @@ function M.set_terminal_direction(...)
   end
   local winnr = vim.fn.winnr('$')
   if (vim.fn.winheight(winnr) * 3.2) > vim.fn.winwidth(winnr) then
-    vim.g.term_direction = 'vert'
-  else
     vim.g.term_direction = 'horz'
+  else
+    vim.g.term_direction = 'vert'
   end
 end
 
