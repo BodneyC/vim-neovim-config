@@ -29,6 +29,7 @@ skm('x', '', '<Plug>NERDCommenterToggle', {})
 skm('i', '', '<C-o><C-_>', {})
 
 skm('n', '<M-b>', '<CMD>BufferPick<CR>', n_s)
+skm('n', '<M-o>', '<CMD>BufferOrderByBufnr<CR>', n_s)
 skm('n', '<M-1>', '<CMD>BufferGoto 1<CR>', n_s)
 skm('n', '<M-2>', '<CMD>BufferGoto 2<CR>', n_s)
 skm('n', '<M-3>', '<CMD>BufferGoto 3<CR>', n_s)
@@ -38,8 +39,8 @@ skm('n', '<M-6>', '<CMD>BufferGoto 6<CR>', n_s)
 skm('n', '<M-7>', '<CMD>BufferGoto 7<CR>', n_s)
 skm('n', '<M-8>', '<CMD>BufferGoto 8<CR>', n_s)
 skm('n', '<M-9>', '<CMD>BufferGoto 9<CR>', n_s)
-skm('n', '<M-<>', '<CMD>BufferMovePrevious<CR>', n_s)
-skm('n', '<M->>', '<CMD>BufferMoveNext<CR>', n_s)
+skm('n', '<M-,>', '<CMD>BufferMovePrevious<CR>', n_s)
+skm('n', '<M-.>', '<CMD>BufferMoveNext<CR>', n_s)
 
 skm('n', '<C-p>', '<Tab>', {noremap = true})
 skm('n', '<leader>*', ':%s/\\<<C-r><C-w>\\>//g<left><left>', {noremap = true})
@@ -181,6 +182,8 @@ util.command('ZoomToggle', 'lua require\'mod.functions\'.zoom_toggle()', {nargs 
 util.command('ChangeIndent', 'lua require\'mod.functions\'.change_indent(<f-args>)', {nargs = '1'})
 util.command('SetIndent', 'lua require\'mod.functions\'.set_indent(<f-args>)', {nargs = '1'})
 util.command('MatchOver', 'lua require\'mod.functions\'.match_over(<f-args>)', {nargs = '?'})
+
+util.command('BufferOrderByBufnr', 'lua require\'mod.functions\'.order_by_bufnr()', {nargs = '0'})
 
 util.exec('cabbrev PC PackerClean')
 util.exec('cabbrev PI PackerInstall')

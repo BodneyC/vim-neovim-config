@@ -18,7 +18,7 @@ vim.g.completion_enable_snippet = 'vim-vsnip'
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'} -- Order is important here
 vim.g.completion_sorting = 'none'
 vim.g.completion_tabnine_max_num_results = 3
-vim.g.completion_trigger_keyword_length = 3
+vim.g.completion_trigger_keyword_length = 2
 vim.g.completion_chain_complete_list = {
   default = {
     -- with fuzzy, tabnine is garbage - or vice versa

@@ -5,6 +5,14 @@ local lang = require 'utl.lang'
 
 local M = {}
 
+function M.order_by_bufnr()
+  local blstate = require 'bufferline.state'
+  table.sort(blstate.buffers, function(a, b)
+    return a < b
+  end)
+  vim.fn['bufferline#update']()
+end
+
 function M.bs()
   local getline = vim.fn.getline
   local ln = vim.fn.line('.')
@@ -28,9 +36,7 @@ end
 function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(':IndentLinesReset') then
-    util.exec('IndentLinesReset')
-  end
+  if vim.fn.exists(':IndentLinesReset') then util.exec('IndentLinesReset') end
 end
 
 function M.change_indent(n)
@@ -44,9 +50,7 @@ end
 
 function M.spell_checker()
   local spell_pre = vim.wo.spell
-  if not spell_pre then
-    vim.wo.spell = true
-  end
+  if not spell_pre then vim.wo.spell = true end
   util.exec('normal! mzgg]S')
   while vim.fn.spellbadword()[0] ~= '' do
     util.exec('redraw')
@@ -80,31 +84,21 @@ function M.spell_checker()
       f = 'normal! 1z=',
       a = 'normal! zG',
     }
-    if ch == 'q' then
-      break
-    end
-    if dic[ch] then
-      util.exec_lines(dic[ch])
-    end
+    if ch == 'q' then break end
+    if dic[ch] then util.exec_lines(dic[ch]) end
     util.exec('normal! ]S')
   end
   util.exec('normal! `z')
-  if not spell_pre then
-    vim.wo.spell = false
-  end
+  if not spell_pre then vim.wo.spell = false end
   print('Spell checker end')
 end
 
 function M.match_over(...)
   local args = {...}
   print(vim.inspect(args))
-  if #args > 1 or (args[1] and not tonumber(args[1])) then
-    error('More than one argument')
-  end
+  if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
   local w = vim.g.match_over_width or 80
-  if args[1] then
-    w = args[1]
-  end
+  if args[1] then w = args[1] end
   util.exec('match OverLength /\\%' .. w .. 'v.\\+/')
 end
 
@@ -132,18 +126,14 @@ function M.buffer_close_all_but_visible()
   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
       'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'), 'bufname(v:val)')
   if #bs > 0 then
-    for _, buf in ipairs(bs) do
-      vim.fn.execute('BufferClose ' .. buf)
-    end
+    for _, buf in ipairs(bs) do vim.fn.execute('BufferClose ' .. buf) end
   else
     print('No buffers to delete')
   end
 end
 
 local function call_if_fn_exists(fn)
-  if vim.fn.exists(':' .. fn) then
-    util.exec(fn)
-  end
+  if vim.fn.exists(':' .. fn) then util.exec(fn) end
 end
 
 function M.handle_large_file()

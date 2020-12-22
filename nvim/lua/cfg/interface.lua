@@ -35,7 +35,7 @@ vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 
 vim.o.title = true
-vim.o.titlestring = '%t - nvim'
+vim.o.titlestring = "bodneyc - nvim"
 
 vim.o.showtabline = 2
 vim.bo.tabstop = 2

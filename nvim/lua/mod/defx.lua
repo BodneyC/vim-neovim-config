@@ -4,11 +4,21 @@ local M = {}
 
 function M.open()
   local opts = {
-    '-columns=indent:git:icons:filename:type', '-split=vertical', '-winwidth=32', '-no-auto-cd',
+    '-columns=indent:git:icons:filename', '-split=vertical', '-winwidth=32', '-no-auto-cd',
     '-direction=topleft', '-show-ignored-files',
     '-session-file=' .. os.getenv('HOME') .. '/.config/defx/sessions/defx-sessions.json',
   }
   vim.fn.execute('Defx ' .. table.concat(opts, ' '))
+end
+
+function M.defx_resize()
+  local cur_win = vim.fn.bufnr()
+  M.open()
+  local buf = vim.fn.getline(1, '$')
+  table.remove(buf, 1)
+  table.sort(buf, function(a, b) return #a > #b end)
+  vim.cmd('vertical resize' .. #buf[1])
+  vim.cmd(cur_win .. 'wincmd w')
 end
 
 function M.init()

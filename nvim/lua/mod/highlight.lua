@@ -22,8 +22,8 @@ function M.init()
     augroup __HIGHLIGHT__
       au!
       au TextYankPost * silent! lua require'vim.highlight'.on_yank()
-      au ColorScheme  * lua require'mod.highlight'.additional_highlights()
-      " au CursorHold   * lua require'mod.highlight'.hover_match()
+      au ColorScheme * lua require'mod.highlight'.additional_highlights()
+      " au CursorHold * lua require'mod.highlight'.hover_match()
     augroup END
   ]])
 

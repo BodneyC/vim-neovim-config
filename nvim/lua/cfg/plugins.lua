@@ -14,7 +14,7 @@ return packer.startup(function()
   local use = packer.use
 
   -- java
-    use {'mfussenegger/nvim-dap'}
+  use {'mfussenegger/nvim-dap'}
   use {'mfussenegger/nvim-jdtls'}
 
   use {'wbthomason/packer.nvim', opt = true}
@@ -41,12 +41,7 @@ return packer.startup(function()
   use {'bronson/vim-visual-star-search'}
   use {'brooth/far.vim'}
   use {'chrisbra/recover.vim'}
-  use {
-    'christoomey/vim-tmux-navigator',
-    cond = function()
-      return os.getenv('TMUX')
-    end,
-  }
+  use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
   use {'dominikduda/vim_current_word'}
   use {'drmingdrmer/vim-indent-lua'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {'tpope/vim-fugitive'}}
@@ -69,12 +64,7 @@ return packer.startup(function()
   use {'junegunn/vim-easy-align'}
   use {'justinmk/vim-syntax-extra'}
   use {'kamykn/spelunker.vim'}
-  use {
-    'knubie/vim-kitty-navigator',
-    cond = function()
-      return os.getenv('KITTY_WINDOW_ID')
-    end,
-  }
+  use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
   use {'kristijanhusak/defx-git'}
   use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
@@ -101,8 +91,7 @@ return packer.startup(function()
   use {'rbong/vim-flog', cmd = 'Flog'}
   use {'rhysd/clever-f.vim'}
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
-  use {'romgrk/barbar.nvim'}
-  use {'romgrk/lib.kom'}
+  -- use {'romgrk/barbar.nvim', requires = {'romgrk/lib.kom'}}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'scrooloose/nerdcommenter'}
   use {'sheerun/vim-polyglot'}
@@ -121,5 +110,8 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
+
+  -- use {'~/gitclones/VirkSpaces', branch = 'master'}
+  use {'~/gitclones/barbar.nvim', branch = 'master', requires = {'romgrk/lib.kom'}}
 
 end)
