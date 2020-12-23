@@ -5,7 +5,9 @@ local util = require 'utl.util'
 local n_s = {noremap = true, silent = true}
 
 util.exec('let mapleader=" "')
-skm('n', '<leader>', '<NOP>', {})
+-- skm('n', '<leader>', '<NOP>', {})
+skm('n', '<leader>', '<Cmd>LeaderGuide \' \'<CR>', {})
+skm('n', '<leader><leader>', '<Cmd>LeaderGuide \' \'<CR>', {})
 
 skm('n', 'j', 'gj', n_s)
 skm('n', 'k', 'gk', n_s)
@@ -120,7 +122,7 @@ skm('n', '<leader>ld', '<CMD>Telescope lsp_document_symbols<CR>', n_s)
 skm('n', '<leader>lw', '<CMD>Telescope lsp_workspace_symbols<CR>', n_s)
 skm('n', '<leader>ga', '<CMD>Telescope lsp_code_actions<CR>', n_s)
 skm('n', '<leader>M', '<CMD>Telescope marks<CR>', n_s)
-skm('n', '<leader>r', [[<CMD>lua require'telescope.builtin'.grep_string { search = '' }<CR>]],
+skm('n', '<leader>r', [[<CMD>lua require'mod.telescope'.grep_string_filtered { search = '' }<CR>]],
     {noremap = true})
 skm('n', '<leader>f',
     [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]], n_s)
@@ -128,12 +130,12 @@ skm('n', '<leader>bl', '<CMD>Telescope buffers<CR>', n_s)
 
 -- Gets better results than the builtin
 local grep_string_under_cursor =
-    [[ <CMD>lua require'telescope.builtin'.grep_string { search = vim.fn.expand('<cword>'), ]] ..
+    [[ <CMD>lua require'mod.telescope'.grep_string_filtered { search = vim.fn.expand('<cword>'), ]] ..
         [[ prompt_prefix = vim.fn.expand('<cword>') .. ' >' }<CR>]]
 skm('n', '<M-]>', grep_string_under_cursor, n_s)
 skm('n', '‘', grep_string_under_cursor, n_s)
 
-skm('n', '<leader>h',
+skm('n', '<leader>H',
     '<CMD>lua require\'mod.terminal\'.floating_help(vim.fn.expand(\'<cword>\'))<CR>', n_s)
 
 util.func([[

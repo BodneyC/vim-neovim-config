@@ -19,6 +19,7 @@ return packer.startup(function()
       {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-packer.nvim'},
     },
   }
+  use {'spinks/vim-leader-guide'}
 
   -- java
   use {'mfussenegger/nvim-dap'}
@@ -31,6 +32,7 @@ return packer.startup(function()
   use {'BodneyC/VirkSpaces', branch = 'master'}
   -- use {'BodneyC/barbar.nvim',   branch = 'playing-around' }
   use {'BodneyC/bolorscheme', branch = 'master'}
+  -- use {'~/gitclones/bolorscheme', branch = 'master'}
   use {'BodneyC/flocho', branch = 'master'}
   use {'BodneyC/hex-this-vim', branch = 'master'}
   use {'BodneyC/pic-vim', branch = 'master'}
