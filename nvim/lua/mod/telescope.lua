@@ -2,7 +2,6 @@ local vim = vim
 
 local telescope = require 'telescope'
 local actions = require 'telescope.actions'
-local mt = require 'telescope.actions.mt'
 local builtin = require 'telescope.builtin'
 
 local M = {}
@@ -18,8 +17,8 @@ function M.init()
       prompt_position = 'top',
       sorting_strategy = 'ascending',
       vimgrep_arguments = {
-        'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column',
-        '--smart-case',
+        'rg', '--hidden', '--ignore-vcs', '--color=never', '--no-heading', '--with-filename',
+        '--line-number', '--column', '--smart-case',
       },
       prompt_prefix = '>',
       selection_strategy = 'reset',
@@ -28,7 +27,9 @@ function M.init()
         -- TODO add builtin options.
       },
       file_sorter = require'telescope.sorters'.get_fuzzy_file,
-      file_ignore_patterns = {},
+      file_ignore_patterns = {
+        '.lsp', '.clj-kondo', 'node_modules', 'package-lock.json', 'yarn.lock', '.git',
+      },
       generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
       shorten_path = true,
       winblend = 0,

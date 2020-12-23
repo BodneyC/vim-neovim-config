@@ -120,8 +120,10 @@ skm('n', '<leader>ld', '<CMD>Telescope lsp_document_symbols<CR>', n_s)
 skm('n', '<leader>lw', '<CMD>Telescope lsp_workspace_symbols<CR>', n_s)
 skm('n', '<leader>ga', '<CMD>Telescope lsp_code_actions<CR>', n_s)
 skm('n', '<leader>M', '<CMD>Telescope marks<CR>', n_s)
-skm('n', '<leader>r', [[<CMD>lua require'telescope.builtin'.grep_string { search = '' }<CR>]], n_s)
-skm('n', '<leader>f', '<CMD>Telescope fd<CR>', n_s)
+skm('n', '<leader>r', [[<CMD>lua require'telescope.builtin'.grep_string { search = '' }<CR>]],
+    {noremap = true})
+skm('n', '<leader>f',
+    [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]], n_s)
 skm('n', '<leader>bl', '<CMD>Telescope buffers<CR>', n_s)
 
 -- Gets better results than the builtin
