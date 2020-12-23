@@ -13,6 +13,13 @@ local packer = require 'packer'
 return packer.startup(function()
   local use = packer.use
 
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-packer.nvim'},
+    },
+  }
+
   -- java
   use {'mfussenegger/nvim-dap'}
   use {'mfussenegger/nvim-jdtls'}
@@ -44,7 +51,7 @@ return packer.startup(function()
   use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
   use {'dominikduda/vim_current_word'}
   use {'drmingdrmer/vim-indent-lua'}
-  use {'gregsexton/gitv', cmd = 'Gitv', requires = {'tpope/vim-fugitive'}}
+  use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
   -- use {'guns/vim-sexp'}
   use {'haorenW1025/completion-nvim'}
   use {'honza/vim-snippets'}
@@ -55,9 +62,6 @@ return packer.startup(function()
   use {'janko/vim-test', cmd = 'TestFile'}
   -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
   use {'jiangmiao/auto-pairs'}
-  use {'junegunn/fzf', run = 'cd ~/.fzf && ./install --all'}
-  use {'yuki-ycino/fzf-preview.vim', branch = 'release', run = ':FzfPreviewInstall'}
-  use {'junegunn/fzf.vim'}
   use {'junegunn/goyo.vim', cmd = 'Goyo'}
   use {'junegunn/gv.vim', cmd = 'GV'}
   use {'junegunn/limelight.vim', cmd = 'Limelight'}
@@ -91,7 +95,7 @@ return packer.startup(function()
   use {'rbong/vim-flog', cmd = 'Flog'}
   use {'rhysd/clever-f.vim'}
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
-  -- use {'romgrk/barbar.nvim', requires = {'romgrk/lib.kom'}}
+  -- use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'scrooloose/nerdcommenter'}
   use {'sheerun/vim-polyglot'}
@@ -112,6 +116,6 @@ return packer.startup(function()
   use {'wellle/visual-split.vim'}
 
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
-  use {'~/gitclones/barbar.nvim', branch = 'master', requires = {'romgrk/lib.kom'}}
+  use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
 
 end)

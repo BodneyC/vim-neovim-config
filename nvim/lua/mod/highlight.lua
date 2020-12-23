@@ -41,7 +41,7 @@ function M.additional_highlights()
     hi! CurrentWord gui=bold
     hi! link CurrentWordTwins CurrentWord
     exec 'hi! NormalFloat guibg=' . g:color_dict.highlight[1]
-    " hi! link NormalFloat Normal " Still unsure of this
+    hi! link NormalFloat Normal " Still unsure of this
   ]])
   if os.getenv('TERMTHEME') == 'light' then
     util.exec('hi! Visual guifg=bg')

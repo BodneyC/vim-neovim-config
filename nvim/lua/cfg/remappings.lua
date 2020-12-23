@@ -28,7 +28,10 @@ skm('n', '', '<Plug>NERDCommenterToggle', {})
 skm('x', '', '<Plug>NERDCommenterToggle', {})
 skm('i', '', '<C-o><C-_>', {})
 
-skm('n', '<M-b>', '<CMD>BufferPick<CR>', n_s)
+skm('n', '<leader>bp', '<CMD>BufferPick<CR>', n_s)
+skm('n', '<M-/>', '<CMD>BufferPick<CR>', n_s)
+skm('n', '÷', '<CMD>BufferPick<CR>', n_s)
+
 skm('n', '<M-o>', '<CMD>BufferOrderByBufnr<CR>', n_s)
 skm('n', '<M-1>', '<CMD>BufferGoto 1<CR>', n_s)
 skm('n', '<M-2>', '<CMD>BufferGoto 2<CR>', n_s)
@@ -104,30 +107,38 @@ skm('n', ',', '<Plug>(clever-f-repeat-back)', {})
 
 skm('n', '<leader>ea', 'vip:EasyAlign<CR>', n_s)
 skm('x', '<leader>ea', ':EasyAlign<CR>', n_s)
+skm('x', 'ea', ':EasyAlign<CR>', n_s)
 
--- Unimpaired covers this
--- skm('n', '[<Leader>',  '<CMD>call append(line(".") - 1, repeat([""], v:count1))<CR>', n_s)
--- skm('n', ']<Leader>',  '<CMD>call append(line("."), repeat([""], v:count1))<CR>',     n_s)
+util.command('Rg', 'lua require\'mod.telescope\'.grep(<f-args>)', {nargs = '1'})
+skm('n', '<leader>gs', '<CMD>Telescope git_status<CR>', n_s)
+skm('n', '<leader>gb', '<CMD>Telescope git_branches<CR>', n_s)
+skm('n', '<leader>gc', '<CMD>Telescope git_commits<CR>', n_s)
+skm('n', '<leader>gr', '<CMD>Telescope registers<CR>', n_s)
+skm('n', '<leader>m', '<CMD>Telescope keymaps<CR>', n_s)
+skm('n', '<leader>p', [[<CMD>lua require('telescope').extensions.packer.plugins(opts)<CR>]], n_s)
+skm('n', '<leader>ld', '<CMD>Telescope lsp_document_symbols<CR>', n_s)
+skm('n', '<leader>lw', '<CMD>Telescope lsp_workspace_symbols<CR>', n_s)
+skm('n', '<leader>ga', '<CMD>Telescope lsp_code_actions<CR>', n_s)
+skm('n', '<leader>M', '<CMD>Telescope marks<CR>', n_s)
+skm('n', '<leader>r', [[<CMD>lua require'telescope.builtin'.grep_string { search = '' }<CR>]], n_s)
+skm('n', '<leader>f', '<CMD>Telescope fd<CR>', n_s)
+skm('n', '<leader>bl', '<CMD>Telescope buffers<CR>', n_s)
 
-util.command('Rg', 'lua require\'mod.fzf\'.rg(<q-args>,    <bang>0)', {bang = true, nargs = '*'})
-util.command('FilesFzf', 'lua require\'mod.fzf\'.files(<q-args>, <bang>0)',
-    {bang = true, nargs = '*'})
-
-skm('n', '<leader>gs', '<CMD>FzfPreviewGitStatus<CR>', n_s)
-skm('n', '<leader>ga', '<CMD>FzfPreviewGitActions<CR>', n_s)
-skm('n', '<leader>M', '<CMD>FzfPreviewMarks<CR>', n_s)
-skm('n', '<leader>r', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Rg\')<CR>', n_s)
-skm('n', '<leader>f', '<CMD>lua require\'mod.fzf\'.run_cmd(\'FilesFzf\')<CR>', n_s)
-skm('n', '<leader>m', '<CMD>lua require\'mod.fzf\'.run_cmd(\'Maps\')<CR>', n_s)
-skm('n', '<leader>bl', '<CMD>FzfPreviewBuffers<CR>', n_s)
-skm('n', '<M-]>', '<CMD>lua require\'mod.fzf\'.rg(vim.fn.expand(\'<cword>\'), 0)<CR>', n_s)
-skm('n', '‘', '<CMD>lua require\'mod.fzf\'.rg(vim.fn.expand(\'<cword>\'), 0)<CR>', n_s)
+-- Gets better results than the builtin
+local grep_string_under_cursor =
+    [[ <CMD>lua require'telescope.builtin'.grep_string { search = vim.fn.expand('<cword>'), ]] ..
+        [[ prompt_prefix = vim.fn.expand('<cword>') .. ' >' }<CR>]]
+skm('n', '<M-]>', grep_string_under_cursor, n_s)
+skm('n', '‘', grep_string_under_cursor, n_s)
 
 skm('n', '<leader>h',
     '<CMD>lua require\'mod.terminal\'.floating_help(vim.fn.expand(\'<cword>\'))<CR>', n_s)
 
 util.func([[
   function! MasterBS()
+    if (&buftype != '')
+      return "\<BS>"
+    endif
     let ln = line('.')
     let l = getline(ln)
     let pl = getline(ln - 1)
