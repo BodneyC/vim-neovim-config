@@ -17,9 +17,9 @@ return packer.startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {
       {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-packer.nvim'},
+      {'nvim-telescope/telescope-fzy-native.nvim', run = {'make'}},
     },
   }
-  use {'spinks/vim-leader-guide'}
 
   -- java
   use {'mfussenegger/nvim-dap'}

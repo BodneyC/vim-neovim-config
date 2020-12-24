@@ -6,32 +6,33 @@ local builtin = require 'telescope.builtin'
 
 local M = {}
 
-function M.grep(q)
-  -- builtin.grep_string {search = q, prompt_prefix = q .. ' >'}
-  M.grep_string_filtered {search = q, prompt_prefix = q .. ' >'}
-end
-
 M.grep_string_filtered = function(opts)
   local conf = require('telescope.config').values
   local search = opts.search or vim.fn.expand('<cword>')
 
+  local rg_rgx = '^[^:]*:%d*:?%d*:?'
+
   opts.entry_maker = opts.entry_maker or require'telescope.make_entry'.gen_from_vimgrep(opts)
   opts.word_match = opts.word_match or nil
 
-  local sorter = require'telescope.sorters'.get_generic_fuzzy_sorter(opts)
+  -- local sorter = require'telescope.sorters'.get_generic_fuzzy_sorter(opts)
+  local sorter = require'telescope.sorters'.get_fzy_sorter()
   local original_scoring_function = sorter.scoring_function
   sorter.scoring_function = function(a, prompt, line, b)
     if prompt == 0 or #prompt < (opts.ngram_len or 2) then return 0 end
-    local l = line:gsub('^.*:%d*:%d:', '')
+    local l = line:gsub(rg_rgx, '')
     return original_scoring_function(a, prompt, l, b)
   end
 
   local original_highlighter = sorter.highlighter
   sorter.highlighter = function(a, prompt, line)
-    local _, idx = line:find('^.*:%d*:%d:')
-    local ll = line:sub(1, idx):gsub('.', ' ')
-    local lr = line:sub(idx + 1)
-    return original_highlighter(a, prompt, ll .. lr)
+    local _, idx = line:find(rg_rgx)
+    if idx then
+      local ll = line:sub(1, idx):gsub('.', ' ')
+      local lr = line:sub(idx + 1):lower()
+      line = ll .. lr
+    end
+    return original_highlighter(a, prompt, line)
   end
 
   require'telescope.pickers'.new(opts, {
@@ -43,7 +44,7 @@ M.grep_string_filtered = function(opts)
   }):find()
 end
 
-function M.init()
+M.init = function()
   telescope.setup {
     defaults = {
       mappings = {i = {['<Esc>'] = actions.close, ['<C-u>'] = false}},
@@ -59,11 +60,9 @@ function M.init()
       layout_defaults = {
         -- TODO add builtin options.
       },
-      file_sorter = require'telescope.sorters'.get_fuzzy_file,
       file_ignore_patterns = {
         '.lsp', '.clj-kondo', 'node_modules', 'package-lock.json', 'yarn.lock', '.git',
       },
-      generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
       shorten_path = true,
       winblend = 0,
       width = 0.75,
@@ -78,8 +77,10 @@ function M.init()
       file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
       grep_previewer = require'telescope.previewers'.vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
       qflist_previewer = require'telescope.previewers'.qflist.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
+      fzy_native = {override_generic_sorter = true, override_file_sorter = true},
     },
   }
+  -- telescope.load_extension('fzy_native')
 end
 
 return M
