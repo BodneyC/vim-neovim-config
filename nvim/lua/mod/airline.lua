@@ -2,26 +2,26 @@ local vim = vim
 
 local M = {}
 
-function M.file_info()
+M.file_info = function()
   local ff = {unix = '', mac = '', dos = ''}
   return ff[vim.bo.ff] .. ' ' .. vim.bo.ft
 end
 
-function M.mode()
+M.mode = function()
   local m = vim.w.airline_current_mode or ''
   return string.sub(vim.fn['airline#util#shorten'](m, 79, 1), 0, 3)
 end
 
-function M.modified()
+M.modified = function()
   return vim.bo.modified and ' ' or ''
 end
 
-function M.nvim_lsp()
+M.nvim_lsp = function()
   if #vim.lsp.buf_get_clients() > 0 then return require'lsp-status'.status() end
   return ' '
 end
 
-function M.init()
+M.init = function()
   local spc = vim.g.airline_symbols.space or ' '
   vim.g.airline_section_a = vim.fn['airline#section#create'](
       {'Mode', 'crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'})

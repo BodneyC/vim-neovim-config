@@ -3,7 +3,7 @@ local skm = vim.api.nvim_set_keymap
 
 local M = {}
 
-function M.init()
+M.init = function()
   vim.fn['quickui#menu#reset']()
 
   vim.fn['quickui#menu#install']('&File', {

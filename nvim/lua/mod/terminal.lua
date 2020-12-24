@@ -7,7 +7,7 @@ local some_init_val = 'SOME_INIT_VALUE'
 
 local M = {}
 
-local function set_open_term_buffer_name()
+local set_open_term_buffer_name = function()
   local blist = vim.fn.getbufinfo({bufloaded = 1, buflisted = 0})
   for _, e in ipairs(blist) do
     if e.name ~= '' and not e.hidden then
@@ -19,13 +19,13 @@ local function set_open_term_buffer_name()
   end
 end
 
-function M.close_if_term_job()
+M.close_if_term_job = function()
   if vim.b.terminal_job_pid then
     if not pcall(util.exec, 'close') then print('Could not close terminal') end
   end
 end
 
-function M.next_term_split()
+M.next_term_split = function()
   -- M.set_terminal_direction()
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
@@ -48,7 +48,7 @@ function M.next_term_split()
   end
 end
 
-local function split()
+local split = function()
   if vim.g.term_direction == 'vert' then
     util.exec('vsplit')
   elseif vim.g.term_direction == 'horz' then
@@ -58,7 +58,7 @@ local function split()
   end
 end
 
-function M.term_split(b)
+M.term_split = function(b)
   M.set_terminal_direction()
   if vim.g.tmp_term_name == some_init_val then set_open_term_buffer_name() end
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
@@ -95,7 +95,7 @@ function M.term_split(b)
   util.exec('startinsert')
 end
 
-function M.border_box(h, w, c, r)
+M.border_box = function(h, w, c, r)
   local bar = string.rep('─', w)
   local top = '╭' .. bar .. '╮'
   local mid = '│' .. string.rep(' ', w) .. '│'
@@ -118,7 +118,7 @@ function M.border_box(h, w, c, r)
   return buf
 end
 
-function M.floating_centred(...)
+M.floating_centred = function(...)
   local args = {...}
   local height_divisor = args[1] or vim.g.floating_term_divisor
   local width_divisor = args[2] or vim.g.floating_term_divisor
@@ -146,22 +146,22 @@ function M.floating_centred(...)
   return cur_float_win
 end
 
-local function on_term_exit(_, code, _)
+local on_term_exit = function(_, code, _)
   if code == 0 then util.exec('bd!') end
 end
 
-function M.floating_term(...)
+M.floating_term = function(...)
   local args = {...}
   bskm(M.floating_centred(), 'n', '<Esc>', ':bw!<CR>', {})
   vim.fn.termopen(args[1] or os.getenv('SHELL'), {on_exit = on_term_exit})
 end
 
-function M.floating_man(...)
+M.floating_man = function(...)
   local args = {...}
   M.floating_term('man ' .. table.concat(args, ' '))
 end
 
-function M.floating_help(...)
+M.floating_help = function(...)
   local args = {...}
   if vim.g.tmp_help_buf > 0 and vim.fn.bufloaded(vim.g.tmp_help_buf) == 1 then
     util.exec('bw! ' .. vim.g.tmp_help_buf)
@@ -191,7 +191,7 @@ function M.floating_help(...)
   end
 end
 
-function M.set_terminal_direction(...)
+M.set_terminal_direction = function(...)
   vim.g.term_height = vim.g.term_height or math.floor(vim.o.lines * 0.3)
   vim.g.term_width = vim.g.term_width or math.floor(vim.o.columns * 0.4)
   local args = {...}
@@ -207,12 +207,12 @@ function M.set_terminal_direction(...)
   end
 end
 
-function M.setup_terms_from_session()
+M.setup_terms_from_session = function()
   vim.g.tmp_term_name = vim.fn.expand('%') -- I know this will pick one at random... but they have no real order anyway...
   util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
 end
 
-function M.init()
+M.init = function()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
   vim.g.tmp_term_name = some_init_val

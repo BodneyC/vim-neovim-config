@@ -8,7 +8,7 @@ local M = {}
 -- `wqa` with a terminal open comes with E948 and the "no matching autocommands
 --  for acwrite buffer" - I can't find a solution, this is a bodge, I hate it,
 --  but it works.
-function M.wqa()
+M.wqa = function()
   util.exec([[
     try
       wqa
@@ -19,7 +19,7 @@ function M.wqa()
   ]])
 end
 
-function M.order_by_bufnr()
+M.order_by_bufnr = function()
   local blstate = require 'bufferline.state'
   table.sort(blstate.buffers, function(a, b)
     return a < b
@@ -27,7 +27,7 @@ function M.order_by_bufnr()
   vim.fn['bufferline#update']()
 end
 
-function M.bs()
+M.bs = function()
   local getline = vim.fn.getline
   local ln = vim.fn.line('.')
   local l = getline(ln)
@@ -47,13 +47,13 @@ function M.bs()
   end
 end
 
-function M.set_indent(n)
+M.set_indent = function(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
   if vim.fn.exists(':IndentLinesReset') then util.exec('IndentLinesReset') end
 end
 
-function M.change_indent(n)
+M.change_indent = function(n)
   util.toggle_bool_option('bo', 'et')
   util.exec('%retab!')
   vim.bo.ts = tonumber(n)
@@ -62,7 +62,7 @@ function M.change_indent(n)
   M.set_indent(n)
 end
 
-function M.spell_checker()
+M.spell_checker = function()
   local spell_pre = vim.wo.spell
   if not spell_pre then vim.wo.spell = true end
   util.exec('normal! mzgg]S')
@@ -107,7 +107,7 @@ function M.spell_checker()
   print('Spell checker end')
 end
 
-function M.match_over(...)
+M.match_over = function(...)
   local args = {...}
   print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
@@ -116,7 +116,7 @@ function M.match_over(...)
   util.exec('match OverLength /\\%' .. w .. 'v.\\+/')
 end
 
-function M.zoom_toggle()
+M.zoom_toggle = function()
   if vim.t.zoomed and vim.t.zoom_winrestcmd then
     util.exec(vim.t.zoom_winrestcmd)
     vim.t.zoomed = false
@@ -127,7 +127,7 @@ function M.zoom_toggle()
   end
 end
 
-function M.highlight_under_cursor()
+M.highlight_under_cursor = function()
   local hl_groups = {}
   for _, e in ipairs(vim.fn.synstack(vim.fn.col('.'), vim.fn.line('.'))) do
     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
@@ -136,7 +136,7 @@ function M.highlight_under_cursor()
 end
 
 -- Requires barbar at the minute, but not necessary I suppose...
-function M.buffer_close_all_but_visible()
+M.buffer_close_all_but_visible = function()
   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
       'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'), 'bufname(v:val)')
   if #bs > 0 then
@@ -146,11 +146,11 @@ function M.buffer_close_all_but_visible()
   end
 end
 
-local function call_if_fn_exists(fn)
+local call_if_fn_exists = function(fn)
   if vim.fn.exists(':' .. fn) then util.exec(fn) end
 end
 
-function M.handle_large_file()
+M.handle_large_file = function()
   local fn = vim.fn.expand('<afile>')
   if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
     vim.o.updatetime = 1000
