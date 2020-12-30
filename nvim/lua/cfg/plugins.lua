@@ -13,6 +13,12 @@ local packer = require 'packer'
 return packer.startup(function()
   local use = packer.use
 
+  use {'wbthomason/packer.nvim', opt = true}
+
+  -- java
+  use {'mfussenegger/nvim-dap'}
+  use {'mfussenegger/nvim-jdtls'}
+
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -20,19 +26,10 @@ return packer.startup(function()
       {'nvim-telescope/telescope-fzy-native.nvim', run = {'make'}},
     },
   }
-
-  -- java
-  use {'mfussenegger/nvim-dap'}
-  use {'mfussenegger/nvim-jdtls'}
-
-  use {'wbthomason/packer.nvim', opt = true}
-
   use {'f-person/git-blame.nvim'}
   use {'BodneyC/At-Zed-vim', branch = 'master'}
   use {'BodneyC/VirkSpaces', branch = 'master'}
-  -- use {'BodneyC/barbar.nvim',   branch = 'playing-around' }
   use {'BodneyC/bolorscheme', branch = 'master'}
-  -- use {'~/gitclones/bolorscheme', branch = 'master'}
   use {'BodneyC/flocho', branch = 'master'}
   use {'BodneyC/hex-this-vim', branch = 'master'}
   use {'BodneyC/pic-vim', branch = 'master'}
@@ -54,12 +51,11 @@ return packer.startup(function()
   use {'dominikduda/vim_current_word'}
   use {'drmingdrmer/vim-indent-lua'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
-  -- use {'guns/vim-sexp'}
   use {'haorenW1025/completion-nvim'}
   use {'honza/vim-snippets'}
   use {'hrsh7th/vim-vsnip'}
   use {'hrsh7th/vim-vsnip-integ'}
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', cmd = 'MarkdownPreview'}
+  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}
   use {'itchyny/calendar.vim', cmd = 'Cal'}
   use {'janko/vim-test', cmd = 'TestFile'}
   -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
@@ -97,7 +93,7 @@ return packer.startup(function()
   use {'rbong/vim-flog', cmd = 'Flog'}
   use {'rhysd/clever-f.vim'}
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
-  -- use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
+  use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'scrooloose/nerdcommenter'}
   use {'sheerun/vim-polyglot'}
@@ -106,7 +102,6 @@ return packer.startup(function()
   use {'steelsojka/completion-buffers'}
   use {'tpope/vim-dispatch'}
   use {'tpope/vim-repeat'}
-  -- use {'tpope/vim-sexp-mappings-for-regular-people'}
   use {'tpope/vim-surround'}
   use {'tpope/vim-unimpaired'}
   use {'uiiaoo/java-syntax.vim'}
@@ -118,6 +113,7 @@ return packer.startup(function()
   use {'wellle/visual-split.vim'}
 
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
-  use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
+  -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
+  -- use {'~/gitclones/bolorscheme', branch = 'master'}
 
 end)
