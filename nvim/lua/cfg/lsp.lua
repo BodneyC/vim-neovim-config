@@ -23,8 +23,7 @@ vim.g.completion_chain_complete_list = {
   default = {
     -- with fuzzy, tabnine is garbage - or vice versa
     -- ts is being weird... hopefully this isn't too big of a drop
-    {complete_items = {'lsp', 'path', 'snippet'}}, {complete_items = {'buffers'}}, {mode = '<C-p>'},
-    {mode = '<C-n>'},
+    {complete_items = {'lsp', 'path', 'snippet', 'buffers'}}, {mode = '<C-p>'}, {mode = '<C-n>'},
   },
 }
 
@@ -114,7 +113,7 @@ lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capab
 lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 -- npm i -g bash-language-server
-lspconfig.bashls.setup { on_attach = on_attach, capabilities = lsp_status.capabilities }
+lspconfig.bashls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 -- package-manager - clang
 lspconfig.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}

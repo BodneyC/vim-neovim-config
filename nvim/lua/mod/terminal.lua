@@ -3,6 +3,7 @@ local skm = vim.api.nvim_set_keymap
 local bskm = vim.api.nvim_buf_set_keymap
 local util = require 'utl.util'
 
+local plane = {HORIZTONAL = 0, VERTICAL = 1}
 local some_init_val = 'SOME_INIT_VALUE'
 
 local M = {}
@@ -25,17 +26,30 @@ M.close_if_term_job = function()
   end
 end
 
+local split = function()
+  if vim.g.term_direction == plane.VERTICAL then
+    util.exec('vsplit')
+  elseif vim.g.term_direction == plane.HORIZTONAL then
+    util.exec('split')
+  else
+    print('Invalid term_direction: ' .. vim.g.term_direction)
+  end
+end
+
+local flip = function()
+  if vim.g.term_direction == plane.VERTICAL then
+    vim.g.term_direction = plane.HORIZTONAL
+  else
+    vim.g.term_direction = plane.VERTICAL
+  end
+end
+
 M.next_term_split = function()
-  -- M.set_terminal_direction()
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
   if winnr ~= -1 then
     util.exec(winnr .. 'wincmd w')
-    if vim.g.term_direction == 'horz' then
-      util.exec('split')
-    else
-      util.exec('vsplit')
-    end
+    split()
     vim.o.hidden = true
     util.exec('terminal')
     local new_win = vim.fn.bufwinnr('%')
@@ -43,18 +57,9 @@ M.next_term_split = function()
     util.exec(cur_win .. 'wincmd w')
     util.exec(new_win .. 'wincmd w')
     util.exec('startinsert')
+    flip()
   else
     M.term_split(1)
-  end
-end
-
-local split = function()
-  if vim.g.term_direction == 'vert' then
-    util.exec('vsplit')
-  elseif vim.g.term_direction == 'horz' then
-    util.exec('split')
-  else
-    print('Invalid term_direction: ' .. vim.g.term_direction)
   end
 end
 
@@ -63,7 +68,7 @@ M.term_split = function(b)
   if vim.g.tmp_term_name == some_init_val then set_open_term_buffer_name() end
   local winnr = vim.fn.bufwinnr(vim.g.tmp_term_name)
   local dir_char = 'j'
-  if vim.g.term_direction == 'vert' then dir_char = 'l' end
+  if vim.g.term_direction == plane.VERTICAL then dir_char = 'l' end
 
   if winnr ~= -1 then
     util.exec(winnr .. 'wincmd ' .. (b and 'q' or 'w'))
@@ -84,7 +89,7 @@ M.term_split = function(b)
   if b then util.exec('wincmd ' .. string.upper(dir_char)) end
   util.exec('terminal')
 
-  if vim.g.term_direction == 'vert' then
+  if vim.g.term_direction == plane.VERTICAL then
     util.exec('vertical resize ' .. vim.g.term_width)
   else
     util.exec('resize ' .. vim.g.term_height)
@@ -93,6 +98,8 @@ M.term_split = function(b)
   vim.g.tmp_term_name = vim.fn.bufname('%')
   util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
   util.exec('startinsert')
+
+  flip()
 end
 
 M.border_box = function(h, w, c, r)
@@ -201,9 +208,9 @@ M.set_terminal_direction = function(...)
   end
   local winnr = vim.fn.winnr('$')
   if (vim.fn.winheight(winnr) * 3.2) > vim.fn.winwidth(winnr) then
-    vim.g.term_direction = 'horz'
+    vim.g.term_direction = plane.HORIZTONAL
   else
-    vim.g.term_direction = 'vert'
+    vim.g.term_direction = plane.VERTICAL
   end
 end
 
@@ -256,7 +263,6 @@ M.init = function()
       au SessionLoadPost term://* lua require'mod.terminal'.setup_terms_from_session()
     augroup END
   ]])
-
 end
 
 return M

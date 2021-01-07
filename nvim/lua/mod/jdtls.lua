@@ -30,11 +30,11 @@ end
 M.attach = function()
   jdtls.start_or_attach({
     cmd = {'jdt.ls.sh'},
-    root_dir = jdtls.setup.find_root({'.git'}),
+    root_dir = jdtls.setup.find_root({'.git', 'pom.xml'}),
     init_options = {
       bundles = {
         vim.fn.glob(
-            'path/to/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
+            '$HOME/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
         unpack(vim.split(vim.fn.glob('$HOME/software/vscode-java-test/server/*.jar'), '\n')),
       },
     },
