@@ -130,8 +130,25 @@ lspconfig.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilit
 -- npm i -g vscode-json-languageserver
 lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
--- LspInstall sumneko_lua
-lspconfig.sumneko_lua.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+-- manual
+local lua_ls_root_dir = vim.fn.expand('$HOME') .. '/software/lua-language-server'
+lspconfig.sumneko_lua.setup {
+  cmd = {lua_ls_root_dir .. '/bin/Linux/lua-language-server', '-E', lua_ls_root_dir .. '/main.lua'},
+  settings = {
+    Lua = {
+      runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
+      diagnostics = {globals = {'vim'}},
+      workspace = {
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
+  },
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g vim-language-server
 lspconfig.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
@@ -150,20 +167,6 @@ lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
 }
-
--- -- LspInstall jdtls
--- local lombok_path = nil
--- lspconfig.jdtls.setup {
---   on_attach = on_attach,
---   capabilities = lsp_status.capabilities,
---   init_options = {
---     jvm_args = {
---       '-noverify', '-Xmx1G', '-XX:+UseG1GC', '-XX:+UseStringDeduplication',
---       lombok_path and '-javaagent:' .. lombok_path or '',
---       lombok_path and '-Xbootclasspath/a:' .. lombok_path or '',
---     },
---   },
--- }
 
 -- npm i -g diagnostic-languageserver
 lspconfig.diagnosticls.setup {
