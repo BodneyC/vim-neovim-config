@@ -136,12 +136,12 @@ vim.g['vista#renderer#icons'] = {variable = '\\u71b'}
 vim.g['vista#renderer#icons']['function'] = '\\uf794'
 vim.g.vista_executive_for = {vim = 'ctags'}
 
-util.augroup([[
-  augroup __STARTIFY__
-    au!
-    au VimEnter * lua require'cfg.startify'.init()
-  augroup END
-]])
+-- util.augroup([[
+--   augroup __STARTIFY__
+--     au!
+--     au VimEnter * lua require'cfg.startify'.init()
+--   augroup END
+-- ]])
 
 vim.g.tagbar_iconchars = {lang.utf8(0x00a0), lang.utf8(0x00a0)}
 vim.g.tagbar_compact = 1

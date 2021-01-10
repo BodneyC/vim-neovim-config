@@ -2,7 +2,7 @@ local vim = vim
 
 local M = {}
 
-function M.init()
+M.init = function()
   vim.bo.formatprg = 'autopep8 -'
 end
 

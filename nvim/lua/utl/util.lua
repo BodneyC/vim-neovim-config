@@ -2,7 +2,7 @@ local vim = vim
 
 local M = {}
 
-function M.document_formatting()
+M.document_formatting = function()
   local clients = vim.lsp.buf_get_clients()
   if #clients > 0 then
     for _, o in pairs(clients) do
@@ -16,7 +16,7 @@ function M.document_formatting()
   vim.fn.execute('FormatWrite')
 end
 
-function M.show_documentation()
+M.show_documentation = function()
   if #vim.lsp.buf_get_clients() ~= 0 then
     vim.lsp.buf.hover()
   else
@@ -30,7 +30,7 @@ function M.show_documentation()
   end
 end
 
-function M.go_to_definition()
+M.go_to_definition = function()
   if #vim.lsp.buf_get_clients() ~= 0 then
     vim.lsp.buf.definition()
   else
@@ -46,7 +46,7 @@ function M.go_to_definition()
   end
 end
 
-local function vim_run_all_lines_separately(s)
+local vim_run_all_lines_separately = function(s)
   for l in s:gmatch('[^\r\n]+') do
     vim.fn.execute(l:gsub('^%s*(.-)%s*$', '%1'))
   end
@@ -59,7 +59,7 @@ M.func = vim.fn.execute
 M.funcs = vim.fn.execute
 M.exec = vim.fn.execute
 
-function M.command(lhs, rhs, opts)
+M.command = function(lhs, rhs, opts)
   local parts = {
     'command!',
     '-nargs=' .. (opts.nargs or '0'),
@@ -73,14 +73,14 @@ function M.command(lhs, rhs, opts)
   M.exec(table.concat(parts, ' '))
 end
 
-function M.toggle_bool_option(scope, opt)
+M.toggle_bool_option = function(scope, opt)
   if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) ==
       'boolean' then
     vim[scope][opt] = not vim[scope][opt]
   end
 end
 
-local function edge_of_screen(d)
+local edge_of_screen = function(d)
   local w = vim.fn.winnr()
   vim.fn.execute('silent! wincmd ' .. d)
   local n = vim.fn.winnr()
@@ -88,7 +88,7 @@ local function edge_of_screen(d)
   return w == n
 end
 
-function M.resize_window(d)
+M.resize_window = function(d)
   local inc = vim.g.resize_increment or 2
   if vim.fn.winnr('$') == 1 then
     return

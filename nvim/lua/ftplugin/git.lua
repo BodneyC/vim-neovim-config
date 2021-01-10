@@ -2,7 +2,7 @@ local vim = vim
 
 local M = {}
 
-function M.init()
+M.init = function()
   vim.wo.foldenable = false
 end
 

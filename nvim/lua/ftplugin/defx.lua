@@ -8,14 +8,14 @@ end
 
 local M = {}
 
-function M.defx_rem_rm(targets)
+M.defx_rem_rm = function(targets)
   table.insert(DEFX_REM_STACK, targets)
   local cmd = 'rem rm ' .. table.concat(targets, ' ')
   print(cmd)
   os.execute(cmd)
 end
 
-function M.defx_rem_rs()
+M.defx_rem_rs = function()
   if #DEFX_REM_STACK > 0 and #DEFX_REM_STACK[#DEFX_REM_STACK] > 0 then
     local cmd = 'rem rs ' .. table.concat(DEFX_REM_STACK[#DEFX_REM_STACK], ' ')
     print(cmd)
@@ -26,14 +26,14 @@ function M.defx_rem_rs()
   end
 end
 
-local function str_tree_or_open(if_dir, if_file)
+local str_tree_or_open = function(if_dir, if_file)
   return "defx#is_directory() ? defx#do_action('open_tree'" ..
       (if_dir and ", '" .. if_dir .. "'" or "") .. ") " ..
     ": defx#do_action('open'" ..
       (if_file and ", '" .. if_file .. "'" or "") .. ")"
 end
 
-function M.init()
+M.init = function()
   util.func([[
     func! __DEFX_REM_RM(ctx) abort
       exe "lua require'ftplugin.defx'.defx_rem_rm({'" . join(a:ctx.targets, "', '") . "'})"

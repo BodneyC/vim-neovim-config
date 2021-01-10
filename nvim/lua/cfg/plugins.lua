@@ -50,7 +50,9 @@ return packer.startup(function()
   use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
   use {'dominikduda/vim_current_word'}
   use {'drmingdrmer/vim-indent-lua'}
+  use {'glepnir/dashboard-nvim'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
+
   use {'haorenW1025/completion-nvim'}
   use {'honza/vim-snippets'}
   use {'hrsh7th/vim-vsnip'}
@@ -77,7 +79,6 @@ return packer.startup(function()
   use {'m-pilia/vim-pkgbuild', ft = 'pkgbuild'}
   use {'machakann/vim-swap'}
   use {'majutsushi/tagbar', cmd = 'Tagbar'}
-  use {'mhinz/vim-startify'}
   use {'michaeljsmith/vim-indent-object'}
   use {'moll/vim-bbye'}
   use {'neovim/nvim-lspconfig'}

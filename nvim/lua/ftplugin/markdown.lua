@@ -4,7 +4,7 @@ local bskm = vim.api.nvim_buf_set_keymap
 
 local M = {}
 
-function M.init()
+M.init = function()
   vim.wo.conceallevel = 2
   vim.wo.concealcursor = ''
   util.exec([[

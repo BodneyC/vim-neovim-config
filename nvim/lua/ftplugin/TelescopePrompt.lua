@@ -4,7 +4,7 @@ local bskm = vim.api.nvim_buf_set_keymap
 
 local M = {}
 
-function M.init()
+M.init = function()
   bskm(0, '<C-u>', 'cc', {})
 end
 
