@@ -13,6 +13,7 @@ M.init = function()
   bskm(0, 'n', 'b', [[<Cmd>call dashboard#telescope#bookmarks()<CR>]], n_s)
   bskm(0, 'n', 'h', [[<Cmd>call dashboard#telescope#find_history()<CR>]], n_s)
   bskm(0, 'n', 'q', [[<Cmd>q<CR>]], n_s)
+  bskm(0, 'n', 'd', [[<Cmd>bd<CR>]], n_s)
 end
 
 return M

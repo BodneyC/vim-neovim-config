@@ -19,6 +19,7 @@ return packer.startup(function()
   use {'mfussenegger/nvim-dap'}
   use {'mfussenegger/nvim-jdtls'}
 
+  use {'glepnir/lspsaga.nvim'}
   use {
     'nvim-telescope/telescope.nvim',
     requires = {

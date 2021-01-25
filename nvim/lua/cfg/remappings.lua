@@ -10,6 +10,8 @@ skm('n', '<leader>', '<NOP>', {})
 
 skm('n', 'j', 'gj', n_s)
 skm('n', 'k', 'gk', n_s)
+skm('n', 'gj', 'j', n_s)
+skm('n', 'gk', 'k', n_s)
 
 skm('n', '<leader>E', [[<CMD>e!<CR>]], n_s)
 skm('n', '<leader>Q', [[<CMD>qa!<CR>]], n_s)
@@ -34,6 +36,7 @@ skm('n', '<M-/>', [[<CMD>BufferPick<CR>]], n_s)
 skm('n', '÷', [[<CMD>BufferPick<CR>]], n_s)
 
 skm('n', '<M-o>', [[<CMD>BufferOrderByBufnr<CR>]], n_s)
+skm('n', 'ø', [[<CMD>BufferOrderByBufnr<CR>]], n_s)
 for i = 1, 9 do skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], n_s) end
 skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], n_s)
 skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], n_s)
