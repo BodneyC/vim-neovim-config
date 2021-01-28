@@ -54,7 +54,8 @@ return packer.startup(function()
   use {'glepnir/dashboard-nvim'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
 
-  use {'haorenW1025/completion-nvim'}
+  -- use {'haorenW1025/completion-nvim'}
+  use {'hrsh7th/nvim-compe'}
   use {'honza/vim-snippets'}
   use {'hrsh7th/vim-vsnip'}
   use {'hrsh7th/vim-vsnip-integ'}
@@ -85,7 +86,7 @@ return packer.startup(function()
   use {'neovim/nvim-lspconfig'}
   use {'nicwest/vim-http', cmd = 'Http'}
   use {'nvim-lua/lsp-status.nvim'}
-  use {'nvim-treesitter/completion-treesitter'}
+  -- use {'nvim-treesitter/completion-treesitter'}
   use {'nvim-treesitter/nvim-treesitter'}
   use {'nvim-treesitter/nvim-treesitter-refactor'}
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
@@ -101,7 +102,7 @@ return packer.startup(function()
   use {'sheerun/vim-polyglot'}
   use {'simnalamburt/vim-mundo'}
   use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
-  use {'steelsojka/completion-buffers'}
+  -- use {'steelsojka/completion-buffers'}
   use {'tpope/vim-dispatch'}
   use {'tpope/vim-repeat'}
   use {'tpope/vim-surround'}
