@@ -10,7 +10,7 @@ require'compe'.setup {
   -- throttle_time = ... number ...,
   -- source_timeout = ... number ...,
   -- incomplete_delay = ... number ...,
-  allow_prefix_unmatch = false,
+  allow_prefix_unmatch = true,
   source = {
     path = true,
     buffer = true,
@@ -25,11 +25,12 @@ local skm = vim.api.nvim_set_keymap
 -- Well, this is awful
 local function tab_string(e, k)
   return [[ pumvisible() ? "\]] .. e .. [[" ]] ..
-             [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] .. [[   ? "\]] .. k ..
+             [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ? "\]] .. k ..
              [[" : compe#complete() ]]
 end
 skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'), {noremap = true, silent = true, expr = true})
 skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'), {noremap = true, silent = true, expr = true})
+skm('i', '<C-e>', [[compe#close('<C-e>')]], {noremap = true, silent = true, expr = true})
 
 skm('i', '<CR>', string.gsub([[
   pumvisible()
@@ -38,13 +39,3 @@ skm('i', '<CR>', string.gsub([[
     : "<C-e><CR>"
   : "<CR><Plug>AutoPairsReturn"
 ]], '\n', ''), {noremap = false, silent = true, expr = true})
-
--- inoremap <silent><expr> <C-Space> compe#complete()
--- inoremap <silent><expr> <CR>      compe#confirm('<CR>')
--- inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-
--- if s:lexima
---   inoremap <silent><expr> <C-Space> compe#complete()
---   inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
---   inoremap <silent><expr> <C-e>     compe#close('<C-e>')
--- endif

@@ -182,7 +182,7 @@ util.command('W', [[w]], {nargs = '0'})
 util.command('Q', [[q]], {nargs = '0'})
 
 util.command('DiffThis', [[windo diffthis]], {nargs = '0'})
-util.command('DiffOff', [[window diffoff]], {nargs = '0'})
+util.command('DiffOff', [[windo diffoff]], {nargs = '0'})
 util.command('ConvLineEndings', [[%s/<CR>//g]], {nargs = '0'})
 
 local req_funcs = [[lua require 'mod.functions']]
