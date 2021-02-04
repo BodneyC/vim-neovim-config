@@ -15,11 +15,15 @@ return packer.startup(function()
 
   use {'wbthomason/packer.nvim', opt = true}
 
-  -- java
+  --- Lsp ---
+  -- use {'haorenW1025/completion-nvim'}
+  -- use {'steelsojka/completion-buffers'}
+  use {'glepnir/lspsaga.nvim'}
+  use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-dap'}
   use {'mfussenegger/nvim-jdtls'}
-
-  use {'glepnir/lspsaga.nvim'}
+  use {'neovim/nvim-lspconfig'}
+  use {'nvim-lua/lsp-status.nvim'}
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -27,96 +31,104 @@ return packer.startup(function()
       {'nvim-telescope/telescope-fzy-native.nvim', run = {'make'}},
     },
   }
-  use {'f-person/git-blame.nvim'}
-  use {'BodneyC/At-Zed-vim', branch = 'master'}
-  use {'BodneyC/VirkSpaces', branch = 'master'}
-  use {'BodneyC/bolorscheme', branch = 'master'}
-  use {'BodneyC/flocho', branch = 'master'}
+
+  --- Added functionality ---
+  -- use {'benmills/vimux'}
+  -- use {'nvim-treesitter/completion-treesitter'}
   use {'BodneyC/hex-this-vim', branch = 'master'}
   use {'BodneyC/pic-vim', branch = 'master'}
-  use {'BodneyC/sood-vim', branch = 'master'}
-  use {'BodneyC/togool.vim', branch = 'master'}
-  use {'KabbAmine/vCoolor.vim'}
-  use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
-  use {'Yggdroot/indentLine'}
-  use {'airblade/vim-gitgutter'}
-  use {'alvan/vim-closetag', ft = {'html', 'xml'}}
-  use {'amdt/vim-niji'}
-  use {'andymass/vim-matchup'}
-  use {'benmills/vimux'}
   use {'bodneyc/Comrade', branch = 'master'}
-  use {'bronson/vim-visual-star-search'}
   use {'brooth/far.vim'}
-  use {'chrisbra/recover.vim'}
   use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
-  use {'dominikduda/vim_current_word'}
-  use {'drmingdrmer/vim-indent-lua'}
   use {'glepnir/dashboard-nvim'}
-  use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
-
-  -- use {'haorenW1025/completion-nvim'}
-  use {'hrsh7th/nvim-compe'}
-  use {'honza/vim-snippets'}
-  use {'hrsh7th/vim-vsnip'}
-  use {'hrsh7th/vim-vsnip-integ'}
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}
   use {'itchyny/calendar.vim', cmd = 'Cal'}
-  use {'janko/vim-test', cmd = 'TestFile'}
-  -- use {'cohama/lexima.vim'}
-  -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
-  use {'jiangmiao/auto-pairs'}
-  use {'junegunn/goyo.vim', cmd = 'Goyo'}
-  use {'junegunn/gv.vim', cmd = 'GV'}
-  use {'junegunn/limelight.vim', cmd = 'Limelight'}
-  use {'junegunn/vim-easy-align'}
-  use {'justinmk/vim-syntax-extra'}
-  use {'kamykn/spelunker.vim'}
   use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
-  use {'kristijanhusak/defx-git'}
-  use {'kristijanhusak/defx-icons'}
-  use {'kyazdani42/nvim-web-devicons'}
-  use {'leafgarland/typescript-vim'}
-  use {'liuchengxu/vista.vim', cmd = 'Vista'}
-  use {'ludovicchabant/vim-gutentags'}
-  use {'lukas-reineke/format.nvim'}
-  use {'m-pilia/vim-pkgbuild', ft = 'pkgbuild'}
-  use {'machakann/vim-swap'}
-  use {'majutsushi/tagbar', cmd = 'Tagbar'}
-  use {'michaeljsmith/vim-indent-object'}
-  use {'moll/vim-bbye'}
-  use {'neovim/nvim-lspconfig'}
   use {'nicwest/vim-http', cmd = 'Http'}
-  use {'nvim-lua/lsp-status.nvim'}
-  -- use {'nvim-treesitter/completion-treesitter'}
   use {'nvim-treesitter/nvim-treesitter'}
   use {'nvim-treesitter/nvim-treesitter-refactor'}
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
   use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
-  use {'oguzbilgic/vim-gdiff', cmd = {'Gdiff', 'Gdiffsplit'}}
-  use {'plasticboy/vim-markdown'}
-  use {'radenling/vim-dispatch-neovim'}
-  use {'rbong/vim-flog', cmd = 'Flog'}
-  use {'rhysd/clever-f.vim'}
+  use {'vigoux/treesitter-context.nvim'}
+
+  --- QOL ---
+  use {'bronson/vim-visual-star-search'}
+  use {'dominikduda/vim_current_word'}
+  use {'honza/vim-snippets'}
+  use {'hrsh7th/vim-vsnip'}
+  use {'hrsh7th/vim-vsnip-integ'}
+  use {'jiangmiao/auto-pairs'}
+  use {'junegunn/vim-easy-align'}
+  use {'kamykn/spelunker.vim'}
+  use {'liuchengxu/vista.vim', cmd = 'Vista'}
+  use {'ludovicchabant/vim-gutentags'}
+  use {'lukas-reineke/format.nvim'}
+  use {'machakann/vim-swap'}
+  use {'majutsushi/tagbar', cmd = 'Tagbar'}
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
-  use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
-  use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'scrooloose/nerdcommenter'}
-  -- use {'sheerun/vim-polyglot'}
   use {'simnalamburt/vim-mundo'}
-  use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
-  -- use {'steelsojka/completion-buffers'}
+
+  --- Vim internal wrappers ---
+  -- use {'cohama/lexima.vim'}
+  use {'BodneyC/At-Zed-vim', branch = 'master'}
+  use {'BodneyC/flocho', branch = 'master'}
+  use {'BodneyC/togool.vim', branch = 'master'}
+  use {'alvan/vim-closetag', ft = {'html', 'xml', 'markdown'}}
+  use {'andymass/vim-matchup'}
+  use {'chrisbra/recover.vim'}
+  use {'moll/vim-bbye'}
+  use {'radenling/vim-dispatch-neovim'}
+  use {'rhysd/clever-f.vim'}
   use {'tpope/vim-dispatch'}
   use {'tpope/vim-repeat'}
   use {'tpope/vim-surround'}
   use {'tpope/vim-unimpaired'}
-  use {'uiiaoo/java-syntax.vim'}
-  use {'vigoux/treesitter-context.nvim'}
-  use {'vim-airline/vim-airline'}
   use {'vim-scripts/BufOnly.vim'}
   use {'vim-utils/vim-all'}
+
+  --- Prettiness ---
+  use {'BodneyC/bolorscheme', branch = 'master'}
+  use {'KabbAmine/vCoolor.vim'}
+  use {'Yggdroot/indentLine'}
+  use {'amdt/vim-niji'}
+  use {'junegunn/goyo.vim', cmd = 'Goyo'}
+  use {'junegunn/limelight.vim', cmd = 'Limelight'}
+  use {'kristijanhusak/defx-icons'}
+  use {'kyazdani42/nvim-web-devicons'}
+  use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
+  use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
+  use {'vim-airline/vim-airline'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
 
+  --- SDL ---
+  use {'BodneyC/VirkSpaces', branch = 'master'}
+  use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
+  use {'airblade/vim-gitgutter'}
+  use {'f-person/git-blame.nvim'}
+  use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
+  use {'junegunn/gv.vim', cmd = 'GV'}
+  use {'kristijanhusak/defx-git'}
+  use {'oguzbilgic/vim-gdiff', cmd = {'Gdiff', 'Gdiffsplit'}}
+  use {'rbong/vim-flog', cmd = 'Flog'}
+  use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
+
+  --- Language support ---
+  -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
+  -- use {'sheerun/vim-polyglot'}
+  use {'BodneyC/sood-vim', branch = 'master'}
+  use {'drmingdrmer/vim-indent-lua'}
+  use {'janko/vim-test', cmd = 'TestFile'}
+  use {'justinmk/vim-syntax-extra'}
+  use {'leafgarland/typescript-vim'}
+  use {'m-pilia/vim-pkgbuild', ft = 'pkgbuild'}
+  use {'mboughaba/i3config.vim'}
+  use {'michaeljsmith/vim-indent-object'}
+  use {'plasticboy/vim-markdown'}
+  use {'uiiaoo/java-syntax.vim'}
+
+  --- Local ---
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
   -- use {'~/gitclones/bolorscheme', branch = 'master'}
