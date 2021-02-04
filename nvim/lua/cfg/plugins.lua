@@ -93,6 +93,7 @@ return packer.startup(function()
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
   use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
   use {'oguzbilgic/vim-gdiff', cmd = {'Gdiff', 'Gdiffsplit'}}
+  use {'plasticboy/vim-markdown'}
   use {'radenling/vim-dispatch-neovim'}
   use {'rbong/vim-flog', cmd = 'Flog'}
   use {'rhysd/clever-f.vim'}
@@ -100,7 +101,7 @@ return packer.startup(function()
   use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'scrooloose/nerdcommenter'}
-  use {'sheerun/vim-polyglot'}
+  -- use {'sheerun/vim-polyglot'}
   use {'simnalamburt/vim-mundo'}
   use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
   -- use {'steelsojka/completion-buffers'}

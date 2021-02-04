@@ -129,7 +129,7 @@ end
 
 M.highlight_under_cursor = function()
   local hl_groups = {}
-  for _, e in ipairs(vim.fn.synstack(vim.fn.col('.'), vim.fn.line('.'))) do
+  for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
   end
   print(vim.inspect(hl_groups))

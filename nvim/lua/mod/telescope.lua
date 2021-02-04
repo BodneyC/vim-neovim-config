@@ -69,7 +69,7 @@ M.init = function()
         '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock', '\\.git',
       },
       shorten_path = true,
-      winblend = 0,
+      winblend = 20,
       width = 0.75,
       preview_cutoff = 120,
       results_height = 1,

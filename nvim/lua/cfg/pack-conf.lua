@@ -4,6 +4,7 @@ local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 local lang = require 'utl.lang'
 
+vim.g.vim_markdown_folding_disabled = true
 vim.g.vim_markdown_no_default_key_mappings = true
 
 vim.g.AutoPairsMapBS = false
