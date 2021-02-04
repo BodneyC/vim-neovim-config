@@ -4,19 +4,27 @@ vim.o.completeopt = 'menu,menuone,noselect'
 
 require'compe'.setup {
   enabled = true,
+  autocomplete = true,
   debug = false,
-  min_length = 1,
-  preselect = 'enable', -- or 'disable' or 'always',
+  min_length = 2,
+  preselect = 'disable', -- or 'enable' or 'always',
+  ---- Defaults are fine
   -- throttle_time = ... number ...,
   -- source_timeout = ... number ...,
   -- incomplete_delay = ... number ...,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
   allow_prefix_unmatch = true,
   source = {
     path = true,
+    calc = true,
     buffer = true,
     vsnip = true,
     nvim_lsp = true,
-    -- nvim_lua = { ... overwrite source configuration ... },
+    nvim_lua = true,
+    spell = true,
+    tags = true,
   },
 }
 
@@ -35,7 +43,7 @@ skm('i', '<C-e>', [[compe#close('<C-e>')]], {noremap = true, silent = true, expr
 skm('i', '<CR>', string.gsub([[
   pumvisible()
   ? complete_info()["selected"] != "-1"
-    ? "<C-r>=compe#confirm('<C-y>')<CR> "
+    ? compe#confirm('<CR>')
     : "<C-e><CR>"
   : "<CR><Plug>AutoPairsReturn"
 ]], '\n', ''), {noremap = false, silent = true, expr = true})

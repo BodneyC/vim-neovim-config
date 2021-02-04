@@ -8,10 +8,10 @@ local n_s = {noremap = true, silent = true}
 util.exec('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
 
-skm('n', 'j', 'gj', n_s)
-skm('n', 'k', 'gk', n_s)
-skm('n', 'gj', 'j', n_s)
-skm('n', 'gk', 'k', n_s)
+-- skm('n', 'j', 'gj', n_s)
+-- skm('n', 'k', 'gk', n_s)
+-- skm('n', 'gj', 'j', n_s)
+-- skm('n', 'gk', 'k', n_s)
 
 skm('n', '<leader>E', [[<CMD>e!<CR>]], n_s)
 skm('n', '<leader>Q', [[<CMD>qa!<CR>]], n_s)
@@ -102,8 +102,8 @@ skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], n_s)
 skm('x', '<leader>ea', [[:EasyAlign<CR>]], n_s)
 skm('x', 'ea', [[:EasyAlign<CR>]], n_s)
 
-skm('n', '<leader>h;', [[<CMD>GitGutterNextHunk<CR>]], n_s)
-skm('n', '<leader>h,', [[<CMD>GitGutterPrevHunk<CR>]], n_s)
+skm('n', '<leader>hn', [[<CMD>GitGutterNextHunk<CR>]], n_s)
+skm('n', '<leader>hN', [[<CMD>GitGutterPrevHunk<CR>]], n_s)
 
 util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]], {nargs = '1'})
 skm('n', '<leader>gs', [[<CMD>Telescope git_status<CR>]], n_s)

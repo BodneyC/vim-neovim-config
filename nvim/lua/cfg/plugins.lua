@@ -62,6 +62,7 @@ return packer.startup(function()
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}
   use {'itchyny/calendar.vim', cmd = 'Cal'}
   use {'janko/vim-test', cmd = 'TestFile'}
+  -- use {'cohama/lexima.vim'}
   -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
   use {'jiangmiao/auto-pairs'}
   use {'junegunn/goyo.vim', cmd = 'Goyo'}
