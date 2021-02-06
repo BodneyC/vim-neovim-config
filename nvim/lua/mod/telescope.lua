@@ -66,7 +66,7 @@ M.init = function()
         -- TODO add builtin options.
       },
       file_ignore_patterns = {
-        '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock', '\\.git',
+        '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock', '\\.git',
       },
       shorten_path = true,
       winblend = 20,

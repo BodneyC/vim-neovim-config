@@ -41,6 +41,7 @@ safe_require 'cfg.remappings'
 safe_require 'cfg.airline'
 safe_require 'cfg.ts'
 safe_require 'cfg.lsp'
+safe_require 'cfg.dap'
 safe_require 'cfg.format'
 safe_require 'cfg.compe'
 

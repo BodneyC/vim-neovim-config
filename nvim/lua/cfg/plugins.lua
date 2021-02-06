@@ -31,6 +31,7 @@ return packer.startup(function()
       {'nvim-telescope/telescope-fzy-native.nvim', run = {'make'}},
     },
   }
+  use {'onsails/lspkind-nvim'}
 
   --- Added functionality ---
   -- use {'benmills/vimux'}
