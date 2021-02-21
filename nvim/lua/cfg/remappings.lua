@@ -105,31 +105,6 @@ skm('x', 'ea', [[:EasyAlign<CR>]], n_s)
 skm('n', '<leader>hn', [[<CMD>GitGutterNextHunk<CR>]], n_s)
 skm('n', '<leader>hN', [[<CMD>GitGutterPrevHunk<CR>]], n_s)
 
-util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]], {nargs = '1'})
-skm('n', '<leader>gs', [[<CMD>Telescope git_status<CR>]], n_s)
-skm('n', '<leader>gb', [[<CMD>Telescope git_branches<CR>]], n_s)
-skm('n', '<leader>gc', [[<CMD>Telescope git_commits<CR>]], n_s)
-skm('n', '<leader>gr', [[<CMD>Telescope registers<CR>]], n_s)
-skm('n', '<leader>m', [[<CMD>Telescope keymaps<CR>]], n_s)
-skm('n', '<leader>p', [[<CMD>lua require'telescope'.extensions.packer.plugins(opts)<CR>]], n_s)
-skm('n', '<leader>ld', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
-skm('n', '<leader>lw', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
-skm('n', '<leader>ga', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
-skm('n', '<leader>M', [[<CMD>Telescope marks<CR>]], n_s)
-skm('n', '<leader>r', [[<CMD>lua require'mod.telescope'.grep_string_filtered ]] ..
-    [[ { search = '', disable_coordinates = true, shorten_path = true, }<CR>]], n)
-skm('n', '<leader>f',
-    [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]], n_s)
-skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], n_s)
-
--- Gets better results than the builtin
-local grep_string_under_cursor = [[ <CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
-                                     [[require'telescope.builtin'.grep_string { ]] ..
-                                     [[ search = s, prompt_prefix = s .. ' >', ]] ..
-                                     [[ ngram_len = 1, }<CR>]]
-skm('n', '<M-]>', grep_string_under_cursor, n_s)
-skm('n', '‘', grep_string_under_cursor, n_s)
-
 skm('n', '<leader>H',
     [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]], n_s)
 

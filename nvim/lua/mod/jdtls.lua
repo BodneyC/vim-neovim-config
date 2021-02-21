@@ -24,8 +24,8 @@ M.mappings = function()
   bskm(0, 'v', 'crv', [[<Esc><Cmd>lua require'jdtls'.extract_variable(true)<CR>]], {})
   bskm(0, 'v', 'crm', [[<Esc><Cmd>lua require'jdtls'.extract_method(true)<CR>]], {})
 
-  bskm(0, 'n', '<leader>dtc', [[<Cmd>lua require'jdtls'.test_class()<CR>]], {})
-  bskm(0, 'n', '<leader>dtm', [[<Cmd>lua require'jdtls'.test_nearest_method()<CR>]], {})
+  bskm(0, 'n', '<leader>Dtc', [[<Cmd>lua require'jdtls'.test_class()<CR>]], {})
+  bskm(0, 'n', '<leader>Dtm', [[<Cmd>lua require'jdtls'.test_nearest_method()<CR>]], {})
 end
 
 M.attach = function()

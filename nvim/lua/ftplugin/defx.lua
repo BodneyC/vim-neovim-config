@@ -26,13 +26,6 @@ M.defx_rem_rs = function()
   end
 end
 
-local str_tree_or_open = function(if_dir, if_file)
-  return "defx#is_directory() ? defx#do_action('open_tree'" ..
-      (if_dir and ", '" .. if_dir .. "'" or "") .. ") " ..
-    ": defx#do_action('open'" ..
-      (if_file and ", '" .. if_file .. "'" or "") .. ")"
-end
-
 M.init = function()
   util.func([[
     func! __DEFX_REM_RM(ctx) abort
@@ -50,6 +43,13 @@ M.init = function()
 
   bskm(0, 'n', 'u',  "defx#do_action('call', '__DEFX_REM_RS')", { noremap = true, silent = true, expr = true })
   bskm(0, 'n', 'dd', "defx#do_action('call', '__DEFX_REM_RM')", { noremap = true, silent = true, expr = true })
+
+  local str_tree_or_open = function(if_dir, if_file)
+    return "defx#is_directory() ? defx#do_action('open_tree'" ..
+        (if_dir and ", '" .. if_dir .. "'" or "") .. ") " ..
+      ": defx#do_action('open'" ..
+        (if_file and ", '" .. if_file .. "'" or "") .. ")"
+  end
 
   bskm(0, 'n', '<CR>',          str_tree_or_open('recursive:10', 'botright vsplit'), { noremap = true, silent = true, expr = true })
   bskm(0, 'n', 'gl',            str_tree_or_open('recursive:10', 'botright vsplit'), { noremap = true, silent = true, expr = true })

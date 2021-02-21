@@ -5,7 +5,7 @@ local n_s = {noremap = true, silent = true}
 
 vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='DiffDelete', linehl='', numhl=''})
 
-local debug_leader = '<leader>d'
+local debug_leader = '<leader>D'
 
 skm('n', debug_leader .. 'r', [[<Cmd>lua require'dap'.run()<CR>]], n_s)
 skm('n', debug_leader .. 'R', [[<Cmd>lua require'dap'.repl.run_last()<CR>]], n_s)

@@ -93,6 +93,7 @@ return packer.startup(function()
   use {'KabbAmine/vCoolor.vim'}
   use {'Yggdroot/indentLine'}
   use {'amdt/vim-niji'}
+  use {'dstein64/nvim-scrollview'}
   use {'junegunn/goyo.vim', cmd = 'Goyo'}
   use {'junegunn/limelight.vim', cmd = 'Limelight'}
   use {'kristijanhusak/defx-icons'}
@@ -126,6 +127,7 @@ return packer.startup(function()
   use {'m-pilia/vim-pkgbuild', ft = 'pkgbuild'}
   use {'mboughaba/i3config.vim'}
   use {'michaeljsmith/vim-indent-object'}
+  use {'NoorWachid/VimVLanguage'}
   use {'plasticboy/vim-markdown'}
   use {'uiiaoo/java-syntax.vim'}
 

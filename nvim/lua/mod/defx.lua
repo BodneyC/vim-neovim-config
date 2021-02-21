@@ -16,7 +16,9 @@ M.defx_resize = function()
   M.open()
   local buf = vim.fn.getline(1, '$')
   table.remove(buf, 1)
-  table.sort(buf, function(a, b) return #a > #b end)
+  table.sort(buf, function(a, b)
+    return #a > #b
+  end)
   vim.cmd('vertical resize' .. #buf[1])
   vim.cmd(cur_win .. 'wincmd w')
 end
@@ -40,7 +42,7 @@ M.init = function()
     Unknown = '?',
   })
   vim.fn.execute('command! -nargs=0 DefxOpen lua require\'mod.defx\'.open()')
-  vim.api.nvim_set_keymap('n', '<Leader>D', '<CMD>DefxOpen<CR>', {silent = true, noremap = true})
+  vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>', {silent = true, noremap = true})
 end
 
 return M
