@@ -90,6 +90,7 @@ return packer.startup(function()
 
   --- Prettiness ---
   use {'BodneyC/bolorscheme', branch = 'master'}
+  -- use {'arcticicestudio/nord-vim'}
   use {'KabbAmine/vCoolor.vim'}
   use {'Yggdroot/indentLine'}
   use {'amdt/vim-niji'}
