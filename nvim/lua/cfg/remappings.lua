@@ -46,7 +46,7 @@ skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], n)
 skm('n', '<leader>/', [[<Cmd>noh<CR>]], n_s)
 skm('n', '<leader>;', [[<Cmd>Commands<CR>]], n_s)
 skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], n_s)
-skm('n', '<leader>T', [[<Cmd>TagbarToggle<CR>]], n_s)
+skm('n', '<leader>T', [[<Cmd>Tagbar<CR>]], n_s)
 skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], n_s)
 skm('n', '<leader>V', [[<Cmd>Vista!!<CR>]], n_s)
 
