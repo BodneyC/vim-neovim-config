@@ -133,7 +133,10 @@ lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabil
 -- manual
 local lua_ls_root_dir = vim.fn.expand('$HOME') .. '/software/lua-language-server'
 lspconfig.sumneko_lua.setup {
-  cmd = {lua_ls_root_dir .. '/bin/Linux/lua-language-server', '-E', lua_ls_root_dir .. '/main.lua'},
+  cmd = {
+    lua_ls_root_dir .. '/bin/' .. (util.basic_os_info() == 'Darwin' and 'macOS' or 'Linux') ..
+        '/lua-language-server', '-E', lua_ls_root_dir .. '/main.lua',
+  },
   settings = {
     Lua = {
       runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},

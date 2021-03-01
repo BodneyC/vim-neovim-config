@@ -100,6 +100,7 @@ return packer.startup(function()
   use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
   use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
+  use {'rktjmp/lush.nvim'}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'vim-airline/vim-airline'}
   use {'wellle/targets.vim'}

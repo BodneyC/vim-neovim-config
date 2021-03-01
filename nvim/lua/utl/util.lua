@@ -47,9 +47,7 @@ M.go_to_definition = function()
 end
 
 local vim_run_all_lines_separately = function(s)
-  for l in s:gmatch('[^\r\n]+') do
-    vim.fn.execute(l:gsub('^%s*(.-)%s*$', '%1'))
-  end
+  for l in s:gmatch('[^\r\n]+') do vim.fn.execute(l:gsub('^%s*(.-)%s*$', '%1')) end
 end
 M.augroup = vim_run_all_lines_separately
 M.exec_lines = vim_run_all_lines_separately
@@ -61,21 +59,15 @@ M.exec = vim.fn.execute
 
 M.command = function(lhs, rhs, opts)
   local parts = {
-    'command!',
-    '-nargs=' .. (opts.nargs or '0'),
-    opts.complete and '-complete=' .. opts.complete or '',
-    opts.bang and '-bang' or '',
-    opts.range and '-range' or '',
-    opts.buffer and '-buffer' or '',
-    lhs,
-    rhs,
+    'command!', '-nargs=' .. (opts.nargs or '0'),
+    opts.complete and '-complete=' .. opts.complete or '', opts.bang and '-bang' or '',
+    opts.range and '-range' or '', opts.buffer and '-buffer' or '', lhs, rhs,
   }
   M.exec(table.concat(parts, ' '))
 end
 
 M.toggle_bool_option = function(scope, opt)
-  if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) ==
-      'boolean' then
+  if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) == 'boolean' then
     vim[scope][opt] = not vim[scope][opt]
   end
 end
@@ -90,21 +82,31 @@ end
 
 M.resize_window = function(d)
   local inc = vim.g.resize_increment or 2
-  if vim.fn.winnr('$') == 1 then
-    return
-  end
+  if vim.fn.winnr('$') == 1 then return end
   local dir = ''
-  if d == 'h' or d == 'l' then
-    dir = 'vertical'
-  end
+  if d == 'h' or d == 'l' then dir = 'vertical' end
   print(edge_of_screen(d))
   local edge = edge_of_screen(d) and '-' or '+'
-  if dir == '' and edge == '-' then
-    if edge_of_screen((d == 'j') and 'k' or 'j') then
-      return
-    end
-  end
+  if dir == '' and edge == '-' then if edge_of_screen((d == 'j') and 'k' or 'j') then return end end
   vim.fn.execute(dir .. ' resize ' .. edge .. inc)
+end
+
+M.basic_os_info = function()
+  local name, arch = '', ''
+
+  local popen_status, popen_result = pcall(io.popen, '')
+  if popen_status then
+    popen_result:close()
+    name = io.popen('uname -s', 'r'):read('*l')
+    arch = io.popen('uname -m', 'r'):read('*l')
+  else
+    -- Windows
+    local env_OS = os.getenv('OS')
+    local env_ARCH = os.getenv('PROCESSOR_ARCHITECTURE')
+    if env_OS and env_ARCH then name, arch = env_OS, env_ARCH end
+  end
+
+  return name, arch
 end
 
 return M
