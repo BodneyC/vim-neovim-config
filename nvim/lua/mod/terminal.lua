@@ -110,8 +110,8 @@ M.border_box = function(h, w, c, r)
   local lines = {top}
   for _ = 1, h do table.insert(lines, mid) end
   table.insert(lines, bot)
-  local buf = vim.fn.nvim_create_buf(false, true)
-  vim.fn.nvim_buf_set_lines(buf, 0, -1, true, lines)
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
   local opts = {
     relative = 'editor',
     row = r - 1,
@@ -120,7 +120,7 @@ M.border_box = function(h, w, c, r)
     height = h + 2,
     style = 'minimal',
   }
-  vim.fn.nvim_open_win(buf, true, opts)
+  vim.api.nvim_open_win(buf, true, opts)
   vim.g.tmp_border_buf = buf
   return buf
 end
@@ -142,8 +142,8 @@ M.floating_centred = function(...)
     height = height,
     style = 'minimal',
   }
-  local cur_float_win = vim.fn.nvim_create_buf(false, true)
-  vim.fn.nvim_open_win(cur_float_win, true, opts)
+  local cur_float_win = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_open_win(cur_float_win, true, opts)
   util.augroup(string.format([[
     augroup __FLOAT__
       au!

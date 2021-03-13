@@ -63,8 +63,8 @@ skm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', n_s)
 skm('n', 'gr', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], n_s)
 skm('n', 'g0', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
 skm('n', 'gW', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
-skm('n', ']c', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], n_s)
-skm('n', '[c', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], n_s)
+skm('n', ']c', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], n_s)
+skm('n', '[c', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], n_s)
 skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
 
 -- Well, this is awful
