@@ -8,7 +8,15 @@ M.open = function()
     '-direction=topleft', '-show-ignored-files',
     '-session-file=' .. os.getenv('HOME') .. '/.config/defx/sessions/defx-sessions.json',
   }
+  local fn = vim.fn.expand('%:p')
   vim.fn.execute('Defx ' .. table.concat(opts, ' '))
+print(fn)
+  M.go_to_file(fn)
+end
+
+M.go_to_file = function(fn)
+  if not fn then fn = vim.fn.expand('%:p') end
+  vim.fn['defx#call_action']('search', fn)
 end
 
 M.defx_resize = function()

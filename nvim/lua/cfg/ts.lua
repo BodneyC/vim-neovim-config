@@ -5,7 +5,7 @@ require'nvim-treesitter.configs'.setup {
     'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
   },
   indent = {enable = true, disable = {'python'}},
-  highlight = {enable = true, disable = {'python'}},
+  highlight = {enable = false, disable = {'python'}},
   incremental_selection = {
     enable = true,
     keymaps = {
