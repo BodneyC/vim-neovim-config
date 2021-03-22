@@ -42,7 +42,7 @@ skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], n_s)
 skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], n_s)
 
 skm('n', '<C-p>', [[<Tab>]], n)
-skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], n)
+skm('n', '<leader>*', [[,
 skm('n', '<leader>/', [[<Cmd>noh<CR>]], n_s)
 skm('n', '<leader>;', [[<Cmd>Commands<CR>]], n_s)
 skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], n_s)
@@ -103,8 +103,8 @@ skm('n', ',', [[<Plug>(clever-f-repeat-back)]], {})
 skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], n_s)
 skm('x', '<leader>ea', [[:EasyAlign<CR>]], n_s)
 
-skm('n', '<leader>hn', [[<CMD>GitGutterNextHunk<CR>]], n_s)
-skm('n', '<leader>hN', [[<CMD>GitGutterPrevHunk<CR>]], n_s)
+-- skm('n', '<leader>hn', [[<CMD>GitGutterNextHunk<CR>]], n_s)
+-- skm('n', '<leader>hN', [[<CMD>GitGutterPrevHunk<CR>]], n_s)
 
 skm('n', '<leader>H',
     [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]], n_s)

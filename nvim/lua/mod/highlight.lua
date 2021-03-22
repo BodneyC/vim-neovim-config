@@ -74,13 +74,6 @@ M.SetSignTheme = function(bg)
   vim.fn.execute('hi! GitGutterDelete       guibg=' .. bg)
   vim.fn.execute('hi! CocErrorSign          guibg=' .. bg)
   vim.fn.execute('hi! CocWarningSign        guibg=' .. bg)
-  util.exec([[
-    hi! clear CocGitAddedSign CocGitChangedSign CocGitChangeRemovedSign CocGitRemovedSign
-    hi link CocGitAddedSign GitGutterAdd
-    hi link CocGitChangedSign GitGutterChange
-    hi link CocGitChangeRemovedSign GitGutterChangeDelete
-    hi link CocGitRemovedSign GitGutterDelete
-  ]])
 end
 
 return M

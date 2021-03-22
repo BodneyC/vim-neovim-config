@@ -92,7 +92,7 @@ return packer.startup(function()
   use {'BodneyC/bolorscheme', branch = 'master'}
   -- use {'arcticicestudio/nord-vim'}
   use {'KabbAmine/vCoolor.vim'}
-  use {'Yggdroot/indentLine'}
+  use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
   use {'amdt/vim-niji'}
   use {'dstein64/nvim-scrollview'}
   use {'junegunn/goyo.vim', cmd = 'Goyo'}
@@ -109,7 +109,8 @@ return packer.startup(function()
   --- SDL ---
   use {'BodneyC/VirkSpaces', branch = 'master'}
   use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
-  use {'airblade/vim-gitgutter'}
+  -- use {'airblade/vim-gitgutter'}
+  use {'lewis6991/gitsigns.nvim'}
   use {'f-person/git-blame.nvim'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
   use {'junegunn/gv.vim', cmd = 'GV'}

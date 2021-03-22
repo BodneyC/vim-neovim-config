@@ -104,11 +104,11 @@ vim.g.virk_close_by_ft = {
   Mundo = 'MundoShow',
 }
 
-vim.g.indentLine_showFirstIndentLevel = 1
-vim.g.indentLine_enabled = 0
-vim.g.indentLine_char = '·'
-vim.g.indentLine_first_char = '·'
-vim.g.indentLine_fileTypeExclude = {'markdown', 'nerdtree', 'defx', 'twiggy', 'startify', 'help'}
+vim.g.indentLine_char = '│'
+vim.g.indentLine_first_char = '│'
+vim.g.indentLine_fileTypeExclude = {
+  'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help',
+}
 
 vim.g.NERDSpaceDelims = 1
 vim.g.NERDDefaultAlign = 'left'
