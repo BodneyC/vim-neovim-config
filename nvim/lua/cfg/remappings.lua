@@ -42,7 +42,7 @@ skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], n_s)
 skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], n_s)
 
 skm('n', '<C-p>', [[<Tab>]], n)
-skm('n', '<leader>*', [[,
+skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], n)
 skm('n', '<leader>/', [[<Cmd>noh<CR>]], n_s)
 skm('n', '<leader>;', [[<Cmd>Commands<CR>]], n_s)
 skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], n_s)
