@@ -8,11 +8,6 @@ local n_s = {noremap = true, silent = true}
 util.exec('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
 
--- skm('n', 'j', 'gj', n_s)
--- skm('n', 'k', 'gk', n_s)
--- skm('n', 'gj', 'j', n_s)
--- skm('n', 'gk', 'k', n_s)
-
 skm('n', '<leader>E', [[<CMD>e!<CR>]], n_s)
 skm('n', '<leader>Q', [[<CMD>qa!<CR>]], n_s)
 skm('n', '<leader>W', [[<CMD>lua require'mod.functions'.wqa()<CR>]], n_s)
@@ -134,7 +129,9 @@ util.func([[
 ]])
 
 skm('i', '<BS>', [[<C-r>=MasterBS()<CR>]], n_s)
-skm('i', '´', [[<C-r>=AutoPairsFastWrap()<CR>]], n_s)
+
+skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], n_s)
+skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], n_s)
 
 util.command('ToggleLazyGit', [[w | lua require'mod.terminal'.floating_term('lazygit')]],
     {nargs = '0'})
