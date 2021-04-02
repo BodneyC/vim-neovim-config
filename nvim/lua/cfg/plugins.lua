@@ -39,7 +39,8 @@ return packer.startup(function()
   use {'BodneyC/hex-this-vim', branch = 'master'}
   use {'BodneyC/pic-vim', branch = 'master'}
   use {'bodneyc/Comrade', branch = 'master'}
-  use {'brooth/far.vim'}
+  -- use {'brooth/far.vim'}
+  use {'windwp/nvim-spectre'}
   use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
   use {'glepnir/dashboard-nvim'}
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}

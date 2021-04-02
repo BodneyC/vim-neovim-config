@@ -147,6 +147,8 @@ util.exec([[
 util.command('CopyForTerminal', [[<line1>,<line2>call CopyForTerminal(<f-args>)]],
     {range = true, nargs = '?'})
 
+util.command('Spectre', [[lua require('spectre').open()]], {nargs = 0})
+
 util.command('Wqa', [[wqa]], {nargs = '0'})
 util.command('WQa', [[wqa]], {nargs = '0'})
 util.command('WQ', [[wq]], {nargs = '0'})
