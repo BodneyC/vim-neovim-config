@@ -2,6 +2,7 @@ local vim = vim
 local skm = vim.api.nvim_set_keymap
 
 local lang = require 'utl.lang'
+local util = require 'utl.util'
 
 vim.g.vim_markdown_folding_disabled = true
 vim.g.vim_markdown_no_default_key_mappings = true
@@ -25,6 +26,14 @@ vim.g.bufferline = {
   icon_close_tab = ' ',
   icon_close_tab_modified = '● ',
 }
+
+-- Relies on this file being loaded after the plugins itself
+util.augroup([[
+  augroup bufferline_update__custom
+     au!
+     au BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter * BufferOrderByBufnr
+  augroup END
+]])
 
 vim.g.vcoolor_disable_mappings = false
 
@@ -108,7 +117,9 @@ vim.g.scrollview_excluded_filetypes = {'defx'}
 
 vim.g.indentLine_char = '│'
 vim.g.indentLine_first_char = '│'
-vim.g.indentLine_fileTypeExclude = {'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help'}
+vim.g.indentLine_fileTypeExclude = {
+  'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help', '',
+}
 
 vim.g.NERDSpaceDelims = 1
 vim.g.NERDDefaultAlign = 'left'

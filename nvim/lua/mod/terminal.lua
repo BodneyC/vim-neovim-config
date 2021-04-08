@@ -206,8 +206,7 @@ M.set_terminal_direction = function(...)
     vim.g.term_direction = args[1]
     return
   end
-  local winnr = vim.fn.winnr('$')
-  if (vim.fn.winheight(winnr) * 3.2) > vim.fn.winwidth(winnr) then
+  if (vim.fn.winheight(0) * 3.2) > vim.fn.winwidth(0) then
     vim.g.term_direction = plane.HORIZTONAL
   else
     vim.g.term_direction = plane.VERTICAL
