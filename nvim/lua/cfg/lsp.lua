@@ -130,7 +130,27 @@ lspconfig.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilit
 -- npm i -g vscode-json-languageserver
 lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
--- manual
+-- npm i -g vim-language-server
+lspconfig.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- npm i -g yaml-language-server
+lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- rustup component add rls rust-{analysis,src}
+lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- pip3 i --user 'python-language-sever[all]'
+lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+--[[
+mkdir -p "$HOME/software" && cd "$HOME/software"
+gcl https://github.com/sumneko/lua-language-server.git
+cd lua-language-server
+git submodule update --init --recursive
+cd 3rd/luamake && compile/install.sh
+cd -
+./3rd/luamake/luamake rebuild
+--]]
 local lua_ls_root_dir = vim.fn.expand('$HOME') .. '/software/lua-language-server'
 lspconfig.sumneko_lua.setup {
   cmd = {
@@ -153,36 +173,54 @@ lspconfig.sumneko_lua.setup {
   capabilities = lsp_status.capabilities,
 }
 
--- npm i -g vim-language-server
-lspconfig.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+--[[
+mkdir -p "$HOME/software" && cd "$HOME/software"
+gcl https://github.com/prominic/groovy-language-server
+cd groovy-language-server
+./gradlew build
+]]
+lspconfig.groovyls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+  cmd = {
+    'java', '-jar',
+    os.getenv('HOME') .. '/software/groovy-language-server/build/libs/groovy-language-server.jar',
+  },
+  filetypes = {'groovy'},
+  root_dir = require'lspconfig.util'.root_pattern('.git') or vim.loop.os_homedir(),
+  settings = {
+    groovy = {
+      classpath = {
+        os.getenv('HOME') .. '/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4',
+      },
+    },
+  },
+}
 
--- npm i -g yaml-language-server
-lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-
--- rustup component add rls rust-{analysis,src}
-lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-
--- pip3 i --user 'python-language-sever[all]'
-lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-
--- manual - https://github.com/fwcd/kotlin-language-server
+--[[
+mkdir -p "$HOME/software" && cd "$HOME/software"
+gcl https://github.com/fwcd/kotlin-language-server.git
+cd kotlin-language-server
+./gradlew :server:installDist
+]]
 lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
+  cmd = os.getenv('HOME') ..
+      '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
 }
 
 -- npm i -g diagnostic-languageserver
 lspconfig.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
-  filetypes = {'groovy', 'pkgbuild', 'terraform', 'sh', 'zsh', 'markdown'},
+  filetypes = {'pkgbuild', 'terraform', 'sh', 'zsh', 'markdown'},
   init_options = {
     filetypes = {
       pkgbuild = 'pkgbuild',
       terraform = 'terraform',
       zsh = 'shellcheck_zsh',
       sh = 'shellcheck',
-      groovy = 'groovy',
       markdown = 'markdown',
     },
     formatFiletypes = {sh = 'shfmt', zsh = 'shfmt'},
@@ -245,21 +283,6 @@ lspconfig.diagnosticls.setup {
         offsetLine = 0,
         securities = {error = 'error', note = 'info', warning = 'warning'},
         sourceName = 'shellcheck_zsh',
-      },
-      groovy = {
-        args = {
-          '-jar',
-          os.getenv('HOME') ..
-              '/gitclones/groovy-language-server/build/libs/groovy-language-server.jar',
-        },
-        command = 'java',
-        filetypes = {'groovy'},
-        settings = {
-          groovy = {
-            classpath = {'/link-home/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4'},
-          },
-        },
-        sourceName = 'groovy',
       },
     },
   },

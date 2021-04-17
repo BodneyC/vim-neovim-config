@@ -35,7 +35,7 @@ vim.o.guifont = 'VictorMono Nerd Font:h11'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 
 vim.o.title = true
-vim.o.titlestring = "bodneyc - nvim"
+vim.o.titlestring = 'bodneyc - nvim'
 
 vim.o.showtabline = 2
 vim.bo.tabstop = 2
@@ -71,12 +71,13 @@ util.augroup([[
     au BufReadPre         *         lua  require'mod.functions'.handle_large_file()
     au BufRead,BufNewFile *.MD,*.md setf markdown
     au BufRead,BufNewFile *.rasi    setf css
-    au FileType           *         lua  require'ftplugin'(vim.bo.ft)
+    au FileType,BufEnter  *         lua  require'ftplugin'(vim.bo.ft)
     au TermEnter          *         startinsert
 
     " TMP
-    au BufRead,BufNewFile *.sood setf sood
-    au BufRead,BufNewFile *.sood.ast setf sood-ast
+    " au BufRead,BufNewFile *.sood     setf sood
+    " au BufRead,BufNewFile *.sood.ast setf sood-ast
+    " au BufRead,BufNewFile *.knit     setf knit
   augroup END
 ]])
 

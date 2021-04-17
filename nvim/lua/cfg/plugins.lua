@@ -124,6 +124,7 @@ return packer.startup(function()
   -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
   -- use {'sheerun/vim-polyglot'}
   use {'BodneyC/sood-vim', branch = 'master'}
+  use {'BodneyC/knit-vim', branch = 'master'}
   use {'drmingdrmer/vim-indent-lua'}
   use {'janko/vim-test', cmd = 'TestFile'}
   use {'justinmk/vim-syntax-extra'}
@@ -136,6 +137,7 @@ return packer.startup(function()
   use {'uiiaoo/java-syntax.vim'}
 
   --- Local ---
+  -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
   -- use {'~/gitclones/bolorscheme', branch = 'master'}
