@@ -3,29 +3,7 @@ local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 
 local lspconfig = require 'lspconfig'
--- local diagnostic = require'diagnostic'
 local lsp_status = require 'lsp-status'
-
--- Options for LSP
--- vim.o.completeopt = 'menuone,noinsert,noselect'
--- vim.o.shortmess = vim.o.shortmess .. 'c'
-
--- vim.g.completion_auto_change_source = 1
--- vim.g.completion_confirm_key = '<C-y>'
--- vim.g.completion_enable_auto_paren = 1
--- vim.g.completion_enable_auto_signature = 1
--- vim.g.completion_enable_snippet = 'vim-vsnip'
--- vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'} -- Order is important here
--- vim.g.completion_sorting = 'none'
--- vim.g.completion_tabnine_max_num_results = 3
--- vim.g.completion_trigger_keyword_length = 2
--- vim.g.completion_chain_complete_list = {
---   default = {
---     -- with fuzzy, tabnine is garbage - or vice versa
---     -- ts is being weird... hopefully this isn't too big of a drop
---     {complete_items = {'lsp', 'path', 'snippet', 'buffers'}}, {mode = '<C-p>'}, {mode = '<C-n>'},
---   },
--- }
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -55,7 +33,6 @@ skm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', n_s)
 
 skm('n', 'ga', [[<cmd>lua require'lspsaga.codeaction'.code_action()<CR>]], n_s)
 skm('n', 'gd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], n_s)
--- skm('n', 'gh', '<CMD>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', n_s)
 skm('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
 skm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', n_s)
 skm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', n_s)
@@ -67,22 +44,13 @@ skm('n', ']w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next(
 skm('n', '[w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], n_s)
 skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
 
--- Well, this is awful
--- local function tab_string(e, k)
---   return [[ pumvisible() ? "\]] .. e .. [[" ]] ..
---              [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ]] .. [[   ? "\]] .. k ..
---              [[" : completion#trigger_completion() ]]
--- end
--- skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'), {noremap = true, silent = true, expr = true})
--- skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'), {noremap = true, silent = true, expr = true})
-
 skm('i', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'', s_e)
 skm('i', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'', s_e)
 skm('s', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'', s_e)
 skm('s', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'', s_e)
 
-require'utl.util'.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-require'utl.util'.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
+util.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
+util.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 -- Diagnostics
 vim.fn.sign_define('LspDiagnosticsSignError', {text = ' ', texthl = 'LspDiagnosticsError'})
@@ -103,7 +71,6 @@ lsp_status.config({
 
 local on_attach = function(client, bufnr)
   lsp_status.on_attach(client, bufnr)
-  -- diagnostic.on_attach(client, bufnr)
 end
 
 -- npm i -g {typescript,}-language-server

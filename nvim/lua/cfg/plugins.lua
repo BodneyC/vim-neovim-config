@@ -42,7 +42,7 @@ return packer.startup(function()
   -- use {'brooth/far.vim'}
   use {'windwp/nvim-spectre'}
   use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
-  use {'glepnir/dashboard-nvim'}
+  -- use {'glepnir/dashboard-nvim'}
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}
   use {'itchyny/calendar.vim', cmd = 'Cal'}
   use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
