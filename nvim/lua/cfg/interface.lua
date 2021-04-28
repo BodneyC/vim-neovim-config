@@ -74,10 +74,7 @@ util.augroup([[
     au FileType,BufEnter  *         lua  require'ftplugin'(vim.bo.ft)
     au TermEnter          *         startinsert
 
-    " TMP
-    " au BufRead,BufNewFile *.sood     setf sood
-    " au BufRead,BufNewFile *.sood.ast setf sood-ast
-    " au BufRead,BufNewFile *.knit     setf knit
+    au BufRead,BufNewFile Jenkinsfile* setf groovy
   augroup END
 ]])
 

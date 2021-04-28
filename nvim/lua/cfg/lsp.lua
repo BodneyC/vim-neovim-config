@@ -151,7 +151,7 @@ lspconfig.groovyls.setup {
   capabilities = lsp_status.capabilities,
   cmd = {
     'java', '-jar',
-    os.getenv('HOME') .. '/software/groovy-language-server/build/libs/groovy-language-server.jar',
+    os.getenv('HOME') .. '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
   },
   filetypes = {'groovy'},
   root_dir = require'lspconfig.util'.root_pattern('.git') or vim.loop.os_homedir(),
@@ -254,6 +254,8 @@ lspconfig.diagnosticls.setup {
     },
   },
 }
+
+require('symbols-outline').setup({highlight_hover_item = true, show_guides = true})
 
 require'lspkind'.init({
   with_text = false,

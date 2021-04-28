@@ -54,6 +54,7 @@ return packer.startup(function()
   use {'vigoux/treesitter-context.nvim'}
 
   --- QOL ---
+  use {'simrat39/symbols-outline.nvim'}
   use {'bronson/vim-visual-star-search'}
   use {'dominikduda/vim_current_word'}
   use {'honza/vim-snippets'}
@@ -90,7 +91,7 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
 
   --- Prettiness ---
-  use {'BodneyC/bolorscheme', branch = 'master'}
+  -- use {'BodneyC/bolorscheme', branch = 'master'}
   -- use {'arcticicestudio/nord-vim'}
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
@@ -140,6 +141,6 @@ return packer.startup(function()
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-  -- use {'~/gitclones/bolorscheme', branch = 'master'}
+  use {'~/gitclones/bolorscheme', branch = 'master'}
 
 end)

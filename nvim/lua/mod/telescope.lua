@@ -63,15 +63,27 @@ M.tags_absolute = function(opts)
   }):find()
 end
 
+local escape_chars = function(string)
+  return string.gsub(string,  "[%(|%)|\\|%[|%]|%-|%{%}|%?|%+|%*]", {
+    ["\\"] = "\\\\", ["-"] = "\\-",
+    ["("] = "\\(", [")"] = "\\)",
+    ["["] = "\\[", ["]"] = "\\]",
+    ["{"] = "\\{", ["}"] = "\\}",
+    ["?"] = "\\?", ["+"] = "\\+",
+    ["*"] = "\\*",
+  })
+end
 
 M.grep_string_filtered = function(opts)
   local conf = config.values
-  local search = opts.search or vim.fn.expand('<cword>')
+
+  local search = escape_chars(opts.search or vim.fn.expand('<cword>'))
+  local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
+
+  local word_match = opts.word_match
+  opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
 
   local rg_rgx = '^[^:]*:%d*:?%d*:?'
-
-  opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
-  opts.word_match = opts.word_match or nil
 
   local sorter = sorters.get_fzy_sorter()
   local original_scoring_function = sorter.scoring_function
@@ -92,11 +104,16 @@ M.grep_string_filtered = function(opts)
     return original_highlighter(a, prompt, line)
   end
 
+  local args = vim.tbl_flatten {
+    vimgrep_arguments,
+    word_match,
+    search,
+  }
+
+  -- print(vim.inspect(vim.tbl_flatten {conf.vimgrep_arguments, opts.word_match, search}))
   pickers.new(opts, {
     prompt_title = 'Find Word',
-    finder = finders.new_oneshot_job(vim.tbl_flatten {
-      conf.vimgrep_arguments, opts.word_match, search,
-    }, opts),
+    finder = finders.new_oneshot_job(args, opts),
     previewer = conf.grep_previewer(opts),
     sorter = sorter,
   }):find()
@@ -109,8 +126,8 @@ M.init = function()
       prompt_position = 'top',
       sorting_strategy = 'ascending',
       vimgrep_arguments = {
-        'rg', '--hidden', '--ignore-vcs', '--color=never', '--no-heading', '--with-filename',
-        '--line-number', '--column', '--smart-case',
+        'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case',
+        '--glob', '!.git/**', '--glob', '!.vim/**', '--glob', '!**/target/**', '--glob', '!**/*.class',
       },
       prompt_prefix = '>',
       selection_strategy = 'reset',
