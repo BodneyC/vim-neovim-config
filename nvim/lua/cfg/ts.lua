@@ -17,7 +17,7 @@ require'nvim-treesitter.configs'.setup {
   },
   playground = {enable = true, disable = {}, updatetime = 25, persist_queries = false},
   refactor = {
-    smart_rename = {enable = true, keymaps = {smart_rename = '<Leader>R'}},
+    smart_rename = {enable = false, keymaps = {smart_rename = '<Leader>R'}},
     highlight_current_scope = {enable = false},
     highlight_definitions = {enable = false},
     navigation = {

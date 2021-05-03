@@ -15,12 +15,12 @@ M.tags_absolute = function(opts)
   local conf = config.values
   local ctags_file = vim.bo.tags:split(',')[1] or 'tags'
 
-  if not vim.loop.fs_open(vim.fn.expand(ctags_file, true), "r", 438) then
+  if not vim.loop.fs_open(vim.fn.expand(ctags_file, true), 'r', 438) then
     print('Tags file does not exists. Create one with ctags -R')
     return
   end
 
-  local fd = assert(vim.loop.fs_open(vim.fn.expand(ctags_file, true), "r", 438))
+  local fd = assert(vim.loop.fs_open(vim.fn.expand(ctags_file, true), 'r', 438))
   local stat = assert(vim.loop.fs_fstat(fd))
   local data = assert(vim.loop.fs_read(fd, stat.size, 0))
   assert(vim.loop.fs_close(fd))
@@ -31,7 +31,7 @@ M.tags_absolute = function(opts)
 
   local results = vim.split(data, '\n')
 
-  pickers.new(opts,{
+  pickers.new(opts, {
     prompt = 'Tags',
     finder = finders.new_table {
       results = results,
@@ -40,7 +40,7 @@ M.tags_absolute = function(opts)
     previewer = previewers.ctags.new(opts),
     sorter = conf.generic_sorter(opts),
     attach_mappings = function()
-      actions._goto_file_selection:enhance {
+      actions._goto_file_selection:enhance{
         post = function()
           local selection = actions.get_selected_entry()
 
@@ -59,23 +59,34 @@ M.tags_absolute = function(opts)
         end,
       }
       return true
-    end
+    end,
   }):find()
 end
 
 local escape_chars = function(string)
-  return string.gsub(string,  "[%(|%)|\\|%[|%]|%-|%{%}|%?|%+|%*]", {
-    ["\\"] = "\\\\", ["-"] = "\\-",
-    ["("] = "\\(", [")"] = "\\)",
-    ["["] = "\\[", ["]"] = "\\]",
-    ["{"] = "\\{", ["}"] = "\\}",
-    ["?"] = "\\?", ["+"] = "\\+",
-    ["*"] = "\\*",
+  return string.gsub(string, '[%(|%)|\\|%[|%]|%-|%{%}|%?|%+|%*]', {
+    ['\\'] = '\\\\',
+    ['-'] = '\\-',
+    ['('] = '\\(',
+    [')'] = '\\)',
+    ['['] = '\\[',
+    [']'] = '\\]',
+    ['{'] = '\\{',
+    ['}'] = '\\}',
+    ['?'] = '\\?',
+    ['+'] = '\\+',
+    ['*'] = '\\*',
   })
 end
 
+M.tmpfile = '/tmp/telescope.histbuf'
+M.histfile = os.getenv('HOME') .. '/.cache/nvim/telescope.histfile'
+M.histfile_idx = -1
+
 M.grep_string_filtered = function(opts)
   local conf = config.values
+
+  M.histfile_idx = -1
 
   local search = escape_chars(opts.search or vim.fn.expand('<cword>'))
   local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
@@ -89,6 +100,9 @@ M.grep_string_filtered = function(opts)
   local original_scoring_function = sorter.scoring_function
   sorter.scoring_function = function(a, prompt, line, b)
     if prompt == 0 or #prompt < (opts.ngram_len or 2) then return 0 end
+    local file = io.open(M.tmpfile, 'w')
+    file:write(prompt)
+    file:close()
     local l = line:gsub(rg_rgx, '')
     return original_scoring_function(a, prompt, l, b)
   end
@@ -104,13 +118,8 @@ M.grep_string_filtered = function(opts)
     return original_highlighter(a, prompt, line)
   end
 
-  local args = vim.tbl_flatten {
-    vimgrep_arguments,
-    word_match,
-    search,
-  }
+  local args = vim.tbl_flatten {vimgrep_arguments, word_match, search}
 
-  -- print(vim.inspect(vim.tbl_flatten {conf.vimgrep_arguments, opts.word_match, search}))
   pickers.new(opts, {
     prompt_title = 'Find Word',
     finder = finders.new_oneshot_job(args, opts),
@@ -119,24 +128,79 @@ M.grep_string_filtered = function(opts)
   }):find()
 end
 
+local read_hist_file = function()
+  local f = io.open(M.histfile, 'r')
+  if not f then return nil end
+  local arr = {}
+  for line in f:lines() do table.insert(arr, line); end
+  f:close()
+  return arr
+end
+
+function actions.prev_hist(prompt_bufnr)
+  local arr = read_hist_file()
+  if not arr then return end
+  if M.histfile_idx == -1 or M.histfile_idx > #arr then M.histfile_idx = #arr + 1 end
+  if M.histfile_idx ~= 1 then M.histfile_idx = M.histfile_idx - 1 end
+  if not arr[M.histfile_idx] then return end
+  vim.api.nvim_input('<C-u>' .. arr[M.histfile_idx])
+  if M.histfile_idx == 1 then return end
+end
+
+function actions.next_hist(prompt_bufnr)
+  local arr = read_hist_file()
+  if not arr then return end
+  if M.histfile_idx == -1 or M.histfile_idx > #arr then M.histfile_idx = #arr end
+  if M.histfile_idx ~= #arr then M.histfile_idx = M.histfile_idx + 1 end
+  if not arr[M.histfile_idx] then return end
+  vim.api.nvim_input('<C-u>' .. arr[M.histfile_idx])
+end
+
+function actions.append_to_hist(prompt_bufnr)
+  local f = io.open(M.tmpfile, 'r')
+  local fl = f:read('*a')
+  f:close()
+  if fl and not fl:match('^%s*$') then
+    f = io.open(M.tmpfile, 'w')
+    f:close()
+    f = io.open(M.histfile, 'a+')
+    f:write(fl .. '\n')
+    f:close()
+  end
+
+  -- temp pending: https://github.com/nvim-telescope/telescope.nvim/issues/684
+  actions.select_default(prompt_bufnr)
+  actions.center(prompt_bufnr)
+end
+
 M.init = function()
   telescope.setup {
     defaults = {
-      mappings = {i = {['<Esc>'] = actions.close, ['<C-u>'] = false}},
+      mappings = {
+        i = {
+          ['<Esc>'] = actions.close,
+          ['<C-u>'] = false,
+          ['<C-j>'] = actions.prev_hist,
+          ['<C-k>'] = actions.next_hist,
+          ['<CR>'] = actions.append_to_hist,
+        },
+      },
       prompt_position = 'top',
       sorting_strategy = 'ascending',
       vimgrep_arguments = {
-        'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case',
-        '--glob', '!.git/**', '--glob', '!.vim/**', '--glob', '!**/target/**', '--glob', '!**/*.class',
+        'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number',
+        '--column', '--smart-case', '--glob', '!.git/**', '--glob', '!.vim/**', '--glob',
+        '!**/target/**', '--glob', '!**/*.class',
       },
-      prompt_prefix = '>',
+      prompt_prefix = '> ',
       selection_strategy = 'reset',
       layout_strategy = 'horizontal',
       layout_defaults = {
         -- TODO add builtin options.
       },
       file_ignore_patterns = {
-        '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock', '\\.git',
+        '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock',
+        '\\.git',
       },
       shorten_path = true,
       winblend = 20,
@@ -184,7 +248,8 @@ M.init = function()
   skm('n', '<M-]>', grep_string_under_cursor, n_s)
   skm('n', '‘', grep_string_under_cursor, n_s)
 
-  skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]], n_s)
+  skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
+      n_s)
 
 end
 

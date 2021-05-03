@@ -16,12 +16,12 @@ require('gitsigns').setup {
     ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
     ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
 
-    ['n \\hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['n \\hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n \\hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['n \\hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n \\hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n \\hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    ['n <Leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    ['n <Leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    ['n <Leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    ['n <Leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    ['n <Leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    ['n <Leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
 
     -- Text objects
     ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',

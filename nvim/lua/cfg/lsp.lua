@@ -31,23 +31,26 @@ local s_e = {silent = true, expr = true}
 skm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', n_s)
 skm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', n_s)
 
-skm('n', 'ga', [[<cmd>lua require'lspsaga.codeaction'.code_action()<CR>]], n_s)
-skm('n', 'gd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], n_s)
-skm('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
 skm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', n_s)
 skm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', n_s)
 skm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', n_s)
-skm('n', 'gr', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], n_s)
-skm('n', 'g0', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
-skm('n', 'gW', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
 skm('n', ']w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], n_s)
 skm('n', '[w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], n_s)
 skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
 
-skm('i', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'', s_e)
-skm('i', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'', s_e)
-skm('s', '<C-j>', 'vsnip#jumpable(1)  ? \'<Plug>(vsnip-jump-next)\' : \'<C-j>\'', s_e)
-skm('s', '<C-k>', 'vsnip#jumpable(-1) ? \'<Plug>(vsnip-jump-prev)\' : \'<C-k>\'', s_e)
+skm('n', '\\h', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
+skm('n', '\\s', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
+skm('n', '\\q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
+skm('n', '\\f', [[<cmd>Lspsaga lsp_finder<CR>]], n_s)
+skm('n', '\\a', [[<cmd>Lspsaga code_action<CR>]], n_s)
+skm('n', '\\d', [[<cmd>Lspsaga hover_doc<CR>]], n_s)
+skm('n', '\\D', [[<cmd>Lspsaga preview_definition<CR>]], n_s)
+skm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', n_s)
+
+skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
+skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], s_e)
+skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
+skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], s_e)
 
 util.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
 util.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
@@ -151,7 +154,8 @@ lspconfig.groovyls.setup {
   capabilities = lsp_status.capabilities,
   cmd = {
     'java', '-jar',
-    os.getenv('HOME') .. '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
+    os.getenv('HOME') ..
+        '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
   },
   filetypes = {'groovy'},
   root_dir = require'lspconfig.util'.root_pattern('.git') or vim.loop.os_homedir(),
@@ -173,8 +177,10 @@ cd kotlin-language-server
 lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
-  cmd = os.getenv('HOME') ..
-      '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
+  cmd = {
+    os.getenv('HOME') ..
+        '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
+  },
 }
 
 -- npm i -g diagnostic-languageserver
