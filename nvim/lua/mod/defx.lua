@@ -2,7 +2,7 @@ local vim = vim
 
 local M = {}
 
-M.open = function()
+function M.open()
   local opts = {
     '-columns=indent:git:icons:filename', '-split=vertical', '-winwidth=32', '-no-auto-cd',
     '-direction=topleft', '-show-ignored-files',
@@ -14,12 +14,12 @@ print(fn)
   M.go_to_file(fn)
 end
 
-M.go_to_file = function(fn)
+function M.go_to_file(fn)
   if not fn then fn = vim.fn.expand('%:p') end
   vim.fn['defx#call_action']('search', fn)
 end
 
-M.defx_resize = function()
+function M.defx_resize()
   local cur_win = vim.fn.bufnr()
   M.open()
   local buf = vim.fn.getline(1, '$')
@@ -31,7 +31,7 @@ M.defx_resize = function()
   vim.cmd(cur_win .. 'wincmd w')
 end
 
-M.init = function()
+function M.init()
   require'utl.util'.augroup([[
     augroup __DEFX__
       au!

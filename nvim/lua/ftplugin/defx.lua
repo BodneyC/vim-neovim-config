@@ -6,14 +6,14 @@ if not DEFX_REM_STACK then DEFX_REM_STACK = {} end
 
 local M = {}
 
-M.defx_rem_rm = function(targets)
+function M.defx_rem_rm(targets)
   table.insert(DEFX_REM_STACK, targets)
   local cmd = 'rem rm ' .. table.concat(targets, ' ')
   print(cmd)
   os.execute(cmd)
 end
 
-M.defx_rem_rs = function()
+function M.defx_rem_rs()
   if #DEFX_REM_STACK > 0 and #DEFX_REM_STACK[#DEFX_REM_STACK] > 0 then
     local cmd = 'rem rs ' .. table.concat(DEFX_REM_STACK[#DEFX_REM_STACK], ' ')
     print(cmd)
@@ -38,7 +38,7 @@ function M.defx_find_window_for(fn)
   print('Couldn\'t find a suitable window')
 end
 
-M.init = function()
+function M.init()
   util.func([[
     func! __DEFX_REM_RM(ctx) abort
       exe "lua require'ftplugin.defx'.defx_rem_rm({'" . join(a:ctx.targets, "', '") . "'})"

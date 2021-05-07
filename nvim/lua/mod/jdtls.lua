@@ -6,7 +6,7 @@ local jdtls = require 'jdtls'
 
 local M = {}
 
-M.commands = function()
+function M.commands()
   util.command('JdtCompile', [[lua require'jdtls'.compile()]], {buffer = true})
   util.command('JdtUpdateConfig', [[lua require'jdtls'.update_project_config()]], {buffer = true})
   util.command('JdtJol', [[lua require'jdtls'.jol()]], {buffer = true})
@@ -15,7 +15,7 @@ M.commands = function()
   util.command('JdtOrganizeImports', [[<Cmd>lua require'jdtls'.organize_imports()<CR>]], {buffer = true})
 end
 
-M.mappings = function()
+function M.mappings()
   bskm(0, 'n', 'ga', [[<Cmd>lua require'jdtls'.code_action()<CR>]], {})
   bskm(0, 'v', 'ga', [[<Esc><Cmd>lua require'jdtls'.code_action(true)<CR>]], {})
   bskm(0, 'n', '<leader>R', [[<Cmd>lua require'jdtls'.code_action(false, 'refactor')<CR>]], {})
@@ -28,7 +28,7 @@ M.mappings = function()
   bskm(0, 'n', '<leader>Dtm', [[<Cmd>lua require'jdtls'.test_nearest_method()<CR>]], {})
 end
 
-M.attach = function()
+function M.attach()
   jdtls.start_or_attach({
     cmd = {'jdt.ls.sh'},
     root_dir = jdtls.setup.find_root({'.git', 'pom.xml'}),
@@ -45,7 +45,7 @@ M.attach = function()
   })
 end
 
-M.init = function()
+function M.init()
   if not jdtls then return end
   M.attach()
   M.mappings()

@@ -1,6 +1,6 @@
 local M = {}
 
-M.file_exists = function(fn)
+function M.file_exists(fn)
   local f = io.open(fn, 'r')
   if f == nil then
     return false
@@ -9,7 +9,7 @@ M.file_exists = function(fn)
   return true
 end
 
-M.dir_exists = function(fn)
+function M.dir_exists(fn)
   local f = io.open(fn, 'r')
   if f == nil then
     return false
@@ -19,7 +19,7 @@ M.dir_exists = function(fn)
   return c == 21
 end
 
-M.fsize = function(fn)
+function M.fsize(fn)
   local f = assert(io.open(fn, 'r'))
   local size = f:seek('end')
   io.close(f)

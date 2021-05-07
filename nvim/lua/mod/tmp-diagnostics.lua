@@ -14,6 +14,10 @@ local function _iter_diagnostic_move_pos(name, opts, pos)
     return
   end
 
+  -- This is the block changed from:
+  --  .../lspsaga.nvim/lua/lspsaga/diagnostic.lua
+  -- Some linters (like markdownlint) don't always provide a column num,
+  --  this default to SOL if that happens
   if pos[2] == -1 then
     pos[2] = 1
   end

@@ -11,7 +11,7 @@ local previewers = require 'telescope.previewers'
 
 local M = {}
 
-M.tags_absolute = function(opts)
+function M.tags_absolute(opts)
   local conf = config.values
   local ctags_file = vim.bo.tags:split(',')[1] or 'tags'
 
@@ -79,14 +79,15 @@ local escape_chars = function(string)
   })
 end
 
-M.tmpfile = '/tmp/telescope.histbuf'
 M.histfile = os.getenv('HOME') .. '/.cache/nvim/telescope.histfile'
-M.histfile_idx = -1
 
-M.grep_string_filtered = function(opts)
+local tmpfile = '/tmp/telescope.histfile'
+local histfile_idx = -1
+
+function M.grep_string_filtered(opts)
   local conf = config.values
 
-  M.histfile_idx = -1
+  histfile_idx = -1
 
   local search = escape_chars(opts.search or vim.fn.expand('<cword>'))
   local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
@@ -100,7 +101,7 @@ M.grep_string_filtered = function(opts)
   local original_scoring_function = sorter.scoring_function
   sorter.scoring_function = function(a, prompt, line, b)
     if prompt == 0 or #prompt < (opts.ngram_len or 2) then return 0 end
-    local file = io.open(M.tmpfile, 'w')
+    local file = io.open(tmpfile, 'w')
     file:write(prompt)
     file:close()
     local l = line:gsub(rg_rgx, '')
@@ -140,28 +141,28 @@ end
 function actions.prev_hist(prompt_bufnr)
   local arr = read_hist_file()
   if not arr then return end
-  if M.histfile_idx == -1 or M.histfile_idx > #arr then M.histfile_idx = #arr + 1 end
-  if M.histfile_idx ~= 1 then M.histfile_idx = M.histfile_idx - 1 end
-  if not arr[M.histfile_idx] then return end
-  vim.api.nvim_input('<C-u>' .. arr[M.histfile_idx])
-  if M.histfile_idx == 1 then return end
+  if histfile_idx == -1 or histfile_idx > #arr then histfile_idx = #arr + 1 end
+  if histfile_idx ~= 1 then histfile_idx = histfile_idx - 1 end
+  if not arr[histfile_idx] then return end
+  vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
+  if histfile_idx == 1 then return end
 end
 
 function actions.next_hist(prompt_bufnr)
   local arr = read_hist_file()
   if not arr then return end
-  if M.histfile_idx == -1 or M.histfile_idx > #arr then M.histfile_idx = #arr end
-  if M.histfile_idx ~= #arr then M.histfile_idx = M.histfile_idx + 1 end
-  if not arr[M.histfile_idx] then return end
-  vim.api.nvim_input('<C-u>' .. arr[M.histfile_idx])
+  if histfile_idx == -1 or histfile_idx > #arr then histfile_idx = #arr end
+  if histfile_idx ~= #arr then histfile_idx = histfile_idx + 1 end
+  if not arr[histfile_idx] then return end
+  vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
 end
 
 function actions.append_to_hist(prompt_bufnr)
-  local f = io.open(M.tmpfile, 'r')
+  local f = io.open(tmpfile, 'r')
   local fl = f:read('*a')
   f:close()
   if fl and not fl:match('^%s*$') then
-    f = io.open(M.tmpfile, 'w')
+    f = io.open(tmpfile, 'w')
     f:close()
     f = io.open(M.histfile, 'a+')
     f:write(fl .. '\n')
@@ -173,7 +174,7 @@ function actions.append_to_hist(prompt_bufnr)
   actions.center(prompt_bufnr)
 end
 
-M.init = function()
+function M.init()
   telescope.setup {
     defaults = {
       mappings = {
@@ -251,7 +252,7 @@ M.init = function()
   skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
       n_s)
 
-  io.open(M.tmpfile, 'w'):close()
+  io.open(tmpfile, 'w'):close()
 end
 
 return M

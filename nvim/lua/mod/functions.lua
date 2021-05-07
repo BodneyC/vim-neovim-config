@@ -8,7 +8,7 @@ local M = {}
 -- `wqa` with a terminal open comes with E948 and the "no matching autocommands
 --  for acwrite buffer" - I can't find a solution, this is a bodge, I hate it,
 --  but it works.
-M.wqa = function()
+function M.wqa()
   util.exec([[
     try
       wqa
@@ -19,7 +19,7 @@ M.wqa = function()
   ]])
 end
 
-M.order_by_bufnr = function()
+function M.order_by_bufnr()
   local blstate = require 'bufferline.state'
   table.sort(blstate.buffers, function(a, b)
     return a < b
@@ -27,7 +27,7 @@ M.order_by_bufnr = function()
   vim.fn['bufferline#update']()
 end
 
-M.bs = function()
+function M.bs()
   local getline = vim.fn.getline
   local ln = vim.fn.line('.')
   local l = getline(ln)
@@ -47,13 +47,14 @@ M.bs = function()
   end
 end
 
-M.set_indent = function(n)
+function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(':IndentLinesReset') then util.exec('IndentLinesReset') end
+  if vim.fn.exists(':IndentLinesReset') == 1 then util.exec('IndentLinesReset') end
+  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then util.exec('IndentBlanklineRefresh') end
 end
 
-M.change_indent = function(n)
+function M.change_indent(n)
   util.toggle_bool_option('bo', 'et')
   util.exec('%retab!')
   vim.bo.ts = tonumber(n)
@@ -62,7 +63,7 @@ M.change_indent = function(n)
   M.set_indent(n)
 end
 
-M.spell_checker = function()
+function M.spell_checker()
   local spell_pre = vim.wo.spell
   if not spell_pre then vim.wo.spell = true end
   util.exec('normal! mzgg]S')
@@ -107,7 +108,7 @@ M.spell_checker = function()
   print('Spell checker end')
 end
 
-M.match_over = function(...)
+function M.match_over(...)
   local args = {...}
   print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
@@ -116,7 +117,7 @@ M.match_over = function(...)
   util.exec('match OverLength /\\%' .. w .. 'v.\\+/')
 end
 
-M.zoom_toggle = function()
+function M.zoom_toggle()
   if vim.t.zoomed and vim.t.zoom_winrestcmd then
     util.exec(vim.t.zoom_winrestcmd)
     vim.t.zoomed = false
@@ -127,7 +128,7 @@ M.zoom_toggle = function()
   end
 end
 
-M.highlight_under_cursor = function()
+function M.highlight_under_cursor()
   local hl_groups = {}
   for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
@@ -136,7 +137,7 @@ M.highlight_under_cursor = function()
 end
 
 -- Requires barbar at the minute, but not necessary I suppose...
-M.buffer_close_all_but_visible = function()
+function M.buffer_close_all_but_visible()
   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
       'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'), 'bufname(v:val)')
   if #bs > 0 then
@@ -150,7 +151,7 @@ local call_if_fn_exists = function(fn)
   if vim.fn.exists(':' .. fn) then util.exec(fn) end
 end
 
-M.handle_large_file = function()
+function M.handle_large_file()
   local fn = vim.fn.expand('<afile>')
   if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
     vim.o.updatetime = 1000

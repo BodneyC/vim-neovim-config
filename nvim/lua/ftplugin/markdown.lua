@@ -15,7 +15,7 @@ local tab = function()
   end
 end
 
-M.init = function()
+function M.init()
   vim.wo.conceallevel = 2
   vim.wo.concealcursor = ''
   bskm(0, 'n', 'j', 'gj', n_s)

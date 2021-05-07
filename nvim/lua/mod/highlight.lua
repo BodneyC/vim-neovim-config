@@ -3,7 +3,7 @@ local util = require 'utl.util'
 
 local M = {}
 
-M.init = function()
+function M.init()
   vim.g.python_highlight_all = 1
   vim.g.vimspectrItalicComment = 'on'
   vim.g.onedark_termcolors = 256
@@ -30,7 +30,7 @@ M.init = function()
   util.exec('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
 end
 
-M.additional_highlights = function()
+function M.additional_highlights()
   util.exec([[
     hi! link HoverMatch MatchParen
     hi! SpelunkerSpellBad gui=undercurl
@@ -49,7 +49,7 @@ M.additional_highlights = function()
   end
 end
 
-M.hover_match = function()
+function M.hover_match()
   local id = vim.b.hover_match_id
   if id then
     for _, match in ipairs(vim.fn.getmatches()) do
@@ -66,7 +66,7 @@ M.hover_match = function()
   end
 end
 
-M.SetSignTheme = function(bg)
+function M.SetSignTheme(bg)
   vim.fn.execute('hi! SignColumn            guibg=' .. bg)
   vim.fn.execute('hi! GitGutterAdd          guibg=' .. bg)
   vim.fn.execute('hi! GitGutterChange       guibg=' .. bg)

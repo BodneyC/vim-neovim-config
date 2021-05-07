@@ -4,7 +4,7 @@ local bskm = vim.api.nvim_buf_set_keymap
 
 local M = {}
 
-M.init = function()
+function M.init()
   local n_s = {noremap = true, silent = true}
   bskm(0, 'n', 'e', [[<Cmd>enew<CR>]], n_s)
   bskm(0, 'n', 'c', [[<Cmd>call dashboard#telescope#change_colorscheme()<CR>]], n_s)

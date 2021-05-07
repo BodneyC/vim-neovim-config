@@ -3,7 +3,7 @@ local util = require'utl.util'
 
 local M = {}
 
-M.init = function()
+function M.init()
   util.exec([[
     let @t="mzvipo |j e* `z"
     let @j="Ji |"

@@ -2,7 +2,7 @@ local vim = vim
 
 local M = {}
 
-M.document_formatting = function()
+function M.document_formatting()
   local clients = vim.lsp.buf_get_clients()
   if #clients > 0 then
     for _, o in pairs(clients) do
@@ -16,7 +16,7 @@ M.document_formatting = function()
   vim.fn.execute('FormatWrite')
 end
 
-M.show_documentation = function()
+function M.show_documentation()
   if #vim.lsp.buf_get_clients() ~= 0 then
     vim.lsp.buf.hover()
   else
@@ -30,7 +30,7 @@ M.show_documentation = function()
   end
 end
 
-M.go_to_definition = function()
+function M.go_to_definition()
   if #vim.lsp.buf_get_clients() ~= 0 then
     vim.lsp.buf.definition()
   else
@@ -57,7 +57,7 @@ M.func = vim.fn.execute
 M.funcs = vim.fn.execute
 M.exec = vim.fn.execute
 
-M.command = function(lhs, rhs, opts)
+function M.command(lhs, rhs, opts)
   local parts = {
     'command!', '-nargs=' .. (opts.nargs or '0'),
     opts.complete and '-complete=' .. opts.complete or '', opts.bang and '-bang' or '',
@@ -66,7 +66,7 @@ M.command = function(lhs, rhs, opts)
   M.exec(table.concat(parts, ' '))
 end
 
-M.toggle_bool_option = function(scope, opt)
+function M.toggle_bool_option(scope, opt)
   if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) == 'boolean' then
     vim[scope][opt] = not vim[scope][opt]
   end
@@ -80,7 +80,7 @@ local edge_of_screen = function(d)
   return w == n
 end
 
-M.resize_window = function(d)
+function M.resize_window(d)
   local inc = vim.g.resize_increment or 2
   if vim.fn.winnr('$') == 1 then return end
   local dir = ''
@@ -91,7 +91,7 @@ M.resize_window = function(d)
   vim.fn.execute(dir .. ' resize ' .. edge .. inc)
 end
 
-M.basic_os_info = function()
+function M.basic_os_info()
   local name, arch = '', ''
 
   local popen_status, popen_result = pcall(io.popen, '')

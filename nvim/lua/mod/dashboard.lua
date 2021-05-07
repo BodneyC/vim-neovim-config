@@ -33,7 +33,7 @@ local footer = string.split([[
 
 ]], '\n')
 
-M.init = function()
+function M.init()
   -- util.augroup([[
   --   augroup __DASHBOARD__
   --     au FileType dashboard set laststatus=0
