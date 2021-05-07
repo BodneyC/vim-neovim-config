@@ -251,6 +251,7 @@ M.init = function()
   skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
       n_s)
 
+  io.open(M.tmpfile, 'w'):close()
 end
 
 return M
