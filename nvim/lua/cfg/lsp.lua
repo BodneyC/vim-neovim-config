@@ -17,8 +17,6 @@ vim.g.diagnostic_auto_popup_while_jump = false
 util.augroup([[
   augroup __LSP__
     au!
-    " au BufEnter   * silent lua require'completion'.on_attach()
-    " au CursorHold * silent lua vim.lsp.diagnostic.show_line_diagnostics()
     au FileType java lua require'mod.jdtls'.init()
   augroup END
 ]])
@@ -72,7 +70,7 @@ lsp_status.config({
   indicator_ok = '',
 })
 
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   lsp_status.on_attach(client, bufnr)
 end
 

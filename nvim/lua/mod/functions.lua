@@ -147,7 +147,7 @@ function M.buffer_close_all_but_visible()
   end
 end
 
-local call_if_fn_exists = function(fn)
+local function call_if_fn_exists(fn)
   if vim.fn.exists(':' .. fn) then util.exec(fn) end
 end
 

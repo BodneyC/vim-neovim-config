@@ -7,7 +7,7 @@ local M = {}
 local n_s = {noremap = true, silent = true}
 local n_s_e = {noremap = true, silent = true, expr = true}
 
-local tab = function()
+local function tab()
   if vim.fn.getline('.'):match('%s-%s') then
     return '<C-o>>>A'
   else

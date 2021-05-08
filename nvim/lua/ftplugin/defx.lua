@@ -58,7 +58,7 @@ function M.init()
   bskm(0, 'n', 'dd', 'defx#do_action(\'call\', \'__DEFX_REM_RM\')',
       {noremap = true, silent = true, expr = true})
 
-  local str_tree_or_open = function(if_dir, if_file)
+  local function str_tree_or_open(if_dir, if_file)
     return 'defx#is_directory() ? defx#do_action(\'open_tree\'' ..
                (if_dir and ', \'' .. if_dir .. '\'' or '') .. ') ' .. ': defx#do_action(\'open\'' ..
                (if_file and ', \'' .. if_file .. '\'' or '') .. ')'

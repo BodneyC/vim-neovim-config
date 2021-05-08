@@ -46,7 +46,7 @@ function M.go_to_definition()
   end
 end
 
-local vim_run_all_lines_separately = function(s)
+local function vim_run_all_lines_separately(s)
   for l in s:gmatch('[^\r\n]+') do vim.fn.execute(l:gsub('^%s*(.-)%s*$', '%1')) end
 end
 M.augroup = vim_run_all_lines_separately
@@ -72,7 +72,7 @@ function M.toggle_bool_option(scope, opt)
   end
 end
 
-local edge_of_screen = function(d)
+local function edge_of_screen(d)
   local w = vim.fn.winnr()
   vim.fn.execute('silent! wincmd ' .. d)
   local n = vim.fn.winnr()

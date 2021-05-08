@@ -8,7 +8,7 @@ local some_init_val = 'SOME_INIT_VALUE'
 
 local M = {}
 
-local set_open_term_buffer_name = function()
+local function set_open_term_buffer_name()
   local blist = vim.fn.getbufinfo({bufloaded = 1, buflisted = 0})
   for _, e in ipairs(blist) do
     if e.name ~= '' and not e.hidden then
@@ -26,7 +26,7 @@ function M.close_if_term_job()
   end
 end
 
-local split = function()
+local function split()
   if vim.g.term_direction == plane.VERTICAL then
     util.exec('vsplit')
   elseif vim.g.term_direction == plane.HORIZTONAL then
@@ -36,7 +36,7 @@ local split = function()
   end
 end
 
-local flip = function()
+local function flip()
   if vim.g.term_direction == plane.VERTICAL then
     vim.g.term_direction = plane.HORIZTONAL
   else
@@ -153,7 +153,7 @@ function M.floating_centred(...)
   return cur_float_win
 end
 
-local on_term_exit = function(_, code, _)
+local function on_term_exit(_, code, _)
   if code == 0 then util.exec('bd!') end
 end
 

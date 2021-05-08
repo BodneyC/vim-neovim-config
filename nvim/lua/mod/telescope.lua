@@ -63,7 +63,7 @@ function M.tags_absolute(opts)
   }):find()
 end
 
-local escape_chars = function(string)
+local function escape_chars(string)
   return string.gsub(string, '[%(|%)|\\|%[|%]|%-|%{%}|%?|%+|%*]', {
     ['\\'] = '\\\\',
     ['-'] = '\\-',
@@ -129,7 +129,7 @@ function M.grep_string_filtered(opts)
   }):find()
 end
 
-local read_hist_file = function()
+local function read_hist_file()
   local f = io.open(M.histfile, 'r')
   if not f then return nil end
   local arr = {}
