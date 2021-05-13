@@ -54,6 +54,7 @@ return packer.startup(function()
   use {'vigoux/treesitter-context.nvim'}
 
   --- QOL ---
+  use {'folke/todo-comments.nvim'}
   use {'simrat39/symbols-outline.nvim'}
   use {'bronson/vim-visual-star-search'}
   use {'dominikduda/vim_current_word'}
@@ -93,6 +94,7 @@ return packer.startup(function()
   --- Prettiness ---
   -- use {'BodneyC/bolorscheme', branch = 'master'}
   -- use {'arcticicestudio/nord-vim'}
+  use {'folke/tokyonight.nvim'}
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
   use {'amdt/vim-niji'}
@@ -104,7 +106,8 @@ return packer.startup(function()
   use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
   use {'rktjmp/lush.nvim'}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
-  use {'vim-airline/vim-airline'}
+  -- use {'vim-airline/vim-airline'}
+  use {'hoob3rt/lualine.nvim'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
 

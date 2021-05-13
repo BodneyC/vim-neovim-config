@@ -13,7 +13,8 @@ function M.init()
   if os.getenv('TERMTHEME') == 'light' then
     util.exec('colo plint-light')
   else
-    util.exec('colo bolorscheme')
+    -- util.exec('colo bolorscheme')
+    util.exec('colo tokyonight')
   end
 
   M.additional_highlights()
