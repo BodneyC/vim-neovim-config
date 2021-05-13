@@ -136,6 +136,7 @@ return packer.startup(function()
   use {'NoorWachid/VimVLanguage'}
   use {'plasticboy/vim-markdown'}
   use {'uiiaoo/java-syntax.vim'}
+  use {'stevearc/vim-arduino'}
 
   --- Local ---
   -- use {'~/Documents/knit-vim'}

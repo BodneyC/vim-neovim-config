@@ -3,6 +3,7 @@ local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 
 local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
 local lsp_status = require 'lsp-status'
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
@@ -36,13 +37,13 @@ skm('n', ']w', [[<cmd>Lspsaga diagnostic_jump_next<CR>]], n_s)
 skm('n', '[w', [[<cmd>Lspsaga diagnostic_jump_prev<CR>]], n_s)
 skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
 
-skm('n', '\\h', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
-skm('n', '\\s', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
-skm('n', '\\q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
-skm('n', '\\f', [[<cmd>Lspsaga lsp_finder<CR>]], n_s)
-skm('n', '\\a', [[<cmd>Lspsaga code_action<CR>]], n_s)
-skm('n', '\\d', [[<cmd>Lspsaga hover_doc<CR>]], n_s)
-skm('n', '\\D', [[<cmd>Lspsaga preview_definition<CR>]], n_s)
+skm('n', [[\h]], '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
+skm('n', [[\s]], '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
+skm('n', [[\q]], '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
+skm('n', [[\f]], [[<cmd>Lspsaga lsp_finder<CR>]], n_s)
+skm('n', [[\a]], [[<cmd>Lspsaga code_action<CR>]], n_s)
+skm('n', [[\d]], [[<cmd>Lspsaga hover_doc<CR>]], n_s)
+skm('n', [[\D]], [[<cmd>Lspsaga preview_definition<CR>]], n_s)
 skm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', n_s)
 
 skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
@@ -140,6 +141,29 @@ lspconfig.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
 }
+
+--[[
+go get github.com/arduino/arduino-language-server
+package-manager arduino-cli
+arduino-cli core install arduino:avr # or other platform
+]]
+if not lspconfig.arduino_lsp then
+  configs.arduino_lsp = {
+    default_config = {
+      cmd = {
+        'arduino-language-server',
+        '-cli-config=' .. os.getenv('HOME') .. '/.arduino15/arduino-cli.yaml', '-log',
+        '-logpath=' .. os.getenv('HOME') .. '/.arduino15/lsp-logs',
+      },
+      filetypes = {'arduino'},
+      root_dir = function(fname)
+        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      end,
+      settings = {},
+    },
+  }
+end
+lspconfig.arduino_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"

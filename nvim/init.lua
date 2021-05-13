@@ -47,6 +47,7 @@ safe_require 'cfg.dap'
 safe_require 'cfg.format'
 safe_require 'cfg.compe'
 safe_require 'cfg.gitsigns'
+safe_require 'cfg.arduino'
 
 safe_require_and_init 'mod.terminal'
 safe_require_and_init 'mod.highlight'
