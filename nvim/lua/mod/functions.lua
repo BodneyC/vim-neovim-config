@@ -164,7 +164,6 @@ function M.handle_large_file()
     vim.bo.bufhidden = true
     vim.bo.buftype = 'nowrite'
     vim.bo.syntax = 'off'
-    call_if_fn_exists('AirlineToggle')
     call_if_fn_exists('TSBufDisable')
     call_if_fn_exists('LspBufStopAll')
     call_if_fn_exists('GitGutterDisable')

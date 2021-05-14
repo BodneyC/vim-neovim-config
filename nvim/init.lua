@@ -34,8 +34,6 @@ local function safe_require_and_init(module)
   if mod then mod.init() end
 end
 
-safe_require 'cfg.bolorscheme-custom'
-
 safe_require 'cfg.plugins'
 safe_require 'cfg.interface'
 safe_require 'cfg.pack-conf'
@@ -53,4 +51,3 @@ safe_require_and_init 'mod.terminal'
 safe_require_and_init 'mod.highlight'
 safe_require_and_init 'mod.defx'
 safe_require_and_init 'mod.telescope'
--- safe_require_and_init 'mod.dashboard'

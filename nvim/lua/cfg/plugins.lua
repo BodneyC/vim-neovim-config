@@ -16,8 +16,6 @@ return packer.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   --- Lsp ---
-  -- use {'haorenW1025/completion-nvim'}
-  -- use {'steelsojka/completion-buffers'}
   use {'glepnir/lspsaga.nvim'}
   use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-dap'}
@@ -34,15 +32,11 @@ return packer.startup(function()
   use {'onsails/lspkind-nvim'}
 
   --- Added functionality ---
-  -- use {'benmills/vimux'}
-  -- use {'nvim-treesitter/completion-treesitter'}
   use {'BodneyC/hex-this-vim', branch = 'master'}
   use {'BodneyC/pic-vim', branch = 'master'}
   use {'bodneyc/Comrade', branch = 'master'}
-  -- use {'brooth/far.vim'}
   use {'windwp/nvim-spectre'}
   use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
-  -- use {'glepnir/dashboard-nvim'}
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}
   use {'itchyny/calendar.vim', cmd = 'Cal'}
   use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
@@ -74,7 +68,6 @@ return packer.startup(function()
   use {'simnalamburt/vim-mundo'}
 
   --- Vim internal wrappers ---
-  -- use {'cohama/lexima.vim'}
   use {'BodneyC/At-Zed-vim', branch = 'master'}
   use {'BodneyC/flocho', branch = 'master'}
   use {'BodneyC/togool.vim', branch = 'master'}
@@ -99,8 +92,6 @@ return packer.startup(function()
       require'bolorscheme'.setup {theme = 'bolorscheme'}
     end,
   }
-  -- use {'arcticicestudio/nord-vim'}
-  -- use {'folke/tokyonight.nvim', }
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
   use {'amdt/vim-niji'}
@@ -112,7 +103,6 @@ return packer.startup(function()
   use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
   use {'rktjmp/lush.nvim'}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
-  -- use {'vim-airline/vim-airline'}
   use {'hoob3rt/lualine.nvim'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
@@ -120,7 +110,6 @@ return packer.startup(function()
   --- SDL ---
   use {'BodneyC/VirkSpaces', branch = 'master'}
   use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
-  -- use {'airblade/vim-gitgutter'}
   use {'lewis6991/gitsigns.nvim'}
   use {'f-person/git-blame.nvim'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
@@ -131,8 +120,6 @@ return packer.startup(function()
   use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
 
   --- Language support ---
-  -- use {'jeetsukumaran/vim-pythonsense', ft = 'python'}
-  -- use {'sheerun/vim-polyglot'}
   use {'BodneyC/sood-vim', branch = 'master'}
   use {'BodneyC/knit-vim', branch = 'master'}
   use {'drmingdrmer/vim-indent-lua'}
