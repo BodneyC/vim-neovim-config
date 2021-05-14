@@ -2,7 +2,7 @@ require'lualine'.setup {
   options = {
     icons_enabled = true,
     symbols = {modified = '*', readonly = '-'},
-    theme = 'tokyonight',
+    theme = 'bolorscheme',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {},

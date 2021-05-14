@@ -85,7 +85,6 @@ function M.resize_window(d)
   if vim.fn.winnr('$') == 1 then return end
   local dir = ''
   if d == 'h' or d == 'l' then dir = 'vertical' end
-  print(edge_of_screen(d))
   local edge = edge_of_screen(d) and '-' or '+'
   if dir == '' and edge == '-' then if edge_of_screen((d == 'j') and 'k' or 'j') then return end end
   vim.fn.execute(dir .. ' resize ' .. edge .. inc)

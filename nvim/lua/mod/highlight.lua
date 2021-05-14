@@ -13,8 +13,6 @@ function M.init()
   if os.getenv('TERMTHEME') == 'light' then
     util.exec('colo plint-light')
   else
-    -- util.exec('colo bolorscheme')
-    util.exec('colo tokyonight')
   end
 
   M.additional_highlights()
@@ -32,22 +30,22 @@ function M.init()
 end
 
 function M.additional_highlights()
-  util.exec([[
-    hi! link HoverMatch MatchParen
-    hi! SpelunkerSpellBad gui=undercurl
-    hi! OverLength guibg=#995959 guifg=#ffffff
-    hi! link JavaIdentifier NONE
-    hi! link CleverFChar ErrorMsg
-    hi! link CleverFCursor ErrorMsg
-    hi! CurrentWord gui=bold
-    hi! link CurrentWordTwins CurrentWord
-    exec 'hi! NormalFloat guibg=' . g:color_dict.highlight[1]
-    hi! link NormalFloat Normal " Still unsure of this
-  ]])
-  if os.getenv('TERMTHEME') == 'light' then
-    util.exec('hi! Visual guifg=bg')
-    util.exec('hi! VertSplit guibg=NONE')
-  end
+  -- util.exec([[
+  --   hi! link HoverMatch MatchParen
+  --   hi! SpelunkerSpellBad gui=undercurl
+  --   hi! OverLength guibg=#995959 guifg=#ffffff
+  --   hi! link JavaIdentifier NONE
+  --   hi! link CleverFChar ErrorMsg
+  --   hi! link CleverFCursor ErrorMsg
+  --   hi! CurrentWord gui=bold
+  --   hi! link CurrentWordTwins CurrentWord
+  --   exec 'hi! NormalFloat guibg=' . g:color_dict.highlight[1]
+  --   hi! link NormalFloat Normal " Still unsure of this
+  -- ]])
+  -- if os.getenv('TERMTHEME') == 'light' then
+  --   util.exec('hi! Visual guifg=bg')
+  --   util.exec('hi! VertSplit guibg=NONE')
+  -- end
 end
 
 function M.hover_match()
