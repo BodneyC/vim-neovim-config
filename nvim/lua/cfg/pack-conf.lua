@@ -31,9 +31,11 @@ vim.g.bufferline = {
 util.augroup({
   name = 'bufferline_update__custom',
   autocmds = {
-    event = 'BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter',
-    glob = '*',
-    cmd = 'BufferOrderByBufnr',
+    {
+      event = 'BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter',
+      glob = '*',
+      cmd = 'BufferOrderByBufnr',
+    },
   },
 })
 
