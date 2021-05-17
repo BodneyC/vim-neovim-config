@@ -9,7 +9,7 @@ local M = {}
 --  for acwrite buffer" - I can't find a solution, this is a bodge, I hate it,
 --  but it works.
 function M.wqa()
-  util.exec([[
+  vim.cmd([[
     try
       wqa
     catch
@@ -50,25 +50,25 @@ end
 function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(':IndentLinesReset') == 1 then util.exec('IndentLinesReset') end
-  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then util.exec('IndentBlanklineRefresh') end
+  if vim.fn.exists(':IndentLinesReset') == 1 then vim.cmd('IndentLinesReset') end
+  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then vim.cmd('IndentBlanklineRefresh') end
 end
 
 function M.change_indent(n)
   util.toggle_bool_option('bo', 'et')
-  util.exec('%retab!')
+  vim.cmd('%retab!')
   vim.bo.ts = tonumber(n)
   util.toggle_bool_option('bo', 'et')
-  util.exec('%retab!')
+  vim.cmd('%retab!')
   M.set_indent(n)
 end
 
 function M.spell_checker()
   local spell_pre = vim.wo.spell
   if not spell_pre then vim.wo.spell = true end
-  util.exec('normal! mzgg]S')
+  vim.cmd('normal! mzgg]S')
   while vim.fn.spellbadword()[0] ~= '' do
-    util.exec('redraw')
+    vim.cmd('redraw')
     local ch = ''
     local draw = true
     while not lang.elem_in_array({'y', 'n', 'f', 'r', 'a', 'q'}, ch) do
@@ -77,7 +77,7 @@ function M.spell_checker()
                   ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
       end
       draw = false
-      util.exec('redraw')
+      vim.cmd('redraw')
       ch = vim.fn.nr2char(vim.fn.getchar())
     end
     local dic = {
@@ -100,10 +100,10 @@ function M.spell_checker()
       a = 'normal! zG',
     }
     if ch == 'q' then break end
-    if dic[ch] then util.exec_lines(dic[ch]) end
-    util.exec('normal! ]S')
+    if dic[ch] then vim.cmd_lines(dic[ch]) end
+    vim.cmd('normal! ]S')
   end
-  util.exec('normal! `z')
+  vim.cmd('normal! `z')
   if not spell_pre then vim.wo.spell = false end
   print('Spell checker end')
 end
@@ -114,16 +114,16 @@ function M.match_over(...)
   if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
   local w = vim.g.match_over_width or 80
   if args[1] then w = args[1] end
-  util.exec('match OverLength /\\%' .. w .. 'v.\\+/')
+  vim.cmd('match OverLength /\\%' .. w .. 'v.\\+/')
 end
 
 function M.zoom_toggle()
   if vim.t.zoomed and vim.t.zoom_winrestcmd then
-    util.exec(vim.t.zoom_winrestcmd)
+    vim.cmd(vim.t.zoom_winrestcmd)
     vim.t.zoomed = false
   else
     vim.t.zoom_winrestcmd = vim.fn.winrestcmd()
-    util.exec('resize | vertical resize')
+    vim.cmd('resize | vertical resize')
     vim.t.zoomed = true
   end
 end
@@ -148,7 +148,7 @@ function M.buffer_close_all_but_visible()
 end
 
 local function call_if_fn_exists(fn)
-  if vim.fn.exists(':' .. fn) then util.exec(fn) end
+  if vim.fn.exists(':' .. fn) then vim.cmd(fn) end
 end
 
 function M.handle_large_file()

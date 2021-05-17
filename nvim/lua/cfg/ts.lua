@@ -4,8 +4,8 @@ require'nvim-treesitter.configs'.setup {
     'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html', 'typescript', 'query',
     'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
   },
-  indent = {enable = true, disable = {'python', 'yaml'}},
-  highlight = {enable = true, disable = {'python', 'yaml'}},
+  indent = {enable = true, disable = {'yaml'}},
+  highlight = {enable = true, disable = {'yaml'}},
   incremental_selection = {
     enable = true,
     keymaps = {

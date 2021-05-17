@@ -22,15 +22,15 @@ end
 
 function M.close_if_term_job()
   if vim.b.terminal_job_pid then
-    if not pcall(util.exec, 'close') then print('Could not close terminal') end
+    if not pcall(vim.cmd, 'close') then print('Could not close terminal') end
   end
 end
 
 local function split()
   if vim.g.term_direction == plane.VERTICAL then
-    util.exec('vsplit')
+    vim.cmd('vsplit')
   elseif vim.g.term_direction == plane.HORIZTONAL then
-    util.exec('split')
+    vim.cmd('split')
   else
     print('Invalid term_direction: ' .. vim.g.term_direction)
   end
@@ -48,15 +48,15 @@ function M.next_term_split()
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(__MOD_TERM_TMP_TERM_NAME)
   if winnr ~= -1 then
-    util.exec(winnr .. 'wincmd w')
+    vim.cmd(winnr .. 'wincmd w')
     split()
     vim.o.hidden = true
-    util.exec('terminal')
+    vim.cmd('terminal')
     local new_win = vim.fn.bufwinnr('%')
-    util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
-    util.exec(cur_win .. 'wincmd w')
-    util.exec(new_win .. 'wincmd w')
-    util.exec('startinsert')
+    vim.cmd('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+    vim.cmd(cur_win .. 'wincmd w')
+    vim.cmd(new_win .. 'wincmd w')
+    vim.cmd('startinsert')
     flip()
   else
     M.term_split(1)
@@ -71,33 +71,33 @@ function M.term_split(b)
   if vim.g.term_direction == plane.VERTICAL then dir_char = 'l' end
 
   if winnr ~= -1 then
-    util.exec(winnr .. 'wincmd ' .. (b and 'q' or 'w'))
+    vim.cmd(winnr .. 'wincmd ' .. (b and 'q' or 'w'))
     return
   end
 
   local bufnr = vim.fn.bufnr(__MOD_TERM_TMP_TERM_NAME)
   if bufnr ~= -1 and vim.fn.bufexists(bufnr) and vim.fn.bufloaded(bufnr) then
-    util.exec('bd!' .. bufnr)
+    vim.cmd('bd!' .. bufnr)
   end
 
-  if not b then util.exec('10 wincmd ' .. dir_char) end
+  if not b then vim.cmd('10 wincmd ' .. dir_char) end
   split()
-  if not b then util.exec('wincmd ' .. dir_char) end
+  if not b then vim.cmd('wincmd ' .. dir_char) end
 
   vim.o.hidden = true
 
-  if b then util.exec('wincmd ' .. string.upper(dir_char)) end
-  util.exec('terminal')
+  if b then vim.cmd('wincmd ' .. string.upper(dir_char)) end
+  vim.cmd('terminal')
 
   if vim.g.term_direction == plane.VERTICAL then
-    util.exec('vertical resize ' .. vim.g.term_width)
+    vim.cmd('vertical resize ' .. vim.g.term_width)
   else
-    util.exec('resize ' .. vim.g.term_height)
+    vim.cmd('resize ' .. vim.g.term_height)
   end
 
   __MOD_TERM_TMP_TERM_NAME = vim.fn.bufname('%')
-  util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
-  util.exec('startinsert')
+  vim.cmd('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+  vim.cmd('startinsert')
 
   flip()
 end
@@ -144,17 +144,17 @@ function M.floating_centred(...)
   }
   local cur_float_win = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_open_win(cur_float_win, true, opts)
-  util.augroup(string.format([[
-    augroup __FLOAT__
-      au!
-      au BufWipeout <buffer=%d> bd! %d
-    augroup END
-  ]], cur_float_win, buf))
+  util.augroup({
+    name = '__FLOAT__',
+    autocmds = {
+      {event = 'BufWipeout', glob = '<buffer=' .. cur_float_win .. '>', cmd = 'bd!' .. buf},
+    },
+  })
   return cur_float_win
 end
 
 local function on_term_exit(_, code, _)
-  if code == 0 then util.exec('bd!') end
+  if code == 0 then vim.cmd('bd!') end
 end
 
 function M.floating_term(...)
@@ -167,39 +167,40 @@ function M.floating_man(...)
   local args = {...}
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   M.floating_term('man ' .. table.concat(args, ' '))
-    util.exec(winid .. 'wincmd w')
+  vim.cmd(winid .. 'wincmd w')
 end
 
 function M.floating_help(...)
   local args = {...}
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   if __MOD_TERM_TMP_HELP_BUF > 0 and vim.fn.bufloaded(vim.g.tmp_help_buf) == 1 then
-    util.exec('bw! ' .. __MOD_TERM_TMP_HELP_BUF)
+    vim.cmd('bw! ' .. __MOD_TERM_TMP_HELP_BUF)
     __MOD_TERM_TMP_HELP_BUF = -1
   end
   local query = args[1] or ''
   __MOD_TERM_TMP_HELP_BUF = M.floating_centred()
-  util.augroup([[
-    augroup __FLOAT__
-      au!
-    augroup END
-  ]])
+  util.augroup({name = '__FLOAT__', autocmds = {}})
   vim.bo.ft = 'help'
   vim.bo.bt = 'help'
-  if not pcall(util.exec, 'help ' .. query) then
-    util.exec('bw ' .. __MOD_TERM_TMP_HELP_BUF)
-    util.exec('bw ' .. __MOD_TERM_TMP_BORDER_BUF)
+  if not pcall(vim.cmd, 'help ' .. query) then
+    vim.cmd('bw ' .. __MOD_TERM_TMP_HELP_BUF)
+    vim.cmd('bw ' .. __MOD_TERM_TMP_BORDER_BUF)
     print('"' .. query .. '" not in helptags')
-    util.exec(winid .. 'wincmd w')
+    vim.cmd(winid .. 'wincmd w')
     return
   end
   bskm(__MOD_TERM_TMP_HELP_BUF, 'n', '<Esc>', ':bw<CR>', {})
   bskm(__MOD_TERM_TMP_HELP_BUF, 'n', '<leader>q', ':bw<CR>', {})
-  util.augroup(string.format([[
-    augroup __FLOAT__
-      au BufWipeout <buffer=%s> bd! %s
-    augroup END
-  ]], __MOD_TERM_TMP_HELP_BUF, __MOD_TERM_TMP_BORDER_BUF))
+  util.augroup({
+    name = '__FLOAT__',
+    autocmds = {
+      {
+        event = 'BufWipeout',
+        glob = '<buffer=' .. __MOD_TERM_TMP_HELP_BUF .. '>',
+        cmd = 'bd! ' .. __MOD_TERM_TMP_BORDER_BUF,
+      },
+    },
+  })
 end
 
 function M.set_terminal_direction(...)
@@ -219,7 +220,7 @@ end
 
 function M.setup_terms_from_session()
   __MOD_TERM_TMP_TERM_NAME = vim.fn.expand('%') -- I know this will pick one at random... but they have no real order anyway...
-  util.exec('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+  vim.cmd('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
 end
 
 function M.init()
@@ -254,18 +255,25 @@ function M.init()
   skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', n_s)
   skm('t', '<LeftRelease>', '<Nop>', n_s)
 
-  util.augroup([[
-    augroup __TERMINAL__
-      au!
-      au TermEnter,TermOpen,BufNew,BufEnter term://* startinsert
-      " au TermEnter term://* if winnr('$') == 1 | q | endif
-      au TermOpen term://* nnoremap <buffer> <LeftRelease> <LeftRelease>i
-      au TermLeave,BufLeave term://* stopinsert
-      au TermOpen,TermEnter * setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1
-        " winhl=Normal:CursorLine,EndOfBuffer:EndOfBufferWinHl
-      au SessionLoadPost term://* lua require'mod.terminal'.setup_terms_from_session()
-    augroup END
-  ]])
+  util.augroup({
+    name = '__TERMINAL__',
+    autocmds = {
+      {event = 'TermEnter,TermOpen,BufNew,BufEnter', glob = 'term://*', cmd = [[startinsert]]},
+      {
+        event = 'TermOpen',
+        glob = 'term://*',
+        cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
+      }, {event = 'TermLeave,BufLeave', glob = 'term://*', cmd = [[stopinsert]]}, {
+        event = 'TermOpen,TermEnter',
+        glob = '*',
+        cmd = [[setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1]],
+      }, {
+        event = 'SessionLoadPost',
+        glob = 'term://*',
+        cmd = [[lua require'mod.terminal'.setup_terms_from_session()]],
+      }, {event = 'TermEnter', glob = 'term://*', cmd = [[if winnr('$') == 1 | q | endif]]},
+    },
+  })
 end
 
 return M

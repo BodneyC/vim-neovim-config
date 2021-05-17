@@ -4,7 +4,7 @@ local util = require'utl.util'
 local M = {}
 
 function M.init()
-  util.exec([[
+  vim.cmd([[
     let @t="mzvipo |j e* `z"
     let @j="Ji |"
   ]])

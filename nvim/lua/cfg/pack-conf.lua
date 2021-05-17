@@ -28,12 +28,14 @@ vim.g.bufferline = {
 }
 
 -- Relies on this file being loaded after the plugins itself
-util.augroup([[
-  augroup bufferline_update__custom
-     au!
-     au BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter * BufferOrderByBufnr
-  augroup END
-]])
+util.augroup({
+  name = 'bufferline_update__custom',
+  autocmds = {
+    event = 'BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter',
+    glob = '*',
+    cmd = 'BufferOrderByBufnr',
+  },
+})
 
 vim.g.vcoolor_disable_mappings = false
 

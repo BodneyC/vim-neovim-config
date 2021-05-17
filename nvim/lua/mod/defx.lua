@@ -1,4 +1,5 @@
 local vim = vim
+local util = require 'utl.util'
 
 local M = {}
 
@@ -10,7 +11,7 @@ function M.open()
   }
   local fn = vim.fn.expand('%:p')
   vim.fn.execute('Defx ' .. table.concat(opts, ' '))
-print(fn)
+  print(fn)
   M.go_to_file(fn)
 end
 
@@ -32,13 +33,20 @@ function M.defx_resize()
 end
 
 function M.init()
-  require'utl.util'.augroup([[
-    augroup __DEFX__
-      au!
-      au BufEnter * if (winnr("$") == 1 && &ft == 'defx') | silent call defx#call_action('add_session') | bd! | q | endif
-      au BufLeave * if &ft == 'defx' | silent call defx#call_action('add_session') | endif
-    augroup END
-  ]])
+  util.augroup({
+    name = '__DEFX__',
+    autocmds = {
+      {
+        event = 'BufEnter',
+        glob = '*',
+        cmd = [[if (winnr("$") == 1 && &ft == 'defx') | silent call defx#call_action('add_session') | bd! | q | endif]],
+      }, {
+        event = 'BufLeave',
+        glob = '*',
+        cmd = [[if &ft == 'defx' | silent call defx#call_action('add_session') | endif]],
+      },
+    },
+  })
   vim.fn['defx#custom#column']('git', 'indicators', {
     Modified = '~',
     Staged = '+',

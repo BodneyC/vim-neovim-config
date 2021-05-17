@@ -34,12 +34,13 @@ local footer = string.split([[
 ]], '\n')
 
 function M.init()
-  -- util.augroup([[
-  --   augroup __DASHBOARD__
-  --     au FileType dashboard set laststatus=0
-  --     au WinLeave <buffer> set laststatus=2
-  --   augroup END
-  -- ]])
+  -- util.augroup({
+  --   name = '__DASHBOARD__',
+  --   autocmds = {
+  --     {event = 'FileType', glob = 'dashboard', cmd = [[set laststatus=0]]},
+  --     {event = 'WinLeave', glob = '<buffer>', cmd = [[set laststatus=2]]},
+  --   },
+  -- })
   vim.g.dashboard_custom_header = header
   vim.g.dashboard_custom_footer = footer
   vim.g.dashboard_default_executive = 'telescope'

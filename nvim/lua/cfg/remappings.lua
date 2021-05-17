@@ -5,7 +5,7 @@ local util = require 'utl.util'
 local n = {noremap = true}
 local n_s = {noremap = true, silent = true}
 
-util.exec('let mapleader=" "')
+vim.cmd('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
 
 skm('n', '¬', [[<CMD>KittyNavigateRight<CR>]], n_s)
@@ -117,7 +117,7 @@ skm('x', '<leader>ea', [[:EasyAlign<CR>]], n_s)
 skm('n', '<leader>H',
     [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]], n_s)
 
-util.func([[
+vim.cmd([[
   function! MasterBS()
     if (&buftype != '')
       return "\<BS>"
@@ -149,7 +149,7 @@ skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], n_s)
 util.command('ToggleLazyGit', [[w | lua require'mod.terminal'.floating_term('lazygit')]],
     {nargs = '0'})
 
-util.exec([[
+vim.cmd([[
   func! CopyForTerminal(...) range
     let reg = get(a:, 1, '"')
     let lines = getline(a:firstline, a:lastline)
@@ -183,7 +183,7 @@ util.command('MatchOver', req_funcs .. [[.match_over(<f-args>)]], {nargs = '?'})
 
 util.command('BufferOrderByBufnr', req_funcs .. [[.order_by_bufnr()]], {nargs = '0'})
 
-util.exec('cabbrev PC PackerClean')
-util.exec('cabbrev PI PackerInstall')
-util.exec('cabbrev PS PackerSync')
-util.exec('cabbrev PU PackerUpdate')
+vim.cmd('cabbrev PC PackerClean')
+vim.cmd('cabbrev PI PackerInstall')
+vim.cmd('cabbrev PS PackerSync')
+vim.cmd('cabbrev PU PackerUpdate')

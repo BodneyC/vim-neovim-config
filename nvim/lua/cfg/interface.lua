@@ -64,19 +64,21 @@ vim.g.netrw_winsize = 14
 
 vim.g.large_file = 524288 -- 512k
 
-util.augroup([[
-  augroup __CONFIG_GENERAL__
-    au!
-    au BufReadPost        *         if   line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end
-    au BufReadPre         *         lua  require'mod.functions'.handle_large_file()
-    au BufRead,BufNewFile *.MD,*.md setf markdown
-    au BufRead,BufNewFile *.rasi    setf css
-    au FileType,BufEnter  *         lua  require'ftplugin'(vim.bo.ft)
-    au TermEnter          *         startinsert
-
-    au BufRead,BufNewFile Jenkinsfile* setf groovy
-  augroup END
-]])
+util.augroup({
+  name = '__CONFIG_GENERAL__',
+  autocmds = {
+    {
+      event = 'BufReadPost',
+      glob = '*',
+      cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end]],
+    }, {event = 'BufReadPre', glob = '*', cmd = [[lua require'mod.functions'.handle_large_file()]]},
+    {event = 'BufRead,BufNewFile', glob = '*.MD,*.md', cmd = [[setf markdown]]},
+    {event = 'BufRead,BufNewFile', glob = '*.rasi', cmd = [[setf css]]},
+    {event = 'FileType,BufEnter', glob = '*', cmd = [[lua require'ftplugin'(vim.bo.ft)]]},
+    {event = 'TermEnter', glob = '*', cmd = [[startinsert]]},
+    {event = 'BufRead,BufNewFile', glob = 'Jenkinsfile*', cmd = [[setf groovy]]},
+  },
+})
 
 local undodir = os.getenv('HOME') .. '/.config/nvim/undo'
 os.execute('test -d ' .. undodir .. ' || mkdir -p ' .. undodir)

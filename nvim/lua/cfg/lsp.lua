@@ -15,12 +15,10 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
     })
 vim.g.diagnostic_auto_popup_while_jump = false
 
-util.augroup([[
-  augroup __LSP__
-    au!
-    au FileType java lua require'mod.jdtls'.init()
-  augroup END
-]])
+util.augroup({
+  name = '__LSP__',
+  autocmds = {event = 'FileType', glob = 'java', cmd = [[lua require'mod.jdtls'.init()]]},
+})
 
 -- LSP Mappings
 

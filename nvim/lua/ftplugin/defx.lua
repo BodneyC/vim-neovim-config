@@ -26,12 +26,12 @@ end
 
 function M.defx_find_window_for(fn)
   if vim.fn.buflisted(vim.fn.bufnr('#')) == 1 then
-    util.exec('wincmd p | e ' .. fn)
+    vim.cmd('wincmd p | e ' .. fn)
     return
   end
   for i = 1, vim.fn.winnr('$') do
     if vim.fn.buflisted(vim.fn.winbufnr(i)) == 1 then
-      util.exec(i .. 'wincmd w | e ' .. fn)
+      vim.cmd(i .. 'wincmd w | e ' .. fn)
       return
     end
   end
@@ -39,12 +39,12 @@ function M.defx_find_window_for(fn)
 end
 
 function M.init()
-  util.func([[
+  vim.cmd([[
     func! __DEFX_REM_RM(ctx) abort
       exe "lua require'ftplugin.defx'.defx_rem_rm({'" . join(a:ctx.targets, "', '") . "'})"
     endfunc
   ]])
-  util.func([[
+  vim.cmd([[
     func! __DEFX_REM_RS(ctx) abort
       lua require'ftplugin.defx'.defx_rem_rs()
     endfunc

@@ -12,8 +12,8 @@ function M.document_formatting()
       end
     end
   end
-  vim.fn.execute('w')
-  vim.fn.execute('FormatWrite')
+  vim.cmd('w')
+  vim.cmd('FormatWrite')
 end
 
 function M.show_documentation()
@@ -21,9 +21,9 @@ function M.show_documentation()
     vim.lsp.buf.hover()
   else
     if vim.bo.ft == 'vim' then
-      vim.fn.execute('H ' .. vim.fn.expand('<cword>'))
+      vim.cmd('H ' .. vim.fn.expand('<cword>'))
     elseif string.match(vim.bo.ft, 'z?sh') then
-      vim.fn.execute('M ' .. vim.fn.expand('<cword>'))
+      vim.cmd('M ' .. vim.fn.expand('<cword>'))
     else
       print('No hover candidate found')
     end
@@ -37,25 +37,35 @@ function M.go_to_definition()
     for _, wrd in ipairs({'<cword>', '<cWORD>', '<cexpr>'}) do
       local word = vim.fn.expand(wrd)
       if #(vim.fn.taglist('^' .. word .. '$')) then
-        vim.fn.execute('tag ' .. word)
+        vim.cmd('tag ' .. word)
         return
       end
     end
-    vim.fn.execute('redraw')
+    vim.cmd('redraw')
     print('No definition found')
   end
 end
 
-local function vim_run_all_lines_separately(s)
-  for l in s:gmatch('[^\r\n]+') do vim.fn.execute(l:gsub('^%s*(.-)%s*$', '%1')) end
+--[[
+{
+  name = '',
+  autocommands = {
+    {
+      event = '',
+      glob = '',
+      cmd = ''
+    }
+  }
+}
+--]]
+function M.augroup(opts)
+  vim.cmd('augroup ' .. opts.name)
+  vim.cmd('au!')
+  for _, au in ipairs(opts.autocmds) do
+    vim.cmd('au ' .. au.event .. ' ' .. au.glob .. ' ' .. au.cmd)
+  end
+  vim.cmd('augroup END')
 end
-M.augroup = vim_run_all_lines_separately
-M.exec_lines = vim_run_all_lines_separately
-
-M.func = vim.fn.execute
-
-M.funcs = vim.fn.execute
-M.exec = vim.fn.execute
 
 function M.command(lhs, rhs, opts)
   local parts = {
@@ -63,7 +73,7 @@ function M.command(lhs, rhs, opts)
     opts.complete and '-complete=' .. opts.complete or '', opts.bang and '-bang' or '',
     opts.range and '-range' or '', opts.buffer and '-buffer' or '', lhs, rhs,
   }
-  M.exec(table.concat(parts, ' '))
+  vim.cmd(table.concat(parts, ' '))
 end
 
 function M.toggle_bool_option(scope, opt)
@@ -74,9 +84,9 @@ end
 
 local function edge_of_screen(d)
   local w = vim.fn.winnr()
-  vim.fn.execute('silent! wincmd ' .. d)
+  vim.cmd('silent! wincmd ' .. d)
   local n = vim.fn.winnr()
-  vim.fn.execute('silent! ' .. w .. ' wincmd w')
+  vim.cmd('silent! ' .. w .. ' wincmd w')
   return w == n
 end
 
@@ -87,7 +97,7 @@ function M.resize_window(d)
   if d == 'h' or d == 'l' then dir = 'vertical' end
   local edge = edge_of_screen(d) and '-' or '+'
   if dir == '' and edge == '-' then if edge_of_screen((d == 'j') and 'k' or 'j') then return end end
-  vim.fn.execute(dir .. ' resize ' .. edge .. inc)
+  vim.cmd(dir .. ' resize ' .. edge .. inc)
 end
 
 function M.basic_os_info()

@@ -10,9 +10,9 @@ local M = {}
 
 function M.run_cmd(cmd)
   if vim.fn.winnr('$') > 1 and lang.elem_in_array({'defx', 'coc-explorer'}, vim.bo.ft) then
-    util.exec('wincmd p')
+    vim.cmd('wincmd p')
   end
-  util.exec(cmd)
+  vim.cmd(cmd)
 end
 
 function M.files(q)

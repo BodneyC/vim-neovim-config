@@ -89,7 +89,7 @@ return packer.startup(function()
     'BodneyC/bolorscheme',
     branch = 'lua',
     config = function()
-      require'bolorscheme'.setup {theme = 'bolorscheme'}
+      require'bolorscheme'.setup {theme = 'tokyonight'}
     end,
   }
   use {'KabbAmine/vCoolor.vim'}
@@ -141,7 +141,7 @@ return packer.startup(function()
   -- use {
   --   '~/gitclones/bolorscheme',
   --   config = function()
-  --     require'bolorscheme'.setup {theme = 'bolorscheme'}
+  --     require'bolorscheme'.setup {theme = 'tokyonight'}
   --   end,
   -- }
 

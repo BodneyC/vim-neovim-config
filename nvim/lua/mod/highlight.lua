@@ -11,26 +11,30 @@ function M.init()
   vim.o.termguicolors = true
 
   if os.getenv('TERMTHEME') == 'light' then
-    util.exec('colo plint-light')
+    vim.cmd('colo plint-light')
   else
   end
 
   M.additional_highlights()
 
-  util.augroup([[
-    augroup __HIGHLIGHT__
-      au!
-      au TextYankPost * silent! lua require'vim.highlight'.on_yank()
-      au ColorScheme * lua require'mod.highlight'.additional_highlights()
-      " au CursorHold * lua require'mod.highlight'.hover_match()
-    augroup END
-  ]])
+  util.augroup({
+    name = '__HIGHLIGHT__',
+    autocmds = {
+      {event = 'TextYankPost', glob = '*', cmd = [[silent! lua require'vim.highlight'.on_yank()]]},
+      {
+        event = 'ColorScheme',
+        glob = '*',
+        cmd = [[lua require'mod.highlight'.additional_highlights()]],
+      },
+      -- {event = 'CursorHold', glob = '*', cmd = [[lua require'mod.highlight'.hover_match()]]},
+    },
+  })
 
-  util.exec('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
+  vim.cmd('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
 end
 
 function M.additional_highlights()
-  -- util.exec([[
+  -- vim.cmd([[
   --   hi! link HoverMatch MatchParen
   --   hi! SpelunkerSpellBad gui=undercurl
   --   hi! OverLength guibg=#995959 guifg=#ffffff
@@ -43,8 +47,8 @@ function M.additional_highlights()
   --   hi! link NormalFloat Normal " Still unsure of this
   -- ]])
   -- if os.getenv('TERMTHEME') == 'light' then
-  --   util.exec('hi! Visual guifg=bg')
-  --   util.exec('hi! VertSplit guibg=NONE')
+  --   vim.cmd('hi! Visual guifg=bg')
+  --   vim.cmd('hi! VertSplit guibg=NONE')
   -- end
 end
 

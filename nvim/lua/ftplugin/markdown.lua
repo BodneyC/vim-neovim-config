@@ -22,7 +22,7 @@ function M.init()
   bskm(0, 'n', 'k', 'gk', n_s)
   bskm(0, 'n', 'gj', 'j', n_s)
   bskm(0, 'n', 'gk', 'k', n_s)
-  util.exec([[
+  vim.cmd([[
     let @t = "mzvip:EasyAlign *|\<CR>`z"
     let @h = "YpVr="
   ]])
