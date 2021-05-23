@@ -1,68 +1,72 @@
 local vim = vim
 local util = require 'utl.util'
 
-vim.o.tags = ''
-vim.o.hls = true
-vim.o.mouse = 'a'
-vim.o.tabstop = 2
-vim.o.ruler = true
-vim.o.hidden = true
-vim.o.icm = 'split'
-vim.o.scrolloff = 1
-vim.o.textwidth = 0
-vim.o.pumheight = 20
-vim.o.laststatus = 2
-vim.o.shiftwidth = 0
-vim.o.softtabstop = 0
-vim.o.ttimeout = true
-vim.o.updatetime = 250
-vim.o.expandtab = true
-vim.o.showmode = false
-vim.o.ttimeoutlen = 50
-vim.o.autoindent = true
-vim.o.autowrite = false
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.smartindent = true
-vim.o.equalalways = false
-vim.o.spelllang = 'en_gb'
-vim.o.spell = false
-vim.o.fillchars = 'vert:|'
-vim.o.wildmode = 'longest,full'
-vim.o.backspace = 'indent,eol,start'
-vim.o.shortmess = vim.o.shortmess .. 'c'
-vim.o.guifont = 'VictorMono Nerd Font:h11'
-vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+local function opt(s, d)
+  for k, v in pairs(d) do vim[s][k] = v end
+end
 
-vim.o.title = true
-vim.o.titlestring = 'bodneyc - nvim'
+opt('o', {
+  tags = '',
+  hls = true,
+  mouse = 'a',
+  tabstop = 2,
+  ruler = true,
+  hidden = true,
+  icm = 'split',
+  scrolloff = 1,
+  textwidth = 0,
+  pumheight = 20,
+  laststatus = 2,
+  shiftwidth = 0,
+  softtabstop = 0,
+  ttimeout = true,
+  updatetime = 250,
+  expandtab = true,
+  showmode = false,
+  ttimeoutlen = 50,
+  autoindent = true,
+  autowrite = false,
+  splitbelow = true,
+  splitright = true,
+  smartindent = true,
+  equalalways = false,
+  spelllang = 'en_gb',
+  spell = false,
+  fillchars = 'vert:|',
+  wildmode = 'longest,full',
+  backspace = 'indent,eol,start',
+  shortmess = vim.o.shortmess .. 'c',
+  guifont = 'VictorMono Nerd Font:h11',
+  matchpairs = vim.o.matchpairs .. ',<:>',
+  title = true,
+  titlestring = 'bodneyc - nvim',
+  showtabline = 2,
+})
 
-vim.o.showtabline = 2
-vim.bo.tabstop = 2
-vim.bo.shiftwidth = 0
-vim.bo.softtabstop = 0
+opt('wo', {
+  nu = true,
+  cul = true,
+  rnu = true,
+  wrap = true,
+  winblend = 10,
+  linebreak = true,
+  foldenable = true,
+  cursorline = true,
+  breakindent = true,
+  signcolumn = 'yes',
+  cursorcolumn = false,
+  foldmethod = 'manual',
+  breakindentopt = 'shift:3',
+})
 
-vim.wo.nu = true
-vim.wo.cul = true
-vim.wo.rnu = true
-vim.wo.wrap = true
-vim.wo.winblend = 10
-vim.wo.linebreak = true
-vim.wo.foldenable = true
-vim.wo.cursorline = true
-vim.wo.breakindent = true
-vim.wo.signcolumn = 'yes'
-vim.wo.cursorcolumn = false
-vim.wo.foldmethod = 'manual'
-vim.wo.breakindentopt = 'shift:3'
-
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = 14
-
-vim.g.large_file = 524288 -- 512k
+opt('g', {
+  netrw_banner = 0,
+  netrw_liststyle = 3,
+  netrw_browse_split = 4,
+  netrw_altv = 1,
+  netrw_winsize = 14,
+  large_file = 524288, -- 512k
+})
 
 util.augroup({
   name = '__CONFIG_GENERAL__',
@@ -73,6 +77,7 @@ util.augroup({
       cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end]],
     }, {event = 'BufReadPre', glob = '*', cmd = [[lua require'mod.functions'.handle_large_file()]]},
     {event = 'BufRead,BufNewFile', glob = '*.MD,*.md', cmd = [[setf markdown]]},
+    {event = 'BufRead,BufNewFile', glob = 'Dockerfile*', cmd = [[setf dockerfile]]},
     {event = 'BufRead,BufNewFile', glob = '*.rasi', cmd = [[setf css]]},
     {event = 'FileType,BufEnter', glob = '*', cmd = [[lua require'ftplugin'(vim.bo.ft)]]},
     {event = 'TermEnter', glob = '*', cmd = [[startinsert]]},
