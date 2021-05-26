@@ -73,10 +73,10 @@ local function on_attach(client, bufnr)
   lsp_status.on_attach(client, bufnr)
 end
 
--- npm i -g {typescript,}-language-server
+-- npm i -g typescript-language-server
 lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
--- npm i -g docker-language-server
+-- npm i -g dockerfile-language-server-nodejs
 lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 -- npm i -g bash-language-server
