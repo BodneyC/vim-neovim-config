@@ -43,8 +43,6 @@ function M.init()
     func! __DEFX_REM_RM(ctx) abort
       exe "lua require'ftplugin.defx'.defx_rem_rm({'" . join(a:ctx.targets, "', '") . "'})"
     endfunc
-  ]])
-  vim.cmd([[
     func! __DEFX_REM_RS(ctx) abort
       lua require'ftplugin.defx'.defx_rem_rs()
     endfunc
@@ -53,10 +51,13 @@ function M.init()
   vim.wo.number = false
   vim.wo.relativenumber = false
 
-  bskm(0, 'n', 'u', 'defx#do_action(\'call\', \'__DEFX_REM_RS\')',
-      {noremap = true, silent = true, expr = true})
-  bskm(0, 'n', 'dd', 'defx#do_action(\'call\', \'__DEFX_REM_RM\')',
-      {noremap = true, silent = true, expr = true})
+  local nse = {noremap = true, silent = true, expr = true}
+
+  bskm(0, 'n', 'u',  [[defx#do_action('call', '__DEFX_REM_RS')]], nse)
+  bskm(0, 'n', 'dd', [[defx#do_action('call', '__DEFX_REM_RM')]], nse)
+  bskm(0, 'n', '+x', [[defx#do_action('execute_command', 'chmod +x %')]], nse)
+  bskm(0, 'n', '-x', [[defx#do_action('execute_command', 'chmod -x %')]], nse)
+  bskm(0, 'n', 'G', [[G0]], {noremap = true, silent = true})
 
   local function str_tree_or_open(if_dir, if_file)
     return 'defx#is_directory() ? defx#do_action(\'open_tree\'' ..
@@ -67,7 +68,7 @@ function M.init()
   util.command('DefxFindWindowFor', 'lua require\'ftplugin.defx\'.defx_find_window_for(<f-args>)',
       {nargs = 1})
 
-  local nse = {noremap = true, silent = true, expr = true}
+  bskm(0, 'n', '<leader>r',  "<CMD>lua require'mod.defx'.resize()<CR>", {noremap = true, silent = true})
 
   bskm(0, 'n', '<CR>', str_tree_or_open('recursive:10', 'botright vsplit'), nse)
   bskm(0, 'n', 'gl', str_tree_or_open('recursive:10', 'botright vsplit'), nse)

@@ -8,22 +8,27 @@ local n_s = {noremap = true, silent = true}
 vim.cmd('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
 
-skm('n', '¬', [[<CMD>KittyNavigateRight<CR>]], n_s)
-skm('n', '˙', [[<CMD>KittyNavigateLeft<CR>]], n_s)
-skm('n', '˚', [[<CMD>KittyNavigateUp<CR>]], n_s)
-skm('n', '∆', [[<CMD>KittyNavigateDown<CR>]], n_s)
-skm('i', '¬', [[<Esc><CMD>KittyNavigateRight<CR>]], n_s)
-skm('i', '˙', [[<Esc><CMD>KittyNavigateLeft<CR>]], n_s)
-skm('i', '˚', [[<Esc><CMD>KittyNavigateUp<CR>]], n_s)
-skm('i', '∆', [[<Esc><CMD>KittyNavigateDown<CR>]], n_s)
-skm('t', '¬', [[<C-\><C-n><CMD>KittyNavigateRight<CR>]], n_s)
-skm('t', '˙', [[<C-\><C-n><CMD>KittyNavigateLeft<CR>]], n_s)
-skm('t', '˚', [[<C-\><C-n><CMD>KittyNavigateUp<CR>]], n_s)
-skm('t', '∆', [[<C-\><C-n><CMD>KittyNavigateDown<CR>]], n_s)
+local knav = {
+  normal = [[<CMD>KittyNavigate]],
+  insert = [[<ESC><CMD>KittyNavigate]],
+  termin = [[<C-\><C-n><CMD>KittyNavigate]],
+}
+skm('n', '¬', knav.normal .. 'Right<CR>', n_s)
+skm('n', '˙', knav.normal .. 'Left<CR>', n_s)
+skm('n', '˚', knav.normal .. 'Up<CR>', n_s)
+skm('n', '∆', knav.normal .. 'Down<CR>', n_s)
+skm('i', '¬', knav.insert .. 'Right<CR>', n_s)
+skm('i', '˙', knav.insert .. 'Left<CR>', n_s)
+skm('i', '˚', knav.insert .. 'Up<CR>', n_s)
+skm('i', '∆', knav.insert .. 'Down<CR>', n_s)
+skm('t', '¬', knav.termin .. 'Right<CR>', n_s)
+skm('t', '˙', knav.termin .. 'Left<CR>', n_s)
+skm('t', '˚', knav.termin .. 'Up<CR>', n_s)
+skm('t', '∆', knav.termin .. 'Down<CR>', n_s)
 
 skm('n', '<leader>E', [[<CMD>e!<CR>]], n_s)
 skm('n', '<leader>Q', [[<CMD>qa!<CR>]], n_s)
-skm('n', '<leader>W', [[<CMD>lua require'mod.functions'.wqa()<CR>]], n_s)
+skm('n', '<leader>W', [[<CMD>wa | qa<CR>]], n_s)
 skm('n', '<leader>e', [[<CMD>e<CR>]], n_s)
 skm('n', '<leader>q', [[<CMD>q<CR>]], n_s)
 skm('n', '<leader>w', [[<CMD>w<CR>]], n_s)
@@ -96,7 +101,6 @@ skm('x', '<', [[<gv]], n)
 skm('x', '<Tab>', [[>gv]], n)
 skm('x', '<S-Tab>', [[<gv]], n)
 
-skm('n', '<leader>ce', [[<CMD>CocCommand explorer --toggle<CR>]], n_s)
 skm('n', '<leader>gg', [[<CMD>Git<CR>]], n_s)
 skm('n', '<leader>gl', [[<CMD>ToggleLazyGit<CR>]], n_s)
 skm('n', '<leader>ge', [[<CMD>Ge:<CR>]], n_s)

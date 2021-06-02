@@ -118,4 +118,14 @@ function M.basic_os_info()
   return name, arch
 end
 
+function M.run_cmd(cmd, strip)
+  local handle = io.popen(cmd)
+  local result = handle:read("*a")
+  handle:close()
+  if strip then
+    result = result:gsub("^%s*(.-)%s*$", "%1")
+  end
+  return result
+end
+
 return M

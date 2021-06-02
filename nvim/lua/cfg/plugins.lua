@@ -133,6 +133,7 @@ return packer.startup(function()
   use {'plasticboy/vim-markdown'}
   use {'uiiaoo/java-syntax.vim'}
   use {'stevearc/vim-arduino'}
+  use {'rhysd/vim-llvm'}
 
   --- Local ---
   -- use {'~/Documents/knit-vim'}

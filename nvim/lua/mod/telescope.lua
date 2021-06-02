@@ -1,6 +1,10 @@
 local vim = vim
 
+local util = require 'utl.util'
+
 local telescope = require 'telescope'
+local action_set = require('telescope.actions.set')
+local action_state = require('telescope.actions.state')
 local config = require 'telescope.config'
 local sorters = require 'telescope.sorters'
 local pickers = require 'telescope.pickers'
@@ -40,9 +44,9 @@ function M.tags_absolute(opts)
     previewer = previewers.ctags.new(opts),
     sorter = conf.generic_sorter(opts),
     attach_mappings = function()
-      actions._goto_file_selection:enhance{
+      action_set.select:enhance{
         post = function()
-          local selection = actions.get_selected_entry()
+          local selection = action_state.get_selected_entry()
 
           if selection.scode then
             local scode = string.gsub(selection.scode, '[$]$', '')
@@ -130,6 +134,7 @@ function M.grep_string_filtered(opts)
 end
 
 local function read_hist_file()
+  if M.euid == '0' then return end
   local f = io.open(M.histfile, 'r')
   if not f then return nil end
   local arr = {}
@@ -139,6 +144,7 @@ local function read_hist_file()
 end
 
 function actions.prev_hist(prompt_bufnr)
+  if M.euid == '0' then return end
   local arr = read_hist_file()
   if not arr then return end
   if histfile_idx == -1 or histfile_idx > #arr then histfile_idx = #arr + 1 end
@@ -149,6 +155,7 @@ function actions.prev_hist(prompt_bufnr)
 end
 
 function actions.next_hist(prompt_bufnr)
+  if M.euid == '0' then return end
   local arr = read_hist_file()
   if not arr then return end
   if histfile_idx == -1 or histfile_idx > #arr then histfile_idx = #arr end
@@ -158,6 +165,7 @@ function actions.next_hist(prompt_bufnr)
 end
 
 function actions.append_to_hist(prompt_bufnr)
+  if M.euid == '0' then return end
   local f = io.open(tmpfile, 'r')
   local fl = f:read('*a')
   f:close()
@@ -175,6 +183,7 @@ function actions.append_to_hist(prompt_bufnr)
 end
 
 function M.init()
+  M.euid = util.run_cmd('id -u', true)
   telescope.setup {
     defaults = {
       mappings = {
@@ -224,7 +233,7 @@ function M.init()
 
   local n_s = {noremap = true, silent = true}
   local skm = vim.api.nvim_set_keymap
-  require'utl.util'.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]], {nargs = '1'})
+  util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]], {nargs = '1'})
   skm('n', '<leader>gs', [[<CMD>Telescope git_status<CR>]], n_s)
   skm('n', '<leader>gb', [[<CMD>Telescope git_branches<CR>]], n_s)
   skm('n', '<leader>gc', [[<CMD>Telescope git_commits<CR>]], n_s)
@@ -244,7 +253,7 @@ function M.init()
   -- Gets better results than the builtin
   local grep_string_under_cursor = [[<CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
                                        [[require'telescope.builtin'.grep_string { ]] ..
-                                       [[ search = s, prompt_prefix = s .. ' >', ]] ..
+                                       [[ search = s, prompt_prefix = s .. ' > ', ]] ..
                                        [[ ngram_len = 1, }<CR>]]
   skm('n', '<M-]>', grep_string_under_cursor, n_s)
   skm('n', '‘', grep_string_under_cursor, n_s)
@@ -252,7 +261,7 @@ function M.init()
   skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
       n_s)
 
-  io.open(tmpfile, 'w'):close()
+  if M.euid ~= '0' then assert(io.open(tmpfile, 'w')):close() end
 end
 
 return M

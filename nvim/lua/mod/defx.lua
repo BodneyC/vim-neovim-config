@@ -3,6 +3,11 @@ local util = require 'utl.util'
 
 local M = {}
 
+function M.search_file(fn)
+  if not fn then fn = vim.fn.expand('%:p') end
+  vim.fn['defx#call_action']('search', fn)
+end
+
 function M.open()
   local opts = {
     '-columns=indent:git:icons:filename', '-split=vertical', '-winwidth=32', '-no-auto-cd',
@@ -11,25 +16,32 @@ function M.open()
   }
   local fn = vim.fn.expand('%:p')
   vim.fn.execute('Defx ' .. table.concat(opts, ' '))
-  print(fn)
-  M.go_to_file(fn)
+  M.search_file(fn)
 end
 
-function M.go_to_file(fn)
-  if not fn then fn = vim.fn.expand('%:p') end
-  vim.fn['defx#call_action']('search', fn)
-end
-
-function M.defx_resize()
-  local cur_win = vim.fn.bufnr()
-  M.open()
+function M.resize()
+  if vim.bo.ft ~= 'defx' then
+    print('Not a defx buffer')
+  end
   local buf = vim.fn.getline(1, '$')
   table.remove(buf, 1)
-  table.sort(buf, function(a, b)
-    return #a > #b
-  end)
-  vim.cmd('vertical resize' .. #buf[1])
-  vim.cmd(cur_win .. 'wincmd w')
+  table.remove(buf, #table)
+  local width = 1
+  for i, l in ipairs(buf) do
+    local line_width = #(l:gsub("^(.-)%s*$", "%1")) 
+    if line_width > width then
+      width = line_width
+    end
+  end
+  vim.cmd('vertical resize' .. width)
+  print('Defx resized')
+end
+
+function M.open_and_size(opts)
+  local cur_win = vim.fn.bufwinnr(vim.fn.bufnr())
+  if opts.open then M.open() end
+  if opts.resize then M.resize() end
+  if opts.refocus then vim.cmd(cur_win .. 'wincmd w') end
 end
 
 function M.init()
@@ -57,7 +69,7 @@ function M.init()
     Deleted = '×',
     Unknown = '?',
   })
-  vim.fn.execute('command! -nargs=0 DefxOpen lua require\'mod.defx\'.open()')
+  vim.fn.execute([[command! -nargs=0 DefxOpen lua require'mod.defx'.open_and_size {open = true, resize = true, refocus = false}]])
   vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>', {silent = true, noremap = true})
 end
 
