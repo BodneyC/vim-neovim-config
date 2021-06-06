@@ -18,7 +18,6 @@ return packer.startup(function()
   --- Lsp ---
   use {'glepnir/lspsaga.nvim'}
   use {'hrsh7th/nvim-compe'}
-  use {'mfussenegger/nvim-dap'}
   use {'mfussenegger/nvim-jdtls'}
   use {'neovim/nvim-lspconfig'}
   use {'nvim-lua/lsp-status.nvim'}
@@ -30,6 +29,12 @@ return packer.startup(function()
     },
   }
   use {'onsails/lspkind-nvim'}
+
+  --- DAP ---
+  use {'mfussenegger/nvim-dap'}
+  use {'jbyuki/one-small-step-for-vimkind'}
+  use {'Pocco81/DAPInstall.nvim'}
+  use {'mfussenegger/nvim-dap-python'}
 
   --- Added functionality ---
   use {'BodneyC/hex-this-vim', branch = 'master'}
@@ -46,6 +51,7 @@ return packer.startup(function()
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
   use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
   use {'vigoux/treesitter-context.nvim'}
+  use {'RRethy/nvim-treesitter-textsubjects'}
 
   --- QOL ---
   use {'folke/todo-comments.nvim'}
@@ -101,6 +107,7 @@ return packer.startup(function()
   use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
   use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
+  -- use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
   use {'rktjmp/lush.nvim'}
   use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
   use {'hoob3rt/lualine.nvim'}

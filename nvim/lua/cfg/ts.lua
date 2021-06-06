@@ -30,20 +30,31 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
+  textsubjects = {enable = true, keymaps = {['.'] = 'textsubjects-smart'}},
   -- Currently unsupported by most
-  -- textobjects = {
-  --   swap = {
-  --     enable = true,
-  --     swap_next = {['<leader>a'] = '@parameter.inner'},
-  --     swap_previous = {['<leader>A'] = '@parameter.inner'},
-  --   },
-  --   move = {
-  --     enable = true,
-  --     goto_next_start = {[']m'] = '@function.outer', [']]'] = '@class.outer'},
-  --     goto_next_end = {[']M'] = '@function.outer', [']['] = '@class.outer'},
-  --     goto_previous_start = {['[m'] = '@function.outer', ['[['] = '@class.outer'},
-  --     goto_previous_end = {['[M'] = '@function.outer', ['[]'] = '@class.outer'},
-  --   },
-  -- },
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {['<leader>a'] = '@parameter.inner'},
+      swap_previous = {['<leader>A'] = '@parameter.inner'},
+    },
+    move = {
+      enable = true,
+      goto_next_start = {[']m'] = '@function.outer', [']]'] = '@class.outer'},
+      goto_next_end = {[']M'] = '@function.outer', [']['] = '@class.outer'},
+      goto_previous_start = {['[m'] = '@function.outer', ['[['] = '@class.outer'},
+      goto_previous_end = {['[M'] = '@function.outer', ['[]'] = '@class.outer'},
+    },
+  },
 }
 -- require'nvim-treesitter.parsers'.get_parser_configs().markdown = nil

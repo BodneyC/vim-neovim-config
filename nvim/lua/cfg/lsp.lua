@@ -35,13 +35,15 @@ skm('n', ']w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next(
 skm('n', '[w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], n_s)
 skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
 
-skm('n', [[\h]], '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
-skm('n', [[\s]], '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
-skm('n', [[\q]], '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
-skm('n', [[\f]], [[<cmd>Lspsaga lsp_finder<CR>]], n_s)
-skm('n', [[\a]], [[<cmd>Lspsaga code_action<CR>]], n_s)
-skm('n', [[\d]], [[<cmd>Lspsaga hover_doc<CR>]], n_s)
-skm('n', [[\D]], [[<cmd>Lspsaga preview_definition<CR>]], n_s)
+local lsp_leader = [[<leader>l]]
+
+skm('n', lsp_leader .. 'h', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
+skm('n', lsp_leader .. 's', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
+skm('n', lsp_leader .. 'q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
+skm('n', lsp_leader .. 'f', [[<cmd>Lspsaga lsp_finder<CR>]], n_s)
+skm('n', lsp_leader .. 'a', [[<cmd>Lspsaga code_action<CR>]], n_s)
+skm('n', lsp_leader .. 'd', [[<cmd>Lspsaga hover_doc<CR>]], n_s)
+skm('n', lsp_leader .. 'D', [[<cmd>Lspsaga preview_definition<CR>]], n_s)
 skm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', n_s)
 
 skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
