@@ -3,6 +3,7 @@ local util = require 'utl.util'
 
 local M = {}
 
+-- helpers -s-
 function M.search_file(fn)
   if not fn then fn = vim.fn.expand('%:p') end
   vim.fn['defx#call_action']('search', fn)
@@ -43,7 +44,9 @@ function M.open_and_size(opts)
   if opts.resize then M.resize() end
   if opts.refocus then vim.cmd(cur_win .. 'wincmd w') end
 end
+-- -e-
 
+-- init -s-
 function M.init()
   util.augroup({
     name = '__DEFX__',
@@ -72,5 +75,6 @@ function M.init()
   vim.fn.execute([[command! -nargs=0 DefxOpen lua require'mod.defx'.open_and_size {open = true, resize = true, refocus = false}]])
   vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>', {silent = true, noremap = true})
 end
+-- -e-
 
 return M

@@ -6,16 +6,16 @@ local jdtls = require 'jdtls'
 
 local M = {}
 
-function M.commands()
+function M.commands() -- -s-
   util.command('JdtCompile', [[lua require'jdtls'.compile()]], {buffer = true})
   util.command('JdtUpdateConfig', [[lua require'jdtls'.update_project_config()]], {buffer = true})
   util.command('JdtJol', [[lua require'jdtls'.jol()]], {buffer = true})
   util.command('JdtBytecode', [[lua require'jdtls'.javap()]], {buffer = true})
   util.command('JdtJshell', [[lua require'jdtls'.jshell()]], {buffer = true})
   util.command('JdtOrganizeImports', [[<Cmd>lua require'jdtls'.organize_imports()<CR>]], {buffer = true})
-end
+end -- -e-
 
-function M.mappings()
+function M.mappings() -- -s-
   bskm(0, 'n', 'ga', [[<Cmd>lua require'jdtls'.code_action()<CR>]], {})
   bskm(0, 'v', 'ga', [[<Esc><Cmd>lua require'jdtls'.code_action(true)<CR>]], {})
   bskm(0, 'n', '<leader>R', [[<Cmd>lua require'jdtls'.code_action(false, 'refactor')<CR>]], {})
@@ -26,9 +26,9 @@ function M.mappings()
 
   bskm(0, 'n', '<leader>Dtc', [[<Cmd>lua require'jdtls'.test_class()<CR>]], {})
   bskm(0, 'n', '<leader>Dtm', [[<Cmd>lua require'jdtls'.test_nearest_method()<CR>]], {})
-end
+end -- -e-
 
-function M.attach()
+function M.attach() -- -s-
   jdtls.start_or_attach({
     cmd = {'jdt.ls.sh'},
     root_dir = jdtls.setup.find_root({'.git', 'pom.xml'}),
@@ -43,13 +43,13 @@ function M.attach()
       jdtls.setup_dap()
     end,
   })
-end
+end -- -e-
 
-function M.init()
+function M.init() -- -s-
   if not jdtls then return end
   M.attach()
   M.mappings()
   M.commands()
-end
+end -- -e-
 
 return M

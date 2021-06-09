@@ -8,7 +8,7 @@ local some_init_val = 'SOME_INIT_VALUE'
 
 local M = {}
 
-local function set_open_term_buffer_name()
+local function set_open_term_buffer_name() -- -s-
   local blist = vim.fn.getbufinfo({bufloaded = 1, buflisted = 0})
   for _, e in ipairs(blist) do
     if e.name ~= '' and not e.hidden then
@@ -18,15 +18,15 @@ local function set_open_term_buffer_name()
       end
     end
   end
-end
+end -- -e-
 
-function M.close_if_term_job()
+function M.close_if_term_job() -- -s-
   if vim.b.terminal_job_pid then
     if not pcall(vim.cmd, 'close') then print('Could not close terminal') end
   end
-end
+end -- -e-
 
-local function split()
+local function split() -- -s-
   if vim.g.term_direction == plane.VERTICAL then
     vim.cmd('vsplit')
   elseif vim.g.term_direction == plane.HORIZTONAL then
@@ -34,17 +34,17 @@ local function split()
   else
     print('Invalid term_direction: ' .. vim.g.term_direction)
   end
-end
+end -- -e-
 
-local function flip()
+local function flip() -- -s-
   if vim.g.term_direction == plane.VERTICAL then
     vim.g.term_direction = plane.HORIZTONAL
   else
     vim.g.term_direction = plane.VERTICAL
   end
-end
+end -- -e-
 
-function M.next_term_split()
+function M.next_term_split() -- -s-
   local cur_win = vim.fn.bufwinnr('%')
   local winnr = vim.fn.bufwinnr(__MOD_TERM_TMP_TERM_NAME)
   if winnr ~= -1 then
@@ -61,9 +61,9 @@ function M.next_term_split()
   else
     M.term_split(1)
   end
-end
+end -- -e-
 
-function M.term_split(b)
+function M.term_split(b) -- -s-
   M.set_terminal_direction()
   if __MOD_TERM_TMP_TERM_NAME == some_init_val then set_open_term_buffer_name() end
   local winnr = vim.fn.bufwinnr(__MOD_TERM_TMP_TERM_NAME)
@@ -100,9 +100,9 @@ function M.term_split(b)
   vim.cmd('startinsert')
 
   flip()
-end
+end -- -e-
 
-function M.border_box(h, w, c, r)
+function M.border_box(h, w, c, r) -- -s-
   local bar = string.rep('─', w)
   local top = '╭' .. bar .. '╮'
   local mid = '│' .. string.rep(' ', w) .. '│'
@@ -123,9 +123,9 @@ function M.border_box(h, w, c, r)
   vim.api.nvim_open_win(buf, true, opts)
   __MOD_TERM_TMP_BORDER_BUF = buf
   return buf
-end
+end -- -e-
 
-function M.floating_centred(...)
+function M.floating_centred(...) -- -s-
   local args = {...}
   local height_divisor = args[1] or vim.g.floating_term_divisor
   local width_divisor = args[2] or vim.g.floating_term_divisor
@@ -151,26 +151,26 @@ function M.floating_centred(...)
     },
   })
   return cur_float_win
-end
+end -- -e-
 
-local function on_term_exit(_, code, _)
+local function on_term_exit(_, code, _) -- -s-
   if code == 0 then vim.cmd('bd!') end
-end
+end -- -e-
 
-function M.floating_term(...)
+function M.floating_term(...) -- -s-
   local args = {...}
   bskm(M.floating_centred(), 'n', '<Esc>', ':bw!<CR>', {})
   vim.fn.termopen(args[1] or os.getenv('SHELL'), {on_exit = on_term_exit})
-end
+end -- -e-
 
-function M.floating_man(...)
+function M.floating_man(...) -- -s-
   local args = {...}
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   M.floating_term('man ' .. table.concat(args, ' '))
   vim.cmd(winid .. 'wincmd w')
-end
+end -- -e-
 
-function M.floating_help(...)
+function M.floating_help(...) -- -s-
   local args = {...}
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   if __MOD_TERM_TMP_HELP_BUF > 0 and vim.fn.bufloaded(vim.g.tmp_help_buf) == 1 then
@@ -201,9 +201,9 @@ function M.floating_help(...)
       },
     },
   })
-end
+end -- -e-
 
-function M.set_terminal_direction(...)
+function M.set_terminal_direction(...) -- -s-
   vim.g.term_height = vim.g.term_height or math.floor(vim.o.lines * 0.3)
   vim.g.term_width = vim.g.term_width or math.floor(vim.o.columns * 0.4)
   local args = {...}
@@ -216,14 +216,14 @@ function M.set_terminal_direction(...)
   else
     vim.g.term_direction = plane.VERTICAL
   end
-end
+end -- -e-
 
-function M.setup_terms_from_session()
+function M.setup_terms_from_session() -- -s-
   __MOD_TERM_TMP_TERM_NAME = vim.fn.expand('%') -- I know this will pick one at random... but they have no real order anyway...
   vim.cmd('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
-end
+end -- -e-
 
-function M.init()
+function M.init() -- -s-
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
   __MOD_TERM_TMP_TERM_NAME = some_init_val
@@ -233,6 +233,7 @@ function M.init()
   local n_s = {noremap = true, silent = true}
   local mod_terminal = 'lua require\'mod.terminal\''
 
+  -- commands -s-
   -- `table.unpack` not in 5.1, use `unpack`
   util.command('SetTerminalDirection', mod_terminal .. '.set_terminal_direction(<f-args>)',
       {nargs = '?'})
@@ -241,7 +242,9 @@ function M.init()
   util.command('M', mod_terminal .. '.floating_man(<f-args>)', {nargs = '+', complete = 'shellcmd'})
   util.command('H', mod_terminal .. '.floating_help(<f-args>)', {nargs = '?', complete = 'help'})
   util.command('Help', mod_terminal .. '.floating_help(<f-args>)', {nargs = '?', complete = 'help'})
+  -- -e-
 
+  -- mappings -s-
   skm('n', '<Leader>\'', ':' .. mod_terminal .. '.next_term_split(false)<CR>', n_s)
 
   skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {expr = true, unpack(n_s)})
@@ -254,7 +257,9 @@ function M.init()
   skm('n', '<C-q>', ':' .. mod_terminal .. '.term_split(false)<CR>', n_s)
   skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', n_s)
   skm('t', '<LeftRelease>', '<Nop>', n_s)
+  -- -e-
 
+  -- __TERMINAL__ -s-
   util.augroup({
     name = '__TERMINAL__',
     autocmds = {
@@ -273,7 +278,7 @@ function M.init()
         cmd = [[lua require'mod.terminal'.setup_terms_from_session()]],
       }, {event = 'TermEnter', glob = 'term://*', cmd = [[if winnr('$') == 1 | q | endif]]},
     },
-  })
-end
+  }) -- -e-
+end -- -e-
 
 return M

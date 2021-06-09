@@ -20,8 +20,7 @@ util.augroup({
   autocmds = {{event = 'FileType', glob = 'java', cmd = [[lua require'mod.jdtls'.init()]]}},
 })
 
--- LSP Mappings
-
+-- mappings -s-
 local n_s = {noremap = true, silent = true}
 local s_e = {silent = true, expr = true}
 
@@ -50,11 +49,12 @@ skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], 
 skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], s_e)
 skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
 skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], s_e)
+-- -e-
 
 util.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
 util.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
--- Diagnostics
+-- diagnostics -s-
 vim.fn.sign_define('LspDiagnosticsSignError', {text = ' ', texthl = 'LspDiagnosticsError'})
 vim.fn.sign_define('LspDiagnosticsSignWarning', {text = ' ', texthl = 'LspDiagnosticsWarning'})
 vim.fn.sign_define('LspDiagnosticsSignInformation',
@@ -70,7 +70,9 @@ lsp_status.config({
   indicator_hint = 'ﯦ',
   indicator_ok = '',
 })
+-- -e-
 
+-- setup -s-
 local function on_attach(client, bufnr)
   lsp_status.on_attach(client, bufnr)
 end
@@ -282,9 +284,11 @@ lspconfig.diagnosticls.setup {
     },
   },
 }
+-- -e-
 
 require('symbols-outline').setup({highlight_hover_item = true, show_guides = true})
 
+-- lspkind -s-
 require'lspkind'.init({
   with_text = false,
   symbol_map = {
@@ -310,3 +314,4 @@ require'lspkind'.init({
     Struct = '',
   },
 })
+-- -e-

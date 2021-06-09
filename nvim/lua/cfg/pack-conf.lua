@@ -10,8 +10,7 @@ vim.g.vim_markdown_no_default_key_mappings = true
 vim.g.AutoPairsMapBS = false
 vim.g.AutoPairsMultilineClose = false
 
--- Bufferline <3
-
+-- Bufferline <3 -s-
 vim.g.bufferline = {
   icons = true,
   closable = true,
@@ -38,6 +37,7 @@ util.augroup({
     },
   },
 })
+-- -e-
 
 vim.g.vcoolor_disable_mappings = false
 
@@ -58,6 +58,7 @@ vim.g.Hexokinase_virtualText = ' '
 vim.g.Hexokinase_highlighters = {'backgroundfull'}
 vim.g.Hexokinase_optInPatterns = {'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla'}
 
+-- fzf -s-
 -- Weird behaviour with os.setenv...
 -- vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always ' ..
 --                    '--style=numbers --color=always {} || highlight -O ansi -l {} || ' ..
@@ -70,7 +71,9 @@ vim.g.Hexokinase_optInPatterns = {'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl'
 --     '[[ $(git diff --cached -- {-1}) != "" ]] && git diff --cached --color=always -- {-1} | delta || ' ..
 --         '[[ $(git diff -- {-1}) != "" ]] && git diff --color=always -- {-1} | delta || ' ..
 --         vim.g.fzf_preview_command
+-- -e-
 
+-- terminal window manager -s-
 local pane_manager = 'Tmux'
 if os.getenv('KITTY_WINDOW_ID') then
   pane_manager = 'Kitty'
@@ -98,6 +101,7 @@ skm('t', '<M-j>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateDown<CR>', n_s)
 skm('t', '<M-k>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
 skm('t', '<M-l>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
 skm('t', '<M-\\>', '<C-\\><C-n>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
+-- -e-
 
 vim.g['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
 
@@ -105,6 +109,7 @@ vim.g.matchup_matchparen_offscreen = {method = 'popup'}
 
 vim.g.togool_extras = {{'<', '+'}, {'>', '-'}}
 
+-- virk -s-
 vim.g.virk_tags_enable = 0
 vim.g.virk_close_regexes = {
   '^$', 'FAR.*', 'MERGE MSG', 'git-.*', 'COMMIT.*', '.*Plugins.*', '^.defx].*',
@@ -116,6 +121,7 @@ vim.g.virk_close_by_ft = {
   defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
   Mundo = 'MundoShow',
 }
+-- -e-
 
 vim.g.scrollview_excluded_filetypes = {'defx'}
 
@@ -131,6 +137,7 @@ vim.g.NERDDefaultAlign = 'left'
 vim.g.mundo_right = 1
 vim.g.tagbar_auto_close = 1
 
+-- gutentags -s-
 -- vim.g.gutentags_trace = 1
 vim.g.gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags'
 os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' .. vim.g.gutentags_cache_dir)
@@ -144,6 +151,7 @@ vim.g.gutentags_generate_on_new = 1
 vim.g.gutentags_generate_on_empty_buffer = 0
 vim.g.gutentags_ctags_exclude = {'*.json'}
 vim.g.gutentags_ctags_extra_args = {'--tag-relative=always', '--fields=+ailmnS'}
+-- -e-
 
 vim.g.vista_icon_indent = {'╰─▸ ', '├─▸ '}
 vim.g.vista_default_executive = 'ctags'
@@ -154,6 +162,7 @@ vim.g.vista_executive_for = {vim = 'ctags'}
 vim.g.tagbar_iconchars = {lang.utf8(0x00a0), lang.utf8(0x00a0)}
 vim.g.tagbar_compact = 1
 
+-- secp -s-
 vim.g.sexp_mappings = {
   sexp_outer_list = 'af',
   sexp_inner_list = 'if',
@@ -210,3 +219,4 @@ vim.g.sexp_mappings = {
   sexp_capture_prev_element = '',
   sexp_capture_next_element = '',
 }
+-- -e-

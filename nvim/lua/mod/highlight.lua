@@ -3,7 +3,7 @@ local util = require 'utl.util'
 
 local M = {}
 
-function M.init()
+function M.init() -- -s-
   vim.g.python_highlight_all = 1
   vim.g.vimspectrItalicComment = 'on'
   vim.g.onedark_termcolors = 256
@@ -31,9 +31,9 @@ function M.init()
   })
 
   vim.cmd('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
-end
+end -- -e-
 
-function M.additional_highlights()
+function M.additional_highlights() -- -s-
   -- vim.cmd([[
   --   hi! link HoverMatch MatchParen
   --   hi! SpelunkerSpellBad gui=undercurl
@@ -50,9 +50,9 @@ function M.additional_highlights()
   --   vim.cmd('hi! Visual guifg=bg')
   --   vim.cmd('hi! VertSplit guibg=NONE')
   -- end
-end
+end -- -e-
 
-function M.hover_match()
+function M.hover_match() -- -s-
   local id = vim.b.hover_match_id
   if id then
     for _, match in ipairs(vim.fn.getmatches()) do
@@ -67,9 +67,9 @@ function M.hover_match()
     vim.b.hover_match_id = vim.fn.matchadd('HoverMatch', '\\([^a-zA-z]\\|^\\)\\zs' .. w ..
         '\\ze\\([^a-zA-z]\\|$\\)', 0)
   end
-end
+end -- -e-
 
-function M.SetSignTheme(bg)
+function M.SetSignTheme(bg) -- -s-
   vim.fn.execute('hi! SignColumn            guibg=' .. bg)
   vim.fn.execute('hi! GitGutterAdd          guibg=' .. bg)
   vim.fn.execute('hi! GitGutterChange       guibg=' .. bg)
@@ -77,6 +77,6 @@ function M.SetSignTheme(bg)
   vim.fn.execute('hi! GitGutterDelete       guibg=' .. bg)
   vim.fn.execute('hi! CocErrorSign          guibg=' .. bg)
   vim.fn.execute('hi! CocWarningSign        guibg=' .. bg)
-end
+end -- -e-
 
 return M

@@ -5,15 +5,15 @@ local lang = require 'utl.lang'
 
 local M = {}
 
-function M.order_by_bufnr()
+function M.order_by_bufnr() -- -s-
   local blstate = require 'bufferline.state'
   table.sort(blstate.buffers, function(a, b)
     return a < b
   end)
   vim.fn['bufferline#update']()
-end
+end -- -e-
 
-function M.bs()
+function M.bs() -- -s-
   local getline = vim.fn.getline
   local ln = vim.fn.line('.')
   local l = getline(ln)
@@ -31,25 +31,25 @@ function M.bs()
   else
     return vim.fn.AutoPairsDelete()
   end
-end
+end -- -e-
 
-function M.set_indent(n)
+function M.set_indent(n) -- -s-
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
   if vim.fn.exists(':IndentLinesReset') == 1 then vim.cmd('IndentLinesReset') end
   if vim.fn.exists(':IndentBlanklineRefresh') == 1 then vim.cmd('IndentBlanklineRefresh') end
-end
+end -- -e-
 
-function M.change_indent(n)
+function M.change_indent(n) -- -s-
   util.toggle_bool_option('bo', 'et')
   vim.cmd('%retab!')
   vim.bo.ts = tonumber(n)
   util.toggle_bool_option('bo', 'et')
   vim.cmd('%retab!')
   M.set_indent(n)
-end
+end -- -e-
 
-function M.spell_checker()
+function M.spell_checker() -- -s-
   local spell_pre = vim.wo.spell
   if not spell_pre then vim.wo.spell = true end
   vim.cmd('normal! mzgg]S')
@@ -92,18 +92,18 @@ function M.spell_checker()
   vim.cmd('normal! `z')
   if not spell_pre then vim.wo.spell = false end
   print('Spell checker end')
-end
+end -- -e-
 
-function M.match_over(...)
+function M.match_over(...) -- -s-
   local args = {...}
   print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
   local w = vim.g.match_over_width or 80
   if args[1] then w = args[1] end
   vim.cmd('match OverLength /\\%' .. w .. 'v.\\+/')
-end
+end -- -e-
 
-function M.zoom_toggle()
+function M.zoom_toggle() -- -s-
   if vim.t.zoomed and vim.t.zoom_winrestcmd then
     vim.cmd(vim.t.zoom_winrestcmd)
     vim.t.zoomed = false
@@ -112,18 +112,18 @@ function M.zoom_toggle()
     vim.cmd('resize | vertical resize')
     vim.t.zoomed = true
   end
-end
+end -- -e-
 
-function M.highlight_under_cursor()
+function M.highlight_under_cursor() -- -s-
   local hl_groups = {}
   for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
   end
   print(vim.inspect(hl_groups))
-end
+end -- -e-
 
 -- Requires barbar at the minute, but not necessary I suppose...
-function M.buffer_close_all_but_visible()
+function M.buffer_close_all_but_visible() -- -s-
   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
       'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'), 'bufname(v:val)')
   if #bs > 0 then
@@ -131,13 +131,13 @@ function M.buffer_close_all_but_visible()
   else
     print('No buffers to delete')
   end
-end
+end -- -e-
 
-local function call_if_fn_exists(fn)
+local function call_if_fn_exists(fn) -- -s-
   if vim.fn.exists(':' .. fn) then vim.cmd(fn) end
-end
+end -- -e-
 
-function M.handle_large_file()
+function M.handle_large_file() -- -s-
   local fn = vim.fn.expand('<afile>')
   if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
     vim.o.updatetime = 1000
@@ -155,6 +155,6 @@ function M.handle_large_file()
     call_if_fn_exists('GitGutterDisable')
     call_if_fn_exists('PearTreeDisable')
   end
-end
+end -- -e-
 
 return M

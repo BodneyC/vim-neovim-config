@@ -2,7 +2,7 @@ local vim = vim
 
 local M = {}
 
-function M.document_formatting()
+function M.document_formatting() -- -s-
   local clients = vim.lsp.buf_get_clients()
   if #clients > 0 then
     for _, o in pairs(clients) do
@@ -14,9 +14,9 @@ function M.document_formatting()
   end
   vim.cmd('w')
   vim.cmd('FormatWrite')
-end
+end -- -e-
 
-function M.show_documentation()
+function M.show_documentation() -- -s-
   if #vim.lsp.buf_get_clients() ~= 0 then
     vim.lsp.buf.hover()
   else
@@ -28,9 +28,9 @@ function M.show_documentation()
       print('No hover candidate found')
     end
   end
-end
+end -- -e-
 
-function M.go_to_definition()
+function M.go_to_definition() -- -s-
   if #vim.lsp.buf_get_clients() ~= 0 then
     vim.lsp.buf.definition()
   else
@@ -44,8 +44,9 @@ function M.go_to_definition()
     vim.cmd('redraw')
     print('No definition found')
   end
-end
+end -- -e-
 
+-- -s-
 --[[
 {
   name = '',
@@ -66,31 +67,32 @@ function M.augroup(opts)
   end
   vim.cmd('augroup END')
 end
+-- -e-
 
-function M.command(lhs, rhs, opts)
+function M.command(lhs, rhs, opts) -- -s-
   local parts = {
     'command!', '-nargs=' .. (opts.nargs or '0'),
     opts.complete and '-complete=' .. opts.complete or '', opts.bang and '-bang' or '',
     opts.range and '-range' or '', opts.buffer and '-buffer' or '', lhs, rhs,
   }
   vim.cmd(table.concat(parts, ' '))
-end
+end -- -e-
 
-function M.toggle_bool_option(scope, opt)
+function M.toggle_bool_option(scope, opt) -- -s-
   if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) == 'boolean' then
     vim[scope][opt] = not vim[scope][opt]
   end
-end
+end -- -e-
 
-local function edge_of_screen(d)
+local function edge_of_screen(d) -- -s-
   local w = vim.fn.winnr()
   vim.cmd('silent! wincmd ' .. d)
   local n = vim.fn.winnr()
   vim.cmd('silent! ' .. w .. ' wincmd w')
   return w == n
-end
+end -- -e-
 
-function M.resize_window(d)
+function M.resize_window(d) -- -s-
   local inc = vim.g.resize_increment or 2
   if vim.fn.winnr('$') == 1 then return end
   local dir = ''
@@ -98,9 +100,9 @@ function M.resize_window(d)
   local edge = edge_of_screen(d) and '-' or '+'
   if dir == '' and edge == '-' then if edge_of_screen((d == 'j') and 'k' or 'j') then return end end
   vim.cmd(dir .. ' resize ' .. edge .. inc)
-end
+end -- -e-
 
-function M.basic_os_info()
+function M.basic_os_info() -- -s-
   local name, arch = '', ''
 
   local popen_status, popen_result = pcall(io.popen, '')
@@ -116,16 +118,14 @@ function M.basic_os_info()
   end
 
   return name, arch
-end
+end -- -e-
 
-function M.run_cmd(cmd, strip)
+function M.run_cmd(cmd, strip) -- -s-
   local handle = io.popen(cmd)
-  local result = handle:read("*a")
+  local result = handle:read('*a')
   handle:close()
-  if strip then
-    result = result:gsub("^%s*(.-)%s*$", "%1")
-  end
+  if strip then result = result:gsub('^%s*(.-)%s*$', '%1') end
   return result
-end
+end -- -e-
 
 return M

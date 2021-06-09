@@ -1,12 +1,12 @@
 -- local ts_utils = require 'nvim-treesitter.ts_utils'
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
+  ensure_installed = { -- -s-
     'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html', 'typescript', 'query',
     'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
-  },
+  }, -- -e-
   indent = {enable = true, disable = {'yaml'}},
   highlight = {enable = true, disable = {'yaml'}},
-  incremental_selection = {
+  incremental_selection = { -- -s-
     enable = true,
     keymaps = {
       init_selection = 'gnn',
@@ -14,9 +14,9 @@ require'nvim-treesitter.configs'.setup {
       scope_incremental = 'grc',
       node_decremental = 'grm',
     },
-  },
+  }, -- -e-
   playground = {enable = true, disable = {}, updatetime = 25, persist_queries = false},
-  refactor = {
+  refactor = { -- -s-
     smart_rename = {enable = false, keymaps = {smart_rename = '<Leader>R'}},
     highlight_current_scope = {enable = false},
     highlight_definitions = {enable = false},
@@ -29,10 +29,10 @@ require'nvim-treesitter.configs'.setup {
         goto_previous_usage = '<M-#>',
       },
     },
-  },
+  }, -- -e-
   textsubjects = {enable = true, keymaps = {['.'] = 'textsubjects-smart'}},
   -- Currently unsupported by most
-  textobjects = {
+  textobjects = { -- -s-
     select = {
       enable = true,
       keymaps = {
@@ -55,6 +55,6 @@ require'nvim-treesitter.configs'.setup {
       goto_previous_start = {['[m'] = '@function.outer', ['[['] = '@class.outer'},
       goto_previous_end = {['[M'] = '@function.outer', ['[]'] = '@class.outer'},
     },
-  },
+  }, -- -e-
 }
 -- require'nvim-treesitter.parsers'.get_parser_configs().markdown = nil

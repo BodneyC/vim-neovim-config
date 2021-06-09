@@ -2,6 +2,7 @@ local vim = vim
 
 local util = require 'utl.util'
 
+-- imports -s-
 local telescope = require 'telescope'
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
@@ -12,10 +13,11 @@ local finders = require 'telescope.finders'
 local actions = require 'telescope.actions'
 local make_entry = require 'telescope.make_entry'
 local previewers = require 'telescope.previewers'
+-- -e-
 
 local M = {}
 
-function M.tags_absolute(opts)
+function M.tags_absolute(opts) -- -s-
   local conf = config.values
   local ctags_file = vim.bo.tags:split(',')[1] or 'tags'
 
@@ -35,6 +37,7 @@ function M.tags_absolute(opts)
 
   local results = vim.split(data, '\n')
 
+  -- picker -s-
   pickers.new(opts, {
     prompt = 'Tags',
     finder = finders.new_table {
@@ -65,9 +68,10 @@ function M.tags_absolute(opts)
       return true
     end,
   }):find()
-end
+  -- -e-
+end -- -e-
 
-local function escape_chars(string)
+local function escape_chars(string) -- -s-
   return string.gsub(string, '[%(|%)|\\|%[|%]|%-|%{%}|%?|%+|%*]', {
     ['\\'] = '\\\\',
     ['-'] = '\\-',
@@ -81,14 +85,14 @@ local function escape_chars(string)
     ['+'] = '\\+',
     ['*'] = '\\*',
   })
-end
+end -- -e-
 
 M.histfile = os.getenv('HOME') .. '/.cache/nvim/telescope.histfile'
 
 local tmpfile = '/tmp/telescope.histfile'
 local histfile_idx = -1
 
-function M.grep_string_filtered(opts)
+function M.grep_string_filtered(opts) -- -s-
   local conf = config.values
 
   histfile_idx = -1
@@ -101,7 +105,7 @@ function M.grep_string_filtered(opts)
 
   local rg_rgx = '^[^:]*:%d*:?%d*:?'
 
-  local sorter = sorters.get_fzy_sorter()
+  local sorter = sorters.get_fzy_sorter() -- -s-
   local original_scoring_function = sorter.scoring_function
   sorter.scoring_function = function(a, prompt, line, b)
     if prompt == 0 or #prompt < (opts.ngram_len or 2) then return 0 end
@@ -110,8 +114,9 @@ function M.grep_string_filtered(opts)
     file:close()
     local l = line:gsub(rg_rgx, '')
     return original_scoring_function(a, prompt, l, b)
-  end
+  end -- -e-
 
+  -- highligher -s-
   local original_highlighter = sorter.highlighter
   sorter.highlighter = function(a, prompt, line)
     local _, idx = line:find(rg_rgx)
@@ -122,18 +127,19 @@ function M.grep_string_filtered(opts)
     end
     return original_highlighter(a, prompt, line)
   end
+  -- -e-
 
   local args = vim.tbl_flatten {vimgrep_arguments, word_match, search}
 
-  pickers.new(opts, {
+  pickers.new(opts, { -- -s-
     prompt_title = 'Find Word',
     finder = finders.new_oneshot_job(args, opts),
     previewer = conf.grep_previewer(opts),
     sorter = sorter,
-  }):find()
-end
+  }):find() -- -e-
+end -- -e-
 
-local function read_hist_file()
+local function read_hist_file() -- -s-
   if M.euid == '0' then return end
   local f = io.open(M.histfile, 'r')
   if not f then return nil end
@@ -141,9 +147,9 @@ local function read_hist_file()
   for line in f:lines() do table.insert(arr, line); end
   f:close()
   return arr
-end
+end -- -e-
 
-function actions.prev_hist(prompt_bufnr)
+function actions.prev_hist(prompt_bufnr) -- -s-
   if M.euid == '0' then return end
   local arr = read_hist_file()
   if not arr then return end
@@ -152,9 +158,9 @@ function actions.prev_hist(prompt_bufnr)
   if not arr[histfile_idx] then return end
   vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
   if histfile_idx == 1 then return end
-end
+end -- -e-
 
-function actions.next_hist(prompt_bufnr)
+function actions.next_hist(prompt_bufnr) -- -s-
   if M.euid == '0' then return end
   local arr = read_hist_file()
   if not arr then return end
@@ -162,9 +168,9 @@ function actions.next_hist(prompt_bufnr)
   if histfile_idx ~= #arr then histfile_idx = histfile_idx + 1 end
   if not arr[histfile_idx] then return end
   vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
-end
+end -- -e-
 
-function actions.append_to_hist(prompt_bufnr)
+function actions.append_to_hist(prompt_bufnr) -- -s-
   if M.euid == '0' then return end
   local f = io.open(tmpfile, 'r')
   local fl = f:read('*a')
@@ -180,11 +186,11 @@ function actions.append_to_hist(prompt_bufnr)
   -- temp pending: https://github.com/nvim-telescope/telescope.nvim/issues/684
   actions.select_default(prompt_bufnr)
   actions.center(prompt_bufnr)
-end
+end -- -e-
 
-function M.init()
+function M.init() -- -s-
   M.euid = util.run_cmd('id -u', true)
-  telescope.setup {
+  telescope.setup { -- -s-
     defaults = {
       mappings = {
         i = {
@@ -206,18 +212,15 @@ function M.init()
       selection_strategy = 'reset',
       layout_strategy = 'horizontal',
       layout_defaults = {
-        -- TODO add builtin options.
+        horizontal = {width_padding = 0.1, height_padding = 0.2, preview_width = 0.65, mirror = false},
+        vertical = {mirror = true},
       },
       file_ignore_patterns = {
         '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock',
         '\\.git',
       },
       shorten_path = true,
-      winblend = 20,
-      width = 0.75,
-      preview_cutoff = 120,
-      results_height = 1,
-      results_width = 0.8,
+      winblend = 5,
       border = {},
       borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
       color_devicons = true,
@@ -230,7 +233,9 @@ function M.init()
     },
   }
   telescope.load_extension('fzy_native')
+  -- -e-
 
+  -- mappings -s-
   local n_s = {noremap = true, silent = true}
   local skm = vim.api.nvim_set_keymap
   util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]], {nargs = '1'})
@@ -260,8 +265,9 @@ function M.init()
 
   skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
       n_s)
+  -- -e-
 
   if M.euid ~= '0' then assert(io.open(tmpfile, 'w')):close() end
-end
+end -- -e-
 
 return M

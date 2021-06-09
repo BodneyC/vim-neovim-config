@@ -3,7 +3,7 @@
 
 local M = {}
 
-local function _iter_diagnostic_move_pos(name, opts, pos)
+local function _iter_diagnostic_move_pos(name, opts, pos) -- -s-
   opts = opts or {}
 
   local enable_popup = vim.F.if_nil(opts.enable_popup, true)
@@ -29,22 +29,22 @@ local function _iter_diagnostic_move_pos(name, opts, pos)
       require'lspsaga.diagnostic'.show_line_diagnostics(opts.popup_opts, vim.api.nvim_win_get_buf(win_id))
     end)
   end
-end
+end -- -e-
 
-function M.lsp_jump_diagnostic_next(opts)
+function M.lsp_jump_diagnostic_next(opts) -- -s-
   return _iter_diagnostic_move_pos(
     "DiagnosticNext",
     opts,
     vim.lsp.diagnostic.get_next_pos(opts)
   )
-end
+end -- -e-
 
-function M.lsp_jump_diagnostic_prev(opts)
+function M.lsp_jump_diagnostic_prev(opts) -- -s-
   return _iter_diagnostic_move_pos(
     "DiagnosticPrevious",
     opts,
     vim.lsp.diagnostic.get_prev_pos(opts)
   )
-end
+end -- -e-
 
 return M

@@ -2,6 +2,7 @@ local vim = vim
 
 vim.o.completeopt = 'menu,menuone,noselect'
 
+-- compe -s-
 require'compe'.setup {
   enabled = true,
   autocomplete = true,
@@ -27,7 +28,9 @@ require'compe'.setup {
     tags = true,
   },
 }
+-- -e-
 
+-- tab cr -s-
 local skm = vim.api.nvim_set_keymap
 
 -- Well, this is awful
@@ -47,3 +50,4 @@ skm('i', '<CR>', string.gsub([[
     : "<C-e><CR>"
   : "<CR><Plug>AutoPairsReturn"
 ]], '\n', ''), {noremap = false, silent = true, expr = true})
+-- -e-
