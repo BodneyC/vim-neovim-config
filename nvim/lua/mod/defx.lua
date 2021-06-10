@@ -28,8 +28,8 @@ function M.resize()
   table.remove(buf, 1)
   table.remove(buf, #table)
   local width = 1
-  for i, l in ipairs(buf) do
-    local line_width = #(l:gsub("^(.-)%s*$", "%1")) 
+  for _, l in ipairs(buf) do
+    local line_width = #(l:gsub("^(.-)%s*$", "%1"))
     if line_width > width then
       width = line_width
     end

@@ -89,13 +89,14 @@ end -- -e-
 
 M.histfile = os.getenv('HOME') .. '/.cache/nvim/telescope.histfile'
 
-local tmpfile = '/tmp/telescope.histfile'
+local prompt_hist = ""
 local histfile_idx = -1
 
 function M.grep_string_filtered(opts) -- -s-
   local conf = config.values
 
   histfile_idx = -1
+  prompt_hist = ""
 
   local search = escape_chars(opts.search or vim.fn.expand('<cword>'))
   local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
@@ -109,9 +110,7 @@ function M.grep_string_filtered(opts) -- -s-
   local original_scoring_function = sorter.scoring_function
   sorter.scoring_function = function(a, prompt, line, b)
     if prompt == 0 or #prompt < (opts.ngram_len or 2) then return 0 end
-    local file = io.open(tmpfile, 'w')
-    file:write(prompt)
-    file:close()
+    prompt_hist = prompt
     local l = line:gsub(rg_rgx, '')
     return original_scoring_function(a, prompt, l, b)
   end -- -e-
@@ -149,7 +148,7 @@ local function read_hist_file() -- -s-
   return arr
 end -- -e-
 
-function actions.prev_hist(prompt_bufnr) -- -s-
+function actions.prev_hist(_) -- -s-
   if M.euid == '0' then return end
   local arr = read_hist_file()
   if not arr then return end
@@ -160,7 +159,7 @@ function actions.prev_hist(prompt_bufnr) -- -s-
   if histfile_idx == 1 then return end
 end -- -e-
 
-function actions.next_hist(prompt_bufnr) -- -s-
+function actions.next_hist(_) -- -s-
   if M.euid == '0' then return end
   local arr = read_hist_file()
   if not arr then return end
@@ -172,14 +171,9 @@ end -- -e-
 
 function actions.append_to_hist(prompt_bufnr) -- -s-
   if M.euid == '0' then return end
-  local f = io.open(tmpfile, 'r')
-  local fl = f:read('*a')
-  f:close()
-  if fl and not fl:match('^%s*$') then
-    f = io.open(tmpfile, 'w')
-    f:close()
-    f = io.open(M.histfile, 'a+')
-    f:write(fl .. '\n')
+  if prompt_hist ~= "" then
+    local f = io.open(M.histfile, 'a+')
+    f:write(prompt_hist .. '\n')
     f:close()
   end
 
@@ -212,7 +206,12 @@ function M.init() -- -s-
       selection_strategy = 'reset',
       layout_strategy = 'horizontal',
       layout_defaults = {
-        horizontal = {width_padding = 0.1, height_padding = 0.2, preview_width = 0.65, mirror = false},
+        horizontal = {
+          width_padding = 0.1,
+          height_padding = 0.2,
+          preview_width = 0.65,
+          mirror = false,
+        },
         vertical = {mirror = true},
       },
       file_ignore_patterns = {
@@ -266,8 +265,6 @@ function M.init() -- -s-
   skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
       n_s)
   -- -e-
-
-  if M.euid ~= '0' then assert(io.open(tmpfile, 'w')):close() end
 end -- -e-
 
 return M
