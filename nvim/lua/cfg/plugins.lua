@@ -10,13 +10,13 @@ vim.cmd('packadd packer.nvim')
 
 local packer = require 'packer'
 
--- plugins -s-
+-- plugins
 return packer.startup(function()
   local use = packer.use
 
   use {'wbthomason/packer.nvim', opt = true}
 
-  --- Lsp -s-
+  --- Lsp
   use {'glepnir/lspsaga.nvim'}
   use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-jdtls'}
@@ -32,16 +32,16 @@ return packer.startup(function()
   use {'onsails/lspkind-nvim'}
   use {'junegunn/fzf', run = function() vim.fn['fzf#install']() end}
   use {'junegunn/fzf.vim'}
-  -- -e-
+  --
 
-  --- DAP -s-
+  --- DAP
   use {'mfussenegger/nvim-dap'}
   use {'jbyuki/one-small-step-for-vimkind'}
   use {'Pocco81/DAPInstall.nvim'}
   use {'mfussenegger/nvim-dap-python'}
-  -- -e-
+  --
 
-  --- Added functionality -s-
+  --- Added functionality
   use {'BodneyC/hex-this-vim', branch = 'master'}
   use {'BodneyC/pic-vim', branch = 'master'}
   use {'bodneyc/Comrade', branch = 'master'}
@@ -57,9 +57,9 @@ return packer.startup(function()
   use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
   use {'vigoux/treesitter-context.nvim'}
   use {'RRethy/nvim-treesitter-textsubjects'}
-  -- -e-
+  --
 
-  --- QOL -s-
+  --- QOL
   use {'folke/todo-comments.nvim'}
   use {'simrat39/symbols-outline.nvim'}
   use {'bronson/vim-visual-star-search'}
@@ -78,9 +78,9 @@ return packer.startup(function()
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
   use {'scrooloose/nerdcommenter'}
   use {'simnalamburt/vim-mundo'}
-  -- -e-
+  --
 
-  --- Vim internal wrappers -s-
+  --- Vim internal wrappers
   use {'BodneyC/At-Zed-vim', branch = 'master'}
   use {'BodneyC/flocho', branch = 'master'}
   use {'BodneyC/togool.vim', branch = 'master'}
@@ -96,18 +96,18 @@ return packer.startup(function()
   use {'tpope/vim-unimpaired'}
   use {'vim-scripts/BufOnly.vim'}
   use {'vim-utils/vim-all'}
-  -- -e-
+  --
 
-  --- Prettiness -s-
+  --- Prettiness
   use {
     'BodneyC/bolorscheme',
     branch = 'lua',
     config = function()
-      require'bolorscheme'.setup {theme = 'tokyonight'}
+      require'bolorscheme'.setup {theme = 'spacegray'}
     end,
   }
   use {'KabbAmine/vCoolor.vim'}
-  use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+  use {'lukas-reineke/indent-blankline.nvim'}
   use {'amdt/vim-niji'}
   use {'dstein64/nvim-scrollview'}
   use {'junegunn/goyo.vim', cmd = 'Goyo'}
@@ -121,9 +121,9 @@ return packer.startup(function()
   use {'hoob3rt/lualine.nvim'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
-  -- -e-
+  --
 
-  --- SDL -s-
+  --- SDL
   use {'BodneyC/VirkSpaces', branch = 'master'}
   use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
   use {'lewis6991/gitsigns.nvim'}
@@ -134,9 +134,9 @@ return packer.startup(function()
   use {'oguzbilgic/vim-gdiff', cmd = {'Gdiff', 'Gdiffsplit'}}
   use {'rbong/vim-flog', cmd = 'Flog'}
   use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
-  -- -e-
+  --
 
-  --- Language support -s-
+  --- Language support
   use {'BodneyC/sood-vim', branch = 'master'}
   use {'BodneyC/knit-vim', branch = 'master'}
   use {'drmingdrmer/vim-indent-lua'}
@@ -151,19 +151,19 @@ return packer.startup(function()
   use {'uiiaoo/java-syntax.vim'}
   use {'stevearc/vim-arduino'}
   use {'rhysd/vim-llvm'}
-  -- -e-
+  --
 
-  --- Local -s-
+  --- Local
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
   -- use {
   --   '~/gitclones/bolorscheme',
   --   config = function()
-  --     require'bolorscheme'.setup {theme = 'tokyonight'}
+  --     require'bolorscheme'.setup {theme = 'spacegray'}
   --   end,
   -- }
-  -- -e-
+  --
 
 end)
--- -e-
+--

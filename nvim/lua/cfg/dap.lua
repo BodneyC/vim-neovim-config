@@ -4,7 +4,7 @@ local n_s = {noremap = true, silent = true}
 
 vim.fn.sign_define('DapBreakpoint', {text = '🛑', texthl = 'DiffDelete', linehl = '', numhl = ''})
 
--- mappings -s-
+-- mappings
 local debug_leader = [[<leader>x]]
 
 -- skm('n', debug_leader .. 'r', [[<Cmd>lua require'dap'.run()<CR>]], n_s)
@@ -18,9 +18,9 @@ skm('n', debug_leader .. 'B',
 skm('n', debug_leader .. 'l', [[<Cmd>lua require'dap'.list_breakpoints()<CR>]], n_s)
 skm('n', debug_leader .. 'o', [[<Cmd>lua require'dap'.repl.open()<CR>]], n_s)
 skm('n', debug_leader .. 'R', [[<Cmd>lua require'dap'.repl.run_last()<CR>]], n_s)
--- -e-
+--
 
--- setup -s-
+-- setup
 local dap_install = require('dap-install')
 local dbg_list = require('dap-install.debuggers_list').debuggers
 
@@ -50,4 +50,4 @@ dap.adapters.nlua = function(callback, config)
 end
 
 require'dap-python'.setup('~/.virtualenvs/debugpy/bin/python')
--- -e-
+--

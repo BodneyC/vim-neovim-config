@@ -2,7 +2,7 @@ local M = {}
 
 local bytemarkers = {{0x7ff, 192}, {0xffff, 224}, {0x1fffff, 240}}
 
-function M.cmd_output(cmd, throw, raw) -- -s-
+function M.cmd_output(cmd, throw, raw) --
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
   local _, _, e = f:close()
@@ -11,9 +11,9 @@ function M.cmd_output(cmd, throw, raw) -- -s-
   s = string.gsub(s, '^%s+', '')
   s = string.gsub(s, '%s+$', '')
   return s
-end -- -e-
+end --
 
-function M.utf8(decimal) -- -s-
+function M.utf8(decimal) --
   if decimal < 128 then return string.char(decimal) end
   local charbytes = {}
   for bytes, vals in ipairs(bytemarkers) do
@@ -28,14 +28,14 @@ function M.utf8(decimal) -- -s-
     end
   end
   return table.concat(charbytes)
-end -- -e-
+end --
 
-function M.elem_in_array(a, e) -- -s-
+function M.elem_in_array(a, e) --
   for _, v in ipairs(a) do if v == e then return true end end
   return false
-end -- -e-
+end --
 
-function M.module_exists(m) -- -s-
+function M.module_exists(m) --
   if package.loaded[m] then return true end
   for _, searcher in ipairs(package.searchers or package.loaders) do
     local loader = searcher(m)
@@ -45,13 +45,13 @@ function M.module_exists(m) -- -s-
     end
   end
   return false
-end -- -e-
+end --
 
-function string.split(inputstr, sep) -- -s-
+function string.split(inputstr, sep) --
   if sep == nil then sep = '%s' end
   local t = {}
   for str in string.gmatch(inputstr, '([^' .. sep .. ']+)') do table.insert(t, str) end
   return t
-end -- -e-
+end --
 
 return M

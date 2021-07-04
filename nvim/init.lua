@@ -1,4 +1,4 @@
--- initial -s-
+-- initial
 vim.o.compatible = false
 vim.cmd 'filetype off'
 
@@ -15,12 +15,12 @@ local function command_v(b)
 end
 
 vim.g.python_host_prog = command_v 'python2'
-vim.g.python3_host_prog = command_v 'python3'
+vim.g.python3_host_prog = '/usr/local/bin/python3'
 
 vim.g.polyglot_disabled = {'autoload', 'typescript'}
--- -e-
+--
 
--- safe_require -s-
+-- safe_require
 local function safe_require(module)
   local ok, err = pcall(require, module)
   if not ok then
@@ -42,9 +42,9 @@ safe_require 'cfg.format'
 safe_require 'cfg.compe'
 safe_require 'cfg.gitsigns'
 safe_require 'cfg.arduino'
--- -e-
+--
 
--- safe_require_and_init -s-
+-- safe_require_and_init
 local function safe_require_and_init(module)
   local mod = safe_require(module)
   if mod then mod.init() end
@@ -54,4 +54,4 @@ safe_require_and_init 'mod.terminal'
 safe_require_and_init 'mod.highlight'
 safe_require_and_init 'mod.defx'
 safe_require_and_init 'mod.telescope'
--- -e-
+--

@@ -4,19 +4,19 @@ local skm = vim.api.nvim_set_keymap
 
 local M = {}
 
-function M.pear_tree_close(c) -- -s-
+function M.pear_tree_close(c) --
   if #vim.fn['pear_tree#GetSurroundingPair']() ~= 0 and vim.fn['pear_tree#GetSurroundingPair']()[2] ==
       c and string.match(string.sub(vim.fn.getline('.'), vim.fn.col('.')), '^%s*%' .. c) then
     return vim.fn['pear_tree#insert_mode#JumpOut']()
   else
     return vim.fn['pear_tree#insert_mode#HandleCloser'](c)
   end
-end -- -e-
+end --
 
-function M.init() -- -s-
+function M.init() --
   local sne = {noremap = false, silent = true, expr = true}
   vim.g.pear_tree_map_special_keys = 0
-  -- cr -s-
+  -- cr
   local cr = string.gsub([[
     pumvisible()
     ? complete_info()["selected"] != "-1"
@@ -25,8 +25,8 @@ function M.init() -- -s-
     : "<Plug>(PearTreeExpand)"
   ]], '\n', '')
   skm('i', '<CR>', cr, sne)
-  -- -e-
-  -- bs -s-
+  --
+  -- bs
   local bs = string.gsub([[
     getline('.')[:col('.') - 2] =~ '^\s\+$'
       ? getline(line('.') - 1) =~ '^\s*$'
@@ -37,7 +37,7 @@ function M.init() -- -s-
       : pear_tree#insert_mode#Backspace()
   ]], '\n', '')
   skm('i', '<BS>', bs, sne)
-  -- -e-
+  --
   skm('i', '<C-f>', 'pear_tree#insert_mode#JumpOut()', sne)
   skm('i', '<Esc>', 'pear_tree#insert_mode#Expand()', sne)
   skm('i', '<Space>', 'pear_tree#insert_mode#Space()', sne)
@@ -50,6 +50,6 @@ function M.init() -- -s-
   skm('i', ']', [[luaeval("require'mod.pear-tree'.pear_tree_close(']')")]], sne)
   skm('i', ')', [[luaeval("require'mod.pear-tree'.pear_tree_close(')')")]], sne)
   skm('i', '}', [[luaeval("require'mod.pear-tree'.pear_tree_close('}')")]], sne)
-end -- -e-
+end --
 
 return M

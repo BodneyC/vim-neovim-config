@@ -1,15 +1,15 @@
 local M = {}
 
-function M.file_exists(fn) -- -s-
+function M.file_exists(fn) --
   local f = io.open(fn, 'r')
   if f == nil then
     return false
   end
   io.close(f)
   return true
-end -- -e-
+end --
 
-function M.dir_exists(fn) -- -s-
+function M.dir_exists(fn) --
   local f = io.open(fn, 'r')
   if f == nil then
     return false
@@ -17,13 +17,13 @@ function M.dir_exists(fn) -- -s-
   local _, _, c = f:read()
   io.close(f)
   return c == 21
-end -- -e-
+end --
 
-function M.fsize(fn) -- -s-
+function M.fsize(fn) --
   local f = assert(io.open(fn, 'r'))
   local size = f:seek('end')
   io.close(f)
   return size
-end -- -e-
+end --
 
 return M

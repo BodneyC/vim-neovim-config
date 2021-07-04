@@ -5,7 +5,7 @@ local function opt(s, d)
   for k, v in pairs(d) do vim[s][k] = v end
 end
 
--- o-options -s-
+-- o-options
 opt('o', {
   tags = '',
   hls = true,
@@ -42,8 +42,7 @@ opt('o', {
   title = true,
   titlestring = 'bodneyc - nvim',
   showtabline = 2,
-  foldmethod = 'marker',
-  foldmarker = '-s-,-e-',
+  foldmethod = 'manual',
 })
 
 local undodir = os.getenv('HOME') .. '/.config/nvim/undo'
@@ -55,9 +54,9 @@ vim.o.undoreload = 10000
 
 local notags = os.getenv('HOME') .. '/.notags'
 os.execute('test -e ' .. notags .. ' || touch ' .. notags)
--- -e-
+--
 
--- wo-options -s-
+-- wo-options
 opt('wo', {
   nu = true,
   cul = true,
@@ -72,9 +71,9 @@ opt('wo', {
   cursorcolumn = false,
   breakindentopt = 'shift:3',
 })
--- -e-
+--
 
--- g-options -s-
+-- g-options
 opt('g', {
   netrw_banner = 0,
   netrw_liststyle = 3,
@@ -83,9 +82,9 @@ opt('g', {
   netrw_winsize = 14,
   large_file = 524288, -- 512k
 })
--- -e-
+--
 
--- __CONFIG_GENERAL__ -s-
+-- __CONFIG_GENERAL__
 util.augroup({
   name = '__CONFIG_GENERAL__',
   autocmds = {
@@ -102,6 +101,6 @@ util.augroup({
     {event = 'BufRead,BufNewFile', glob = 'Jenkinsfile*', cmd = [[setf groovy]]},
   },
 })
--- -s-
+--
 
 vim.fn.execute('syntax on')
