@@ -28,7 +28,6 @@ require'compe'.setup {
     tags = true,
   },
 }
---
 
 -- tab cr
 local skm = vim.api.nvim_set_keymap
@@ -50,4 +49,3 @@ skm('i', '<CR>', string.gsub([[
     : "<C-e><CR>"
   : "<CR><Plug>AutoPairsReturn"
 ]], '\n', ''), {noremap = false, silent = true, expr = true})
---

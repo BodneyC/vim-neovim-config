@@ -110,7 +110,7 @@ lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabil
 -- rustup component add rls rust-{analysis,src}
 lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
--- pip3 i --user 'python-language-sever[all]'
+-- pip3 install --user 'python-language-sever[all]'
 lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 --[[

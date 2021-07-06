@@ -18,7 +18,6 @@ skm('n', debug_leader .. 'B',
 skm('n', debug_leader .. 'l', [[<Cmd>lua require'dap'.list_breakpoints()<CR>]], n_s)
 skm('n', debug_leader .. 'o', [[<Cmd>lua require'dap'.repl.open()<CR>]], n_s)
 skm('n', debug_leader .. 'R', [[<Cmd>lua require'dap'.repl.run_last()<CR>]], n_s)
---
 
 -- setup
 local dap_install = require('dap-install')
@@ -50,4 +49,3 @@ dap.adapters.nlua = function(callback, config)
 end
 
 require'dap-python'.setup('~/.virtualenvs/debugpy/bin/python')
---

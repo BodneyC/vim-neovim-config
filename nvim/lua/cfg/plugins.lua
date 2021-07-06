@@ -30,16 +30,19 @@ return packer.startup(function()
     },
   }
   use {'onsails/lspkind-nvim'}
-  use {'junegunn/fzf', run = function() vim.fn['fzf#install']() end}
+  use {
+    'junegunn/fzf',
+    run = function()
+      vim.fn['fzf#install']()
+    end,
+  }
   use {'junegunn/fzf.vim'}
-  --
 
   --- DAP
   use {'mfussenegger/nvim-dap'}
   use {'jbyuki/one-small-step-for-vimkind'}
   use {'Pocco81/DAPInstall.nvim'}
   use {'mfussenegger/nvim-dap-python'}
-  --
 
   --- Added functionality
   use {'BodneyC/hex-this-vim', branch = 'master'}
@@ -57,7 +60,6 @@ return packer.startup(function()
   use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
   use {'vigoux/treesitter-context.nvim'}
   use {'RRethy/nvim-treesitter-textsubjects'}
-  --
 
   --- QOL
   use {'folke/todo-comments.nvim'}
@@ -78,7 +80,6 @@ return packer.startup(function()
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
   use {'scrooloose/nerdcommenter'}
   use {'simnalamburt/vim-mundo'}
-  --
 
   --- Vim internal wrappers
   use {'BodneyC/At-Zed-vim', branch = 'master'}
@@ -96,7 +97,6 @@ return packer.startup(function()
   use {'tpope/vim-unimpaired'}
   use {'vim-scripts/BufOnly.vim'}
   use {'vim-utils/vim-all'}
-  --
 
   --- Prettiness
   use {
@@ -121,7 +121,6 @@ return packer.startup(function()
   use {'hoob3rt/lualine.nvim'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
-  --
 
   --- SDL
   use {'BodneyC/VirkSpaces', branch = 'master'}
@@ -134,7 +133,6 @@ return packer.startup(function()
   use {'oguzbilgic/vim-gdiff', cmd = {'Gdiff', 'Gdiffsplit'}}
   use {'rbong/vim-flog', cmd = 'Flog'}
   use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
-  --
 
   --- Language support
   use {'BodneyC/sood-vim', branch = 'master'}
@@ -151,7 +149,6 @@ return packer.startup(function()
   use {'uiiaoo/java-syntax.vim'}
   use {'stevearc/vim-arduino'}
   use {'rhysd/vim-llvm'}
-  --
 
   --- Local
   -- use {'~/Documents/knit-vim'}
@@ -163,7 +160,6 @@ return packer.startup(function()
   --     require'bolorscheme'.setup {theme = 'spacegray'}
   --   end,
   -- }
-  --
 
 end)
 --

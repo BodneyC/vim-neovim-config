@@ -54,7 +54,6 @@ vim.o.undoreload = 10000
 
 local notags = os.getenv('HOME') .. '/.notags'
 os.execute('test -e ' .. notags .. ' || touch ' .. notags)
---
 
 -- wo-options
 opt('wo', {
@@ -71,7 +70,6 @@ opt('wo', {
   cursorcolumn = false,
   breakindentopt = 'shift:3',
 })
---
 
 -- g-options
 opt('g', {
@@ -82,7 +80,6 @@ opt('g', {
   netrw_winsize = 14,
   large_file = 524288, -- 512k
 })
---
 
 -- __CONFIG_GENERAL__
 util.augroup({
@@ -101,6 +98,5 @@ util.augroup({
     {event = 'BufRead,BufNewFile', glob = 'Jenkinsfile*', cmd = [[setf groovy]]},
   },
 })
---
 
 vim.fn.execute('syntax on')

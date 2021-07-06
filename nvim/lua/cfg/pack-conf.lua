@@ -37,7 +37,6 @@ util.augroup({
     },
   },
 })
---
 
 vim.g.vcoolor_disable_mappings = false
 
@@ -71,7 +70,6 @@ vim.g.Hexokinase_optInPatterns = {'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl'
 --     '[[ $(git diff --cached -- {-1}) != "" ]] && git diff --cached --color=always -- {-1} | delta || ' ..
 --         '[[ $(git diff -- {-1}) != "" ]] && git diff --color=always -- {-1} | delta || ' ..
 --         vim.g.fzf_preview_command
---
 
 -- terminal window manager
 local pane_manager = 'Tmux'
@@ -101,7 +99,6 @@ skm('t', '<M-j>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateDown<CR>', n_s)
 skm('t', '<M-k>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
 skm('t', '<M-l>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
 skm('t', '<M-\\>', '<C-\\><C-n>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
---
 
 vim.g['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
 
@@ -121,7 +118,6 @@ vim.g.virk_close_by_ft = {
   defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
   Mundo = 'MundoShow',
 }
---
 
 vim.g.scrollview_excluded_filetypes = {'defx'}
 
@@ -151,7 +147,6 @@ vim.g.gutentags_generate_on_new = 1
 vim.g.gutentags_generate_on_empty_buffer = 0
 vim.g.gutentags_ctags_exclude = {'*.json'}
 vim.g.gutentags_ctags_extra_args = {'--tag-relative=always', '--fields=+ailmnS'}
---
 
 vim.g.vista_icon_indent = {'╰─▸ ', '├─▸ '}
 vim.g.vista_default_executive = 'ctags'
@@ -219,4 +214,3 @@ vim.g.sexp_mappings = {
   sexp_capture_prev_element = '',
   sexp_capture_next_element = '',
 }
---
