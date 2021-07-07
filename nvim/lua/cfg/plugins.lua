@@ -39,10 +39,13 @@ return packer.startup(function()
   use {'junegunn/fzf.vim'}
 
   --- DAP
-  use {'mfussenegger/nvim-dap'}
-  use {'jbyuki/one-small-step-for-vimkind'}
-  use {'Pocco81/DAPInstall.nvim'}
-  use {'mfussenegger/nvim-dap-python'}
+  -- use {'mfussenegger/nvim-dap'}
+  -- use {'jbyuki/one-small-step-for-vimkind'}
+  -- use {'Pocco81/DAPInstall.nvim'}
+  -- use {'mfussenegger/nvim-dap-python'}
+
+  --- Debug
+  use {'puremourning/vimspector'}
 
   --- Added functionality
   use {'BodneyC/hex-this-vim', branch = 'master'}
