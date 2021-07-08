@@ -1,5 +1,5 @@
 local vim = vim
-local skm = vim.api.nvim_set_keymap
+-- local bskm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 
 local lspconfig = require 'lspconfig'
@@ -19,40 +19,6 @@ util.augroup({
   name = '__LSP__',
   autocmds = {{event = 'FileType', glob = 'java', cmd = [[lua require'mod.jdtls'.init()]]}},
 })
-
--- mappings
-local n_s = {noremap = true, silent = true}
-local s_e = {silent = true, expr = true}
-
-skm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', n_s)
-skm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', n_s)
-
-skm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', n_s)
-skm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', n_s)
-skm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', n_s)
-skm('n', ']w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], n_s)
-skm('n', '[w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], n_s)
-skm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', n_s)
-
-local lsp_leader = [[<leader>l]]
-
-skm('n', lsp_leader .. 'h', '<CMD>lua vim.lsp.buf.hover()<CR>', n_s)
-skm('n', lsp_leader .. 's', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', n_s)
-skm('n', lsp_leader .. 'q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', n_s)
-skm('n', lsp_leader .. 'f', [[<cmd>Lspsaga lsp_finder<CR>]], n_s)
-skm('n', lsp_leader .. 'a', [[<cmd>Lspsaga code_action<CR>]], n_s)
-skm('n', lsp_leader .. 'd', [[<cmd>Lspsaga hover_doc<CR>]], n_s)
-skm('n', lsp_leader .. 'D', [[<cmd>Lspsaga preview_definition<CR>]], n_s)
-skm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', n_s)
-
-skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
-skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], s_e)
-skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], s_e)
-skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], s_e)
---
-
-util.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-util.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 -- diagnostics
 vim.fn.sign_define('LspDiagnosticsSignError', {text = ' ', texthl = 'LspDiagnosticsError'})
@@ -74,8 +40,45 @@ lsp_status.config({
 
 -- setup
 local function on_attach(client, bufnr)
+
+  -- mappings
+  local ns = {noremap = true, silent = true}
+  local se = {silent = true, expr = true}
+
+  local function bskm(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
+  local function bso(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+
   lsp_status.on_attach(client, bufnr)
+
+  bskm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', ns)
+  bskm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', ns)
+
+  bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
+  bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
+  bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
+  bskm('n', ']w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
+  bskm('n', '[w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
+  bskm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', ns)
+
+  local lsp_leader = [[<leader>l]]
+
+  bskm('n', lsp_leader .. 'h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
+  bskm('n', lsp_leader .. 's', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
+  bskm('n', lsp_leader .. 'q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
+  bskm('n', lsp_leader .. 'f', [[<cmd>Lspsaga lsp_finder<CR>]], ns)
+  bskm('n', lsp_leader .. 'a', [[<cmd>Lspsaga code_action<CR>]], ns)
+  bskm('n', lsp_leader .. 'd', [[<cmd>Lspsaga hover_doc<CR>]], ns)
+  bskm('n', lsp_leader .. 'D', [[<cmd>Lspsaga preview_definition<CR>]], ns)
+  bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
+
 end
+
+util.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
+util.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 -- npm i -g typescript-language-server
 lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}

@@ -3,7 +3,8 @@ local skm = vim.api.nvim_set_keymap
 local util = require 'utl.util'
 
 local n = {noremap = true}
-local n_s = {noremap = true, silent = true}
+local ns = {noremap = true, silent = true}
+local se = {silent = true, expr = true}
 
 vim.cmd('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
@@ -14,42 +15,47 @@ local knav = {
   insert = [[<ESC><CMD>KittyNavigate]],
   termin = [[<C-\><C-n><CMD>KittyNavigate]],
 }
-skm('n', '¬', knav.normal .. 'Right<CR>', n_s)
-skm('n', '˙', knav.normal .. 'Left<CR>', n_s)
-skm('n', '˚', knav.normal .. 'Up<CR>', n_s)
-skm('n', '∆', knav.normal .. 'Down<CR>', n_s)
-skm('i', '¬', knav.insert .. 'Right<CR>', n_s)
-skm('i', '˙', knav.insert .. 'Left<CR>', n_s)
-skm('i', '˚', knav.insert .. 'Up<CR>', n_s)
-skm('i', '∆', knav.insert .. 'Down<CR>', n_s)
-skm('t', '¬', knav.termin .. 'Right<CR>', n_s)
-skm('t', '˙', knav.termin .. 'Left<CR>', n_s)
-skm('t', '˚', knav.termin .. 'Up<CR>', n_s)
-skm('t', '∆', knav.termin .. 'Down<CR>', n_s)
+skm('n', '¬', knav.normal .. 'Right<CR>', ns)
+skm('n', '˙', knav.normal .. 'Left<CR>', ns)
+skm('n', '˚', knav.normal .. 'Up<CR>', ns)
+skm('n', '∆', knav.normal .. 'Down<CR>', ns)
+skm('i', '¬', knav.insert .. 'Right<CR>', ns)
+skm('i', '˙', knav.insert .. 'Left<CR>', ns)
+skm('i', '˚', knav.insert .. 'Up<CR>', ns)
+skm('i', '∆', knav.insert .. 'Down<CR>', ns)
+skm('t', '¬', knav.termin .. 'Right<CR>', ns)
+skm('t', '˙', knav.termin .. 'Left<CR>', ns)
+skm('t', '˚', knav.termin .. 'Up<CR>', ns)
+skm('t', '∆', knav.termin .. 'Down<CR>', ns)
+
+skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], se)
+skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], se)
+skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], se)
+skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], se)
 
 -- wqa
-skm('n', '<leader>E', [[<CMD>e!<CR>]], n_s)
-skm('n', '<leader>Q', [[<CMD>qa!<CR>]], n_s)
-skm('n', '<leader>W', [[<CMD>wa | qa<CR>]], n_s)
-skm('n', '<leader>e', [[<CMD>e<CR>]], n_s)
-skm('n', '<leader>q', [[<CMD>q<CR>]], n_s)
-skm('n', '<leader>w', [[<CMD>w<CR>]], n_s)
-skm('n', '<A-s>', [[<CMD>w<CR>]], n_s)
+skm('n', '<leader>E', [[<CMD>e!<CR>]], ns)
+skm('n', '<leader>Q', [[<CMD>qa!<CR>]], ns)
+skm('n', '<leader>W', [[<CMD>wa | qa<CR>]], ns)
+skm('n', '<leader>e', [[<CMD>e<CR>]], ns)
+skm('n', '<leader>q', [[<CMD>q<CR>]], ns)
+skm('n', '<leader>w', [[<CMD>w<CR>]], ns)
+skm('n', '<A-s>', [[<CMD>w<CR>]], ns)
 skm('n', 'Q', [[q]], n)
 skm('n', 'Q!', [[q!]], n)
-skm('n', '<F1>', [[:H <C-r><C-w><CR>]], n_s)
-skm('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], n_s)
-skm('n', '<F7>', [[<CMD>set spell!<CR>]], n_s)
-skm('i', '<F7>', [[<C-o>:set spell!<CR>]], n_s)
+skm('n', '<F1>', [[:H <C-r><C-w><CR>]], ns)
+skm('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], ns)
+skm('n', '<F7>', [[<CMD>set spell!<CR>]], ns)
+skm('i', '<F7>', [[<C-o>:set spell!<CR>]], ns)
 
 skm('n', '<C-p>', [[<Tab>]], n)
 skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], n)
-skm('n', '<leader>/', [[<Cmd>noh<CR>]], n_s)
-skm('n', '<leader>;', [[<Cmd>Commands<CR>]], n_s)
-skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], n_s)
-skm('n', '<leader>T', [[<Cmd>Tagbar<CR>]], n_s)
-skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], n_s)
-skm('n', '<leader>V', [[<Cmd>Vista!!<CR>]], n_s)
+skm('n', '<leader>/', [[<Cmd>noh<CR>]], ns)
+skm('n', '<leader>;', [[<Cmd>Commands<CR>]], ns)
+skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], ns)
+skm('n', '<leader>T', [[<Cmd>Tagbar<CR>]], ns)
+skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], ns)
+skm('n', '<leader>V', [[<Cmd>Vista!!<CR>]], ns)
 
 util.command('Wqa', [[wqa]], {nargs = '0'})
 util.command('WQa', [[wqa]], {nargs = '0'})
@@ -63,23 +69,23 @@ skm('x', '', [[<Plug>NERDCommenterToggle]], {})
 skm('i', '', [[<C-o><C-_>]], {})
 
 -- buffers
-skm('n', '<leader>bp', [[<CMD>BufferPick<CR>]], n_s)
-skm('n', '<M-/>', [[<CMD>BufferPick<CR>]], n_s)
-skm('n', '÷', [[<CMD>BufferPick<CR>]], n_s)
+skm('n', '<leader>bp', [[<CMD>BufferPick<CR>]], ns)
+skm('n', '<M-/>', [[<CMD>BufferPick<CR>]], ns)
+skm('n', '÷', [[<CMD>BufferPick<CR>]], ns)
 
-skm('n', '<M-o>', [[<CMD>BufferOrderByBufnr<CR>]], n_s)
-skm('n', 'ø', [[<CMD>BufferOrderByBufnr<CR>]], n_s)
-for i = 1, 9 do skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], n_s) end
-skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], n_s)
-skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], n_s)
+skm('n', '<M-o>', [[<CMD>BufferOrderByBufnr<CR>]], ns)
+skm('n', 'ø', [[<CMD>BufferOrderByBufnr<CR>]], ns)
+for i = 1, 9 do skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], ns) end
+skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], ns)
+skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], ns)
 
-skm('n', '<leader>"', [[<CMD>sbn<CR>]], n_s)
-skm('n', '<leader>#', [[<C-^>]], n_s)
-skm('n', '<leader>%', [[<CMD>vert sbn<CR>]], n_s)
-skm('n', '<leader>bD', [[<CMD>lua require'mod.functions'.buffer_close_all_but_visible()<CR>]], n_s)
-skm('n', '<leader>be', [[<CMD>enew<CR>]], n_s)
-skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], n_s)
-skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], n_s)
+skm('n', '<leader>"', [[<CMD>sbn<CR>]], ns)
+skm('n', '<leader>#', [[<C-^>]], ns)
+skm('n', '<leader>%', [[<CMD>vert sbn<CR>]], ns)
+skm('n', '<leader>bD', [[<CMD>lua require'mod.functions'.buffer_close_all_but_visible()<CR>]], ns)
+skm('n', '<leader>be', [[<CMD>enew<CR>]], ns)
+skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], ns)
+skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], ns)
 
 util.command('BufferOrderByBufnr', [[lua require 'mod.functions'.order_by_bufnr()]], {nargs = '0'})
 
@@ -90,21 +96,21 @@ local function resize_window_str(p, c)
   return p .. req_util .. [[.resize_window(']] .. c .. [[')<CR>]]
 end
 
-skm('n', '<C-M-h>', resize_window_str('<Cmd>', 'h'), n_s)
-skm('n', '<C-M-j>', resize_window_str('<Cmd>', 'j'), n_s)
-skm('n', '<C-M-k>', resize_window_str('<Cmd>', 'k'), n_s)
-skm('n', '<C-M-l>', resize_window_str('<Cmd>', 'l'), n_s)
+skm('n', '<C-M-h>', resize_window_str('<Cmd>', 'h'), ns)
+skm('n', '<C-M-j>', resize_window_str('<Cmd>', 'j'), ns)
+skm('n', '<C-M-k>', resize_window_str('<Cmd>', 'k'), ns)
+skm('n', '<C-M-l>', resize_window_str('<Cmd>', 'l'), ns)
 
-skm('t', '<C-M-h>', resize_window_str('<C-\\><C-n>:', 'h'), n_s)
-skm('t', '<C-M-j>', resize_window_str('<C-\\><C-n>:', 'j'), n_s)
-skm('t', '<C-M-k>', resize_window_str('<C-\\><C-n>:', 'k'), n_s)
-skm('t', '<C-M-l>', resize_window_str('<C-\\><C-n>:', 'l'), n_s)
+skm('t', '<C-M-h>', resize_window_str('<C-\\><C-n>:', 'h'), ns)
+skm('t', '<C-M-j>', resize_window_str('<C-\\><C-n>:', 'j'), ns)
+skm('t', '<C-M-k>', resize_window_str('<C-\\><C-n>:', 'k'), ns)
+skm('t', '<C-M-l>', resize_window_str('<C-\\><C-n>:', 'l'), ns)
 
 -- line movement
-skm('n', '<S-down>', [[<CMD>m+<CR>]], n_s)
-skm('n', '<S-up>', [[<CMD>m-2<CR>]], n_s)
-skm('n', '<S-Tab>', [[<CMD>bp<CR>]], n_s)
-skm('n', '<Tab>', [[<CMD>bn<CR>]], n_s)
+skm('n', '<S-down>', [[<CMD>m+<CR>]], ns)
+skm('n', '<S-up>', [[<CMD>m-2<CR>]], ns)
+skm('n', '<S-Tab>', [[<CMD>bp<CR>]], ns)
+skm('n', '<Tab>', [[<CMD>bn<CR>]], ns)
 skm('i', '<S-down>', [[<C-o>:m+<CR>]], n)
 skm('i', '<S-up>', [[<C-o>:m-2<CR>]], n)
 skm('x', '<S-down>', [[:m'>+<CR>gv=gv]], n)
@@ -116,25 +122,22 @@ skm('x', '<Tab>', [[>gv]], n)
 skm('x', '<S-Tab>', [[<gv]], n)
 
 -- git
-skm('n', '<leader>gg', [[<CMD>Git<CR>]], n_s)
-skm('n', '<leader>gl', [[<CMD>ToggleLazyGit<CR>]], n_s)
-skm('n', '<leader>ge', [[<CMD>Ge:<CR>]], n_s)
-skm('n', '<leader>z', [[<CMD>ZoomToggle<CR>]], n_s)
-skm('n', '<leader>}', [[zf}]], n_s)
+skm('n', '<leader>gg', [[<CMD>Git<CR>]], ns)
+skm('n', '<leader>gl', [[<CMD>ToggleLazyGit<CR>]], ns)
+skm('n', '<leader>ge', [[<CMD>Ge:<CR>]], ns)
+skm('n', '<leader>z', [[<CMD>ZoomToggle<CR>]], ns)
+skm('n', '<leader>}', [[zf}]], ns)
 
-skm('n', '<leader>i', [[<CMD>]] .. req_util .. [[.toggle_bool_option('o', 'ignorecase')<CR>]], n_s)
+skm('n', '<leader>i', [[<CMD>]] .. req_util .. [[.toggle_bool_option('o', 'ignorecase')<CR>]], ns)
 
 skm('n', ';', [[<Plug>(clever-f-repeat-forward)]], {})
 skm('n', ',', [[<Plug>(clever-f-repeat-back)]], {})
 
-skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], n_s)
-skm('x', '<leader>ea', [[:EasyAlign<CR>]], n_s)
-
--- skm('n', '<leader>hn', [[<CMD>GitGutterNextHunk<CR>]], n_s)
--- skm('n', '<leader>hN', [[<CMD>GitGutterPrevHunk<CR>]], n_s)
+skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], ns)
+skm('x', '<leader>ea', [[:EasyAlign<CR>]], ns)
 
 skm('n', '<leader>H',
-    [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]], n_s)
+    [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]], ns)
 
 -- bs
 vim.cmd([[
@@ -161,10 +164,10 @@ vim.cmd([[
   endfunc
 ]])
 
-skm('i', '<BS>', [[<C-r>=MasterBS()<CR>]], n_s)
+skm('i', '<BS>', [[<C-r>=MasterBS()<CR>]], ns)
 
-skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], n_s)
-skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], n_s)
+skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
+skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
 
 util.command('ToggleLazyGit', [[w | lua require'mod.terminal'.floating_term('lazygit')]],
     {nargs = '0'})
