@@ -10,7 +10,6 @@ vim.cmd('packadd packer.nvim')
 
 local packer = require 'packer'
 
--- plugins
 return packer.startup(function()
   local use = packer.use
 
@@ -66,6 +65,7 @@ return packer.startup(function()
 
   --- QOL
   use {'folke/todo-comments.nvim'}
+  use {'folke/trouble.nvim'}
   use {'simrat39/symbols-outline.nvim'}
   use {'bronson/vim-visual-star-search'}
   use {'dominikduda/vim_current_word'}
@@ -165,4 +165,3 @@ return packer.startup(function()
   -- }
 
 end)
---

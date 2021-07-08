@@ -68,7 +68,7 @@ function M.tags_absolute(opts)
       return true
     end,
   }):find()
- 
+
 end
 
 local function escape_chars(string)
@@ -89,33 +89,26 @@ end
 
 M.histfile = os.getenv('HOME') .. '/.cache/nvim/telescope.histfile'
 
-local prompt_hist = ""
+local prompt_hist = ''
 local histfile_idx = -1
-
 
 function M.grep_string_filtered(opts)
   local conf = config.values
 
   histfile_idx = -1
-  prompt_hist = ""
+  prompt_hist = ''
 
   local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
   local search_dirs = opts.search_dirs
-  local word = opts.search or vim.fn.expand("<cword>")
+  local word = opts.search or vim.fn.expand('<cword>')
   local search = opts.use_regex and word or escape_chars(word)
   local word_match = opts.word_match
   opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
 
-  local args = vim.tbl_flatten {
-    vimgrep_arguments,
-    word_match,
-    search,
-  }
+  local args = vim.tbl_flatten {vimgrep_arguments, word_match, search}
 
   if search_dirs then
-    for _, path in ipairs(search_dirs) do
-      table.insert(args, vim.fn.expand(path))
-    end
+    for _, path in ipairs(search_dirs) do table.insert(args, vim.fn.expand(path)) end
   else
     table.insert(args, '.')
   end
@@ -130,23 +123,12 @@ function M.grep_string_filtered(opts)
     local l = line:gsub(rg_rgx, '')
     return original_scoring_function(a, prompt, l, b)
   end
-  -- highligher
-  local original_highlighter = sorter.highlighter
-  sorter.highlighter = function(a, prompt, line)
-    local _, idx = line:find(rg_rgx)
-    if idx then
-      local ll = line:sub(1, idx):gsub('.', ' ')
-      local lr = line:sub(idx + 1):lower()
-      line = ll .. lr
-    end
-    return original_highlighter(a, prompt, line)
-  end
- 
+
   pickers.new(opts, {
     prompt_title = 'Find Word',
     finder = finders.new_oneshot_job(args, opts),
     previewer = conf.grep_previewer(opts),
-    sorter = sorter
+    sorter = sorter,
   }):find()
 end
 
@@ -183,7 +165,7 @@ end
 
 function actions.append_to_hist(prompt_bufnr)
   if M.euid == '0' then return end
-  if prompt_hist ~= "" then
+  if prompt_hist ~= '' then
     local f = io.open(M.histfile, 'a+')
     f:write(prompt_hist .. '\n')
     f:close()
@@ -230,7 +212,7 @@ function M.init()
         '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock',
         '\\.git',
       },
-      shorten_path = true,
+      path_display = {'absolute'},
       winblend = 5,
       border = {},
       borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
@@ -244,7 +226,6 @@ function M.init()
     },
   }
   telescope.load_extension('fzy_native')
- 
 
   -- mappings
   local n_s = {noremap = true, silent = true}
@@ -261,7 +242,8 @@ function M.init()
   skm('n', '<leader>ga', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
   skm('n', '<leader>M', [[<CMD>Telescope marks<CR>]], n_s)
   skm('n', '<leader>r', [[<CMD>lua require'mod.telescope'.grep_string_filtered ]] ..
-      [[ { search = '', disable_coordinates = true, shorten_path = true, }<CR>]], {noremap = true})
+      [[ { search = '', disable_coordinates = true, path_display = 'hidden', }<CR>]],
+      {noremap = true})
   skm('n', '<leader>f',
       [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]], n_s)
   skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], n_s)
@@ -276,7 +258,7 @@ function M.init()
 
   skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
       n_s)
- 
+
 end
 
 return M

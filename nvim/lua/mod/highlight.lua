@@ -3,7 +3,7 @@ local util = require 'utl.util'
 
 local M = {}
 
-function M.init() --
+function M.init()
   vim.g.python_highlight_all = 1
   vim.g.vimspectrItalicComment = 'on'
   vim.g.onedark_termcolors = 256
@@ -31,28 +31,20 @@ function M.init() --
   })
 
   vim.cmd('command! -nargs=0 HiTest so $VIMRUNTIME/syntax/hitest.vim')
-end --
+end
 
-function M.additional_highlights() --
+function M.additional_highlights()
   -- vim.cmd([[
   --   hi! link HoverMatch MatchParen
-  --   hi! SpelunkerSpellBad gui=undercurl
   --   hi! OverLength guibg=#995959 guifg=#ffffff
-  --   hi! link JavaIdentifier NONE
-  --   hi! link CleverFChar ErrorMsg
-  --   hi! link CleverFCursor ErrorMsg
-  --   hi! CurrentWord gui=bold
-  --   hi! link CurrentWordTwins CurrentWord
-  --   exec 'hi! NormalFloat guibg=' . g:color_dict.highlight[1]
-  --   hi! link NormalFloat Normal " Still unsure of this
   -- ]])
   -- if os.getenv('TERMTHEME') == 'light' then
   --   vim.cmd('hi! Visual guifg=bg')
   --   vim.cmd('hi! VertSplit guibg=NONE')
   -- end
-end --
+end
 
-function M.hover_match() --
+function M.hover_match()
   local id = vim.b.hover_match_id
   if id then
     for _, match in ipairs(vim.fn.getmatches()) do
@@ -67,9 +59,9 @@ function M.hover_match() --
     vim.b.hover_match_id = vim.fn.matchadd('HoverMatch', '\\([^a-zA-z]\\|^\\)\\zs' .. w ..
         '\\ze\\([^a-zA-z]\\|$\\)', 0)
   end
-end --
+end
 
-function M.SetSignTheme(bg) --
+function M.SetSignTheme(bg)
   vim.fn.execute('hi! SignColumn            guibg=' .. bg)
   vim.fn.execute('hi! GitGutterAdd          guibg=' .. bg)
   vim.fn.execute('hi! GitGutterChange       guibg=' .. bg)
@@ -77,6 +69,6 @@ function M.SetSignTheme(bg) --
   vim.fn.execute('hi! GitGutterDelete       guibg=' .. bg)
   vim.fn.execute('hi! CocErrorSign          guibg=' .. bg)
   vim.fn.execute('hi! CocWarningSign        guibg=' .. bg)
-end --
+end
 
 return M
