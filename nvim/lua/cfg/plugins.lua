@@ -160,7 +160,8 @@ return packer.startup(function()
   -- use {
   --   '~/gitclones/bolorscheme',
   --   config = function()
-  --     require'bolorscheme'.setup {theme = 'spacegray'}
+  --     -- require'bolorscheme'.setup {theme = 'spacegray'}
+  --     require'bolorscheme'.setup {theme = 'unicorn', light = false}
   --   end,
   -- }
 

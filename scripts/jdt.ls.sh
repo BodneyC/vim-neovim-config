@@ -19,4 +19,5 @@ GRADLE_HOME=$HOME/gradle "$JAVA_HOME/bin/java" \
   -data "$HOME/.config/eclipse.jdt.ls" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \
+  --add-opens java.base/java.time=ALL-UNNAMED \
   --add-opens java.base/java.lang=ALL-UNNAMED

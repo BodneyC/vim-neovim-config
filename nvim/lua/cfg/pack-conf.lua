@@ -3,6 +3,7 @@ local skm = vim.api.nvim_set_keymap
 
 local lang = require 'utl.lang'
 local util = require 'utl.util'
+local fs = require 'utl.fs'
 
 vim.g.vim_markdown_folding_disabled = true
 vim.g.vim_markdown_no_default_key_mappings = true
@@ -124,7 +125,7 @@ vim.g.scrollview_excluded_filetypes = {'defx'}
 vim.g.indentLine_char = '│'
 vim.g.indentLine_first_char = '│'
 vim.g.indentLine_fileTypeExclude = {
-  'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help', '',
+  'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help', 'defx', '',
 }
 
 vim.g.NERDSpaceDelims = 1
@@ -146,7 +147,10 @@ vim.g.gutentags_generate_on_missing = 1
 vim.g.gutentags_generate_on_new = 1
 vim.g.gutentags_generate_on_empty_buffer = 0
 vim.g.gutentags_ctags_exclude = {'*.json'}
-vim.g.gutentags_ctags_extra_args = {'--tag-relative=always', '--fields=+ailmnS'}
+vim.g.gutentags_ctags_extra_args = {
+  '--tag-relative=' .. (fs.dir_exists(os.getenv('HOME') .. '/Library') and 'yes' or 'always'),
+  '--fields=+ailmnS',
+}
 
 vim.g.vista_icon_indent = {'╰─▸ ', '├─▸ '}
 vim.g.vista_default_executive = 'ctags'

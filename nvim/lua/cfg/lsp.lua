@@ -6,6 +6,8 @@ local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
 local lsp_status = require 'lsp-status'
 
+local home = vim.loop.os_homedir()
+
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
       underline = false,
@@ -43,13 +45,9 @@ local function on_attach(client, bufnr)
 
   -- mappings
   local ns = {noremap = true, silent = true}
-  local se = {silent = true, expr = true}
 
   local function bskm(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local function bso(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
   end
 
   lsp_status.on_attach(client, bufnr)
@@ -114,7 +112,10 @@ lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabil
 lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 -- pip3 install --user 'python-language-sever[all]'
-lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+-- lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+
+-- pip3 install --user 'python-lsp-sever[all]'
+lspconfig.pylsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -125,6 +126,10 @@ cd 3rd/luamake && compile/install.sh
 cd -
 ./3rd/luamake/luamake rebuild
 --]]
+-- local library = {}
+local path = vim.split(package.path, ';')
+table.insert(path, 'lua/?.lua')
+table.insert(path, 'lua/?/init.lua')
 local lua_ls_root_dir = vim.fn.expand('$HOME') .. '/software/lua-language-server'
 lspconfig.sumneko_lua.setup {
   cmd = {
@@ -133,14 +138,18 @@ lspconfig.sumneko_lua.setup {
   },
   settings = {
     Lua = {
-      runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
+      runtime = {version = 'LuaJIT', path = path},
       diagnostics = {globals = {'vim'}},
       workspace = {
         library = {
+          [vim.fn.expand('$VIMRUNTIME')] = true,
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
           [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+          [home .. '/.local/share/nvim/runtime/lua/vim/lsp'] = true,
+          [home .. '/gitclones/vim-neovim-config/nvim/lua'] = true,
         },
       },
+      telemetry = {enable = false},
     },
   },
   on_attach = on_attach,
@@ -156,13 +165,12 @@ if not lspconfig.arduino_lsp then
   configs.arduino_lsp = {
     default_config = {
       cmd = {
-        'arduino-language-server',
-        '-cli-config=' .. os.getenv('HOME') .. '/.arduino15/arduino-cli.yaml', '-log',
-        '-logpath=' .. os.getenv('HOME') .. '/.arduino15/lsp-logs',
+        'arduino-language-server', '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml', '-log',
+        '-logpath=' .. home .. '/.arduino15/lsp-logs',
       },
       filetypes = {'arduino'},
       root_dir = function(fname)
-        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+        return lspconfig.util.find_git_ancestor(fname) or home
       end,
       settings = {},
     },
@@ -181,17 +189,12 @@ lspconfig.groovyls.setup {
   capabilities = lsp_status.capabilities,
   cmd = {
     'java', '-jar',
-    os.getenv('HOME') ..
-        '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
+    home .. '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
   },
   filetypes = {'groovy'},
-  root_dir = require'lspconfig.util'.root_pattern('.git') or vim.loop.os_homedir(),
+  root_dir = require'lspconfig.util'.root_pattern('.git') or home,
   settings = {
-    groovy = {
-      classpath = {
-        os.getenv('HOME') .. '/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4',
-      },
-    },
+    groovy = {classpath = {home .. '/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4'}},
   },
 }
 
@@ -205,7 +208,7 @@ lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
   cmd = {
-    os.getenv('HOME') ..
+    home ..
         '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
   },
 }
@@ -245,8 +248,7 @@ lspconfig.diagnosticls.setup {
       pkgbuild = {
         args = {'%file'},
         -- manual - vim-pkgbuild
-        command = os.getenv('HOME') ..
-            '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
+        command = home .. '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
           {column = 2, line = 1, message = 4, security = 3},

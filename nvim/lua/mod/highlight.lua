@@ -10,10 +10,10 @@ function M.init()
 
   vim.o.termguicolors = true
 
-  if os.getenv('TERMTHEME') == 'light' then
-    vim.cmd('colo plint-light')
-  else
-  end
+  -- if os.getenv('TERMTHEME') == 'light' then
+  --   vim.cmd('colo plint-light')
+  -- else
+  -- end
 
   M.additional_highlights()
 
