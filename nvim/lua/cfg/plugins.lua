@@ -1,9 +1,11 @@
 local vim = vim
 
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local install_path = vim.fn.stdpath('data') ..
+                       '/site/pack/packer/opt/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' ..
+                   install_path)
 end
 
 vim.cmd('packadd packer.nvim')
@@ -24,17 +26,13 @@ return packer.startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-packer.nvim'},
+      {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope-packer.nvim'},
       {'nvim-telescope/telescope-fzy-native.nvim', run = {'make'}},
     },
   }
   use {'onsails/lspkind-nvim'}
-  use {
-    'junegunn/fzf',
-    run = function()
-      vim.fn['fzf#install']()
-    end,
-  }
+  use {'junegunn/fzf', run = function() vim.fn['fzf#install']() end}
   use {'junegunn/fzf.vim'}
 
   --- DAP
@@ -56,12 +54,38 @@ return packer.startup(function()
   use {'itchyny/calendar.vim', cmd = 'Cal'}
   use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
   use {'nicwest/vim-http', cmd = 'Http'}
+  use {'windwp/nvim-ts-autotag'}
+  use {
+    'kristijanhusak/orgmode.nvim',
+    config = function()
+      require'orgmode'.setup {
+        org_agenda_files = {'~/.org/*'},
+        org_default_notes_file = '~/.org/notes.org',
+      }
+    end,
+  }
   use {'nvim-treesitter/nvim-treesitter'}
   use {'nvim-treesitter/nvim-treesitter-refactor'}
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
   use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
   use {'vigoux/treesitter-context.nvim'}
   use {'RRethy/nvim-treesitter-textsubjects'}
+  use {
+    'p00f/nvim-ts-rainbow',
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        rainbow = {enable = true, extended_mode = true, max_file_lines = 1000},
+      }
+    end,
+  }
+  use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        context_commentstring = {enable = true},
+      }
+    end,
+  }
 
   --- QOL
   use {'folke/todo-comments.nvim'}
@@ -102,13 +126,13 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
 
   --- Prettiness
-  use {
-    'BodneyC/bolorscheme',
-    branch = 'lua',
-    config = function()
-      require'bolorscheme'.setup {theme = 'spacegray'}
-    end,
-  }
+  -- use {
+  --   'BodneyC/bolorscheme',
+  --   branch = 'lua',
+  --   config = function()
+  --     require'bolorscheme'.setup {theme = 'spacegray'}
+  --   end,
+  -- }
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim'}
   use {'amdt/vim-niji'}
@@ -157,12 +181,12 @@ return packer.startup(function()
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-  -- use {
-  --   '~/gitclones/bolorscheme',
-  --   config = function()
-  --     -- require'bolorscheme'.setup {theme = 'spacegray'}
-  --     require'bolorscheme'.setup {theme = 'unicorn', light = false}
-  --   end,
-  -- }
+  use {
+    '~/gitclones/bolorscheme',
+    config = function()
+      require'bolorscheme'.setup {theme = 'spacegray'}
+      -- require'bolorscheme'.setup {theme = 'unicorn', light = false}
+    end,
+  }
 
 end)

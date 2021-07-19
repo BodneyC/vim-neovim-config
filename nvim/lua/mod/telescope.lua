@@ -4,8 +4,8 @@ local util = require 'utl.util'
 
 -- imports
 local telescope = require 'telescope'
-local action_set = require('telescope.actions.set')
-local action_state = require('telescope.actions.state')
+local action_set = require 'telescope.actions.set'
+local action_state = require 'telescope.actions.state'
 local config = require 'telescope.config'
 local sorters = require 'telescope.sorters'
 local pickers = require 'telescope.pickers'
@@ -108,7 +108,9 @@ function M.grep_string_filtered(opts)
   local args = vim.tbl_flatten {vimgrep_arguments, word_match, search}
 
   if search_dirs then
-    for _, path in ipairs(search_dirs) do table.insert(args, vim.fn.expand(path)) end
+    for _, path in ipairs(search_dirs) do
+      table.insert(args, vim.fn.expand(path))
+    end
   else
     table.insert(args, '.')
   end
@@ -118,7 +120,9 @@ function M.grep_string_filtered(opts)
   local sorter = sorters.get_fzy_sorter()
   local original_scoring_function = sorter.scoring_function
   sorter.scoring_function = function(a, prompt, line, b)
-    if prompt == 0 or #prompt < (opts.ngram_len or 2) then return 0 end
+    if prompt == 0 or #prompt < (opts.ngram_len or 2) then
+      return 0
+    end
     prompt_hist = prompt
     local l = line:gsub(rg_rgx, '')
     return original_scoring_function(a, prompt, l, b)
@@ -133,38 +137,68 @@ function M.grep_string_filtered(opts)
 end
 
 local function read_hist_file()
-  if M.euid == '0' then return end
+  if M.euid == '0' then
+    return
+  end
   local f = io.open(M.histfile, 'r')
-  if not f then return nil end
+  if not f then
+    return nil
+  end
   local arr = {}
-  for line in f:lines() do table.insert(arr, line); end
+  for line in f:lines() do
+    table.insert(arr, line);
+  end
   f:close()
   return arr
 end
 
 function actions.prev_hist(_)
-  if M.euid == '0' then return end
+  if M.euid == '0' then
+    return
+  end
   local arr = read_hist_file()
-  if not arr then return end
-  if histfile_idx == -1 or histfile_idx > #arr then histfile_idx = #arr + 1 end
-  if histfile_idx ~= 1 then histfile_idx = histfile_idx - 1 end
-  if not arr[histfile_idx] then return end
+  if not arr then
+    return
+  end
+  if histfile_idx == -1 or histfile_idx > #arr then
+    histfile_idx = #arr + 1
+  end
+  if histfile_idx ~= 1 then
+    histfile_idx = histfile_idx - 1
+  end
+  if not arr[histfile_idx] then
+    return
+  end
   vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
-  if histfile_idx == 1 then return end
+  if histfile_idx == 1 then
+    return
+  end
 end
 
 function actions.next_hist(_)
-  if M.euid == '0' then return end
+  if M.euid == '0' then
+    return
+  end
   local arr = read_hist_file()
-  if not arr then return end
-  if histfile_idx == -1 or histfile_idx > #arr then histfile_idx = #arr end
-  if histfile_idx ~= #arr then histfile_idx = histfile_idx + 1 end
-  if not arr[histfile_idx] then return end
+  if not arr then
+    return
+  end
+  if histfile_idx == -1 or histfile_idx > #arr then
+    histfile_idx = #arr
+  end
+  if histfile_idx ~= #arr then
+    histfile_idx = histfile_idx + 1
+  end
+  if not arr[histfile_idx] then
+    return
+  end
   vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
 end
 
 function actions.append_to_hist(prompt_bufnr)
-  if M.euid == '0' then return end
+  if M.euid == '0' then
+    return
+  end
   if prompt_hist ~= '' then
     local f = io.open(M.histfile, 'a+')
     f:write(prompt_hist .. '\n')
@@ -191,9 +225,10 @@ function M.init()
       },
       sorting_strategy = 'ascending',
       vimgrep_arguments = {
-        'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number',
-        '--column', '--smart-case', '--glob', '!.git/**', '--glob', '!.vim/**', '--glob',
-        '!**/target/**', '--glob', '!**/*.class',
+        'rg', '--hidden', '--color=never', '--no-heading', '--with-filename',
+        '--line-number', '--column', '--smart-case', '--glob', '!.git/**',
+        '--glob', '!.vim/**', '--glob', '!**/target/**', '--glob',
+        '!**/*.class',
       },
       prompt_prefix = '> ',
       selection_strategy = 'reset',
@@ -209,8 +244,8 @@ function M.init()
         vertical = {mirror = true},
       },
       file_ignore_patterns = {
-        '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules', 'package-lock\\.json', 'yarn\\.lock',
-        '\\.git',
+        '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules',
+        'package-lock\\.json', 'yarn\\.lock', '\\.git',
       },
       path_display = {'absolute'},
       winblend = 5,
@@ -230,34 +265,39 @@ function M.init()
   -- mappings
   local n_s = {noremap = true, silent = true}
   local skm = vim.api.nvim_set_keymap
-  util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]], {nargs = '1'})
+  util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]],
+    {nargs = '1'})
   skm('n', '<leader>gs', [[<CMD>Telescope git_status<CR>]], n_s)
   skm('n', '<leader>gb', [[<CMD>Telescope git_branches<CR>]], n_s)
   skm('n', '<leader>gc', [[<CMD>Telescope git_commits<CR>]], n_s)
   skm('n', '<leader>gr', [[<CMD>Telescope registers<CR>]], n_s)
   skm('n', '<leader>m', [[<CMD>Telescope keymaps<CR>]], n_s)
-  skm('n', '<leader>p', [[<CMD>lua require'telescope'.extensions.packer.plugins(opts)<CR>]], n_s)
+  skm('n', '<leader>p',
+    [[<CMD>lua require'telescope'.extensions.packer.plugins(opts)<CR>]], n_s)
   skm('n', '<leader>ld', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
   skm('n', '<leader>lw', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
   skm('n', '<leader>ga', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
   skm('n', '<leader>M', [[<CMD>Telescope marks<CR>]], n_s)
-  skm('n', '<leader>r', [[<CMD>lua require'mod.telescope'.grep_string_filtered ]] ..
+  skm('n', '<leader>r',
+    [[<CMD>lua require'mod.telescope'.grep_string_filtered ]] ..
       [[ { search = '', disable_coordinates = true, path_display = 'hidden', }<CR>]],
-      {noremap = true})
+    {noremap = true})
   skm('n', '<leader>f',
-      [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]], n_s)
+    [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]],
+    n_s)
   skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], n_s)
 
   -- Gets better results than the builtin
-  local grep_string_under_cursor = [[<CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
-                                       [[require'telescope.builtin'.grep_string { ]] ..
-                                       [[ search = s, prompt_prefix = s .. ' > ', ]] ..
-                                       [[ ngram_len = 1, }<CR>]]
+  local grep_string_under_cursor =
+    [[<CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
+      [[require'telescope.builtin'.grep_string { ]] ..
+      [[ search = s, prompt_prefix = s .. ' > ', ]] .. [[ ngram_len = 1, }<CR>]]
   skm('n', '<M-]>', grep_string_under_cursor, n_s)
   skm('n', '‘', grep_string_under_cursor, n_s)
 
-  skm('n', '<M-[>', [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
-      n_s)
+  skm('n', '<M-[>',
+    [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
+    n_s)
 
 end
 

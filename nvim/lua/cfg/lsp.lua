@@ -9,25 +9,30 @@ local lsp_status = require 'lsp-status'
 local home = vim.loop.os_homedir()
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      underline = false,
-      virtual_text = false, -- {space = 2, prefix = ' '},
-      signs = true,
-      update_in_insert = false,
-    })
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = false,
+    virtual_text = false, -- {space = 2, prefix = ' '},
+    signs = true,
+    update_in_insert = false,
+  })
 vim.g.diagnostic_auto_popup_while_jump = false
 
 util.augroup({
   name = '__LSP__',
-  autocmds = {{event = 'FileType', glob = 'java', cmd = [[lua require'mod.jdtls'.init()]]}},
+  autocmds = {
+    {event = 'FileType', glob = 'java', cmd = [[lua require'mod.jdtls'.init()]]},
+  },
 })
 
 -- diagnostics
-vim.fn.sign_define('LspDiagnosticsSignError', {text = ' ', texthl = 'LspDiagnosticsError'})
-vim.fn.sign_define('LspDiagnosticsSignWarning', {text = ' ', texthl = 'LspDiagnosticsWarning'})
+vim.fn.sign_define('LspDiagnosticsSignError',
+  {text = ' ', texthl = 'LspDiagnosticsError'})
+vim.fn.sign_define('LspDiagnosticsSignWarning',
+  {text = ' ', texthl = 'LspDiagnosticsWarning'})
 vim.fn.sign_define('LspDiagnosticsSignInformation',
-    {text = ' ', texthl = 'LspDiagnosticsInformation'})
-vim.fn.sign_define('LspDiagnosticsSignHint', {text = 'ﯦ ', texthl = 'LspDiagnosticsHint'})
+  {text = ' ', texthl = 'LspDiagnosticsInformation'})
+vim.fn.sign_define('LspDiagnosticsSignHint',
+  {text = 'ﯦ ', texthl = 'LspDiagnosticsHint'})
 
 lsp_status.register_progress()
 lsp_status.config({
@@ -46,9 +51,7 @@ local function on_attach(client, bufnr)
   -- mappings
   local ns = {noremap = true, silent = true}
 
-  local function bskm(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
+  local function bskm(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   lsp_status.on_attach(client, bufnr)
 
@@ -58,9 +61,12 @@ local function on_attach(client, bufnr)
   bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
   bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
   bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
-  bskm('n', ']w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
-  bskm('n', '[w', [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
-  bskm('n', '<Leader>F', '<CMD>lua require\'utl.util\'.document_formatting()<CR>', ns)
+  bskm('n', ']w',
+    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
+  bskm('n', '[w',
+    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
+  bskm('n', '<Leader>F',
+    '<CMD>lua require\'utl.util\'.document_formatting()<CR>', ns)
 
   local lsp_leader = [[<leader>l]]
 
@@ -75,47 +81,85 @@ local function on_attach(client, bufnr)
 
 end
 
-util.command('LspStopAll', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-util.command('LspBufStopAll', 'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
+util.command('LspStopAll',
+  'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
+util.command('LspBufStopAll',
+  'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 -- npm i -g typescript-language-server
-lspconfig.tsserver.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g dockerfile-language-server-nodejs
-lspconfig.dockerls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.dockerls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g bash-language-server
-lspconfig.bashls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.bashls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- package-manager - clang
-lspconfig.clangd.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- manual - https://github.com/snoe/clojure-lsp
-lspconfig.clojure_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.clojure_lsp.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- go get golang.org/x/tools/gopls@latest
-lspconfig.gopls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.gopls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g vscode-html-languageserver-bin
-lspconfig.html.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.html.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g vscode-json-languageserver
-lspconfig.jsonls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g vim-language-server
-lspconfig.vimls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.vimls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- npm i -g yaml-language-server
-lspconfig.yamlls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.yamlls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- rustup component add rls rust-{analysis,src}
-lspconfig.rls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.rls.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 -- pip3 install --user 'python-language-sever[all]'
 -- lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
 
 -- pip3 install --user 'python-lsp-sever[all]'
-lspconfig.pylsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.pylsp.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -130,11 +174,13 @@ cd -
 local path = vim.split(package.path, ';')
 table.insert(path, 'lua/?.lua')
 table.insert(path, 'lua/?/init.lua')
-local lua_ls_root_dir = vim.fn.expand('$HOME') .. '/software/lua-language-server'
+local lua_ls_root_dir = vim.fn.expand('$HOME') ..
+                          '/software/lua-language-server'
 lspconfig.sumneko_lua.setup {
   cmd = {
-    lua_ls_root_dir .. '/bin/' .. (util.basic_os_info() == 'Darwin' and 'macOS' or 'Linux') ..
-        '/lua-language-server', '-E', lua_ls_root_dir .. '/main.lua',
+    lua_ls_root_dir .. '/bin/' ..
+      (util.basic_os_info() == 'Darwin' and 'macOS' or 'Linux') ..
+      '/lua-language-server', '-E', lua_ls_root_dir .. '/main.lua',
   },
   settings = {
     Lua = {
@@ -165,7 +211,8 @@ if not lspconfig.arduino_lsp then
   configs.arduino_lsp = {
     default_config = {
       cmd = {
-        'arduino-language-server', '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml', '-log',
+        'arduino-language-server',
+        '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml', '-log',
         '-logpath=' .. home .. '/.arduino15/lsp-logs',
       },
       filetypes = {'arduino'},
@@ -176,7 +223,10 @@ if not lspconfig.arduino_lsp then
     },
   }
 end
-lspconfig.arduino_lsp.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
+lspconfig.arduino_lsp.setup {
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -188,13 +238,17 @@ lspconfig.groovyls.setup {
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
   cmd = {
-    'java', '-jar',
-    home .. '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
+    'java', '-jar', home ..
+      '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
   },
   filetypes = {'groovy'},
   root_dir = require'lspconfig.util'.root_pattern('.git') or home,
   settings = {
-    groovy = {classpath = {home .. '/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4'}},
+    groovy = {
+      classpath = {
+        home .. '/.m2/repository/org/spockframework/spock-core/1.1-groovy-2.4',
+      },
+    },
   },
 }
 
@@ -209,7 +263,7 @@ lspconfig.kotlin_language_server.setup {
   capabilities = lsp_status.capabilities,
   cmd = {
     home ..
-        '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
+      '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
   },
 }
 
@@ -228,7 +282,9 @@ lspconfig.diagnosticls.setup {
     },
     formatFiletypes = {sh = 'shfmt', zsh = 'shfmt'},
     -- package-manager - shfmt
-    formatters = {shfmt = {args = {'-i=2', '-bn', '-ci', '-sr'}, command = 'shfmt'}},
+    formatters = {
+      shfmt = {args = {'-i=2', '-bn', '-ci', '-sr'}, command = 'shfmt'},
+    },
     linters = {
       markdown = {
         -- npm i -g markdownlint
@@ -238,7 +294,8 @@ lspconfig.diagnosticls.setup {
         isStdout = false,
         formatPattern = {
           -- README.md:3:81 MD013/line-length Line length [Expected: 80; Actual: 282]
-          '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$', {security = 1, line = 2, column = 3, message = 4},
+          '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$',
+          {security = 1, line = 2, column = 3, message = 4},
         },
         offsetColumn = 0,
         offsetLine = 0,
@@ -248,7 +305,8 @@ lspconfig.diagnosticls.setup {
       pkgbuild = {
         args = {'%file'},
         -- manual - vim-pkgbuild
-        command = home .. '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
+        command = home ..
+          '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
           {column = 2, line = 1, message = 4, security = 3},
@@ -264,7 +322,14 @@ lspconfig.diagnosticls.setup {
         formatLines = 1,
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
-          {column = 2, endColumn = 2, endLine = 1, line = 1, message = 4, security = 3},
+          {
+            column = 2,
+            endColumn = 2,
+            endLine = 1,
+            line = 1,
+            message = 4,
+            security = 3,
+          },
         },
         offsetColumn = 0,
         offsetLine = 0,
@@ -279,7 +344,14 @@ lspconfig.diagnosticls.setup {
         formatLines = 1,
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
-          {column = 2, endColumn = 2, endLine = 1, line = 1, message = 4, security = 3},
+          {
+            column = 2,
+            endColumn = 2,
+            endLine = 1,
+            line = 1,
+            message = 4,
+            security = 3,
+          },
         },
         offsetColumn = 0,
         offsetLine = 0,
@@ -291,7 +363,10 @@ lspconfig.diagnosticls.setup {
 }
 --
 
-require('symbols-outline').setup({highlight_hover_item = true, show_guides = true})
+require('symbols-outline').setup({
+  highlight_hover_item = true,
+  show_guides = true,
+})
 
 -- lspkind
 require'lspkind'.init({

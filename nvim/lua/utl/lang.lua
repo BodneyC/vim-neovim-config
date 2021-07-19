@@ -2,19 +2,25 @@ local M = {}
 
 local bytemarkers = {{0x7ff, 192}, {0xffff, 224}, {0x1fffff, 240}}
 
-function M.cmd_output(cmd, throw, raw) --
+function M.cmd_output(cmd, throw, raw)
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
   local _, _, e = f:close()
-  if throw and e ~= 0 then error('Cmd `' .. cmd .. '` returned status code ' .. e) end
-  if raw then return s end
+  if throw and e ~= 0 then
+    error('Cmd `' .. cmd .. '` returned status code ' .. e)
+  end
+  if raw then
+    return s
+  end
   s = string.gsub(s, '^%s+', '')
   s = string.gsub(s, '%s+$', '')
   return s
-end --
+end
 
-function M.utf8(decimal) --
-  if decimal < 128 then return string.char(decimal) end
+function M.utf8(decimal)
+  if decimal < 128 then
+    return string.char(decimal)
+  end
   local charbytes = {}
   for bytes, vals in ipairs(bytemarkers) do
     if decimal <= vals[1] then
@@ -28,15 +34,21 @@ function M.utf8(decimal) --
     end
   end
   return table.concat(charbytes)
-end --
+end
 
-function M.elem_in_array(a, e) --
-  for _, v in ipairs(a) do if v == e then return true end end
+function M.elem_in_array(a, e)
+  for _, v in ipairs(a) do
+    if v == e then
+      return true
+    end
+  end
   return false
-end --
+end
 
-function M.module_exists(m) --
-  if package.loaded[m] then return true end
+function M.module_exists(m)
+  if package.loaded[m] then
+    return true
+  end
   for _, searcher in ipairs(package.searchers or package.loaders) do
     local loader = searcher(m)
     if type(loader) == 'function' then
@@ -45,13 +57,17 @@ function M.module_exists(m) --
     end
   end
   return false
-end --
+end
 
-function string.split(inputstr, sep) --
-  if sep == nil then sep = '%s' end
+function string.split(inputstr, sep)
+  if sep == nil then
+    sep = '%s'
+  end
   local t = {}
-  for str in string.gmatch(inputstr, '([^' .. sep .. ']+)') do table.insert(t, str) end
+  for str in string.gmatch(inputstr, '([^' .. sep .. ']+)') do
+    table.insert(t, str)
+  end
   return t
-end --
+end
 
 return M

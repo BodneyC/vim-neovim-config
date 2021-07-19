@@ -5,8 +5,9 @@ local skm = vim.api.nvim_set_keymap
 local M = {}
 
 function M.pear_tree_close(c) --
-  if #vim.fn['pear_tree#GetSurroundingPair']() ~= 0 and vim.fn['pear_tree#GetSurroundingPair']()[2] ==
-      c and string.match(string.sub(vim.fn.getline('.'), vim.fn.col('.')), '^%s*%' .. c) then
+  if #vim.fn['pear_tree#GetSurroundingPair']() ~= 0 and
+    vim.fn['pear_tree#GetSurroundingPair']()[2] == c and
+    string.match(string.sub(vim.fn.getline('.'), vim.fn.col('.')), '^%s*%' .. c) then
     return vim.fn['pear_tree#insert_mode#JumpOut']()
   else
     return vim.fn['pear_tree#insert_mode#HandleCloser'](c)

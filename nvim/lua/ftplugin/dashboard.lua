@@ -7,7 +7,8 @@ local M = {}
 function M.init()
   local n_s = {noremap = true, silent = true}
   bskm(0, 'n', 'e', [[<Cmd>enew<CR>]], n_s)
-  bskm(0, 'n', 'c', [[<Cmd>call dashboard#telescope#change_colorscheme()<CR>]], n_s)
+  bskm(0, 'n', 'c', [[<Cmd>call dashboard#telescope#change_colorscheme()<CR>]],
+    n_s)
   bskm(0, 'n', 'f', [[<Cmd>call dashboard#telescope#find_file()<CR>]], n_s)
   bskm(0, 'n', 'a', [[<Cmd>call dashboard#telescope#find_word()<CR>]], n_s)
   bskm(0, 'n', 'b', [[<Cmd>call dashboard#telescope#bookmarks()<CR>]], n_s)

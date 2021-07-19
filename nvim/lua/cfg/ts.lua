@@ -1,8 +1,16 @@
 -- local ts_utils = require 'nvim-treesitter.ts_utils'
 require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+    filetypes = {
+      'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte',
+      'vue', 'xml',
+    },
+  },
   ensure_installed = {
-    'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html', 'typescript', 'query',
-    'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript', 'tsx',
+    'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html',
+    'typescript', 'query', 'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript',
+    'tsx',
   },
   indent = {enable = true, disable = {'yaml'}},
   highlight = {enable = true, disable = {'yaml'}},
@@ -15,7 +23,12 @@ require'nvim-treesitter.configs'.setup {
       node_decremental = 'grm',
     },
   },
-  playground = {enable = true, disable = {}, updatetime = 25, persist_queries = false},
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25,
+    persist_queries = false,
+  },
   refactor = {
     smart_rename = {enable = false, keymaps = {smart_rename = '<Leader>R'}},
     highlight_current_scope = {enable = false},
@@ -52,7 +65,10 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       goto_next_start = {[']m'] = '@function.outer', [']]'] = '@class.outer'},
       goto_next_end = {[']M'] = '@function.outer', [']['] = '@class.outer'},
-      goto_previous_start = {['[m'] = '@function.outer', ['[['] = '@class.outer'},
+      goto_previous_start = {
+        ['[m'] = '@function.outer',
+        ['[['] = '@class.outer',
+      },
       goto_previous_end = {['[M'] = '@function.outer', ['[]'] = '@class.outer'},
     },
   },

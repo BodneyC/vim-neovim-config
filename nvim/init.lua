@@ -48,7 +48,9 @@ safe_require 'cfg.arduino'
 -- safe_require_and_init
 local function safe_require_and_init(module)
   local mod = safe_require(module)
-  if mod then mod.init() end
+  if mod then
+    mod.init()
+  end
 end
 
 safe_require_and_init 'mod.terminal'

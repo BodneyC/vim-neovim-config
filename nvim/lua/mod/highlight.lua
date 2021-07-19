@@ -20,8 +20,11 @@ function M.init()
   util.augroup({
     name = '__HIGHLIGHT__',
     autocmds = {
-      {event = 'TextYankPost', glob = '*', cmd = [[silent! lua require'vim.highlight'.on_yank()]]},
       {
+        event = 'TextYankPost',
+        glob = '*',
+        cmd = [[silent! lua require'vim.highlight'.on_yank()]],
+      }, {
         event = 'ColorScheme',
         glob = '*',
         cmd = [[lua require'mod.highlight'.additional_highlights()]],
@@ -56,8 +59,8 @@ function M.hover_match()
   end
   local w = vim.fn.expand('<cword>')
   if string.match(w, '^[0-9]*[#_a-zA-Z][#_a-zA-Z0-9]*$') then
-    vim.b.hover_match_id = vim.fn.matchadd('HoverMatch', '\\([^a-zA-z]\\|^\\)\\zs' .. w ..
-        '\\ze\\([^a-zA-z]\\|$\\)', 0)
+    vim.b.hover_match_id = vim.fn.matchadd('HoverMatch',
+      '\\([^a-zA-z]\\|^\\)\\zs' .. w .. '\\ze\\([^a-zA-z]\\|$\\)', 0)
   end
 end
 

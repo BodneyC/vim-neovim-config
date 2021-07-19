@@ -2,7 +2,9 @@ local vim = vim
 local bskm = vim.api.nvim_buf_set_keymap
 local util = require 'utl.util'
 
-if not DEFX_REM_STACK then DEFX_REM_STACK = {} end
+if not DEFX_REM_STACK then
+  DEFX_REM_STACK = {}
+end
 
 local M = {}
 
@@ -53,7 +55,7 @@ function M.init()
 
   local nse = {noremap = true, silent = true, expr = true}
 
-  bskm(0, 'n', 'u',  [[defx#do_action('call', '__DEFX_REM_RS')]], nse)
+  bskm(0, 'n', 'u', [[defx#do_action('call', '__DEFX_REM_RS')]], nse)
   bskm(0, 'n', 'dd', [[defx#do_action('call', '__DEFX_REM_RM')]], nse)
   bskm(0, 'n', '+x', [[defx#do_action('execute_command', 'chmod +x %')]], nse)
   bskm(0, 'n', '-x', [[defx#do_action('execute_command', 'chmod -x %')]], nse)
@@ -61,14 +63,16 @@ function M.init()
 
   local function str_tree_or_open(if_dir, if_file)
     return 'defx#is_directory() ? defx#do_action(\'open_tree\'' ..
-               (if_dir and ', \'' .. if_dir .. '\'' or '') .. ') ' .. ': defx#do_action(\'open\'' ..
-               (if_file and ', \'' .. if_file .. '\'' or '') .. ')'
+             (if_dir and ', \'' .. if_dir .. '\'' or '') .. ') ' ..
+             ': defx#do_action(\'open\'' ..
+             (if_file and ', \'' .. if_file .. '\'' or '') .. ')'
   end
 
-  util.command('DefxFindWindowFor', 'lua require\'ftplugin.defx\'.defx_find_window_for(<f-args>)',
-      {nargs = 1})
+  util.command('DefxFindWindowFor',
+    'lua require\'ftplugin.defx\'.defx_find_window_for(<f-args>)', {nargs = 1})
 
-  bskm(0, 'n', '<leader>r',  "<CMD>lua require'mod.defx'.resize()<CR>", {noremap = true, silent = true})
+  bskm(0, 'n', '<leader>r', '<CMD>lua require\'mod.defx\'.resize()<CR>',
+    {noremap = true, silent = true})
 
   bskm(0, 'n', '<CR>', str_tree_or_open('recursive:10', 'botright vsplit'), nse)
   bskm(0, 'n', 'gl', str_tree_or_open('recursive:10', 'botright vsplit'), nse)

@@ -56,7 +56,9 @@ vim.g['conjure#mapping#prefix'] = '\\'
 
 vim.g.Hexokinase_virtualText = ' '
 vim.g.Hexokinase_highlighters = {'backgroundfull'}
-vim.g.Hexokinase_optInPatterns = {'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla'}
+vim.g.Hexokinase_optInPatterns = {
+  'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla',
+}
 
 -- fzf
 -- Weird behaviour with os.setenv...
@@ -101,7 +103,8 @@ skm('t', '<M-k>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
 skm('t', '<M-l>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
 skm('t', '<M-\\>', '<C-\\><C-n>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
 
-vim.g['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
+vim.g['test#java#maventest#file_pattern'] =
+  '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
 
 vim.g.matchup_matchparen_offscreen = {method = 'popup'}
 
@@ -137,7 +140,8 @@ vim.g.tagbar_auto_close = 1
 -- gutentags
 -- vim.g.gutentags_trace = 1
 vim.g.gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags'
-os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' .. vim.g.gutentags_cache_dir)
+os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' ..
+             vim.g.gutentags_cache_dir)
 vim.g.gutentags_modules = {'ctags'}
 vim.g.gutentags_add_default_project_roots = 0
 vim.g.gutentags_ctags_auto_set_tags = 1
@@ -148,7 +152,8 @@ vim.g.gutentags_generate_on_new = 1
 vim.g.gutentags_generate_on_empty_buffer = 0
 vim.g.gutentags_ctags_exclude = {'*.json'}
 vim.g.gutentags_ctags_extra_args = {
-  '--tag-relative=' .. (fs.dir_exists(os.getenv('HOME') .. '/Library') and 'yes' or 'always'),
+  '--tag-relative=' ..
+    (fs.dir_exists(os.getenv('HOME') .. '/Library') and 'yes' or 'always'),
   '--fields=+ailmnS',
 }
 

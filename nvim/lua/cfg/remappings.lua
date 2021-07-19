@@ -28,10 +28,14 @@ skm('t', '˙', knav.termin .. 'Left<CR>', ns)
 skm('t', '˚', knav.termin .. 'Up<CR>', ns)
 skm('t', '∆', knav.termin .. 'Down<CR>', ns)
 
-skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], se)
-skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], se)
-skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']], se)
-skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']], se)
+skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']],
+  se)
+skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']],
+  se)
+skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']],
+  se)
+skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']],
+  se)
 
 -- wqa
 skm('n', '<leader>E', [[<CMD>e!<CR>]], ns)
@@ -75,19 +79,23 @@ skm('n', '÷', [[<CMD>BufferPick<CR>]], ns)
 
 skm('n', '<M-o>', [[<CMD>BufferOrderByBufnr<CR>]], ns)
 skm('n', 'ø', [[<CMD>BufferOrderByBufnr<CR>]], ns)
-for i = 1, 9 do skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], ns) end
+for i = 1, 9 do
+  skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], ns)
+end
 skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], ns)
 skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], ns)
 
 skm('n', '<leader>"', [[<CMD>sbn<CR>]], ns)
 skm('n', '<leader>#', [[<C-^>]], ns)
 skm('n', '<leader>%', [[<CMD>vert sbn<CR>]], ns)
-skm('n', '<leader>bD', [[<CMD>lua require'mod.functions'.buffer_close_all_but_visible()<CR>]], ns)
+skm('n', '<leader>bD',
+  [[<CMD>lua require'mod.functions'.buffer_close_all_but_visible()<CR>]], ns)
 skm('n', '<leader>be', [[<CMD>enew<CR>]], ns)
 skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], ns)
 skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], ns)
 
-util.command('BufferOrderByBufnr', [[lua require 'mod.functions'.order_by_bufnr()]], {nargs = '0'})
+util.command('BufferOrderByBufnr',
+  [[lua require 'mod.functions'.order_by_bufnr()]], {nargs = '0'})
 
 local req_util = [[lua require'utl.util']]
 
@@ -128,7 +136,8 @@ skm('n', '<leader>ge', [[<CMD>Ge:<CR>]], ns)
 skm('n', '<leader>z', [[<CMD>ZoomToggle<CR>]], ns)
 skm('n', '<leader>}', [[zf}]], ns)
 
-skm('n', '<leader>i', [[<CMD>]] .. req_util .. [[.toggle_bool_option('o', 'ignorecase')<CR>]], ns)
+skm('n', '<leader>i',
+  [[<CMD>]] .. req_util .. [[.toggle_bool_option('o', 'ignorecase')<CR>]], ns)
 
 skm('n', ';', [[<Plug>(clever-f-repeat-forward)]], {})
 skm('n', ',', [[<Plug>(clever-f-repeat-back)]], {})
@@ -137,7 +146,8 @@ skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], ns)
 skm('x', '<leader>ea', [[:EasyAlign<CR>]], ns)
 
 skm('n', '<leader>H',
-    [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]], ns)
+  [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]],
+  ns)
 
 -- bs
 vim.cmd([[
@@ -169,8 +179,8 @@ skm('i', '<BS>', [[<C-r>=MasterBS()<CR>]], ns)
 skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
 skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
 
-util.command('ToggleLazyGit', [[w | lua require'mod.terminal'.floating_term('lazygit')]],
-    {nargs = '0'})
+util.command('ToggleLazyGit',
+  [[w | lua require'mod.terminal'.floating_term('lazygit')]], {nargs = '0'})
 
 vim.cmd([[
   func! CopyForTerminal(...) range
@@ -180,8 +190,8 @@ vim.cmd([[
     exe "let @" . reg . " = join(lines, ' ')"
   endfunc
 ]])
-util.command('CopyForTerminal', [[<line1>,<line2>call CopyForTerminal(<f-args>)]],
-    {range = true, nargs = '?'})
+util.command('CopyForTerminal',
+  [[<line1>,<line2>call CopyForTerminal(<f-args>)]], {range = true, nargs = '?'})
 
 util.command('Spectre', [[lua require('spectre').open()]], {nargs = 0})
 
@@ -191,10 +201,12 @@ util.command('ConvLineEndings', [[%s/<CR>//g]], {nargs = '0'})
 
 -- lua funcs
 local req_funcs = [[lua require 'mod.functions']]
-util.command('HighlightUnderCursor', req_funcs .. [[.highlight_under_cursor()]], {nargs = '0'})
+util.command('HighlightUnderCursor', req_funcs .. [[.highlight_under_cursor()]],
+  {nargs = '0'})
 util.command('SpellChecker', req_funcs .. [[.spell_checker()]], {nargs = '0'})
 util.command('ZoomToggle', req_funcs .. [[.zoom_toggle()]], {nargs = '0'})
-util.command('ChangeIndent', req_funcs .. [[.change_indent(<f-args>)]], {nargs = '1'})
+util.command('ChangeIndent', req_funcs .. [[.change_indent(<f-args>)]],
+  {nargs = '1'})
 util.command('SetIndent', req_funcs .. [[.set_indent(<f-args>)]], {nargs = '1'})
 util.command('MatchOver', req_funcs .. [[.match_over(<f-args>)]], {nargs = '?'})
 

@@ -36,8 +36,12 @@ end --
 function M.set_indent(n) --
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(':IndentLinesReset') == 1 then vim.cmd('IndentLinesReset') end
-  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then vim.cmd('IndentBlanklineRefresh') end
+  if vim.fn.exists(':IndentLinesReset') == 1 then
+    vim.cmd('IndentLinesReset')
+  end
+  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then
+    vim.cmd('IndentBlanklineRefresh')
+  end
 end --
 
 function M.change_indent(n) --
@@ -51,7 +55,9 @@ end --
 
 function M.spell_checker() --
   local spell_pre = vim.wo.spell
-  if not spell_pre then vim.wo.spell = true end
+  if not spell_pre then
+    vim.wo.spell = true
+  end
   vim.cmd('normal! mzgg]S')
   while vim.fn.spellbadword()[0] ~= '' do
     vim.cmd('redraw')
@@ -60,7 +66,7 @@ function M.spell_checker() --
     while not lang.elem_in_array({'y', 'n', 'f', 'r', 'a', 'q'}, ch) do
       if draw then
         print('Word: ' .. vim.fn.expand('<cword>') ..
-                  ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
+                ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
       end
       draw = false
       vim.cmd('redraw')
@@ -85,21 +91,31 @@ function M.spell_checker() --
       f = 'normal! 1z=',
       a = 'normal! zG',
     }
-    if ch == 'q' then break end
-    if dic[ch] then vim.cmd_lines(dic[ch]) end
+    if ch == 'q' then
+      break
+    end
+    if dic[ch] then
+      vim.cmd_lines(dic[ch])
+    end
     vim.cmd('normal! ]S')
   end
   vim.cmd('normal! `z')
-  if not spell_pre then vim.wo.spell = false end
+  if not spell_pre then
+    vim.wo.spell = false
+  end
   print('Spell checker end')
 end --
 
 function M.match_over(...) --
   local args = {...}
   print(vim.inspect(args))
-  if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
+  if #args > 1 or (args[1] and not tonumber(args[1])) then
+    error('More than one argument')
+  end
   local w = vim.g.match_over_width or 80
-  if args[1] then w = args[1] end
+  if args[1] then
+    w = args[1]
+  end
   vim.cmd('match OverLength /\\%' .. w .. 'v.\\+/')
 end --
 
@@ -125,21 +141,27 @@ end --
 -- Requires barbar at the minute, but not necessary I suppose...
 function M.buffer_close_all_but_visible() --
   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
-      'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'), 'bufname(v:val)')
+    'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'),
+    'bufname(v:val)')
   if #bs > 0 then
-    for _, buf in ipairs(bs) do vim.fn.execute('BufferClose ' .. buf) end
+    for _, buf in ipairs(bs) do
+      vim.fn.execute('BufferClose ' .. buf)
+    end
   else
     print('No buffers to delete')
   end
 end --
 
 local function call_if_fn_exists(fn) --
-  if vim.fn.exists(':' .. fn) then vim.cmd(fn) end
+  if vim.fn.exists(':' .. fn) then
+    vim.cmd(fn)
+  end
 end --
 
 function M.handle_large_file() --
   local fn = vim.fn.expand('<afile>')
-  if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
+  if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) >
+    vim.g.large_file then
     vim.o.updatetime = 1000
     vim.o.wrap = false
     vim.o.completeopt = ''

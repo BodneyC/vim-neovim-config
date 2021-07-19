@@ -26,6 +26,7 @@ require'compe'.setup {
     nvim_lua = true,
     spell = true,
     tags = true,
+    orgmode = true,
   },
 }
 
@@ -35,12 +36,15 @@ local skm = vim.api.nvim_set_keymap
 -- Well, this is awful
 local function tab_string(e, k)
   return [[ pumvisible() ? "\]] .. e .. [[" ]] ..
-             [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ? "\]] .. k ..
-             [[" : compe#complete() ]]
+           [[ : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s') ? "\]] ..
+           k .. [[" : compe#complete() ]]
 end
-skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'), {noremap = true, silent = true, expr = true})
-skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'), {noremap = true, silent = true, expr = true})
-skm('i', '<C-e>', [[compe#close('<C-e>')]], {noremap = true, silent = true, expr = true})
+skm('i', '<Tab>', tab_string('<C-n>', '<Tab>'),
+  {noremap = true, silent = true, expr = true})
+skm('i', '<S-Tab>', tab_string('<C-p>', '<C-d>'),
+  {noremap = true, silent = true, expr = true})
+skm('i', '<C-e>', [[compe#close('<C-e>')]],
+  {noremap = true, silent = true, expr = true})
 
 skm('i', '<CR>', string.gsub([[
   pumvisible()
@@ -49,3 +53,6 @@ skm('i', '<CR>', string.gsub([[
     : "<C-e><CR>"
   : "<CR><Plug>AutoPairsReturn"
 ]], '\n', ''), {noremap = false, silent = true, expr = true})
+* TODO 
+  sldjknsl
+  [2021-07-19 Mon]
