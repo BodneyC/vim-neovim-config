@@ -53,6 +53,3 @@ skm('i', '<CR>', string.gsub([[
     : "<C-e><CR>"
   : "<CR><Plug>AutoPairsReturn"
 ]], '\n', ''), {noremap = false, silent = true, expr = true})
-* TODO 
-  sldjknsl
-  [2021-07-19 Mon]
