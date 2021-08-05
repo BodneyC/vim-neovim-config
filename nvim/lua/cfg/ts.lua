@@ -1,10 +1,11 @@
 -- local ts_utils = require 'nvim-treesitter.ts_utils'
 require'nvim-treesitter.configs'.setup {
+  context_commentstring = {enable = true, config = {css = '// %s', c = '// %s'}},
   autotag = {
     enable = true,
     filetypes = {
       'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte',
-      'vue', 'xml',
+      'vue', 'xml', 'kotlin',
     },
   },
   ensure_installed = {

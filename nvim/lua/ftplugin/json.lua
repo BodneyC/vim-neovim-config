@@ -5,7 +5,7 @@ local bskm = vim.api.nvim_buf_set_keymap
 local M = {}
 
 function M.init()
-  vim.bo.commentstring = '//%s'
+  vim.bo.commentstring = '// %s'
   vim.fn.execute('syntax match Comment "//.\\+$"')
   util.command('SortJSON', ':%!grep -v \'^[\t ]*//\' | jq --indent 2 -S \'.\'',
     {nargs = 0})

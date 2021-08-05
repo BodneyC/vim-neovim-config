@@ -45,6 +45,8 @@ opt('o', {
   titlestring = 'bodneyc - nvim',
   showtabline = 2,
   foldmethod = 'manual',
+  grepprg = 'rg --vimgrep --no-heading --smart-case',
+  grepformat = '%f:%l:%c:%m',
 })
 
 local undodir = os.getenv('HOME') .. '/.config/nvim/undo'

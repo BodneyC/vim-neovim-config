@@ -51,7 +51,9 @@ local function on_attach(client, bufnr)
   -- mappings
   local ns = {noremap = true, silent = true}
 
-  local function bskm(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function bskm(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
 
   lsp_status.on_attach(client, bufnr)
 
@@ -170,30 +172,42 @@ cd 3rd/luamake && compile/install.sh
 cd -
 ./3rd/luamake/luamake rebuild
 --]]
--- local library = {}
+
+local system_name
+if vim.fn.has('mac') == 1 then
+  system_name = 'macOS'
+elseif vim.fn.has('unix') == 1 then
+  system_name = 'Linux'
+elseif vim.fn.has('win32') == 1 then
+  system_name = 'Windows'
+else
+  print('Unsupported system for sumneko')
+end
+
+local sumneko_root_path = vim.fn.expand('$HOME') ..
+                            '/software/lua-language-server'
+local sumneko_binary = sumneko_root_path .. '/bin/' .. system_name ..
+                         '/lua-language-server'
+
 local path = vim.split(package.path, ';')
 table.insert(path, 'lua/?.lua')
 table.insert(path, 'lua/?/init.lua')
-local lua_ls_root_dir = vim.fn.expand('$HOME') ..
-                          '/software/lua-language-server'
 lspconfig.sumneko_lua.setup {
-  cmd = {
-    lua_ls_root_dir .. '/bin/' ..
-      (util.basic_os_info() == 'Darwin' and 'macOS' or 'Linux') ..
-      '/lua-language-server', '-E', lua_ls_root_dir .. '/main.lua',
-  },
+  cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'},
   settings = {
     Lua = {
       runtime = {version = 'LuaJIT', path = path},
       diagnostics = {globals = {'vim'}},
       workspace = {
-        library = {
-          [vim.fn.expand('$VIMRUNTIME')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-          [home .. '/.local/share/nvim/runtime/lua/vim/lsp'] = true,
-          [home .. '/gitclones/vim-neovim-config/nvim/lua'] = true,
-        },
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file('', true),
+        -- library = {
+        --   [vim.fn.expand('$VIMRUNTIME')] = true,
+        --   [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        --   [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        --   [home .. '/.local/share/nvim/runtime/lua/vim/lsp'] = true,
+        --   [home .. '/gitclones/vim-neovim-config/nvim/lua'] = true,
+        -- },
       },
       telemetry = {enable = false},
     },

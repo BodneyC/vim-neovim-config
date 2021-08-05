@@ -18,7 +18,6 @@ vim.g.python_host_prog = command_v 'python2'
 vim.g.python3_host_prog = '/usr/local/bin/python3'
 
 vim.g.polyglot_disabled = {'autoload', 'typescript'}
---
 
 -- safe_require
 local function safe_require(module)

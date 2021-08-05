@@ -28,14 +28,15 @@ skm('t', '˙', knav.termin .. 'Left<CR>', ns)
 skm('t', '˚', knav.termin .. 'Up<CR>', ns)
 skm('t', '∆', knav.termin .. 'Down<CR>', ns)
 
-skm('i', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']],
-  se)
-skm('i', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']],
-  se)
-skm('s', '<C-j>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>']],
-  se)
-skm('s', '<C-k>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>']],
-  se)
+local function vsnip_map(mode, key, pos)
+  skm(mode, key,
+    'vsnip#jumpable(' .. pos .. ')  ? \'<Plug>(vsnip-jump-next)\' : \'' .. key ..
+      '\'', se)
+end
+vsnip_map('i', '<C-j>', 1)
+vsnip_map('i', '<C-k>', -1)
+vsnip_map('s', '<C-j>', 1)
+vsnip_map('s', '<C-k>', -1)
 
 -- wqa
 skm('n', '<leader>E', [[<CMD>e!<CR>]], ns)
@@ -68,9 +69,9 @@ util.command('Wq', [[wq]], {nargs = '0'})
 util.command('W', [[w]], {nargs = '0'})
 util.command('Q', [[q]], {nargs = '0'})
 
-skm('n', '', [[<Plug>NERDCommenterToggle]], {})
-skm('x', '', [[<Plug>NERDCommenterToggle]], {})
-skm('i', '', [[<C-o><C-_>]], {})
+skm('n', '', [[gcc]], {})
+skm('x', '', [[gc]], {})
+skm('i', '', [[<C-o>gcc]], {})
 
 -- buffers
 skm('n', '<leader>bp', [[<CMD>BufferPick<CR>]], ns)

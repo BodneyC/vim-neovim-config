@@ -5,6 +5,20 @@ local lang = require 'utl.lang'
 local util = require 'utl.util'
 local fs = require 'utl.fs'
 
+-- vim.g.enable_spelunker_vim = false
+-- vim.g.spelunker_check_type = 2
+
+-- util.augroup({
+--   name = '__SPELUNKER__',
+--   autocmds = {
+--     {
+--       event = 'BufWinEnter,BufWritePost',
+--       glob = '*',
+--       cmd = [[if &ft && &ft != 'qf' | call spelunker#check() | end]],
+--     },
+--   },
+-- })
+
 vim.g.vim_markdown_folding_disabled = true
 vim.g.vim_markdown_no_default_key_mappings = true
 

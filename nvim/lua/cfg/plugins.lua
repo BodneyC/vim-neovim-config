@@ -32,7 +32,12 @@ return packer.startup(function()
     },
   }
   use {'onsails/lspkind-nvim'}
-  use {'junegunn/fzf', run = function() vim.fn['fzf#install']() end}
+  use {
+    'junegunn/fzf',
+    run = function()
+      vim.fn['fzf#install']()
+    end,
+  }
   use {'junegunn/fzf.vim'}
 
   --- DAP
@@ -55,15 +60,6 @@ return packer.startup(function()
   use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
   use {'nicwest/vim-http', cmd = 'Http'}
   use {'windwp/nvim-ts-autotag'}
-  use {
-    'kristijanhusak/orgmode.nvim',
-    config = function()
-      require'orgmode'.setup {
-        org_agenda_files = {'~/.org/*'},
-        org_default_notes_file = '~/.org/notes.org',
-      }
-    end,
-  }
   use {'nvim-treesitter/nvim-treesitter'}
   use {'nvim-treesitter/nvim-treesitter-refactor'}
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
@@ -78,14 +74,7 @@ return packer.startup(function()
       }
     end,
   }
-  use {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    config = function()
-      require'nvim-treesitter.configs'.setup {
-        context_commentstring = {enable = true},
-      }
-    end,
-  }
+  use {'JoosepAlviste/nvim-ts-context-commentstring'}
 
   --- QOL
   use {'folke/todo-comments.nvim'}
@@ -105,7 +94,8 @@ return packer.startup(function()
   use {'machakann/vim-swap'}
   use {'majutsushi/tagbar', cmd = 'Tagbar'}
   use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
-  use {'scrooloose/nerdcommenter'}
+  -- use {'scrooloose/nerdcommenter'}
+  use {'tpope/vim-commentary'}
   use {'simnalamburt/vim-mundo'}
 
   --- Vim internal wrappers
@@ -114,7 +104,7 @@ return packer.startup(function()
   use {'BodneyC/togool.vim', branch = 'master'}
   use {'alvan/vim-closetag', ft = {'html', 'xml', 'markdown'}}
   use {'andymass/vim-matchup'}
-  use {'chrisbra/recover.vim'}
+  -- use {'chrisbra/recover.vim'}
   use {'moll/vim-bbye'}
   use {'radenling/vim-dispatch-neovim'}
   use {'rhysd/clever-f.vim'}
