@@ -13,7 +13,7 @@ require'nvim-treesitter.configs'.setup {
     'typescript', 'query', 'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript',
     'tsx',
   },
-  indent = {enable = true, disable = {'yaml'}},
+  indent = {enable = true, disable = {'yaml', 'python'}},
   highlight = {enable = true, disable = {'yaml'}},
   incremental_selection = {
     enable = true,

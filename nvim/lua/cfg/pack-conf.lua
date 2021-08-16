@@ -8,16 +8,18 @@ local fs = require 'utl.fs'
 -- vim.g.enable_spelunker_vim = false
 -- vim.g.spelunker_check_type = 2
 
--- util.augroup({
---   name = '__SPELUNKER__',
---   autocmds = {
---     {
---       event = 'BufWinEnter,BufWritePost',
---       glob = '*',
---       cmd = [[if &ft && &ft != 'qf' | call spelunker#check() | end]],
---     },
---   },
--- })
+vim.g.spelunker_disable_auto_group = 1 -- true
+
+util.augroup({
+  name = 'spelunker',
+  autocmds = {
+    {
+      event = 'BufWinEnter,BufWritePost',
+      glob = '*.md,*.txt',
+      cmd = [[call spelunker#check()]],
+    },
+  },
+})
 
 vim.g.vim_markdown_folding_disabled = true
 vim.g.vim_markdown_no_default_key_mappings = true

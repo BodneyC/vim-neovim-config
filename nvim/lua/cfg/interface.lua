@@ -1,14 +1,8 @@
 local vim = vim
 local util = require 'utl.util'
 
-local function opt(s, d)
-  for k, v in pairs(d) do
-    vim[s][k] = v
-  end
-end
-
 -- o-options
-opt('o', {
+util.opt('o', {
   tags = '',
   hls = true,
   mouse = 'a',
@@ -28,7 +22,7 @@ opt('o', {
   showmode = false,
   ttimeoutlen = 50,
   autoindent = true,
-  autowrite = false,
+  autowrite = true,
   splitbelow = true,
   splitright = true,
   smartindent = true,
@@ -51,16 +45,18 @@ opt('o', {
 
 local undodir = os.getenv('HOME') .. '/.config/nvim/undo'
 os.execute('test -d ' .. undodir .. ' || mkdir -p ' .. undodir)
-vim.o.undodir = undodir
-vim.o.undofile = true
-vim.o.undolevels = 10000
-vim.o.undoreload = 10000
+util.opt('o', {
+  undodir = undodir,
+  undofile = true,
+  undolevels = 10000,
+  undoreload = 10000,
+})
 
 local notags = os.getenv('HOME') .. '/.notags'
 os.execute('test -e ' .. notags .. ' || touch ' .. notags)
 
 -- wo-options
-opt('wo', {
+util.opt('wo', {
   nu = true,
   cul = true,
   rnu = true,
@@ -76,7 +72,7 @@ opt('wo', {
 })
 
 -- g-options
-opt('g', {
+util.opt('g', {
   netrw_banner = 0,
   netrw_liststyle = 3,
   netrw_browse_split = 4,

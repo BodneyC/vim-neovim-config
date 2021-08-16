@@ -53,6 +53,12 @@ skm('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], ns)
 skm('n', '<F7>', [[<CMD>set spell!<CR>]], ns)
 skm('i', '<F7>', [[<C-o>:set spell!<CR>]], ns)
 
+skm('n', '<leader>y', '"+y', ns)
+skm('n', '<leader>p', '"+p', ns)
+skm('n', '<leader>P', '"+P', ns)
+
+skm('i', '<M-d>', [[<C-r>=strftime('%Y-%m-%d')<CR>]], ns)
+
 skm('n', '<C-p>', [[<Tab>]], n)
 skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], n)
 skm('n', '<leader>/', [[<Cmd>noh<CR>]], ns)

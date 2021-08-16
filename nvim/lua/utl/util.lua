@@ -2,6 +2,12 @@ local vim = vim
 
 local M = {}
 
+function M.opt(s, d)
+  for k, v in pairs(d) do
+    vim[s][k] = v
+  end
+end
+
 function M.document_formatting()
   local clients = vim.lsp.buf_get_clients()
   if #clients > 0 then

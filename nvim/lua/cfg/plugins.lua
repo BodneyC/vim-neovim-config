@@ -74,7 +74,7 @@ return packer.startup(function()
       }
     end,
   }
-  use {'JoosepAlviste/nvim-ts-context-commentstring'}
+  -- use {'JoosepAlviste/nvim-ts-context-commentstring'}
 
   --- QOL
   use {'folke/todo-comments.nvim'}
@@ -142,7 +142,7 @@ return packer.startup(function()
   --- SDL
   use {'BodneyC/VirkSpaces', branch = 'master'}
   use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
-  use {'lewis6991/gitsigns.nvim'}
+  use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
   use {'f-person/git-blame.nvim'}
   use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
   use {'junegunn/gv.vim', cmd = 'GV'}

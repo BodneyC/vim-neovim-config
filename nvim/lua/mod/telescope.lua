@@ -272,7 +272,7 @@ function M.init()
   skm('n', '<leader>gc', [[<CMD>Telescope git_commits<CR>]], n_s)
   skm('n', '<leader>gr', [[<CMD>Telescope registers<CR>]], n_s)
   skm('n', '<leader>m', [[<CMD>Telescope keymaps<CR>]], n_s)
-  skm('n', '<leader>p',
+  skm('n', '<leader>lp',
     [[<CMD>lua require'telescope'.extensions.packer.plugins(opts)<CR>]], n_s)
   skm('n', '<leader>ld', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
   skm('n', '<leader>lw', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
