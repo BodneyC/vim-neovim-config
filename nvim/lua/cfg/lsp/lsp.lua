@@ -8,6 +8,57 @@ local lsp_status = require 'lsp-status'
 
 local home = vim.loop.os_homedir()
 
+require'navigator'.setup {
+  keymaps = {
+    {key = '\\r', func = 'references()'},
+    {mode = 'i', key = '<M-k>', func = 'signature_help()'},
+    {key = '\\s', func = 'signature_help()'},
+    {key = '\\0', func = 'document_symbol()'},
+    {key = '\\W', func = 'workspace_symbol()'},
+    {key = '<C-]>', func = 'definition()'},
+    {key = '\\D', func = 'declaration({ border = \'single\' })'},
+    {
+      key = '\\p',
+      func = 'require(\'navigator.definition\').definition_preview()',
+    }, {key = '\\T', func = 'require(\'navigator.treesitter\').buf_ts()'},
+    {key = '<Leader>\\T', func = 'require(\'navigator.treesitter\').bufs_ts()'},
+    {key = 'K', func = 'hover({ popup_opts = { border = single }})'},
+    {key = '<Space>ca', mode = 'n', func = 'code_action()'},
+    {key = '<Space>cA', mode = 'v', func = 'range_code_action()'},
+    {key = '<Leader>re', func = 'rename()'},
+    {key = '<Space>R', func = 'require(\'navigator.rename\').rename()'},
+    -- {key = '<Leader>gi', func = 'incoming_calls()'},
+    -- {key = '<Leader>go', func = 'outgoing_calls()'},
+    {key = '\\i', func = 'implementation()'},
+    {key = '<Space>D', func = 'type_definition()'}, {
+      key = '\\L',
+      func = 'diagnostic.show_line_diagnostics( { border = \'single\' })',
+    },
+    {key = 'gG', func = 'require(\'navigator.diagnostics\').show_diagnostic()'},
+    {key = ']w', func = 'diagnostic.goto_next({ border = \'single\' })'},
+    {key = '[w', func = 'diagnostic.goto_prev({ border = \'single\' })'},
+    {key = ']r', func = 'require(\'navigator.treesitter\').goto_next_usage()'},
+    {
+      key = '[r',
+      func = 'require(\'navigator.treesitter\').goto_previous_usage()',
+    }, {key = '<C-LeftMouse>', func = 'definition()'},
+    {key = 'g<LeftMouse>', func = 'implementation()'},
+    {
+      key = '<Leader>k',
+      func = 'require(\'navigator.dochighlight\').hi_symbol()',
+    }, -- {key = '<Space>wa', func = 'vim.lsp.buf.add_workspace_folder()'},
+    -- {key = '<Space>wr', func = 'vim.lsp.buf.remove_workspace_folder()'}, {
+    --   key = '<Space>wl',
+    --   func = 'print(vim.inspect(vim.lsp.buf.list_workspace_folders()))',
+    -- },
+    {
+      key = '<Space>la',
+      mode = 'n',
+      func = 'require(\'navigator.codelens\').run_action()',
+    },
+  },
+}
+
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = false,
@@ -55,31 +106,31 @@ local function on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
 
-  lsp_status.on_attach(client, bufnr)
+  lsp_status.on_attach(client)
 
-  bskm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', ns)
-  bskm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', ns)
+  -- bskm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', ns)
+  -- bskm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', ns)
 
-  bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
-  bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
-  bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
-  bskm('n', ']w',
-    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
-  bskm('n', '[w',
-    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
+  -- bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
+  -- bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
+  -- bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
+  -- bskm('n', ']w',
+  --   [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
+  -- bskm('n', '[w',
+  --   [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
   bskm('n', '<Leader>F',
     '<CMD>lua require\'utl.util\'.document_formatting()<CR>', ns)
 
-  local lsp_leader = [[<leader>l]]
+  -- local lsp_leader = [[<leader>l]]
 
-  bskm('n', lsp_leader .. 'h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
-  bskm('n', lsp_leader .. 's', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
-  bskm('n', lsp_leader .. 'q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
-  bskm('n', lsp_leader .. 'f', [[<cmd>Lspsaga lsp_finder<CR>]], ns)
-  bskm('n', lsp_leader .. 'a', [[<cmd>Lspsaga code_action<CR>]], ns)
-  bskm('n', lsp_leader .. 'd', [[<cmd>Lspsaga hover_doc<CR>]], ns)
-  bskm('n', lsp_leader .. 'D', [[<cmd>Lspsaga preview_definition<CR>]], ns)
-  bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
+  -- bskm('n', lsp_leader .. 'h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
+  -- bskm('n', lsp_leader .. 's', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
+  -- bskm('n', lsp_leader .. 'q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
+  -- bskm('n', lsp_leader .. 'f', [[<cmd>Lspsaga lsp_finder<CR>]], ns)
+  -- bskm('n', lsp_leader .. 'a', [[<cmd>Lspsaga code_action<CR>]], ns)
+  -- bskm('n', lsp_leader .. 'd', [[<cmd>Lspsaga hover_doc<CR>]], ns)
+  -- bskm('n', lsp_leader .. 'D', [[<cmd>Lspsaga preview_definition<CR>]], ns)
+  -- bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
 
 end
 

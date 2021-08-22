@@ -18,7 +18,11 @@ return packer.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   --- Lsp
-  use {'glepnir/lspsaga.nvim'}
+  use {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}
+  use {'ray-x/navigator.lua'}
+  use {'ray-x/lsp_signature.nvim'}
+
+  -- use {'glepnir/lspsaga.nvim'}
   use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-jdtls'}
   use {'neovim/nvim-lspconfig'}
@@ -116,13 +120,13 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
 
   --- Prettiness
-  -- use {
-  --   'BodneyC/bolorscheme',
-  --   branch = 'lua',
-  --   config = function()
-  --     require'bolorscheme'.setup {theme = 'spacegray'}
-  --   end,
-  -- }
+  use {
+    'BodneyC/bolorscheme',
+    branch = 'lua',
+    config = function()
+      require'bolorscheme'.setup {theme = 'spacegray'}
+    end,
+  }
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim'}
   use {'amdt/vim-niji'}
@@ -171,12 +175,12 @@ return packer.startup(function()
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-  use {
-    '~/gitclones/bolorscheme',
-    config = function()
-      require'bolorscheme'.setup {theme = 'spacegray'}
-      -- require'bolorscheme'.setup {theme = 'unicorn', light = false}
-    end,
-  }
+  -- use {
+  --   '~/gitclones/bolorscheme',
+  --   config = function()
+  --     require'bolorscheme'.setup {theme = 'spacegray'}
+  --     -- require'bolorscheme'.setup {theme = 'unicorn', light = false}
+  --   end,
+  -- }
 
 end)

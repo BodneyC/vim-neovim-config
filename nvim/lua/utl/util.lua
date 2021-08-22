@@ -2,6 +2,22 @@ local vim = vim
 
 local M = {}
 
+function M.safe_require(module)
+  local ok, err = pcall(require, module)
+  if not ok then
+    print('Module \'' .. module .. '\' not required: ' .. err)
+    err = nil
+  end
+  return err
+end
+
+function M.safe_require_and_init(module)
+  local mod = M.safe_require(module)
+  if mod then
+    mod.init()
+  end
+end
+
 function M.opt(s, d)
   for k, v in pairs(d) do
     vim[s][k] = v
@@ -80,7 +96,7 @@ function M.make_mappings(mappings)
   for _, e in ipairs(mappings) do
     local args = e.args or {}
     if not e.mode or not e.key or not e.cmd then
-      print("Skipping: " .. vim.inspect(e))
+      print('Skipping: ' .. vim.inspect(e))
     end
     if e.bufnr then
       bskm(e.bufnr, e.mode, e.key, e.cmd, args)
