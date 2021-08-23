@@ -267,21 +267,23 @@ function M.init()
   local skm = vim.api.nvim_set_keymap
   util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]],
     {nargs = '1'})
-  skm('n', '<leader>gs', [[<CMD>Telescope git_status<CR>]], n_s)
-  skm('n', '<leader>gb', [[<CMD>Telescope git_branches<CR>]], n_s)
-  skm('n', '<leader>gc', [[<CMD>Telescope git_commits<CR>]], n_s)
-  skm('n', '<leader>gr', [[<CMD>Telescope registers<CR>]], n_s)
-  skm('n', '<leader>m', [[<CMD>Telescope keymaps<CR>]], n_s)
-  skm('n', '<leader>lp',
+  local tele_leader = '<leader>t'
+  skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], n_s)
+  skm('n', tele_leader .. 'b', [[<CMD>Telescope git_branches<CR>]], n_s)
+  skm('n', tele_leader .. 'c', [[<CMD>Telescope git_commits<CR>]], n_s)
+  skm('n', tele_leader .. 'r', [[<CMD>Telescope registers<CR>]], n_s)
+  skm('n', tele_leader .. 'm', [[<CMD>Telescope keymaps<CR>]], n_s)
+  skm('n', tele_leader .. 'p',
     [[<CMD>lua require'telescope'.extensions.packer.plugins(opts)<CR>]], n_s)
-  skm('n', '<leader>ld', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
-  skm('n', '<leader>lw', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
-  skm('n', '<leader>ga', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
-  skm('n', '<leader>M', [[<CMD>Telescope marks<CR>]], n_s)
-  skm('n', '<leader>r',
+  skm('n', tele_leader .. 'd', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
+  skm('n', tele_leader .. 'w', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
+  skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
+  skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], n_s)
+  skm('n', tele_leader .. 'r',
     [[<CMD>lua require'mod.telescope'.grep_string_filtered ]] ..
       [[ { search = '', disable_coordinates = true, path_display = 'hidden', }<CR>]],
     {noremap = true})
+
   skm('n', '<leader>f',
     [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]],
     n_s)

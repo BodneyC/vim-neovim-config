@@ -18,11 +18,11 @@ return packer.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   --- Lsp
-  use {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}
-  use {'ray-x/navigator.lua'}
-  use {'ray-x/lsp_signature.nvim'}
+  -- use {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}
+  -- use {'ray-x/navigator.lua'}
+  -- use {'ray-x/lsp_signature.nvim'}
 
-  -- use {'glepnir/lspsaga.nvim'}
+  use {'glepnir/lspsaga.nvim'}
   use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-jdtls'}
   use {'neovim/nvim-lspconfig'}

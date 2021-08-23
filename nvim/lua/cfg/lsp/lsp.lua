@@ -1,63 +1,12 @@
 local vim = vim
 -- local bskm = vim.api.nvim_set_keymap
-local util = require 'utl.util'
+local util = require('utl.util')
 
-local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig/configs'
-local lsp_status = require 'lsp-status'
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig/configs')
+local lsp_status = require('lsp-status')
 
 local home = vim.loop.os_homedir()
-
-require'navigator'.setup {
-  keymaps = {
-    {key = '\\r', func = 'references()'},
-    {mode = 'i', key = '<M-k>', func = 'signature_help()'},
-    {key = '\\s', func = 'signature_help()'},
-    {key = '\\0', func = 'document_symbol()'},
-    {key = '\\W', func = 'workspace_symbol()'},
-    {key = '<C-]>', func = 'definition()'},
-    {key = '\\D', func = 'declaration({ border = \'single\' })'},
-    {
-      key = '\\p',
-      func = 'require(\'navigator.definition\').definition_preview()',
-    }, {key = '\\T', func = 'require(\'navigator.treesitter\').buf_ts()'},
-    {key = '<Leader>\\T', func = 'require(\'navigator.treesitter\').bufs_ts()'},
-    {key = 'K', func = 'hover({ popup_opts = { border = single }})'},
-    {key = '<Space>ca', mode = 'n', func = 'code_action()'},
-    {key = '<Space>cA', mode = 'v', func = 'range_code_action()'},
-    {key = '<Leader>re', func = 'rename()'},
-    {key = '<Space>R', func = 'require(\'navigator.rename\').rename()'},
-    -- {key = '<Leader>gi', func = 'incoming_calls()'},
-    -- {key = '<Leader>go', func = 'outgoing_calls()'},
-    {key = '\\i', func = 'implementation()'},
-    {key = '<Space>D', func = 'type_definition()'}, {
-      key = '\\L',
-      func = 'diagnostic.show_line_diagnostics( { border = \'single\' })',
-    },
-    {key = 'gG', func = 'require(\'navigator.diagnostics\').show_diagnostic()'},
-    {key = ']w', func = 'diagnostic.goto_next({ border = \'single\' })'},
-    {key = '[w', func = 'diagnostic.goto_prev({ border = \'single\' })'},
-    {key = ']r', func = 'require(\'navigator.treesitter\').goto_next_usage()'},
-    {
-      key = '[r',
-      func = 'require(\'navigator.treesitter\').goto_previous_usage()',
-    }, {key = '<C-LeftMouse>', func = 'definition()'},
-    {key = 'g<LeftMouse>', func = 'implementation()'},
-    {
-      key = '<Leader>k',
-      func = 'require(\'navigator.dochighlight\').hi_symbol()',
-    }, -- {key = '<Space>wa', func = 'vim.lsp.buf.add_workspace_folder()'},
-    -- {key = '<Space>wr', func = 'vim.lsp.buf.remove_workspace_folder()'}, {
-    --   key = '<Space>wl',
-    --   func = 'print(vim.inspect(vim.lsp.buf.list_workspace_folders()))',
-    -- },
-    {
-      key = '<Space>la',
-      mode = 'n',
-      func = 'require(\'navigator.codelens\').run_action()',
-    },
-  },
-}
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -71,7 +20,11 @@ vim.g.diagnostic_auto_popup_while_jump = false
 util.augroup({
   name = '__LSP__',
   autocmds = {
-    {event = 'FileType', glob = 'java', cmd = [[lua require'mod.jdtls'.init()]]},
+    {
+      event = 'FileType',
+      glob = 'java',
+      cmd = [[lua require('mod.jdtls').init()]],
+    },
   },
 })
 
@@ -108,29 +61,29 @@ local function on_attach(client, bufnr)
 
   lsp_status.on_attach(client)
 
-  -- bskm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', ns)
-  -- bskm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', ns)
+  bskm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', ns)
+  bskm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', ns)
 
-  -- bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
-  -- bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
-  -- bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
-  -- bskm('n', ']w',
-  --   [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
-  -- bskm('n', '[w',
-  --   [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
+  bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
+  bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
+  bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
+  bskm('n', ']w',
+    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
+  bskm('n', '[w',
+
+    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
   bskm('n', '<Leader>F',
     '<CMD>lua require\'utl.util\'.document_formatting()<CR>', ns)
+  bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
 
-  -- local lsp_leader = [[<leader>l]]
-
-  -- bskm('n', lsp_leader .. 'h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
-  -- bskm('n', lsp_leader .. 's', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
-  -- bskm('n', lsp_leader .. 'q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
-  -- bskm('n', lsp_leader .. 'f', [[<cmd>Lspsaga lsp_finder<CR>]], ns)
-  -- bskm('n', lsp_leader .. 'a', [[<cmd>Lspsaga code_action<CR>]], ns)
-  -- bskm('n', lsp_leader .. 'd', [[<cmd>Lspsaga hover_doc<CR>]], ns)
-  -- bskm('n', lsp_leader .. 'D', [[<cmd>Lspsaga preview_definition<CR>]], ns)
-  -- bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
+  bskm('n', '\\h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
+  bskm('n', '\\s', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
+  bskm('n', '\\q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
+  bskm('n', '\\f', '<CMD>Lspsaga lsp_finder<CR>', ns)
+  bskm('n', '\\a', '<CMD>Lspsaga code_action<CR>', ns)
+  bskm('n', '\\D', '<CMD>Lspsaga hover_doc<CR>', ns)
+  bskm('n', '\\d', '<CMD>Lspsaga preview_definition<CR>', ns)
+  bskm('n', '\\r', '<CMD>Lspsaga rename<CR>', ns)
 
 end
 
@@ -139,80 +92,26 @@ util.command('LspStopAll',
 util.command('LspBufStopAll',
   'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
--- npm i -g typescript-language-server
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- npm i -g dockerfile-language-server-nodejs
-lspconfig.dockerls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- npm i -g bash-language-server
-lspconfig.bashls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- package-manager - clang
-lspconfig.clangd.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- manual - https://github.com/snoe/clojure-lsp
-lspconfig.clojure_lsp.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- go get golang.org/x/tools/gopls@latest
-lspconfig.gopls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- npm i -g vscode-html-languageserver-bin
-lspconfig.html.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- npm i -g vscode-json-languageserver
-lspconfig.jsonls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- npm i -g vim-language-server
-lspconfig.vimls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- npm i -g yaml-language-server
-lspconfig.yamlls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- rustup component add rls rust-{analysis,src}
-lspconfig.rls.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
-
--- pip3 install --user 'python-language-sever[all]'
--- lspconfig.pyls.setup {on_attach = on_attach, capabilities = lsp_status.capabilities}
-
--- pip3 install --user 'python-lsp-sever[all]'
-lspconfig.pylsp.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
+for _, lsp in ipairs({
+  'tsserver', -- npm i -g typescript-language-server
+  'dockerls', -- npm i -g dockerfile-language-server-nodejs
+  'bashls', -- npm i -g bash-language-server
+  'clangd', -- package-manager - clang
+  'clojure_lsp', -- manual - https://github.com/snoe/clojure-lsp
+  'gopls', -- go get golang.org/x/tools/gopls@latest
+  'html', -- npm i -g vscode-html-languageserver-bin
+  'jsonls', -- npm i -g vscode-json-languageserver
+  'vimls', -- npm i -g vim-language-server
+  'yamlls', -- npm i -g yaml-language-server
+  'rls', -- rustup component add rls rust-{analysis,src}
+  -- 'pyls', pip3 install --user 'python-language-sever[all]'
+  'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
+}) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = lsp_status.capabilities,
+  }
+end
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -426,7 +325,6 @@ lspconfig.diagnosticls.setup {
     },
   },
 }
---
 
 require('symbols-outline').setup({
   highlight_hover_item = true,
@@ -434,7 +332,7 @@ require('symbols-outline').setup({
 })
 
 -- lspkind
-require'lspkind'.init({
+require('lspkind').init({
   with_text = false,
   symbol_map = {
     Text = '',
@@ -459,4 +357,3 @@ require'lspkind'.init({
     Struct = '',
   },
 })
---
