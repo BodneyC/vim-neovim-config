@@ -1,4 +1,4 @@
-require'format'.setup {
+require('format').setup {
   ['*'] = {
     {
       cmd = {

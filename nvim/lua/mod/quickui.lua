@@ -1,4 +1,3 @@
-local vim = vim
 local skm = vim.api.nvim_set_keymap
 
 local M = {}

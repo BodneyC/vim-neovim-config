@@ -1,12 +1,11 @@
-local vim = vim
-local fs = require 'utl.fs'
-local util = require 'utl.util'
-local lang = require 'utl.lang'
+local fs = require('utl.fs')
+local util = require('utl.util')
+local lang = require('utl.lang')
 
 local M = {}
 
 function M.order_by_bufnr() --
-  local blstate = require 'bufferline.state'
+  local blstate = require('bufferline.state')
   table.sort(blstate.buffers, function(a, b)
     return a < b
   end)

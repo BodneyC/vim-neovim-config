@@ -1,4 +1,4 @@
-local snap = require 'snap'
+local snap = require('snap')
 
 snap.run {
   producer = snap.get 'producer.ripgrep.vimgrep',

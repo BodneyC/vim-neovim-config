@@ -1,5 +1,3 @@
-local vim = vim
-
 local M = {}
 
 function M.safe_require(module)
@@ -68,9 +66,8 @@ function M.go_to_definition()
   end
 end
 
--- autocmds
 --[[
-{
+util.augroup {
   name = '',
   autocommands = {
     {
@@ -84,10 +81,14 @@ end
 function M.augroup(opts)
   vim.cmd('augroup ' .. opts.name)
   vim.cmd('au!')
-  for _, au in ipairs(opts.autocmds) do
+  for _, au in ipairs(opts.autocmds or opts.autocommands) do
     vim.cmd('au ' .. au.event .. ' ' .. au.glob .. ' ' .. au.cmd)
   end
   vim.cmd('augroup END')
+end
+
+function M.autogroup(opts)
+  M.augroup(opts)
 end
 
 function M.make_mappings(mappings)

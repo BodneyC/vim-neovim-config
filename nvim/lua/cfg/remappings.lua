@@ -1,6 +1,5 @@
-local vim = vim
 local skm = vim.api.nvim_set_keymap
-local util = require 'utl.util'
+local util = require('utl.util')
 
 local n = {noremap = true}
 local ns = {noremap = true, silent = true}
@@ -96,15 +95,15 @@ skm('n', '<leader>"', [[<CMD>sbn<CR>]], ns)
 skm('n', '<leader>#', [[<C-^>]], ns)
 skm('n', '<leader>%', [[<CMD>vert sbn<CR>]], ns)
 skm('n', '<leader>bD',
-  [[<CMD>lua require'mod.functions'.buffer_close_all_but_visible()<CR>]], ns)
+  [[<CMD>lua require('mod.functions').buffer_close_all_but_visible()<CR>]], ns)
 skm('n', '<leader>be', [[<CMD>enew<CR>]], ns)
 skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], ns)
 skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], ns)
 
 util.command('BufferOrderByBufnr',
-  [[lua require 'mod.functions'.order_by_bufnr()]], {nargs = '0'})
+  [[lua require ('mod.functions').order_by_bufnr()]], {nargs = '0'})
 
-local req_util = [[lua require'utl.util']]
+local req_util = [[lua require('utl.util')]]
 
 -- resize
 local function resize_window_str(p, c)
@@ -153,7 +152,7 @@ skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], ns)
 skm('x', '<leader>ea', [[:EasyAlign<CR>]], ns)
 
 skm('n', '<leader>H',
-  [[<CMD>lua require'mod.terminal'.floating_help(vim.fn.expand('<cword>'))<CR>]],
+  [[<CMD>lua require('mod.terminal').floating_help(vim.fn.expand('<cword>'))<CR>]],
   ns)
 
 -- bs
@@ -187,7 +186,7 @@ skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
 skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
 
 util.command('ToggleLazyGit',
-  [[w | lua require'mod.terminal'.floating_term('lazygit')]], {nargs = '0'})
+  [[w | lua require('mod.terminal').floating_term('lazygit')]], {nargs = '0'})
 
 vim.cmd([[
   func! CopyForTerminal(...) range
@@ -207,7 +206,7 @@ util.command('DiffOff', [[windo diffoff]], {nargs = '0'})
 util.command('ConvLineEndings', [[%s/<CR>//g]], {nargs = '0'})
 
 -- lua funcs
-local req_funcs = [[lua require 'mod.functions']]
+local req_funcs = [[lua require ('mod.functions')]]
 util.command('HighlightUnderCursor', req_funcs .. [[.highlight_under_cursor()]],
   {nargs = '0'})
 util.command('SpellChecker', req_funcs .. [[.spell_checker()]], {nargs = '0'})

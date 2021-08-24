@@ -1,5 +1,4 @@
-local vim = vim
-local util = require 'utl.util'
+local util = require('utl.util')
 
 local M = {}
 
@@ -63,7 +62,8 @@ function M.init()
       {
         event = 'BufEnter',
         glob = '*',
-        cmd = [[if (winnr("$") == 1 && &ft == 'defx') | silent call defx#call_action('add_session') | bd! | q | endif]],
+        cmd = [[if (winnr("$") == 1 && &ft == 'defx') | ]] ..
+          [[silent call defx#call_action('add_session') | bd! | q | endif]],
       }, {
         event = 'BufLeave',
         glob = '*',
@@ -81,8 +81,8 @@ function M.init()
     Deleted = '×',
     Unknown = '?',
   })
-  vim.fn.execute(
-    [[command! -nargs=0 DefxOpen lua require'mod.defx'.open_and_size {open = true, resize = true, refocus = false}]])
+  vim.fn.execute([[command! -nargs=0 DefxOpen lua require('mod.defx')]] ..
+                   [[.open_and_size {open = true, resize = true, refocus = false}]])
   vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>',
     {silent = true, noremap = true})
 end

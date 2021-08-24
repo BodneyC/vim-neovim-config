@@ -1,5 +1,3 @@
-local vim = vim
--- local bskm = vim.api.nvim_set_keymap
 local util = require('utl.util')
 
 local lspconfig = require('lspconfig')
@@ -49,6 +47,21 @@ lsp_status.config({
 })
 --
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport =
+  true
+capabilities.textDocument.completion.completionItem.tagSupport = {
+  valueSet = {1},
+}
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {'documentation', 'detail', 'additionalTextEdits'},
+}
+
 -- setup
 local function on_attach(client, bufnr)
 
@@ -61,19 +74,21 @@ local function on_attach(client, bufnr)
 
   lsp_status.on_attach(client)
 
-  bskm('n', 'K', '<CMD>lua require\'utl.util\'.show_documentation()<CR>', ns)
-  bskm('n', '<C-]>', '<CMD>lua require\'utl.util\'.go_to_definition()<CR>', ns)
+  bskm('n', 'K', [[<CMD>lua require('utl.util').show_documentation()<CR>]], ns)
+  bskm('n', '<C-]>', [[<CMD>lua require('utl.util').go_to_definition()<CR>]], ns)
 
   bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
   bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
   bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
   bskm('n', ']w',
-    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_next()<CR>]], ns)
+    [[<CMD>lua require('mod.tmp-diagnostics').lsp_jump_diagnostic_next()<CR>]],
+    ns)
   bskm('n', '[w',
 
-    [[<cmd>lua require'mod.tmp-diagnostics'.lsp_jump_diagnostic_prev()<CR>]], ns)
+    [[<CMD>lua require('mod.tmp-diagnostics').lsp_jump_diagnostic_prev()<CR>]],
+    ns)
   bskm('n', '<Leader>F',
-    '<CMD>lua require\'utl.util\'.document_formatting()<CR>', ns)
+    [[<CMD>lua require('utl.util').document_formatting()<CR>]], ns)
   bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
 
   bskm('n', '\\h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
@@ -107,10 +122,7 @@ for _, lsp in ipairs({
   -- 'pyls', pip3 install --user 'python-language-sever[all]'
   'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
 }) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = lsp_status.capabilities,
-  }
+  lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
 end
 
 --[[
@@ -163,7 +175,7 @@ lspconfig.sumneko_lua.setup {
     },
   },
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
 --[[
@@ -187,10 +199,7 @@ if not lspconfig.arduino_lsp then
     },
   }
 end
-lspconfig.arduino_lsp.setup {
-  on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
-}
+lspconfig.arduino_lsp.setup {on_attach = on_attach, capabilities = capabilities}
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -200,13 +209,13 @@ cd groovy-language-server
 ]]
 lspconfig.groovyls.setup {
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
   cmd = {
     'java', '-jar', home ..
       '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
   },
   filetypes = {'groovy'},
-  root_dir = require'lspconfig.util'.root_pattern('.git') or home,
+  root_dir = require('lspconfig.util').root_pattern('.git') or home,
   settings = {
     groovy = {
       classpath = {
@@ -224,7 +233,7 @@ cd kotlin-language-server
 ]]
 lspconfig.kotlin_language_server.setup {
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
   cmd = {
     home ..
       '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
@@ -234,7 +243,7 @@ lspconfig.kotlin_language_server.setup {
 -- npm i -g diagnostic-languageserver
 lspconfig.diagnosticls.setup {
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
   filetypes = {'pkgbuild', 'terraform', 'sh', 'zsh', 'markdown'},
   init_options = {
     filetypes = {

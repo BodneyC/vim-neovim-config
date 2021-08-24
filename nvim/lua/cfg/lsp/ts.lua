@@ -1,5 +1,5 @@
--- local ts_utils = require 'nvim-treesitter.ts_utils'
-require'nvim-treesitter.configs'.setup {
+-- local ts_utils = require('nvim-treesitter.ts_utils')
+require('nvim-treesitter.configs').setup {
   context_commentstring = {enable = true, config = {css = '// %s', c = '// %s'}},
   autotag = {
     enable = true,
@@ -74,4 +74,4 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
--- require'nvim-treesitter.parsers'.get_parser_configs().markdown = nil
+-- require('nvim-treesitter.parsers').get_parser_configs().markdown = nil

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ! test -d "$HOME/gitclones" && mkdir -p "$HOME/gitclones"
 cd "$HOME/gitclones" || exit

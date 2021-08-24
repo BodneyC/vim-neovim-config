@@ -1,7 +1,3 @@
-local vim = vim
-local util = require 'utl.util'
-local fs = require 'utl.fs'
-
 local M = {}
 
 local header = string.split([[

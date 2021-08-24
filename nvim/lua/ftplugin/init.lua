@@ -1,4 +1,4 @@
-local lang = require 'utl.lang'
+local lang = require('utl.lang')
 
 return function(ft)
   if ft == '' or ft == nil then

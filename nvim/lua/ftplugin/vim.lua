@@ -1,6 +1,3 @@
-local vim = vim
-local util = require 'utl.util'
-
 local M = {}
 
 function M.init()

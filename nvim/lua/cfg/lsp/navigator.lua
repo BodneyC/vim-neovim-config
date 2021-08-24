@@ -1,4 +1,4 @@
-require'navigator'.setup {
+require('navigator').setup {
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
   end,
@@ -48,8 +48,8 @@ require'navigator'.setup {
     {
       key = '\\p',
       func = [[require('navigator.definition').definition_preview()]],
-    }, {key = '\\T', func = [[require([[navigator.treesitter').buf_ts()]]},
-    {key = '<Leader>\\T', func = [[require([[navigator.treesitter').bufs_ts()]]},
+    }, {key = '\\T', func = [[require('navigator.treesitter').buf_ts()]]},
+    {key = '<Leader>\\T', func = [[require('navigator.treesitter').bufs_ts()]]},
     {key = 'K', func = 'hover({ popup_opts = { border = single }})'},
     {key = '<Space>ca', mode = 'n', func = 'code_action()'},
     {key = '<Space>cA', mode = 'v', func = 'range_code_action()'},
@@ -85,7 +85,7 @@ require'navigator'.setup {
     }, {
       mode = 'n',
       key = '<Leader>F',
-      func = [[require'utl.util'.document_formatting()]],
+      func = [[require('utl.util').document_formatting()]],
     },
   },
 }

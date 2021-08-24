@@ -1,7 +1,6 @@
-local vim = vim
 local skm = vim.api.nvim_set_keymap
 local bskm = vim.api.nvim_buf_set_keymap
-local util = require 'utl.util'
+local util = require ('utl.util')
 
 local plane = {HORIZTONAL = 0, VERTICAL = 1}
 local some_init_val = 'SOME_INIT_VALUE'
@@ -308,7 +307,7 @@ function M.init()
       }, {
         event = 'SessionLoadPost',
         glob = 'term://*',
-        cmd = [[lua require'mod.terminal'.setup_terms_from_session()]],
+        cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
       }, {
         event = 'TermEnter',
         glob = 'term://*',

@@ -1,5 +1,4 @@
-local vim = vim
-local util = require 'utl.util'
+local util = require('utl.util')
 
 -- o-options
 util.opt('o', {
@@ -92,11 +91,11 @@ util.augroup({
     }, {
       event = 'BufReadPre',
       glob = '*',
-      cmd = [[lua require'mod.functions'.handle_large_file()]],
+      cmd = [[lua require('mod.functions').handle_large_file()]],
     }, {
       event = 'FileType,BufEnter',
       glob = '*',
-      cmd = [[lua require'ftplugin'(vim.bo.ft)]],
+      cmd = [[lua require('ftplugin')(vim.bo.ft)]],
     }, {event = 'TermEnter', glob = '*', cmd = [[startinsert]]},
     {event = 'BufRead,BufNewFile', glob = '*.MD,*.md', cmd = [[setf markdown]]},
     {event = 'BufRead,BufNewFile', glob = '*.rasi', cmd = [[setf css]]},

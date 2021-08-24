@@ -1,5 +1,4 @@
-local vim = vim
-local util = require 'utl.util'
+local util = require('utl.util')
 local bskm = vim.api.nvim_buf_set_keymap
 
 local M = {}

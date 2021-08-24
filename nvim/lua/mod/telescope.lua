@@ -1,18 +1,16 @@
-local vim = vim
-
-local util = require 'utl.util'
+local util = require('utl.util')
 
 -- imports
-local telescope = require 'telescope'
-local action_set = require 'telescope.actions.set'
-local action_state = require 'telescope.actions.state'
-local config = require 'telescope.config'
-local sorters = require 'telescope.sorters'
-local pickers = require 'telescope.pickers'
-local finders = require 'telescope.finders'
-local actions = require 'telescope.actions'
-local make_entry = require 'telescope.make_entry'
-local previewers = require 'telescope.previewers'
+local telescope = require('telescope')
+local action_set = require('telescope.actions.set')
+local action_state = require('telescope.actions.state')
+local config = require('telescope.config')
+local sorters = require('telescope.sorters')
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
+local actions = require('telescope.actions')
+local make_entry = require('telescope.make_entry')
+local previewers = require('telescope.previewers')
 --
 
 local M = {}
@@ -201,7 +199,14 @@ function actions.append_to_hist(prompt_bufnr)
   end
   if prompt_hist ~= '' then
     local f = io.open(M.histfile, 'a+')
-    f:write(prompt_hist .. '\n')
+    local len = f:seek('end')
+    f:seek('set', len - 128)
+    local last_chunk = f:read("*a")
+    if last_chunk:match(prompt_hist .. "*%s*$") then
+      print('Repeated search term, not writing to histfile')
+    else
+      f:write(prompt_hist .. '\n')
+    end
     f:close()
   end
 
@@ -265,7 +270,7 @@ function M.init()
   -- mappings
   local n_s = {noremap = true, silent = true}
   local skm = vim.api.nvim_set_keymap
-  util.command('Rg', [[lua require'mod.telescope'.grep(<f-args>)]],
+  util.command('Rg', [[lua require('mod.telescope').grep(<f-args>)]],
     {nargs = '1'})
   local tele_leader = '<leader>t'
   skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], n_s)
@@ -274,31 +279,31 @@ function M.init()
   skm('n', tele_leader .. 'r', [[<CMD>Telescope registers<CR>]], n_s)
   skm('n', tele_leader .. 'm', [[<CMD>Telescope keymaps<CR>]], n_s)
   skm('n', tele_leader .. 'p',
-    [[<CMD>lua require'telescope'.extensions.packer.plugins(opts)<CR>]], n_s)
+    [[<CMD>lua require('telescope').extensions.packer.plugins(opts)<CR>]], n_s)
   skm('n', tele_leader .. 'd', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
   skm('n', tele_leader .. 'w', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
   skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
   skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], n_s)
-  skm('n', tele_leader .. 'r',
-    [[<CMD>lua require'mod.telescope'.grep_string_filtered ]] ..
+
+  skm('n', '<leader>r',
+    [[<CMD>lua require('mod.telescope').grep_string_filtered ]] ..
       [[ { search = '', disable_coordinates = true, path_display = 'hidden', }<CR>]],
     {noremap = true})
-
   skm('n', '<leader>f',
-    [[<CMD>lua require'telescope.builtin'.fd { find_command = { 'fd', '-tf', '-H' } }<CR>]],
+    [[<CMD>lua require('telescope.builtin').fd { find_command = { 'fd', '-tf', '-H' } }<CR>]],
     n_s)
   skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], n_s)
 
   -- Gets better results than the builtin
   local grep_string_under_cursor =
     [[<CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
-      [[require'telescope.builtin'.grep_string { ]] ..
+      [[require('telescope.builtin').grep_string { ]] ..
       [[ search = s, prompt_prefix = s .. ' > ', ]] .. [[ ngram_len = 1, }<CR>]]
   skm('n', '<M-]>', grep_string_under_cursor, n_s)
   skm('n', '‘', grep_string_under_cursor, n_s)
 
   skm('n', '<M-[>',
-    [[<CMD>lua require'mod.telescope'.tags_absolute {shorten_path = true} <CR> ]],
+    [[<CMD>lua require('mod.telescope').tags_absolute {shorten_path = true} <CR> ]],
     n_s)
 
 end

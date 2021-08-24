@@ -25,7 +25,7 @@ local function _iter_diagnostic_move_pos(name, opts, pos)
 
   if enable_popup then
     vim.schedule(function()
-      require'lspsaga.diagnostic'.show_line_diagnostics(opts.popup_opts, vim.api
+      require('lspsaga.diagnostic').show_line_diagnostics(opts.popup_opts, vim.api
         .nvim_win_get_buf(win_id))
     end)
   end

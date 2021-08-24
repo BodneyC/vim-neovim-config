@@ -1,5 +1,3 @@
-local vim = vim
-
 local install_path = vim.fn.stdpath('data') ..
                        '/site/pack/packer/opt/packer.nvim'
 
@@ -10,7 +8,7 @@ end
 
 vim.cmd('packadd packer.nvim')
 
-local packer = require 'packer'
+local packer = require('packer')
 
 return packer.startup(function()
   local use = packer.use
@@ -23,7 +21,14 @@ return packer.startup(function()
   -- use {'ray-x/lsp_signature.nvim'}
 
   use {'glepnir/lspsaga.nvim'}
-  use {'hrsh7th/nvim-compe'}
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      {'hrsh7th/cmp-path'}, {'hrsh7th/cmp-buffer'}, {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'}, {'hrsh7th/cmp-vsnip'}, {'hrsh7th/cmp-calc'},
+    },
+  }
+  -- use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-jdtls'}
   use {'neovim/nvim-lspconfig'}
   use {'nvim-lua/lsp-status.nvim'}
@@ -73,7 +78,7 @@ return packer.startup(function()
   use {
     'p00f/nvim-ts-rainbow',
     config = function()
-      require'nvim-treesitter.configs'.setup {
+      require('nvim-treesitter.configs').setup {
         rainbow = {enable = true, extended_mode = true, max_file_lines = 1000},
       }
     end,
@@ -124,7 +129,7 @@ return packer.startup(function()
     'BodneyC/bolorscheme',
     branch = 'lua',
     config = function()
-      require'bolorscheme'.setup {theme = 'spacegray'}
+      require('bolorscheme').setup {theme = 'spacegray'}
     end,
   }
   use {'KabbAmine/vCoolor.vim'}
@@ -178,8 +183,8 @@ return packer.startup(function()
   -- use {
   --   '~/gitclones/bolorscheme',
   --   config = function()
-  --     require'bolorscheme'.setup {theme = 'spacegray'}
-  --     -- require'bolorscheme'.setup {theme = 'unicorn', light = false}
+  --     require('bolorscheme').setup {theme = 'spacegray'}
+  --     -- require('bolorscheme').setup {theme = 'unicorn', light = false}
   --   end,
   -- }
 

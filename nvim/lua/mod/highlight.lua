@@ -1,5 +1,4 @@
-local vim = vim
-local util = require 'utl.util'
+local util = require('utl.util')
 
 local M = {}
 
@@ -23,13 +22,13 @@ function M.init()
       {
         event = 'TextYankPost',
         glob = '*',
-        cmd = [[silent! lua require'vim.highlight'.on_yank()]],
+        cmd = [[silent! lua require('vim.highlight').on_yank()]],
       }, {
         event = 'ColorScheme',
         glob = '*',
-        cmd = [[lua require'mod.highlight'.additional_highlights()]],
+        cmd = [[lua require('mod.highlight').additional_highlights()]],
       },
-      -- {event = 'CursorHold', glob = '*', cmd = [[lua require'mod.highlight'.hover_match()]]},
+      -- {event = 'CursorHold', glob = '*', cmd = [[lua require('mod.highlight').hover_match()]]},
     },
   })
 

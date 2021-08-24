@@ -1,19 +1,9 @@
-local vim = vim
-local util = require 'utl.util'
 local bskm = vim.api.nvim_buf_set_keymap
 
 local M = {}
 
 local n_s = {noremap = true, silent = true}
 local n_s_e = {noremap = true, silent = true, expr = true}
-
-local function tab()
-  if vim.fn.getline('.'):match('%s-%s') then
-    return '<C-o>>>A'
-  else
-    return '<Tab>'
-  end
-end
 
 function M.init()
   vim.wo.conceallevel = 2

@@ -1,9 +1,8 @@
-local vim = vim
 local skm = vim.api.nvim_set_keymap
 
-local lang = require 'utl.lang'
-local util = require 'utl.util'
-local fs = require 'utl.fs'
+local lang = require('utl.lang')
+local util = require('utl.util')
+local fs = require('utl.fs')
 
 -- vim.g.enable_spelunker_vim = false
 -- vim.g.spelunker_check_type = 2

@@ -1,6 +1,5 @@
-local vim = vim
 local bskm = vim.api.nvim_buf_set_keymap
-local util = require 'utl.util'
+local util = require('utl.util')
 
 if not DEFX_REM_STACK then
   DEFX_REM_STACK = {}
@@ -43,10 +42,10 @@ end
 function M.init()
   vim.cmd([[
     func! __DEFX_REM_RM(ctx) abort
-      exe "lua require'ftplugin.defx'.defx_rem_rm({'" . join(a:ctx.targets, "', '") . "'})"
+      exe "lua require('ftplugin.defx').defx_rem_rm({'" . join(a:ctx.targets, "', '") . "'})"
     endfunc
     func! __DEFX_REM_RS(ctx) abort
-      lua require'ftplugin.defx'.defx_rem_rs()
+      lua require('ftplugin.defx').defx_rem_rs()
     endfunc
   ]])
 
