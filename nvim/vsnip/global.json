@@ -1,6 +1,6 @@
 {
   "magic": {
-    "prefix": ["vim:"],
+    "prefix": ["vim", "modeline"],
     "body": [ "$LINE_COMMENT vim: et ts=${1:2} sw=$1" ],
     "description": "Magicline"
   }

@@ -125,13 +125,7 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
 
   --- Prettiness
-  use {
-    'BodneyC/bolorscheme',
-    branch = 'lua',
-    config = function()
-      require('bolorscheme').setup {theme = 'spacegray'}
-    end,
-  }
+  use {'BodneyC/bolorscheme', branch = 'lua'}
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim'}
   use {'amdt/vim-niji'}
@@ -180,12 +174,6 @@ return packer.startup(function()
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-  -- use {
-  --   '~/gitclones/bolorscheme',
-  --   config = function()
-  --     require('bolorscheme').setup {theme = 'spacegray'}
-  --     -- require('bolorscheme').setup {theme = 'unicorn', light = false}
-  --   end,
-  -- }
+  -- use {'~/gitclones/bolorscheme'}
 
 end)

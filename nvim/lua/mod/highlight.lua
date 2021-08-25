@@ -16,6 +16,8 @@ function M.init()
 
   M.additional_highlights()
 
+  require('bolorscheme').setup {theme = 'unicorn', light = false}
+
   util.augroup({
     name = '__HIGHLIGHT__',
     autocmds = {
