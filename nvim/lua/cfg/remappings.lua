@@ -100,8 +100,8 @@ skm('n', '<leader>be', [[<CMD>enew<CR>]], ns)
 skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], ns)
 skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], ns)
 
-util.command('BufferOrderByBufnr',
-  [[lua require ('mod.functions').order_by_bufnr()]], {nargs = '0'})
+-- util.command('BufferOrderByBufnr',
+--   [[lua require ('mod.functions').order_by_bufnr()]], {nargs = '0'})
 
 local req_util = [[lua require('utl.util')]]
 

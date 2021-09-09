@@ -28,28 +28,43 @@ vim.g.AutoPairsMultilineClose = false
 
 -- Bufferline <3
 vim.g.bufferline = {
-  icons = true,
-  closable = true,
   animation = true,
-  letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
+  auto_hide = false,
+  tabpages = false,
+  closable = true,
   clickable = true,
-  shadow = true,
-  semantic_letters = true,
-  maximum_padding = 4,
+  -- exclude_ft = {},
+  -- exclude_name = {},
+  icons = true,
+  icon_custom_colors = false,
   icon_separator_active = ' ',
   icon_separator_inactive = '  ',
   icon_close_tab = ' ',
   icon_close_tab_modified = '● ',
+  insert_at_end = false,
+  maximum_padding = 4,
+  maximum_length = 200,
+  semantic_letters = true,
+  letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
+  no_name_title = nil,
 }
 
--- Relies on this file being loaded after the plugins itself
+-- Relies on this file being loaded after the plugin itself
+vim.g.__buffer_first_refreshed = false
 util.augroup({
   name = 'bufferline_update__custom',
   autocmds = {
     {
-      event = 'BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter',
+      event = 'BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter,VimEnter',
       glob = '*',
-      cmd = 'BufferOrderByBufnr',
+      cmd = 'BufferOrderByBufferNumber',
+    }, {
+      -- Temporary as bufferline not updating at the mo
+      event = 'CursorMoved',
+      glob = '*',
+      cmd = [[ lua if not vim.g.__buffer_first_refreshed then ]] ..
+        [[ vim.g.__buffer_first_refreshed = true; ]] ..
+        [[ vim.cmd('BufferOrderByBufferNumber') end ]],
     },
   },
 })
