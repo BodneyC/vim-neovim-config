@@ -14,9 +14,9 @@ function M.init()
   -- else
   -- end
 
-  M.additional_highlights()
+  require('bolorscheme').setup {theme = 'bronzage', light = false}
 
-  require('bolorscheme').setup {theme = 'unicorn', light = false}
+  M.additional_highlights()
 
   util.augroup({
     name = '__HIGHLIGHT__',
@@ -38,10 +38,10 @@ function M.init()
 end
 
 function M.additional_highlights()
-  -- vim.cmd([[
-  --   hi! link HoverMatch MatchParen
-  --   hi! OverLength guibg=#995959 guifg=#ffffff
-  -- ]])
+  vim.cmd([[
+    " hi! link HoverMatch MatchParen
+    hi! OverLength guibg=#995959 guifg=#ffffff
+  ]])
   -- if os.getenv('TERMTHEME') == 'light' then
   --   vim.cmd('hi! Visual guifg=bg')
   --   vim.cmd('hi! VertSplit guibg=NONE')

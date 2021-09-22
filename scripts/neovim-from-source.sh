@@ -8,9 +8,13 @@ cd neovim || exit
 
 git checkout master
 git pull
-# git fetch --tags --all -f
-# git checkout nightly
-git checkout origin/release-0.5
+
+# For 0.6+
+git fetch --tags --all -f
+git checkout nightly
+
+# For 0.5
+# git checkout origin/release-0.5
 
 unset LUA_PATH LUA_CPATH
 

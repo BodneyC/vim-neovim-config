@@ -52,7 +52,9 @@ skm('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], ns)
 skm('n', '<F7>', [[<CMD>set spell!<CR>]], ns)
 skm('i', '<F7>', [[<C-o>:set spell!<CR>]], ns)
 
+skm('n', 'Y', 'yy', ns)
 skm('n', '<leader>y', '"+y', ns)
+skm('n', '<leader>Y', '"+Y', ns)
 skm('n', '<leader>p', '"+p', ns)
 skm('n', '<leader>P', '"+P', ns)
 

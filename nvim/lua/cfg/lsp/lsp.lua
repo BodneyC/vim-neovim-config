@@ -121,6 +121,7 @@ for _, lsp in ipairs({
   'rls', -- rustup component add rls rust-{analysis,src}
   -- 'pyls', pip3 install --user 'python-language-sever[all]'
   'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
+  'texlab', -- package-manager - texlab
 }) do
   lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
 end

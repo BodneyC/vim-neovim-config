@@ -14,7 +14,7 @@ util.augroup({
   autocmds = {
     {
       event = 'BufWinEnter,BufWritePost',
-      glob = '*.md,*.txt',
+      glob = '*.md,*.txt,*.tex',
       cmd = [[call spelunker#check()]],
     },
   },

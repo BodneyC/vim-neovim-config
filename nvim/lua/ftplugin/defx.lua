@@ -52,13 +52,20 @@ function M.init()
   vim.wo.number = false
   vim.wo.relativenumber = false
 
+  local n = {noremap = true}
+  local ns = {noremap = true, silent = true}
   local nse = {noremap = true, silent = true, expr = true}
+
+  local function cmd_on_file(cmd)
+    return [[:echo ']] .. cmd .. [[' | ]] ..
+             [[call defx#do_action('execute_command', ']] .. cmd .. [[ %')<CR>]]
+  end
 
   bskm(0, 'n', 'u', [[defx#do_action('call', '__DEFX_REM_RS')]], nse)
   bskm(0, 'n', 'dd', [[defx#do_action('call', '__DEFX_REM_RM')]], nse)
-  bskm(0, 'n', '+x', [[defx#do_action('execute_command', 'chmod +x %')]], nse)
-  bskm(0, 'n', '-x', [[defx#do_action('execute_command', 'chmod -x %')]], nse)
-  bskm(0, 'n', 'G', [[G0]], {noremap = true, silent = true})
+  bskm(0, 'n', '+x', cmd_on_file('chmod +x'), n)
+  bskm(0, 'n', '-x', cmd_on_file('chmod -x'), n)
+  bskm(0, 'n', 'G', [[G0]], ns)
 
   local function str_tree_or_open(if_dir, if_file)
     return 'defx#is_directory() ? defx#do_action(\'open_tree\'' ..

@@ -97,6 +97,12 @@ return packer.startup(function()
   use {'jiangmiao/auto-pairs'}
   use {'junegunn/vim-easy-align'}
   use {'kamykn/spelunker.vim'}
+  use {
+    'kwkarlwang/bufresize.nvim',
+    config = function()
+      require('bufresize').setup()
+    end,
+  }
   use {'liuchengxu/vista.vim', cmd = 'Vista'}
   use {'ludovicchabant/vim-gutentags'}
   use {'lukas-reineke/format.nvim'}
