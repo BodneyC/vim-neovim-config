@@ -1,18 +1,10 @@
 local fs = require('utl.fs')
 local util = require('utl.util')
-local lang = require('utl.lang')
 
 local M = {}
 
-function M.order_by_bufnr() --
-  local blstate = require('bufferline.state')
-  table.sort(blstate.buffers, function(a, b)
-    return a < b
-  end)
-  vim.fn['bufferline#update']()
-end --
-
-function M.bs() --
+-- WIP
+function M.bs()
   local getline = vim.fn.getline
   local ln = vim.fn.line('.')
   local l = getline(ln)
@@ -30,82 +22,26 @@ function M.bs() --
   else
     return vim.fn.AutoPairsDelete()
   end
-end --
+end
 
-function M.set_indent(n) --
+function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(':IndentLinesReset') == 1 then
-    vim.cmd('IndentLinesReset')
-  end
   if vim.fn.exists(':IndentBlanklineRefresh') == 1 then
     vim.cmd('IndentBlanklineRefresh')
   end
-end --
+end
 
-function M.change_indent(n) --
+function M.change_indent(n)
   util.toggle_bool_option('bo', 'et')
   vim.cmd('%retab!')
   vim.bo.ts = tonumber(n)
   util.toggle_bool_option('bo', 'et')
   vim.cmd('%retab!')
   M.set_indent(n)
-end --
+end
 
-function M.spell_checker() --
-  local spell_pre = vim.wo.spell
-  if not spell_pre then
-    vim.wo.spell = true
-  end
-  vim.cmd('normal! mzgg]S')
-  while vim.fn.spellbadword()[0] ~= '' do
-    vim.cmd('redraw')
-    local ch = ''
-    local draw = true
-    while not lang.elem_in_array({'y', 'n', 'f', 'r', 'a', 'q'}, ch) do
-      if draw then
-        print('Word: ' .. vim.fn.expand('<cword>') ..
-                ' ([y]es/[n]o/[f]irst/[r]epeat/[a]dd/[q]uit)\n')
-      end
-      draw = false
-      vim.cmd('redraw')
-      ch = vim.fn.nr2char(vim.fn.getchar())
-    end
-    local dic = {
-      n = '',
-      y = -- bit of a dirty hack to be honest
-      [[
-        let tmp_file = tempname()
-        call writefile(spellsuggest(expand('<cword>')), tmp_file)
-        exe 'split ' . tmp_file
-        redraw
-        setl buftype=nofile bufhidden=wipe nobuflisted ro hidden nornu nu
-        let choice = input('Make your selection: ')
-        q
-        exe 'normal! ' . choice . 'z='
-        mode
-        redraw
-      ]],
-      r = 'spellrepall',
-      f = 'normal! 1z=',
-      a = 'normal! zG',
-    }
-    if ch == 'q' then
-      break
-    end
-    if dic[ch] then
-      vim.cmd_lines(dic[ch])
-    end
-    vim.cmd('normal! ]S')
-  end
-  vim.cmd('normal! `z')
-  if not spell_pre then
-    vim.wo.spell = false
-  end
-  print('Spell checker end')
-end --
-
-function M.match_over(...) --
+function M.match_over(...)
   local args = {...}
   print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then
@@ -115,10 +51,13 @@ function M.match_over(...) --
   if args[1] then
     w = args[1]
   end
-  vim.cmd('match OverLength /\\%' .. w .. 'v.\\+/')
-end --
+  if vim.fn.hlexists('OverLength') == 0 then
+    vim.cmd([[hi! OverLength guibg=#995959 guifg=#ffffff]])
+  end
+  vim.cmd([[match OverLength /\%]] .. w .. [[v.\+/]])
+end
 
-function M.zoom_toggle() --
+function M.zoom_toggle()
   if vim.t.zoomed and vim.t.zoom_winrestcmd then
     vim.cmd(vim.t.zoom_winrestcmd)
     vim.t.zoomed = false
@@ -127,18 +66,18 @@ function M.zoom_toggle() --
     vim.cmd('resize | vertical resize')
     vim.t.zoomed = true
   end
-end --
+end
 
-function M.highlight_under_cursor() --
+function M.highlight_under_cursor()
   local hl_groups = {}
   for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
   end
   print(vim.inspect(hl_groups))
-end --
+end
 
 -- Requires barbar at the minute, but not necessary I suppose...
-function M.buffer_close_all_but_visible() --
+function M.buffer_close_all_but_visible()
   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
     'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'),
     'bufname(v:val)')
@@ -149,15 +88,15 @@ function M.buffer_close_all_but_visible() --
   else
     print('No buffers to delete')
   end
-end --
+end
 
-local function call_if_fn_exists(fn) --
+local function call_if_fn_exists(fn)
   if vim.fn.exists(':' .. fn) then
     vim.cmd(fn)
   end
-end --
+end
 
-function M.handle_large_file() --
+function M.handle_large_file()
   local fn = vim.fn.expand('<afile>')
   if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) >
     vim.g.large_file then
@@ -176,6 +115,6 @@ function M.handle_large_file() --
     call_if_fn_exists('GitGutterDisable')
     call_if_fn_exists('PearTreeDisable')
   end
-end --
+end
 
 return M

@@ -2,7 +2,6 @@ local util = require('utl.util')
 
 local M = {}
 
--- helpers
 function M.search_file(fn)
   if not fn then
     fn = vim.fn.expand('%:p')
@@ -12,8 +11,12 @@ end
 
 function M.open()
   local opts = {
-    '-columns=indent:git:space:icons:space:filename', '-split=vertical',
-    '-winwidth=32', '-no-auto-cd', '-direction=topleft', '-show-ignored-files',
+    '-columns=indent:git:space:icons:space:filename',
+    '-split=vertical',
+    '-winwidth=32',
+    '-no-auto-cd',
+    '-direction=topleft',
+    '-show-ignored-files',
     '-session-file=' .. os.getenv('HOME') ..
       '/.config/defx/sessions/defx-sessions.json',
   }
@@ -52,9 +55,7 @@ function M.open_and_size(opts)
     vim.cmd(cur_win .. 'wincmd w')
   end
 end
---
 
--- init
 function M.init()
   util.augroup({
     name = '__DEFX__',
@@ -64,7 +65,8 @@ function M.init()
         glob = '*',
         cmd = [[if (winnr("$") == 1 && &ft == 'defx') | ]] ..
           [[silent call defx#call_action('add_session') | bd! | q | endif]],
-      }, {
+      },
+      {
         event = 'BufLeave',
         glob = '*',
         cmd = [[if &ft == 'defx' | silent call defx#call_action('add_session') | endif]],
@@ -86,6 +88,5 @@ function M.init()
   vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>',
     {silent = true, noremap = true})
 end
---
 
 return M

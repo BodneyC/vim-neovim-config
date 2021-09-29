@@ -83,7 +83,6 @@ return packer.startup(function()
       }
     end,
   }
-  -- use {'JoosepAlviste/nvim-ts-context-commentstring'}
 
   --- QOL
   use {'folke/todo-comments.nvim'}

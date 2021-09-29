@@ -117,6 +117,21 @@ function M.command(lhs, rhs, opts)
   vim.cmd(table.concat(parts, ' '))
 end
 
+--[[
+util.commands({
+  {
+    name = '...',
+    cmd = ':...<CR>',
+    opts = {},
+  },
+})
+--]]
+function M.commands(cmds)
+  for _, cmd in ipairs(cmds) do
+    M.command(cmd.name, cmd.cmd, cmd.opts)
+  end
+end
+
 vim.cmd(
   [[cnoreabbrev SortLen ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }']])
 

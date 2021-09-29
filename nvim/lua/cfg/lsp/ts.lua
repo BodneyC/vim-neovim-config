@@ -1,16 +1,36 @@
--- local ts_utils = require('nvim-treesitter.ts_utils')
 require('nvim-treesitter.configs').setup {
   context_commentstring = {enable = true, config = {css = '// %s', c = '// %s'}},
   autotag = {
     enable = true,
     filetypes = {
-      'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte',
-      'vue', 'xml', 'kotlin',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'typescriptreact',
+      'svelte',
+      'vue',
+      'xml',
+      'kotlin',
     },
   },
   ensure_installed = {
-    'c', 'java', 'python', 'lua', 'go', 'yaml', 'json', 'clojure', 'html',
-    'typescript', 'query', 'cpp', 'ruby', 'toml', 'bash', 'css', 'javascript',
+    'c',
+    'java',
+    'python',
+    'lua',
+    'go',
+    'yaml',
+    'json',
+    'clojure',
+    'html',
+    'typescript',
+    'query',
+    'cpp',
+    'ruby',
+    'toml',
+    'bash',
+    'css',
+    'javascript',
     'tsx',
   },
   indent = {enable = true, disable = {'yaml', 'python'}},
@@ -74,4 +94,3 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
--- require('nvim-treesitter.parsers').get_parser_configs().markdown = nil

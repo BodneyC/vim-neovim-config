@@ -1,6 +1,5 @@
 local util = require('utl.util')
 
--- imports
 local telescope = require('telescope')
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
@@ -11,7 +10,6 @@ local finders = require('telescope.finders')
 local actions = require('telescope.actions')
 local make_entry = require('telescope.make_entry')
 local previewers = require('telescope.previewers')
---
 
 local M = {}
 
@@ -201,8 +199,8 @@ function actions.append_to_hist(prompt_bufnr)
     local f = io.open(M.histfile, 'a+')
     local len = f:seek('end')
     f:seek('set', len - 128)
-    local last_chunk = f:read("*a")
-    if last_chunk:match(prompt_hist .. "*%s*$") then
+    local last_chunk = f:read('*a')
+    if last_chunk:match(prompt_hist .. '*%s*$') then
       print('Repeated search term, not writing to histfile')
     else
       f:write(prompt_hist .. '\n')
@@ -230,9 +228,21 @@ function M.init()
       },
       sorting_strategy = 'ascending',
       vimgrep_arguments = {
-        'rg', '--hidden', '--color=never', '--no-heading', '--with-filename',
-        '--line-number', '--column', '--smart-case', '--glob', '!.git/**',
-        '--glob', '!.vim/**', '--glob', '!**/target/**', '--glob',
+        'rg',
+        '--hidden',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--glob',
+        '!.git/**',
+        '--glob',
+        '!.vim/**',
+        '--glob',
+        '!**/target/**',
+        '--glob',
         '!**/*.class',
       },
       prompt_prefix = '> ',
@@ -249,8 +259,13 @@ function M.init()
         vertical = {mirror = true},
       },
       file_ignore_patterns = {
-        '\\.cache', '\\.lsp', '\\.clj-kondo', 'node_modules',
-        'package-lock\\.json', 'yarn\\.lock', '\\.git',
+        '\\.cache',
+        '\\.lsp',
+        '\\.clj-kondo',
+        'node_modules',
+        'package-lock\\.json',
+        'yarn\\.lock',
+        '\\.git',
       },
       path_display = {'absolute'},
       winblend = 5,
@@ -303,8 +318,7 @@ function M.init()
   skm('n', '‘', grep_string_under_cursor, n_s)
 
   skm('n', '<M-[>',
-    [[<CMD>lua require('mod.telescope').tags_absolute {shorten_path = true} <CR> ]],
-    n_s)
+    [[<CMD>lua require('mod.telescope').tags_absolute {} <CR> ]], n_s)
 
 end
 

@@ -1,13 +1,125 @@
-local skm = vim.api.nvim_set_keymap
-
-local lang = require('utl.lang')
 local util = require('utl.util')
-local fs = require('utl.fs')
 
--- vim.g.enable_spelunker_vim = false
--- vim.g.spelunker_check_type = 2
+require('bolorscheme').setup {theme = 'bronzage', light = false}
 
-vim.g.spelunker_disable_auto_group = 1 -- true
+util.opt('g', {
+  -- Relies on this file being loaded after the plugin itself
+  __buffer_first_refreshed = false,
+
+  AutoPairsMapBS = false,
+  AutoPairsMultilineClose = false,
+
+  Hexokinase_virtualText = ' ',
+  Hexokinase_highlighters = {'backgroundfull'},
+
+  Hexokinase_optInPatterns = {
+    'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla',
+  },
+
+  NERDSpaceDelims = 1,
+  NERDDefaultAlign = 'left',
+
+  asynctasks_term_pos = 'bottom',
+  asyncrun_open = 15,
+
+  ['conjure#mapping#prefix'] = '\\',
+
+  bufferline = {
+    animation = true,
+    auto_hide = false,
+    tabpages = false,
+    closable = true,
+    clickable = true,
+    -- exclude_ft = {},
+    -- exclude_name = {},
+    icons = true,
+    icon_custom_colors = false,
+    icon_separator_active = ' ',
+    icon_separator_inactive = '  ',
+    icon_close_tab = ' ',
+    icon_close_tab_modified = '● ',
+    insert_at_end = false,
+    maximum_padding = 4,
+    maximum_length = 200,
+    semantic_letters = true,
+    letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
+    no_name_title = nil,
+  },
+
+  gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
+  gutentags_modules = {'ctags'},
+  gutentags_add_default_project_roots = 0,
+  gutentags_ctags_auto_set_tags = 1,
+  gutentags_project_root = {'.git', '.vim'},
+  gutentags_generate_on_write = 1,
+  gutentags_generate_on_missing = 1,
+  gutentags_generate_on_new = 1,
+  gutentags_generate_on_empty_buffer = 0,
+  gutentags_ctags_exclude = {'*.json'},
+  gutentags_ctags_extra_args = {
+    '--tag-relative=' ..
+      (vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes' or
+        'always'), '--fields=+ailmnS',
+  },
+
+  indentLine_char = '│',
+  indentLine_first_char = '│',
+  indentLine_fileTypeExclude = {
+    'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help', 'defx', '',
+  },
+
+  matchup_matchparen_offscreen = {method = 'popup'},
+
+  move_map_keys = false,
+
+  mundo_right = 1,
+
+  spelunker_disable_auto_group = 1,
+
+  scrollview_excluded_filetypes = {'defx'},
+
+  tagbar_auto_close = 1,
+  tagbar_compact = 1,
+  tagbar_iconchars = {'\\ua0', '\\ua0'},
+
+  ['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$',
+
+  togool_extras = {{'<', '+'}, {'>', '-'}},
+
+  twiggy_local_branch_sort = 'mru',
+  twiggy_remote_branch_sort = 'date',
+
+  vcoolor_disable_mappings = false,
+
+  vim_markdown_folding_disabled = true,
+  vim_markdown_no_default_key_mappings = true,
+
+  vimade = {fadelevel = 0.6, enablesigns = 0},
+
+  virk_close_regexes = {
+    '^$', 'FAR.*', 'MERGE MSG', 'git-.*', 'COMMIT.*', '.*Plugins.*',
+    '^.defx].*',
+  },
+  virk_close_by_ft = {
+    -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
+    tagbar = 'TagbarOpen',
+    vista = 'Vista!! | wincmd p',
+    defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
+    Mundo = 'MundoShow',
+  },
+  virk_tags_enable = 0,
+
+  vista_icon_indent = {'╰─▸ ', '├─▸ '},
+  vista_default_executive = 'ctags',
+  ['vista#renderer#icons'] = {variable = '\\u71b', ['function'] = '\\uf794'},
+  vista_executive_for = {vim = 'ctags'},
+
+  vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip',
+
+})
+
+os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' ..
+             vim.g.gutentags_cache_dir)
 
 util.augroup({
   name = 'spelunker',
@@ -20,37 +132,6 @@ util.augroup({
   },
 })
 
-vim.g.vim_markdown_folding_disabled = true
-vim.g.vim_markdown_no_default_key_mappings = true
-
-vim.g.AutoPairsMapBS = false
-vim.g.AutoPairsMultilineClose = false
-
--- Bufferline <3
-vim.g.bufferline = {
-  animation = true,
-  auto_hide = false,
-  tabpages = false,
-  closable = true,
-  clickable = true,
-  -- exclude_ft = {},
-  -- exclude_name = {},
-  icons = true,
-  icon_custom_colors = false,
-  icon_separator_active = ' ',
-  icon_separator_inactive = '  ',
-  icon_close_tab = ' ',
-  icon_close_tab_modified = '● ',
-  insert_at_end = false,
-  maximum_padding = 4,
-  maximum_length = 200,
-  semantic_letters = true,
-  letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
-  no_name_title = nil,
-}
-
--- Relies on this file being loaded after the plugin itself
-vim.g.__buffer_first_refreshed = false
 util.augroup({
   name = 'bufferline_update__custom',
   autocmds = {
@@ -68,27 +149,6 @@ util.augroup({
     },
   },
 })
-
-vim.g.vcoolor_disable_mappings = false
-
-vim.g.move_map_keys = false
-vim.g.asynctasks_term_pos = 'bottom'
-vim.g.asyncrun_open = 15
-
-vim.g.vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip'
-
-vim.g.vimade = {fadelevel = 0.6, enablesigns = 0}
-
-vim.g.twiggy_local_branch_sort = 'mru'
-vim.g.twiggy_remote_branch_sort = 'date'
-
-vim.g['conjure#mapping#prefix'] = '\\'
-
-vim.g.Hexokinase_virtualText = ' '
-vim.g.Hexokinase_highlighters = {'backgroundfull'}
-vim.g.Hexokinase_optInPatterns = {
-  'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla',
-}
 
 -- fzf
 -- Weird behaviour with os.setenv...
@@ -115,141 +175,28 @@ if os.getenv('KITTY_WINDOW_ID') then
     print('KittyNavigate will not work, no KITTY_LISTEN_ON')
   end
 end
+
 vim.g[string.lower(pane_manager) .. '_navigator_no_mappings'] = 1
-local n_s = {noremap = true, silent = true}
-skm('n', '<M-k>', ':' .. pane_manager .. 'NavigateUp<CR>', n_s)
-skm('n', '<M-h>', ':' .. pane_manager .. 'NavigateLeft<CR>', n_s)
-skm('n', '<M-j>', ':' .. pane_manager .. 'NavigateDown<CR>', n_s)
-skm('n', '<M-l>', ':' .. pane_manager .. 'NavigateRight<CR>', n_s)
-skm('n', '<M-\\>', ':' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
-skm('i', '<M-k>', '<C-o>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
-skm('i', '<M-h>', '<C-o>:' .. pane_manager .. 'NavigateLeft<CR>', n_s)
-skm('i', '<M-j>', '<C-o>:' .. pane_manager .. 'NavigateDown<CR>', n_s)
-skm('i', '<M-l>', '<C-o>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
-skm('i', '<M-\\>', '<C-o>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
-skm('t', '<M-h>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateLeft<CR>', n_s)
-skm('t', '<M-j>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateDown<CR>', n_s)
-skm('t', '<M-k>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateUp<CR>', n_s)
-skm('t', '<M-l>', '<C-\\><C-n>:' .. pane_manager .. 'NavigateRight<CR>', n_s)
-skm('t', '<M-\\>', '<C-\\><C-n>:' .. pane_manager .. 'NavigatePrevious<CR>', n_s)
 
-vim.g['test#java#maventest#file_pattern'] =
-  '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$'
-
-vim.g.matchup_matchparen_offscreen = {method = 'popup'}
-
-vim.g.togool_extras = {{'<', '+'}, {'>', '-'}}
-
--- virk
-vim.g.virk_tags_enable = 0
-vim.g.virk_close_regexes = {
-  '^$', 'FAR.*', 'MERGE MSG', 'git-.*', 'COMMIT.*', '.*Plugins.*', '^.defx].*',
-}
-vim.g.virk_close_by_ft = {
-  -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
-  tagbar = 'TagbarOpen',
-  vista = 'Vista!! | wincmd p',
-  defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
-  Mundo = 'MundoShow',
+local mappings = {
+  mode_pairs = {
+    {mode = 'n', cmd = ':'}, {mode = 'i', cmd = '<C-o>:'},
+    {mode = 't', cmd = [[<C-\><C-n>:]]},
+  },
+  dir_pairs = {
+    {key = 'k', txt = 'Up'}, {key = 'h', txt = 'Left'},
+    {key = 'j', txt = 'Down'}, {key = 'l', txt = 'Right'},
+    {key = [[\]], txt = 'Previous'},
+    -- MacOS
+    {key = '˚', txt = 'Up'}, {key = '˙', txt = 'Left'},
+    {key = '∆', txt = 'Down'}, {key = '¬', txt = 'Right'},
+  },
 }
 
-vim.g.scrollview_excluded_filetypes = {'defx'}
-
-vim.g.indentLine_char = '│'
-vim.g.indentLine_first_char = '│'
-vim.g.indentLine_fileTypeExclude = {
-  'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help', 'defx', '',
-}
-
-vim.g.NERDSpaceDelims = 1
-vim.g.NERDDefaultAlign = 'left'
-
-vim.g.mundo_right = 1
-vim.g.tagbar_auto_close = 1
-
--- gutentags
--- vim.g.gutentags_trace = 1
-vim.g.gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags'
-os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' ..
-             vim.g.gutentags_cache_dir)
-vim.g.gutentags_modules = {'ctags'}
-vim.g.gutentags_add_default_project_roots = 0
-vim.g.gutentags_ctags_auto_set_tags = 1
-vim.g.gutentags_project_root = {'.git', '.vim'}
-vim.g.gutentags_generate_on_write = 1
-vim.g.gutentags_generate_on_missing = 1
-vim.g.gutentags_generate_on_new = 1
-vim.g.gutentags_generate_on_empty_buffer = 0
-vim.g.gutentags_ctags_exclude = {'*.json'}
-vim.g.gutentags_ctags_extra_args = {
-  '--tag-relative=' ..
-    (fs.dir_exists(os.getenv('HOME') .. '/Library') and 'yes' or 'always'),
-  '--fields=+ailmnS',
-}
-
-vim.g.vista_icon_indent = {'╰─▸ ', '├─▸ '}
-vim.g.vista_default_executive = 'ctags'
-vim.g['vista#renderer#icons'] = {variable = '\\u71b'}
-vim.g['vista#renderer#icons']['function'] = '\\uf794'
-vim.g.vista_executive_for = {vim = 'ctags'}
-
-vim.g.tagbar_iconchars = {lang.utf8(0x00a0), lang.utf8(0x00a0)}
-vim.g.tagbar_compact = 1
-
--- secp
-vim.g.sexp_mappings = {
-  sexp_outer_list = 'af',
-  sexp_inner_list = 'if',
-  sexp_outer_top_list = 'aF',
-  sexp_inner_top_list = 'iF',
-  sexp_outer_string = 'as',
-  sexp_inner_string = 'is',
-  sexp_outer_element = 'ae',
-  sexp_inner_element = 'ie',
-  sexp_move_to_prev_bracket = '(',
-  sexp_move_to_next_bracket = ')',
-  sexp_move_to_prev_top_element = '[[',
-  sexp_move_to_next_top_element = ']]',
-  sexp_select_prev_element = '[e',
-  sexp_select_next_element = ']e',
-  sexp_indent = '==',
-  sexp_indent_top = '=-',
-  sexp_round_head_wrap_list = '\\i',
-  sexp_round_tail_wrap_list = '\\I',
-  sexp_square_head_wrap_list = '\\[',
-  sexp_square_tail_wrap_list = '\\]',
-  sexp_curly_head_wrap_list = '\\{',
-  sexp_curly_tail_wrap_list = '\\}',
-  sexp_round_head_wrap_element = '\\w',
-  sexp_round_tail_wrap_element = '\\W',
-  sexp_square_head_wrap_element = '\\e[',
-  sexp_square_tail_wrap_element = '\\e]',
-  sexp_curly_head_wrap_element = '\\e{',
-  sexp_curly_tail_wrap_element = '\\e}',
-  sexp_insert_at_list_head = '\\h',
-  sexp_insert_at_list_tail = '\\l',
-  sexp_splice_list = '\\@',
-  sexp_convolute = '\\?',
-  sexp_raise_list = '\\o',
-  sexp_raise_element = '\\O',
-  sexp_move_to_prev_element_head = '',
-  sexp_move_to_next_element_head = '',
-  sexp_move_to_prev_element_tail = '',
-  sexp_move_to_next_element_tail = '',
-  sexp_flow_to_prev_close = '',
-  sexp_flow_to_next_open = '',
-  sexp_flow_to_prev_open = '',
-  sexp_flow_to_next_close = '',
-  sexp_flow_to_prev_leaf_head = '',
-  sexp_flow_to_next_leaf_head = '',
-  sexp_flow_to_prev_leaf_tail = '',
-  sexp_flow_to_next_leaf_tail = '',
-  sexp_swap_list_backward = '',
-  sexp_swap_list_forward = '',
-  sexp_swap_element_backward = '',
-  sexp_swap_element_forward = '',
-  sexp_emit_head_element = '',
-  sexp_emit_tail_element = '',
-  sexp_capture_prev_element = '',
-  sexp_capture_next_element = '',
-}
+for _, mode in ipairs(mappings.mode_pairs) do
+  for _, dir in ipairs(mappings.dir_pairs) do
+    vim.api.nvim_set_keymap(mode.mode, '<M-' .. dir.key .. '>', mode.cmd ..
+      pane_manager .. 'Navigate' .. dir.txt .. '<CR>',
+      {noremap = true, silent = true})
+  end
+end

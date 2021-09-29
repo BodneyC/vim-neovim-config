@@ -48,19 +48,18 @@ lsp_status.config({
 --
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport =
-  true
-capabilities.textDocument.completion.completionItem.tagSupport = {
-  valueSet = {1},
-}
-capabilities.textDocument.completion.completionItem.resolveSupport = {
+local completionItem = capabilities.textDocument.completion.completionItem
+completionItem.snippetSupport = true
+completionItem.preselectSupport = true
+completionItem.insertReplaceSupport = true
+completionItem.labelDetailsSupport = true
+completionItem.deprecatedSupport = true
+completionItem.commitCharactersSupport = true
+completionItem.tagSupport = {valueSet = {1}}
+completionItem.resolveSupport = {
   properties = {'documentation', 'detail', 'additionalTextEdits'},
 }
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- setup
 local function on_attach(client, bufnr)
@@ -91,14 +90,14 @@ local function on_attach(client, bufnr)
     [[<CMD>lua require('utl.util').document_formatting()<CR>]], ns)
   bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
 
-  bskm('n', '\\h', '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
-  bskm('n', '\\s', '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
-  bskm('n', '\\q', '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
-  bskm('n', '\\f', '<CMD>Lspsaga lsp_finder<CR>', ns)
-  bskm('n', '\\a', '<CMD>Lspsaga code_action<CR>', ns)
-  bskm('n', '\\D', '<CMD>Lspsaga hover_doc<CR>', ns)
-  bskm('n', '\\d', '<CMD>Lspsaga preview_definition<CR>', ns)
-  bskm('n', '\\r', '<CMD>Lspsaga rename<CR>', ns)
+  bskm('n', [[\h]], '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
+  bskm('n', [[\s]], '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
+  bskm('n', [[\q]], '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
+  bskm('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', ns)
+  bskm('n', [[\a]], '<CMD>Lspsaga code_action<CR>', ns)
+  bskm('n', [[\D]], '<CMD>Lspsaga hover_doc<CR>', ns)
+  bskm('n', [[\d]], '<CMD>Lspsaga preview_definition<CR>', ns)
+  bskm('n', [[\r]], '<CMD>Lspsaga rename<CR>', ns)
 
 end
 
@@ -126,16 +125,6 @@ for _, lsp in ipairs({
   lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
 end
 
---[[
-mkdir -p "$HOME/software" && cd "$HOME/software"
-gcl https://github.com/sumneko/lua-language-server.git
-cd lua-language-server
-git submodule update --init --recursive
-cd 3rd/luamake && compile/install.sh
-cd -
-./3rd/luamake/luamake rebuild
---]]
-
 local system_name
 if vim.fn.has('mac') == 1 then
   system_name = 'macOS'
@@ -155,6 +144,16 @@ local sumneko_binary = sumneko_root_path .. '/bin/' .. system_name ..
 local path = vim.split(package.path, ';')
 table.insert(path, 'lua/?.lua')
 table.insert(path, 'lua/?/init.lua')
+
+--[[
+mkdir -p "$HOME/software" && cd "$HOME/software"
+gcl https://github.com/sumneko/lua-language-server.git
+cd lua-language-server
+git submodule update --init --recursive
+cd 3rd/luamake && compile/install.sh
+cd -
+./3rd/luamake/luamake rebuild
+--]]
 lspconfig.sumneko_lua.setup {
   cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'},
   settings = {
@@ -189,7 +188,8 @@ if not lspconfig.arduino_lsp then
     default_config = {
       cmd = {
         'arduino-language-server',
-        '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml', '-log',
+        '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml',
+        '-log',
         '-logpath=' .. home .. '/.arduino15/lsp-logs',
       },
       filetypes = {'arduino'},
@@ -212,7 +212,9 @@ lspconfig.groovyls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = {
-    'java', '-jar', home ..
+    'java',
+    '-jar',
+    home ..
       '/software/groovy-language-server/build/libs/groovy-language-server-all.jar',
   },
   filetypes = {'groovy'},

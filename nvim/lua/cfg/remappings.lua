@@ -1,5 +1,4 @@
 local skm = vim.api.nvim_set_keymap
-local util = require('utl.util')
 
 local n = {noremap = true}
 local ns = {noremap = true, silent = true}
@@ -7,25 +6,6 @@ local se = {silent = true, expr = true}
 
 vim.cmd('let mapleader=" "')
 skm('n', '<leader>', '<NOP>', {})
-
--- kitty macos
-local knav = {
-  normal = [[<CMD>KittyNavigate]],
-  insert = [[<ESC><CMD>KittyNavigate]],
-  termin = [[<C-\><C-n><CMD>KittyNavigate]],
-}
-skm('n', '¬', knav.normal .. 'Right<CR>', ns)
-skm('n', '˙', knav.normal .. 'Left<CR>', ns)
-skm('n', '˚', knav.normal .. 'Up<CR>', ns)
-skm('n', '∆', knav.normal .. 'Down<CR>', ns)
-skm('i', '¬', knav.insert .. 'Right<CR>', ns)
-skm('i', '˙', knav.insert .. 'Left<CR>', ns)
-skm('i', '˚', knav.insert .. 'Up<CR>', ns)
-skm('i', '∆', knav.insert .. 'Down<CR>', ns)
-skm('t', '¬', knav.termin .. 'Right<CR>', ns)
-skm('t', '˙', knav.termin .. 'Left<CR>', ns)
-skm('t', '˚', knav.termin .. 'Up<CR>', ns)
-skm('t', '∆', knav.termin .. 'Down<CR>', ns)
 
 local function vsnip_map(mode, key, pos)
   skm(mode, key,
@@ -69,13 +49,6 @@ skm('n', '<leader>T', [[<Cmd>Tagbar<CR>]], ns)
 skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], ns)
 skm('n', '<leader>V', [[<Cmd>Vista!!<CR>]], ns)
 
-util.command('Wqa', [[wqa]], {nargs = '0'})
-util.command('WQa', [[wqa]], {nargs = '0'})
-util.command('WQ', [[wq]], {nargs = '0'})
-util.command('Wq', [[wq]], {nargs = '0'})
-util.command('W', [[w]], {nargs = '0'})
-util.command('Q', [[q]], {nargs = '0'})
-
 skm('n', '', [[gcc]], {})
 skm('x', '', [[gc]], {})
 skm('i', '', [[<C-o>gcc]], {})
@@ -102,21 +75,15 @@ skm('n', '<leader>be', [[<CMD>enew<CR>]], ns)
 skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], ns)
 skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], ns)
 
--- util.command('BufferOrderByBufnr',
---   [[lua require ('mod.functions').order_by_bufnr()]], {nargs = '0'})
-
-local req_util = [[lua require('utl.util')]]
-
 -- resize
 local function resize_window_str(p, c)
-  return p .. req_util .. [[.resize_window(']] .. c .. [[')<CR>]]
+  return p .. [[lua require('utl.util').resize_window(']] .. c .. [[')<CR>]]
 end
 
 skm('n', '<C-M-h>', resize_window_str('<Cmd>', 'h'), ns)
 skm('n', '<C-M-j>', resize_window_str('<Cmd>', 'j'), ns)
 skm('n', '<C-M-k>', resize_window_str('<Cmd>', 'k'), ns)
 skm('n', '<C-M-l>', resize_window_str('<Cmd>', 'l'), ns)
-
 skm('t', '<C-M-h>', resize_window_str('<C-\\><C-n>:', 'h'), ns)
 skm('t', '<C-M-j>', resize_window_str('<C-\\><C-n>:', 'j'), ns)
 skm('t', '<C-M-k>', resize_window_str('<C-\\><C-n>:', 'k'), ns)
@@ -145,7 +112,7 @@ skm('n', '<leader>z', [[<CMD>ZoomToggle<CR>]], ns)
 skm('n', '<leader>}', [[zf}]], ns)
 
 skm('n', '<leader>i',
-  [[<CMD>]] .. req_util .. [[.toggle_bool_option('o', 'ignorecase')<CR>]], ns)
+  [[<CMD>lua require('utl.util').toggle_bool_option('o', 'ignorecase')<CR>]], ns)
 
 skm('n', ';', [[<Plug>(clever-f-repeat-forward)]], {})
 skm('n', ',', [[<Plug>(clever-f-repeat-back)]], {})
@@ -186,40 +153,3 @@ skm('i', '<BS>', [[<C-r>=MasterBS()<CR>]], ns)
 
 skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
 skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], ns)
-
-util.command('ToggleLazyGit',
-  [[w | lua require('mod.terminal').floating_term('lazygit')]], {nargs = '0'})
-
-vim.cmd([[
-  func! CopyForTerminal(...) range
-    let reg = get(a:, 1, '"')
-    let lines = getline(a:firstline, a:lastline)
-    call map(lines, { i, l -> substitute(l, '^ *\(.*\)\\ *$', '\1 ', '') })
-    exe "let @" . reg . " = join(lines, ' ')"
-  endfunc
-]])
-util.command('CopyForTerminal',
-  [[<line1>,<line2>call CopyForTerminal(<f-args>)]], {range = true, nargs = '?'})
-
-util.command('Spectre', [[lua require('spectre').open()]], {nargs = 0})
-
-util.command('DiffThis', [[windo diffthis]], {nargs = '0'})
-util.command('DiffOff', [[windo diffoff]], {nargs = '0'})
-util.command('ConvLineEndings', [[%s/<CR>//g]], {nargs = '0'})
-
--- lua funcs
-local req_funcs = [[lua require ('mod.functions')]]
-util.command('HighlightUnderCursor', req_funcs .. [[.highlight_under_cursor()]],
-  {nargs = '0'})
-util.command('SpellChecker', req_funcs .. [[.spell_checker()]], {nargs = '0'})
-util.command('ZoomToggle', req_funcs .. [[.zoom_toggle()]], {nargs = '0'})
-util.command('ChangeIndent', req_funcs .. [[.change_indent(<f-args>)]],
-  {nargs = '1'})
-util.command('SetIndent', req_funcs .. [[.set_indent(<f-args>)]], {nargs = '1'})
-util.command('MatchOver', req_funcs .. [[.match_over(<f-args>)]], {nargs = '?'})
-
--- packer
-vim.cmd('cabbrev PC PackerClean')
-vim.cmd('cabbrev PI PackerInstall')
-vim.cmd('cabbrev PS PackerSync')
-vim.cmd('cabbrev PU PackerUpdate')
