@@ -25,20 +25,20 @@ local function _iter_diagnostic_move_pos(name, opts, pos)
 
   if enable_popup then
     vim.schedule(function()
-      require('lspsaga.diagnostic').show_line_diagnostics(opts.popup_opts, vim.api
-        .nvim_win_get_buf(win_id))
+      require('lspsaga.diagnostic').show_line_diagnostics(opts.popup_opts,
+        vim.api.nvim_win_get_buf(win_id))
     end)
   end
 end
 
 function M.lsp_jump_diagnostic_next(opts)
   return _iter_diagnostic_move_pos('DiagnosticNext', opts,
-    vim.lsp.diagnostic.get_next_pos(opts))
+    vim.diagnostic.get_next_pos(opts))
 end
 
 function M.lsp_jump_diagnostic_prev(opts)
   return _iter_diagnostic_move_pos('DiagnosticPrevious', opts,
-    vim.lsp.diagnostic.get_prev_pos(opts))
+    vim.diagnostic.get_prev_pos(opts))
 end
 
 return M

@@ -8,11 +8,26 @@ require('format').setup {
   },
   -- sh = {{cmd = {'shfmt -w -i=2 -bn -ci -sr'}}},
   -- zsh = {{cmd = {'shfmt -w -i=2 -bn -ci -sr'}}},
-  lua = {{cmd = {'lua-format -i'}}},
-  go = {{cmd = {'gofmt -w', 'goimports -w'}, tempfile_postfix = '.tmp'}},
-  javascript = {{cmd = {'prettier -w', './node_modules/.bin/eslint --fix'}}},
+  lua = {
+    {
+      cmd = {'lua-format -i'},
+    },
+  },
+  go = {
+    {
+      cmd = {'gofmt -w', 'goimports -w'},
+      tempfile_postfix = '.tmp',
+    },
+  },
+  javascript = {
+    {
+      cmd = {'prettier -w', './node_modules/.bin/eslint --fix'},
+    },
+  },
   markdown = {
-    {cmd = {'prettier -w'}},
+    {
+      cmd = {'prettier -w'},
+    },
     {
       cmd = {'black'},
       start_pattern = '^```python$',

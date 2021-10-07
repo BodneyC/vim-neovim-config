@@ -13,20 +13,27 @@ local packer = require('packer')
 return packer.startup(function()
   local use = packer.use
 
-  use {'wbthomason/packer.nvim', opt = true}
+  use {
+    'wbthomason/packer.nvim',
+    opt = true,
+  }
 
   --- Lsp
   -- use {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}
   -- use {'ray-x/navigator.lua'}
   -- use {'ray-x/lsp_signature.nvim'}
 
-  use {'glepnir/lspsaga.nvim'}
+  use {'tami5/lspsaga.nvim'}
   use {
     'hrsh7th/nvim-cmp',
-    requires = {
-      {'hrsh7th/cmp-path'}, {'hrsh7th/cmp-buffer'}, {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lua'}, {'hrsh7th/cmp-vsnip'}, {'hrsh7th/cmp-calc'},
-    },
+    -- requires = {
+    --   {'hrsh7th/cmp-path'},
+    --   {'hrsh7th/cmp-buffer'},
+    --   {'hrsh7th/cmp-nvim-lsp'},
+    --   {'hrsh7th/cmp-nvim-lua'},
+    --   {'hrsh7th/cmp-vsnip'},
+    --   {'hrsh7th/cmp-calc'},
+    -- },
   }
   -- use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-jdtls'}
@@ -35,9 +42,13 @@ return packer.startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
       {'nvim-telescope/telescope-packer.nvim'},
-      {'nvim-telescope/telescope-fzy-native.nvim', run = {'make'}},
+      {
+        'nvim-telescope/telescope-fzy-native.nvim',
+        run = {'make'},
+      },
     },
   }
   use {'onsails/lspkind-nvim'}
@@ -59,27 +70,59 @@ return packer.startup(function()
   use {'puremourning/vimspector'}
 
   --- Added functionality
-  use {'BodneyC/hex-this-vim', branch = 'master'}
-  use {'BodneyC/pic-vim', branch = 'master'}
-  use {'bodneyc/Comrade', branch = 'master'}
+  use {
+    'BodneyC/hex-this-vim',
+    branch = 'master',
+  }
+  use {
+    'BodneyC/pic-vim',
+    branch = 'master',
+  }
+  use {
+    'bodneyc/Comrade',
+    branch = 'master',
+  }
   use {'windwp/nvim-spectre'}
-  use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn', ft = 'markdown'}
-  use {'itchyny/calendar.vim', cmd = 'Cal'}
-  use {'knubie/vim-kitty-navigator', cond = os.getenv('KITTY_WINDOW_ID')}
-  use {'nicwest/vim-http', cmd = 'Http'}
+  use {
+    'christoomey/vim-tmux-navigator',
+    cond = os.getenv('TMUX'),
+  }
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = 'cd app && yarn',
+    ft = 'markdown',
+  }
+  use {
+    'itchyny/calendar.vim',
+    cmd = 'Cal',
+  }
+  use {
+    'knubie/vim-kitty-navigator',
+    cond = os.getenv('KITTY_WINDOW_ID'),
+  }
+  use {
+    'nicwest/vim-http',
+    cmd = 'Http',
+  }
   use {'windwp/nvim-ts-autotag'}
   use {'nvim-treesitter/nvim-treesitter'}
   use {'nvim-treesitter/nvim-treesitter-refactor'}
   use {'nvim-treesitter/nvim-treesitter-textobjects'}
-  use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
+  use {
+    'nvim-treesitter/playground',
+    cmd = 'TSPlaygroundToggle',
+  }
   use {'vigoux/treesitter-context.nvim'}
   use {'RRethy/nvim-treesitter-textsubjects'}
   use {
     'p00f/nvim-ts-rainbow',
     config = function()
       require('nvim-treesitter.configs').setup {
-        rainbow = {enable = true, extended_mode = true, max_file_lines = 1000},
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = 1000,
+        },
       }
     end,
   }
@@ -102,21 +145,33 @@ return packer.startup(function()
       require('bufresize').setup()
     end,
   }
-  use {'liuchengxu/vista.vim', cmd = 'Vista'}
+  use {
+    'liuchengxu/vista.vim',
+    cmd = 'Vista',
+  }
   use {'ludovicchabant/vim-gutentags'}
   use {'lukas-reineke/format.nvim'}
   use {'machakann/vim-swap'}
-  use {'majutsushi/tagbar', cmd = 'Tagbar'}
-  use {'rhysd/vim-grammarous', ft = {'markdown', 'tex'}}
+  use {
+    'majutsushi/tagbar',
+    cmd = 'Tagbar',
+  }
+  use {
+    'rhysd/vim-grammarous',
+    ft = {'markdown', 'tex'},
+  }
   -- use {'scrooloose/nerdcommenter'}
   use {'tpope/vim-commentary'}
   use {'simnalamburt/vim-mundo'}
 
   --- Vim internal wrappers
-  use {'BodneyC/At-Zed-vim', branch = 'master'}
-  use {'BodneyC/flocho', branch = 'master'}
-  use {'BodneyC/togool.vim', branch = 'master'}
-  use {'alvan/vim-closetag', ft = {'html', 'xml', 'markdown'}}
+  use {'BodneyC/At-Zed-vim'}
+  use {'BodneyC/flocho'}
+  use {'BodneyC/togool.vim'}
+  use {
+    'alvan/vim-closetag',
+    ft = {'html', 'xml', 'markdown'},
+  }
   use {'andymass/vim-matchup'}
   -- use {'chrisbra/recover.vim'}
   use {'moll/vim-bbye'}
@@ -130,43 +185,89 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
 
   --- Prettiness
-  use {'BodneyC/bolorscheme', branch = 'lua'}
+  -- use {
+  --   'BodneyC/bolorscheme',
+  --   branch = 'lua',
+  -- }
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim'}
   use {'amdt/vim-niji'}
   use {'dstein64/nvim-scrollview'}
-  use {'junegunn/goyo.vim', cmd = 'Goyo'}
-  use {'junegunn/limelight.vim', cmd = 'Limelight'}
+  use {
+    'junegunn/goyo.vim',
+    cmd = 'Goyo',
+  }
+  use {
+    'junegunn/limelight.vim',
+    cmd = 'Limelight',
+  }
   use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
-  use {'romgrk/barbar.nvim', requires = {{'romgrk/lib.kom'}}}
+  use {
+    'romgrk/barbar.nvim',
+    requires = {{'romgrk/lib.kom'}},
+  }
   -- use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
   use {'rktjmp/lush.nvim'}
-  use {'rrethy/vim-hexokinase', run = 'make hexokinase'}
+  use {
+    'rrethy/vim-hexokinase',
+    run = 'make hexokinase',
+  }
   use {'hoob3rt/lualine.nvim'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
 
   --- SDL
-  use {'BodneyC/VirkSpaces', branch = 'master'}
-  use {'Shougo/defx.nvim', run = ':UpdateRemotePlugins'}
-  use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+  use {
+    'BodneyC/VirkSpaces',
+    branch = 'master',
+  }
+  use {
+    'Shougo/defx.nvim',
+    run = ':UpdateRemotePlugins',
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+  }
   use {'f-person/git-blame.nvim'}
-  use {'gregsexton/gitv', cmd = 'Gitv', requires = {{'tpope/vim-fugitive'}}}
-  use {'junegunn/gv.vim', cmd = 'GV'}
+  use {
+    'gregsexton/gitv',
+    cmd = 'Gitv',
+    requires = {{'tpope/vim-fugitive'}},
+  }
+  use {
+    'junegunn/gv.vim',
+    cmd = 'GV',
+  }
   use {'kristijanhusak/defx-git'}
-  use {'oguzbilgic/vim-gdiff', cmd = {'Gdiff', 'Gdiffsplit'}}
-  use {'rbong/vim-flog', cmd = 'Flog'}
-  use {'sodapopcan/vim-twiggy', cmd = 'Twiggy'}
+  use {
+    'oguzbilgic/vim-gdiff',
+    cmd = {'Gdiff', 'Gdiffsplit'},
+  }
+  use {
+    'rbong/vim-flog',
+    cmd = 'Flog',
+  }
+  use {
+    'sodapopcan/vim-twiggy',
+    cmd = 'Twiggy',
+  }
 
   --- Language support
-  use {'BodneyC/sood-vim', branch = 'master'}
-  use {'BodneyC/knit-vim', branch = 'master'}
+  use {'BodneyC/sood-vim'}
+  use {'BodneyC/knit-vim'}
   use {'drmingdrmer/vim-indent-lua'}
-  use {'janko/vim-test', cmd = 'TestFile'}
+  use {
+    'janko/vim-test',
+    cmd = 'TestFile',
+  }
   use {'justinmk/vim-syntax-extra'}
   use {'leafgarland/typescript-vim'}
-  use {'m-pilia/vim-pkgbuild', ft = 'pkgbuild'}
+  use {
+    'm-pilia/vim-pkgbuild',
+    ft = 'pkgbuild',
+  }
   use {'mboughaba/i3config.vim'}
   use {'michaeljsmith/vim-indent-object'}
   use {'NoorWachid/VimVLanguage'}
@@ -179,6 +280,6 @@ return packer.startup(function()
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces', branch = 'master'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-  -- use {'~/gitclones/bolorscheme'}
+  use {'~/gitclones/bolorscheme'}
 
 end)

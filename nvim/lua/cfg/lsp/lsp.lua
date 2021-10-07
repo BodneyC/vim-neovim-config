@@ -26,15 +26,22 @@ util.augroup({
   },
 })
 
--- diagnostics
-vim.fn.sign_define('LspDiagnosticsSignError',
-  {text = ' ', texthl = 'LspDiagnosticsError'})
-vim.fn.sign_define('LspDiagnosticsSignWarning',
-  {text = ' ', texthl = 'LspDiagnosticsWarning'})
-vim.fn.sign_define('LspDiagnosticsSignInformation',
-  {text = ' ', texthl = 'LspDiagnosticsInformation'})
-vim.fn.sign_define('LspDiagnosticsSignHint',
-  {text = 'ﯦ ', texthl = 'LspDiagnosticsHint'})
+vim.fn.sign_define('DiagnosticSignError', {
+  text = ' ',
+  texthl = 'DiagnosticSignError',
+})
+vim.fn.sign_define('DiagnosticSignWarn', {
+  text = ' ',
+  texthl = 'DiagnosticSignWarn',
+})
+vim.fn.sign_define('DiagnosticSignInfo', {
+  text = ' ',
+  texthl = 'DiagnosticSignInfo',
+})
+vim.fn.sign_define('DiagnosticSignHint', {
+  text = ' ',
+  texthl = 'DiagnosticSignHint',
+})
 
 lsp_status.register_progress()
 lsp_status.config({
@@ -45,7 +52,6 @@ lsp_status.config({
   indicator_hint = 'ﯦ',
   indicator_ok = '',
 })
---
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local completionItem = capabilities.textDocument.completion.completionItem
@@ -55,7 +61,9 @@ completionItem.insertReplaceSupport = true
 completionItem.labelDetailsSupport = true
 completionItem.deprecatedSupport = true
 completionItem.commitCharactersSupport = true
-completionItem.tagSupport = {valueSet = {1}}
+completionItem.tagSupport = {
+  valueSet = {1},
+}
 completionItem.resolveSupport = {
   properties = {'documentation', 'detail', 'additionalTextEdits'},
 }
@@ -65,7 +73,10 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local function on_attach(client, bufnr)
 
   -- mappings
-  local ns = {noremap = true, silent = true}
+  local ns = {
+    noremap = true,
+    silent = true,
+  }
 
   local function bskm(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -122,7 +133,10 @@ for _, lsp in ipairs({
   'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
   'texlab', -- package-manager - texlab
 }) do
-  lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 end
 
 local system_name
@@ -158,8 +172,13 @@ lspconfig.sumneko_lua.setup {
   cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'},
   settings = {
     Lua = {
-      runtime = {version = 'LuaJIT', path = path},
-      diagnostics = {globals = {'vim'}},
+      runtime = {
+        version = 'LuaJIT',
+        path = path,
+      },
+      diagnostics = {
+        globals = {'vim'},
+      },
       workspace = {
         checkThirdParty = false,
         library = vim.api.nvim_get_runtime_file('', true),
@@ -171,7 +190,9 @@ lspconfig.sumneko_lua.setup {
         --   [home .. '/gitclones/vim-neovim-config/nvim/lua'] = true,
         -- },
       },
-      telemetry = {enable = false},
+      telemetry = {
+        enable = false,
+      },
     },
   },
   on_attach = on_attach,
@@ -200,7 +221,10 @@ if not lspconfig.arduino_lsp then
     },
   }
 end
-lspconfig.arduino_lsp.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.arduino_lsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -256,10 +280,16 @@ lspconfig.diagnosticls.setup {
       sh = 'shellcheck',
       markdown = 'markdown',
     },
-    formatFiletypes = {sh = 'shfmt', zsh = 'shfmt'},
+    formatFiletypes = {
+      sh = 'shfmt',
+      zsh = 'shfmt',
+    },
     -- package-manager - shfmt
     formatters = {
-      shfmt = {args = {'-i=2', '-bn', '-ci', '-sr'}, command = 'shfmt'},
+      shfmt = {
+        args = {'-i=2', '-bn', '-ci', '-sr'},
+        command = 'shfmt',
+      },
     },
     linters = {
       markdown = {
@@ -271,11 +301,20 @@ lspconfig.diagnosticls.setup {
         formatPattern = {
           -- README.md:3:81 MD013/line-length Line length [Expected: 80; Actual: 282]
           '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$',
-          {security = 1, line = 2, column = 3, message = 4},
+          {
+            security = 1,
+            line = 2,
+            column = 3,
+            message = 4,
+          },
         },
         offsetColumn = 0,
         offsetLine = 0,
-        securities = {error = 'error', note = 'info', warning = ':'},
+        securities = {
+          error = 'error',
+          note = 'info',
+          warning = ':',
+        },
         sourceName = 'markdown',
       },
       pkgbuild = {
@@ -285,9 +324,18 @@ lspconfig.diagnosticls.setup {
           '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
-          {column = 2, line = 1, message = 4, security = 3},
+          {
+            column = 2,
+            line = 1,
+            message = 4,
+            security = 3,
+          },
         },
-        securities = {error = 'error', note = 'info', warning = 'warning'},
+        securities = {
+          error = 'error',
+          note = 'info',
+          warning = 'warning',
+        },
         sourceName = 'pkgbuild',
       },
       shellcheck = {
@@ -309,7 +357,11 @@ lspconfig.diagnosticls.setup {
         },
         offsetColumn = 0,
         offsetLine = 0,
-        securities = {error = 'error', note = 'info', warning = 'warning'},
+        securities = {
+          error = 'error',
+          note = 'info',
+          warning = 'warning',
+        },
         sourceName = 'shellcheck',
       },
       shellcheck_zsh = {
@@ -331,7 +383,11 @@ lspconfig.diagnosticls.setup {
         },
         offsetColumn = 0,
         offsetLine = 0,
-        securities = {error = 'error', note = 'info', warning = 'warning'},
+        securities = {
+          error = 'error',
+          note = 'info',
+          warning = 'warning',
+        },
         sourceName = 'shellcheck_zsh',
       },
     },
@@ -346,26 +402,52 @@ require('symbols-outline').setup({
 -- lspkind
 require('lspkind').init({
   with_text = false,
+  preset = 'default',
   symbol_map = {
-    Text = '',
-    Method = 'ƒ',
-    Function = 'f',
-    Constructor = '',
-    Variable = '',
-    Class = '',
-    Interface = 'ﰮ',
-    Module = '',
-    Property = '',
-    Unit = '',
+    Text = '',
+    Method = '',
+    Function = '',
+    Constructor = '',
+    Field = 'ﰠ',
+    Variable = '',
+    Class = 'ﴯ',
+    Interface = '',
+    Module = '',
+    Property = 'ﰠ',
+    Unit = '塞',
     Value = '',
-    Enum = '了',
-    Keyword = '',
-    Snippet = '',
-    Color = '',
-    File = '',
-    Folder = '',
+    Enum = '',
+    Keyword = '',
+    Snippet = '',
+    Color = '',
+    File = '',
+    Reference = '',
+    Folder = '',
     EnumMember = '',
-    Constant = '',
-    Struct = '',
+    Constant = '',
+    Struct = 'פּ',
+    Event = '',
+    Operator = '',
+    TypeParameter = '',
+    -- Text = '',
+    -- Method = 'ƒ',
+    -- Function = 'f',
+    -- Constructor = '',
+    -- Variable = '',
+    -- Class = '',
+    -- Interface = 'ﰮ',
+    -- Module = '',
+    -- Property = '',
+    -- Unit = '',
+    -- Value = '',
+    -- Enum = '了',
+    -- Keyword = '',
+    -- Snippet = '',
+    -- Color = '',
+    -- File = '',
+    -- Folder = '',
+    -- EnumMember = '',
+    -- Constant = '',
+    -- Struct = '',
   },
 })
