@@ -26,14 +26,14 @@ return packer.startup(function()
   use {'tami5/lspsaga.nvim'}
   use {
     'hrsh7th/nvim-cmp',
-    -- requires = {
-    --   {'hrsh7th/cmp-path'},
-    --   {'hrsh7th/cmp-buffer'},
-    --   {'hrsh7th/cmp-nvim-lsp'},
-    --   {'hrsh7th/cmp-nvim-lua'},
-    --   {'hrsh7th/cmp-vsnip'},
-    --   {'hrsh7th/cmp-calc'},
-    -- },
+    requires = {
+      {'hrsh7th/cmp-path'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'},
+      {'hrsh7th/cmp-vsnip'},
+      {'hrsh7th/cmp-calc'},
+    },
   }
   -- use {'hrsh7th/nvim-compe'}
   use {'mfussenegger/nvim-jdtls'}

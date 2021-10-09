@@ -58,8 +58,6 @@ skm('n', '<leader>bp', [[<CMD>BufferPick<CR>]], ns)
 skm('n', '<M-/>', [[<CMD>BufferPick<CR>]], ns)
 skm('n', '÷', [[<CMD>BufferPick<CR>]], ns)
 
-skm('n', '<M-o>', [[<CMD>BufferOrderByBufnr<CR>]], ns)
-skm('n', 'ø', [[<CMD>BufferOrderByBufnr<CR>]], ns)
 for i = 1, 9 do
   skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], ns)
 end

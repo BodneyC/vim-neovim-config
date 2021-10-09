@@ -18,10 +18,12 @@ local function has_words_before()
       :match('%s') == nil
 end
 
+vim.o.completeopt = 'menu,menuone,noselect'
+
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body) -- For `vsnip` user.
+      vim.fn['vsnip#anonymous'](args.body)
     end,
   },
 
@@ -34,23 +36,23 @@ cmp.setup({
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        feedkeys('<C-n>', 'n')
+      if cmp.visible() then
+        cmp.select_next_item()
       elseif vim.fn['vsnip#available']() == 1 then
         feedkeys('<Plug>(vsnip-expand-or-jump)', '')
       elseif has_words_before() then
-        feedkeys('<C-n>', 'n')
+        cmp.complete()
       else
         fallback()
       end
     end, {'i', 's'}),
     ['<S-Tab>'] = cmp.mapping(function(_)
-      if vim.fn.pumvisible() == 1 then
-        feedkeys('<C-p>', 'n')
+      if cmp.visible() then
+        cmp.select_prev_item()
       elseif vim.fn['vsnip#jumpable'](-1) == 1 then
         feedkeys('<Plug>(vsnip-jump-prev)', '')
       elseif has_words_before() then
-        feedkeys('<C-p><C-p>', 'n')
+        cmp.complete()
       else
         feedkeys('<C-d>', 'n')
       end
@@ -80,13 +82,13 @@ cmp.setup({
   },
 })
 
-util.augroup({
-  name = '__CMP__',
-  autocmds = {
-    {
-      event = 'FileType',
-      glob = 'lua',
-      cmd = [[lua require('cmp').setup.buffer {sources = {{name = 'nvim_lua'}}}]],
-    },
-  },
-})
+-- require('utl.util').augroup({
+--   name = '__CMP__',
+--   autocmds = {
+--     {
+--       event = 'FileType',
+--       glob = 'lua',
+--       cmd = [[lua require('cmp').setup.buffer {sources = {{name = 'nvim_lua'}}}]],
+--     },
+--   },
+-- })

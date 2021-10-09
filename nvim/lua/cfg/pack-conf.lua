@@ -1,6 +1,9 @@
 local util = require('utl.util')
 
-require('bolorscheme').setup {theme = 'bronzage', light = false}
+require('bolorscheme').setup {
+  theme = 'bronzage',
+  light = false,
+}
 
 util.opt('g', {
   -- Relies on this file being loaded after the plugin itself
@@ -13,7 +16,12 @@ util.opt('g', {
   Hexokinase_highlighters = {'backgroundfull'},
 
   Hexokinase_optInPatterns = {
-    'full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla',
+    'full_hex',
+    'triple_hex',
+    'rgb',
+    'rgba',
+    'hsl',
+    'hsla',
   },
 
   NERDSpaceDelims = 1,
@@ -59,16 +67,26 @@ util.opt('g', {
   gutentags_ctags_extra_args = {
     '--tag-relative=' ..
       (vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes' or
-        'always'), '--fields=+ailmnS',
+        'always'),
+    '--fields=+ailmnS',
   },
 
   indentLine_char = '│',
   indentLine_first_char = '│',
   indentLine_fileTypeExclude = {
-    'packer', 'dashboard', 'nerdtree', 'twiggy', 'startify', 'help', 'defx', '',
+    'packer',
+    'dashboard',
+    'nerdtree',
+    'twiggy',
+    'startify',
+    'help',
+    'defx',
+    '',
   },
 
-  matchup_matchparen_offscreen = {method = 'popup'},
+  matchup_matchparen_offscreen = {
+    method = 'popup',
+  },
 
   move_map_keys = false,
 
@@ -94,10 +112,18 @@ util.opt('g', {
   vim_markdown_folding_disabled = true,
   vim_markdown_no_default_key_mappings = true,
 
-  vimade = {fadelevel = 0.6, enablesigns = 0},
+  vimade = {
+    fadelevel = 0.6,
+    enablesigns = 0,
+  },
 
   virk_close_regexes = {
-    '^$', 'FAR.*', 'MERGE MSG', 'git-.*', 'COMMIT.*', '.*Plugins.*',
+    '^$',
+    'FAR.*',
+    'MERGE MSG',
+    'git-.*',
+    'COMMIT.*',
+    '.*Plugins.*',
     '^.defx].*',
   },
   virk_close_by_ft = {
@@ -111,8 +137,13 @@ util.opt('g', {
 
   vista_icon_indent = {'╰─▸ ', '├─▸ '},
   vista_default_executive = 'ctags',
-  ['vista#renderer#icons'] = {variable = '\\u71b', ['function'] = '\\uf794'},
-  vista_executive_for = {vim = 'ctags'},
+  ['vista#renderer#icons'] = {
+    variable = '\\u71b',
+    ['function'] = '\\uf794',
+  },
+  vista_executive_for = {
+    vim = 'ctags',
+  },
 
   vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip',
 
@@ -136,10 +167,11 @@ util.augroup({
   name = 'bufferline_update__custom',
   autocmds = {
     {
-      event = 'BufNew,BufEnter,BufWinEnter,SessionLoadPost,WinEnter,VimEnter',
+      event = 'BufEnter,BufWinEnter,SessionLoadPost,WinEnter,VimEnter',
       glob = '*',
       cmd = 'BufferOrderByBufferNumber',
-    }, {
+    },
+    {
       -- Temporary as bufferline not updating at the mo
       event = 'CursorMoved',
       glob = '*',
@@ -180,23 +212,66 @@ vim.g[string.lower(pane_manager) .. '_navigator_no_mappings'] = 1
 
 local mappings = {
   mode_pairs = {
-    {mode = 'n', cmd = ':'}, {mode = 'i', cmd = '<C-o>:'},
-    {mode = 't', cmd = [[<C-\><C-n>:]]},
+    {
+      mode = 'n',
+      cmd = ':',
+    },
+    {
+      mode = 'i',
+      cmd = '<C-o>:',
+    },
+    {
+      mode = 't',
+      cmd = [[<C-\><C-n>:]],
+    },
   },
   dir_pairs = {
-    {key = 'k', txt = 'Up'}, {key = 'h', txt = 'Left'},
-    {key = 'j', txt = 'Down'}, {key = 'l', txt = 'Right'},
-    {key = [[\]], txt = 'Previous'},
+    {
+      key = 'k',
+      txt = 'Up',
+    },
+    {
+      key = 'h',
+      txt = 'Left',
+    },
+    {
+      key = 'j',
+      txt = 'Down',
+    },
+    {
+      key = 'l',
+      txt = 'Right',
+    },
+    {
+      key = [[\]],
+      txt = 'Previous',
+    },
     -- MacOS
-    {key = '˚', txt = 'Up'}, {key = '˙', txt = 'Left'},
-    {key = '∆', txt = 'Down'}, {key = '¬', txt = 'Right'},
+    {
+      key = '˚',
+      txt = 'Up',
+    },
+    {
+      key = '˙',
+      txt = 'Left',
+    },
+    {
+      key = '∆',
+      txt = 'Down',
+    },
+    {
+      key = '¬',
+      txt = 'Right',
+    },
   },
 }
 
 for _, mode in ipairs(mappings.mode_pairs) do
   for _, dir in ipairs(mappings.dir_pairs) do
     vim.api.nvim_set_keymap(mode.mode, '<M-' .. dir.key .. '>', mode.cmd ..
-      pane_manager .. 'Navigate' .. dir.txt .. '<CR>',
-      {noremap = true, silent = true})
+      pane_manager .. 'Navigate' .. dir.txt .. '<CR>', {
+      noremap = true,
+      silent = true,
+    })
   end
 end
