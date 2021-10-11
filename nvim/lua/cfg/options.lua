@@ -75,7 +75,7 @@ util.opt('wo', {
   foldenable = true,
   linebreak = true,
   nu = true,
-  rnu = true,
+  rnu = false,
   signcolumn = 'yes',
   winblend = 10,
   wrap = true,

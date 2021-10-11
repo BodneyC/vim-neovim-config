@@ -227,23 +227,23 @@ local mappings = {
   },
   dir_pairs = {
     {
-      key = 'k',
+      key = '<M-k>',
       txt = 'Up',
     },
     {
-      key = 'h',
+      key = '<M-h>',
       txt = 'Left',
     },
     {
-      key = 'j',
+      key = '<M-j>',
       txt = 'Down',
     },
     {
-      key = 'l',
+      key = '<M-l>',
       txt = 'Right',
     },
     {
-      key = [[\]],
+      key = [[<M-\>]],
       txt = 'Previous',
     },
     -- MacOS
@@ -268,8 +268,8 @@ local mappings = {
 
 for _, mode in ipairs(mappings.mode_pairs) do
   for _, dir in ipairs(mappings.dir_pairs) do
-    vim.api.nvim_set_keymap(mode.mode, '<M-' .. dir.key .. '>', mode.cmd ..
-      pane_manager .. 'Navigate' .. dir.txt .. '<CR>', {
+    vim.api.nvim_set_keymap(mode.mode, dir.key, mode.cmd .. pane_manager ..
+      'Navigate' .. dir.txt .. '<CR>', {
       noremap = true,
       silent = true,
     })
