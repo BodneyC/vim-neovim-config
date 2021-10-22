@@ -75,12 +75,15 @@ util.augroup {
       glob = '',
       cmd = ''
     }
-  }
+  },
+  nobang = true|false,
 }
 --]]
 function M.augroup(opts)
   vim.cmd('augroup ' .. opts.name)
-  vim.cmd('au!')
+  if opts.nobang == true then
+    vim.cmd('au!')
+  end
   for _, au in ipairs(opts.autocmds or opts.autocommands) do
     vim.cmd('au ' .. au.event .. ' ' .. au.glob .. ' ' .. au.cmd)
   end
@@ -109,10 +112,14 @@ end
 
 function M.command(lhs, rhs, opts)
   local parts = {
-    'command!', '-nargs=' .. (opts.nargs or '0'),
+    'command!',
+    '-nargs=' .. (opts.nargs or '0'),
     opts.complete and '-complete=' .. opts.complete or '',
-    opts.bang and '-bang' or '', opts.range and '-range' or '',
-    opts.buffer and '-buffer' or '', lhs, rhs,
+    opts.bang and '-bang' or '',
+    opts.range and '-range' or '',
+    opts.buffer and '-buffer' or '',
+    lhs,
+    rhs,
   }
   vim.cmd(table.concat(parts, ' '))
 end

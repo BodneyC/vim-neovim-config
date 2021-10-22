@@ -8,6 +8,10 @@ end
 
 vim.cmd('packadd packer.nvim')
 
+vim.cmd('packadd defx.nvim')
+vim.cmd('packadd defx-icons')
+vim.cmd('packadd defx-git')
+
 local packer = require('packer')
 
 return packer.startup(function()
@@ -129,7 +133,15 @@ return packer.startup(function()
 
   --- QOL
   use {'folke/todo-comments.nvim'}
-  use {'folke/trouble.nvim'}
+  use {
+    'folke/trouble.nvim',
+    config = function()
+      require('trouble').setup {
+        auto_open = true,
+        auto_close = true,
+      }
+    end,
+  }
   use {'simrat39/symbols-outline.nvim'}
   use {'bronson/vim-visual-star-search'}
   use {'dominikduda/vim_current_word'}
@@ -143,6 +155,12 @@ return packer.startup(function()
     'kwkarlwang/bufresize.nvim',
     config = function()
       require('bufresize').setup()
+    end,
+  }
+  use {
+    'luukvbaal/stabilize.nvim',
+    config = function()
+      require('stabilize').setup()
     end,
   }
   use {
@@ -213,7 +231,7 @@ return packer.startup(function()
     'rrethy/vim-hexokinase',
     run = 'make hexokinase',
   }
-  use {'hoob3rt/lualine.nvim'}
+  use {'nvim-lualine/lualine.nvim'}
   use {'wellle/targets.vim'}
   use {'wellle/visual-split.vim'}
 
@@ -270,7 +288,7 @@ return packer.startup(function()
   }
   use {'mboughaba/i3config.vim'}
   use {'michaeljsmith/vim-indent-object'}
-  use {'NoorWachid/VimVLanguage'}
+  -- use {'NoorWachid/VimVLanguage'}
   use {'plasticboy/vim-markdown'}
   use {'uiiaoo/java-syntax.vim'}
   use {'stevearc/vim-arduino'}
