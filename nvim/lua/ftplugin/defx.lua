@@ -65,7 +65,7 @@ function M.init()
   bskm(0, 'n', 'dd', [[defx#do_action('call', '__DEFX_REM_RM')]], nse)
   bskm(0, 'n', '+x', cmd_on_file('chmod +x'), n)
   bskm(0, 'n', '-x', cmd_on_file('chmod -x'), n)
-  bskm(0, 'n', 'G', [[G0]], ns)
+  bskm(0, 'n', 'G', 'G0', ns)
 
   local function str_tree_or_open(if_dir, if_file)
     return 'defx#is_directory() ? defx#do_action(\'open_tree\'' ..

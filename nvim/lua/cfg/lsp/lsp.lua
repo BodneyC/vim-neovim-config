@@ -1,7 +1,7 @@
 local util = require('utl.util')
 
 local lspconfig = require('lspconfig')
-local configs = require('lspconfig/configs')
+-- local configs = require('lspconfig/configs')
 local lsp_status = require('lsp-status')
 
 local home = vim.loop.os_homedir()
@@ -26,31 +26,16 @@ util.augroup({
   },
 })
 
-vim.fn.sign_define('DiagnosticSignError', {
-  text = ' ',
-  texthl = 'DiagnosticSignError',
-})
-vim.fn.sign_define('DiagnosticSignWarn', {
-  text = ' ',
-  texthl = 'DiagnosticSignWarn',
-})
-vim.fn.sign_define('DiagnosticSignInfo', {
-  text = ' ',
-  texthl = 'DiagnosticSignInfo',
-})
-vim.fn.sign_define('DiagnosticSignHint', {
-  text = ' ',
-  texthl = 'DiagnosticSignHint',
-})
+local icons = require('mod.theme').icons
 
 lsp_status.register_progress()
 lsp_status.config({
   status_symbol = '',
-  indicator_errors = '',
-  indicator_warnings = '',
-  indicator_info = '',
-  indicator_hint = 'ﯦ',
-  indicator_ok = '',
+  indicator_errors = icons.error,
+  indicator_warnings = icons.warning,
+  indicator_info = icons.info,
+  indicator_hint = icons.hint,
+  indicator_ok = icons.ok,
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -90,13 +75,12 @@ local function on_attach(client, bufnr)
   bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
   bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
   bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
+  -- bskm('n', '[w', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], ns)
+  -- bskm('n', ']w', [[<cmd>Lspsaga diagnostic_jump_next<CR>]], ns)
   bskm('n', ']w',
-    [[<CMD>lua require('mod.tmp-diagnostics').lsp_jump_diagnostic_next()<CR>]],
-    ns)
+    [[<CMD>lua require('mod.diagnostics').navigate('next')()<CR>]], ns)
   bskm('n', '[w',
-
-    [[<CMD>lua require('mod.tmp-diagnostics').lsp_jump_diagnostic_prev()<CR>]],
-    ns)
+    [[<CMD>lua require('mod.diagnostics').navigate('prev')()<CR>]], ns)
   bskm('n', '<Leader>F',
     [[<CMD>lua require('utl.util').document_formatting()<CR>]], ns)
   bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
@@ -204,27 +188,27 @@ go get github.com/arduino/arduino-language-server
 package-manager arduino-cli
 arduino-cli core install arduino:avr # or other platform
 ]]
-if not lspconfig.arduino_lsp then
-  configs.arduino_lsp = {
-    default_config = {
-      cmd = {
-        'arduino-language-server',
-        '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml',
-        '-log',
-        '-logpath=' .. home .. '/.arduino15/lsp-logs',
-      },
-      filetypes = {'arduino'},
-      root_dir = function(fname)
-        return lspconfig.util.find_git_ancestor(fname) or home
-      end,
-      settings = {},
-    },
-  }
-end
-lspconfig.arduino_lsp.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- if not lspconfig.arduino_lsp then
+--   configs.arduino_lsp = {
+--     default_config = {
+--       cmd = {
+--         'arduino-language-server',
+--         '-cli-config=' .. home .. '/.arduino15/arduino-cli.yaml',
+--         '-log',
+--         '-logpath=' .. home .. '/.arduino15/lsp-logs',
+--       },
+--       filetypes = {'arduino'},
+--       root_dir = function(fname)
+--         return lspconfig.util.find_git_ancestor(fname) or home
+--       end,
+--       settings = {},
+--     },
+--   }
+-- end
+-- lspconfig.arduino_lsp.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
 
 --[[
 mkdir -p "$HOME/software" && cd "$HOME/software"
@@ -429,25 +413,5 @@ require('lspkind').init({
     Event = '',
     Operator = '',
     TypeParameter = '',
-    -- Text = '',
-    -- Method = 'ƒ',
-    -- Function = 'f',
-    -- Constructor = '',
-    -- Variable = '',
-    -- Class = '',
-    -- Interface = 'ﰮ',
-    -- Module = '',
-    -- Property = '',
-    -- Unit = '',
-    -- Value = '',
-    -- Enum = '了',
-    -- Keyword = '',
-    -- Snippet = '',
-    -- Color = '',
-    -- File = '',
-    -- Folder = '',
-    -- EnumMember = '',
-    -- Constant = '',
-    -- Struct = '',
   },
 })

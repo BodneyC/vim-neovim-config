@@ -1,5 +1,11 @@
 require('nvim-treesitter.configs').setup {
-  context_commentstring = {enable = true, config = {css = '// %s', c = '// %s'}},
+  context_commentstring = {
+    enable = true,
+    config = {
+      css = '// %s',
+      c = '// %s',
+    },
+  },
   autotag = {
     enable = true,
     filetypes = {
@@ -33,8 +39,14 @@ require('nvim-treesitter.configs').setup {
     'javascript',
     'tsx',
   },
-  indent = {enable = true, disable = {'yaml', 'python'}},
-  highlight = {enable = true, disable = {'yaml'}},
+  indent = {
+    enable = true,
+    disable = {'yaml', 'python'},
+  },
+  highlight = {
+    enable = true,
+    disable = {'yaml'},
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -51,9 +63,18 @@ require('nvim-treesitter.configs').setup {
     persist_queries = false,
   },
   refactor = {
-    smart_rename = {enable = false, keymaps = {smart_rename = '<Leader>R'}},
-    highlight_current_scope = {enable = false},
-    highlight_definitions = {enable = false},
+    smart_rename = {
+      enable = false,
+      keymaps = {
+        smart_rename = '<Leader>R',
+      },
+    },
+    highlight_current_scope = {
+      enable = false,
+    },
+    highlight_definitions = {
+      enable = false,
+    },
     navigation = {
       enable = true,
       keymaps = {
@@ -64,7 +85,12 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-  textsubjects = {enable = true, keymaps = {['.'] = 'textsubjects-smart'}},
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ['.'] = 'textsubjects-smart',
+    },
+  },
   -- Currently unsupported by most
   textobjects = {
     select = {
@@ -79,18 +105,31 @@ require('nvim-treesitter.configs').setup {
     },
     swap = {
       enable = true,
-      swap_next = {['<leader>a'] = '@parameter.inner'},
-      swap_previous = {['<leader>A'] = '@parameter.inner'},
+      swap_next = {
+        ['<leader>a'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<leader>A'] = '@parameter.inner',
+      },
     },
     move = {
       enable = true,
-      goto_next_start = {[']m'] = '@function.outer', [']]'] = '@class.outer'},
-      goto_next_end = {[']M'] = '@function.outer', [']['] = '@class.outer'},
+      goto_next_start = {
+        [']m'] = '@function.outer',
+        [']]'] = '@class.outer',
+      },
+      goto_next_end = {
+        [']M'] = '@function.outer',
+        [']['] = '@class.outer',
+      },
       goto_previous_start = {
         ['[m'] = '@function.outer',
         ['[['] = '@class.outer',
       },
-      goto_previous_end = {['[M'] = '@function.outer', ['[]'] = '@class.outer'},
+      goto_previous_end = {
+        ['[M'] = '@function.outer',
+        ['[]'] = '@class.outer',
+      },
     },
   },
 }

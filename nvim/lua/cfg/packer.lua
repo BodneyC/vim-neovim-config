@@ -8,10 +8,6 @@ end
 
 vim.cmd('packadd packer.nvim')
 
-vim.cmd('packadd defx.nvim')
-vim.cmd('packadd defx-icons')
-vim.cmd('packadd defx-git')
-
 local packer = require('packer')
 
 return packer.startup(function()
@@ -116,6 +112,7 @@ return packer.startup(function()
     'nvim-treesitter/playground',
     cmd = 'TSPlaygroundToggle',
   }
+  use {'JoosepAlviste/nvim-ts-context-commentstring'}
   use {'vigoux/treesitter-context.nvim'}
   use {'RRethy/nvim-treesitter-textsubjects'}
   use {
@@ -137,8 +134,8 @@ return packer.startup(function()
     'folke/trouble.nvim',
     config = function()
       require('trouble').setup {
-        auto_open = true,
-        auto_close = true,
+        auto_open = false,
+        auto_close = false,
       }
     end,
   }
@@ -163,17 +160,9 @@ return packer.startup(function()
       require('stabilize').setup()
     end,
   }
-  use {
-    'liuchengxu/vista.vim',
-    cmd = 'Vista',
-  }
   use {'ludovicchabant/vim-gutentags'}
   use {'lukas-reineke/format.nvim'}
   use {'machakann/vim-swap'}
-  use {
-    'majutsushi/tagbar',
-    cmd = 'Tagbar',
-  }
   use {
     'rhysd/vim-grammarous',
     ft = {'markdown', 'tex'},
@@ -219,7 +208,6 @@ return packer.startup(function()
     'junegunn/limelight.vim',
     cmd = 'Limelight',
   }
-  use {'kristijanhusak/defx-icons'}
   use {'kyazdani42/nvim-web-devicons'}
   use {
     'romgrk/barbar.nvim',
@@ -236,50 +224,35 @@ return packer.startup(function()
   use {'wellle/visual-split.vim'}
 
   --- SDL
-  use {
-    'BodneyC/VirkSpaces',
-    branch = 'master',
-  }
+  use {'BodneyC/VirkSpaces'}
   use {
     'Shougo/defx.nvim',
-    run = ':UpdateRemotePlugins',
+    requires = {{'kristijanhusak/defx-icons'}, {'kristijanhusak/defx-git'}},
   }
+  -- use {
+  --   'kyazdani42/nvim-tree.lua',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  -- }
   use {
     'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = 'nvim-lua/plenary.nvim',
   }
   use {'f-person/git-blame.nvim'}
   use {
     'gregsexton/gitv',
     cmd = 'Gitv',
-    requires = {{'tpope/vim-fugitive'}},
+    requires = 'tpope/vim-fugitive',
   }
-  use {
-    'junegunn/gv.vim',
-    cmd = 'GV',
-  }
-  use {'kristijanhusak/defx-git'}
   use {
     'oguzbilgic/vim-gdiff',
     cmd = {'Gdiff', 'Gdiffsplit'},
-  }
-  use {
-    'rbong/vim-flog',
-    cmd = 'Flog',
-  }
-  use {
-    'sodapopcan/vim-twiggy',
-    cmd = 'Twiggy',
   }
 
   --- Language support
   use {'BodneyC/sood-vim'}
   use {'BodneyC/knit-vim'}
   use {'drmingdrmer/vim-indent-lua'}
-  use {
-    'janko/vim-test',
-    cmd = 'TestFile',
-  }
+  use {'janko/vim-test'}
   use {'justinmk/vim-syntax-extra'}
   use {'leafgarland/typescript-vim'}
   use {
@@ -296,7 +269,7 @@ return packer.startup(function()
 
   --- Local
   -- use {'~/Documents/knit-vim'}
-  -- use {'~/gitclones/VirkSpaces', branch = 'master'}
+  -- use {'~/gitclones/VirkSpaces'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
   use {'~/gitclones/bolorscheme'}
 

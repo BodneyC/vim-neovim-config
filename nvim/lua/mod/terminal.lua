@@ -2,7 +2,10 @@ local skm = vim.api.nvim_set_keymap
 local bskm = vim.api.nvim_buf_set_keymap
 local util = require('utl.util')
 
-local plane = {HORZ = 0, VERT = 1}
+local plane = {
+  HORZ = 0,
+  VERT = 1,
+}
 local some_init_val = 'SOME_INIT_VALUE'
 
 local M = {
@@ -13,7 +16,10 @@ local M = {
 }
 
 local function set_open_term_buffer_name()
-  local blist = vim.fn.getbufinfo({bufloaded = 1, buflisted = 0})
+  local blist = vim.fn.getbufinfo({
+    bufloaded = 1,
+    buflisted = 0,
+  })
   for _, e in ipairs(blist) do
     if e.name ~= '' and not e.hidden then
       if string.match(e.name, '^term://.*') then
@@ -123,6 +129,7 @@ function M.term_split(b)
   M.term_name = vim.fn.bufname('%')
   vim.cmd(
     'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+
   vim.cmd('startinsert')
 
   flip()
@@ -159,7 +166,9 @@ end
 function M.floating_term(...)
   local args = {...}
   bskm(M.floating_centred(), 'n', '<Esc>', ':bw!<CR>', {})
-  vim.fn.termopen(args[1] or os.getenv('SHELL'), {on_exit = on_term_exit})
+  vim.fn.termopen(args[1] or os.getenv('SHELL'), {
+    on_exit = on_term_exit,
+  })
 end
 
 function M.floating_man(...)
@@ -215,29 +224,43 @@ function M.init()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
 
-  local n_s = {noremap = true, silent = true}
+  local n_s = {
+    noremap = true,
+    silent = true,
+  }
   local mod_terminal = 'lua require\'mod.terminal\''
 
   -- commands
   -- `table.unpack` not in 5.1, use `unpack`
   util.command('SetTerminalDirection',
-    mod_terminal .. '.set_terminal_direction(<f-args>)', {nargs = '?'})
+    mod_terminal .. '.set_terminal_direction(<f-args>)', {
+      nargs = '?',
+    })
 
-  util.command('TermSplit', mod_terminal .. '.term_split(<bang>0)',
-    {bang = true})
-  util.command('M', mod_terminal .. '.floating_man(<f-args>)',
-    {nargs = '+', complete = 'shellcmd'})
-  util.command('H', mod_terminal .. '.floating_help(<f-args>)',
-    {nargs = '?', complete = 'help'})
-  util.command('Help', mod_terminal .. '.floating_help(<f-args>)',
-    {nargs = '?', complete = 'help'})
+  util.command('TermSplit', mod_terminal .. '.term_split(<bang>0)', {
+    bang = true,
+  })
+  util.command('M', mod_terminal .. '.floating_man(<f-args>)', {
+    nargs = '+',
+    complete = 'shellcmd',
+  })
+  util.command('H', mod_terminal .. '.floating_help(<f-args>)', {
+    nargs = '?',
+    complete = 'help',
+  })
+  util.command('Help', mod_terminal .. '.floating_help(<f-args>)', {
+    nargs = '?',
+    complete = 'help',
+  })
 
   -- mappings
   skm('n', '<Leader>\'', ':' .. mod_terminal .. '.next_term_split(false)<CR>',
     n_s)
 
-  skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'',
-    {expr = true, unpack(n_s)})
+  skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {
+    expr = true,
+    unpack(n_s),
+  })
 
   skm('n', '<F10>', ':' .. mod_terminal .. '.term_split(true)<CR>', n_s)
   skm('i', '<F10>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', n_s)
@@ -257,21 +280,28 @@ function M.init()
         event = 'TermEnter,TermOpen,BufNew,BufEnter',
         glob = 'term://*',
         cmd = [[startinsert]],
-      }, {
+      },
+      {
         event = 'TermOpen',
         glob = 'term://*',
         cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
       },
-      {event = 'TermLeave,BufLeave', glob = 'term://*', cmd = [[stopinsert]]},
+      {
+        event = 'TermLeave,BufLeave',
+        glob = 'term://*',
+        cmd = [[stopinsert]],
+      },
       {
         event = 'TermOpen,TermEnter',
         glob = '*',
         cmd = [[setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1]],
-      }, {
+      },
+      {
         event = 'SessionLoadPost',
         glob = 'term://*',
         cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
-      }, {
+      },
+      {
         event = 'TermEnter',
         glob = 'term://*',
         cmd = [[if winnr('$') == 1 | q | endif]],

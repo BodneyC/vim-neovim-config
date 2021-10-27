@@ -80,7 +80,7 @@ util.opt('g', {
     'twiggy',
     'startify',
     'help',
-    'defx',
+    -- 'defx',
     '',
   },
 
@@ -100,6 +100,7 @@ util.opt('g', {
   tagbar_compact = 1,
   tagbar_iconchars = {'\\ua0', '\\ua0'},
 
+  ['test#strategy'] = 'neovim',
   ['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$',
 
   togool_extras = {{'<', '+'}, {'>', '-'}},
@@ -125,24 +126,15 @@ util.opt('g', {
     'COMMIT.*',
     '.*Plugins.*',
     '^.defx].*',
+    -- 'NvimTree.*',
   },
   virk_close_by_ft = {
     -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
+    NvimTree = 'exe \'NvimTreeOpen\' | setlocal nobuflisted | wincmd p',
     tagbar = 'TagbarOpen',
     vista = 'Vista!! | wincmd p',
     defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
     Mundo = 'MundoShow',
-  },
-  virk_tags_enable = 0,
-
-  vista_icon_indent = {'╰─▸ ', '├─▸ '},
-  vista_default_executive = 'ctags',
-  ['vista#renderer#icons'] = {
-    variable = '\\u71b',
-    ['function'] = '\\uf794',
-  },
-  vista_executive_for = {
-    vim = 'ctags',
   },
 
   vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip',
@@ -169,32 +161,10 @@ util.augroup({
     {
       event = 'BufEnter,BufWinEnter,SessionLoadPost,WinEnter,VimEnter',
       glob = '*',
-      cmd = 'BufferOrderByBufferNumber',
-    },
-    {
-      -- Temporary as bufferline not updating at the mo
-      event = 'CursorMoved',
-      glob = '*',
-      cmd = [[ lua if not vim.g.__buffer_first_refreshed then ]] ..
-        [[ vim.g.__buffer_first_refreshed = true; ]] ..
-        [[ vim.cmd('BufferOrderByBufferNumber') end ]],
+      cmd = [[if exists(':BufferOrderByBufferNumber') | exe 'BufferOrderByBufferNumber' | endif]],
     },
   },
 })
-
--- fzf
--- Weird behaviour with os.setenv...
--- vim.fn.execute('let $FZF_PREVIEW_COMMAND = "bat --italic-text=always ' ..
---                    '--style=numbers --color=always {} || highlight -O ansi -l {} || ' ..
---                    'coderay {} || rougify {} || cat {}"')
--- vim.fn.execute('let $FZF_DEFAULT_OPTS="--layout=reverse --margin=1,1"')
--- vim.g.fzf_preview_command = 'bat --color=always --plain {-1}'
--- vim.g.fzf_layout = {window = 'lua require\'mod.terminal\'.floating_centred()'}
--- vim.g.fzf_history_dir = os.getenv('HOME') .. '/.fzf/.fzf_history_dir'
--- vim.g.fzf_preview_git_status_preview_command =
---     '[[ $(git diff --cached -- {-1}) != "" ]] && git diff --cached --color=always -- {-1} | delta || ' ..
---         '[[ $(git diff -- {-1}) != "" ]] && git diff --color=always -- {-1} | delta || ' ..
---         vim.g.fzf_preview_command
 
 -- terminal window manager
 local pane_manager = 'Tmux'

@@ -64,9 +64,6 @@ util.opt('o', {
   undoreload = 10000,
   updatetime = 250,
   wildmode = 'longest,full',
-})
-
-util.opt('wo', {
   breakindent = true,
   breakindentopt = 'shift:3',
   cul = true,

@@ -1,6 +1,6 @@
 local skm = vim.api.nvim_set_keymap
 
-vim.g.vimspector_install_gadgets = {'debugpy', 'vscode-cpptools', 'CodeLLDB'}
+vim.g.vimspector_install_gadgets = {'debugpy', 'vscode-cpptools', 'CodeLLDB', 'vsacode-node-debug2'}
 
 skm('n', '<F5>', '<Plug>VimspectorContinue', {})
 skm('n', '<F3>', '<Plug>VimspectorStop', {})
