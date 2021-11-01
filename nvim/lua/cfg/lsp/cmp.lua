@@ -60,7 +60,11 @@ cmp.setup({
   },
 
   formatting = {
-    format = require('lspkind').cmp_format(),
+    format = require('lspkind').cmp_format({
+      with_text = false,
+      preset = 'default',
+      symbol_map = require('mod.theme').icons.lspkind,
+    }),
   },
 
   sources = {

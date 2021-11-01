@@ -180,11 +180,8 @@ return packer.startup(function()
     ft = {'html', 'xml', 'markdown'},
   }
   use {'andymass/vim-matchup'}
-  -- use {'chrisbra/recover.vim'}
   use {'moll/vim-bbye'}
-  use {'radenling/vim-dispatch-neovim'}
   use {'rhysd/clever-f.vim'}
-  use {'tpope/vim-dispatch'}
   use {'tpope/vim-repeat'}
   use {'tpope/vim-surround'}
   use {'tpope/vim-unimpaired'}
@@ -192,10 +189,7 @@ return packer.startup(function()
   use {'vim-utils/vim-all'}
 
   --- Prettiness
-  -- use {
-  --   'BodneyC/bolorscheme',
-  --   branch = 'lua',
-  -- }
+  use {'BodneyC/bolorscheme'}
   use {'KabbAmine/vCoolor.vim'}
   use {'lukas-reineke/indent-blankline.nvim'}
   use {'amdt/vim-niji'}
@@ -259,18 +253,13 @@ return packer.startup(function()
     'm-pilia/vim-pkgbuild',
     ft = 'pkgbuild',
   }
-  use {'mboughaba/i3config.vim'}
   use {'michaeljsmith/vim-indent-object'}
-  -- use {'NoorWachid/VimVLanguage'}
   use {'plasticboy/vim-markdown'}
-  use {'uiiaoo/java-syntax.vim'}
-  use {'stevearc/vim-arduino'}
-  use {'rhysd/vim-llvm'}
 
   --- Local
   -- use {'~/Documents/knit-vim'}
   -- use {'~/gitclones/VirkSpaces'}
   -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-  use {'~/gitclones/bolorscheme'}
+  -- use {'~/gitclones/bolorscheme'}
 
 end)

@@ -382,36 +382,3 @@ require('symbols-outline').setup({
   highlight_hover_item = true,
   show_guides = true,
 })
-
--- lspkind
-require('lspkind').init({
-  with_text = false,
-  preset = 'default',
-  symbol_map = {
-    Text = '',
-    Method = '',
-    Function = '',
-    Constructor = '',
-    Field = 'ﰠ',
-    Variable = '',
-    Class = 'ﴯ',
-    Interface = '',
-    Module = '',
-    Property = 'ﰠ',
-    Unit = '塞',
-    Value = '',
-    Enum = '',
-    Keyword = '',
-    Snippet = '',
-    Color = '',
-    File = '',
-    Reference = '',
-    Folder = '',
-    EnumMember = '',
-    Constant = '',
-    Struct = 'פּ',
-    Event = '',
-    Operator = '',
-    TypeParameter = '',
-  },
-})

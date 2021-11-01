@@ -31,7 +31,7 @@ local icons = require('mod.theme').icons
 do
   local signs = {
     Error = icons.diagnostics.error,
-    Warn =  icons.diagnostics.warn,
+    Warn =  icons.diagnostics.warning,
     Hint =  icons.diagnostics.hint,
     Info =  icons.diagnostics.info,
   }
@@ -53,7 +53,7 @@ end
 do
   local signs = {
     Error = icons.diagnostics.error,
-    Warning =  icons.diagnostics.warn,
+    Warning =  icons.diagnostics.warning,
     Hint =  icons.diagnostics.hint,
     Information =  icons.diagnostics.info,
   }

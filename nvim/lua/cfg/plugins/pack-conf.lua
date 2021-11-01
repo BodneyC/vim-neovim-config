@@ -130,9 +130,8 @@ util.opt('g', {
   },
   virk_close_by_ft = {
     -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
+    VimspectorPrompt = '',
     NvimTree = 'exe \'NvimTreeOpen\' | setlocal nobuflisted | wincmd p',
-    tagbar = 'TagbarOpen',
-    vista = 'Vista!! | wincmd p',
     defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
     Mundo = 'MundoShow',
   },

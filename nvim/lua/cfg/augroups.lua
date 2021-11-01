@@ -6,7 +6,7 @@ util.augroup({
     {
       event = 'BufReadPost',
       glob = '*',
-      cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | end]],
+      cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | echom 'wank'  | exe "normal g`\"" | end]],
     },
     {
       event = 'BufReadPre',

@@ -73,14 +73,16 @@ function M.next_term_split()
       'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
     vim.cmd(cur_win .. 'wincmd w')
     vim.cmd(new_win .. 'wincmd w')
-    vim.cmd('startinsert')
+    vim.defer_fn(function()
+      vim.cmd('startinsert')
+    end, 100)
     flip()
   else
-    M.term_split(1)
+    M.term_split(true)
   end
 end
 
-function M.term_split(b)
+function M.term_split(toggle)
   M.set_terminal_direction()
   if M.term_name == some_init_val then
     set_open_term_buffer_name()
@@ -92,7 +94,7 @@ function M.term_split(b)
   end
 
   if winnr ~= -1 then
-    vim.cmd(winnr .. 'wincmd ' .. (b and 'q' or 'w'))
+    vim.cmd(winnr .. 'wincmd ' .. (toggle and 'q' or 'w'))
     return
   end
 
@@ -100,17 +102,17 @@ function M.term_split(b)
   local term_exists = bufnr ~= -1 and vim.fn.bufexists(bufnr) and
                         vim.fn.bufloaded(bufnr)
 
-  if not b then
+  if not toggle then
     vim.cmd('10 wincmd ' .. dir_char)
   end
   split()
-  if not b then
+  if not toggle then
     vim.cmd('wincmd ' .. dir_char)
   end
 
   vim.o.hidden = true
 
-  if b then
+  if toggle then
     vim.cmd('wincmd ' .. string.upper(dir_char))
   end
 
@@ -130,7 +132,9 @@ function M.term_split(b)
   vim.cmd(
     'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
 
-  vim.cmd('startinsert')
+  vim.defer_fn(function()
+    vim.cmd('startinsert')
+  end, 100)
 
   flip()
 end
@@ -230,7 +234,6 @@ function M.init()
   }
   local mod_terminal = 'lua require\'mod.terminal\''
 
-  -- commands
   -- `table.unpack` not in 5.1, use `unpack`
   util.command('SetTerminalDirection',
     mod_terminal .. '.set_terminal_direction(<f-args>)', {
@@ -253,7 +256,6 @@ function M.init()
     complete = 'help',
   })
 
-  -- mappings
   skm('n', '<Leader>\'', ':' .. mod_terminal .. '.next_term_split(false)<CR>',
     n_s)
 
@@ -262,9 +264,9 @@ function M.init()
     unpack(n_s),
   })
 
-  skm('n', '<F10>', ':' .. mod_terminal .. '.term_split(true)<CR>', n_s)
-  skm('i', '<F10>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', n_s)
-  skm('t', '<F10>', '<C-\\><C-n>:' .. mod_terminal .. '.term_split(true)<CR>',
+  skm('n', '<C-S-q>', ':' .. mod_terminal .. '.term_split(true)<CR>', n_s)
+  skm('i', '<C-S-q>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', n_s)
+  skm('t', '<C-S-q>', '<C-\\><C-n>:' .. mod_terminal .. '.term_split(true)<CR>',
     n_s)
 
   skm('i', '<C-q>', '<C-o>:' .. mod_terminal .. '.term_split(false)<CR>', n_s)
@@ -272,7 +274,6 @@ function M.init()
   skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', n_s)
   skm('t', '<LeftRelease>', '<Nop>', n_s)
 
-  -- __TERMINAL__
   util.augroup({
     name = '__TERMINAL__',
     autocmds = {
