@@ -1,2 +1,4 @@
 .vim
 startup.log
+nvim/lua/packer_compiled.lua
+tags

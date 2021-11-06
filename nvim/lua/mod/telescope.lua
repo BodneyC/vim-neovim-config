@@ -256,7 +256,9 @@ function M.init()
           preview_width = 0.65,
           mirror = false,
         },
-        vertical = {mirror = true},
+        vertical = {
+          mirror = true,
+        },
       },
       file_ignore_patterns = {
         '\\.cache',
@@ -273,52 +275,60 @@ function M.init()
       borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
       color_devicons = true,
       use_less = true,
-      set_env = {['COLORTERM'] = 'truecolor'},
+      set_env = {
+        ['COLORTERM'] = 'truecolor',
+      },
       file_previewer = previewers.cat.new,
       grep_previewer = previewers.vimgrep.new,
       qflist_previewer = previewers.qflist.new,
-      fzy_native = {override_generic_sorter = true, override_file_sorter = true},
+      fzy_native = {
+        override_generic_sorter = true,
+        override_file_sorter = true,
+      },
     },
   }
   telescope.load_extension('fzy_native')
 
   -- mappings
-  local n_s = {noremap = true, silent = true}
+  local ns = require('utl.maps').flags.ns
   local skm = vim.api.nvim_set_keymap
-  util.command('Rg', [[lua require('mod.telescope').grep(<f-args>)]],
-    {nargs = '1'})
+  util.command('Rg', [[lua require('mod.telescope').grep(<f-args>)]], {
+    nargs = '1',
+  })
   local tele_leader = '<leader>t'
-  skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], n_s)
-  skm('n', tele_leader .. 'b', [[<CMD>Telescope git_branches<CR>]], n_s)
-  skm('n', tele_leader .. 'c', [[<CMD>Telescope git_commits<CR>]], n_s)
-  skm('n', tele_leader .. 'r', [[<CMD>Telescope registers<CR>]], n_s)
-  skm('n', tele_leader .. 'm', [[<CMD>Telescope keymaps<CR>]], n_s)
+  skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], ns)
+  skm('n', tele_leader .. 'b', [[<CMD>Telescope git_branches<CR>]], ns)
+  skm('n', tele_leader .. 'c', [[<CMD>Telescope git_commits<CR>]], ns)
+  skm('n', tele_leader .. 'r', [[<CMD>Telescope registers<CR>]], ns)
+  skm('n', tele_leader .. 'm', [[<CMD>Telescope keymaps<CR>]], ns)
   skm('n', tele_leader .. 'p',
-    [[<CMD>lua require('telescope').extensions.packer.plugins(opts)<CR>]], n_s)
-  skm('n', tele_leader .. 'd', [[<CMD>Telescope lsp_document_symbols<CR>]], n_s)
-  skm('n', tele_leader .. 'w', [[<CMD>Telescope lsp_workspace_symbols<CR>]], n_s)
-  skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], n_s)
-  skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], n_s)
+    [[<CMD>lua require('telescope').extensions.packer.plugins(opts)<CR>]], ns)
+  skm('n', tele_leader .. 'd', [[<CMD>Telescope lsp_document_symbols<CR>]], ns)
+  skm('n', tele_leader .. 'w', [[<CMD>Telescope lsp_workspace_symbols<CR>]], ns)
+  skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], ns)
+  skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], ns)
 
   skm('n', '<leader>r',
     [[<CMD>lua require('mod.telescope').grep_string_filtered ]] ..
       [[ { search = '', disable_coordinates = true, path_display = 'hidden', }<CR>]],
-    {noremap = true})
+    {
+      noremap = true,
+    })
   skm('n', '<leader>f',
     [[<CMD>lua require('telescope.builtin').fd { find_command = { 'fd', '-tf', '-H' } }<CR>]],
-    n_s)
-  skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], n_s)
+    ns)
+  skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], ns)
 
   -- Gets better results than the builtin
   local grep_string_under_cursor =
     [[<CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
       [[require('telescope.builtin').grep_string { ]] ..
       [[ search = s, prompt_prefix = s .. ' > ', ]] .. [[ ngram_len = 1, }<CR>]]
-  skm('n', '<M-]>', grep_string_under_cursor, n_s)
-  skm('n', '‘', grep_string_under_cursor, n_s)
+  skm('n', '<M-]>', grep_string_under_cursor, ns)
+  skm('n', '‘', grep_string_under_cursor, ns)
 
   skm('n', '<M-[>',
-    [[<CMD>lua require('mod.telescope').tags_absolute {} <CR> ]], n_s)
+    [[<CMD>lua require('mod.telescope').tags_absolute {} <CR> ]], ns)
 
 end
 

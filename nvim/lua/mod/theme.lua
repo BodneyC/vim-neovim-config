@@ -16,6 +16,12 @@ return {
       deleted = '',
       ignored = '◌',
     },
+    dap = {
+      breakpoint = '🛑',
+      breakpoint_condition = 'C',
+      breakpoint_rejected = 'R',
+      log_point = 'L',
+    },
     lspkind = {
       Text = '',
       Method = '',

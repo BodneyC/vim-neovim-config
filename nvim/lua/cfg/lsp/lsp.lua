@@ -58,10 +58,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local function on_attach(client, bufnr)
 
   -- mappings
-  local ns = {
-    noremap = true,
-    silent = true,
-  }
+  local ns = require('utl.maps').flags.ns
 
   local function bskm(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)

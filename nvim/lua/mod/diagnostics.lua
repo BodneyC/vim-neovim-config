@@ -26,7 +26,7 @@ function M.navigate(direction)
     vim.api.nvim_win_set_cursor(win_id, {pos[1] + 1, pos[2]})
 
     vim.schedule(function()
-      require'lspsaga.diagnostic'.show_line_diagnostics(opts.popup_opts, nil,
+      require('lspsaga.diagnostic').show_line_diagnostics(opts.popup_opts, nil,
         vim.api.nvim_win_get_buf(win_id))
     end)
   end

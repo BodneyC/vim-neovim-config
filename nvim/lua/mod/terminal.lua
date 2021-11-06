@@ -228,10 +228,7 @@ function M.init()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
 
-  local n_s = {
-    noremap = true,
-    silent = true,
-  }
+  local ns = require('utl.maps').flags.ns
   local mod_terminal = 'lua require\'mod.terminal\''
 
   -- `table.unpack` not in 5.1, use `unpack`
@@ -257,22 +254,22 @@ function M.init()
   })
 
   skm('n', '<Leader>\'', ':' .. mod_terminal .. '.next_term_split(false)<CR>',
-    n_s)
+    ns)
 
   skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {
     expr = true,
-    unpack(n_s),
+    unpack(ns),
   })
 
-  skm('n', '<C-S-q>', ':' .. mod_terminal .. '.term_split(true)<CR>', n_s)
-  skm('i', '<C-S-q>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', n_s)
+  skm('n', '<C-S-q>', ':' .. mod_terminal .. '.term_split(true)<CR>', ns)
+  skm('i', '<C-S-q>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', ns)
   skm('t', '<C-S-q>', '<C-\\><C-n>:' .. mod_terminal .. '.term_split(true)<CR>',
-    n_s)
+    ns)
 
-  skm('i', '<C-q>', '<C-o>:' .. mod_terminal .. '.term_split(false)<CR>', n_s)
-  skm('n', '<C-q>', ':' .. mod_terminal .. '.term_split(false)<CR>', n_s)
-  skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', n_s)
-  skm('t', '<LeftRelease>', '<Nop>', n_s)
+  skm('i', '<C-q>', '<C-o>:' .. mod_terminal .. '.term_split(false)<CR>', ns)
+  skm('n', '<C-q>', ':' .. mod_terminal .. '.term_split(false)<CR>', ns)
+  skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', ns)
+  skm('t', '<LeftRelease>', '<Nop>', ns)
 
   util.augroup({
     name = '__TERMINAL__',

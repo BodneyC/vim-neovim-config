@@ -52,20 +52,18 @@ function M.init()
   vim.wo.number = false
   vim.wo.relativenumber = false
 
-  local n = {noremap = true}
-  local ns = {noremap = true, silent = true}
-  local nse = {noremap = true, silent = true, expr = true}
+  local flags = require('utl.maps').flags
 
   local function cmd_on_file(cmd)
     return [[:echo ']] .. cmd .. [[' | ]] ..
              [[call defx#do_action('execute_command', ']] .. cmd .. [[ %')<CR>]]
   end
 
-  bskm(0, 'n', 'u', [[defx#do_action('call', '__DEFX_REM_RS')]], nse)
-  bskm(0, 'n', 'dd', [[defx#do_action('call', '__DEFX_REM_RM')]], nse)
-  bskm(0, 'n', '+x', cmd_on_file('chmod +x'), n)
-  bskm(0, 'n', '-x', cmd_on_file('chmod -x'), n)
-  bskm(0, 'n', 'G', 'G0', ns)
+  bskm(0, 'n', 'u', [[defx#do_action('call', '__DEFX_REM_RS')]], flags.nse)
+  bskm(0, 'n', 'dd', [[defx#do_action('call', '__DEFX_REM_RM')]], flags.nse)
+  bskm(0, 'n', '+x', cmd_on_file('chmod +x'), flags.n)
+  bskm(0, 'n', '-x', cmd_on_file('chmod -x'), flags.n)
+  bskm(0, 'n', 'G', 'G0', flags.ns)
 
   local function str_tree_or_open(if_dir, if_file)
     return 'defx#is_directory() ? defx#do_action(\'open_tree\'' ..
@@ -80,26 +78,26 @@ function M.init()
   bskm(0, 'n', '<leader>r', '<CMD>lua require\'mod.defx\'.resize()<CR>',
     {noremap = true, silent = true})
 
-  bskm(0, 'n', '<CR>', str_tree_or_open('recursive:10', 'botright vsplit'), nse)
-  bskm(0, 'n', 'gl', str_tree_or_open('recursive:10', 'botright vsplit'), nse)
-  bskm(0, 'n', 'O', str_tree_or_open('recursive:10', 'wincmd p | e'), nse)
-  bskm(0, 'n', '<2-LeftMouse>', str_tree_or_open(nil, 'wincmd p | e'), nse)
-  bskm(0, 'n', 'o', str_tree_or_open(nil, 'wincmd p | e'), nse)
-  bskm(0, 'n', 'l', str_tree_or_open(nil, 'DefxFindWindowFor'), nse)
+  bskm(0, 'n', '<CR>', str_tree_or_open('recursive:10', 'botright vsplit'), flags.nse)
+  bskm(0, 'n', 'gl', str_tree_or_open('recursive:10', 'botright vsplit'), flags.nse)
+  bskm(0, 'n', 'O', str_tree_or_open('recursive:10', 'wincmd p | e'), flags.nse)
+  bskm(0, 'n', '<2-LeftMouse>', str_tree_or_open(nil, 'wincmd p | e'), flags.nse)
+  bskm(0, 'n', 'o', str_tree_or_open(nil, 'wincmd p | e'), flags.nse)
+  bskm(0, 'n', 'l', str_tree_or_open(nil, 'DefxFindWindowFor'), flags.nse)
 
-  bskm(0, 'n', 'h', 'defx#do_action(\'close_tree\')', nse)
-  bskm(0, 'n', 'q', 'defx#do_action(\'quit\')', nse)
-  bskm(0, 'n', '!', 'defx#do_action(\'execute_command\')', nse)
-  bskm(0, 'n', 'a', 'defx#do_action(\'new_file\')', nse)
-  bskm(0, 'n', 'A', 'defx#do_action(\'new_directory\')', nse)
-  bskm(0, 'n', 'r', 'defx#do_action(\'rename\')', nse)
-  bskm(0, 'n', 'R', 'defx#redraw()', nse)
-  bskm(0, 'n', '<Space>', 'defx#do_action(\'toggle_select\')', nse)
-  bskm(0, 'n', 'cc', 'defx#do_action(\'yank_path\')', nse)
-  bskm(0, 'n', 'yy', 'defx#do_action(\'copy\')', nse)
-  bskm(0, 'n', 'Y', 'defx#do_action(\'copy\')', nse)
-  bskm(0, 'n', 'x', 'defx#do_action(\'move\')', nse)
-  bskm(0, 'n', 'p', 'defx#do_action(\'paste\')', nse)
+  bskm(0, 'n', 'h', 'defx#do_action(\'close_tree\')', flags.nse)
+  bskm(0, 'n', 'q', 'defx#do_action(\'quit\')', flags.nse)
+  bskm(0, 'n', '!', 'defx#do_action(\'execute_command\')', flags.nse)
+  bskm(0, 'n', 'a', 'defx#do_action(\'new_file\')', flags.nse)
+  bskm(0, 'n', 'A', 'defx#do_action(\'new_directory\')', flags.nse)
+  bskm(0, 'n', 'r', 'defx#do_action(\'rename\')', flags.nse)
+  bskm(0, 'n', 'R', 'defx#redraw()', flags.nse)
+  bskm(0, 'n', 'm', 'defx#do_action(\'toggle_select\')', flags.nse)
+  bskm(0, 'n', 'cc', 'defx#do_action(\'yank_path\')', flags.nse)
+  bskm(0, 'n', 'yy', 'defx#do_action(\'copy\')', flags.nse)
+  bskm(0, 'n', 'Y', 'defx#do_action(\'copy\')', flags.nse)
+  bskm(0, 'n', 'x', 'defx#do_action(\'move\')', flags.nse)
+  bskm(0, 'n', 'p', 'defx#do_action(\'paste\')', flags.nse)
 end
 
 return M

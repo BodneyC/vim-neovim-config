@@ -1,4 +1,4 @@
-local util = require 'utl.util'
+local util = require('utl.util')
 
 vim.api.nvim_set_keymap('n', '<Leader>d',
   [[<CMD>lua require('mod.nvim-tree').resize {refocus = false}<CR>]], {
