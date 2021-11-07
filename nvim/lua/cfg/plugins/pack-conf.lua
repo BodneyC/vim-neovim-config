@@ -32,27 +32,27 @@ util.opt('g', {
 
   ['conjure#mapping#prefix'] = '\\',
 
-  bufferline = {
-    animation = true,
-    auto_hide = false,
-    tabpages = false,
-    closable = true,
-    clickable = true,
-    -- exclude_ft = {},
-    -- exclude_name = {},
-    icons = true,
-    icon_custom_colors = false,
-    icon_separator_active = ' ',
-    icon_separator_inactive = '  ',
-    icon_close_tab = ' ',
-    icon_close_tab_modified = '● ',
-    insert_at_end = false,
-    maximum_padding = 4,
-    maximum_length = 200,
-    semantic_letters = true,
-    letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
-    no_name_title = nil,
-  },
+  -- bufferline = {
+  --   animation = true,
+  --   auto_hide = false,
+  --   tabpages = false,
+  --   closable = true,
+  --   clickable = true,
+  --   -- exclude_ft = {},
+  --   -- exclude_name = {},
+  --   icons = true,
+  --   icon_custom_colors = false,
+  --   icon_separator_active = ' ',
+  --   icon_separator_inactive = '  ',
+  --   icon_close_tab = ' ',
+  --   icon_close_tab_modified = '● ',
+  --   insert_at_end = false,
+  --   maximum_padding = 4,
+  --   maximum_length = 200,
+  --   semantic_letters = true,
+  --   letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
+  --   no_name_title = nil,
+  -- },
 
   gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
   gutentags_modules = {'ctags'},
@@ -150,17 +150,6 @@ util.augroup({
       event = 'BufWinEnter,BufWritePost',
       glob = '*.md,*.txt,*.tex',
       cmd = [[call spelunker#check()]],
-    },
-  },
-})
-
-util.augroup({
-  name = 'bufferline_update__custom',
-  autocmds = {
-    {
-      event = 'BufEnter,BufWinEnter,SessionLoadPost,WinEnter,VimEnter',
-      glob = '*',
-      cmd = [[if exists(':BufferOrderByBufferNumber') | exe 'BufferOrderByBufferNumber' | endif]],
     },
   },
 })

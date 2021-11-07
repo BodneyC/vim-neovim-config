@@ -207,10 +207,11 @@ return packer.startup({
       cmd = 'Limelight',
     }
     use {'kyazdani42/nvim-web-devicons'}
-    use {
-      'romgrk/barbar.nvim',
-      requires = {{'romgrk/lib.kom'}},
-    }
+    use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+    -- use {
+    --   'romgrk/barbar.nvim',
+    --   requires = {{'romgrk/lib.kom'}},
+    -- }
     use {'rktjmp/lush.nvim'}
     use {
       'rrethy/vim-hexokinase',

@@ -24,8 +24,16 @@ util.augroup({
 util.augroup({
   name = '__EXT_ASSOCS__',
   autocmds = {
-    {event = 'BufRead,BufNewFile', glob = '*.MD,*.md', cmd = [[setf markdown]]},
-    {event = 'BufRead,BufNewFile', glob = '*.rasi', cmd = [[setf css]]},
+    {
+      event = 'BufRead,BufNewFile',
+      glob = '*.MD,*.md',
+      cmd = [[setf markdown]],
+    },
+    {
+      event = 'BufRead,BufNewFile',
+      glob = '*.rasi',
+      cmd = [[setf css]],
+    },
     {
       event = 'BufRead,BufNewFile',
       glob = 'Dockerfile*',

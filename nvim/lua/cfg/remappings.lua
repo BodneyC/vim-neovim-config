@@ -66,11 +66,9 @@ skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], flags.ns)
 skm('n', '<leader>"', [[<CMD>sbn<CR>]], flags.ns)
 skm('n', '<leader>#', [[<C-^>]], flags.ns)
 skm('n', '<leader>%', [[<CMD>vert sbn<CR>]], flags.ns)
-skm('n', '<leader>bD',
-  [[<CMD>lua require('mod.functions').buffer_close_all_but_visible()<CR>]],
-  flags.ns)
+skm('n', '<leader>bD', [[<CMD>BufOnly<CR>]], flags.ns)
 skm('n', '<leader>be', [[<CMD>enew<CR>]], flags.ns)
-skm('n', '<leader>bd', [[<CMD>BufferClose<CR>]], flags.ns)
+skm('n', '<leader>bd', [[<CMD>Bdelete<CR>]], flags.ns)
 skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], flags.ns)
 
 -- resize

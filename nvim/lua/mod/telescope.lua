@@ -245,9 +245,9 @@ function M.init()
         '--glob',
         '!**/*.class',
       },
-      prompt_prefix = '> ',
+      prompt_prefix = '$ ',
       selection_strategy = 'reset',
-      layout_strategy = 'horizontal',
+      layout_strategy = 'vertical',
       layout_config = {
         prompt_position = 'top',
         horizontal = {
@@ -310,7 +310,7 @@ function M.init()
 
   skm('n', '<leader>r',
     [[<CMD>lua require('mod.telescope').grep_string_filtered ]] ..
-      [[ { search = '', disable_coordinates = true, path_display = 'hidden', }<CR>]],
+      [[ { search = '', disable_coordinates = true, path_display = {'tail'}, }<CR>]],
     {
       noremap = true,
     })

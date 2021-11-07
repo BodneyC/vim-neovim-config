@@ -1,10 +1,19 @@
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    symbols = {modified = '*', readonly = '-'},
+    symbols = {
+      modified = '*',
+      readonly = '-',
+    },
     theme = 'bolorscheme',
-    component_separators = {'', ''},
-    section_separators = {'', ''},
+    component_separators = {
+      left = '',
+      right = '',
+    },
+    section_separators = {
+      left = '',
+      right = '',
+    },
     disabled_filetypes = {'defx', ''},
   },
   sections = {
@@ -17,7 +26,11 @@ require('lualine').setup {
         'diagnostics',
         sources = {'nvim_lsp'},
         sections = {'error', 'warn', 'info'},
-        symbols = {error = ' ', warn = ' ', info = ' '},
+        symbols = {
+          error = ' ',
+          warn = ' ',
+          info = ' ',
+        },
       },
     },
     lualine_z = {'location'},
@@ -30,6 +43,9 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {},
   },
-  tabline = {},
+  tabline = {
+    -- lualine_a = {'buffers'},
+    -- lualine_x = {[[require('nvim-treesitter').statusline()]]},
+  },
   extensions = {'fugitive'},
 }
