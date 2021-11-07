@@ -1,0 +1,899 @@
+SpecialKey	
+	SpecialKey
+EndOfBuffer	
+	EndOfBuffer
+TermCursor	
+	TermCursor
+NonText	
+	NonText TelescopePreviewHyphen TelescopeResultsDiffUntracked
+Directory	
+	Directory TroubleFile DefxIconsDirectory DefxIconsParentDirectory DefxIconsSymlinkDirectory
+	DefxIconsOpenedTreeIcon DefxIconsNestedTreeIcon DefxIconsClosedTreeIcon
+	TelescopePreviewDirectory TelescopePreviewDate
+ErrorMsg	
+	ErrorMsg NvimInvalidSpacing DefxIconsMoveIcon
+IncSearch	
+	IncSearch
+Search	
+	Search TroublePreview TSDefinition TelescopePreviewMatch
+MoreMsg	
+	MoreMsg
+ModeMsg	
+	ModeMsg
+LineNr	
+	LineNr LineNrAbove LineNrBelow TroubleIndent TroubleLocation TelescopeResultsLineNr
+CursorLineNr	
+	CursorLineNr TroubleFoldIcon
+Question	
+	Question
+StatusLine	
+	StatusLine MsgSeparator
+StatusLineNC	
+	StatusLineNC
+VertSplit	
+	VertSplit
+Title	
+	Title ReferencesCount DefinitionCount DefinitionPreviewTitle TSTitle
+Visual	
+	Visual ScrollView TSDefinitionUsage TelescopeSelection TelescopeSelectionCaret
+	TelescopePreviewLine
+WarningMsg	
+	WarningMsg DefxIconsCopyIcon DefxIconsLinkIcon DiagnosticWarning TSDanger
+WildMenu	
+	WildMenu
+Folded	
+	Folded
+FoldColumn	
+	FoldColumn
+DiffAdd	
+	DiffAdd TelescopeResultsDiffAdd
+DiffChange	
+	DiffChange TelescopeResultsDiffChange
+DiffDelete	
+	DiffDelete TelescopeResultsDiffDelete
+DiffText	
+	DiffText
+SignColumn	
+	SignColumn
+Conceal	
+	Conceal
+SpellBad	
+	SpellBad
+SpellCap	
+	SpellCap
+SpellRare	
+	SpellRare
+SpellLocal	
+	SpellLocal
+Pmenu	
+	Pmenu
+PmenuSel	
+	PmenuSel
+PmenuSbar	
+	PmenuSbar
+PmenuThumb	
+	PmenuThumb
+TabLine	
+	TabLine
+TabLineSel	
+	TabLineSel TroubleCount
+TabLineFill	
+	TabLineFill
+CursorColumn	
+	CursorColumn
+CursorLine	
+	CursorLine TSCurrentScope
+ColorColumn	
+	ColorColumn MatchBackground
+QuickFixLine	
+	QuickFixLine
+Whitespace	
+	Whitespace
+NormalNC	
+	NormalNC
+NormalFloat	
+	NormalFloat
+MsgArea	
+	MsgArea
+FloatBorder	
+	FloatBorder
+RedrawDebugNormal	
+	RedrawDebugNormal
+RedrawDebugClear	
+	RedrawDebugClear
+RedrawDebugComposed	
+	RedrawDebugComposed
+RedrawDebugRecompose	
+	RedrawDebugRecompose
+Cursor	
+	Cursor
+lCursor	
+	lCursor
+Normal	
+	Normal NvimSpacing TroubleNormal TroubleText TroubleTextInformation TroubleTextWarning
+	TroubleTextError TroubleTextHint DapUIVariable DapUIValue DapUIFrameName LspFloatWinNormal
+	TelescopeNormal TelescopePreviewNormal TelescopePreviewMessage
+	TelescopePreviewMessageFillchar
+Substitute	
+	Substitute
+FloatShadow	
+	FloatShadow
+FloatShadowThrough	
+	FloatShadowThrough
+Error	
+	Error NvimInvalid NvimInvalidAssignment NvimInvalidPlainAssignment
+	NvimInvalidAugmentedAssignment NvimInvalidAssignmentWithAddition
+	NvimInvalidAssignmentWithSubtraction NvimInvalidAssignmentWithConcatenation
+	NvimInvalidOperator NvimInvalidUnaryOperator NvimInvalidUnaryPlus NvimInvalidUnaryMinus
+	NvimInvalidNot NvimInvalidBinaryOperator NvimInvalidComparison NvimInvalidComparisonModifier
+	NvimInvalidBinaryPlus NvimInvalidBinaryMinus NvimInvalidConcat NvimInvalidConcatOrSubscript
+	NvimInvalidOr NvimInvalidAnd NvimInvalidMultiplication NvimInvalidDivision NvimInvalidMod
+	NvimInvalidTernary NvimInvalidTernaryColon NvimInvalidDelimiter NvimInvalidParenthesis
+	NvimInvalidLambda NvimInvalidNestingParenthesis NvimInvalidCallingParenthesis
+	NvimInvalidSubscript NvimInvalidSubscriptBracket NvimInvalidSubscriptColon NvimInvalidCurly
+	NvimInvalidContainer NvimInvalidDict NvimInvalidList NvimInvalidValue NvimInvalidIdentifier
+	NvimInvalidIdentifierScope NvimInvalidIdentifierScopeDelimiter NvimInvalidIdentifierName
+	NvimInvalidIdentifierKey NvimInvalidColon NvimInvalidComma NvimInvalidArrow
+	NvimInvalidRegister NvimInvalidNumber NvimInvalidFloat NvimInvalidNumberPrefix
+	NvimInvalidOptionSigil NvimInvalidOptionName NvimInvalidOptionScope
+	NvimInvalidOptionScopeDelimiter NvimInvalidEnvironmentSigil NvimInvalidEnvironmentName
+	NvimInvalidString NvimInvalidStringQuote NvimInvalidSingleQuote NvimInvalidDoubleQuote
+	NvimInvalidDoubleQuotedUnknownEscape NvimInvalidFigureBrace NvimDoubleQuotedUnknownEscape
+	TargetWord luaParenError luaBraceError luaError jsonStringSQError jsonNoQuotesError
+	jsonTripleQuotesError jsonNumError jsonCommentError jsonSemicolonError
+	jsonTrailingCommaError jsonMissingCommaError
+Todo	
+	Todo TSWarning luaTodo
+String	
+	String NvimString NvimStringBody NvimStringQuote NvimSingleQuote NvimSingleQuotedBody
+	NvimDoubleQuote NvimDoubleQuotedBody NvimInvalidStringBody NvimInvalidSingleQuotedBody
+	NvimInvalidDoubleQuotedBody TSString TSLiteral TelescopePreviewExecute TelescopePreviewSize
+	luaString2 luaString luaTSString jsonString jsonTSString
+Constant	
+	Constant Number Boolean Float NvimNumber NvimFloat TSConstant TSNumber TSBoolean TSFloat
+	TelescopePreviewPipe TelescopePreviewCharDev TelescopePreviewBlock TelescopePreviewRead
+	TelescopePreviewUser TelescopePreviewGroup TelescopeResultsConstant TelescopeResultsNumber
+	luaConstant luaNumber jsonNumber jsonBoolean
+Character	
+	Character TSCharacter
+Function	
+	Function TSFunction TSMethod TelescopeResultsClass TelescopeResultsField
+	TelescopeResultsFunction luaFunction luaTSFunction jsonNull
+Identifier	
+	Identifier NvimIdentifier NvimIdentifierScope NvimIdentifierScopeDelimiter
+	NvimIdentifierName NvimIdentifierKey NvimOptionName NvimOptionScope NvimOptionScopeDelimiter
+	NvimEnvironmentName TSSymbol TelescopePromptPrefix TelescopeResultsIdentifier luaFunc
+Statement	
+	Statement Conditional Repeat Label Exception DefxIconsMarkIcon TSConditional TSRepeat
+	TSException TSTag TelescopePreviewSocket TelescopePreviewWrite luaElse luaStatement luaCond
+	luaRepeat luaLabel luaFor jsonKeyword jsonTest
+Operator	
+	Operator NvimAssignment NvimPlainAssignment NvimAugmentedAssignment
+	NvimAssignmentWithAddition NvimAssignmentWithSubtraction NvimAssignmentWithConcatenation
+	NvimOperator NvimUnaryOperator NvimUnaryPlus NvimUnaryMinus NvimNot NvimBinaryOperator
+	NvimComparison NvimComparisonModifier NvimBinaryPlus NvimBinaryMinus NvimConcat
+	NvimConcatOrSubscript NvimOr NvimAnd NvimMultiplication NvimDivision NvimMod NvimTernary
+	NvimTernaryColon TelescopeResultsOperator luaIn luaOperator jsonPadding
+Keyword	
+	Keyword TelescopePreviewSticky
+PreProc	
+	PreProc Include Define Macro PreCondit TSConstMacro TSFuncMacro TSAnnotation TSAttribute
+	TSNamespace TSInclude TSEnvironment
+Type	
+	Type StorageClass Structure Typedef NvimNumberPrefix NvimOptionSigil NvimEnvironmentSigil
+	TSType TSTypeBuiltin TSEnvironmentName TelescopeMultiSelection luaTable
+Special	
+	Special Tag SpecialChar Delimiter SpecialComment Debug NvimParenthesis NvimLambda
+	NvimNestingParenthesis NvimCallingParenthesis NvimSubscript NvimSubscriptBracket
+	NvimSubscriptColon NvimCurly NvimContainer NvimDict NvimList NvimColon NvimComma NvimArrow
+	NvimRegister NvimStringSpecial NvimSingleQuotedQuote NvimDoubleQuotedEscape
+	NvimInvalidStringSpecial NvimInvalidSingleQuotedQuote NvimInvalidDoubleQuotedEscape
+	DefinitionIcon ReferencesIcon TSConstBuiltin TSStringSpecial TSFuncBuiltin TSMath TSNote
+	TSTagDelimiter TelescopeMatching TelescopePreviewLink TelescopeResultsVariable
+	TelescopeResultsSpecialComment luaSpecial luaTSFuncBuiltin jsonEscape jsonBraces
+DiagnosticError	
+	DiagnosticError DiagnosticVirtualTextError DiagnosticFloatingError DiagnosticSignError
+	TroubleError TroubleSignError
+DiagnosticWarn	
+	DiagnosticWarn DiagnosticVirtualTextWarn DiagnosticFloatingWarn DiagnosticSignWarn
+	TroubleWarning TroubleSignWarning NvimDapVirtualTextChanged
+DiagnosticInfo	
+	DiagnosticInfo DiagnosticVirtualTextInfo DiagnosticFloatingInfo DiagnosticSignInfo
+	TroubleSignInformation TroubleSignOther TroubleInformation
+DiagnosticHint	
+	DiagnosticHint DiagnosticVirtualTextHint DiagnosticFloatingHint DiagnosticSignHint
+	TroubleHint TroubleSignHint
+DiagnosticUnderlineError	
+	DiagnosticUnderlineError
+DiagnosticUnderlineWarn	
+	DiagnosticUnderlineWarn
+DiagnosticUnderlineInfo	
+	DiagnosticUnderlineInfo
+DiagnosticUnderlineHint	
+	DiagnosticUnderlineHint
+MatchParen	
+	MatchParen MatchParenCur MatchWord
+Comment	
+	Comment TroubleCode TroubleSource NvimDapVirtualText gitblame TargetFileName TSComment
+	TelescopeResultsComment luaComment luaTSComment
+Underlined	
+	Underlined TSURI
+Ignore	
+	Ignore
+NvimInternalError	
+	NvimInternalError NvimFigureBrace NvimSingleQuotedUnknownEscape
+	NvimInvalidSingleQuotedUnknownEscape
+CursorIM	
+	CursorIM
+SignColumnSB	
+	SignColumnSB
+NormalSB	
+	NormalSB
+VisualNOS	
+	VisualNOS
+Italic	
+	Italic
+qfLineNr	
+	qfLineNr
+qfFileName	
+	qfFileName
+htmlH1	
+	htmlH1
+htmlH2	
+	htmlH2
+mkdHeading	
+	mkdHeading
+mkdCode	
+	mkdCode
+mkdCodeDelimiter	
+	mkdCodeDelimiter
+mkdCodeStart	
+	mkdCodeStart
+mkdCodeEnd	
+	mkdCodeEnd
+mkdLink	
+	mkdLink
+markdownH1	
+	markdownH1
+markdownH1Delimiter	
+	markdownH1Delimiter
+markdownH2	
+	markdownH2
+markdownH2Delimiter	
+	markdownH2Delimiter
+debugBreakpoint	
+	debugBreakpoint
+Bold	
+	Bold
+DapUIScope	
+	DapUIScope
+DapUIType	
+	DapUIType
+DapUIModifiedValue	
+	DapUIModifiedValue
+DapUIDecoration	
+	DapUIDecoration
+DapUIThread	
+	DapUIThread
+DapUIStoppedThread	
+	DapUIStoppedThread
+DapUISource	
+	DapUISource
+DapUILineNumber	
+	DapUILineNumber DapUIBreakpointsLine
+DapUIFloatBorder	
+	DapUIFloatBorder
+DapUIWatchesEmpty	
+	DapUIWatchesEmpty
+DapUIWatchesValue	
+	DapUIWatchesValue
+DapUIWatchesError	
+	DapUIWatchesError
+DapUIBreakpointsPath	
+	DapUIBreakpointsPath
+DapUIBreakpointsInfo	
+	DapUIBreakpointsInfo
+DapUIBreakpointsCurrentLine	
+	DapUIBreakpointsCurrentLine
+HexThisAsciiEq	
+	HexThisAsciiEq
+HexThisHexEq	
+	HexThisHexEq
+IndentBlanklineContextChar	
+	IndentBlanklineContextChar
+IndentBlanklineContextStart	
+	IndentBlanklineContextStart
+IndentBlanklineChar	
+	IndentBlanklineChar
+IndentBlanklineSpaceChar	
+	IndentBlanklineSpaceChar
+IndentBlanklineSpaceCharBlankline	
+	IndentBlanklineSpaceCharBlankline
+LspSagaFinderSelection	
+	LspSagaFinderSelection
+LspFloatWinBorder	
+	LspFloatWinBorder
+LspSagaBorderTitle	
+	LspSagaBorderTitle
+ProviderTruncateLine	
+	ProviderTruncateLine
+SagaShadow	
+	SagaShadow
+DiagnosticTruncateLine	
+	DiagnosticTruncateLine
+DiagnosticInformation	
+	DiagnosticInformation
+LspSagaDiagnosticBorder	
+	LspSagaDiagnosticBorder
+LspSagaDiagnosticHeader	
+	LspSagaDiagnosticHeader
+LspSagaDiagnosticTruncateLine	
+	LspSagaDiagnosticTruncateLine
+LspDiagnosticsFloatingError	
+	LspDiagnosticsFloatingError
+LspDiagnosticsFloatingWarn	
+	LspDiagnosticsFloatingWarn
+LspDiagnosticsFloatingInfor	
+	LspDiagnosticsFloatingInfor
+LspDiagnosticsFloatingHint	
+	LspDiagnosticsFloatingHint
+LspSagaShTruncateLine	
+	LspSagaShTruncateLine
+LspSagaDocTruncateLine	
+	LspSagaDocTruncateLine
+LspSagaCodeActionTitle	
+	LspSagaCodeActionTitle
+LspSagaCodeActionTruncateLine	
+	LspSagaCodeActionTruncateLine
+LspSagaCodeActionContent	
+	LspSagaCodeActionContent
+LspSagaRenamePromptPrefix	
+	LspSagaRenamePromptPrefix
+LspSagaRenameBorder	
+	LspSagaRenameBorder
+LspSagaHoverBorder	
+	LspSagaHoverBorder
+LspSagaSignatureHelpBorder	
+	LspSagaSignatureHelpBorder
+LspSagaLspFinderBorder	
+	LspSagaLspFinderBorder
+LspSagaCodeActionBorder	
+	LspSagaCodeActionBorder
+LspSagaAutoPreview	
+	LspSagaAutoPreview
+LspSagaDefPreviewBorder	
+	LspSagaDefPreviewBorder
+CmpItemAbbrDefault	
+	CmpItemAbbrDefault CmpItemAbbr
+CmpItemAbbrDeprecatedDefault	
+	CmpItemAbbrDeprecatedDefault CmpItemAbbrDeprecated
+CmpItemAbbrMatchDefault	
+	CmpItemAbbrMatchDefault CmpItemAbbrMatch
+CmpItemAbbrMatchFuzzyDefault	
+	CmpItemAbbrMatchFuzzyDefault CmpItemAbbrMatchFuzzy
+CmpItemKindDefault	
+	CmpItemKindDefault CmpItemKind
+CmpItemMenuDefault	
+	CmpItemMenuDefault CmpItemMenu
+TSNone	
+	TSNone TSText
+TSPunctDelimiter	
+	TSPunctDelimiter luaTSPunctDelimiter jsonTSPunctDelimiter
+TSPunctBracket	
+	TSPunctBracket luaTSPunctBracket jsonTSPunctBracket
+TSPunctSpecial	
+	TSPunctSpecial
+TSStringRegex	
+	TSStringRegex
+TSStringEscape	
+	TSStringEscape
+TSParameter	
+	TSParameter TSParameterReference luaTSParameter
+TSField	
+	TSField luaTSField
+TSProperty	
+	TSProperty TSTagAttribute luaTSProperty
+TSConstructor	
+	TSConstructor luaTSConstructor
+TSLabel	
+	TSLabel jsonTSLabel
+TSOperator	
+	TSOperator TSKeywordOperator luaTSOperator
+TSKeyword	
+	TSKeyword TSKeywordReturn luaTSKeywordReturn
+TSKeywordFunction	
+	TSKeywordFunction luaTSKeywordFunction
+TSStrong	
+	TSStrong
+TSEmphasis	
+	TSEmphasis
+TSUnderline	
+	TSUnderline
+TSStrike	
+	TSStrike
+SpelunkerSpellBad	
+	SpelunkerSpellBad
+SpelunkerComplexOrCompoundWord	
+	SpelunkerComplexOrCompoundWord
+TelescopeBorder	
+	TelescopeBorder TelescopePromptBorder TelescopeResultsBorder TelescopePreviewBorder
+	TelescopeTitle TelescopePromptTitle TelescopeResultsTitle TelescopePreviewTitle
+WhichKeyValue	
+	WhichKeyValue
+WhichKeyGroup	
+	WhichKeyGroup
+WhichKeyDesc	
+	WhichKeyDesc
+WhichKey	
+	WhichKey
+WhichKeySeparator	
+	WhichKeySeparator
+WhichKeySeperator	
+	WhichKeySeperator
+BufferLineModified	
+	BufferLineModified
+BufferLineWarning	
+	BufferLineWarning
+BufferLineInfo	
+	BufferLineInfo
+BufferLineIndicatorSelected	
+	BufferLineIndicatorSelected
+BufferLineDiagnostic	
+	BufferLineDiagnostic
+BufferLineTabSelected	
+	BufferLineTabSelected
+BufferLineGroupLabel	
+	BufferLineGroupLabel
+BufferLineGroupSeparator	
+	BufferLineGroupSeparator
+BufferLineError	
+	BufferLineError
+BufferLineCloseButtonVisible	
+	BufferLineCloseButtonVisible
+BufferLineInfoDiagnosticVisible	
+	BufferLineInfoDiagnosticVisible
+BufferLineInfoVisible	
+	BufferLineInfoVisible
+BufferLineWarningDiagnosticVisible	
+	BufferLineWarningDiagnosticVisible
+BufferLineWarningVisible	
+	BufferLineWarningVisible
+BufferLineBuffer	
+	BufferLineBuffer
+BufferLineErrorVisible	
+	BufferLineErrorVisible
+BufferLineFill	
+	BufferLineFill
+BufferLineSeparatorVisible	
+	BufferLineSeparatorVisible
+BufferLinePickVisible	
+	BufferLinePickVisible
+BufferLineDuplicateVisible	
+	BufferLineDuplicateVisible
+BufferLineModifiedVisible	
+	BufferLineModifiedVisible
+BufferLineBufferVisible	
+	BufferLineBufferVisible
+BufferLineCloseButtonSelected	
+	BufferLineCloseButtonSelected
+BufferLineCloseButton	
+	BufferLineCloseButton
+BufferLineInfoDiagnosticSelected	
+	BufferLineInfoDiagnosticSelected
+BufferLineInfoDiagnostic	
+	BufferLineInfoDiagnostic
+BufferLineInfoSelected	
+	BufferLineInfoSelected
+BufferLineWarningDiagnosticSelected	
+	BufferLineWarningDiagnosticSelected
+BufferLineWarningDiagnostic	
+	BufferLineWarningDiagnostic
+BufferLineWarningSelected	
+	BufferLineWarningSelected
+BufferLineErrorDiagnosticSelected	
+	BufferLineErrorDiagnosticSelected
+BufferLineErrorDiagnostic	
+	BufferLineErrorDiagnostic
+BufferLineErrorSelected	
+	BufferLineErrorSelected
+BufferLineDiagnosticSelected	
+	BufferLineDiagnosticSelected
+BufferLineSeparatorSelected	
+	BufferLineSeparatorSelected
+BufferLinePickSelected	
+	BufferLinePickSelected
+BufferLinePick	
+	BufferLinePick
+BufferLineDuplicateSelected	
+	BufferLineDuplicateSelected
+BufferLineDuplicate	
+	BufferLineDuplicate
+BufferLineTabClose	
+	BufferLineTabClose
+BufferLineBufferSelected	
+	BufferLineBufferSelected
+BufferLineTab	
+	BufferLineTab
+BufferLineBackground	
+	BufferLineBackground
+BufferLineDiagnosticVisible	
+	BufferLineDiagnosticVisible
+BufferLineErrorDiagnosticVisible	
+	BufferLineErrorDiagnosticVisible
+BufferLineModifiedSelected	
+	BufferLineModifiedSelected
+BufferLineSeparator	
+	BufferLineSeparator
+GitSignsChange	
+	GitSignsChange
+GitSignsAdd	
+	GitSignsAdd
+GitSignsDelete	
+	GitSignsDelete
+CurrentWordTwins	
+	CurrentWordTwins
+CurrentWord	
+	CurrentWord
+DevIconLua	
+	DevIconLua
+DevIconDesktopEntry	
+	DevIconDesktopEntry
+DevIconKsh	
+	DevIconKsh
+DevIconMli	
+	DevIconMli
+DevIconDart	
+	DevIconDart
+DevIconSh	
+	DevIconSh
+DevIconNix	
+	DevIconNix
+DevIconEx	
+	DevIconEx
+DevIconDefault	
+	DevIconDefault
+DevIconMustache	
+	DevIconMustache
+DevIconYaml	
+	DevIconYaml
+DevIconElm	
+	DevIconElm
+DevIconR	
+	DevIconR
+DevIconCxx	
+	DevIconCxx
+DevIconGif	
+	DevIconGif
+DevIconClojureJS	
+	DevIconClojureJS
+DevIconClojureC	
+	DevIconClojureC
+DevIconGitIgnore	
+	DevIconGitIgnore
+DevIconFsscript	
+	DevIconFsscript
+DevIconFsi	
+	DevIconFsi
+DevIconBashrc	
+	DevIconBashrc
+DevIconGo	
+	DevIconGo
+DevIconBat	
+	DevIconBat
+DevIconLess	
+	DevIconLess
+DevIconFsharp	
+	DevIconFsharp
+DevIconMakefile	
+	DevIconMakefile
+DevIconRb	
+	DevIconRb
+DevIconEjs	
+	DevIconEjs
+DevIconSettingsJson	
+	DevIconSettingsJson
+DevIconWebpack	
+	DevIconWebpack
+DevIconCPlusPlus	
+	DevIconCPlusPlus
+DevIconCobol	
+	DevIconCobol
+DevIconMjs	
+	DevIconMjs
+DevIconCs	
+	DevIconCs
+DevIconDb	
+	DevIconDb
+DevIconSwift	
+	DevIconSwift
+DevIconXls	
+	DevIconXls
+DevIconSig	
+	DevIconSig
+DevIconDropbox	
+	DevIconDropbox
+DevIconCson	
+	DevIconCson
+DevIconGulpfile	
+	DevIconGulpfile
+DevIconDump	
+	DevIconDump
+DevIconHeex	
+	DevIconHeex
+DevIconGruntfile	
+	DevIconGruntfile
+DevIconExs	
+	DevIconExs
+DevIconCMake	
+	DevIconCMake
+DevIconDoc	
+	DevIconDoc
+DevIconKotlin	
+	DevIconKotlin
+DevIconConf	
+	DevIconConf
+DevIconDiff	
+	DevIconDiff
+DevIconJl	
+	DevIconJl
+DevIconCoffee	
+	DevIconCoffee
+DevIconConfiguration	
+	DevIconConfiguration
+DevIconScss	
+	DevIconScss
+DevIconHrl	
+	DevIconHrl
+DevIconCss	
+	DevIconCss
+DevIconTerminal	
+	DevIconTerminal
+DevIconBabelrc	
+	DevIconBabelrc
+DevIconBmp	
+	DevIconBmp
+DevIconJava	
+	DevIconJava
+DevIconPhp	
+	DevIconPhp
+DevIconJson	
+	DevIconJson
+DevIconVim	
+	DevIconVim
+DevIconFish	DevIconFish
+DevIconGemspec	DevIconGemspec
+DevIconCpp	DevIconCpp
+DevIconGvimrc	DevIconGvimrc
+DevIconBash	DevIconBash
+DevIconVagrantfile	DevIconVagrantfile
+DevIconD	DevIconD
+DevIconIni	DevIconIni
+DevIconLicense	DevIconLicense
+DevIconJsx	DevIconJsx
+DevIconZshrc	DevIconZshrc
+DevIconOPUS	DevIconOPUS
+DevIconGitlabCI	DevIconGitlabCI
+DevIconRmd	DevIconRmd
+DevIconProlog	DevIconProlog
+DevIconGitCommit	DevIconGitCommit
+DevIconOpenTypeFont	DevIconOpenTypeFont
+DevIconC	DevIconC
+DevIconMaterial	DevIconMaterial
+DevIconPyo	DevIconPyo
+DevIconGitAttributes	DevIconGitAttributes
+DevIconPyd	DevIconPyd
+DevIconMdx	DevIconMdx
+DevIconDsStore	DevIconDsStore
+DevIconBinaryGLTF	DevIconBinaryGLTF
+DevIconPsd	DevIconPsd
+DevIconTextResource	DevIconTextResource
+DevIconPsb	DevIconPsb
+DevIconSvg	DevIconSvg
+DevIconProcfile	DevIconProcfile
+DevIconAi	DevIconAi
+DevIconTextScene	DevIconTextScene
+DevIconGitLogo	DevIconGitLogo
+DevIconZshenv	DevIconZshenv
+DevIconPdf	DevIconPdf
+DevIconVimrc	DevIconVimrc
+DevIconPp	DevIconPp
+DevIconEdn	DevIconEdn
+DevIconLhs	DevIconLhs
+DevIconPm	DevIconPm
+DevIconXcPlayground	DevIconXcPlayground
+DevIconHxx	DevIconHxx
+DevIconHs	DevIconHs
+DevIconDockerfile	DevIconDockerfile
+DevIconZshprofile	DevIconZshprofile
+DevIconHtml	DevIconHtml
+DevIconRakefile	DevIconRakefile
+DevIconScala	DevIconScala
+DevIconJs	DevIconJs
+DevIconPl	DevIconPl
+DevIconMd	DevIconMd
+DevIconLeex	DevIconLeex
+DevIconErl	DevIconErl
+DevIconTwig	DevIconTwig
+DevIconFavicon	DevIconFavicon
+DevIconCrystal	DevIconCrystal
+DevIconHbs	DevIconHbs
+DevIconTor	DevIconTor
+DevIconJpg	DevIconJpg
+DevIconHaml	DevIconHaml
+DevIconJpeg	DevIconJpeg
+DevIconH	DevIconH
+DevIconFsx	DevIconFsx
+DevIconClojure	DevIconClojure
+DevIconFs	DevIconFs
+DevIconHpp	DevIconHpp
+DevIconYml	DevIconYml
+DevIconIco	DevIconIco
+DevIconSuo	DevIconSuo
+DevIconZig	DevIconZig
+DevIconEex	DevIconEex
+DevIconStyl	DevIconStyl
+DevIconNodeModules	DevIconNodeModules
+DevIconCp	DevIconCp
+DevIconMixLock	DevIconMixLock
+DevIconSln	DevIconSln
+DevIconGemfile	DevIconGemfile
+DevIconRake	DevIconRake
+DevIconWebmanifest	DevIconWebmanifest
+DevIconConfigRu	DevIconConfigRu
+DevIconPpt	DevIconPpt
+DevIconPackedResource	DevIconPackedResource
+DevIconSvelte	DevIconSvelte
+DevIconImportConfiguration	DevIconImportConfiguration
+DevIconCMakeLists	DevIconCMakeLists
+DevIconPng	DevIconPng
+DevIconPromptPs1	DevIconPromptPs1
+DevIconPy	DevIconPy
+DevIconRlib	DevIconRlib
+DevIconPyc	DevIconPyc
+DevIconGitConfig	DevIconGitConfig
+DevIconRproj	DevIconRproj
+DevIconRs	DevIconRs
+DevIconRss	DevIconRss
+DevIconSass	DevIconSass
+DevIconSlim	DevIconSlim
+DevIconSml	DevIconSml
+DevIconSql	DevIconSql
+DevIconHh	DevIconHh
+DevIconTs	DevIconTs
+DevIconTsx	DevIconTsx
+DevIconVue	DevIconVue
+DevIconToml	DevIconToml
+DevIconWebp	DevIconWebp
+DevIconXul	DevIconXul
+DevIconMarkdown	DevIconMarkdown
+DevIconNPMIgnore	DevIconNPMIgnore
+DevIconZsh	DevIconZsh
+DevIconGDScript	DevIconGDScript
+DevIconTex	DevIconTex
+DevIconMl	DevIconMl
+DevIconBashProfile	DevIconBashProfile
+DevIconHtm	DevIconHtm
+DevIconGitModules	DevIconGitModules
+DevIconErb	DevIconErb
+DevIconAwk	DevIconAwk
+DevIconCsh	DevIconCsh
+DevIconXml	DevIconXml
+DevIconGodotProject	DevIconGodotProject
+BufferLineDevIconDefaultSelected	BufferLineDevIconDefaultSelected
+BufferLineDevIconLua	BufferLineDevIconLua
+lualine_b_normal	lualine_b_normal
+lualine_c_normal	lualine_c_normal
+lualine_a_normal	lualine_a_normal
+lualine_b_inactive	lualine_b_inactive
+lualine_c_inactive	lualine_c_inactive
+lualine_a_inactive	lualine_a_inactive
+lualine_b_replace	lualine_b_replace
+lualine_a_replace	lualine_a_replace
+lualine_b_visual	lualine_b_visual
+lualine_a_visual	lualine_a_visual
+lualine_b_insert	lualine_b_insert
+lualine_a_insert	lualine_a_insert
+lualine_b_command	lualine_b_command
+lualine_a_command	lualine_a_command
+lualine_y_diagnostics_error_normal	lualine_y_diagnostics_error_normal
+lualine_y_diagnostics_error_inactive	lualine_y_diagnostics_error_inactive
+lualine_y_diagnostics_warn_normal	lualine_y_diagnostics_warn_normal
+lualine_y_diagnostics_warn_inactive	lualine_y_diagnostics_warn_inactive
+lualine_y_diagnostics_info_normal	lualine_y_diagnostics_info_normal
+lualine_y_diagnostics_info_inactive	lualine_y_diagnostics_info_inactive
+lualine_y_diagnostics_hint_normal	lualine_y_diagnostics_hint_normal
+lualine_y_diagnostics_hint_inactive	lualine_y_diagnostics_hint_inactive
+LspTroubleText	LspTroubleText
+LspTroubleCount	LspTroubleCount
+LspTroubleNormal	LspTroubleNormal
+illuminatedWord	illuminatedWord
+illuminatedCurWord	illuminatedCurWord
+diffAdded	diffAdded
+diffRemoved	diffRemoved
+diffChanged	diffChanged
+diffOldFile	diffOldFile
+diffNewFile	diffNewFile
+diffFile	diffFile
+diffLine	diffLine
+diffIndexLine	diffIndexLine
+NeogitBranch	NeogitBranch
+NeogitRemote	NeogitRemote
+NeogitHunkHeader	NeogitHunkHeader
+NeogitHunkHeaderHighlight	NeogitHunkHeaderHighlight
+NeogitDiffContextHighlight	NeogitDiffContextHighlight
+NeogitDiffDeleteHighlight	NeogitDiffDeleteHighlight
+NeogitDiffAddHighlight	NeogitDiffAddHighlight
+GitGutterAdd	GitGutterAdd
+GitGutterChange	GitGutterChange
+GitGutterDelete	GitGutterDelete
+NvimTreeNormal	NvimTreeNormal
+NvimTreeRootFolder	NvimTreeRootFolder
+NvimTreeGitDirty	NvimTreeGitDirty
+NvimTreeGitNew	NvimTreeGitNew
+NvimTreeGitDeleted	NvimTreeGitDeleted
+NvimTreeSpecialFile	NvimTreeSpecialFile
+LspDiagnosticsError	LspDiagnosticsError
+LspDiagnosticsWarning	LspDiagnosticsWarning
+LspDiagnosticsInformation	LspDiagnosticsInformation
+LspDiagnosticsHint	LspDiagnosticsHint
+NvimTreeIndentMarker	NvimTreeIndentMarker
+NvimTreeImageFile	NvimTreeImageFile
+NvimTreeSymlink	NvimTreeSymlink
+DashboardShortCut	DashboardShortCut
+DashboardHeader	DashboardHeader
+DashboardCenter	DashboardCenter
+DashboardFooter	DashboardFooter
+LspReferenceWrite	LspReferenceWrite
+LspReferenceRead	LspReferenceRead
+LspReferenceText	LspReferenceText
+healthError	healthError
+healthSuccess	healthSuccess
+healthWarning	healthWarning
+BufferCurrent	BufferCurrent
+BufferVisible	BufferVisible
+BufferInactive	BufferInactive
+BufferVisibleIndex	BufferVisibleIndex
+BufferCurrentSign	BufferCurrentSign
+BufferVisibleSign	BufferVisibleSign
+BufferInactiveSign	BufferInactiveSign
+BufferVisibleTarget	BufferVisibleTarget
+BufferVisibleMod	BufferVisibleMod
+Sneak	Sneak
+SneakScope	SneakScope
+HopUnmatched	HopUnmatched
+CleverFChar	CleverFChar CleverFCursor
+rainbowcol1	rainbowcol1
+rainbowcol2	rainbowcol2
+rainbowcol3	rainbowcol3
+rainbowcol4	rainbowcol4
+rainbowcol5	rainbowcol5
+rainbowcol6	rainbowcol6
+rainbowcol7	rainbowcol7
+LspDiagnosticsDefaultError	LspDiagnosticsDefaultError
+LspDiagnosticsDefaultWarning	LspDiagnosticsDefaultWarning
+LspDiagnosticsDefaultInformation	LspDiagnosticsDefaultInformation
+LspDiagnosticsDefaultHint	LspDiagnosticsDefaultHint
+LspDiagnosticsVirtualTextError	LspDiagnosticsVirtualTextError
+LspDiagnosticsVirtualTextWarning	LspDiagnosticsVirtualTextWarning
+LspDiagnosticsVirtualTextInformation	LspDiagnosticsVirtualTextInformation
+LspDiagnosticsVirtualTextHint	LspDiagnosticsVirtualTextHint
+LspDiagnosticsUnderlineError	LspDiagnosticsUnderlineError
+LspDiagnosticsUnderlineWarning	LspDiagnosticsUnderlineWarning
+LspDiagnosticsUnderlineInformation	LspDiagnosticsUnderlineInformation
+LspDiagnosticsUnderlineHint	LspDiagnosticsUnderlineHint
+BufferLineDevIconLuaSelected	BufferLineDevIconLuaSelected
+lualine_x_DevIconLua_normal	lualine_x_DevIconLua_normal
+lualine_transitional_lualine_a_normal_to_lualine_b_normal	lualine_transitional_lualine_a_normal_to_lualine_b_normal
+lualine_transitional_lualine_b_normal_to_lualine_c_normal	lualine_transitional_lualine_b_normal_to_lualine_c_normal
+lualine_transitional_lualine_a_normal_to_lualine_c_normal	lualine_transitional_lualine_a_normal_to_lualine_c_normal
+lualine_transitional_lualine_a_insert_to_lualine_b_insert	lualine_transitional_lualine_a_insert_to_lualine_b_insert
+lualine_transitional_lualine_b_insert_to_lualine_c_normal	lualine_transitional_lualine_b_insert_to_lualine_c_normal
+lualine_transitional_lualine_a_insert_to_lualine_c_normal	lualine_transitional_lualine_a_insert_to_lualine_c_normal
+BufferLineDevIconLuaInactive	BufferLineDevIconLuaInactive
+BufferLineDevIconJsonSelected	BufferLineDevIconJsonSelected
+lualine_x_DevIconJson_normal	lualine_x_DevIconJson_normal
+lualine_transitional_lualine_y_diagnostics_error_normal_to_lualine_c_normal	lualine_transitional_lualine_y_diagnostics_error_normal_to_lualine_c_normal
+lualine_transitional_lualine_a_normal_to_lualine_y_diagnostics_error_normal	lualine_transitional_lualine_a_normal_to_lualine_y_diagnostics_error_normal
+lualine_transitional_lualine_a_command_to_lualine_b_command	lualine_transitional_lualine_a_command_to_lualine_b_command
+lualine_transitional_lualine_b_command_to_lualine_c_normal	lualine_transitional_lualine_b_command_to_lualine_c_normal
+lualine_transitional_lualine_a_command_to_lualine_y_diagnostics_error_normal	lualine_transitional_lualine_a_command_to_lualine_y_diagnostics_error_normal

@@ -37,7 +37,6 @@ do
   }
 
   local t = vim.fn.sign_getdefined('DiagnosticSignWarn')
-  -- print("WANK " .. vim.inspect(signs))
   if vim.tbl_isempty(t) then
     for type, icon in pairs(signs) do
       local hl = 'DiagnosticSign' .. type

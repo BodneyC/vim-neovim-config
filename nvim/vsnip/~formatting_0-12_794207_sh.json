@@ -1,0 +1,12 @@
+{
+  "shebang": {
+    "prefix": ["#!", "usr/bin"],
+    "body": [ "#!/usr/bin/env $1" ],
+    "description": "Shebang"
+  },
+  "shellcheck disable": {
+    "prefix": ["shellcheck", "#shellcheck"],
+    "body": [ "# shellcheck disable=SC$1"],
+    "description": "Shellcheck disable rule"
+  }
+}

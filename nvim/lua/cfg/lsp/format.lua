@@ -24,15 +24,19 @@ require('format').setup {
       cmd = {'prettier -w', './node_modules/.bin/eslint --fix'},
     },
   },
+  json = {
+    {
+      cmd = {
+        function(file)
+          vim.cmd([[%!jq]])
+          return file
+        end,
+      },
+    },
+  },
   markdown = {
     {
       cmd = {'prettier -w'},
-    },
-    {
-      cmd = {'black'},
-      start_pattern = '^```python$',
-      end_pattern = '^```$',
-      target = 'current',
     },
   },
 }
