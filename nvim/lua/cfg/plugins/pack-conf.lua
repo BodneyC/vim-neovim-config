@@ -101,7 +101,8 @@ util.opt('g', {
   tagbar_iconchars = {'\\ua0', '\\ua0'},
 
   ['test#strategy'] = 'neovim',
-  ['test#java#maventest#file_pattern'] = '\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$',
+  ['test#java#maventest#file_pattern'] = [[\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$]],
+  ['test#javascript#ava#file_pattern'] = [[\v(tests|spec)?/.*\.(js|jsx|coffee|ts|tsx)$]],
 
   togool_extras = {{'<', '+'}, {'>', '-'}},
 

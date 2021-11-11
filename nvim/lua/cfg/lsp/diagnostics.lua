@@ -1,8 +1,7 @@
 -- Nicked from cosmic
-
 vim.diagnostic.config({
   underline = true,
-  update_in_insert = false,
+  update_in_insert = true,
   virtual_text = {
     spacing = 4,
     source = 'always',
@@ -31,9 +30,9 @@ local icons = require('mod.theme').icons
 do
   local signs = {
     Error = icons.diagnostics.error,
-    Warn =  icons.diagnostics.warning,
-    Hint =  icons.diagnostics.hint,
-    Info =  icons.diagnostics.info,
+    Warn = icons.diagnostics.warning,
+    Hint = icons.diagnostics.hint,
+    Info = icons.diagnostics.info,
   }
 
   local t = vim.fn.sign_getdefined('DiagnosticSignWarn')
@@ -52,9 +51,9 @@ end
 do
   local signs = {
     Error = icons.diagnostics.error,
-    Warning =  icons.diagnostics.warning,
-    Hint =  icons.diagnostics.hint,
-    Information =  icons.diagnostics.info,
+    Warning = icons.diagnostics.warning,
+    Hint = icons.diagnostics.hint,
+    Information = icons.diagnostics.info,
   }
   local h = vim.fn.sign_getdefined('LspDiagnosticsSignWarn')
   if vim.tbl_isempty(h) then

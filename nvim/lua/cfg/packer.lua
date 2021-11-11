@@ -135,15 +135,6 @@ return packer.startup({
     }
     -- use {'spinks/vim-leader-guide'}
     use {'folke/todo-comments.nvim'}
-    use {
-      'folke/trouble.nvim',
-      config = function()
-        require('trouble').setup {
-          auto_open = false,
-          auto_close = false,
-        }
-      end,
-    }
     use {'simrat39/symbols-outline.nvim'}
     use {'bronson/vim-visual-star-search'}
     use {'dominikduda/vim_current_word'}
@@ -163,6 +154,13 @@ return packer.startup({
       'luukvbaal/stabilize.nvim',
       config = function()
         require('stabilize').setup()
+      end,
+    }
+    use {
+      'folke/trouble.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('trouble').setup()
       end,
     }
     use {'ludovicchabant/vim-gutentags'}
@@ -207,7 +205,10 @@ return packer.startup({
       cmd = 'Limelight',
     }
     use {'kyazdani42/nvim-web-devicons'}
-    use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+    use {
+      'akinsho/bufferline.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+    }
     -- use {
     --   'romgrk/barbar.nvim',
     --   requires = {{'romgrk/lib.kom'}},
