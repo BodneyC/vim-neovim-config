@@ -6,7 +6,7 @@ function M.search_file(fn)
   if not fn then
     fn = vim.fn.expand('%:p')
   end
-  vim.fn['defx#call_action']('search', fn)
+  vim.fn['defx#call_action']('search_recursive', fn)
 end
 
 function M.open()
@@ -85,8 +85,10 @@ function M.init()
   })
   vim.fn.execute([[command! -nargs=0 DefxOpen lua require('mod.defx')]] ..
                    [[.open_and_size {open = true, resize = true, refocus = false}]])
-  vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>',
-    {silent = true, noremap = true})
+  vim.api.nvim_set_keymap('n', '<Leader>d', '<CMD>DefxOpen<CR>', {
+    silent = true,
+    noremap = true,
+  })
 end
 
 return M

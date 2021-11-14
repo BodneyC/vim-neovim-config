@@ -1,5 +1,13 @@
 local M = {}
 
+function M.replace_termcodes(s)
+  return vim.api.nvim_replace_termcodes(s, true, true, true)
+end
+
+function M.feedkeys(s, mode)
+  vim.api.nvim_feedkeys(M.replace_termcodes(s), mode, true)
+end
+
 function M.safe_require(module)
   local ok, err = pcall(require, module)
   if not ok then

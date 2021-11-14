@@ -133,9 +133,6 @@ function M.grep_string_filtered(opts)
 end
 
 local function read_hist_file()
-  if M.euid == '0' then
-    return
-  end
   local f = io.open(M.histfile, 'r')
   if not f then
     return nil
@@ -148,47 +145,26 @@ local function read_hist_file()
   return arr
 end
 
-function actions.prev_hist(_)
-  if M.euid == '0' then
-    return
+function actions.hist_f(dir)
+  return function(_)
+    if M.euid == '0' then
+      return
+    end
+    local arr = read_hist_file()
+    if not arr then
+      return
+    end
+    if histfile_idx == -1 or histfile_idx > #arr then
+      histfile_idx = #arr + (dir == 'prev' and 1 or 0)
+    end
+    if histfile_idx ~= (dir == 'prev' and 1 or #arr) then
+      histfile_idx = histfile_idx + (dir == 'prev' and -1 or 1)
+    end
+    if not arr[histfile_idx] then
+      return
+    end
+    util.feedkeys('<C-u>' .. arr[histfile_idx], 'n')
   end
-  local arr = read_hist_file()
-  if not arr then
-    return
-  end
-  if histfile_idx == -1 or histfile_idx > #arr then
-    histfile_idx = #arr + 1
-  end
-  if histfile_idx ~= 1 then
-    histfile_idx = histfile_idx - 1
-  end
-  if not arr[histfile_idx] then
-    return
-  end
-  vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
-  if histfile_idx == 1 then
-    return
-  end
-end
-
-function actions.next_hist(_)
-  if M.euid == '0' then
-    return
-  end
-  local arr = read_hist_file()
-  if not arr then
-    return
-  end
-  if histfile_idx == -1 or histfile_idx > #arr then
-    histfile_idx = #arr
-  end
-  if histfile_idx ~= #arr then
-    histfile_idx = histfile_idx + 1
-  end
-  if not arr[histfile_idx] then
-    return
-  end
-  vim.api.nvim_input('<C-u>' .. arr[histfile_idx])
 end
 
 function actions.append_to_hist(prompt_bufnr)
@@ -219,10 +195,10 @@ function M.init()
     defaults = {
       mappings = {
         i = {
-          ['<Esc>'] = actions.close,
-          ['<C-u>'] = false,
-          ['<C-j>'] = actions.prev_hist,
-          ['<C-k>'] = actions.next_hist,
+          -- ['<Esc>'] = actions.close,
+          -- ['<C-u>'] = false,
+          ['<C-j>'] = actions.hist_f('prev'),
+          ['<C-k>'] = actions.hist_f('next'),
           ['<CR>'] = actions.append_to_hist,
         },
       },
@@ -270,20 +246,12 @@ function M.init()
         '\\.git',
       },
       path_display = {'absolute'},
-      winblend = 5,
-      border = {},
-      borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+      winblend = 15,
+      -- border = {},
+      -- borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
       color_devicons = true,
-      use_less = true,
       set_env = {
         ['COLORTERM'] = 'truecolor',
-      },
-      file_previewer = previewers.cat.new,
-      grep_previewer = previewers.vimgrep.new,
-      qflist_previewer = previewers.qflist.new,
-      fzy_native = {
-        override_generic_sorter = true,
-        override_file_sorter = true,
       },
     },
   }

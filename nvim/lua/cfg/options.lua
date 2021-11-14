@@ -30,7 +30,7 @@ util.opt('o', {
   foldmethod = 'manual',
   grepformat = '%f:%l:%c:%m',
   grepprg = 'rg --vimgrep --no-heading --smart-case',
-  guifont = 'VictorMono Nerd Font:h11',
+  guifont = 'Iosevka Nerd Font:h11',
   hidden = true,
   hls = true,
   icm = 'split',

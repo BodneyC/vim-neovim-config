@@ -55,7 +55,7 @@ function M.init()
   local flags = require('utl.maps').flags
 
   local function cmd_on_file(cmd)
-    return [[:echo ']] .. cmd .. [[' | ]] ..
+    return [[:echo ']] .. cmd .. ' ' .. vim.fn.expand('%') .. [[' | ]] ..
              [[call defx#do_action('execute_command', ']] .. cmd .. [[ %')<CR>]]
   end
 
@@ -73,13 +73,19 @@ function M.init()
   end
 
   util.command('DefxFindWindowFor',
-    'lua require\'ftplugin.defx\'.defx_find_window_for(<f-args>)', {nargs = 1})
+    'lua require\'ftplugin.defx\'.defx_find_window_for(<f-args>)', {
+      nargs = 1,
+    })
 
-  bskm(0, 'n', '<leader>r', '<CMD>lua require\'mod.defx\'.resize()<CR>',
-    {noremap = true, silent = true})
+  bskm(0, 'n', '<leader>r', '<CMD>lua require\'mod.defx\'.resize()<CR>', {
+    noremap = true,
+    silent = true,
+  })
 
-  bskm(0, 'n', '<CR>', str_tree_or_open('recursive:10', 'botright vsplit'), flags.nse)
-  bskm(0, 'n', 'gl', str_tree_or_open('recursive:10', 'botright vsplit'), flags.nse)
+  bskm(0, 'n', '<CR>', str_tree_or_open('recursive:10', 'botright vsplit'),
+    flags.nse)
+  bskm(0, 'n', 'gl', str_tree_or_open('recursive:10', 'botright vsplit'),
+    flags.nse)
   bskm(0, 'n', 'O', str_tree_or_open('recursive:10', 'wincmd p | e'), flags.nse)
   bskm(0, 'n', '<2-LeftMouse>', str_tree_or_open(nil, 'wincmd p | e'), flags.nse)
   bskm(0, 'n', 'o', str_tree_or_open(nil, 'wincmd p | e'), flags.nse)

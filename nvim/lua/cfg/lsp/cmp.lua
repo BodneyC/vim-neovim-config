@@ -1,12 +1,5 @@
 local cmp = require('cmp')
-
-local function replace_termcodes(s)
-  return vim.api.nvim_replace_termcodes(s, true, true, true)
-end
-
-local function feedkeys(s, mode)
-  vim.api.nvim_feedkeys(replace_termcodes(s), mode, true)
-end
+local util = require('utl.util')
 
 local function has_words_before()
   if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
@@ -39,7 +32,7 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_next_item()
       elseif vim.fn['vsnip#available']() == 1 then
-        feedkeys('<Plug>(vsnip-expand-or-jump)', '')
+        util.feedkeys('<Plug>(vsnip-expand-or-jump)', '')
       elseif has_words_before() then
         cmp.complete()
       else
@@ -50,11 +43,11 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_prev_item()
       elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-        feedkeys('<Plug>(vsnip-jump-prev)', '')
+        util.feedkeys('<Plug>(vsnip-jump-prev)', '')
       elseif has_words_before() then
         cmp.complete()
       else
-        feedkeys('<C-d>', 'n')
+        util.feedkeys('<C-d>', 'n')
       end
     end, {'i', 's'}),
   },

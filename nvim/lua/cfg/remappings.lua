@@ -48,6 +48,10 @@ skm('n', '<leader>;', [[<Cmd>Commands<CR>]], flags.ns)
 skm('n', '<leader>T', [[<Cmd>SymbolsOutline<CR>]], flags.ns)
 skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], flags.ns)
 
+skm('n', '<C-/>', [[gcc]], {})
+skm('x', '<C-/>', [[gc]], {})
+skm('i', '<C-/>', [[<C-o>gcc]], {})
+
 skm('n', '', [[gcc]], {})
 skm('x', '', [[gc]], {})
 skm('i', '', [[<C-o>gcc]], {})

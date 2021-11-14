@@ -59,13 +59,14 @@ return packer.startup({
       },
     }
     use {'onsails/lspkind-nvim'}
-    use {
-      'junegunn/fzf',
-      run = function()
-        vim.fn['fzf#install']()
-      end,
-    }
-    use {'junegunn/fzf.vim'}
+    -- use {
+    --   'ibhagwan/fzf-lua',
+    --   requires = {'vijaymarupudi/nvim-fzf', 'kyazdani42/nvim-web-devicons'},
+    -- }
+    -- use {
+    --   'junegunn/fzf',
+    --   run = './install --bin',
+    -- }
 
     --- DAP
     use {'mfussenegger/nvim-dap'}
