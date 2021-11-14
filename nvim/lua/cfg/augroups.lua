@@ -19,7 +19,7 @@ util.augroup({
       cmd = [[lua require('ftplugin')(vim.bo.ft)]],
     },
     {
-      event = 'TextChanged,InsertLeave',
+      event = 'BufLeave',
       glob = '*',
       cmd = [[if &readonly == 0 && filereadable(bufname('%')) | silent! write | endif]],
     },
