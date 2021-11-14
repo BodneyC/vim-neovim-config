@@ -5,6 +5,8 @@ vim.cmd('let mapleader=" "')
 --- Leave unmapped for which-key
 -- skm('n', '<leader>', '<NOP>', {})
 
+skm('n', [[\]], [[<CMD>WhichKey \<CR>]], {})
+
 local flags = require('utl.maps').flags
 
 local function vsnip_map(mode, key, pos)
