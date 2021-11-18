@@ -39,4 +39,9 @@ require('format').setup {
       cmd = {'prettier -w'},
     },
   },
+  python = {
+    {
+      cmd = {'autopep8 --in-place'},
+    },
+  },
 }

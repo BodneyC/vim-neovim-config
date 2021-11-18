@@ -103,6 +103,7 @@ util.opt('g', {
   ['test#strategy'] = 'neovim',
   ['test#java#maventest#file_pattern'] = [[\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$]],
   ['test#javascript#ava#file_pattern'] = [[\v(tests|spec)?/.*\.(js|jsx|coffee|ts|tsx)$]],
+  ['test#javascript#jest#file_pattern'] = [[\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$]],
 
   togool_extras = {{'<', '+'}, {'>', '-'}},
 

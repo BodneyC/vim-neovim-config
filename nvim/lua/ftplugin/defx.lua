@@ -31,7 +31,8 @@ function M.defx_find_window_for(fn)
     return
   end
   for i = 1, vim.fn.winnr('$') do
-    if vim.fn.buflisted(vim.fn.winbufnr(i)) == 1 then
+    local bufnr = vim.fn.winbufnr(i)
+    if vim.fn.buflisted(bufnr) == 1 or #vim.fn.bufname(bufnr) == 0 then
       vim.cmd(i .. 'wincmd w | e ' .. fn)
       return
     end

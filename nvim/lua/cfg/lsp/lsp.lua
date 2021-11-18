@@ -111,7 +111,8 @@ for _, lsp in ipairs({
   'yamlls', -- npm i -g yaml-language-server
   'rls', -- rustup component add rls rust-{analysis,src}
   -- 'pyls', pip3 install --user 'python-language-sever[all]'
-  'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
+  -- 'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
+  'pyright', -- pip3 install --user pyright
   'texlab', -- package-manager - texlab
 }) do
   lspconfig[lsp].setup {
