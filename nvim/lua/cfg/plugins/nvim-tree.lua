@@ -38,6 +38,10 @@ util.opt('g', {
       symlink_open = '',
     },
   },
+  nvim_tree_window_picker_exclude = {
+    filetype = {'notify', 'packer', 'qf', 'Outline'},
+    buftype = {'terminal'},
+  },
   nvim_tree_show_icons = {
     git = 1,
     folders = 1,
@@ -46,6 +50,7 @@ util.opt('g', {
   },
 })
 
+local system_cb = require('mod.nvim-tree').system_cb
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 require('nvim-tree').setup {
@@ -64,10 +69,10 @@ require('nvim-tree').setup {
   diagnostics = {
     enable = true,
     icons = {
-      hint = icons.hint,
-      info = icons.info,
-      warning = icons.warning,
-      error = icons.error,
+      hint = icons.diagnostics.hint,
+      info = icons.diagnostics.info,
+      warning = icons.diagnostics.warning,
+      error = icons.diagnostics.error,
     },
   },
   update_focused_file = {
@@ -95,6 +100,14 @@ require('nvim-tree').setup {
         {
           key = 'h',
           cb = tree_cb('close_node'),
+        },
+        {
+          key = '+x',
+          cb = system_cb('chmod +x'),
+        },
+        {
+          key = '-x',
+          cb = system_cb('chmod -x'),
         },
       },
     },

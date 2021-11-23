@@ -225,10 +225,11 @@ return packer.startup({
 
     --- SDL
     use {'BodneyC/VirkSpaces'}
-    use {
-      'Shougo/defx.nvim',
-      requires = {{'kristijanhusak/defx-icons'}, {'kristijanhusak/defx-git'}},
-    }
+    use {'kyazdani42/nvim-tree.lua'}
+    -- use {
+    --   'Shougo/defx.nvim',
+    --   requires = {{'kristijanhusak/defx-icons'}, {'kristijanhusak/defx-git'}},
+    -- }
     use {
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',

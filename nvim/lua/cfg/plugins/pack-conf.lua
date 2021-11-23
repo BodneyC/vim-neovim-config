@@ -94,7 +94,7 @@ util.opt('g', {
 
   spelunker_disable_auto_group = 1,
 
-  scrollview_excluded_filetypes = {'defx'},
+  scrollview_excluded_filetypes = {'defx', 'NvimTree'},
 
   tagbar_auto_close = 1,
   tagbar_compact = 1,
