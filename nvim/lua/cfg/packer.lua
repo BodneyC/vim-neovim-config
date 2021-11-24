@@ -135,7 +135,22 @@ return packer.startup({
       end,
     }
     -- use {'spinks/vim-leader-guide'}
-    use {'folke/todo-comments.nvim'}
+    -- NOTE:
+    use {
+      'folke/todo-comments.nvim',
+      config = function()
+        require('todo-comments').setup {
+          signs = false,
+          colors = {
+            error = {'LspDiagnosticsDefaultError', 'ErrorMsg', '#D75F5F'},
+            warning = {'LspDiagnosticsDefaultWarning', 'WarningMsg', '#AFAF5F'},
+            info = {'LspDiagnosticsDefaultInformation', '#78BCAF'},
+            hint = {'LspDiagnosticsDefaultHint', '#8AD1C3'},
+            default = {'Identifier', '#87AFD7'},
+          },
+        }
+      end,
+    }
     use {'simrat39/symbols-outline.nvim'}
     use {'bronson/vim-visual-star-search'}
     use {'dominikduda/vim_current_word'}
@@ -154,7 +169,12 @@ return packer.startup({
     use {
       'luukvbaal/stabilize.nvim',
       config = function()
-        require('stabilize').setup()
+        require('stabilize').setup {
+          ignore = {
+            filetype = {'help', 'list', 'Trouble', 'NvimTree', 'Outline'},
+            buftype = {'terminal', 'quickfix', 'loclist'},
+          },
+        }
       end,
     }
     use {
@@ -193,6 +213,7 @@ return packer.startup({
 
     --- Prettiness
     use {'BodneyC/bolorscheme'}
+
     use {'KabbAmine/vCoolor.vim'}
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'amdt/vim-niji'}
@@ -246,6 +267,7 @@ return packer.startup({
     }
 
     --- Language support
+    use {'hashivim/vim-terraform'}
     use {'BodneyC/sood-vim'}
     use {'BodneyC/knit-vim'}
     use {'drmingdrmer/vim-indent-lua'}

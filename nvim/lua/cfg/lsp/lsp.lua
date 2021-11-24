@@ -114,6 +114,7 @@ for _, lsp in ipairs({
   -- 'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
   'pyright', -- pip3 install --user pyright
   'texlab', -- package-manager - texlab
+  'terraformls', -- system install
 }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,

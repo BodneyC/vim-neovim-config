@@ -68,13 +68,13 @@ cmp.setup({
       name = 'vsnip',
     },
     {
+      name = 'path',
+    },
+    {
       name = 'buffer',
     },
     {
       name = 'calc',
-    },
-    {
-      name = 'path',
     },
   },
 })

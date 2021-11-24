@@ -1,14 +1,14 @@
 require('nvim-treesitter.configs').setup {
   context_commentstring = {
     enable = true,
+    enable_autocmd = true,
     config = {
-      css = '// %s',
-      c = '// %s',
+      markdown = '<!-- %s -->',
     },
   },
   autotag = {
     enable = true,
-    filetypes = {
+    feletypes = {
       'html',
       'javascript',
       'javascriptreact',

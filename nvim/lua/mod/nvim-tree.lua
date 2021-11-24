@@ -7,7 +7,7 @@ local nvim_tree = require('nvim-tree')
 M.min_width = 30
 
 function M.system(cmd)
-  if view.is_help_ui() and mode ~= 'toggle_help' then
+  if view.is_help_ui() then
     return
   end
   local node = lib.get_node_at_cursor()
@@ -31,6 +31,7 @@ function M.resize(opts)
     cur_win = vim.fn.bufwinnr(vim.fn.bufnr())
     nvim_tree.focus()
   end
+  local cur_width = vim.fn.winwidth('.')
   local buf = vim.fn.getline(1, '$')
   table.remove(buf, 1)
   local width = M.min_width
@@ -40,9 +41,10 @@ function M.resize(opts)
       width = line_width
     end
   end
-  -- vim.cmd('vertical resize' .. width)
-  nvim_tree.resize(width)
-  print('NvimTree resized (' .. width .. ')')
+  if width ~= cur_width then
+    nvim_tree.resize(width)
+    print('NvimTree resized (' .. width .. ')')
+  end
   if opts.refocus and cur_win ~= -1 then
     vim.cmd(cur_win .. 'wincmd w')
   end

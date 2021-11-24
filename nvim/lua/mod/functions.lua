@@ -1,7 +1,31 @@
 local fs = require('utl.fs')
 local util = require('utl.util')
+local lang = require('utl.lang')
 
 local M = {}
+
+function M.bufonly()
+  local tablist = {}
+  for tabnr = 1, vim.fn.tabpagenr('$') do
+    for _, bufnr in ipairs(vim.fn.tabpagebuflist(tabnr)) do
+      table.insert(tablist, bufnr)
+    end
+  end
+  local cnt = 0
+  -- NOTE: These comments exist for debugging purposes
+  -- local bwd = {}
+  for bufnr = 1, vim.fn.bufnr('$') do
+    if vim.fn.bufexists(bufnr) and vim.fn.getbufvar(bufnr, '&mod') == 0 and
+      lang.index_of(tablist, bufnr) == -1 then
+      vim.cmd([[silent bwipeout]] .. bufnr)
+      cnt = cnt + 1
+      -- table.insert(bwd, bufnr)
+    end
+  end
+  if cnt > 0 then
+    print(cnt .. ' buffers wiped out') -- : ' .. vim.inspect(bwd))
+  end
+end
 
 -- WIP
 function M.bs()

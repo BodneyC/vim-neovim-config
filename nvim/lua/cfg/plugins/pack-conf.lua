@@ -65,6 +65,7 @@ util.opt('g', {
   gutentags_generate_on_empty_buffer = 0,
   gutentags_ctags_exclude = {'*.json'},
   gutentags_ctags_extra_args = {
+    '--exclude=node_modules',
     '--tag-relative=' ..
       (vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes' or
         'always'),
@@ -133,8 +134,8 @@ util.opt('g', {
   virk_close_by_ft = {
     -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
     VimspectorPrompt = '',
-    NvimTree = 'exe \'NvimTreeOpen\' | setlocal nobuflisted | wincmd p',
-    defx = 'exe \'DefxOpen\' | setlocal nobuflisted | wincmd p',
+    NvimTree = [[exe 'NvimTreeOpen']],
+    defx = [[exe 'DefxOpen' | setlocal nobuflisted | wincmd p]],
     Mundo = 'MundoShow',
   },
 

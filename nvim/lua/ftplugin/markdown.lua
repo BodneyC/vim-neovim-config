@@ -7,6 +7,7 @@ local flags = require('utl.maps').flags
 function M.init()
   vim.wo.conceallevel = 2
   vim.wo.concealcursor = ''
+  vim.bo.commentstring = '<!-- %s -->'
   bskm(0, 'n', 'j', 'gj', flags.ns)
   bskm(0, 'n', 'k', 'gk', flags.ns)
   bskm(0, 'n', 'gj', 'j', flags.ns)
