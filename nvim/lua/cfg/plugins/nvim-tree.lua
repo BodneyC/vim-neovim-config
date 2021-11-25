@@ -109,6 +109,14 @@ require('nvim-tree').setup {
           key = '-x',
           cb = system_cb('chmod -x'),
         },
+        {
+          key = 'd',
+          cb = system_cb('rem --hist'),
+        },
+        {
+          key = 'u',
+          cb = system_cb('rem last'),
+        },
       },
     },
   },
