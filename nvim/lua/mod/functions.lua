@@ -15,7 +15,7 @@ function M.bufonly()
   -- NOTE: These comments exist for debugging purposes
   -- local bwd = {}
   for bufnr = 1, vim.fn.bufnr('$') do
-    if vim.fn.bufexists(bufnr) and vim.fn.getbufvar(bufnr, '&mod') == 0 and
+    if vim.fn.bufexists(bufnr) == 1 and vim.fn.getbufvar(bufnr, '&mod') == 0 and
       lang.index_of(tablist, bufnr) == -1 then
       vim.cmd([[silent bwipeout]] .. bufnr)
       cnt = cnt + 1

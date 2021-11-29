@@ -211,10 +211,13 @@ function M.set_terminal_direction(...)
     vim.g.term_direction = args[1]
     return
   end
-  if (vim.fn.winheight(0) * 3.2) > vim.fn.winwidth(0) then
-    vim.g.term_direction = plane.HORZ
-  else
+  local winwidth = vim.fn.winwidth(0)
+  local winheight = vim.fn.winheight(0)
+  -- 3.2 is a number that means something to someone... not me, though
+  if winwidth / 2 >= 80 and (winheight * 3.2) <= winwidth then
     vim.g.term_direction = plane.VERT
+  else
+    vim.g.term_direction = plane.HORZ
   end
 end
 
@@ -283,6 +286,11 @@ function M.init()
         event = 'TermOpen',
         glob = 'term://*',
         cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
+      },
+      {
+        event = 'TermOpen',
+        glob = 'term://*',
+        cmd = [[set winhighlight=Normal:NvimTreeNormal]],
       },
       {
         event = 'TermLeave,BufLeave',

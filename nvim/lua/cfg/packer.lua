@@ -208,7 +208,7 @@ return packer.startup({
     use {'tpope/vim-repeat'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-unimpaired'}
-    use {'vim-scripts/BufOnly.vim'}
+    -- use {'vim-scripts/BufOnly.vim'}
     use {'vim-utils/vim-all'}
 
     --- Prettiness

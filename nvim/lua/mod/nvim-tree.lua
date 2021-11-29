@@ -18,7 +18,7 @@ function M.system(cmd)
     return
   end
   os.execute(cmd .. ' ' .. lib.get_last_group_node(node).absolute_path)
-  lib.refresh_tree(true)
+  lib.refresh_tree()
 end
 
 function M.system_cb(cmd)
