@@ -27,10 +27,6 @@ return packer.startup({
     }
 
     --- Lsp
-    -- use {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}
-    -- use {'ray-x/navigator.lua'}
-    -- use {'ray-x/lsp_signature.nvim'}
-
     use {'tami5/lspsaga.nvim'}
     use {
       'hrsh7th/nvim-cmp',
@@ -59,14 +55,6 @@ return packer.startup({
       },
     }
     use {'onsails/lspkind-nvim'}
-    -- use {
-    --   'ibhagwan/fzf-lua',
-    --   requires = {'vijaymarupudi/nvim-fzf', 'kyazdani42/nvim-web-devicons'},
-    -- }
-    -- use {
-    --   'junegunn/fzf',
-    --   run = './install --bin',
-    -- }
 
     --- DAP
     use {'mfussenegger/nvim-dap'}
@@ -204,11 +192,10 @@ return packer.startup({
     }
     use {'andymass/vim-matchup'}
     use {'moll/vim-bbye'}
-    use {'rhysd/clever-f.vim'}
+    use {'ggandor/lightspeed.nvim'}
     use {'tpope/vim-repeat'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-unimpaired'}
-    -- use {'vim-scripts/BufOnly.vim'}
     use {'vim-utils/vim-all'}
 
     --- Prettiness
@@ -231,10 +218,6 @@ return packer.startup({
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
     }
-    -- use {
-    --   'romgrk/barbar.nvim',
-    --   requires = {{'romgrk/lib.kom'}},
-    -- }
     use {'rktjmp/lush.nvim'}
     use {
       'rrethy/vim-hexokinase',
@@ -247,10 +230,6 @@ return packer.startup({
     --- SDL
     use {'BodneyC/VirkSpaces'}
     use {'kyazdani42/nvim-tree.lua'}
-    -- use {
-    --   'Shougo/defx.nvim',
-    --   requires = {{'kristijanhusak/defx-icons'}, {'kristijanhusak/defx-git'}},
-    -- }
     use {
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',

@@ -34,7 +34,7 @@ skm('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], flags.ns)
 skm('n', '<F7>', [[<CMD>set spell!<CR>]], flags.ns)
 skm('i', '<F7>', [[<C-o>:set spell!<CR>]], flags.ns)
 
-skm('n', 'Y', 'yy', flags.ns)
+-- skm('n', 'Y', 'yy', flags.ns)
 for _, ch in ipairs({'y', 'Y', 'p', 'P'}) do
   skm('n', '<leader>' .. ch, '"+' .. ch, flags.ns)
   skm('x', '<leader>' .. ch, '"+' .. ch, flags.ns)

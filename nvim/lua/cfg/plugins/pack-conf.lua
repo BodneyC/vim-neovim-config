@@ -129,6 +129,7 @@ util.opt('g', {
     'COMMIT.*',
     '.*Plugins.*',
     '^.defx].*',
+    'packer].*',
     -- 'NvimTree.*',
   },
   virk_close_by_ft = {
@@ -136,6 +137,7 @@ util.opt('g', {
     VimspectorPrompt = '',
     NvimTree = [[exe 'NvimTreeOpen']],
     defx = [[exe 'DefxOpen' | setlocal nobuflisted | wincmd p]],
+    Outline = [[exe 'SymbolsOutline' | setlocal nobuflisted | wincmd p]],
     Mundo = 'MundoShow',
   },
 
