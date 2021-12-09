@@ -94,6 +94,10 @@ require('nvim-tree').setup {
       custom_only = false,
       list = {
         {
+          key = 'Y',
+          cb = tree_cb('copy'),
+        },
+        {
           key = 'l',
           cb = tree_cb('open_node'),
         },
@@ -111,11 +115,16 @@ require('nvim-tree').setup {
         },
         {
           key = 'd',
-          cb = system_cb('rem --hist'),
+          cb = system_cb('rem -q --', {
+            directories = true,
+          }),
         },
         {
           key = 'u',
-          cb = system_cb('rem last'),
+          cb = system_cb('rem last -q', {
+            directories = true,
+            ignore_file = true,
+          }),
         },
       },
     },

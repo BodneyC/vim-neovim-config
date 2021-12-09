@@ -52,6 +52,8 @@ return packer.startup({
           'nvim-telescope/telescope-fzy-native.nvim',
           run = {'make'},
         },
+        -- One to track
+        {'nvim-telescope/telescope-rg.nvim'},
       },
     }
     use {'onsails/lspkind-nvim'}
@@ -119,7 +121,11 @@ return packer.startup({
     use {
       'folke/which-key.nvim',
       config = function()
-        require('which-key').setup {}
+        require('which-key').setup {
+          triggers_blacklist = {
+            n = {'"'}, -- slow for "+
+          },
+        }
       end,
     }
     -- use {'spinks/vim-leader-guide'}

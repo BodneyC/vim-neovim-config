@@ -223,13 +223,13 @@ function M.init()
       },
       prompt_prefix = '$ ',
       selection_strategy = 'reset',
-      layout_strategy = 'vertical',
+      layout_strategy = 'horizontal',
       layout_config = {
         prompt_position = 'top',
         horizontal = {
           width_padding = 0.1,
           height_padding = 0.2,
-          preview_width = 0.65,
+          preview_width = 0.6,
           mirror = false,
         },
         vertical = {
@@ -256,6 +256,7 @@ function M.init()
     },
   }
   telescope.load_extension('fzy_native')
+  telescope.load_extension('live_grep_raw')
 
   -- mappings
   local ns = require('utl.maps').flags.ns

@@ -6,7 +6,10 @@ local nvim_tree = require('nvim-tree')
 
 M.min_width = 30
 
-function M.system(cmd)
+--[[
+
+--]]
+function M.system(cmd, opts)
   if view.is_help_ui() then
     return
   end
@@ -14,15 +17,28 @@ function M.system(cmd)
   if not node then
     return
   end
-  if node.entries ~= nil then
+  if not opts.directories and node.entries ~= nil then
     return
   end
-  os.execute(cmd .. ' ' .. lib.get_last_group_node(node).absolute_path)
+  local cmd_str = cmd
+  if not opts.ignore_file then
+    cmd_str = cmd_str .. ' ' .. lib.get_last_group_node(node).absolute_path
+  end
+  vim.cmd([[echo """]] .. cmd_str .. [["""]])
+  os.execute(cmd_str)
   lib.refresh_tree()
 end
 
-function M.system_cb(cmd)
-  return [[:lua require('mod.nvim-tree')]] .. '.system([[' .. cmd .. ']])<CR>'
+function M.system_cb(cmd, opts)
+  if not opts then
+    opts = {}
+  end
+  local opts_str = vim.inspect(opts, {
+    newline = '',
+    indent = '',
+  })
+  return [[:lua require('mod.nvim-tree')]] .. '.system([[' .. cmd .. ']], ' ..
+           opts_str .. ')<CR>'
 end
 
 function M.resize(opts)

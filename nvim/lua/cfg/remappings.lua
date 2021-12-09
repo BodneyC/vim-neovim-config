@@ -19,7 +19,6 @@ vsnip_map('i', '<C-k>', -1)
 vsnip_map('s', '<C-j>', 1)
 vsnip_map('s', '<C-k>', -1)
 
--- wqa
 skm('n', '<leader>E', [[<CMD>e!<CR>]], flags.ns)
 skm('n', '<leader>Q', [[<CMD>qa!<CR>]], flags.ns)
 skm('n', '<leader>W', [[<CMD>wa | qa<CR>]], flags.ns)
@@ -116,9 +115,6 @@ skm('n', '<leader>}', [[zf}]], flags.ns)
 skm('n', '<leader>i',
   [[<CMD>lua require('utl.util').toggle_bool_option('o', 'ignorecase')<CR>]],
   flags.ns)
-
-skm('n', ';', [[<Plug>(clever-f-repeat-forward)]], {})
-skm('n', ',', [[<Plug>(clever-f-repeat-back)]], {})
 
 skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], flags.ns)
 skm('x', '<leader>ea', [[:EasyAlign<CR>]], flags.ns)
