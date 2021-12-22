@@ -18,6 +18,7 @@ function M.system(cmd, opts)
     return
   end
   if not opts.directories and node.entries ~= nil then
+    print('Not running for directories')
     return
   end
   local cmd_str = cmd

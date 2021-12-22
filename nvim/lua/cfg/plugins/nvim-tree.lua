@@ -115,6 +115,10 @@ require('nvim-tree').setup {
         },
         {
           key = 'd',
+          cb = system_cb('rem -q --'),
+        },
+        {
+          key = 'D',
           cb = system_cb('rem -q --', {
             directories = true,
           }),
@@ -122,6 +126,13 @@ require('nvim-tree').setup {
         {
           key = 'u',
           cb = system_cb('rem last -q', {
+            directories = true,
+            ignore_file = true,
+          }),
+        },
+        {
+          key = 'U',
+          cb = system_cb('rem last -qy', {
             directories = true,
             ignore_file = true,
           }),

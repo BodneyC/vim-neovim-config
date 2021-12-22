@@ -190,7 +190,37 @@ function actions.append_to_hist(prompt_bufnr)
 end
 
 function M.init()
+  local vimgrep_arguments = {
+    'rg',
+    '--hidden',
+    '--color=never',
+    '--no-heading',
+    '--with-filename',
+    '--line-number',
+    '--column',
+    '--smart-case',
+    '--glob',
+    '!.git/**',
+    '--glob',
+    '!.vim/**',
+    '--glob',
+    '!**/target/**',
+    '--glob',
+    '!**/*.class',
+  }
+
+  local file_ignore_patterns = {
+    '\\.cache',
+    '\\.lsp',
+    '\\.clj-kondo',
+    'node_modules',
+    'package-lock\\.json',
+    'yarn\\.lock',
+    '\\.git',
+  }
+
   M.euid = util.run_cmd('id -u', true)
+
   telescope.setup {
     defaults = {
       mappings = {
@@ -200,27 +230,13 @@ function M.init()
           ['<C-j>'] = actions.hist_f('prev'),
           ['<C-k>'] = actions.hist_f('next'),
           ['<CR>'] = actions.append_to_hist,
+          ['<C-w>'] = function()
+            vim.cmd [[normal! bcw]]
+          end,
         },
       },
       sorting_strategy = 'ascending',
-      vimgrep_arguments = {
-        'rg',
-        '--hidden',
-        '--color=never',
-        '--no-heading',
-        '--with-filename',
-        '--line-number',
-        '--column',
-        '--smart-case',
-        '--glob',
-        '!.git/**',
-        '--glob',
-        '!.vim/**',
-        '--glob',
-        '!**/target/**',
-        '--glob',
-        '!**/*.class',
-      },
+      vimgrep_arguments = vimgrep_arguments,
       prompt_prefix = '$ ',
       selection_strategy = 'reset',
       layout_strategy = 'horizontal',
@@ -236,15 +252,7 @@ function M.init()
           mirror = true,
         },
       },
-      file_ignore_patterns = {
-        '\\.cache',
-        '\\.lsp',
-        '\\.clj-kondo',
-        'node_modules',
-        'package-lock\\.json',
-        'yarn\\.lock',
-        '\\.git',
-      },
+      file_ignore_patterns = file_ignore_patterns,
       path_display = {'absolute'},
       winblend = 15,
       -- border = {},
@@ -259,45 +267,42 @@ function M.init()
   telescope.load_extension('live_grep_raw')
 
   -- mappings
-  local ns = require('utl.maps').flags.ns
+  local flags = require('utl.maps').flags
   local skm = vim.api.nvim_set_keymap
   util.command('Rg', [[lua require('mod.telescope').grep(<f-args>)]], {
     nargs = '1',
   })
   local tele_leader = '<leader>t'
-  skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], ns)
-  skm('n', tele_leader .. 'b', [[<CMD>Telescope git_branches<CR>]], ns)
-  skm('n', tele_leader .. 'c', [[<CMD>Telescope git_commits<CR>]], ns)
-  skm('n', tele_leader .. 'r', [[<CMD>Telescope registers<CR>]], ns)
-  skm('n', tele_leader .. 'm', [[<CMD>Telescope keymaps<CR>]], ns)
-  skm('n', tele_leader .. 'p',
-    [[<CMD>lua require('telescope').extensions.packer.plugins(opts)<CR>]], ns)
-  skm('n', tele_leader .. 'd', [[<CMD>Telescope lsp_document_symbols<CR>]], ns)
-  skm('n', tele_leader .. 'w', [[<CMD>Telescope lsp_workspace_symbols<CR>]], ns)
-  skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], ns)
-  skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], ns)
+  skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], flags.ns)
+  skm('n', tele_leader .. 'b', [[<CMD>Telescope git_branches<CR>]], flags.ns)
+  skm('n', tele_leader .. 'c', [[<CMD>Telescope git_commits<CR>]], flags.ns)
+  skm('n', tele_leader .. 'r', [[<CMD>Telescope registers<CR>]], flags.ns)
+  skm('n', tele_leader .. 'm', [[<CMD>Telescope keymaps<CR>]], flags.ns)
+  skm('n', tele_leader .. 'd', [[<CMD>Telescope lsp_document_symbols<CR>]],
+    flags.ns)
+  skm('n', tele_leader .. 'w', [[<CMD>Telescope lsp_workspace_symbols<CR>]],
+    flags.ns)
+  skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], flags.ns)
+  skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], flags.ns)
 
   skm('n', '<leader>r',
     [[<CMD>lua require('mod.telescope').grep_string_filtered ]] ..
       [[ { search = '', disable_coordinates = true, path_display = {'tail'}, }<CR>]],
-    {
-      noremap = true,
-    })
-  skm('n', '<leader>f',
-    [[<CMD>lua require('telescope.builtin').fd { find_command = { 'fd', '-tf', '-H' } }<CR>]],
-    ns)
-  skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], ns)
+    flags.n)
+  skm('n', '<leader>f', [[<CMD>lua require('telescope.builtin').fd]] ..
+    [[ { find_command = { 'fd', '-tf', '-H' } }<CR>]], flags.ns)
+  skm('n', '<leader>bl', [[<CMD>Telescope buffers<CR>]], flags.ns)
 
   -- Gets better results than the builtin
   local grep_string_under_cursor =
     [[<CMD>lua local s = vim.fn.expand('<cword>'); ]] ..
       [[require('telescope.builtin').grep_string { ]] ..
       [[ search = s, prompt_prefix = s .. ' > ', ]] .. [[ ngram_len = 1, }<CR>]]
-  skm('n', '<M-]>', grep_string_under_cursor, ns)
-  skm('n', '‘', grep_string_under_cursor, ns)
+  skm('n', '<M-]>', grep_string_under_cursor, flags.ns)
+  skm('n', '‘', grep_string_under_cursor, flags.ns)
 
   skm('n', '<M-[>',
-    [[<CMD>lua require('mod.telescope').tags_absolute {} <CR> ]], ns)
+    [[<CMD>lua require('mod.telescope').tags_absolute {} <CR> ]], flags.ns)
 
 end
 

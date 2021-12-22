@@ -26,7 +26,7 @@ cmp.setup({
     ['<C-g>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
-      select = true,
+      select = false,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
