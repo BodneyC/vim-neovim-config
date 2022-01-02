@@ -264,15 +264,18 @@ function M.init()
     unpack(ns),
   })
 
-  skm('n', '<C-S-q>', ':' .. mod_terminal .. '.term_split(true)<CR>', ns)
-  skm('i', '<C-S-q>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', ns)
-  skm('t', '<C-S-q>', '<C-\\><C-n>:' .. mod_terminal .. '.term_split(true)<CR>',
-    ns)
+  -- skm('n', '<C-S-q>', ':' .. mod_terminal .. '.term_split(true)<CR>', ns)
+  -- skm('i', '<C-S-q>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', ns)
+  -- skm('t', '<C-S-q>', '<C-\\><C-n>:' .. mod_terminal .. '.term_split(true)<CR>',
+  --   ns)
 
-  skm('i', '<C-q>', '<C-o>:' .. mod_terminal .. '.term_split(false)<CR>', ns)
-  skm('n', '<C-q>', ':' .. mod_terminal .. '.term_split(false)<CR>', ns)
-  skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', ns)
+  -- skm('i', '<C-q>', '<C-o>:' .. mod_terminal .. '.term_split(false)<CR>', ns)
+  -- skm('n', '<C-q>', ':' .. mod_terminal .. '.term_split(false)<CR>', ns)
+  -- skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', ns)
+
   skm('t', '<LeftRelease>', '<Nop>', ns)
+
+  skm('t', 'jj', '<C-\\><C-n>', ns)
 
   util.augroup({
     name = '__TERMINAL__',

@@ -1,3 +1,5 @@
+local icons = require('mod.theme').icons
+
 require('bufferline').setup {
   options = {
     indicator_icon = '▎',
@@ -12,7 +14,20 @@ require('bufferline').setup {
     tab_size = 18,
     diagnostics = 'nvim_lsp',
     diagnostics_update_in_insert = false,
-
+    diagnostics_indicator = function(_, _, diagnostics_dict, _)
+      local s = ' '
+      for e, n in pairs(diagnostics_dict) do
+        local sym = e == 'error' and icons.diagnostics.glyph.error or
+                      (e == 'warning' and icons.diagnostics.glyph.warning or
+                        icons.diagnostics.glyph.info)
+        if n == 1 then
+          s = s .. sym
+        else
+          s = s .. n .. ' ' .. sym
+        end
+      end
+      return s
+    end,
     offsets = {
       {
         text_align = 'left',

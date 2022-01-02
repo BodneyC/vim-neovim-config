@@ -34,6 +34,7 @@ skm('n', '<F7>', [[<CMD>set spell!<CR>]], flags.ns)
 skm('i', '<F7>', [[<C-o>:set spell!<CR>]], flags.ns)
 
 skm('i', '<C-w>', '<C-S-w>', flags.ns)
+skm('i', 'jj', '<Esc>', flags.ns)
 
 skm('n', 'Y', 'yy', flags.ns)
 for _, ch in ipairs({'y', 'Y', 'p', 'P'}) do
@@ -48,7 +49,7 @@ skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], flags.n)
 skm('n', '<leader>/', [[<Cmd>noh<CR>]], flags.ns)
 skm('n', '<leader>;', [[<Cmd>Commands<CR>]], flags.ns)
 -- skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], ns)
-skm('n', '<leader>T', [[<Cmd>SymbolsOutline<CR>]], flags.ns)
+skm('n', '<leader>S', [[<Cmd>SymbolsOutline<CR>]], flags.ns)
 skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], flags.ns)
 
 skm('n', '<C-/>', [[gcc]], {})
@@ -124,6 +125,11 @@ skm('x', '<leader>ea', [[:EasyAlign<CR>]], flags.ns)
 skm('n', '<leader>H',
   [[<CMD>lua require('mod.terminal').floating_help(vim.fn.expand('<cword>'))<CR>]],
   flags.ns)
+
+skm('v', '<up>',    '<Plug>SchleppUp', {unique = true})
+skm('v', '<down>',  '<Plug>SchleppDown', {unique = true})
+skm('v', '<left>',  '<Plug>SchleppLeft', {unique = true})
+skm('v', '<right>', '<Plug>SchleppRight', {unique = true})
 
 -- bs
 vim.cmd([[

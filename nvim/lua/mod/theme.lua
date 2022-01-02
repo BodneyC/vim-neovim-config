@@ -1,16 +1,20 @@
 return {
   icons = {
     diagnostics = {
-      -- error = ' ',
-      -- warning = ' ',
-      -- info = ' ',
-      -- hint = ' ',
-      -- ok = ' ',
-      error = '■',
-      warning = '■',
-      info = '■',
-      hint = '■',
-      ok = '■',
+      glyph = {
+        error = ' ',
+        warning = ' ',
+        info = ' ',
+        hint = ' ',
+        ok = ' ',
+      },
+      sign = {
+        error = '■',
+        warning = '■',
+        info = '■',
+        hint = '■',
+        ok = '■',
+      },
     },
     git = {
       unstaged = '~',

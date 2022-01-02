@@ -187,6 +187,8 @@ return packer.startup({
     }
     use {'tpope/vim-commentary'}
     use {'simnalamburt/vim-mundo'}
+    use {'zirrostig/vim-schlepp'}
+    use {'voldikss/vim-floaterm'}
 
     --- Vim internal wrappers
     use {'BodneyC/At-Zed-vim'}
@@ -205,7 +207,7 @@ return packer.startup({
     use {'vim-utils/vim-all'}
 
     --- Prettiness
-    use {'BodneyC/bolorscheme'}
+    -- use {'BodneyC/bolorscheme'}
 
     use {'KabbAmine/vCoolor.vim'}
     use {'lukas-reineke/indent-blankline.nvim'}
@@ -270,7 +272,7 @@ return packer.startup({
     -- use {'~/Documents/knit-vim'}
     -- use {'~/gitclones/VirkSpaces'}
     -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-    -- use {'~/gitclones/bolorscheme'}
+    use {'~/gitclones/bolorscheme'}
 
   end,
   config = {

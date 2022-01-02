@@ -29,10 +29,10 @@ local icons = require('mod.theme').icons
 
 do
   local signs = {
-    Error = icons.diagnostics.error,
-    Warn = icons.diagnostics.warning,
-    Hint = icons.diagnostics.hint,
-    Info = icons.diagnostics.info,
+    Error = icons.diagnostics.sign.error,
+    Warn = icons.diagnostics.sign.warning,
+    Hint = icons.diagnostics.sign.hint,
+    Info = icons.diagnostics.sign.info,
   }
 
   local t = vim.fn.sign_getdefined('DiagnosticSignWarn')
@@ -50,10 +50,10 @@ end
 
 do
   local signs = {
-    Error = icons.diagnostics.error,
-    Warning = icons.diagnostics.warning,
-    Hint = icons.diagnostics.hint,
-    Information = icons.diagnostics.info,
+    Error = icons.diagnostics.sign.error,
+    Warning = icons.diagnostics.sign.warning,
+    Hint = icons.diagnostics.sign.hint,
+    Information = icons.diagnostics.sign.info,
   }
   local h = vim.fn.sign_getdefined('LspDiagnosticsSignWarn')
   if vim.tbl_isempty(h) then

@@ -272,7 +272,7 @@ function M.init()
   util.command('Rg', [[lua require('mod.telescope').grep(<f-args>)]], {
     nargs = '1',
   })
-  local tele_leader = '<leader>t'
+  local tele_leader = '<leader>T'
   skm('n', tele_leader .. 's', [[<CMD>Telescope git_status<CR>]], flags.ns)
   skm('n', tele_leader .. 'b', [[<CMD>Telescope git_branches<CR>]], flags.ns)
   skm('n', tele_leader .. 'c', [[<CMD>Telescope git_commits<CR>]], flags.ns)

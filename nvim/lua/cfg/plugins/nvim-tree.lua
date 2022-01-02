@@ -69,10 +69,10 @@ require('nvim-tree').setup {
   diagnostics = {
     enable = true,
     icons = {
-      hint = icons.diagnostics.hint,
-      info = icons.diagnostics.info,
-      warning = icons.diagnostics.warning,
-      error = icons.diagnostics.error,
+      hint = icons.diagnostics.sign.hint,
+      info = icons.diagnostics.sign.info,
+      warning = icons.diagnostics.sign.warning,
+      error = icons.diagnostics.sign.error,
     },
   },
   update_focused_file = {
