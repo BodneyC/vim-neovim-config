@@ -221,7 +221,6 @@ return packer.startup({
       'junegunn/limelight.vim',
       cmd = 'Limelight',
     }
-    use {'kyazdani42/nvim-web-devicons'}
     use {
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',

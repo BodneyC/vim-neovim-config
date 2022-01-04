@@ -11,12 +11,16 @@ util.augroup({
     {
       event = 'BufReadPre',
       glob = '*',
-      cmd = [[lua require('mod.functions').handle_large_file()]],
+      lua_fn = require('mod.functions').handle_large_file,
     },
     {
       event = 'FileType,BufEnter',
       glob = '*',
-      cmd = [[lua require('ftplugin')(vim.bo.ft)]],
+      -- cmd = [[lua require('ftplugin')(vim.bo.ft)]],
+      lua_fn = function()
+        require('ftplugin')(vim.bo.ft)
+      end,
+      silent = true,
     },
     {
       event = 'BufLeave',
@@ -63,7 +67,8 @@ util.augroup({
     {
       event = 'TextYankPost',
       glob = '*',
-      cmd = [[silent! lua require('vim.highlight').on_yank()]],
+      lua_fn = require('vim.highlight').on_yank,
+      silent = true,
     },
   },
 })

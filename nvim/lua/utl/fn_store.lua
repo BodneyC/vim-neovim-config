@@ -16,9 +16,13 @@ function M.apply_expr(idx)
   return require('utl.util').replace_termcodes(store[idx]())
 end
 
-function M.store_fn(fn)
-  return string.format([[<CMD>lua require('%s').apply_fn(%s)<CR>]],
-    _MODULE_NAME_, register_fn(fn))
+function M.store_fn_aug(fn)
+  return string.format([[lua require('%s').apply_fn(%s)]], _MODULE_NAME_,
+    register_fn(fn))
+end
+
+function M.store_fn_map(fn)
+  return '<CMD>' .. M.store_fn_aug(fn) .. '<CR>'
 end
 
 function M.store_expr(fn)

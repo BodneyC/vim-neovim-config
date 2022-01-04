@@ -1,5 +1,6 @@
 local util = require('utl.util')
 
+-- Only here so I don't have to PackerCompile while debugging
 require('bolorscheme').setup {
   theme = 'hicontrast',
   light = false,
@@ -81,13 +82,13 @@ util.opt('g', {
   indentLine_fileTypeExclude = {
     'packer',
     'floaterm',
-    'dashboard',
-    'nerdtree',
-    'twiggy',
-    'startify',
     'help',
-    -- 'defx',
     '',
+    -- 'dashboard',
+    -- 'nerdtree',
+    -- 'twiggy',
+    -- 'startify',
+    -- 'defx',
   },
 
   matchup_matchparen_offscreen = {
@@ -128,23 +129,24 @@ util.opt('g', {
 
   virk_close_regexes = {
     '^$',
-    'FAR.*',
     'MERGE MSG',
     'git-.*',
     'COMMIT.*',
-    '.*Plugins.*',
-    '^.defx].*',
     'packer].*',
+    -- 'FAR.*',
+    -- '.*Plugins.*',
+    -- '^.defx].*',
     -- 'NvimTree.*',
   },
   virk_close_by_ft = {
-    -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
     VimspectorPrompt = '',
     NvimTree = [[exe 'NvimTreeOpen']],
-    defx = [[exe 'DefxOpen' | setlocal nobuflisted | wincmd p]],
     Outline = [[exe 'SymbolsOutline' | setlocal nobuflisted | wincmd p]],
     Mundo = 'MundoShow',
+    -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
+    -- defx = [[exe 'DefxOpen' | setlocal nobuflisted | wincmd p]],
   },
+  virk_close_terminals = 1,
 
   vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip',
 
@@ -178,61 +180,27 @@ end
 
 vim.g[string.lower(pane_manager) .. '_navigator_no_mappings'] = 1
 
+-- LuaFormatter off
 local mappings = {
   mode_pairs = {
-    {
-      mode = 'n',
-      cmd = ':',
-    },
-    {
-      mode = 'i',
-      cmd = '<C-o>:',
-    },
-    {
-      mode = 't',
-      cmd = [[<C-\><C-n>:]],
-    },
+    { mode = 'n', cmd = ':', },
+    { mode = 'i', cmd = '<C-o>:', },
+    { mode = 't', cmd = [[<C-\><C-n>:]], },
   },
   dir_pairs = {
-    {
-      key = '<M-k>',
-      txt = 'Up',
-    },
-    {
-      key = '<M-h>',
-      txt = 'Left',
-    },
-    {
-      key = '<M-j>',
-      txt = 'Down',
-    },
-    {
-      key = '<M-l>',
-      txt = 'Right',
-    },
-    {
-      key = [[<M-\>]],
-      txt = 'Previous',
-    },
+    { key = '<M-k>', txt = 'Up', },
+    { key = '<M-h>', txt = 'Left', },
+    { key = '<M-j>', txt = 'Down', },
+    { key = '<M-l>', txt = 'Right', },
+    { key = [[<M-\>]], txt = 'Previous', },
     -- MacOS
-    {
-      key = '˚',
-      txt = 'Up',
-    },
-    {
-      key = '˙',
-      txt = 'Left',
-    },
-    {
-      key = '∆',
-      txt = 'Down',
-    },
-    {
-      key = '¬',
-      txt = 'Right',
-    },
+    { key = '˚', txt = 'Up', },
+    { key = '˙', txt = 'Left', },
+    { key = '∆', txt = 'Down', },
+    { key = '¬', txt = 'Right', },
   },
 }
+-- LuaFormatter on
 
 for _, mode in ipairs(mappings.mode_pairs) do
   for _, dir in ipairs(mappings.dir_pairs) do

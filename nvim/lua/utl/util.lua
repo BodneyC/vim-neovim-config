@@ -74,6 +74,8 @@ function M.go_to_definition()
   end
 end
 
+local fn_store = require('utl.fn_store')
+
 --[[
 util.augroup {
   name = '',
@@ -81,7 +83,9 @@ util.augroup {
     {
       event = '',
       glob = '',
-      cmd = ''
+      cmd = '',                -- or .lua_fn
+      lua_fn = function() end, -- or .cmd
+      silent = true|false,
     }
   },
   nobang = true|false,
@@ -93,7 +97,15 @@ function M.augroup(opts)
     vim.cmd('au!')
   end
   for _, au in ipairs(opts.autocmds or opts.autocommands) do
-    vim.cmd('au ' .. au.event .. ' ' .. au.glob .. ' ' .. au.cmd)
+    local cmd = 'au ' .. au.event .. ' ' .. au.glob .. ' '
+    if au.silent then
+      cmd = cmd .. 'silent! '
+    end
+    if au.cmd then
+      vim.cmd(cmd .. au.cmd)
+    elseif au.lua_fn then
+      vim.cmd(cmd .. fn_store.store_fn_aug(au.lua_fn))
+    end
   end
   vim.cmd('augroup END')
 end
@@ -127,8 +139,12 @@ function M.command(lhs, rhs, opts)
     opts.range and '-range' or '',
     opts.buffer and '-buffer' or '',
     lhs,
-    rhs,
   }
+  if type(rhs) == 'string' then
+    table.insert(parts, rhs)
+  elseif type(rhs) == 'function' then
+    table.insert(parts, fn_store.store_fn_aug(rhs))
+  end
   vim.cmd(table.concat(parts, ' '))
 end
 
@@ -136,19 +152,17 @@ end
 util.commands({
   {
     name = '...',
-    cmd = ':...<CR>',
+    cmd = ':...<CR>',        -- or .lua_fn
+    lua_fn = function() end, -- or .cmd
     opts = {},
   },
 })
 --]]
 function M.commands(cmds)
   for _, cmd in ipairs(cmds) do
-    M.command(cmd.name, cmd.cmd, cmd.opts)
+    M.command(cmd.name, cmd.cmd or cmd.lua_fn, cmd.opts)
   end
 end
-
-vim.cmd(
-  [[cnoreabbrev SortLen ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }']])
 
 function M.toggle_bool_option(scope, opt)
   if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) ==
@@ -183,6 +197,16 @@ function M.resize_window(d)
   vim.cmd(dir .. ' resize ' .. edge .. inc)
 end
 
+function M.run_cmd(cmd, strip)
+  local handle = io.popen(cmd)
+  local result = handle:read('*a')
+  handle:close()
+  if strip then
+    result = result:gsub('^%s*(.-)%s*$', '%1')
+  end
+  return result
+end
+
 function M.basic_os_info()
   local name, arch = '', ''
 
@@ -201,16 +225,6 @@ function M.basic_os_info()
   end
 
   return name, arch
-end
-
-function M.run_cmd(cmd, strip)
-  local handle = io.popen(cmd)
-  local result = handle:read('*a')
-  handle:close()
-  if strip then
-    result = result:gsub('^%s*(.-)%s*$', '%1')
-  end
-  return result
 end
 
 return M
