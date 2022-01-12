@@ -275,41 +275,39 @@ function M.init()
 
   skm('t', '<LeftRelease>', '<Nop>', ns)
 
-  skm('t', 'jj', '<C-\\><C-n>', ns)
-
   util.augroup({
     name = '__TERMINAL__',
     autocmds = {
-      {
-        event = 'TermEnter,TermOpen,BufNew,BufEnter',
-        glob = 'term://*',
-        cmd = [[startinsert]],
-      },
-      {
-        event = 'TermOpen',
-        glob = 'term://*',
-        cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
-      },
+      -- {
+      --   event = 'TermEnter,TermOpen,BufNew,BufEnter',
+      --   glob = 'term://*',
+      --   cmd = [[startinsert]],
+      -- },
+      -- {
+      --   event = 'TermOpen',
+      --   glob = 'term://*',
+      --   cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
+      -- },
       {
         event = 'TermOpen',
         glob = 'term://*',
         cmd = [[set winhighlight=Normal:NvimTreeNormal]],
       },
-      {
-        event = 'TermLeave,BufLeave',
-        glob = 'term://*',
-        cmd = [[stopinsert]],
-      },
+      -- {
+      --   event = 'TermLeave,BufLeave',
+      --   glob = 'term://*',
+      --   cmd = [[stopinsert]],
+      -- },
       {
         event = 'TermOpen,TermEnter',
         glob = '*',
-        cmd = [[setlocal nospell signcolumn=no nobuflisted nonu nornu tw=0 wh=1]],
+        cmd = [[setlocal nospell signcolumn=no nonu nornu nobuflisted ]]--tw=0 wh=1]],
       },
-      {
-        event = 'SessionLoadPost',
-        glob = 'term://*',
-        cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
-      },
+      -- -- {
+      -- --   event = 'SessionLoadPost',
+      -- --   glob = 'term://*',
+      -- --   cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
+      -- -- },
       {
         event = 'TermEnter',
         glob = 'term://*',
