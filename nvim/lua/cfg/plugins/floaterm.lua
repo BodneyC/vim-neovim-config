@@ -1,11 +1,11 @@
 local terminal = require('mod.terminal')
-local fn_store = require('utl.fn_store')
+local store = require('utl.fn_store')
 local flags = require('utl.maps').flags
 local util = require('utl.util')
 
 local skm = vim.api.nvim_set_keymap
 
-skm('n', '<leader>tn', fn_store.store_fn_map(function()
+skm('n', '<leader>tn', store.fn(function()
   terminal.set_terminal_direction()
   local wintype = 'vsplit'
   if vim.g.term_direction == 0 then
@@ -21,7 +21,7 @@ skm('n', '<leader>tn', fn_store.store_fn_map(function()
   vim.cmd(table.concat(parts, ' '))
 end), flags.ns)
 
-skm('t', 'jj', fn_store.store_fn_map(function()
+skm('t', 'jj', store.fn(function()
   util.feedkeys('<C-\\><C-n>', 'n')
   if vim.bo.ft == 'floaterm' then
     vim.cmd([[FloatermToggle]])

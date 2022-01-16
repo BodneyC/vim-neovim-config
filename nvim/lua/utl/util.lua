@@ -74,7 +74,7 @@ function M.go_to_definition()
   end
 end
 
-local fn_store = require('utl.fn_store')
+local store = require('utl.fn_store')
 
 --[[
 util.augroup {
@@ -93,7 +93,7 @@ util.augroup {
 --]]
 function M.augroup(opts)
   vim.cmd('augroup ' .. opts.name)
-  if opts.nobang == true then
+  if opts.nobang == false then
     vim.cmd('au!')
   end
   for _, au in ipairs(opts.autocmds or opts.autocommands) do
@@ -104,7 +104,7 @@ function M.augroup(opts)
     if au.cmd then
       vim.cmd(cmd .. au.cmd)
     elseif au.lua_fn then
-      vim.cmd(cmd .. fn_store.store_fn_aug(au.lua_fn))
+      vim.cmd(cmd .. store.fn_aug(au.lua_fn))
     end
   end
   vim.cmd('augroup END')
@@ -143,7 +143,7 @@ function M.command(lhs, rhs, opts)
   if type(rhs) == 'string' then
     table.insert(parts, rhs)
   elseif type(rhs) == 'function' then
-    table.insert(parts, fn_store.store_fn_aug(rhs))
+    table.insert(parts, store.fn_aug(rhs))
   end
   vim.cmd(table.concat(parts, ' '))
 end

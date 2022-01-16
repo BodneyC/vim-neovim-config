@@ -61,3 +61,38 @@ dap.configurations.javascript = {
     console = 'integratedTerminal',
   },
 }
+dap.configurations.typescript = dap.configurations.javascript
+
+-- dap.adapters.chrome = {
+--   type = 'executable',
+--   command = 'node',
+--   args = {
+--     os.getenv('HOME') .. '/.local/share/nvim/dapinstall/chrome/vscode-chrome-debug/src/chromeDebug.ts',
+--   },
+-- }
+
+-- dap.configurations.javascript = {
+--   {
+--     type = 'chrome',
+--     request = 'attach',
+--     program = '${file}',
+--     cwd = vim.fn.getcwd(),
+--     sourceMaps = true,
+--     protocol = 'inspector',
+--     port = 9222,
+--     webRoot = '${workspaceFolder}',
+--   },
+-- }
+
+-- dap.configurations.typescript = {
+--   {
+--     type = 'chrome',
+--     request = 'attach',
+--     program = '${file}',
+--     cwd = vim.fn.getcwd(),
+--     sourceMaps = true,
+--     protocol = 'inspector',
+--     port = 9222,
+--     webRoot = '${workspaceFolder}',
+--   },
+-- }

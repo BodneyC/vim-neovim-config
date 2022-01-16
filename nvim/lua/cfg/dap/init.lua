@@ -7,25 +7,32 @@ util.safe_require('cfg.dap.signs')
 
 local skm = vim.api.nvim_set_keymap
 
-local dbg_ldr = [[<leader>x]]
+local ldr = [[<leader>x]]
 
+local store = require('utl.fn_store')
 local ns = require('utl.maps').flags.ns
 
--- skm('n', dbg_ldr .. 'r', [[<Cmd>lua require('dap').run()<CR>]], ns)
-skm('n', dbg_ldr .. 'c', [[<CMD>lua require('dap').continue()<CR>]], ns)
-skm('n', dbg_ldr .. 's', [[<Cmd>lua require('dap').step_over()<CR>]], ns)
-skm('n', dbg_ldr .. 'S', [[<Cmd>lua require('dap').step_into()<CR>]], ns)
-skm('n', dbg_ldr .. 'u', [[<Cmd>lua require('dap').step_out()<CR>]], ns)
-skm('n', dbg_ldr .. 'b', [[<Cmd>lua require('dap').toggle_breakpoint()<CR>]], ns)
-skm('n', dbg_ldr .. 'B',
+skm('n', ldr .. 'x', store.fn(require('mod.dap-helper').run_dap), ns)
+
+skm('n', ldr .. 'c', store.fn(require('dap').continue), ns)
+skm('n', ldr .. 's', store.fn(require('dap').step_over), ns)
+skm('n', ldr .. 'S', store.fn(require('dap').step_into), ns)
+skm('n', ldr .. 'u', store.fn(require('dap').step_out), ns)
+skm('n', ldr .. 'b', store.fn(require('dap').toggle_breakpoint), ns)
+skm('n', ldr .. 'B',
   [[<Cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]],
   ns)
-skm('n', dbg_ldr .. 'i', [[:lua require('dap.ui.variables').hover()<CR>]], ns)
-skm('n', dbg_ldr .. 'i', [[:lua require('dap.ui.variables').visual_hover()<CR>]], ns)
-skm('n', dbg_ldr .. '?', [[:lua require('dap.ui.variables').scopes()<CR>]], ns)
-skm('n', dbg_ldr .. 'l', [[<Cmd>lua require('dap').list_breakpoints()<CR>]], ns)
-skm('n', dbg_ldr .. 'r', [[<Cmd>lua require('dap').repl.open()<CR>]], ns)
-skm('n', dbg_ldr .. 'R', [[<Cmd>lua require('dap').repl.run_last()<CR>]], ns)
+skm('n', ldr .. 'l', store.fn(require('dap').list_breakpoints), ns)
+skm('n', ldr .. 'r', store.fn(require('dap').repl.open), ns)
+skm('n', ldr .. 'R', store.fn(require('dap').repl.run_last), ns)
 
-skm('n', dbg_ldr .. 'o', [[<Cmd>lua require('dapui').open()<CR>]], ns)
-skm('n', dbg_ldr .. 'O', [[<Cmd>lua require('dapui').close()<CR>]], ns)
+skm('n', ldr .. 'h', store.fn(require('dap.ui.widgets').hover), ns)
+skm('n', ldr .. 'e', store.fn(require('dap.ui.widgets').expression),
+  ns)
+skm('n', ldr .. '?', store.fn(function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end), ns)
+
+skm('n', ldr .. 'o', store.fn(require('dapui').open), ns)
+skm('n', ldr .. 'O', store.fn(require('dapui').close), ns)

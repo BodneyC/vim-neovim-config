@@ -2,7 +2,7 @@ local util = require('utl.util')
 
 -- Only here so I don't have to PackerCompile while debugging
 require('bolorscheme').setup {
-  theme = 'hicontrast',
+  theme = 'spacegray',
   light = false,
 }
 
@@ -133,6 +133,7 @@ util.opt('g', {
     'git-.*',
     'COMMIT.*',
     'packer].*',
+    'DAP .*',
     -- 'FAR.*',
     -- '.*Plugins.*',
     -- '^.defx].*',

@@ -32,6 +32,7 @@ return packer.startup({
       'hrsh7th/nvim-cmp',
       requires = {
         {'hrsh7th/cmp-path'},
+        {'hrsh7th/cmp-cmdline'},
         {'hrsh7th/cmp-buffer'},
         {'hrsh7th/cmp-nvim-lsp'},
         {'hrsh7th/cmp-nvim-lua'},
@@ -118,6 +119,7 @@ return packer.startup({
     }
 
     --- QOL
+    use {'farmergreg/vim-lastplace'}
     use {
       'folke/which-key.nvim',
       config = function()
@@ -207,7 +209,7 @@ return packer.startup({
     use {'vim-utils/vim-all'}
 
     --- Prettiness
-    -- use {'BodneyC/bolorscheme'}
+    use {'BodneyC/bolorscheme'}
 
     use {'KabbAmine/vCoolor.vim'}
     use {'lukas-reineke/indent-blankline.nvim'}
@@ -271,7 +273,7 @@ return packer.startup({
     -- use {'~/Documents/knit-vim'}
     -- use {'~/gitclones/VirkSpaces'}
     -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-    use {'~/gitclones/bolorscheme'}
+    -- use {'~/gitclones/bolorscheme'}
 
   end,
   config = {

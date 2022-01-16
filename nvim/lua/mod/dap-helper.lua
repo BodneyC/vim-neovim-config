@@ -5,18 +5,19 @@ dap.set_log_level('TRACE')
 local M = {}
 
 local DEFAULT_CONFIGS = {
-  node = {
+  javascript = {
     type = 'node2',
     request = 'attach',
     cwd = vim.fn.getcwd(),
-    -- sourceMaps = true,
+    sourceMaps = true,
     protocol = 'inspector',
     skipFiles = {'<node_internals>/**/*.js'},
   },
 }
+DEFAULT_CONFIGS.typescript = vim.deepcopy(DEFAULT_CONFIGS.javascript)
 
 function M.debug_mocha(prog, file, term)
-  local cfg = vim.deepcopy(DEFAULT_CONFIGS.node)
+  local cfg = vim.deepcopy(DEFAULT_CONFIGS.javascript)
   cfg.request = 'launch'
   cfg.console = 'integratedTerminal'
   cfg.port = 9229
@@ -29,7 +30,7 @@ function M.debug_mocha(prog, file, term)
 end
 
 function M.debug_jest(prog, file, test)
-  local cfg = vim.deepcopy(DEFAULT_CONFIGS.node)
+  local cfg = vim.deepcopy(DEFAULT_CONFIGS.javascript)
   cfg.request = 'launch'
   cfg.console = 'integratedTerminal'
   cfg.port = 9229
@@ -47,7 +48,7 @@ end
 
 -- WIP, Ava doesn't really support this ATM
 function M.debug_ava(prog, file, match)
-  local cfg = vim.deepcopy(DEFAULT_CONFIGS.node)
+  local cfg = vim.deepcopy(DEFAULT_CONFIGS.javascript)
   cfg.request = 'launch'
   cfg.console = 'integratedTerminal'
   cfg.port = 9230
@@ -62,8 +63,14 @@ function M.debug_ava(prog, file, match)
   dap.run(cfg)
 end
 
-function M.debug_node()
-  dap.run(DEFAULT_CONFIGS.node)
+-- Gotta run the file first... e.g.
+--  $ node --inspect-brk {file}
+function M.run_dap()
+  if DEFAULT_CONFIGS[vim.bo.ft] == nil then
+    print('No dap configuration for filetype: ' .. vim.bo.ft)
+    return
+  end
+  dap.run(DEFAULT_CONFIGS[vim.bo.ft])
 end
 
 return M

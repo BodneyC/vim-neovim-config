@@ -33,7 +33,7 @@ util.opt('o', {
   guifont = 'Iosevka Nerd Font:h11',
   hidden = true,
   hls = true,
-  icm = 'split',
+  icm = 'nosplit',
   laststatus = 2,
   matchpairs = vim.o.matchpairs .. ',<:>',
   mouse = 'a',

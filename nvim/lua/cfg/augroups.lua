@@ -3,11 +3,11 @@ local util = require('utl.util')
 util.augroup({
   name = '__CONFIG_GENERAL__',
   autocmds = {
-    {
-      event = 'BufReadPost',
-      glob = '*',
-      cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | end]],
-    },
+    -- {
+    --   event = 'BufReadPost',
+    --   glob = '*',
+    --   cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "silent normal g`\"" | end]],
+    -- },
     {
       event = 'BufReadPre',
       glob = '*',
