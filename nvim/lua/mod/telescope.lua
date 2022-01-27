@@ -243,6 +243,7 @@ function M.init()
       layout_config = {
         prompt_position = 'top',
         horizontal = {
+          prompt_position = 'top',
           width_padding = 0.1,
           height_padding = 0.2,
           preview_width = 0.6,
@@ -254,9 +255,10 @@ function M.init()
       },
       file_ignore_patterns = file_ignore_patterns,
       path_display = {'absolute'},
-      winblend = 15,
-      -- border = {},
+      winblend = 0,
+      border = {},
       -- borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+      borderchars = {'', '', '', '', '', '', '', ''},
       color_devicons = true,
       set_env = {
         ['COLORTERM'] = 'truecolor',

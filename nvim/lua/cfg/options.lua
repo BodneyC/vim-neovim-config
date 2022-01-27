@@ -74,6 +74,6 @@ util.opt('o', {
   nu = true,
   rnu = false,
   signcolumn = 'yes',
-  winblend = 15,
+  winblend = 0,
   wrap = true,
 })

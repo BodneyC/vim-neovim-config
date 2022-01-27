@@ -209,8 +209,8 @@ return packer.startup({
     use {'vim-utils/vim-all'}
 
     --- Prettiness
-    use {'BodneyC/bolorscheme'}
-
+    -- use {'BodneyC/bolorscheme'}
+    use {'sainnhe/everforest'}
     use {'KabbAmine/vCoolor.vim'}
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'amdt/vim-niji'}
@@ -273,7 +273,7 @@ return packer.startup({
     -- use {'~/Documents/knit-vim'}
     -- use {'~/gitclones/VirkSpaces'}
     -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-    -- use {'~/gitclones/bolorscheme'}
+    use {'~/gitclones/bolorscheme'}
 
   end,
   config = {

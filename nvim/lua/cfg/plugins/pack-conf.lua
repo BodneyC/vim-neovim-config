@@ -1,11 +1,5 @@
 local util = require('utl.util')
 
--- Only here so I don't have to PackerCompile while debugging
-require('bolorscheme').setup {
-  theme = 'spacegray',
-  light = false,
-}
-
 util.opt('g', {
   -- floaterm_wintype = 'vsplit',
   floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
