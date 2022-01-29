@@ -1,9 +1,6 @@
 local util = require('utl.util')
 
 util.opt('g', {
-  -- floaterm_wintype = 'vsplit',
-  floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
-  floaterm_autoclose = 1,
 
   -- Relies on this file being loaded after the plugin itself
   __buffer_first_refreshed = false,
@@ -52,6 +49,12 @@ util.opt('g', {
   --   letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
   --   no_name_title = nil,
   -- },
+
+  -- floaterm_wintype = 'vsplit',
+  floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
+  floaterm_autoclose = 1,
+
+  -- gitblame_ft_ignore = {'SymbolsOutline', 'NvimTree'},
 
   gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
   gutentags_modules = {'ctags'},

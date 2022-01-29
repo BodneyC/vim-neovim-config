@@ -3,10 +3,10 @@
 SOFTWARE_DIR="$HOME/software"
 JDTLS_DIR="$SOFTWARE_DIR/eclipse.jdt.ls"
 
-# cd "$SOFTWARE_DIR" || { echo "Couldn't cd $SOFTWARE_DIR" && exit 1; }
-# git clone https://github.com/eclipse/eclipse.jdt.ls.git
-# cd "$JDTLS_DIR" || { echo "Couldn't cd $JDTLS_DIR" && exit 1; }
-# ./mvnw clean verify
+cd "$SOFTWARE_DIR" || { echo "Couldn't cd $SOFTWARE_DIR" && exit 1; }
+git clone https://github.com/eclipse/eclipse.jdt.ls.git
+cd "$JDTLS_DIR" || { echo "Couldn't cd $JDTLS_DIR" && exit 1; }
+./mvnw clean verify
 
 CONFIG_DIR="$HOME/.config/eclipse.jdt.ls"
 mkdir -p "$CONFIG_DIR"

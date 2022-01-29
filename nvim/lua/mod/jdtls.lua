@@ -1,11 +1,10 @@
 local bskm = vim.api.nvim_buf_set_keymap
 local util = require('utl.util')
-
 local jdtls = require('jdtls')
 
 local M = {}
 
-function M.commands() --
+function M.commands()
   util.commands({
     {
       name = 'JdtCompile',
@@ -50,9 +49,9 @@ function M.commands() --
       },
     },
   })
-end --
+end
 
-function M.mappings() --
+function M.mappings()
   bskm(0, 'n', 'ga', [[<Cmd>lua require('jdtls').code_action()<CR>]], {})
   bskm(0, 'v', 'ga', [[<Esc><Cmd>lua require('jdtls').code_action(true)<CR>]],
     {})
@@ -69,12 +68,20 @@ function M.mappings() --
   bskm(0, 'n', '<leader>Dtc', [[<Cmd>lua require('jdtls').test_class()<CR>]], {})
   bskm(0, 'n', '<leader>Dtm',
     [[<Cmd>lua require('jdtls').test_nearest_method()<CR>]], {})
-end --
+end
 
-function M.attach() --
+function M.attach()
   jdtls.start_or_attach({
     cmd = {'jdt.ls.sh'},
-    root_dir = jdtls.setup.find_root({'.git', 'pom.xml'}),
+    root_dir = require('jdtls.setup').find_root({
+      '.git',
+      'pom.xml',
+      'mvnw',
+      'gradlew',
+    }),
+    settings = {
+      java = {},
+    },
     init_options = {
       bundles = {
         vim.fn.glob(
@@ -84,18 +91,20 @@ function M.attach() --
       },
     },
     on_attach = function(client, bufnr)
-      jdtls.setup_dap()
+      jdtls.setup_dap({
+        hotcodereplace = 'auto',
+      })
     end,
   })
-end --
+end
 
-function M.init() --
+function M.init()
   if not jdtls then
     return
   end
   M.attach()
   M.mappings()
   M.commands()
-end --
+end
 
 return M

@@ -9,7 +9,9 @@ local util = require('utl.util')
 util.opt('g', {
   everforest_background = 'medium',
 })
+
 vim.cmd('colo everforest')
+
 do
   local p = vim.fn['everforest#get_palette'](
     vim.fn['everforest#get_configuration']().background)
@@ -40,4 +42,17 @@ do
   hl('TelescopeSelection', nil, p.bg2)
 
   hl('EndOfBuffer', p.bg0, p.bg0)
+
+  hl('SignColumn', nil, p.bg0)
+  hl('RedSign', p.red, p.none)
+  hl('OrangeSign', p.orange, p.none)
+  hl('YellowSign', p.yellow, p.none)
+  hl('GreenSign', p.green, p.none)
+  hl('AquaSign', p.aqua, p.none)
+  hl('BlueSign', p.blue, p.none)
+  hl('PurpleSign', p.purple, p.none)
+
+  hl('NvimTreeNormal', nil, p.bg1)
+  hl('NvimTreeCursorLine', nil, p.bg0)
+  hl('NvimTreeEndOfBuffer', nil, p.bg1)
 end

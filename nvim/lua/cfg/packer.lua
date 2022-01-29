@@ -247,7 +247,10 @@ return packer.startup({
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
     }
-    use {'f-person/git-blame.nvim'}
+    use {
+      'bodneyc/git-blame.nvim',
+      branch = 'feat/ignore-by-ft',
+    }
     use {
       'gregsexton/gitv',
       cmd = 'Gitv',
@@ -278,6 +281,7 @@ return packer.startup({
     -- use {'~/gitclones/VirkSpaces'}
     -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
     -- use {'~/gitclones/bolorscheme'}
+    -- use {'~/gitclones/git-blame.nvim'}
 
   end,
   config = {
