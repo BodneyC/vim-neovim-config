@@ -147,7 +147,11 @@ return packer.startup({
         }
       end,
     }
-    use {'simrat39/symbols-outline.nvim'}
+
+    -- Pending: https://github.com/simrat39/symbols-outline.nvim/pull/97
+    -- use {'zeertzjq/symbols-outline.nvim'}
+    -- use {'simrat39/symbols-outline.nvim'}
+
     use {'bronson/vim-visual-star-search'}
     use {'dominikduda/vim_current_word'}
     use {'honza/vim-snippets'}
@@ -209,7 +213,7 @@ return packer.startup({
     use {'vim-utils/vim-all'}
 
     --- Prettiness
-    -- use {'BodneyC/bolorscheme'}
+    use {'BodneyC/bolorscheme'}
     use {'sainnhe/everforest'}
     use {'KabbAmine/vCoolor.vim'}
     use {'lukas-reineke/indent-blankline.nvim'}
@@ -273,7 +277,7 @@ return packer.startup({
     -- use {'~/Documents/knit-vim'}
     -- use {'~/gitclones/VirkSpaces'}
     -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
-    use {'~/gitclones/bolorscheme'}
+    -- use {'~/gitclones/bolorscheme'}
 
   end,
   config = {

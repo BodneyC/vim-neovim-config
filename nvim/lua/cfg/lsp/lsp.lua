@@ -377,7 +377,7 @@ lspconfig.diagnosticls.setup {
   },
 }
 
-require('symbols-outline').setup({
-  highlight_hover_item = true,
-  show_guides = true,
-})
+-- require('symbols-outline').setup({
+--   highlight_hover_item = true,
+--   show_guides = true,
+-- })

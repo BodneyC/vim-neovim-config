@@ -6,14 +6,50 @@ local jdtls = require('jdtls')
 local M = {}
 
 function M.commands() --
-  util.command('JdtCompile', [[lua require('jdtls').compile()]], {buffer = true})
-  util.command('JdtUpdateConfig',
-    [[lua require('jdtls').update_project_config()]], {buffer = true})
-  util.command('JdtJol', [[lua require('jdtls').jol()]], {buffer = true})
-  util.command('JdtBytecode', [[lua require('jdtls').javap()]], {buffer = true})
-  util.command('JdtJshell', [[lua require('jdtls').jshell()]], {buffer = true})
-  util.command('JdtOrganizeImports',
-    [[<Cmd>lua require('jdtls').organize_imports()<CR>]], {buffer = true})
+  util.commands({
+    {
+      name = 'JdtCompile',
+      command = [[lua require('jdtls').compile()]],
+      opts = {
+        buffer = true,
+      },
+    },
+    {
+      name = 'JdtUpdateConfig',
+      command = [[lua require('jdtls').update_project_config()]],
+      opts = {
+        buffer = true,
+      },
+    },
+    {
+      name = 'JdtJol',
+      command = [[lua require('jdtls').jol()]],
+      opts = {
+        buffer = true,
+      },
+    },
+    {
+      name = 'JdtBytecode',
+      command = [[lua require('jdtls').javap()]],
+      opts = {
+        buffer = true,
+      },
+    },
+    {
+      name = 'JdtJshell',
+      command = [[lua require('jdtls').jshell()]],
+      opts = {
+        buffer = true,
+      },
+    },
+    {
+      name = 'JdtOrganizeImports',
+      command = [[<Cmd>lua require('jdtls').organize_imports()<CR>]],
+      opts = {
+        buffer = true,
+      },
+    },
+  })
 end --
 
 function M.mappings() --

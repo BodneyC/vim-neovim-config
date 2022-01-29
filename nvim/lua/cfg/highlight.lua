@@ -38,4 +38,6 @@ do
   hl('TelescopeResultsTitle', p.bg1, p.bg1)
 
   hl('TelescopeSelection', nil, p.bg2)
+
+  hl('EndOfBuffer', p.bg0, p.bg0)
 end

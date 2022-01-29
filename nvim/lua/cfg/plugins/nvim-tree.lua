@@ -14,6 +14,24 @@ vim.api.nvim_set_keymap('n', '<Leader>D',
 
 local icons = require('mod.theme').icons
 
+util.augroup({
+  name = '__NVIM_TREE__',
+  autocommands = {
+    {
+      event = 'VimResized',
+      glob = '*',
+      lua_fn = function()
+        if require('nvim-tree.view').win_open() then
+          require('mod.nvim-tree').resize {
+            refocus = true,
+          }
+        end
+      end,
+      silent = true,
+    },
+  },
+})
+
 util.opt('g', {
   nvim_tree_icons = {
     default = '',

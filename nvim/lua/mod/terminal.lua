@@ -154,7 +154,7 @@ function M.floating_centred(...)
     width = width,
     height = height,
     style = 'minimal',
-    border = 'rounded',
+    border = 'solid',
   }
   local cur_float_win = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_open_win(cur_float_win, true, opts)
@@ -169,17 +169,23 @@ end
 
 function M.floating_term(...)
   local args = {...}
-  bskm(M.floating_centred(), 'n', '<Esc>', ':bw!<CR>', {})
+  local bufnr = M.floating_centred()
+  bskm(bufnr, 'n', '<Esc>', ':bw!<CR>', {})
   vim.fn.termopen(args[1] or os.getenv('SHELL'), {
-    on_exit = on_term_exit,
+    on_exit = function(job_id, code, event)
+      on_term_exit(job_id, code, event)
+      if args[2] then
+        vim.cmd(args[2] .. 'wincmd w')
+      end
+    end,
   })
 end
 
 function M.floating_man(...)
   local args = {...}
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
-  M.floating_term('man ' .. table.concat(args, ' '))
-  vim.cmd(winid .. 'wincmd w')
+  M.floating_term('man ' .. table.concat(args, ' '), winid)
+  vim.cmd([[startinsert]])
 end
 
 function M.floating_help(...)
@@ -232,45 +238,63 @@ function M.init()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
 
   local ns = require('utl.maps').flags.ns
-  local mod_terminal = 'lua require\'mod.terminal\''
+  local m_term = 'lua require\'mod.terminal\''
 
   -- `table.unpack` not in 5.1, use `unpack`
-  util.command('SetTerminalDirection',
-    mod_terminal .. '.set_terminal_direction(<f-args>)', {
-      nargs = '?',
-    })
+  util.commands({
+    {
+      name = 'SetTerminalDirection',
+      cmd = m_term .. '.set_terminal_direction(<f-args>)',
+      opts = {
+        nargs = '?',
+      },
+    },
+    {
+      name = 'TermSplit',
+      cmd = m_term .. '.term_split(<bang>0)',
+      opts = {
+        bang = true,
+      },
+    },
+    {
+      name = 'M',
+      cmd = m_term .. '.floating_man(<f-args>)',
+      opts = {
+        nargs = '+',
+        complete = 'shellcmd',
+      },
+    },
+    {
+      name = 'H',
+      cmd = m_term .. '.floating_help(<f-args>)',
+      opts = {
+        nargs = '?',
+        complete = 'help',
+      },
+    },
+    {
+      name = 'Help',
+      cmd = m_term .. '.floating_help(<f-args>)',
+      opts = {
+        nargs = '?',
+        complete = 'help',
+      },
+    },
+  })
 
-  util.command('TermSplit', mod_terminal .. '.term_split(<bang>0)', {
-    bang = true,
-  })
-  util.command('M', mod_terminal .. '.floating_man(<f-args>)', {
-    nargs = '+',
-    complete = 'shellcmd',
-  })
-  util.command('H', mod_terminal .. '.floating_help(<f-args>)', {
-    nargs = '?',
-    complete = 'help',
-  })
-  util.command('Help', mod_terminal .. '.floating_help(<f-args>)', {
-    nargs = '?',
-    complete = 'help',
-  })
-
-  skm('n', '<Leader>\'', ':' .. mod_terminal .. '.next_term_split(false)<CR>',
-    ns)
+  skm('n', '<Leader>\'', ':' .. m_term .. '.next_term_split(false)<CR>', ns)
 
   skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {
     expr = true,
     unpack(ns),
   })
 
-  -- skm('n', '<C-S-q>', ':' .. mod_terminal .. '.term_split(true)<CR>', ns)
-  -- skm('i', '<C-S-q>', '<C-o>:' .. mod_terminal .. '.term_split(true)<CR>', ns)
-  -- skm('t', '<C-S-q>', '<C-\\><C-n>:' .. mod_terminal .. '.term_split(true)<CR>',
-  --   ns)
+  -- skm('n', '<C-S-q>', ':' .. m_term .. '.term_split(true)<CR>', ns)
+  -- skm('i', '<C-S-q>', '<C-o>:' .. m_term .. '.term_split(true)<CR>', ns)
+  -- skm('t', '<C-S-q>', '<C-\\><C-n>:' .. m_term .. '.term_split(true)<CR>', ns)
 
-  -- skm('i', '<C-q>', '<C-o>:' .. mod_terminal .. '.term_split(false)<CR>', ns)
-  -- skm('n', '<C-q>', ':' .. mod_terminal .. '.term_split(false)<CR>', ns)
+  -- skm('i', '<C-q>', '<C-o>:' .. m_term .. '.term_split(false)<CR>', ns)
+  -- skm('n', '<C-q>', ':' .. m_term .. '.term_split(false)<CR>', ns)
   -- skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', ns)
 
   skm('t', '<LeftRelease>', '<Nop>', ns)
@@ -278,6 +302,22 @@ function M.init()
   util.augroup({
     name = '__TERMINAL__',
     autocmds = {
+      {
+        event = 'TermOpen',
+        glob = 'term://*',
+        cmd = [[set winhighlight=Normal:NvimTreeNormal]],
+      },
+      {
+        event = 'TermOpen,TermEnter',
+        glob = '*',
+        cmd = [[setlocal nospell signcolumn=no nonu nornu nobuflisted ]], -- tw=0 wh=1]],
+      },
+      {
+        event = 'TermEnter',
+        glob = 'term://*',
+        cmd = [[if winnr('$') == 1 | q | endif]],
+      },
+      --- Ignored for floaterm
       -- {
       --   event = 'TermEnter,TermOpen,BufNew,BufEnter',
       --   glob = 'term://*',
@@ -288,31 +328,16 @@ function M.init()
       --   glob = 'term://*',
       --   cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
       -- },
-      {
-        event = 'TermOpen',
-        glob = 'term://*',
-        cmd = [[set winhighlight=Normal:NvimTreeNormal]],
-      },
       -- {
       --   event = 'TermLeave,BufLeave',
       --   glob = 'term://*',
       --   cmd = [[stopinsert]],
       -- },
-      {
-        event = 'TermOpen,TermEnter',
-        glob = '*',
-        cmd = [[setlocal nospell signcolumn=no nonu nornu nobuflisted ]]--tw=0 wh=1]],
-      },
-      -- -- {
-      -- --   event = 'SessionLoadPost',
-      -- --   glob = 'term://*',
-      -- --   cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
-      -- -- },
-      {
-        event = 'TermEnter',
-        glob = 'term://*',
-        cmd = [[if winnr('$') == 1 | q | endif]],
-      },
+      -- {
+      --   event = 'SessionLoadPost',
+      --   glob = 'term://*',
+      --   cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
+      -- },
     },
   })
 end

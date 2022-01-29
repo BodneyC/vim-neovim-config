@@ -6,14 +6,14 @@ cd "$HOME/gitclones" || exit
 ! test -d neovim && git clone https://github.com/neovim/neovim.git
 cd neovim || exit
 
-# git checkout master
-# git pull
+git checkout master
+git pull
 
-# # For 0.6+
-# git fetch --tags --all -f
-# git checkout tags/nightly
+# For 0.6+
+git fetch --tags --all -f
+git checkout tags/nightly
 
-# For 0.5
+# # For 0.5
 # git checkout origin/release-0.5
 
 unset LUA_PATH LUA_CPATH

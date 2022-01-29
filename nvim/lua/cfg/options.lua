@@ -63,7 +63,7 @@ util.opt('o', {
   undolevels = 10000,
   undoreload = 10000,
   updatetime = 250,
-  wildmode = 'longest,full',
+  wildmode = 'longest:full,full',
   breakindent = true,
   breakindentopt = 'shift:3',
   cul = true,
