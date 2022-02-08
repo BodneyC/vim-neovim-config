@@ -247,10 +247,7 @@ return packer.startup({
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
     }
-    use {
-      'bodneyc/git-blame.nvim',
-      branch = 'feat/ignore-by-ft',
-    }
+    use {'f-person/git-blame.nvim'}
     use {
       'gregsexton/gitv',
       cmd = 'Gitv',
@@ -277,10 +274,12 @@ return packer.startup({
     use {'plasticboy/vim-markdown'}
 
     --- Local
-    -- use {'~/Documents/knit-vim'}
+    ---- Mine
     -- use {'~/gitclones/VirkSpaces'}
-    -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
     -- use {'~/gitclones/bolorscheme'}
+    -- use {'~/Documents/knit-vim'}
+    ---- Others
+    -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
     -- use {'~/gitclones/git-blame.nvim'}
 
   end,

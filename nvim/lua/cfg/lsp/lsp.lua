@@ -1,4 +1,5 @@
 local util = require('utl.util')
+local fn_store = require('utl.fn_store')
 
 local lspconfig = require('lspconfig')
 -- local configs = require('lspconfig/configs')
@@ -54,10 +55,8 @@ completionItem.resolveSupport = {
 }
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- setup
 local function on_attach(client, bufnr)
 
-  -- mappings
   local ns = require('utl.maps').flags.ns
 
   local function bskm(...)
@@ -86,7 +85,12 @@ local function on_attach(client, bufnr)
   bskm('n', [[\s]], '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
   bskm('n', [[\q]], '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
   bskm('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', ns)
-  bskm('n', [[\a]], '<CMD>Lspsaga code_action<CR>', ns)
+  bskm('n', [[\a]], fn_store.fn(function()
+    local ok = pcall(require'lspsaga.command'.load_command, 'code_action')
+    if not ok then
+      vim.lsp.buf.code_action()
+    end
+  end, 'code action'), ns)
   bskm('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', ns)
   bskm('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>', ns)
   bskm('n', [[\r]], '<CMD>Lspsaga rename<CR>', ns)

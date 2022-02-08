@@ -27,12 +27,33 @@ skm('n', ldr .. 'r', store.fn(require('dap').repl.open), ns)
 skm('n', ldr .. 'R', store.fn(require('dap').repl.run_last), ns)
 
 skm('n', ldr .. 'h', store.fn(require('dap.ui.widgets').hover), ns)
-skm('n', ldr .. 'e', store.fn(require('dap.ui.widgets').expression),
-  ns)
+skm('n', ldr .. 'e', store.fn(require('dap.ui.widgets').expression), ns)
 skm('n', ldr .. '?', store.fn(function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
-end), ns)
+end, 'dap-ui-widgets'), ns)
 
-skm('n', ldr .. 'o', store.fn(require('dapui').open), ns)
-skm('n', ldr .. 'O', store.fn(require('dapui').close), ns)
+skm('n', ldr .. 'o', store.fn(require('dapui').open, 'dapui-open'), ns)
+skm('n', ldr .. 'O', store.fn(require('dapui').close, 'dapui-close'), ns)
+
+require('which-key').register({
+  x = {
+    x = 'Dap run',
+    c = 'Dap continue',
+    s = 'Dap step over',
+    S = 'Dap step into',
+    u = 'Dap step out',
+    b = 'Dap toggle breakpoint',
+    B = 'Dap set breakpoint',
+    l = 'Dap list breakpoints',
+    r = 'Dap repl open',
+    R = 'Dap repl run last',
+    h = 'Dap hover',
+    e = 'Dap expr',
+    ['?'] = 'Dap scopes',
+    o = 'DapUI open',
+    O = 'DapUI close',
+  },
+}, {
+  prefix = '<leader>',
+})

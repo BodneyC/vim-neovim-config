@@ -19,14 +19,14 @@ skm('n', '<leader>tn', store.fn(function()
     '--autoclose=2',
   }
   vim.cmd(table.concat(parts, ' '))
-end), flags.ns)
+end, 'new-terminal'), flags.ns)
 
 skm('t', 'jj', store.fn(function()
   util.feedkeys('<C-\\><C-n>', 'n')
   if vim.bo.ft == 'floaterm' then
     vim.cmd([[FloatermToggle]])
   end
-end), flags.ns)
+end, 'jj-escape'), flags.ns)
 
 skm('n', '<leader>tf', '<CMD>FloatermNew --wintype=float --autoclose=2<CR>',
   flags.ns)

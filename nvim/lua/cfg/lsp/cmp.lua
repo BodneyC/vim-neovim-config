@@ -54,7 +54,7 @@ cmp.setup({
 
   formatting = {
     format = require('lspkind').cmp_format({
-      with_text = false,
+      mode = 'symbol',
       preset = 'default',
       symbol_map = require('mod.theme').icons.lspkind,
     }),
