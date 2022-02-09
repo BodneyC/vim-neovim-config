@@ -6,9 +6,6 @@ local nvim_tree = require('nvim-tree')
 
 M.min_width = 30
 
---[[
-
---]]
 function M.system(cmd, opts)
   if view.is_help_ui() then
     return
@@ -43,9 +40,9 @@ function M.system_cb(cmd, opts)
 end
 
 function M.resize(opts)
-  local cur_win = -1
+  local cur_buf = -1
   if vim.bo.ft ~= 'NvimTree' then
-    cur_win = vim.fn.bufwinnr(vim.fn.bufnr())
+    cur_buf = vim.fn.bufnr()
     nvim_tree.focus()
   end
   local cur_width = vim.fn.winwidth('.')
@@ -62,8 +59,8 @@ function M.resize(opts)
     nvim_tree.resize(width)
     print('NvimTree resized (' .. width .. ')')
   end
-  if opts.refocus and cur_win ~= -1 then
-    vim.cmd(cur_win .. 'wincmd w')
+  if opts.refocus and cur_buf ~= -1 then
+    vim.cmd(vim.fn.bufwinnr(cur_buf) .. 'wincmd w')
   end
 end
 

@@ -54,7 +54,7 @@ util.opt('g', {
   floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
   floaterm_autoclose = 1,
 
-  -- gitblame_ft_ignore = {'SymbolsOutline', 'NvimTree'},
+  gitblame_ignored_filetypes = {'SymbolsOutline', 'NvimTree'},
 
   gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
   gutentags_modules = {'ctags'},
@@ -133,16 +133,14 @@ util.opt('g', {
     'DAP .*',
     -- 'FAR.*',
     -- '.*Plugins.*',
-    -- '^.defx].*',
     -- 'NvimTree.*',
   },
   virk_close_by_ft = {
     VimspectorPrompt = '',
-    NvimTree = [[exe 'NvimTreeOpen']],
+    NvimTree = [[lua vim.defer_fn(function() ]] ..
+      [[require('mod.nvim-tree').resize { refocus = true } end, 0)]],
     Outline = [[exe 'SymbolsOutline' | setlocal nobuflisted | wincmd p]],
     Mundo = 'MundoShow',
-    -- ["coc-explorer"] = "CocCommand explorer --no-focus --toggle " .. vim.fn.getcwd(),
-    -- defx = [[exe 'DefxOpen' | setlocal nobuflisted | wincmd p]],
   },
   virk_close_terminals = 1,
 
