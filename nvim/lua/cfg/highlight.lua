@@ -16,13 +16,16 @@ do
   local p = vim.fn['everforest#get_palette'](
     vim.fn['everforest#get_configuration']().background)
 
-  local function hl(name, fg, bg)
+  local function hl(name, fg, bg, opts)
     local cmd = 'hi! ' .. name
     if fg then
       cmd = cmd .. ' guifg=' .. fg[1]
     end
     if bg then
       cmd = cmd .. ' guibg=' .. bg[1]
+    end
+    if opts then
+      cmd = cmd .. ' gui=' .. table.concat(opts, ',')
     end
     vim.cmd(cmd)
   end
@@ -55,4 +58,11 @@ do
   hl('NvimTreeNormal', nil, p.bg1)
   hl('NvimTreeCursorLine', nil, p.bg0)
   hl('NvimTreeEndOfBuffer', nil, p.bg1)
+
+  hl('gitblame', p.grey1, p.bg1, {'italic'})
+
+  -- hl('VirtualTextInfo', nil, p.bg1)
+  -- hl('VirtualTextHint', nil, p.bg1)
+  -- hl('VirtualTextError', nil, p.bg1)
+  -- hl('VirtualTextWarning', nil, p.bg1)
 end
