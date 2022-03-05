@@ -115,7 +115,7 @@ end
 -- end
 
 local function call_if_fn_exists(fn)
-  if vim.fn.exists(':' .. fn) then
+  if vim.fn.exists(':' .. fn) == 1 then
     vim.cmd(fn)
   end
 end
@@ -128,10 +128,14 @@ function M.handle_large_file()
     vim.o.wrap = false
     vim.o.completeopt = ''
     vim.o.swapfile = false
-    vim.o.eventignore = vim.o.eventignore .. ',FileType'
-    vim.wo.undolevels = -1
+    if #vim.o.eventignore > 0 then
+      vim.o.eventignore = vim.o.eventignore .. ',FileType'
+    else
+      vim.o.eventignore = 'FileType'
+    end
+    vim.o.undolevels = -1
     vim.wo.signcolumn = 'no'
-    vim.bo.bufhidden = true
+    vim.bo.bufhidden = 'wipe'
     vim.bo.buftype = 'nowrite'
     vim.bo.syntax = 'off'
     call_if_fn_exists('TSBufDisable')

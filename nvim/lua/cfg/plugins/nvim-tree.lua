@@ -21,13 +21,13 @@ util.augroup({
       event = 'VimResized',
       glob = '*',
       lua_fn = function()
-        if require('nvim-tree.view').win_open() then
+        if require('nvim-tree.view').is_visible() then
           require('mod.nvim-tree').resize {
             refocus = true,
           }
         end
       end,
-      silent = true,
+      silent = false,
     },
   },
 })
@@ -55,10 +55,6 @@ util.opt('g', {
       symlink = '',
       symlink_open = '',
     },
-  },
-  nvim_tree_window_picker_exclude = {
-    filetype = {'notify', 'packer', 'qf', 'Outline'},
-    buftype = {'terminal'},
   },
   nvim_tree_show_icons = {
     git = 1,
@@ -101,6 +97,32 @@ require('nvim-tree').setup {
   system_open = {
     cmd = nil,
     args = {},
+  },
+  actions = {
+    change_dir = {
+      enable = true,
+      global = false,
+    },
+    open_file = {
+      quit_on_open = false,
+      resize_window = false,
+      window_picker = {
+        enable = true,
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+        exclude = {
+          filetype = {
+            'notify',
+            'packer',
+            'qf',
+            'diff',
+            'fugitive',
+            'fugitiveblame',
+            'Outline',
+          },
+          buftype = {'nofile', 'terminal', 'help'},
+        },
+      },
+    },
   },
   view = {
     width = require('mod.nvim-tree').min_width,

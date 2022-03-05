@@ -231,7 +231,7 @@ function M.init()
           ['<C-k>'] = actions.hist_f('next'),
           ['<CR>'] = actions.append_to_hist,
           ['<C-w>'] = function()
-            vim.cmd [[normal! bcw]]
+            vim.cmd [[normal! db]]
           end,
         },
       },

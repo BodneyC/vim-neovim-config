@@ -186,7 +186,7 @@ return packer.startup({
       end,
     }
     use {'ludovicchabant/vim-gutentags'}
-    use {'lukas-reineke/format.nvim'}
+    use {'mhartington/formatter.nvim'}
     use {'machakann/vim-swap'}
     use {
       'rhysd/vim-grammarous',
