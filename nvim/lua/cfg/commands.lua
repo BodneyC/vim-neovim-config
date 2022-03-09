@@ -1,7 +1,7 @@
 local util = require('utl.util')
 
 vim.cmd([[
-  cabbrev PC PackerClean
+  cabbrev PC PackerCompile
   cabbrev PI PackerInstall
   cabbrev PS PackerSync
   cabbrev PU PackerUpdate

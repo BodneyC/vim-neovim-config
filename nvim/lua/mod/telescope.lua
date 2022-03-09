@@ -287,6 +287,7 @@ function M.init()
   skm('n', tele_leader .. 'a', [[<CMD>Telescope lsp_code_actions<CR>]], flags.ns)
   skm('n', tele_leader .. 'M', [[<CMD>Telescope marks<CR>]], flags.ns)
 
+  skm('n', '<leader>s', [[<CMD>lua require('session-lens').search_session()<CR>]], flags.ns)
   skm('n', '<leader>r',
     [[<CMD>lua require('mod.telescope').grep_string_filtered ]] ..
       [[ { search = '', disable_coordinates = true, path_display = {'tail'}, }<CR>]],

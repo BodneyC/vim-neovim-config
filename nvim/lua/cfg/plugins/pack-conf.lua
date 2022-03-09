@@ -74,20 +74,6 @@ util.opt('g', {
     '--fields=+ailmnS',
   },
 
-  indentLine_char = '│',
-  indentLine_first_char = '│',
-  indentLine_fileTypeExclude = {
-    'packer',
-    'floaterm',
-    'help',
-    '',
-    -- 'dashboard',
-    -- 'nerdtree',
-    -- 'twiggy',
-    -- 'startify',
-    -- 'defx',
-  },
-
   matchup_matchparen_offscreen = {
     method = 'popup',
   },

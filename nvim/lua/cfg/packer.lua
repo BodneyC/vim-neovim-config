@@ -1,5 +1,7 @@
+local util = require('utl.util')
+
 --- Impatient
-require('utl.util').safe_require('impatient')
+util.safe_require('impatient')
 
 --- Packer
 
@@ -12,7 +14,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 vim.cmd('packadd packer.nvim')
-require('packer_compiled')
+util.safe_require('packer_compiled')
 
 local packer = require('packer')
 
@@ -42,6 +44,13 @@ return packer.startup({
       },
     }
     use {'mfussenegger/nvim-jdtls'}
+    use {
+      'narutoxy/dim.lua',
+      requires = {'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter'},
+      config = function()
+        require('dim').setup()
+      end,
+    }
     use {'neovim/nvim-lspconfig'}
     use {'nvim-lua/lsp-status.nvim'}
     use {
@@ -59,6 +68,7 @@ return packer.startup({
       },
     }
     use {'onsails/lspkind-nvim'}
+    use {'simrat39/symbols-outline.nvim'}
 
     --- DAP
     use {'mfussenegger/nvim-dap'}
@@ -106,6 +116,17 @@ return packer.startup({
     use {'JoosepAlviste/nvim-ts-context-commentstring'}
     use {'vigoux/treesitter-context.nvim'}
     use {'RRethy/nvim-treesitter-textsubjects'}
+    use {
+      'RRethy/nvim-treesitter-endwise',
+      config = function()
+        require('nvim-treesitter.configs').setup {
+          endwise = {
+            enable = true,
+          },
+        }
+      end,
+    }
+
     use {
       'p00f/nvim-ts-rainbow',
       config = function()
@@ -217,7 +238,31 @@ return packer.startup({
     use {'BodneyC/bolorscheme'}
     use {'sainnhe/everforest'}
     use {'KabbAmine/vCoolor.vim'}
-    use {'lukas-reineke/indent-blankline.nvim'}
+    use {
+      'lukas-reineke/indent-blankline.nvim',
+      config = function()
+        -- vim.opt.list = true
+        -- vim.opt.listchars:append('eol:↩')
+        require('indent_blankline').setup {
+          char = '│',
+          show_first_indent_level = true,
+          -- show_end_of_line = true,
+          filetype_exclude = {
+            'packer',
+            'floaterm',
+            'help',
+            'Outline',
+            '',
+            -- 'dashboard',
+            -- 'nerdtree',
+            -- 'twiggy',
+            -- 'startify',
+            -- 'defx',
+          },
+
+        }
+      end,
+    }
     use {'amdt/vim-niji'}
     use {'dstein64/nvim-scrollview'}
     use {
@@ -242,7 +287,27 @@ return packer.startup({
     use {'wellle/visual-split.vim'}
 
     --- SDL
-    use {'BodneyC/VirkSpaces'}
+    use {
+      'rmagatti/auto-session',
+      config = function()
+        require('auto-session').setup {
+          log_level = 'warn',
+          auto_session_suppress_dirs = {'~/'},
+        }
+      end,
+    }
+    use {
+      'rmagatti/session-lens',
+      requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+      config = function()
+        require('session-lens').setup({
+          theme_conf = {
+            border = false,
+          },
+        })
+      end,
+    }
+    -- use {'BodneyC/VirkSpaces'}
     use {'kyazdani42/nvim-tree.lua'}
     use {
       'lewis6991/gitsigns.nvim',
