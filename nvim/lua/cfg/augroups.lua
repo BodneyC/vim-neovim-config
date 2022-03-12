@@ -1,74 +1,68 @@
-local util = require('utl.util')
+do
+  local group = vim.api.nvim_create_augroup('__CONFIG_GENERAL__', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd('BufReadPre', {
+    group = group,
+    pattern = '*',
+    callback = require('mod.functions').handle_large_file,
+  })
+  -- vim.api.nvim_create_autocmd({'FileType', 'BufEnter'}, {
+  --   group = group,
+  --   pattern = '*',
+  --   callback = function()
+  --     require('ftplugin')(vim.bo.ft)
+  --   end,
+  -- })
+  vim.api.nvim_create_autocmd('BufLeave', {
+    group = group,
+    pattern = '*',
+    command = [[if &readonly == 0 && filereadable(bufname('%')) | silent! update | endif]],
+  })
+  -- vim.api.nvim_create_autocmd('BufReadPost', {
+  --   pattern = '*',
+  --   command = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "silent normal g`\"" | end]],
+  -- })
+end
 
-util.augroup({
-  name = '__CONFIG_GENERAL__',
-  autocmds = {
-    -- {
-    --   event = 'BufReadPost',
-    --   glob = '*',
-    --   cmd = [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "silent normal g`\"" | end]],
-    -- },
-    {
-      event = 'BufReadPre',
-      glob = '*',
-      lua_fn = require('mod.functions').handle_large_file,
-    },
-    {
-      event = 'FileType,BufEnter',
-      glob = '*',
-      -- cmd = [[lua require('ftplugin')(vim.bo.ft)]],
-      lua_fn = function()
-        require('ftplugin')(vim.bo.ft)
-      end,
-      silent = true,
-    },
-    {
-      event = 'BufLeave',
-      glob = '*',
-      cmd = [[if &readonly == 0 && filereadable(bufname('%')) | silent! update | endif]],
-    },
-  },
-})
+do
+  local group = vim.api.nvim_create_augroup('__EXT_ASSOCS__', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = group,
+    pattern = {'*.MD', '*.md'},
+    command = [[setf markdown]],
+  })
+  vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = group,
+    pattern = '*.rasi',
+    command = [[setf css]],
+  })
+  vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = group,
+    pattern = 'Dockerfile*',
+    command = [[setf dockerfile]],
+  })
+  vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = group,
+    pattern = 'Jenkinsfile*',
+    command = [[set ft=groovy et ts=4 sw=4]],
+  })
+  vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = group,
+    pattern = '*.xml',
+    command = [[set ft=xml et ts=4 sw=4]],
+  })
+end
 
-util.augroup({
-  name = '__EXT_ASSOCS__',
-  autocmds = {
-    {
-      event = 'BufRead,BufNewFile',
-      glob = '*.MD,*.md',
-      cmd = [[setf markdown]],
-    },
-    {
-      event = 'BufRead,BufNewFile',
-      glob = '*.rasi',
-      cmd = [[setf css]],
-    },
-    {
-      event = 'BufRead,BufNewFile',
-      glob = 'Dockerfile*',
-      cmd = [[setf dockerfile]],
-    },
-    {
-      event = 'BufRead,BufNewFile',
-      glob = 'Jenkinsfile*',
-      cmd = [[set ft=groovy et ts=4 sw=4]],
-    },
-    {
-      event = 'BufRead,BufNewFile',
-      glob = '*.xml',
-      cmd = [[set ft=xml et ts=4 sw=4]],
-    },
-  },
-})
-
-util.augroup({
-  name = '__HIGHLIGHT__',
-  autocmds = {
-    {
-      event = 'TextYankPost',
-      glob = '*',
-      lua_fn = require('vim.highlight').on_yank,
-      silent = true,
-    },
-  },
-})
+do
+  local group = vim.api.nvim_create_augroup('__HIGHLIGHT__', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    group = group,
+    pattern = '*',
+    callback = require('vim.highlight').on_yank,
+  })
+end

@@ -299,47 +299,47 @@ function M.init()
 
   skm('t', '<LeftRelease>', '<Nop>', ns)
 
-  util.augroup({
-    name = '__TERMINAL__',
-    autocmds = {
-      {
-        event = 'TermOpen',
-        glob = 'term://*',
-        cmd = [[set winhighlight=Normal:NvimTreeNormal]],
-      },
-      {
-        event = 'TermOpen,TermEnter',
-        glob = '*',
-        cmd = [[setlocal nospell signcolumn=no nonu nornu nobuflisted ]], -- tw=0 wh=1]],
-      },
-      {
-        event = 'TermEnter',
-        glob = 'term://*',
-        cmd = [[if winnr('$') == 1 | q | endif]],
-      },
-      --- Ignored for floaterm
-      -- {
-      --   event = 'TermEnter,TermOpen,BufNew,BufEnter',
-      --   glob = 'term://*',
-      --   cmd = [[startinsert]],
-      -- },
-      -- {
-      --   event = 'TermOpen',
-      --   glob = 'term://*',
-      --   cmd = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
-      -- },
-      -- {
-      --   event = 'TermLeave,BufLeave',
-      --   glob = 'term://*',
-      --   cmd = [[stopinsert]],
-      -- },
-      -- {
-      --   event = 'SessionLoadPost',
-      --   glob = 'term://*',
-      --   cmd = [[lua require('mod.terminal').setup_terms_from_session()]],
-      -- },
-    },
-  })
+  do
+    local group = vim.api.nvim_create_augroup('__TERMINAL__', {
+      clear = true,
+    })
+    vim.api.nvim_create_autocmd('TermOpen', {
+      group = group,
+      pattern = 'term://*',
+      command = [[set winhighlight=Normal:NvimTreeNormal]],
+    })
+    vim.api.nvim_create_autocmd({'TermOpen', 'TermEnter'}, {
+      group = group,
+      pattern = '*',
+      command = [[setlocal nospell signcolumn=no nonu nornu nobuflisted ]], -- tw=0 wh=1]],
+    })
+    vim.api.nvim_create_autocmd('TermEnter', {
+      group = group,
+      pattern = 'term://*',
+      command = [[if winnr('$') == 1 | q | endif]],
+    })
+    --- Ignored for floaterm
+    -- vim.api.nvim_create_autocmd({'TermEnter', 'TermOpen', 'BufNew', 'BufEnter'}, {
+    --   group = group,
+    --   pattern = 'term://*',
+    --   command = [[startinsert]],
+    -- })
+    -- vim.api.nvim_create_autocmd('TermOpen', {
+    --   group = group,
+    --   pattern = 'term://*',
+    --   command = [[nnoremap <buffer> <LeftRelease> <LeftRelease>i]],
+    -- })
+    -- vim.api.nvim_create_autocmd({'TermLeave', 'BufLeave'}, {
+    --   group = group,
+    --   pattern = 'term://*',
+    --   command = [[stopinsert]],
+    -- })
+    -- vim.api.nvim_create_autocmd('SessionLoadPost', {
+    --   group = group,
+    --   pattern = 'term://*',
+    --   callback = require('mod.terminal').setup_terms_from_session,
+    -- })
+  end
 end
 
 return M

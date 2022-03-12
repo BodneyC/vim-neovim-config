@@ -137,16 +137,16 @@ util.opt('g', {
 os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' ..
              vim.g.gutentags_cache_dir)
 
-util.augroup({
-  name = 'spelunker',
-  autocmds = {
-    {
-      event = 'BufWinEnter,BufWritePost',
-      glob = '*.md,*.txt,*.tex',
-      cmd = [[call spelunker#check()]],
-    },
-  },
-})
+do
+  local group = vim.api.nvim_create_augroup('spelunker', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd({'BufWinEnter', 'BufWritePost'}, {
+    group = group,
+    pattern = {'*.md', '*.txt', '*.tex'},
+    command = [[call spelunker#check()]],
+  })
+end
 
 -- terminal window manager
 local pane_manager = 'Tmux'

@@ -16,16 +16,16 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
   })
 vim.g.diagnostic_auto_popup_while_jump = false
 
-util.augroup({
-  name = '__LSP__',
-  autocmds = {
-    {
-      event = 'FileType',
-      glob = 'java',
-      cmd = [[lua require('mod.jdtls').init()]],
-    },
-  },
-})
+do
+  local group = vim.api.nvim_create_augroup('__LSP__', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd('FileType', {
+    group = group,
+    pattern = 'java',
+    callback = require('mod.jdtls').init,
+  })
+end
 
 local icons = require('mod.theme').icons
 

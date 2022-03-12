@@ -76,44 +76,6 @@ end
 
 local store = require('utl.fn_store')
 
---[[
-util.augroup {
-  name = '',
-  autocommands = {
-    {
-      event = '',
-      glob = '',
-      cmd = '',                -- or .lua_fn
-      lua_fn = function() end, -- or .cmd
-      silent = true|false,
-    }
-  },
-  nobang = true|false,
-}
---]]
-function M.augroup(opts)
-  vim.cmd('augroup ' .. opts.name)
-  if opts.nobang == false then
-    vim.cmd('au!')
-  end
-  for _, au in ipairs(opts.autocmds or opts.autocommands) do
-    local cmd = 'au ' .. au.event .. ' ' .. au.glob .. ' '
-    if au.silent then
-      cmd = cmd .. 'silent! '
-    end
-    if au.cmd then
-      vim.cmd(cmd .. au.cmd)
-    elseif au.lua_fn then
-      vim.cmd(cmd .. store.fn_aug(au.lua_fn))
-    end
-  end
-  vim.cmd('augroup END')
-end
-
-function M.autogroup(opts)
-  M.augroup(opts)
-end
-
 function M.make_mappings(mappings)
   local bskm = vim.api.nvim_buf_set_keymap
   local skm = vim.api.nvim_set_keymap

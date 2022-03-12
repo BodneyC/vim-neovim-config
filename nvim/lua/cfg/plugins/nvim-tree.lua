@@ -14,23 +14,22 @@ vim.api.nvim_set_keymap('n', '<Leader>D',
 
 local icons = require('mod.theme').icons
 
-util.augroup({
-  name = '__NVIM_TREE__',
-  autocommands = {
-    {
-      event = 'VimResized',
-      glob = '*',
-      lua_fn = function()
-        if require('nvim-tree.view').is_visible() then
-          require('mod.nvim-tree').resize {
-            refocus = true,
-          }
-        end
-      end,
-      silent = false,
-    },
-  },
-})
+do
+  local group = vim.api.nvim_create_augroup('__NVIM_TREE__', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd('VimResized', {
+    group = group,
+    pattern = '*',
+    callback = function()
+      if require('nvim-tree.view').is_visible() then
+        require('mod.nvim-tree').resize {
+          refocus = true,
+        }
+      end
+    end,
+  })
+end
 
 util.opt('g', {
   nvim_tree_icons = {

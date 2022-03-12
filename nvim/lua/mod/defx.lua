@@ -57,22 +57,23 @@ function M.open_and_size(opts)
 end
 
 function M.init()
-  util.augroup({
-    name = '__DEFX__',
-    autocmds = {
-      {
-        event = 'BufEnter',
-        glob = '*',
-        cmd = [[if (winnr("$") == 1 && &ft == 'defx') | ]] ..
-          [[silent call defx#call_action('add_session') | bd! | q | endif]],
-      },
-      {
-        event = 'BufLeave',
-        glob = '*',
-        cmd = [[if &ft == 'defx' | silent call defx#call_action('add_session') | endif]],
-      },
-    },
-  })
+  do
+    local group = vim.api.nvim_create_augroup('__DEFX__', {
+      clear = true,
+    })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      group = group,
+      pattern = '*',
+      command = [[if (winnr("$") == 1 && &ft == 'defx') | ]] ..
+        [[silent call defx#call_action('add_session') | bd! | q | endif]],
+    })
+    vim.api.nvim_create_autocmd('BufLeave', {
+      group = group,
+      pattern = '*',
+        command = [[if &ft == 'defx' | silent call defx#call_action('add_session') | endif]],
+    })
+  end
+
   vim.fn['defx#custom#column']('git', 'indicators', {
     Modified = '~',
     Staged = '+',
