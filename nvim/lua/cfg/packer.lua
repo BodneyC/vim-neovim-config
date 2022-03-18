@@ -74,20 +74,27 @@ return packer.startup({
     use {'mfussenegger/nvim-dap'}
     use {'theHamsta/nvim-dap-virtual-text'}
     use {'rcarriga/nvim-dap-ui'}
+    use {'Pocco81/DAPInstall.nvim'}
     use {'jbyuki/one-small-step-for-vimkind'}
     use {'nvim-telescope/telescope-dap.nvim'}
-    use {'Pocco81/DAPInstall.nvim'}
-    use {'mfussenegger/nvim-dap-python'}
+    use {
+      'mfussenegger/nvim-dap-python',
+      config = function()
+        require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+      end,
+      ft = 'python',
+    }
 
     --- Added functionality
-    use {'BodneyC/hex-this-vim'}
-    use {'BodneyC/pic-vim'}
-    use {'bodneyc/Comrade'}
-    use {'windwp/nvim-spectre'}
     use {
-      'christoomey/vim-tmux-navigator',
-      cond = os.getenv('TMUX'),
+      'BodneyC/hex-this-vim',
+      cmd = 'HexThis',
     }
+    use {
+      'bodneyc/Comrade',
+      cmd = 'ComradeInit',
+    }
+    use {'windwp/nvim-spectre'}
     use {
       'iamcco/markdown-preview.nvim',
       run = 'cd app && yarn',
@@ -97,10 +104,7 @@ return packer.startup({
       'itchyny/calendar.vim',
       cmd = 'Cal',
     }
-    use {
-      'knubie/vim-kitty-navigator',
-      cond = os.getenv('KITTY_WINDOW_ID'),
-    }
+    use {'knubie/vim-kitty-navigator'}
     use {
       'nicwest/vim-http',
       cmd = 'Http',
@@ -169,11 +173,6 @@ return packer.startup({
         }
       end,
     }
-
-    -- Pending: https://github.com/simrat39/symbols-outline.nvim/pull/97
-    -- use {'zeertzjq/symbols-outline.nvim'}
-    -- use {'simrat39/symbols-outline.nvim'}
-
     use {'bronson/vim-visual-star-search'}
     use {'dominikduda/vim_current_word'}
     use {'honza/vim-snippets'}
@@ -214,13 +213,17 @@ return packer.startup({
       ft = {'markdown', 'tex'},
     }
     use {'tpope/vim-commentary'}
-    use {'simnalamburt/vim-mundo'}
+    use {
+      'simnalamburt/vim-mundo',
+      cmd = 'Mundo',
+    }
     use {'zirrostig/vim-schlepp'}
-    use {'voldikss/vim-floaterm'}
+    use {
+      'voldikss/vim-floaterm',
+      cmd = {'FloatermNew', 'FloatermToggle'},
+    }
 
     --- Vim internal wrappers
-    use {'BodneyC/At-Zed-vim'}
-    use {'BodneyC/flocho'}
     use {'BodneyC/togool.vim'}
     use {
       'alvan/vim-closetag',
@@ -232,12 +235,15 @@ return packer.startup({
     use {'tpope/vim-repeat'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-unimpaired'}
+    use {'tweekmonster/startuptime.vim'}
     use {'vim-utils/vim-all'}
 
     --- Prettiness
-    use {'BodneyC/bolorscheme'}
     use {'sainnhe/everforest'}
-    use {'KabbAmine/vCoolor.vim'}
+    use {
+      'KabbAmine/vCoolor.vim',
+      cmd = 'VCoolor',
+    }
     use {
       'lukas-reineke/indent-blankline.nvim',
       config = function()
@@ -247,19 +253,7 @@ return packer.startup({
           char = '│',
           show_first_indent_level = true,
           -- show_end_of_line = true,
-          filetype_exclude = {
-            'packer',
-            'floaterm',
-            'help',
-            'Outline',
-            '',
-            -- 'dashboard',
-            -- 'nerdtree',
-            -- 'twiggy',
-            -- 'startify',
-            -- 'defx',
-          },
-
+          filetype_exclude = {'packer', 'floaterm', 'help', 'Outline', 'NvimTree', ''},
         }
       end,
     }
@@ -315,29 +309,43 @@ return packer.startup({
     }
     use {'f-person/git-blame.nvim'}
     use {
-      'gregsexton/gitv',
-      cmd = 'Gitv',
-      requires = 'tpope/vim-fugitive',
-    }
-    use {
       'oguzbilgic/vim-gdiff',
       cmd = {'Gdiff', 'Gdiffsplit'},
     }
+    use {'tpope/vim-fugitive'}
 
     --- Language support
-    use {'hashivim/vim-terraform'}
-    use {'BodneyC/sood-vim'}
-    use {'BodneyC/knit-vim'}
+    use {
+      'hashivim/vim-terraform',
+      ft = 'terraform',
+    }
+    use {
+      'BodneyC/sood-vim',
+      ft = 'sood',
+    }
+    use {
+      'BodneyC/knit-vim',
+      ft = 'knit',
+    }
     use {'drmingdrmer/vim-indent-lua'}
-    use {'janko/vim-test'}
+    use {
+      'janko/vim-test',
+      ft = 'vim',
+    }
     use {'justinmk/vim-syntax-extra'}
-    use {'leafgarland/typescript-vim'}
+    use {
+      'leafgarland/typescript-vim',
+      ft = {'typescript', 'typescriptreact'},
+    }
     use {
       'm-pilia/vim-pkgbuild',
       ft = 'pkgbuild',
     }
     use {'michaeljsmith/vim-indent-object'}
-    use {'plasticboy/vim-markdown'}
+    use {
+      'plasticboy/vim-markdown',
+      ft = 'markdown',
+    }
 
     --- Local
     ---- Mine

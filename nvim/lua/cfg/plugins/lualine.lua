@@ -1,5 +1,8 @@
+local icons = require('mod.theme').icons
+
 require('lualine').setup {
   options = {
+    globalstatus = 3,
     icons_enabled = true,
     symbols = {
       modified = '*',
@@ -18,9 +21,16 @@ require('lualine').setup {
     disabled_filetypes = {'defx', ''},
   },
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = {
+      {
+        'mode',
+        fmt = function(str)
+          return str:sub(1, 1)
+        end,
+      },
+    },
     lualine_b = {'branch'},
-    lualine_c = {'filename'},
+    lualine_c = {'filename', [[require('nvim-treesitter').statusline()]]},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {
       {
@@ -28,25 +38,13 @@ require('lualine').setup {
         sources = {'nvim_diagnostic'},
         sections = {'error', 'warn', 'info'},
         symbols = {
-          error = ' ',
-          warn = ' ',
-          info = ' ',
+          error = icons.diagnostics.glyph.error,
+          warn = icons.diagnostics.glyph.warning,
+          info = icons.diagnostics.glyph.info,
         },
       },
     },
     lualine_z = {'location'},
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'filetype', 'location'},
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {
-    -- lualine_a = {'buffers'},
-    -- lualine_x = {[[require('nvim-treesitter').statusline()]]},
-  },
-  extensions = {'fugitive'},
+  extensions = {'fugitive', 'nvim-tree', 'quickfix', 'symbols-outline'},
 }

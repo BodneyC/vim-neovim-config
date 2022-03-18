@@ -36,8 +36,6 @@ dap.adapters.nlua = function(callback, config)
   })
 end
 
-require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-
 --  git clone https://github.com/microsoft/vscode-node-debug2.git
 --  cd vscode-node-debug2
 --  npm install

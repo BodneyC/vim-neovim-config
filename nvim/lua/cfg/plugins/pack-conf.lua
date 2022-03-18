@@ -54,7 +54,7 @@ util.opt('g', {
   floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
   floaterm_autoclose = 1,
 
-  gitblame_ignored_filetypes = {'SymbolsOutline', 'NvimTree'},
+  gitblame_ignored_filetypes = {'Outline', 'NvimTree'},
 
   gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
   gutentags_modules = {'ctags'},

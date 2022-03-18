@@ -6,6 +6,34 @@ os.execute('test -d ' .. undodir .. ' || mkdir -p ' .. undodir)
 local notags = os.getenv('HOME') .. '/.notags'
 os.execute('test -e ' .. notags .. ' || touch ' .. notags)
 
+vim.g.do_filetype_lua = 1
+
+-- Disable builtins
+local builtins = {
+  'gzip',
+  'zip',
+  'zipPlugin',
+  'tar',
+  'tarPlugin',
+  'getscript',
+  'getscriptPlugin',
+  'vimball',
+  'vimballPlugin',
+  '2html_plugin',
+  'matchit',
+  'matchparen',
+  'logiPat',
+  'rrhelper',
+  'netrw',
+  'netrwPlugin',
+  'netrwSettings',
+  'netrwFileHandlers',
+}
+
+for _, plugin in ipairs(builtins) do
+  vim.g['loaded_' .. plugin] = 1
+end
+
 util.opt('g', {
   large_file = 524288, -- 512k
   netrw_altv = 1,
@@ -26,7 +54,7 @@ util.opt('o', {
   backspace = 'indent,eol,start',
   equalalways = false,
   expandtab = true,
-  fillchars = 'vert:|',
+  fillchars = 'vert:│',
   foldmethod = 'manual',
   grepformat = '%f:%l:%c:%m',
   grepprg = 'rg --vimgrep --no-heading --smart-case',
@@ -34,7 +62,7 @@ util.opt('o', {
   hidden = true,
   hls = true,
   icm = 'nosplit',
-  laststatus = 2,
+  laststatus = 3,
   matchpairs = vim.o.matchpairs .. ',<:>',
   mouse = 'a',
   pumheight = 20,
