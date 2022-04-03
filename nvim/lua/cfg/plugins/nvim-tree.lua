@@ -12,6 +12,9 @@ vim.api.nvim_set_keymap('n', '<Leader>D',
     noremap = true,
   })
 
+vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && ]] ..
+          [[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
+
 local icons = require('mod.theme').icons
 
 do
@@ -71,7 +74,6 @@ require('nvim-tree').setup {
   hijack_netrw = true,
   open_on_setup = false,
   ignore_ft_on_setup = {},
-  auto_close = true,
   open_on_tab = false,
   update_to_buf_dir = {
     enable = true,
