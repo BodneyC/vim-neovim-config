@@ -10,7 +10,11 @@ function M.statusline()
       type_patterns = {'block_mapping_pair'},
       separator = '.',
       transform_fn = function(line)
-        return line:gsub('%s*[%[%(%{]*%s*$', ''):gsub(':.*$', '')
+        line = line:gsub('%s*[%[%(%{]*%s*$', ''):gsub(':.*$', '')
+        if line:find('%.') then
+          line = '\'' .. line .. '\''
+        end
+        return line
       end,
     })
   else
