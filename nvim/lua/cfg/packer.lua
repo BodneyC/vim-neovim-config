@@ -253,7 +253,14 @@ return packer.startup({
           char = '│',
           show_first_indent_level = true,
           -- show_end_of_line = true,
-          filetype_exclude = {'packer', 'floaterm', 'help', 'Outline', 'NvimTree', ''},
+          filetype_exclude = {
+            'packer',
+            'floaterm',
+            'help',
+            'Outline',
+            'NvimTree',
+            '',
+          },
         }
       end,
     }
@@ -315,6 +322,7 @@ return packer.startup({
     use {'tpope/vim-fugitive'}
 
     --- Language support
+    use {'towolf/vim-helm'}
     use {
       'hashivim/vim-terraform',
       ft = 'terraform',

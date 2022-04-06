@@ -30,7 +30,7 @@ require('lualine').setup {
       },
     },
     lualine_b = {'branch'},
-    lualine_c = {'filename', [[require('nvim-treesitter').statusline()]]},
+    lualine_c = {'filename', [[require('mod.treesitter').statusline()]]},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {
       {

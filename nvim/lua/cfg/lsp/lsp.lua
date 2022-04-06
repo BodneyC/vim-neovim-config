@@ -59,6 +59,10 @@ local function on_attach(client, bufnr)
 
   local ns = require('utl.maps').flags.ns
 
+  if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
+    vim.diagnostic.disable()
+  end
+
   local function bskm(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
