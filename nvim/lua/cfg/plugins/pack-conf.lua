@@ -80,8 +80,6 @@ util.opt('g', {
 
   move_map_keys = false,
 
-  mundo_right = 1,
-
   spelunker_disable_auto_group = 1,
 
   scrollview_excluded_filetypes = {'defx', 'NvimTree'},

@@ -42,6 +42,8 @@ if [[ "$1" == "-f" ]]; then
 fi
 
 mkdir -p ~/.config/nvim
+mkdir -p ~/.config/nvim/undo
+touch ~/.notags
 
 for f in nvim/*; do
   _symlink "$(realpath "$f")" "$(basename "$f")" "$HOME/.config/$f"

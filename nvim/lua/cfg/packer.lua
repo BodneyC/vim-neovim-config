@@ -63,6 +63,7 @@ return packer.startup({
           'nvim-telescope/telescope-fzy-native.nvim',
           run = {'make'},
         },
+        {'nvim-telescope/telescope-ui-select.nvim'},
         -- One to track
         {'nvim-telescope/telescope-rg.nvim'},
       },
@@ -74,7 +75,10 @@ return packer.startup({
     use {'mfussenegger/nvim-dap'}
     use {'theHamsta/nvim-dap-virtual-text'}
     use {'rcarriga/nvim-dap-ui'}
-    use {'Pocco81/DAPInstall.nvim'}
+    use {
+      'Pocco81/dap-buddy.nvim',
+      branch = 'dev',
+    }
     use {'jbyuki/one-small-step-for-vimkind'}
     use {'nvim-telescope/telescope-dap.nvim'}
     use {
@@ -90,26 +94,9 @@ return packer.startup({
       'BodneyC/hex-this-vim',
       cmd = 'HexThis',
     }
-    use {
-      'bodneyc/Comrade',
-      cmd = 'ComradeInit',
-    }
     use {'windwp/nvim-spectre'}
-    use {
-      'iamcco/markdown-preview.nvim',
-      run = 'cd app && yarn',
-      ft = 'markdown',
-    }
-    use {
-      'itchyny/calendar.vim',
-      cmd = 'Cal',
-    }
     use {'knubie/vim-kitty-navigator'}
-    use {
-      'nicwest/vim-http',
-      cmd = 'Http',
-    }
-    use {'windwp/nvim-ts-autotag'}
+    use {'windwp/nvim-ts-autotag'} -- Setup in ts.lua
     use {'nvim-treesitter/nvim-treesitter'}
     use {'nvim-treesitter/nvim-treesitter-refactor'}
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
@@ -130,7 +117,6 @@ return packer.startup({
         }
       end,
     }
-
     use {
       'p00f/nvim-ts-rainbow',
       config = function()
@@ -156,8 +142,6 @@ return packer.startup({
         }
       end,
     }
-    -- use {'spinks/vim-leader-guide'}
-    -- NOTE:
     use {
       'folke/todo-comments.nvim',
       config = function()
@@ -175,7 +159,6 @@ return packer.startup({
     }
     use {'bronson/vim-visual-star-search'}
     use {'dominikduda/vim_current_word'}
-    use {'honza/vim-snippets'}
     use {'hrsh7th/vim-vsnip'}
     use {'hrsh7th/vim-vsnip-integ'}
     use {'jiangmiao/auto-pairs'}
@@ -205,38 +188,21 @@ return packer.startup({
         require('trouble').setup()
       end,
     }
-    use {'ludovicchabant/vim-gutentags'}
     use {'mhartington/formatter.nvim'}
     use {'machakann/vim-swap'}
-    use {
-      'rhysd/vim-grammarous',
-      ft = {'markdown', 'tex'},
-    }
     use {'tpope/vim-commentary'}
-    use {
-      'simnalamburt/vim-mundo',
-      cmd = 'Mundo',
-    }
     use {'zirrostig/vim-schlepp'}
-    use {
-      'voldikss/vim-floaterm',
-      cmd = {'FloatermNew', 'FloatermToggle'},
-    }
 
     --- Vim internal wrappers
     use {'BodneyC/togool.vim'}
-    use {
-      'alvan/vim-closetag',
-      ft = {'html', 'xml', 'markdown'},
-    }
-    use {'andymass/vim-matchup'}
-    use {'moll/vim-bbye'}
+    use {'andymass/vim-matchup'} -- % on `end`s
+    use {'moll/vim-bbye'} -- <leader>bd
     use {'ggandor/lightspeed.nvim'}
     use {'tpope/vim-repeat'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-unimpaired'}
     use {'tweekmonster/startuptime.vim'}
-    use {'vim-utils/vim-all'}
+    use {'vim-utils/vim-all'} -- a<CR>
 
     --- Prettiness
     use {'sainnhe/everforest'}
@@ -264,7 +230,6 @@ return packer.startup({
         }
       end,
     }
-    use {'amdt/vim-niji'}
     use {'dstein64/nvim-scrollview'}
     use {
       'junegunn/goyo.vim',
@@ -277,8 +242,8 @@ return packer.startup({
     use {
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
+      tag = '*',
     }
-    use {'rktjmp/lush.nvim'}
     use {
       'rrethy/vim-hexokinase',
       run = 'make hexokinase',
@@ -299,7 +264,7 @@ return packer.startup({
     }
     use {
       'rmagatti/session-lens',
-      requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+      requires = {'nvim-telescope/telescope.nvim'},
       config = function()
         require('session-lens').setup({
           theme_conf = {
@@ -335,12 +300,10 @@ return packer.startup({
       'BodneyC/knit-vim',
       ft = 'knit',
     }
-    use {'drmingdrmer/vim-indent-lua'}
     use {
-      'janko/vim-test',
-      ft = 'vim',
+      'justinmk/vim-syntax-extra',
+      ft = {'lex', 'yacc'},
     }
-    use {'justinmk/vim-syntax-extra'}
     use {
       'leafgarland/typescript-vim',
       ft = {'typescript', 'typescriptreact'},
@@ -353,6 +316,11 @@ return packer.startup({
     use {
       'plasticboy/vim-markdown',
       ft = 'markdown',
+    }
+    -- use {'simrat39/rust-tools.nvim'}
+    use {
+      'Freyskeyd/rust-tools.nvim',
+      branch = 'dap_fix',
     }
 
     --- Local

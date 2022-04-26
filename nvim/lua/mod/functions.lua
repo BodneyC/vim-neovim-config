@@ -81,39 +81,6 @@ function M.match_over(...)
   vim.cmd([[match OverLength /\%]] .. w .. [[v.\+/]])
 end
 
-function M.zoom_toggle()
-  if vim.t.zoomed and vim.t.zoom_winrestcmd then
-    vim.cmd(vim.t.zoom_winrestcmd)
-    vim.t.zoomed = false
-  else
-    vim.t.zoom_winrestcmd = vim.fn.winrestcmd()
-    vim.cmd('resize | vertical resize')
-    vim.t.zoomed = true
-  end
-end
-
-function M.highlight_under_cursor()
-  local hl_groups = {}
-  for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
-    table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
-  end
-  print(vim.inspect(hl_groups))
-end
-
--- Requires barbar at the minute, but not necessary I suppose...
--- function M.buffer_close_all_but_visible()
---   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
---     'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'),
---     'bufname(v:val)')
---   if #bs > 0 then
---     for _, buf in ipairs(bs) do
---       vim.fn.execute('BufferClose ' .. buf)
---     end
---   else
---     print('No buffers to delete')
---   end
--- end
-
 local function call_if_fn_exists(fn)
   if vim.fn.exists(':' .. fn) == 1 then
     vim.cmd(fn)
@@ -144,5 +111,38 @@ function M.handle_large_file()
     call_if_fn_exists('PearTreeDisable')
   end
 end
+
+-- function M.zoom_toggle()
+--   if vim.t.zoomed and vim.t.zoom_winrestcmd then
+--     vim.cmd(vim.t.zoom_winrestcmd)
+--     vim.t.zoomed = false
+--   else
+--     vim.t.zoom_winrestcmd = vim.fn.winrestcmd()
+--     vim.cmd('resize | vertical resize')
+--     vim.t.zoomed = true
+--   end
+-- end
+
+-- function M.highlight_under_cursor()
+--   local hl_groups = {}
+--   for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
+--     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
+--   end
+--   print(vim.inspect(hl_groups))
+-- end
+
+-- Requires barbar at the minute, but not necessary I suppose...
+-- function M.buffer_close_all_but_visible()
+--   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
+--     'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'),
+--     'bufname(v:val)')
+--   if #bs > 0 then
+--     for _, buf in ipairs(bs) do
+--       vim.fn.execute('BufferClose ' .. buf)
+--     end
+--   else
+--     print('No buffers to delete')
+--   end
+-- end
 
 return M

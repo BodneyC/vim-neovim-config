@@ -1,21 +1,20 @@
 local util = require('utl.util')
+local s = require('utl.maps').flags.s
 
-vim.api.nvim_set_keymap('n', '<Leader>d',
-  [[<CMD>lua require('mod.nvim-tree').resize {refocus = false}<CR>]], {
-    silent = true,
-    noremap = true,
-  })
+vim.keymap.set('n', '<Leader>d', function()
+  return require('mod.nvim-tree').resize {
+    refocus = false,
+  }
+end, s)
 
-vim.api.nvim_set_keymap('n', '<Leader>D',
-  [[<CMD>lua require('mod.nvim-tree').resize {refocus = true}<CR>]], {
-    silent = true,
-    noremap = true,
-  })
+vim.keymap.set('n', '<Leader>D', function()
+  return require('mod.nvim-tree').resize {
+    refocus = true,
+  }
+end, s)
 
 vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && ]] ..
           [[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
-
-local icons = require('mod.theme').icons
 
 do
   local group = vim.api.nvim_create_augroup('__NVIM_TREE__', {
@@ -33,6 +32,8 @@ do
     end,
   })
 end
+
+local icons = require('mod.theme').icons
 
 util.opt('g', {
   nvim_tree_icons = {

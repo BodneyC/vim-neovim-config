@@ -56,68 +56,25 @@ completionItem.resolveSupport = {
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local function on_attach(client, bufnr)
-
-  local ns = require('utl.maps').flags.ns
-
   if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
     vim.diagnostic.disable()
   end
-
-  local function bskm(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-
   lsp_status.on_attach(client)
-
-  bskm('n', 'K', [[<CMD>lua require('utl.util').show_documentation()<CR>]], ns)
-  bskm('n', '<C-]>', [[<CMD>lua require('utl.util').go_to_definition()<CR>]], ns)
-
-  bskm('n', 'gD', '<CMD>lua vim.lsp.buf.implementation()<CR>', ns)
-  bskm('n', '<C-k>', '<CMD>lua vim.lsp.buf.signature_help()<CR>', ns)
-  bskm('n', '1gD', '<CMD>lua vim.lsp.buf.type_definition()<CR>', ns)
-  -- bskm('n', '[w', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], ns)
-  -- bskm('n', ']w', [[<cmd>Lspsaga diagnostic_jump_next<CR>]], ns)
-  bskm('n', ']w',
-    [[<CMD>lua require('mod.diagnostics').navigate('next')()<CR>]], ns)
-  bskm('n', '[w',
-    [[<CMD>lua require('mod.diagnostics').navigate('prev')()<CR>]], ns)
-  bskm('n', '<Leader>F',
-    [[<CMD>lua require('utl.util').document_formatting()<CR>]], ns)
-  bskm('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', ns)
-
-  bskm('n', [[\h]], '<CMD>lua vim.lsp.buf.hover()<CR>', ns)
-  bskm('n', [[\s]], '<CMD>lua vim.lsp.buf.document_symbol()<CR>', ns)
-  bskm('n', [[\q]], '<CMD>lua vim.lsp.buf.workspace_symbol()<CR>', ns)
-  bskm('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', ns)
-  bskm('n', [[\a]], fn_store.fn(function()
-    local ok = pcall(require'lspsaga.command'.load_command, 'code_action')
-    if not ok then
-      vim.lsp.buf.code_action()
-    end
-  end, 'code action'), ns)
-  bskm('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', ns)
-  bskm('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>', ns)
-  bskm('n', [[\r]], '<CMD>Lspsaga rename<CR>', ns)
-
 end
-
-util.command('LspStopAll',
-  'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-util.command('LspBufStopAll',
-  'lua vim.lsp.stop_client(vim.lsp.buf_get_clients())', {})
 
 for _, lsp in ipairs({
   'tsserver', -- npm i -g typescript-language-server
   'dockerls', -- npm i -g dockerfile-language-server-nodejs
   'bashls', -- npm i -g bash-language-server
   'clangd', -- package-manager - clang
-  'clojure_lsp', -- manual - https://github.com/snoe/clojure-lsp
-  'gopls', -- go get golang.org/x/tools/gopls@latest
+  -- 'clojure_lsp', -- manual - https://github.com/snoe/clojure-lsp
+  -- 'gopls', -- go get golang.org/x/tools/gopls@latest
   'html', -- npm i -g vscode-html-languageserver-bin
   'jsonls', -- npm i -g vscode-json-languageserver
-  'vimls', -- npm i -g vim-language-server
+  -- 'vimls', -- npm i -g vim-language-server
   'yamlls', -- npm i -g yaml-language-server
-  'rls', -- rustup component add rls rust-{analysis,src}
+  -- 'rls', -- rustup component add rls rust-{analysis,src}
+  -- 'rust_analyzer', -- code --install-extension /path/.vsix
   'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
   -- 'pyright', -- pip3 install --user pyright
   'texlab', -- package-manager - texlab
@@ -383,6 +340,27 @@ lspconfig.diagnosticls.setup {
     },
   },
 }
+
+local extension_path = vim.fn.glob(
+  '$HOME/.vscode-oss/extensions/vadimcn.vscode-lldb-*/')
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+
+require('rust-tools').setup({
+  tools = {
+    inlay_hints = {
+      show_parameter_hints = false,
+    },
+  },
+  server = {
+    standalone = false,
+    -- on_attach = on_attach,
+  },
+  dap = {
+    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path,
+      liblldb_path),
+  },
+})
 
 -- require('symbols-outline').setup({
 --   highlight_hover_item = true,

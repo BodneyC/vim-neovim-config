@@ -3,17 +3,6 @@ local dap_helper = require('mod.dap-helper')
 
 local M = {}
 
-function M.ava_strategy(cmd)
-  local parts = shlex.split(cmd)
-  local prog = parts[1]
-  local file = parts[2]
-  local match
-  if #parts >= 3 then
-    match = parts[3]
-  end
-  dap_helper.debug_ava(prog, file, match)
-end
-
 function M.jest_strategy(cmd)
   local parts = shlex.split(cmd)
   local prog = parts[1]

@@ -9,6 +9,10 @@ M.flags = {
     silent = true,
   },
 
+  u = {
+    unique = true,
+  },
+
   e = {
     expr = true,
   },

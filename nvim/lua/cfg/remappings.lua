@@ -1,16 +1,16 @@
-local skm = vim.api.nvim_set_keymap
-
 vim.cmd('let mapleader=" "')
 
 --- Leave unmapped for which-key
--- skm('n', '<leader>', '<NOP>', {})
+-- vim.keymap.set('n', '<leader>', '<NOP>')
 
-skm('n', [[\]], [[<CMD>WhichKey \<CR>]], {})
+vim.keymap.set('n', [[\]], [[<CMD>WhichKey \<CR>]], {})
 
 local flags = require('utl.maps').flags
+local s = flags.s
+local u = flags.u
 
 local function vsnip_map(mode, key, pos)
-  skm(mode, key,
+  vim.keymap.set(mode, key,
     'vsnip#jumpable(' .. pos .. ')  ? \'<Plug>(vsnip-jump-next)\' : \'' .. key ..
       '\'', flags.se)
 end
@@ -19,117 +19,96 @@ vsnip_map('i', '<C-k>', -1)
 vsnip_map('s', '<C-j>', 1)
 vsnip_map('s', '<C-k>', -1)
 
-skm('n', '<leader>E', [[<CMD>e!<CR>]], flags.ns)
-skm('n', '<leader>Q', [[<CMD>qa!<CR>]], flags.ns)
-skm('n', '<leader>W', [[<CMD>wa | qa<CR>]], flags.ns)
-skm('n', '<leader>e', [[<CMD>e<CR>]], flags.ns)
-skm('n', '<leader>q', [[<CMD>q<CR>]], flags.ns)
-skm('n', '<leader>w', [[<CMD>w<CR>]], flags.ns)
-skm('n', '<A-s>', [[<CMD>w<CR>]], flags.ns)
-skm('n', 'Q', [[q]], flags.n)
-skm('n', 'Q!', [[q!]], flags.n)
-skm('n', '<F1>', [[:H <C-r><C-w><CR>]], flags.ns)
-skm('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], flags.ns)
-skm('n', '<F7>', [[<CMD>set spell!<CR>]], flags.ns)
-skm('i', '<F7>', [[<C-o>:set spell!<CR>]], flags.ns)
+vim.keymap.set('n', '<leader>e', [[<CMD>e<CR>]], s)
+vim.keymap.set('n', '<leader>q', [[<CMD>q<CR>]], s)
+vim.keymap.set('n', '<leader>Q', [[<CMD>qa!<CR>]], s)
+vim.keymap.set('n', '<leader>w', [[<CMD>w<CR>]], s)
+vim.keymap.set('n', '<leader>W', [[<CMD>wa | qa<CR>]], s)
 
-skm('i', '<C-w>', '<C-S-w>', flags.ns)
-skm('i', 'jj', '<Esc>', flags.ns)
+vim.keymap.set('n', 'Q', [[q]])
+vim.keymap.set('n', 'Q!', [[q!]])
+vim.keymap.set('n', '<F1>', [[:H <C-r><C-w><CR>]], s)
+vim.keymap.set('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], s)
+vim.keymap.set('n', '<F7>', [[<CMD>set spell!<CR>]], s)
+vim.keymap.set('i', '<F7>', [[<C-o>:set spell!<CR>]], s)
 
-skm('n', 'Y', 'yy', flags.ns)
+vim.keymap.set('i', '<C-w>', '<C-S-w>', s)
+vim.keymap.set('i', 'jj', '<Esc>', s)
+
+vim.keymap.set('n', 'Y', 'yy', s)
 for _, ch in ipairs({'y', 'Y', 'p', 'P'}) do
-  skm('n', '<leader>' .. ch, '"+' .. ch, flags.ns)
-  skm('x', '<leader>' .. ch, '"+' .. ch, flags.ns)
+  vim.keymap.set('n', '<leader>' .. ch, '"+' .. ch, s)
+  vim.keymap.set('x', '<leader>' .. ch, '"+' .. ch, s)
 end
 
-skm('i', '<M-d>', [[<C-r>=strftime('%Y-%m-%d')<CR>]], flags.ns)
+vim.keymap.set('n', '<C-p>', [[<Tab>]])
+vim.keymap.set('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]])
+vim.keymap.set('n', '<leader>/', [[<Cmd>noh<CR>]], s)
+vim.keymap.set('n', '<leader>S', [[<Cmd>SymbolsOutline<CR>]], s)
 
-skm('n', '<C-p>', [[<Tab>]], flags.n)
-skm('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], flags.n)
-skm('n', '<leader>/', [[<Cmd>noh<CR>]], flags.ns)
-skm('n', '<leader>;', [[<Cmd>Commands<CR>]], flags.ns)
--- skm('n', '<leader>t', [[<Cmd>Twiggy<CR>]], ns)
-skm('n', '<leader>S', [[<Cmd>SymbolsOutline<CR>]], flags.ns)
-skm('n', '<leader>U', [[<Cmd>MundoToggle<CR>]], flags.ns)
+vim.keymap.set('n', '<C-/>', [[gcc]], {})
+vim.keymap.set('x', '<C-/>', [[gc]], {})
+vim.keymap.set('i', '<C-/>', [[<C-o>gcc]], {})
 
-skm('n', '<C-/>', [[gcc]], {})
-skm('x', '<C-/>', [[gc]], {})
-skm('i', '<C-/>', [[<C-o>gcc]], {})
+-- NOTE: Doesn't work with `vim.keymap.set`
+vim.api.nvim_set_keymap('n', '', [[gcc]], {})
+vim.api.nvim_set_keymap('x', '', [[gc]], {})
+vim.api.nvim_set_keymap('i', '', [[<C-o>gcc]], {})
 
-skm('n', '', [[gcc]], {})
-skm('x', '', [[gc]], {})
-skm('i', '', [[<C-o>gcc]], {})
-
--- buffers
-skm('n', '<leader>bp', [[<CMD>BufferPick<CR>]], flags.ns)
-skm('n', '<M-/>', [[<CMD>BufferPick<CR>]], flags.ns)
-skm('n', '÷', [[<CMD>BufferPick<CR>]], flags.ns)
-
-for i = 1, 9 do
-  skm('n', '<M-' .. i .. '>', [[<CMD>BufferGoto ]] .. i .. [[<CR>]], flags.ns)
-end
-skm('n', '<M-,>', [[<CMD>BufferMovePrevious<CR>]], flags.ns)
-skm('n', '<M-.>', [[<CMD>BufferMoveNext<CR>]], flags.ns)
-
-skm('n', '<leader>"', [[<CMD>sbn<CR>]], flags.ns)
-skm('n', '<leader>#', [[<C-^>]], flags.ns)
-skm('n', '<leader>%', [[<CMD>vert sbn<CR>]], flags.ns)
-skm('n', '<leader>bD', [[<CMD>lua require('mod.functions').bufonly()<CR>]], flags.ns)
-skm('n', '<leader>be', [[<CMD>enew<CR>]], flags.ns)
-skm('n', '<leader>bd', [[<CMD>Bdelete<CR>]], flags.ns)
-skm('n', '<leader>bb', [[<CMD>BufferPick<CR>]], flags.ns)
+vim.keymap.set('n', '<leader>"', [[<CMD>sbn<CR>]], s)
+vim.keymap.set('n', '<leader>%', [[<CMD>vert sbn<CR>]], s)
+vim.keymap.set('n', '<leader>bD',
+  [[<CMD>lua require('mod.functions').bufonly()<CR>]], s)
+vim.keymap.set('n', '<leader>be', [[<CMD>enew<CR>]], s)
+vim.keymap.set('n', '<leader>bd', [[<CMD>Bdelete<CR>]], s)
 
 -- resize
 local function resize_window_str(p, c)
   return p .. [[lua require('utl.util').resize_window(']] .. c .. [[')<CR>]]
 end
 
-skm('n', '<C-M-h>', resize_window_str('<Cmd>', 'h'), flags.ns)
-skm('n', '<C-M-j>', resize_window_str('<Cmd>', 'j'), flags.ns)
-skm('n', '<C-M-k>', resize_window_str('<Cmd>', 'k'), flags.ns)
-skm('n', '<C-M-l>', resize_window_str('<Cmd>', 'l'), flags.ns)
-skm('t', '<C-M-h>', resize_window_str('<C-\\><C-n>:', 'h'), flags.ns)
-skm('t', '<C-M-j>', resize_window_str('<C-\\><C-n>:', 'j'), flags.ns)
-skm('t', '<C-M-k>', resize_window_str('<C-\\><C-n>:', 'k'), flags.ns)
-skm('t', '<C-M-l>', resize_window_str('<C-\\><C-n>:', 'l'), flags.ns)
+vim.keymap.set('n', '<C-M-h>', resize_window_str('<Cmd>', 'h'), s)
+vim.keymap.set('n', '<C-M-j>', resize_window_str('<Cmd>', 'j'), s)
+vim.keymap.set('n', '<C-M-k>', resize_window_str('<Cmd>', 'k'), s)
+vim.keymap.set('n', '<C-M-l>', resize_window_str('<Cmd>', 'l'), s)
+vim.keymap.set('t', '<C-M-h>', resize_window_str('<C-\\><C-n>:', 'h'), s)
+vim.keymap.set('t', '<C-M-j>', resize_window_str('<C-\\><C-n>:', 'j'), s)
+vim.keymap.set('t', '<C-M-k>', resize_window_str('<C-\\><C-n>:', 'k'), s)
+vim.keymap.set('t', '<C-M-l>', resize_window_str('<C-\\><C-n>:', 'l'), s)
 
 -- line movement
-skm('n', '<S-down>', [[<CMD>m+<CR>]], flags.ns)
-skm('n', '<S-up>', [[<CMD>m-2<CR>]], flags.ns)
-skm('n', '<S-Tab>', [[<CMD>bp<CR>]], flags.ns)
-skm('n', '<Tab>', [[<CMD>bn<CR>]], flags.ns)
-skm('i', '<S-down>', [[<C-o>:m+<CR>]], flags.n)
-skm('i', '<S-up>', [[<C-o>:m-2<CR>]], flags.n)
-skm('x', '<S-down>', [[:m'>+<CR>gv=gv]], flags.n)
-skm('x', '<S-up>', [[:m-2<CR>gv=gv]], flags.n)
+vim.keymap.set('n', '<S-down>', [[<CMD>m+<CR>]], s)
+vim.keymap.set('n', '<S-up>', [[<CMD>m-2<CR>]], s)
+vim.keymap.set('n', '<S-Tab>', [[<CMD>bp<CR>]], s)
+vim.keymap.set('n', '<Tab>', [[<CMD>bn<CR>]], s)
+vim.keymap.set('i', '<S-down>', [[<C-o>:m+<CR>]])
+vim.keymap.set('i', '<S-up>', [[<C-o>:m-2<CR>]])
+vim.keymap.set('x', '<S-down>', [[:m'>+<CR>gv=gv]])
+vim.keymap.set('x', '<S-up>', [[:m-2<CR>gv=gv]])
 
-skm('x', '>', [[>gv]], flags.n)
-skm('x', '<', [[<gv]], flags.n)
-skm('x', '<Tab>', [[>gv]], flags.n)
-skm('x', '<S-Tab>', [[<gv]], flags.n)
+vim.keymap.set('x', '>', [[>gv]])
+vim.keymap.set('x', '<', [[<gv]])
+vim.keymap.set('x', '<Tab>', [[>gv]])
+vim.keymap.set('x', '<S-Tab>', [[<gv]])
 
 -- git
-skm('n', '<leader>gg', [[<CMD>Git<CR>]], flags.ns)
-skm('n', '<leader>gl', [[<CMD>ToggleLazyGit<CR>]], flags.ns)
-skm('n', '<leader>ge', [[<CMD>Ge:<CR>]], flags.ns)
-skm('n', '<leader>z', [[<CMD>ZoomToggle<CR>]], flags.ns)
-skm('n', '<leader>}', [[zf}]], flags.ns)
+vim.keymap.set('n', '<leader>ge', [[<CMD>Ge:<CR>]], s)
+vim.keymap.set('n', '<leader>}', [[zf}]], s)
 
-skm('n', '<leader>i',
-  [[<CMD>lua require('utl.util').toggle_bool_option('o', 'ignorecase')<CR>]],
-  flags.ns)
+vim.keymap.set('n', '<leader>i',
+  [[<CMD>lua require('utl.util').toggle_bool_option('o', 'ignorecase')<CR>]], s)
 
-skm('n', '<leader>ea', [[vip:EasyAlign<CR>]], flags.ns)
-skm('x', '<leader>ea', [[:EasyAlign<CR>]], flags.ns)
+vim.keymap.set('n', '<leader>ea', [[vip:EasyAlign<CR>]], s)
+vim.keymap.set('x', '<leader>ea', [[:EasyAlign<CR>]], s)
 
-skm('n', '<leader>H',
+vim.keymap.set('n', '<leader>H',
   [[<CMD>lua require('mod.terminal').floating_help(vim.fn.expand('<cword>'))<CR>]],
-  flags.ns)
+  s)
 
-skm('v', '<up>',    '<Plug>SchleppUp', {unique = true})
-skm('v', '<down>',  '<Plug>SchleppDown', {unique = true})
-skm('v', '<left>',  '<Plug>SchleppLeft', {unique = true})
-skm('v', '<right>', '<Plug>SchleppRight', {unique = true})
+vim.keymap.set('v', '<up>', '<Plug>SchleppUp', u)
+vim.keymap.set('v', '<down>', '<Plug>SchleppDown', u)
+vim.keymap.set('v', '<left>', '<Plug>SchleppLeft', u)
+vim.keymap.set('v', '<right>', '<Plug>SchleppRight', u)
 
 -- bs
 vim.cmd([[
@@ -156,7 +135,7 @@ vim.cmd([[
   endfunc
 ]])
 
-skm('i', '<BS>', [[<C-r>=MasterBS()<CR>]], flags.ns)
+vim.keymap.set('i', '<BS>', [[<C-r>=MasterBS()<CR>]], s)
 
-skm('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], flags.ns)
-skm('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], flags.ns)
+vim.keymap.set('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], s)
+vim.keymap.set('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], s)

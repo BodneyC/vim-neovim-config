@@ -46,23 +46,6 @@ function M.debug_jest(prog, file, test)
   dap.run(cfg)
 end
 
--- WIP, Ava doesn't really support this ATM
-function M.debug_ava(prog, file, match)
-  local cfg = vim.deepcopy(DEFAULT_CONFIGS.javascript)
-  cfg.request = 'launch'
-  cfg.console = 'integratedTerminal'
-  cfg.port = 9230
-  cfg.outputCapture = 'std'
-  cfg.runtimeExecutable = prog
-  if match then
-    cfg.runtimeArgs = {'--serial', file, match}
-  else
-    cfg.runtimeArgs = {'--serial', file}
-  end
-  print(vim.inspect(cfg))
-  dap.run(cfg)
-end
-
 -- Gotta run the file first... e.g.
 --  $ node --inspect-brk {file}
 function M.run_dap()

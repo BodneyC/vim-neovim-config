@@ -1,11 +1,5 @@
 local util = require('utl.util')
 
-local undodir = os.getenv('HOME') .. '/.config/nvim/undo'
-os.execute('test -d ' .. undodir .. ' || mkdir -p ' .. undodir)
-
-local notags = os.getenv('HOME') .. '/.notags'
-os.execute('test -e ' .. notags .. ' || touch ' .. notags)
-
 vim.g.do_filetype_lua = 1
 
 -- Disable builtins
@@ -86,7 +80,7 @@ util.opt('o', {
   titlestring = 'bodneyc - nvim',
   ttimeout = true,
   ttimeoutlen = 50,
-  undodir = undodir,
+  undodir = os.getenv('HOME') .. '/.config/nvim/undo',
   undofile = true,
   undolevels = 10000,
   undoreload = 10000,
