@@ -49,11 +49,17 @@ end
 -- Gotta run the file first... e.g.
 --  $ node --inspect-brk {file}
 function M.run_dap()
-  if DEFAULT_CONFIGS[vim.bo.ft] == nil then
-    print('No dap configuration for filetype: ' .. vim.bo.ft)
-    return
+  if vim.bo.ft == 'rust' then
+    if vim.fn.exists(':RustDebuggables') == 1 then
+      vim.cmd([[RustDebuggables]])
+    end
+  else
+    if DEFAULT_CONFIGS[vim.bo.ft] == nil then
+      print('No dap configuration for filetype: ' .. vim.bo.ft)
+      return
+    end
+    dap.run(DEFAULT_CONFIGS[vim.bo.ft])
   end
-  dap.run(DEFAULT_CONFIGS[vim.bo.ft])
 end
 
 return M

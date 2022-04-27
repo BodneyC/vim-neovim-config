@@ -133,7 +133,7 @@ function M.toggle_bool_option(scope, opt)
   end
 end
 
-local function edge_of_screen(d)
+local function last_win_of_screen(d)
   local w = vim.fn.winnr()
   vim.cmd('silent! wincmd ' .. d)
   local n = vim.fn.winnr()
@@ -141,22 +141,48 @@ local function edge_of_screen(d)
   return w == n
 end
 
-function M.resize_window(d)
+function M.resize_window(dir)
   local inc = vim.g.resize_increment or 2
   if vim.fn.winnr('$') == 1 then
     return
   end
-  local dir = ''
-  if d == 'h' or d == 'l' then
-    dir = 'vertical'
+  local horz_vert = ''
+  if dir == 'h' or dir == 'l' then
+    horz_vert = 'vertical'
   end
-  local edge = edge_of_screen(d) and '-' or '+'
-  if dir == '' and edge == '-' then
-    if edge_of_screen((d == 'j') and 'k' or 'j') then
+
+  local opp_dir = 'h'
+  if dir == 'h' then
+    opp_dir = 'l'
+  elseif dir == 'j' then
+    opp_dir = 'k'
+  elseif dir == 'k' then
+    opp_dir = 'j'
+  end
+
+  local last_win_in_d = last_win_of_screen(dir)
+  local last_win_in_opp_d = last_win_of_screen(opp_dir)
+
+  local pos_neg_dir = '+'
+
+  if last_win_in_d then
+    pos_neg_dir = '-'
+  elseif not last_win_in_d and (dir == 'j') then
+    pos_neg_dir = '+'
+  elseif not last_win_in_d and not last_win_in_opp_d then
+    if dir == 'l' then
+      pos_neg_dir = '+'
+    else
+      pos_neg_dir = '-'
+    end
+  end
+
+  if horz_vert == '' and pos_neg_dir == '-' then
+    if last_win_of_screen((dir == 'j') and 'k' or 'j') then
       return
     end
   end
-  vim.cmd(dir .. ' resize ' .. edge .. inc)
+  vim.cmd(horz_vert .. ' resize ' .. pos_neg_dir .. inc)
 end
 
 function M.run_cmd(cmd, strip)

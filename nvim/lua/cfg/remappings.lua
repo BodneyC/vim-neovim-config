@@ -57,24 +57,25 @@ vim.api.nvim_set_keymap('i', '', [[<C-o>gcc]], {})
 
 vim.keymap.set('n', '<leader>"', [[<CMD>sbn<CR>]], s)
 vim.keymap.set('n', '<leader>%', [[<CMD>vert sbn<CR>]], s)
-vim.keymap.set('n', '<leader>bD',
-  [[<CMD>lua require('mod.functions').bufonly()<CR>]], s)
+vim.keymap.set('n', '<leader>bD', require('mod.functions').bufonly, s)
 vim.keymap.set('n', '<leader>be', [[<CMD>enew<CR>]], s)
 vim.keymap.set('n', '<leader>bd', [[<CMD>Bdelete<CR>]], s)
 
 -- resize
-local function resize_window_str(p, c)
-  return p .. [[lua require('utl.util').resize_window(']] .. c .. [[')<CR>]]
-end
 
-vim.keymap.set('n', '<C-M-h>', resize_window_str('<Cmd>', 'h'), s)
-vim.keymap.set('n', '<C-M-j>', resize_window_str('<Cmd>', 'j'), s)
-vim.keymap.set('n', '<C-M-k>', resize_window_str('<Cmd>', 'k'), s)
-vim.keymap.set('n', '<C-M-l>', resize_window_str('<Cmd>', 'l'), s)
-vim.keymap.set('t', '<C-M-h>', resize_window_str('<C-\\><C-n>:', 'h'), s)
-vim.keymap.set('t', '<C-M-j>', resize_window_str('<C-\\><C-n>:', 'j'), s)
-vim.keymap.set('t', '<C-M-k>', resize_window_str('<C-\\><C-n>:', 'k'), s)
-vim.keymap.set('t', '<C-M-l>', resize_window_str('<C-\\><C-n>:', 'l'), s)
+local util = require('utl.util')
+vim.keymap.set({'n', 't'}, '<C-M-h>', function()
+  return util.resize_window('h')
+end, s)
+vim.keymap.set({'n', 't'}, '<C-M-j>', function()
+  return util.resize_window('j')
+end, s)
+vim.keymap.set({'n', 't'}, '<C-M-k>', function()
+  return util.resize_window('k')
+end, s)
+vim.keymap.set({'n', 't'}, '<C-M-l>', function()
+  return util.resize_window('l')
+end, s)
 
 -- line movement
 vim.keymap.set('n', '<S-down>', [[<CMD>m+<CR>]], s)
@@ -95,15 +96,16 @@ vim.keymap.set('x', '<S-Tab>', [[<gv]])
 vim.keymap.set('n', '<leader>ge', [[<CMD>Ge:<CR>]], s)
 vim.keymap.set('n', '<leader>}', [[zf}]], s)
 
-vim.keymap.set('n', '<leader>i',
-  [[<CMD>lua require('utl.util').toggle_bool_option('o', 'ignorecase')<CR>]], s)
+vim.keymap.set('n', '<leader>i', function()
+  return require('utl.util').toggle_bool_option('o', 'ignorecase')
+end, s)
 
 vim.keymap.set('n', '<leader>ea', [[vip:EasyAlign<CR>]], s)
 vim.keymap.set('x', '<leader>ea', [[:EasyAlign<CR>]], s)
 
-vim.keymap.set('n', '<leader>H',
-  [[<CMD>lua require('mod.terminal').floating_help(vim.fn.expand('<cword>'))<CR>]],
-  s)
+vim.keymap.set('n', '<leader>H', function()
+  return require('mod.terminal').floating_help(vim.fn.expand('<cword>'))
+end, s)
 
 vim.keymap.set('v', '<up>', '<Plug>SchleppUp', u)
 vim.keymap.set('v', '<down>', '<Plug>SchleppDown', u)
