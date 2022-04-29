@@ -50,7 +50,7 @@ function M.resize(opts)
   table.remove(buf, 1)
   local width = M.min_width
   for _, l in ipairs(buf) do
-    local line_width = #(l:gsub('^(.-)%s*$', '%1'))
+    local line_width = #(l:gsub('^(.-)%s*$', '%1'):gsub('➛.*', ''))
     if line_width > width then
       width = line_width
     end
