@@ -20,7 +20,7 @@ cmp.setup({
     end,
   },
 
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-g>'] = cmp.mapping.complete(),
@@ -50,7 +50,7 @@ cmp.setup({
         util.feedkeys('<C-d>', 'n')
       end
     end, {'i', 's'}),
-  },
+  }),
 
   formatting = {
     format = require('lspkind').cmp_format({
@@ -82,8 +82,8 @@ cmp.setup({
   },
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     {
       name = 'buffer',
@@ -91,8 +91,8 @@ cmp.setup.cmdline('/', {
   },
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     {
       name = 'path',
@@ -103,14 +103,3 @@ cmp.setup.cmdline(':', {
     },
   }),
 })
-
--- require('utl.util').augroup({
---   name = '__CMP__',
---   autocmds = {
---     {
---       event = 'FileType',
---       glob = 'lua',
---       cmd = [[lua require('cmp').setup.buffer {sources = {{name = 'nvim_lua'}}}]],
---     },
---   },
--- })
