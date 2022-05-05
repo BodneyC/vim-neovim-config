@@ -19,6 +19,7 @@ local function make_capabilities()
     properties = {'documentation', 'detail', 'additionalTextEdits'},
   }
   caps = require('cmp_nvim_lsp').update_capabilities(caps)
+  return caps
 end
 
 local capabilities = make_capabilities()
@@ -27,7 +28,8 @@ local function on_attach(client, bufnr)
   if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
     vim.diagnostic.disable()
   end
-  lsp_status.on_attach(client)
+  -- NOTE: Awaiting https://github.com/nvim-lua/lsp-status.nvim/pull/78
+  -- lsp_status.on_attach(client)
 end
 
 local custom_setups = {

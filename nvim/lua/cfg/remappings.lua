@@ -46,15 +46,12 @@ vim.keymap.set('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]])
 vim.keymap.set('n', '<leader>/', [[<Cmd>noh<CR>]], s)
 vim.keymap.set('n', '<leader>S', [[<Cmd>SymbolsOutline<CR>]], s)
 
-vim.keymap.set('n', '<C-/>', [[gcc]], {})
-vim.keymap.set('x', '<C-/>', [[gc]], {})
-vim.keymap.set('i', '<C-/>', [[<C-o>gcc]], {})
-
 -- NOTE: Doesn't work with `vim.keymap.set`
-vim.api.nvim_set_keymap('n', '', [[gcc]], {})
-vim.api.nvim_set_keymap('x', '', [[gc]], {})
-vim.api.nvim_set_keymap('i', '', [[<C-o>gcc]], {})
-
+-- NOTE: Also works with vim.cmd([[nmap gcc]])
+vim.api.nvim_set_keymap('n', '<C-/>', [[gcc]], {})
+vim.api.nvim_set_keymap('x', '<C-/>', [[gc]], {})
+vim.api.nvim_set_keymap('i', '<C-/>', [[<C-o>gcc]], {})
+ 
 vim.keymap.set('n', '<leader>"', [[<CMD>sbn<CR>]], s)
 vim.keymap.set('n', '<leader>%', [[<CMD>vert sbn<CR>]], s)
 vim.keymap.set('n', '<leader>bD', require('mod.functions').bufonly, s)
