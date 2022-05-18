@@ -1,7 +1,6 @@
 local util = require('utl.util')
 
 util.opt('g', {
-
   -- Relies on this file being loaded after the plugin itself
   __buffer_first_refreshed = false,
 
@@ -25,6 +24,8 @@ util.opt('g', {
 
   asynctasks_term_pos = 'bottom',
   asyncrun_open = 15,
+
+  bullets_outline_levels = {'ROM', 'ABC', 'num', 'abc', 'rom', 'std-'},
 
   ['conjure#mapping#prefix'] = '\\',
 

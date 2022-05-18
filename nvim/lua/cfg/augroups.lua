@@ -10,8 +10,16 @@ do
   vim.api.nvim_create_autocmd({'BufLeave', 'TextChanged'}, {
     group = group,
     pattern = '*',
-    -- command = [[if &readonly == 0 && filereadable(bufname('%')) | update | endif]],
-    command = [[if &readonly == 0 && &modified == 1 && filereadable(bufname('%')) | write | doautocmd BufWritePost | endif]],
+    callback = function()
+      if vim.bo.readonly or not vim.bo.modified or
+        vim.fn.filereadable(vim.fn.bufname('%')) == 0 then
+        return
+      end
+      vim.cmd([[silent update]])
+      if vim.bo.ft == 'rust' then
+        vim.cmd([[doautocmd BufWritePost]])
+      end
+    end,
   })
   vim.api.nvim_create_autocmd('TextYankPost', {
     group = group,
@@ -32,32 +40,32 @@ do
 end
 
 -- do
-  -- local group = vim.api.nvim_create_augroup('__EXT_ASSOCS__', {
-  --   clear = true,
-  -- })
-  -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-  --   group = group,
-  --   pattern = {'*.MD', '*.md'},
-  --   command = [[setf markdown]],
-  -- })
-  -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-  --   group = group,
-  --   pattern = '*.rasi',
-  --   command = [[setf css]],
-  -- })
-  -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-  --   group = group,
-  --   pattern = 'Dockerfile*',
-  --   command = [[setf dockerfile]],
-  -- })
-  -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-  --   group = group,
-  --   pattern = 'Jenkinsfile*',
-  --   command = [[set ft=groovy et ts=4 sw=4]],
-  -- })
-  -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-  --   group = group,
-  --   pattern = '*.xml',
-  --   command = [[set ft=xml et ts=4 sw=4]],
-  -- })
+-- local group = vim.api.nvim_create_augroup('__EXT_ASSOCS__', {
+--   clear = true,
+-- })
+-- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+--   group = group,
+--   pattern = {'*.MD', '*.md'},
+--   command = [[setf markdown]],
+-- })
+-- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+--   group = group,
+--   pattern = '*.rasi',
+--   command = [[setf css]],
+-- })
+-- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+--   group = group,
+--   pattern = 'Dockerfile*',
+--   command = [[setf dockerfile]],
+-- })
+-- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+--   group = group,
+--   pattern = 'Jenkinsfile*',
+--   command = [[set ft=groovy et ts=4 sw=4]],
+-- })
+-- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+--   group = group,
+--   pattern = '*.xml',
+--   command = [[set ft=xml et ts=4 sw=4]],
+-- })
 -- end

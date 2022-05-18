@@ -10,10 +10,9 @@ bskm(0, 'n', 'k', 'gk', flags.ns)
 bskm(0, 'n', 'gj', 'j', flags.ns)
 bskm(0, 'n', 'gk', 'k', flags.ns)
 vim.cmd([[
-    let @t = "mzvip:EasyAlign *|\<CR>`z"
-    let @h = "YpVr="
-  ]])
-bskm(0, 'n', 'o', 'A\x0D', flags.ns)
+  let @t = "mzvip:EasyAlign *|\<CR>`z"
+  let @h = "YpVr="
+]])
 bskm(0, 'n', '<leader>S', '1z=', flags.ns)
 bskm(0, 'i', '<Tab>', string.gsub([[
   pumvisible()

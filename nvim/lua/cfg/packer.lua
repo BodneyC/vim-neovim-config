@@ -317,6 +317,7 @@ return packer.startup({
       'plasticboy/vim-markdown',
       ft = 'markdown',
     }
+    use {'dkarter/bullets.vim'}
     -- use {'simrat39/rust-tools.nvim'}
     use {
       'Freyskeyd/rust-tools.nvim',

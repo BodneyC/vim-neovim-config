@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
--- local lsp_status = require('lsp-status')
+local lsp_status = require('lsp-status')
 
 local home = vim.loop.os_homedir()
 
@@ -293,19 +293,23 @@ local custom_setups = {
 
     require('rust-tools').setup({
       tools = {
+        autoSetHints = true,
+        hover_with_actions = true,
         inlay_hints = {
-          show_parameter_hints = false,
+          show_parameter_hints = true,
         },
       },
       server = {
         standalone = false,
         -- on_attach = on_attach,
-        ['rust-analyzer'] = {
-          -- enable clippy on save
-          checkOnSave = {
-            command = 'clippy',
-          },
-        },
+        -- settings = {
+        --   ['rust-analyzer'] = {
+        --     -- enable clippy on save
+        --     checkOnSave = {
+        --       command = 'clippy',
+        --     },
+        --   },
+        -- },
       },
       dap = {
         adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path,
