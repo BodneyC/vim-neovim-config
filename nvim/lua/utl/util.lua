@@ -30,50 +30,6 @@ function M.opt(s, d)
   end
 end
 
-function M.document_formatting()
-  local clients = vim.lsp.buf_get_clients()
-  if #clients > 0 then
-    for _, o in pairs(clients) do
-      if o.resolved_capabilities.document_formatting ~= false then
-        vim.lsp.buf.formatting()
-        return
-      end
-    end
-  end
-  vim.cmd('w')
-  vim.cmd('FormatWrite')
-end
-
-function M.show_documentation()
-  if #vim.lsp.buf_get_clients() ~= 0 then
-    vim.lsp.buf.hover()
-  else
-    if vim.bo.ft == 'vim' then
-      vim.cmd('H ' .. vim.fn.expand('<cword>'))
-    elseif string.match(vim.bo.ft, 'z?sh') then
-      vim.cmd('M ' .. vim.fn.expand('<cword>'))
-    else
-      print('No hover candidate found')
-    end
-  end
-end
-
-function M.go_to_definition()
-  if #vim.lsp.buf_get_clients() ~= 0 then
-    vim.lsp.buf.definition()
-  else
-    for _, wrd in ipairs({'<cword>', '<cWORD>', '<cexpr>'}) do
-      local word = vim.fn.expand(wrd)
-      if #(vim.fn.taglist('^' .. word .. '$')) then
-        vim.cmd('tag ' .. word)
-        return
-      end
-    end
-    vim.cmd('redraw')
-    print('No definition found')
-  end
-end
-
 local store = require('utl.fn_store')
 
 function M.make_mappings(mappings)

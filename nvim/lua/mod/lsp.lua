@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
-local lsp_status = require('lsp-status')
+-- local lsp_status = require('lsp-status')
 
 local home = vim.loop.os_homedir()
 
@@ -416,27 +416,106 @@ local fts_loaded = {
 }
 local lsps_loaded = {}
 
+local function set_keymaps()
+
+  local sb = {
+    silent = true,
+    buffer = true,
+  }
+
+  vim.keymap.set('n', 'K', require('mod.lsp').show_documentation, sb)
+  vim.keymap.set('n', '<C-]>', require('mod.lsp').go_to_definition, sb)
+
+  vim.keymap.set('n', 'gD', vim.lsp.buf.implementation, sb)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, sb)
+  vim.keymap.set('n', '1gD', vim.lsp.buf.type_definition, sb)
+  vim.keymap.set('n', ']w', require('mod.diagnostics').navigate('next'), sb)
+  vim.keymap.set('n', '[w', require('mod.diagnostics').navigate('prev'), sb)
+  vim.keymap.set('n', '<Leader>F', require('mod.lsp').document_formatting, sb)
+  vim.keymap.set('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', sb)
+
+  vim.keymap.set('n', [[\h]], vim.lsp.buf.hover, sb)
+  vim.keymap.set('n', [[\s]], vim.lsp.buf.document_symbol, sb)
+  vim.keymap.set('n', [[\q]], vim.lsp.buf.workspace_symbol, sb)
+  vim.keymap.set('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', sb)
+  vim.keymap.set('n', [[\a]], function()
+    local ok = pcall(require'lspsaga.command'.load_command, 'code_action')
+    if not ok then
+      vim.lsp.buf.code_action()
+    end
+  end, sb)
+  vim.keymap.set('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', sb)
+  vim.keymap.set('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>', sb)
+  vim.keymap.set('n', [[\r]], '<CMD>Lspsaga rename<CR>', sb)
+end
+
 function M.filetype(ft)
   if vim.bo.buftype ~= '' then
     return
   end
   if fts_loaded[ft] then
+    set_keymaps()
     return
   end
+  fts_loaded[ft] = true
   local lsp = find_lsp_for(ft)
   if not lsp then
-    print('No LSP for [' .. ft .. ']')
     return
   end
   if lsps_loaded[lsp] then
+    set_keymaps()
     return
   end
+  lsps_loaded[lsp] = true
   lsp_map[lsp].setup()
   if #vim.lsp.buf_get_clients() == 0 then
     lspconfig[lsp].manager.try_add()
   end
-  fts_loaded[ft] = true
-  lsps_loaded[lsp] = true
+  set_keymaps()
+end
+
+function M.document_formatting()
+  local clients = vim.lsp.buf_get_clients()
+  if #clients > 0 then
+    for _, o in pairs(clients) do
+      if o.server_capabilities.documentFormattingProvider then
+        vim.lsp.buf.format()
+        return
+      end
+    end
+  end
+  vim.cmd('w')
+  vim.cmd('FormatWrite')
+end
+
+function M.show_documentation()
+  if #vim.lsp.buf_get_clients() ~= 0 then
+    vim.lsp.buf.hover()
+  else
+    if vim.bo.ft == 'vim' then
+      vim.cmd('H ' .. vim.fn.expand('<cword>'))
+    elseif string.match(vim.bo.ft, 'z?sh') then
+      vim.cmd('M ' .. vim.fn.expand('<cword>'))
+    else
+      print('No hover candidate found')
+    end
+  end
+end
+
+function M.go_to_definition()
+  if #vim.lsp.buf_get_clients() ~= 0 then
+    vim.lsp.buf.definition()
+  else
+    for _, wrd in ipairs({'<cword>', '<cWORD>', '<cexpr>'}) do
+      local word = vim.fn.expand(wrd)
+      if #(vim.fn.taglist('^' .. word .. '$')) then
+        vim.cmd('tag ' .. word)
+        return
+      end
+    end
+    vim.cmd('redraw')
+    print('No definition found')
+  end
 end
 
 return M

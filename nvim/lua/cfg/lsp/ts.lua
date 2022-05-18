@@ -1,4 +1,4 @@
-local autotag_filetypes = { 
+local autotag_filetypes = {
   'html',
   'javascript',
   'javascriptreact',
