@@ -365,7 +365,7 @@ local function generate_lsp_map()
     'bashls', -- npm i -g bash-language-server
     'clangd', -- package-manager - clang
     -- 'clojure_lsp', -- manual - https://github.com/snoe/clojure-lsp
-    -- 'gopls', -- go get golang.org/x/tools/gopls@latest
+    'gopls', -- go get golang.org/x/tools/gopls@latest
     'html', -- npm i -g vscode-html-languageserver-bin
     'jsonls', -- npm i -g vscode-json-languageserver
     -- 'vimls', -- npm i -g vim-language-server

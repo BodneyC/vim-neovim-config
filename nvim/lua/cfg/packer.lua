@@ -129,6 +129,7 @@ return packer.startup({
         }
       end,
     }
+    use {'vim-test/vim-test'}
 
     --- QOL
     use {'farmergreg/vim-lastplace'}
