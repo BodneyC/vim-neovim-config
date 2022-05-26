@@ -362,7 +362,10 @@ local function generate_lsp_map()
   for _, lsp in ipairs({
     'tsserver', -- npm i -g typescript-language-server
     'dockerls', -- npm i -g dockerfile-language-server-nodejs
-    'bashls', -- npm i -g bash-language-server
+    -- Tree-sitter required
+    -- npm i -g bash-language-server
+    -- package-manager shellcheck
+    'bashls',
     'clangd', -- package-manager - clang
     -- 'clojure_lsp', -- manual - https://github.com/snoe/clojure-lsp
     'gopls', -- go get golang.org/x/tools/gopls@latest

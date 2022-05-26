@@ -5,6 +5,7 @@ require('formatter').setup {
         return {
           exe = 'shfmt',
           args = {'-w', '-i=2', '-bn', '-ci', '-sr'},
+          stdin = false,
         }
       end,
     },
@@ -13,6 +14,7 @@ require('formatter').setup {
         return {
           exe = 'shfmt',
           args = {'-w', '-i=2', '-bn', '-ci', '-sr'},
+          stdin = false,
         }
       end,
     },
