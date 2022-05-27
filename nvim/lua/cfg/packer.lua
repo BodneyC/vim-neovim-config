@@ -198,7 +198,7 @@ return packer.startup({
     use {'BodneyC/togool.vim'}
     use {'andymass/vim-matchup'} -- % on `end`s
     use {'moll/vim-bbye'} -- <leader>bd
-    use {'ggandor/lightspeed.nvim'}
+    -- use {'ggandor/lightspeed.nvim'}
     use {'tpope/vim-repeat'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-unimpaired'}

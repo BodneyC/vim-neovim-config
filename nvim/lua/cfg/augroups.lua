@@ -19,6 +19,8 @@ do
       if vim.bo.ft == 'rust' then
         vim.cmd([[doautocmd BufWritePost]])
       end
+      -- Bug: vaguely related to https://github.com/tpope/vim-repeat/issues/82
+      vim.g.repeat_tick = vim.g.repeat_tick + 1
     end,
   })
   vim.api.nvim_create_autocmd('TextYankPost', {
