@@ -45,7 +45,7 @@ function M.everforest_custom()
 
   hl('NvimTreeNormal', nil, p.bg1)
   hl('NvimTreeCursorLine', nil, p.bg0)
-  hl('NvimTreeEndOfBuffer', nil, p.bg1)
+  hl('NvimTreeEndOfBuffer', p.bg1, p.bg1)
 
   hl('gitblame', p.grey1, p.bg1, {'italic'})
 
@@ -53,6 +53,8 @@ function M.everforest_custom()
   hl('VirtualTextHint', nil, p.bg1)
   hl('VirtualTextError', nil, p.bg1)
   hl('VirtualTextWarning', nil, p.bg1)
+
+  hl('IndentBlanklineChar', p.bg1, nil)
 end
 
 return M

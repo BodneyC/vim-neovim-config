@@ -1,4 +1,3 @@
-local util = require('utl.util')
 local s = require('utl.maps').flags.s
 
 vim.keymap.set('n', '<Leader>d', function()
@@ -35,53 +34,24 @@ end
 
 local icons = require('mod.theme').icons
 
-util.opt('g', {
-  nvim_tree_icons = {
-    default = '',
-    symlink = '',
-    git = {
-      unstaged = icons.git.unstaged,
-      staged = icons.git.staged,
-      unmerged = icons.git.unmerged,
-      renamed = icons.git.renamed,
-      untracked = icons.git.untracked,
-      deleted = icons.git.deleted,
-      ignored = icons.git.ignored,
-    },
-    folder = {
-      arrow_open = '',
-      arrow_closed = '',
-      default = '',
-      open = '',
-      empty = '',
-      empty_open = '',
-      symlink = '',
-      symlink_open = '',
-    },
-  },
-  nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-  },
-})
-
 local system_cb = require('mod.nvim-tree').system_cb
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 require('nvim-tree').setup {
+
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,
   ignore_ft_on_setup = {},
   open_on_tab = false,
+  hijack_cursor = false,
+  update_cwd = false,
+
   hijack_directories = {
     enable = true,
     auto_open = true,
   },
-  hijack_cursor = false,
-  update_cwd = false,
+
   diagnostics = {
     enable = true,
     icons = {
@@ -91,15 +61,52 @@ require('nvim-tree').setup {
       error = icons.diagnostics.sign.error,
     },
   },
+
   update_focused_file = {
     enable = true,
     update_cwd = false,
     ignore_list = {},
   },
+
   system_open = {
     cmd = nil,
     args = {},
   },
+
+  renderer = {
+    icons = {
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = false,
+      },
+      glyphs = {
+        default = '',
+        symlink = '',
+        git = {
+          unstaged = icons.git.unstaged,
+          staged = icons.git.staged,
+          unmerged = icons.git.unmerged,
+          renamed = icons.git.renamed,
+          untracked = icons.git.untracked,
+          deleted = icons.git.deleted,
+          ignored = icons.git.ignored,
+        },
+        folder = {
+          arrow_open = '',
+          arrow_closed = '',
+          default = '',
+          open = '',
+          empty = '',
+          empty_open = '',
+          symlink = '',
+          symlink_open = '',
+        },
+      },
+    },
+  },
+
   actions = {
     change_dir = {
       enable = true,
@@ -126,6 +133,7 @@ require('nvim-tree').setup {
       },
     },
   },
+
   view = {
     width = require('mod.nvim-tree').min_width,
     height = 30,
@@ -134,50 +142,17 @@ require('nvim-tree').setup {
     mappings = {
       custom_only = false,
       list = {
-        {
-          key = 'Y',
-          cb = tree_cb('copy'),
-        },
-        {
-          key = 'l',
-          cb = tree_cb('open_node'),
-        },
-        {
-          key = 'h',
-          cb = tree_cb('close_node'),
-        },
-        {
-          key = '+x',
-          cb = system_cb('chmod +x'),
-        },
-        {
-          key = '-x',
-          cb = system_cb('chmod -x'),
-        },
-        {
-          key = 'd',
-          cb = system_cb('rem -q --'),
-        },
-        {
-          key = 'D',
-          cb = system_cb('rem -q --', {
-            directories = true,
-          }),
-        },
-        {
-          key = 'u',
-          cb = system_cb('rem last -q', {
-            directories = true,
-            ignore_file = true,
-          }),
-        },
-        {
-          key = 'U',
-          cb = system_cb('rem last -qy', {
-            directories = true,
-            ignore_file = true,
-          }),
-        },
+        -- LuaFormatter off
+        { key = 'Y', cb = tree_cb('copy'), },
+        { key = 'l', cb = tree_cb('open_node'), },
+        { key = 'h', cb = tree_cb('close_node'), },
+        { key = '+x', cb = system_cb('chmod +x'), },
+        { key = '-x', cb = system_cb('chmod -x'), },
+        { key = 'd', cb = system_cb('rem -q --'), },
+        { key = 'D', cb = system_cb('rem -q --', { directories = true, }), },
+        { key = 'u', cb = system_cb('rem last -q', { directories = true, ignore_file = true, }), },
+        { key = 'U', cb = system_cb('rem last -qy', { directories = true, ignore_file = true, }), },
+        -- LuaFormatter on
       },
     },
   },
