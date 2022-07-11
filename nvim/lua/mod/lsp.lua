@@ -363,8 +363,8 @@ local function generate_lsp_map()
     'tsserver', -- npm i -g typescript-language-server
     'dockerls', -- npm i -g dockerfile-language-server-nodejs
     -- Tree-sitter required
-    -- npm i -g bash-language-server
-    -- package-manager shellcheck
+    --  npm i -g bash-language-server
+    --  package-manager shellcheck
     'bashls',
     'clangd', -- package-manager - clang
     -- 'clojure_lsp', -- manual - https://github.com/snoe/clojure-lsp

@@ -5,6 +5,7 @@ local lib = require 'nvim-tree.lib'
 local nvim_tree = require('nvim-tree')
 
 M.min_width = 30
+M.max_width = 50
 
 function M.system(cmd, opts)
   if view.is_help_ui() then
@@ -53,6 +54,9 @@ function M.resize(opts)
     local line_width = #(l:gsub('^(.-)%s*$', '%1'):gsub('➛.*', ''))
     if line_width > width then
       width = line_width
+    elseif line_width > M.max_width then
+      width = M.max_width
+      break
     end
   end
   if width ~= cur_width then

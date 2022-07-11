@@ -1,7 +1,5 @@
 local util = require('utl.util')
 
-vim.g.do_filetype_lua = 1
-
 -- Disable builtins
 local builtins = {
   'gzip',

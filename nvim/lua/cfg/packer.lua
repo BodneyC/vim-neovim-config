@@ -131,6 +131,34 @@ return packer.startup({
     }
     use {'vim-test/vim-test'}
 
+    use {
+      'rcarriga/neotest',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-treesitter/nvim-treesitter',
+        'antoinemadec/FixCursorHold.nvim',
+
+        'rcarriga/neotest-vim-test',
+        'rcarriga/neotest-plenary',
+        'rcarriga/neotest-python',
+      },
+      config = function()
+        require('neotest').setup({
+          adapters = {
+            require('neotest-python')({
+              dap = {
+                justMyCode = false,
+              },
+            }),
+            require('neotest-plenary'),
+            require('neotest-vim-test')({
+              ignore_file_types = {'python', 'vim', 'lua'},
+            }),
+          },
+        })
+      end,
+    }
+
     --- QOL
     use {'farmergreg/vim-lastplace'}
     use {
