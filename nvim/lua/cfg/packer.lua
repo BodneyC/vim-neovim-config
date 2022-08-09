@@ -346,12 +346,11 @@ return packer.startup({
       'plasticboy/vim-markdown',
       ft = 'markdown',
     }
-    use {'dkarter/bullets.vim'}
-    -- use {'simrat39/rust-tools.nvim'}
-    use {
-      'Freyskeyd/rust-tools.nvim',
-      branch = 'dap_fix',
+    use { -- bullet points in MD
+      'dkarter/bullets.vim',
+      ft = 'markdown',
     }
+    use {'simrat39/rust-tools.nvim'}
 
     --- Local
     ---- Mine
@@ -361,6 +360,13 @@ return packer.startup({
     ---- Others
     -- use {'~/gitclones/barbar.nvim', branch = 'master', requires = {{'romgrk/lib.kom'}}}
     -- use {'~/gitclones/git-blame.nvim'}
+
+    use {
+      'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+      config = function()
+        require('lsp_lines').setup()
+      end,
+    }
 
   end,
   config = {

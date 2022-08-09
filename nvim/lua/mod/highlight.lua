@@ -50,9 +50,9 @@ function M.everforest_custom()
   hl('gitblame', p.grey1, p.bg1, {'italic'})
 
   hl('VirtualTextInfo', nil, p.bg1)
-  hl('VirtualTextHint', nil, p.bg1)
-  hl('VirtualTextError', nil, p.bg1)
-  hl('VirtualTextWarning', nil, p.bg1)
+  hl('VirtualTextHint', p.blue, p.bg1)
+  hl('VirtualTextError', p.red, p.bg1)
+  hl('VirtualTextWarning', p.orange, p.bg1)
 
   hl('IndentBlanklineChar', p.bg1, nil)
 end

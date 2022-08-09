@@ -33,7 +33,6 @@ vim.keymap.set('n', '<F7>', [[<CMD>set spell!<CR>]], s)
 vim.keymap.set('i', '<F7>', [[<C-o>:set spell!<CR>]], s)
 
 vim.keymap.set('i', '<C-w>', '<C-S-w>', s)
-vim.keymap.set('i', 'jj', '<Esc>', s)
 
 vim.keymap.set('n', 'Y', 'yy', s)
 for _, ch in ipairs({'y', 'Y', 'p', 'P'}) do
@@ -51,7 +50,7 @@ vim.keymap.set('n', '<leader>S', [[<Cmd>SymbolsOutline<CR>]], s)
 vim.api.nvim_set_keymap('n', '<C-/>', [[gcc]], {})
 vim.api.nvim_set_keymap('x', '<C-/>', [[gc]], {})
 vim.api.nvim_set_keymap('i', '<C-/>', [[<C-o>gcc]], {})
- 
+
 vim.keymap.set('n', '<leader>"', [[<CMD>sbn<CR>]], s)
 vim.keymap.set('n', '<leader>%', [[<CMD>vert sbn<CR>]], s)
 vim.keymap.set('n', '<leader>bD', require('mod.functions').bufonly, s)
