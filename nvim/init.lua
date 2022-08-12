@@ -24,3 +24,4 @@ util.safe_require('cfg.highlight')
 
 util.safe_require_and_init('mod.terminal')
 util.safe_require_and_init('mod.vim-test')
+util.safe_require_and_init('mod.neotest')

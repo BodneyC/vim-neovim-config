@@ -1,5 +1,4 @@
 local lspconfig = require('lspconfig')
-local lsp_status = require('lsp-status')
 
 local home = vim.loop.os_homedir()
 
@@ -24,7 +23,7 @@ end
 
 local capabilities = make_capabilities()
 
-local function on_attach(client, bufnr)
+local function on_attach(_, bufnr)
   if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
     vim.diagnostic.disable()
   end

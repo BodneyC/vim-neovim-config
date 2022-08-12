@@ -33,7 +33,7 @@ require('dapui').setup({
           size = 00.25,
         },
       },
-      size = 70,
+      size = 50,
       position = 'left', -- Can be "left", "right", "top", "bottom"
     },
     {

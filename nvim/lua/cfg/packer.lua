@@ -88,7 +88,6 @@ return packer.startup({
       end,
       ft = 'python',
     }
-
     --- Added functionality
     use {
       'BodneyC/hex-this-vim',
@@ -141,9 +140,18 @@ return packer.startup({
         'rcarriga/neotest-vim-test',
         'rcarriga/neotest-plenary',
         'rcarriga/neotest-python',
+        'haydenmeade/neotest-jest',
       },
       config = function()
         require('neotest').setup({
+          diagnostic = {
+            enabled = true,
+          },
+          status = {
+            enabled = true,
+            virtual_text = false,
+            signs = true,
+          },
           adapters = {
             require('neotest-python')({
               dap = {
@@ -153,6 +161,14 @@ return packer.startup({
             require('neotest-plenary'),
             require('neotest-vim-test')({
               ignore_file_types = {'python', 'vim', 'lua'},
+            }),
+            require('neotest-jest')({
+              jestCommand = './node_modules/.bin/jest',
+              jestConfigFile = 'custom.jest.config.ts',
+              env = {
+                CI = true,
+              },
+              cwd = vim.fn.getcwd,
             }),
           },
         })
