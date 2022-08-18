@@ -44,13 +44,13 @@ return packer.startup({
       },
     }
     use {'mfussenegger/nvim-jdtls'}
-    use {
-      'narutoxy/dim.lua',
-      requires = {'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter'},
-      config = function()
-        require('dim').setup()
-      end,
-    }
+    -- use {
+    --   'narutoxy/dim.lua',
+    --   requires = {'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter'},
+    --   config = function()
+    --     require('dim').setup()
+    --   end,
+    -- }
     use {'neovim/nvim-lspconfig'}
     use {'nvim-lua/lsp-status.nvim'}
     use {
@@ -88,6 +88,7 @@ return packer.startup({
       end,
       ft = 'python',
     }
+
     --- Added functionality
     use {
       'BodneyC/hex-this-vim',
@@ -250,7 +251,10 @@ return packer.startup({
     use {'vim-utils/vim-all'} -- a<CR>
 
     --- Prettiness
-    use {'sainnhe/everforest'}
+    use {
+      'sainnhe/everforest',
+      config = require('mod.everforest').config,
+    }
     use {
       'KabbAmine/vCoolor.vim',
       cmd = 'VCoolor',
@@ -332,6 +336,7 @@ return packer.startup({
     use {'tpope/vim-fugitive'}
 
     --- Language support
+    use {'Olical/conjure'}
     use {'towolf/vim-helm'}
     use {
       'hashivim/vim-terraform',

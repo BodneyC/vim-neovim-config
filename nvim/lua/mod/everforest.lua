@@ -1,6 +1,23 @@
 local M = {}
 
-function M.everforest_custom()
+-- This function is used in everforest pugin setup, changing here will require
+-- a :PackerCompile
+function M.config()
+  vim.g.everforest_background = 'medium'
+
+  local group = vim.api.nvim_create_augroup('EverforestCustom', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd('ColorScheme', {
+    group = group,
+    pattern = 'everforest',
+    callback = require('mod.everforest').custom,
+  })
+
+  vim.cmd('colo everforest')
+end
+
+function M.custom()
   local p = vim.fn['everforest#get_palette'](vim.g.everforest_background,
     vim.empty_dict())
 

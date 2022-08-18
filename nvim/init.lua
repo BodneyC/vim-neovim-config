@@ -20,7 +20,7 @@ util.safe_require('cfg.plugins')
 util.safe_require('cfg.lsp')
 util.safe_require('cfg.dap')
 
-util.safe_require('cfg.highlight')
+-- util.safe_require('cfg.highlight')
 
 util.safe_require_and_init('mod.terminal')
 util.safe_require_and_init('mod.vim-test')
