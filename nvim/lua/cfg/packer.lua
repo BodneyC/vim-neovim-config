@@ -88,6 +88,10 @@ return packer.startup({
       end,
       ft = 'python',
     }
+    use {
+      'mxsdev/nvim-dap-vscode-js',
+      requires = {'mfussenegger/nvim-dap'},
+    }
 
     --- Added functionality
     use {
@@ -169,7 +173,9 @@ return packer.startup({
               env = {
                 CI = true,
               },
-              cwd = vim.fn.getcwd,
+              cwd = function(_)
+                vim.fn.getcwd()
+              end,
             }),
           },
         })
@@ -246,6 +252,14 @@ return packer.startup({
     -- use {'ggandor/lightspeed.nvim'}
     use {'tpope/vim-repeat'}
     use {'tpope/vim-surround'}
+    -- use {
+    -- 'kylechui/nvim-surround',
+    -- tag = '*',
+    -- config = function()
+    -- require('nvim-surround').setup()
+    -- end,
+    -- }
+
     use {'tpope/vim-unimpaired'}
     use {'tweekmonster/startuptime.vim'}
     use {'vim-utils/vim-all'} -- a<CR>

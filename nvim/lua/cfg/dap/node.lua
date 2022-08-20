@@ -1,41 +1,9 @@
-require('telescope').load_extension('dap')
-
-local dap_install = require('dap-install')
-local dbg_list = require('dap-install.api.debuggers').get_installed_debuggers()
-
-for _, debugger in ipairs(dbg_list) do
-  dap_install.config(debugger)
-end
-
 local dap = require('dap')
-dap.configurations.lua = {
-  {
-    type = 'nlua',
-    request = 'attach',
-    name = 'Attach to running Neovim instance',
-    host = function()
-      local value = vim.fn.input('Host [127.0.0.1]: ')
-      if value ~= '' then
-        return value
-      end
-      return '127.0.0.1'
-    end,
-    port = function()
-      local val = tonumber(vim.fn.input('Port: '))
-      assert(val, 'Please provide a port number')
-      return val
-    end,
-  },
-}
 
-dap.adapters.nlua = function(callback, config)
-  callback({
-    type = 'server',
-    host = config.host,
-    port = config.port,
-  })
-end
-
+-- git clone https://github.com/microsoft/vscode-js-debug
+-- cd vscode-js-debug
+-- npm i --legacy-peer-deps
+-- npm run compile
 require('dap-vscode-js').setup({
   debugger_path = os.getenv('HOME') .. '/software/vscode-js-debug',
   adapters = {
@@ -48,7 +16,7 @@ require('dap-vscode-js').setup({
 })
 
 for _, language in ipairs({'typescript', 'javascript'}) do
-  require('dap').configurations[language] = {
+  dap.configurations[language] = {
     {
       type = 'pwa-node',
       request = 'launch',
@@ -63,6 +31,7 @@ for _, language in ipairs({'typescript', 'javascript'}) do
       processId = require'dap.utils'.pick_process,
       cwd = '${workspaceFolder}',
     },
+    -- NOTE: This is included *in* neotest-jest, specifying it here does nothing
     {
       type = 'pwa-node',
       request = 'launch',
@@ -74,6 +43,10 @@ for _, language in ipairs({'typescript', 'javascript'}) do
       cwd = '${workspaceFolder}',
       console = 'integratedTerminal',
       internalConsoleOptions = 'neverOpen',
+      -- NOTE: These would solve the "no sourcemaps" things... see above
+      skipFiles = {'<node_internals>/**'},
+      sourceMaps = true,
+      resolveSourceMapLocations = {'${workspaceFolder}/', '!/node_modules/**'},
     },
   }
 end

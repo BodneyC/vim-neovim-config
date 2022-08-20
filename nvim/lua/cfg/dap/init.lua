@@ -1,6 +1,16 @@
 local util = require('utl.util')
 
-util.safe_require('cfg.dap.dap')
+require('telescope').load_extension('dap')
+
+local dap_install = require('dap-install')
+local dbg_list = require('dap-install.api.debuggers').get_installed_debuggers()
+
+for _, debugger in ipairs(dbg_list) do
+  dap_install.config(debugger)
+end
+
+util.safe_require('cfg.dap.node')
+util.safe_require('cfg.dap.lua')
 util.safe_require('cfg.dap.dap-ui')
 util.safe_require('cfg.dap.virtual-text')
 util.safe_require('cfg.dap.signs')
@@ -30,8 +40,7 @@ vim.keymap.set('n', ldr .. '?', function()
   widgets.centered_float(widgets.scopes)
 end, s)
 
-vim.keymap.set('n', ldr .. 'o', require('dapui').open, s)
-vim.keymap.set('n', ldr .. 'O', require('dapui').close, s)
+vim.keymap.set('n', ldr .. 'o', require('dapui').toggle, s)
 
 require('which-key').register({
   x = {
@@ -48,8 +57,7 @@ require('which-key').register({
     h = 'Dap hover',
     -- e = 'Dap expr',
     ['?'] = 'Dap scopes',
-    o = 'DapUI open',
-    O = 'DapUI close',
+    o = 'DapUI toggle',
   },
 }, {
   prefix = '<leader>',

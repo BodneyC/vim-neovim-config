@@ -30,15 +30,17 @@ require('dapui').setup({
         },
         {
           id = 'watches',
-          size = 00.25,
+          size = 0.25,
         },
       },
       size = 50,
       position = 'left', -- Can be "left", "right", "top", "bottom"
     },
     {
-      elements = {'repl', 'console'},
-      size = 10,
+      elements = {
+        'console',
+      },
+      size = 8,
       position = 'bottom', -- Can be "left", "right", "top", "bottom"
     },
   },
