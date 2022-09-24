@@ -116,7 +116,7 @@ end
 
 function _G.master_bs()
   if vim.bo.buftype ~= '' then
-    return npairs.esc('\\<BS>')
+    return npairs.esc('<BS>')
   end
   local bufnr = vim.api.nvim_get_current_buf()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
