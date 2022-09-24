@@ -25,9 +25,9 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-g>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      select = false,
-    }),
+    -- ['<CR>'] = cmp.mapping.confirm({
+    --   select = false,
+    -- }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -85,14 +85,16 @@ cmp.setup({
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
-cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    {
-      name = 'buffer',
+for _, v in pairs({'/', '?'}) do
+  cmp.setup.cmdline(v, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      {
+        name = 'buffer',
+      },
     },
-  },
-})
+  })
+end
 
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),

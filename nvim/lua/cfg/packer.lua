@@ -218,7 +218,8 @@ return packer.startup({
       'windwp/nvim-autopairs',
       config = function()
         require('nvim-autopairs').setup {
-          map_cr = true,
+          break_undo = false,
+          map_cr = false,
           map_bs = false,
         }
       end,
