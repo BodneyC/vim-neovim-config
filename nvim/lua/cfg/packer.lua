@@ -388,10 +388,10 @@ return packer.startup({
       'plasticboy/vim-markdown',
       ft = 'markdown',
     }
-    -- use { -- bullet points in MD
-    --   'dkarter/bullets.vim',
-    --   ft = 'markdown',
-    -- }
+    use { -- bullet points in MD
+      'dkarter/bullets.vim',
+      ft = 'markdown',
+    }
     use {'simrat39/rust-tools.nvim'}
 
     --- Local
