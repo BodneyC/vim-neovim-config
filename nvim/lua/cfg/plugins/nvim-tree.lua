@@ -136,7 +136,6 @@ require('nvim-tree').setup {
 
   view = {
     width = require('mod.nvim-tree').min_width,
-    height = 30,
     hide_root_folder = false,
     side = 'left',
     mappings = {

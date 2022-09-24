@@ -213,7 +213,16 @@ return packer.startup({
     use {'dominikduda/vim_current_word'}
     use {'hrsh7th/vim-vsnip'}
     use {'hrsh7th/vim-vsnip-integ'}
-    use {'jiangmiao/auto-pairs'}
+    -- use {'jiangmiao/auto-pairs'}
+    use {
+      'windwp/nvim-autopairs',
+      config = function()
+        require('nvim-autopairs').setup {
+          map_cr = true,
+          map_bs = false,
+        }
+      end,
+    }
     use {'junegunn/vim-easy-align'}
     use {'kamykn/spelunker.vim'}
     use {
@@ -368,10 +377,7 @@ return packer.startup({
       'justinmk/vim-syntax-extra',
       ft = {'lex', 'yacc'},
     }
-    use {
-      'leafgarland/typescript-vim',
-      ft = {'typescript', 'typescriptreact'},
-    }
+    use {'leafgarland/typescript-vim'}
     use {
       'm-pilia/vim-pkgbuild',
       ft = 'pkgbuild',

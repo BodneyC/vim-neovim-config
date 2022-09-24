@@ -108,32 +108,75 @@ vim.keymap.set('v', '<down>', '<Plug>SchleppDown', u)
 vim.keymap.set('v', '<left>', '<Plug>SchleppLeft', u)
 vim.keymap.set('v', '<right>', '<Plug>SchleppRight', u)
 
--- bs
-vim.cmd([[
-  function! MasterBS()
-    if (&buftype != '')
-      return "\<BS>"
-    endif
-    let ln = line('.')
-    let l = getline(ln)
-    let pl = getline(ln - 1)
-    if l[:col('.') - 2] =~ '^\s\+$'
-      if pl =~ '^\s*$'
-        if l =~ '^\s*$'
-          return "\<Esc>:silent exe line('.') - 1 . 'delete'\<CR>S"
-        else
-          return "\<C-o>:silent exe line('.') - 1 . 'delete'\<CR>"
-        endif
-      else
-        return "\<C-w>\<BS>"
-      endif
+-- -- bs
+-- vim.cmd([[
+--   function! MasterBS()
+--     if (&buftype != '')
+--       return "\<BS>"
+--     endif
+--     let ln = line('.')
+--     let l = getline(ln)
+--     let pl = getline(ln - 1)
+--     if l[:col('.') - 2] =~ '^\s\+$'
+--       if pl =~ '^\s*$'
+--         if l =~ '^\s*$'
+--           return "\<Esc>:silent exe line('.') - 1 . 'delete'\<CR>S"
+--         else
+--           return "\<C-o>:silent exe line('.') - 1 . 'delete'\<CR>"
+--         endif
+--       else
+--         return "\<C-w>\<BS>"
+--       endif
+--     else
+--       return v:lua.MPairs.autopairs_bs(1)
+--     endif
+--   endfunc
+-- ]])
+-- vim.keymap.set('i', '<BS>', [[<C-r>=MasterBS()<CR>]], s)
+-- vim.keymap.set('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], s)
+-- vim.keymap.set('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], s)
+
+local autopairs = require('nvim-autopairs')
+
+local function getline(bufnr, row)
+  return vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false)[1] or ''
+end
+
+local function esc(cmd)
+  return vim.api.nvim_replace_termcodes(cmd, true, false, true)
+end
+
+local function master_bs()
+  if vim.bo.buftype ~= '' then
+    return esc('\\<BS>')
+  end
+  local bufnr = vim.api.nvim_get_current_buf()
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local current_line = getline(bufnr, row)
+  -- Current line is blank to cursor
+  if current_line:sub(0, col):match('%S') == nil then
+    local previous_line = getline(bufnr, row - 1)
+    -- All of previous line is blank
+    if previous_line:match('%S') == nil then
+      -- All of current line is blank
+      if current_line:match('%S') == nil then
+        return esc('<Esc>:silent exe line(\'.\') - 1 . \'delete\'<CR>S')
+      else -- Part of current line is not blank
+        return esc('<C-o>:silent exe line(\'.\') - 1 . \'delete\'<CR>')
+      end
+    end
+    -- The previous line has text
+    if col == 0 then
+      return esc('<C-w>')
     else
-      return AutoPairsDelete()
-    endif
-  endfunc
-]])
+      return esc('<C-w><BS>')
+    end
+  end
+  return autopairs.autopairs_bs(bufnr)
+end
+_G.MasterBS = master_bs
 
-vim.keymap.set('i', '<BS>', [[<C-r>=MasterBS()<CR>]], s)
-
-vim.keymap.set('i', '<M-w>', [[<C-r>=AutoPairsFastWrap()<CR>]], s)
-vim.keymap.set('i', '∑', [[<C-r>=AutoPairsFastWrap()<CR>]], s)
+vim.api.nvim_set_keymap('i', '<BS>', 'v:lua.MasterBS()', {
+  silent = true,
+  expr = true,
+})
