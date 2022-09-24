@@ -167,7 +167,7 @@ function _G.master_cr()
       entries[1].completion_item.label:find('^Workspace loading') then
       return npairs.autopairs_cr()
     else
-      return npairs.esc('<CR>')
+      return npairs.esc('<C-y>')
     end
   else
     return npairs.autopairs_cr()
