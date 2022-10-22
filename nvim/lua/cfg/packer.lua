@@ -256,7 +256,18 @@ return packer.startup({
     use {'zirrostig/vim-schlepp'}
 
     --- Vim internal wrappers
-    use {'BodneyC/togool.vim'}
+    use({
+      'https://github.com/nat-418/boole.nvim',
+      config = function()
+        require('boole').setup({
+          mappings = {
+            increment = '<C-a>',
+            decrement = '<C-x>',
+          },
+        })
+      end,
+    })
+    -- use {'BodneyC/togool.vim'}
     use {'andymass/vim-matchup'} -- % on `end`s
     use {'moll/vim-bbye'} -- <leader>bd
     -- use {'ggandor/lightspeed.nvim'}

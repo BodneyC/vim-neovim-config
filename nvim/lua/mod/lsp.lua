@@ -3,22 +3,27 @@ local lspconfig = require('lspconfig')
 local home = vim.loop.os_homedir()
 
 local function make_capabilities()
-  local caps = vim.lsp.protocol.make_client_capabilities()
-  local completionItem = caps.textDocument.completion.completionItem
-  completionItem.snippetSupport = true
-  completionItem.preselectSupport = true
-  completionItem.insertReplaceSupport = true
-  completionItem.labelDetailsSupport = true
-  completionItem.deprecatedSupport = true
-  completionItem.commitCharactersSupport = true
-  completionItem.tagSupport = {
-    valueSet = {1},
-  }
-  completionItem.resolveSupport = {
-    properties = {'documentation', 'detail', 'additionalTextEdits'},
-  }
-  caps = require('cmp_nvim_lsp').update_capabilities(caps)
-  return caps
+  -- local overrides = {
+  --   textDocument = {
+  --     completion = {
+  --       completionItem = {
+  --         snippetSupport = true,
+  --         preselectSupport = true,
+  --         insertReplaceSupport = true,
+  --         labelDetailsSupport = true,
+  --         deprecatedSupport = true,
+  --         commitCharactersSupport = true,
+  --         tagSupport = {
+  --           valueSet = {1},
+  --         },
+  --         resolveSupport = {
+  --           properties = {'documentation', 'detail', 'additionalTextEdits'},
+  --         },
+  --       },
+  --     },
+  --   },
+  -- }
+  return require('cmp_nvim_lsp').default_capabilities(overrides)
 end
 
 local capabilities = make_capabilities()
