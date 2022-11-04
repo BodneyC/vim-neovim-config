@@ -98,12 +98,13 @@ function M.attach()
     },
     init_options = {
       bundles = {
-        vim.fn.glob( '$HOME/software/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
+        vim.fn.glob(
+          '$HOME/software/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
         unpack(vim.split(vim.fn.glob(
           '$HOME/software/vscode-java-test/server/*.jar'), '\n')),
       },
     },
-    on_attach = function(client, bufnr)
+    on_attach = function(_, _)
       jdtls.setup_dap({
         hotcodereplace = 'auto',
       })

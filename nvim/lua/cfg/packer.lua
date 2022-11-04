@@ -389,7 +389,8 @@ return packer.startup({
       'justinmk/vim-syntax-extra',
       ft = {'lex', 'yacc'},
     }
-    use {'leafgarland/typescript-vim'}
+    -- use {'leafgarland/typescript-vim'}
+    use {'jose-elias-alvarez/typescript.nvim'}
     use {
       'm-pilia/vim-pkgbuild',
       ft = 'pkgbuild',

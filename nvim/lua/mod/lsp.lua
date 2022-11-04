@@ -160,6 +160,10 @@ local custom_setups = {
     }
   end,
 
+  tsserver = function()
+    require('typescript').setup({})
+  end,
+
   -- npm i -g diagnostic-languageserver
   diagnosticls = function()
     lspconfig.diagnosticls.setup {
@@ -351,6 +355,7 @@ local function generate_lsp_map()
     'arduino_language_server',
     'groovyls',
     'kotlin_language_server',
+    'tsserver',
   }) do
     local config = lspconfig[lsp]
     if not config then
@@ -364,7 +369,8 @@ local function generate_lsp_map()
   end
 
   for _, lsp in ipairs({
-    'tsserver', -- npm i -g typescript-language-server
+    -- 'tsserver', -- npm i -g typescript-language-server
+    -- 'prosemd_lsp', -- system install
     'dockerls', -- npm i -g dockerfile-language-server-nodejs
     -- Tree-sitter required
     --  npm i -g bash-language-server
