@@ -1,23 +1,31 @@
 local M = {}
 
-function M.replace_termcodes(s) return vim.api.nvim_replace_termcodes(s, true, true, true) end
+function M.replace_termcodes(s)
+  return vim.api.nvim_replace_termcodes(s, true, true, true)
+end
 
-function M.feedkeys(s, mode) vim.api.nvim_feedkeys(M.replace_termcodes(s), mode, true) end
+function M.feedkeys(s, mode)
+  vim.api.nvim_feedkeys(M.replace_termcodes(s), mode, true)
+end
+
+function M.safe_call(fn, args, err, ctx)
+  if err == nil then err = 'failed to call function' end
+  if ctx == nil then ctx = 'utl.util#safe_call' end
+  local ok, res = pcall(fn, unpack(args))
+  if not ok then vim.notify(err .. ' (' .. res .. ')', 'error', { title = ctx }) end
+  return res
+end
 
 function M.safe_require(module)
-  local status, res = pcall(require, module)
-  if not status then
-    print('module \'' .. module .. '\' not required: ' .. res)
-    res = nil
-  end
-  return res
+  return M.safe_call(require, { module }, 'failed to load: ' .. module,
+    'utl.util#safe_require')
 end
 
 function M.safe_require_and_init(module)
   local mod = M.safe_require(module)
   if not mod then return end
-  local status, res = pcall(mod.init)
-  if not status then print('module \'' .. module .. '\' required but not inited: ' .. res) end
+  return M.safe_call(mod.init, {}, 'failed to call init on: ' .. module,
+    'utl.util#safe_require_and_init')
 end
 
 function M.opt(s, d) for k, v in pairs(d) do vim[s][k] = v end end
@@ -29,7 +37,9 @@ function M.make_mappings(mappings)
   local skm = vim.api.nvim_set_keymap
   for _, e in ipairs(mappings) do
     local args = e.args or {}
-    if not e.mode or not e.key or not e.cmd then print('Skipping: ' .. vim.inspect(e)) end
+    if not e.mode or not e.key or not e.cmd then
+      print('Skipping: ' .. vim.inspect(e))
+    end
     if e.bufnr then
       bskm(e.bufnr, e.mode, e.key, e.cmd, args)
     else
@@ -47,7 +57,7 @@ function M.command(lhs, rhs, opts)
     opts.range and '-range' or '',
     opts.buffer and '-buffer' or '',
     lhs,
-  }
+   }
   if type(rhs) == 'string' then
     table.insert(parts, rhs)
   elseif type(rhs) == 'function' then
@@ -66,12 +76,15 @@ util.commands({
   },
 })
 --]]
-function M.commands(cmds) for _, cmd in ipairs(cmds) do M.command(cmd.name, cmd.cmd or cmd.lua_fn, cmd.opts) end end
+function M.commands(cmds)
+  for _, cmd in ipairs(cmds) do
+    M.command(cmd.name, cmd.cmd or cmd.lua_fn, cmd.opts)
+  end
+end
 
 function M.toggle_bool_option(scope, opt)
-  if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) == 'boolean' then
-    vim[scope][opt] = not vim[scope][opt]
-  end
+  if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) ==
+    'boolean' then vim[scope][opt] = not vim[scope][opt] end
 end
 
 local function last_win_of_screen(d)
@@ -114,7 +127,9 @@ function M.resize_window(dir)
     end
   end
 
-  if horz_vert == '' and pos_neg_dir == '-' then if last_win_of_screen((dir == 'j') and 'k' or 'j') then return end end
+  if horz_vert == '' and pos_neg_dir == '-' then
+    if last_win_of_screen((dir == 'j') and 'k' or 'j') then return end
+  end
   vim.cmd(horz_vert .. ' resize ' .. pos_neg_dir .. inc)
 end
 

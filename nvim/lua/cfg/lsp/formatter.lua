@@ -4,7 +4,7 @@ require('formatter').setup {
       function()
         return {
           exe = 'shfmt',
-          args = {'-w', '-i=2', '-bn', '-ci', '-sr'},
+          args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
           stdin = false,
         }
       end,
@@ -13,7 +13,7 @@ require('formatter').setup {
       function()
         return {
           exe = 'shfmt',
-          args = {'-w', '-i=2', '-bn', '-ci', '-sr'},
+          args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
           stdin = false,
         }
       end,
@@ -22,7 +22,7 @@ require('formatter').setup {
       function()
         return {
           exe = 'lua-format',
-          args = {'-i'},
+          args = { '-i' },
           stdin = false,
         }
       end,
@@ -31,7 +31,7 @@ require('formatter').setup {
       function()
         return {
           exe = 'gofmt',
-          args = {'-w'},
+          args = { '-w' },
           stdin = true,
         }
       end,
@@ -79,7 +79,7 @@ require('formatter').setup {
       function()
         return {
           exe = 'autopep8',
-          args = {'--in-place'},
+          args = { '--in-place' },
           stdin = true,
         }
       end,

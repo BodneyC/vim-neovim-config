@@ -11,6 +11,7 @@ local function vsnip_map(mode, key, pos)
   vim.keymap.set(mode, key, 'vsnip#jumpable(' .. pos .. ')  ? \'<Plug>(vsnip-jump-next)\' : \'' ..
     key .. '\'', flags.se)
 end
+
 vsnip_map('i', '<C-j>', 1)
 vsnip_map('i', '<C-k>', -1)
 vsnip_map('s', '<C-j>', 1)
@@ -32,7 +33,7 @@ vim.keymap.set('i', '<F7>', [[<C-o>:set spell!<CR>]], flags.s)
 vim.keymap.set('i', '<C-w>', '<C-S-w>', flags.s)
 
 vim.keymap.set('n', 'Y', 'yy', flags.s)
-for _, ch in ipairs({'y', 'Y', 'p', 'P'}) do
+for _, ch in ipairs({ 'y', 'Y', 'p', 'P' }) do
   vim.keymap.set('n', '<leader>' .. ch, '"+' .. ch, flags.s)
   vim.keymap.set('x', '<leader>' .. ch, '"+' .. ch, flags.s)
 end
@@ -56,10 +57,10 @@ vim.keymap.set('n', '<leader>bd', [[<CMD>Bdelete<CR>]], flags.s)
 -- resize
 
 local util = require('utl.util')
-vim.keymap.set({'n', 't'}, '<C-M-h>', function() return util.resize_window('h') end, flags.s)
-vim.keymap.set({'n', 't'}, '<C-M-j>', function() return util.resize_window('j') end, flags.s)
-vim.keymap.set({'n', 't'}, '<C-M-k>', function() return util.resize_window('k') end, flags.s)
-vim.keymap.set({'n', 't'}, '<C-M-l>', function() return util.resize_window('l') end, flags.s)
+vim.keymap.set({ 'n', 't' }, '<C-M-h>', function() return util.resize_window('h') end, flags.s)
+vim.keymap.set({ 'n', 't' }, '<C-M-j>', function() return util.resize_window('j') end, flags.s)
+vim.keymap.set({ 'n', 't' }, '<C-M-k>', function() return util.resize_window('k') end, flags.s)
+vim.keymap.set({ 'n', 't' }, '<C-M-l>', function() return util.resize_window('l') end, flags.s)
 
 -- line movement
 vim.keymap.set('n', '<S-down>', [[<CMD>m+<CR>]], flags.s)

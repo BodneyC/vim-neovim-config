@@ -9,11 +9,12 @@ vim.cmd 'filetype off'
 
 vim.g.fzf_history_dir = os.getenv('HOME') .. '/.cache/nvim/fzf/.fzf_history_dir'
 
+util.safe_require('cfg.options')
+util.safe_require('cfg.remappings')
+
 util.safe_require('cfg.packer')
 
-util.safe_require('cfg.options')
 util.safe_require('cfg.augroups')
-util.safe_require('cfg.remappings')
 util.safe_require('cfg.commands')
 
 util.safe_require('cfg.plugins')

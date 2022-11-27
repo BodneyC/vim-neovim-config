@@ -1,9 +1,29 @@
 local util = require('utl.util')
 
-util.safe_require('cfg.plugins.pack-conf')
-util.safe_require('cfg.plugins.lualine')
-util.safe_require('cfg.plugins.bufferline')
-util.safe_require('cfg.plugins.gitsigns')
-util.safe_require('cfg.plugins.nvim-tree')
+local confs = {
+  'cfg.plugins.pack-conf',
+  'cfg.plugins.auto-session',
+  'cfg.plugins.boole',
+  'cfg.plugins.bufferline',
+  'cfg.plugins.bufresize',
+  'cfg.plugins.everforest',
+  'cfg.plugins.gitsigns',
+  'cfg.plugins.indent-blankline',
+  'cfg.plugins.lsp_lines',
+  'cfg.plugins.lualine',
+  'cfg.plugins.mason',
+  'cfg.plugins.neotest',
+  'cfg.plugins.nvim-autopairs',
+  'cfg.plugins.nvim-dap-python',
+  'cfg.plugins.nvim-tree',
+  'cfg.plugins.nvim-treesitter-endwise',
+  'cfg.plugins.nvim-ts-rainbow',
+  'cfg.plugins.session-lens',
+  'cfg.plugins.stabilize',
+  'cfg.plugins.telescope',
+  'cfg.plugins.tree-sitter',
+  'cfg.plugins.todo-comments',
+  'cfg.plugins.which-key',
+ }
 
-util.safe_require_and_init('mod.telescope')
+for _, conf in ipairs(confs) do util.safe_require(conf) end

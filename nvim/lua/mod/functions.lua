@@ -14,7 +14,7 @@ function M.bufonly()
   local bwd = {}
   for bufnr = 1, vim.fn.bufnr('$') do
     if vim.fn.bufexists(bufnr) == 1 and vim.fn.getbufvar(bufnr, '&mod') == 0 and
-      lang.index_of(tablist, bufnr) == -1 then
+        lang.index_of(tablist, bufnr) == -1 then
       table.insert(bwd, vim.fn.bufname(bufnr))
       vim.cmd([[silent bwipeout]] .. bufnr)
       cnt = cnt + 1
@@ -60,7 +60,7 @@ function M.change_indent(n)
 end
 
 function M.match_over(...)
-  local args = {...}
+  local args = { ... }
   print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
   local w = vim.g.match_over_width or 80
@@ -76,9 +76,9 @@ local function call_if_fn_exists(fn) if vim.fn.exists(':' .. fn) == 1 then vim.c
 function M.handle_large_file()
   local fn = vim.fn.expand('<afile>')
   if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
-    vim.wo.updatetime = 1000
+    vim.o.updatetime = 1000
     vim.wo.wrap = false
-    vim.wo.completeopt = ''
+    vim.o.completeopt = ''
     vim.bo.swapfile = false
     if #vim.o.eventignore > 0 then
       vim.o.eventignore = vim.o.eventignore .. ',FileType'

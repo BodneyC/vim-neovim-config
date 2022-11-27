@@ -7,12 +7,12 @@ do
     pattern = '*',
     callback = require('mod.functions').handle_large_file,
   })
-  vim.api.nvim_create_autocmd({'BufLeave', 'TextChanged'}, {
+  vim.api.nvim_create_autocmd({ 'BufLeave', 'TextChanged' }, {
     group = group,
     pattern = '*',
     callback = function()
       if vim.bo.readonly or not vim.bo.modified or vim.bo.buftype ~= '' or
-        vim.fn.filereadable(vim.fn.bufname('%')) == 0 then
+          vim.fn.filereadable(vim.fn.bufname('%')) == 0 then
         return
       end
       vim.cmd([[silent update]])
