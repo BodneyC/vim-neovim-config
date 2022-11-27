@@ -7,24 +7,20 @@ local M = {}
 function M.bufonly()
   local tablist = {}
   for tabnr = 1, vim.fn.tabpagenr('$') do
-    for _, bufnr in ipairs(vim.fn.tabpagebuflist(tabnr)) do
-      table.insert(tablist, bufnr)
-    end
+    for _, bufnr in ipairs(vim.fn.tabpagebuflist(tabnr)) do table.insert(tablist, bufnr) end
   end
   local cnt = 0
   -- NOTE: These comments exist for debugging purposes
-  -- local bwd = {}
+  local bwd = {}
   for bufnr = 1, vim.fn.bufnr('$') do
     if vim.fn.bufexists(bufnr) == 1 and vim.fn.getbufvar(bufnr, '&mod') == 0 and
       lang.index_of(tablist, bufnr) == -1 then
+      table.insert(bwd, vim.fn.bufname(bufnr))
       vim.cmd([[silent bwipeout]] .. bufnr)
       cnt = cnt + 1
-      -- table.insert(bwd, bufnr)
     end
   end
-  if cnt > 0 then
-    print(cnt .. ' buffers wiped out') -- : ' .. vim.inspect(bwd))
-  end
+  if cnt > 0 then print(cnt .. ' buffers wiped out: ' .. vim.inspect(bwd)) end
 end
 
 -- WIP
@@ -51,9 +47,7 @@ end
 function M.set_indent(n)
   vim.bo.ts = tonumber(n)
   vim.bo.sw = tonumber(n)
-  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then
-    vim.cmd('IndentBlanklineRefresh')
-  end
+  if vim.fn.exists(':IndentBlanklineRefresh') == 1 then vim.cmd('IndentBlanklineRefresh') end
 end
 
 function M.change_indent(n)
@@ -68,33 +62,24 @@ end
 function M.match_over(...)
   local args = {...}
   print(vim.inspect(args))
-  if #args > 1 or (args[1] and not tonumber(args[1])) then
-    error('More than one argument')
-  end
+  if #args > 1 or (args[1] and not tonumber(args[1])) then error('More than one argument') end
   local w = vim.g.match_over_width or 80
-  if args[1] then
-    w = args[1]
-  end
+  if args[1] then w = args[1] end
   if vim.fn.hlexists('OverLength') == 0 then
     vim.cmd([[hi! OverLength guibg=#995959 guifg=#ffffff]])
   end
   vim.cmd([[match OverLength /\%]] .. w .. [[v.\+/]])
 end
 
-local function call_if_fn_exists(fn)
-  if vim.fn.exists(':' .. fn) == 1 then
-    vim.cmd(fn)
-  end
-end
+local function call_if_fn_exists(fn) if vim.fn.exists(':' .. fn) == 1 then vim.cmd(fn) end end
 
 function M.handle_large_file()
   local fn = vim.fn.expand('<afile>')
-  if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) >
-    vim.g.large_file then
-    vim.o.updatetime = 1000
-    vim.o.wrap = false
-    vim.o.completeopt = ''
-    vim.o.swapfile = false
+  if fs.file_exists(fn) and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file then
+    vim.wo.updatetime = 1000
+    vim.wo.wrap = false
+    vim.wo.completeopt = ''
+    vim.bo.swapfile = false
     if #vim.o.eventignore > 0 then
       vim.o.eventignore = vim.o.eventignore .. ',FileType'
     else
@@ -111,38 +96,5 @@ function M.handle_large_file()
     call_if_fn_exists('PearTreeDisable')
   end
 end
-
--- function M.zoom_toggle()
---   if vim.t.zoomed and vim.t.zoom_winrestcmd then
---     vim.cmd(vim.t.zoom_winrestcmd)
---     vim.t.zoomed = false
---   else
---     vim.t.zoom_winrestcmd = vim.fn.winrestcmd()
---     vim.cmd('resize | vertical resize')
---     vim.t.zoomed = true
---   end
--- end
-
--- function M.highlight_under_cursor()
---   local hl_groups = {}
---   for _, e in ipairs(vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.'))) do
---     table.insert(hl_groups, vim.fn.synIDattr(e, 'name'))
---   end
---   print(vim.inspect(hl_groups))
--- end
-
--- Requires barbar at the minute, but not necessary I suppose...
--- function M.buffer_close_all_but_visible()
---   local bs = vim.fn.map(vim.fn.filter(vim.fn.range(0, vim.fn.bufnr('$')),
---     'bufexists(v:val) && buflisted(v:val) && bufwinnr(v:val) < 0'),
---     'bufname(v:val)')
---   if #bs > 0 then
---     for _, buf in ipairs(bs) do
---       vim.fn.execute('BufferClose ' .. buf)
---     end
---   else
---     print('No buffers to delete')
---   end
--- end
 
 return M

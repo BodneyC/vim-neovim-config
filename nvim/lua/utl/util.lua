@@ -1,34 +1,26 @@
 local M = {}
 
-function M.replace_termcodes(s)
-  return vim.api.nvim_replace_termcodes(s, true, true, true)
-end
+function M.replace_termcodes(s) return vim.api.nvim_replace_termcodes(s, true, true, true) end
 
-function M.feedkeys(s, mode)
-  vim.api.nvim_feedkeys(M.replace_termcodes(s), mode, true)
-end
+function M.feedkeys(s, mode) vim.api.nvim_feedkeys(M.replace_termcodes(s), mode, true) end
 
 function M.safe_require(module)
-  local ok, err = pcall(require, module)
-  if not ok then
-    print('Module \'' .. module .. '\' not required: ' .. err)
-    err = nil
+  local status, res = pcall(require, module)
+  if not status then
+    print('module \'' .. module .. '\' not required: ' .. res)
+    res = nil
   end
-  return err
+  return res
 end
 
 function M.safe_require_and_init(module)
   local mod = M.safe_require(module)
-  if mod then
-    mod.init()
-  end
+  if not mod then return end
+  local status, res = pcall(mod.init)
+  if not status then print('module \'' .. module .. '\' required but not inited: ' .. res) end
 end
 
-function M.opt(s, d)
-  for k, v in pairs(d) do
-    vim[s][k] = v
-  end
-end
+function M.opt(s, d) for k, v in pairs(d) do vim[s][k] = v end end
 
 local store = require('utl.fn_store')
 
@@ -37,9 +29,7 @@ function M.make_mappings(mappings)
   local skm = vim.api.nvim_set_keymap
   for _, e in ipairs(mappings) do
     local args = e.args or {}
-    if not e.mode or not e.key or not e.cmd then
-      print('Skipping: ' .. vim.inspect(e))
-    end
+    if not e.mode or not e.key or not e.cmd then print('Skipping: ' .. vim.inspect(e)) end
     if e.bufnr then
       bskm(e.bufnr, e.mode, e.key, e.cmd, args)
     else
@@ -76,15 +66,10 @@ util.commands({
   },
 })
 --]]
-function M.commands(cmds)
-  for _, cmd in ipairs(cmds) do
-    M.command(cmd.name, cmd.cmd or cmd.lua_fn, cmd.opts)
-  end
-end
+function M.commands(cmds) for _, cmd in ipairs(cmds) do M.command(cmd.name, cmd.cmd or cmd.lua_fn, cmd.opts) end end
 
 function M.toggle_bool_option(scope, opt)
-  if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) ==
-    'boolean' then
+  if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) == 'boolean' then
     vim[scope][opt] = not vim[scope][opt]
   end
 end
@@ -99,13 +84,9 @@ end
 
 function M.resize_window(dir)
   local inc = vim.g.resize_increment or 2
-  if vim.fn.winnr('$') == 1 then
-    return
-  end
+  if vim.fn.winnr('$') == 1 then return end
   local horz_vert = ''
-  if dir == 'h' or dir == 'l' then
-    horz_vert = 'vertical'
-  end
+  if dir == 'h' or dir == 'l' then horz_vert = 'vertical' end
 
   local opp_dir = 'h'
   if dir == 'h' then
@@ -133,11 +114,7 @@ function M.resize_window(dir)
     end
   end
 
-  if horz_vert == '' and pos_neg_dir == '-' then
-    if last_win_of_screen((dir == 'j') and 'k' or 'j') then
-      return
-    end
-  end
+  if horz_vert == '' and pos_neg_dir == '-' then if last_win_of_screen((dir == 'j') and 'k' or 'j') then return end end
   vim.cmd(horz_vert .. ' resize ' .. pos_neg_dir .. inc)
 end
 
@@ -145,9 +122,7 @@ function M.run_cmd(cmd, strip)
   local handle = io.popen(cmd)
   local result = handle:read('*a')
   handle:close()
-  if strip then
-    result = result:gsub('^%s*(.-)%s*$', '%1')
-  end
+  if strip then result = result:gsub('^%s*(.-)%s*$', '%1') end
   return result
 end
 
@@ -163,9 +138,7 @@ function M.basic_os_info()
     -- Windows
     local env_OS = os.getenv('OS')
     local env_ARCH = os.getenv('PROCESSOR_ARCHITECTURE')
-    if env_OS and env_ARCH then
-      name, arch = env_OS, env_ARCH
-    end
+    if env_OS and env_ARCH then name, arch = env_OS, env_ARCH end
   end
 
   return name, arch

@@ -48,15 +48,11 @@ require('gitsigns').setup {
     },
 
     ['n <Leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['n <Leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <Leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['n <Leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    ['n <Leader>hS'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    ['n <Leader>hu'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    ['n <Leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
     ['n <Leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
     ['n <Leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-
-    -- Text objects
-    ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-    ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
   },
   sign_priority = 6,
   update_debounce = 100,

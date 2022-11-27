@@ -43,7 +43,7 @@ return packer.startup({
         {'hrsh7th/cmp-nvim-lsp-signature-help'},
       },
     }
-    use {'mfussenegger/nvim-jdtls'}
+    -- use {'mfussenegger/nvim-jdtls'}
     -- use {
     --   'narutoxy/dim.lua',
     --   requires = {'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter'},

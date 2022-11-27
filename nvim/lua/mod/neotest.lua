@@ -24,9 +24,9 @@ local function set_keymap()
 end
 
 function M.init()
-  vim.diagnostic.config({
-    virtual_text = false,
-  })
+  -- vim.diagnostic.config({
+  --   virtual_text = false,
+  -- })
   set_keymap()
 end
 

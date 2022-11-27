@@ -2,20 +2,24 @@
 vim.diagnostic.config({
   underline = true,
   update_in_insert = true,
-  virtual_text = {
-    spacing = 4,
-    source = 'always',
-    severity = {
-      min = vim.diagnostic.severity.HINT,
-    },
-    -- todo: icons for diagnostics?
-    --[[ format = function(diagnostic)
-        if diagnostic.severity == vim.diagnostic.severity.ERROR then
-          return string.format('E: %s', diagnostic.message)
-        end
-        return diagnostic.message
-      end, ]]
+  virtual_lines = {
+    only_current_line = true,
   },
+  virtual_text = false,
+  --virtual_text = {
+  --  spacing = 4,
+  --  source = 'always',
+  --  severity = {
+  --    min = vim.diagnostic.severity.HINT,
+  --  },
+  --  -- todo: icons for diagnostics?
+  --  --[[ format = function(diagnostic)
+  --      if diagnostic.severity == vim.diagnostic.severity.ERROR then
+  --        return string.format('E: %s', diagnostic.message)
+  --      end
+  --      return diagnostic.message
+  --    end, ]]
+  --},
   signs = true,
   severity_sort = true,
   float = {

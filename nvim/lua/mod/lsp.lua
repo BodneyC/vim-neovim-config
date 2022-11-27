@@ -344,10 +344,6 @@ local function generate_lsp_map()
       filetypes = lspconfig['rls'].document_config.default_config.filetypes,
       setup = custom_setups.rust_analyzer,
     },
-    jdtls = {
-      filetypes = lspconfig['jdtls'].document_config.default_config.filetypes,
-      setup = require('mod.jdtls').init,
-    },
   }
 
   for _, lsp in ipairs({
