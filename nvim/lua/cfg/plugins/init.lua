@@ -9,7 +9,6 @@ local confs = {
   'cfg.plugins.everforest',
   'cfg.plugins.gitsigns',
   'cfg.plugins.indent-blankline',
-  'cfg.plugins.lsp_lines',
   'cfg.plugins.lualine',
   'cfg.plugins.mason',
   'cfg.plugins.neotest',

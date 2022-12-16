@@ -8,7 +8,7 @@ return function()
   require('rust-tools').setup(add_to_default {
     tools = {
       autoSetHints = true,
-      hover_with_actions = true,
+      -- hover_with_actions = true,
       inlay_hints = { show_parameter_hints = true },
     },
     server = {

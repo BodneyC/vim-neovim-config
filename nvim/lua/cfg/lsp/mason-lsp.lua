@@ -1,4 +1,4 @@
-require'mason-lspconfig'.setup {
+require 'mason-lspconfig'.setup {
   ensure_installed = {
     -- 'tsserver', -- npm i -g typescript-language-server
     -- 'prosemd_lsp', -- system install
@@ -15,17 +15,19 @@ require'mason-lspconfig'.setup {
     -- 'vimls', -- npm i -g vim-language-server
     'yamlls', -- npm i -g yaml-language-server
     -- 'rls', -- rustup component add rls rust-{analysis,src}
-    -- 'rust_analyzer', -- code --install-extension /path/.vsix
+    'rust_analyzer', -- code --install-extension /path/.vsix
     'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
     -- 'pyright', -- pip3 install --user pyright
     'terraformls', -- system install
     'sumneko_lua',
     'cssls',
     'jdtls',
-   },
- }
-require'mason-lspconfig'.setup_handlers {
-  require'cfg.lsp.langs.default'.setup,
+    'diagnosticls',
+  },
+}
+
+require 'mason-lspconfig'.setup_handlers {
+  require 'cfg.lsp.langs.default'.setup,
   ['sumneko_lua'] = require 'cfg.lsp.langs.sumneko_lua',
   ['arduino_language_server'] = require 'cfg.lsp.langs.arduino',
   ['groovyls'] = require 'cfg.lsp.langs.groovyls',
@@ -33,5 +35,4 @@ require'mason-lspconfig'.setup_handlers {
   ['tsserver'] = require 'cfg.lsp.langs.tsserver',
   ['diagnosticls'] = require 'cfg.lsp.langs.diagnosticls',
   ['rust_analyzer'] = require 'cfg.lsp.langs.rust_analyzer',
- }
-
+}

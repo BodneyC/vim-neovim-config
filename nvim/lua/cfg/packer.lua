@@ -69,7 +69,6 @@ packer.startup(function(use)
   }
   use { 'onsails/lspkind-nvim' }
   use { 'simrat39/symbols-outline.nvim' }
-  use { 'jose-elias-alvarez/null-ls.nvim' }
   use { 'ray-x/lsp_signature.nvim' }
 
   --- DAP
