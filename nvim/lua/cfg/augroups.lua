@@ -28,4 +28,11 @@ do
     pattern = '*',
     callback = require('vim.highlight').on_yank,
   })
+  vim.api.nvim_create_autocmd('FileType', {
+    group = group,
+    pattern = 'qf',
+    callback = function()
+      vim.keymap.set('n', '<CR>', [[<CR>:cclose<CR>]], { silent = true, buffer = true })
+    end,
+  })
 end
