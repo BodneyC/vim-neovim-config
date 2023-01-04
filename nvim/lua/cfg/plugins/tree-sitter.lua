@@ -29,9 +29,10 @@ local ensure_installed = {
   'css',
   'javascript',
   'tsx',
+  'help',
 }
 
-require('nvim-treesitter.configs').setup {
+return {
   context_commentstring = {
     enable = true,
     enable_autocmd = true,
@@ -46,11 +47,11 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = ensure_installed,
   indent = {
     enable = true,
-    disable = {'yaml', 'python'},
+    disable = { 'yaml', 'python' },
   },
   highlight = {
     enable = true,
-    disable = {'yaml'},
+    disable = { 'yaml' },
   },
   incremental_selection = {
     enable = true,
@@ -137,4 +138,11 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
+
+  endwise = { enable = true },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = 1000
+  }
 }

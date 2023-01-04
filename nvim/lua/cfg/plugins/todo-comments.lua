@@ -1,4 +1,4 @@
-require('todo-comments').setup {
+ return {
   signs = false,
   colors = {
     error = { 'LspDiagnosticsDefaultError', 'ErrorMsg', '#D75F5F' },

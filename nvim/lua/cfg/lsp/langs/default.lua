@@ -2,10 +2,12 @@ local M = {}
 
 local lspconfig = require 'lspconfig'
 
+M.on_attach = function(client, bufnr)
+  require 'cfg.lsp.keymaps'.set_keymaps(client, bufnr)
+end
+
 local default_opts = {
-  on_attach = function(client, bufnr)
-    require 'cfg.lsp.keymaps'.set_keymaps(client, bufnr)
-  end,
+  on_attach = M.on_attach,
   root_dir = vim.loop.cwd,
   capabilities = require 'cfg.lsp.capabilities'.capabilities,
   settings = { telemetry = { enable = false } },

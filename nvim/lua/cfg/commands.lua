@@ -1,11 +1,6 @@
 local util = require('utl.util')
 
-vim.cmd([[
-  cabbrev PC PackerCompile
-  cabbrev PI PackerInstall
-  cabbrev PS PackerSync
-  cabbrev PU PackerUpdate
-]])
+vim.cmd('cabbrev L Lazy')
 
 util.commands({
   {

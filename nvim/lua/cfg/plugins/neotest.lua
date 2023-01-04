@@ -11,6 +11,6 @@ require('neotest').setup({
       jestConfigFile = 'custom.jest.config.ts',
       env = { CI = true },
       cwd = function(_) vim.fn.getcwd() end,
-     }),
-   },
- })
+    }),
+  },
+})

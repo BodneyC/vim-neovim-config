@@ -51,11 +51,11 @@ function M.set_keymaps(client, bufnr)
   bkm.map('n', [[\r]], '<CMD>Lspsaga rename<CR>', 'Rename')
 
   -- km.which_key.register({ ['<leader>w'] = { name = 'Workspace' } },
-    -- { mode = 'n', buffer = bufnr })
-  bkm.map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add folder')
-  bkm.map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
+  -- { mode = 'n', buffer = bufnr })
+  bkm.map('n', [[\wa]], vim.lsp.buf.add_workspace_folder, 'Add folder')
+  bkm.map('n', [[\wr]], vim.lsp.buf.remove_workspace_folder,
     'Remove folder')
-  bkm.map('n', '<leader>wl', function()
+  bkm.map('n', [[\wl]], function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, 'List folders')
 

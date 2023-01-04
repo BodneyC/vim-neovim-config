@@ -1,4 +1,4 @@
-require('mason').setup {
+return {
   ui = {
     icons = {
       package_installed = '✓',

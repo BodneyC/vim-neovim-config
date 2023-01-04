@@ -1,6 +1,6 @@
 local icons = require('mod.theme').icons
 
-require('lualine').setup {
+return {
   options = {
     globalstatus = 3,
     icons_enabled = true,
