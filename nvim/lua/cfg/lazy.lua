@@ -1,11 +1,11 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
@@ -53,9 +53,12 @@ require('lazy').setup({
   { 'Pocco81/dap-buddy.nvim', branch = 'dev' },
   'jbyuki/one-small-step-for-vimkind',
   'nvim-telescope/telescope-dap.nvim',
-  { 'mfussenegger/nvim-dap-python', config = function()
-    require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-  end },
+  {
+    'mfussenegger/nvim-dap-python',
+    config = function()
+      require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+    end,
+  },
   { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
 
   { 'williamboman/mason.nvim', config = require('cfg.plugins.mason') },
@@ -73,9 +76,8 @@ require('lazy').setup({
     end,
     config = function()
       require('nvim-treesitter.configs').setup(
-        require('cfg.plugins.tree-sitter')
-      )
-    end
+        require('cfg.plugins.tree-sitter'))
+    end,
   },
   'nvim-treesitter/nvim-treesitter-refactor',
   'nvim-treesitter/nvim-treesitter-textobjects',
@@ -102,31 +104,44 @@ require('lazy').setup({
 
   --- QOL
   'farmergreg/vim-lastplace',
-  { 'folke/which-key.nvim', config = {
-    triggers_blacklist = {
-      n = { '"' }, -- slow for "+
+  {
+    'folke/which-key.nvim',
+    config = {
+      triggers_blacklist = {
+        n = { '"' }, -- slow for "+
+      },
     },
-  } },
+  },
   { 'folke/todo-comments.nvim', config = require('cfg.plugins.todo-comments') },
   'bronson/vim-visual-star-search',
   'dominikduda/vim_current_word',
   'hrsh7th/vim-vsnip',
   'hrsh7th/vim-vsnip-integ',
-  --'jiangmiao/auto-pairs',
-  { 'windwp/nvim-autopairs', config = {
-    break_undo = false,
-    map_cr = false,
-    map_bs = false,
-  } },
+  -- 'jiangmiao/auto-pairs',
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup {
+        break_undo = false,
+        map_cr = false,
+        map_bs = false,
+        fast_wrap = { map = '<M-w>' },
+      }
+      vim.keymap.set('i', '∑', [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]], { silent = true })
+    end
+  },
   'junegunn/vim-easy-align',
   'kamykn/spelunker.vim',
   { 'kwkarlwang/bufresize.nvim', config = true },
-  { 'luukvbaal/stabilize.nvim', config = {
-    ignore = {
-      filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline' },
-      buftype = { 'terminal', 'quickfix', 'loclist' },
+  {
+    'luukvbaal/stabilize.nvim',
+    config = {
+      ignore = {
+        filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline' },
+        buftype = { 'terminal', 'quickfix', 'loclist' },
+      },
     },
-  } },
+  },
   { 'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
   'mhartington/formatter.nvim',
   'machakann/vim-swap',
@@ -136,9 +151,7 @@ require('lazy').setup({
   --- Vim internal wrappers
   {
     'nat-418/boole.nvim',
-    config = {
-      mappings = { increment = '<C-a>', decrement = '<C-x>' }
-    },
+    config = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
   },
   'andymass/vim-matchup', -- % on `end`s
   'moll/vim-bbye', -- <leader>bd
@@ -150,17 +163,28 @@ require('lazy').setup({
   'vim-utils/vim-all', -- a<CR>
 
   --- Prettiness
-  { 'sainnhe/everforest', lazy = false, config = function()
-
-    require('mod.everforest').config()
-  end },
+  {
+    'sainnhe/everforest',
+    lazy = false,
+    config = function() require('mod.everforest').config() end,
+  },
   { 'KabbAmine/vCoolor.vim', cmd = 'VCoolor' },
-  { 'lukas-reineke/indent-blankline.nvim', config = {
-    char = '│',
-    show_first_indent_level = true,
-    -- show_end_of_line = true,
-    filetype_exclude = { 'packer', 'floaterm', 'help', 'Outline', 'NvimTree', '' },
-  } },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = {
+      char = '│',
+      show_first_indent_level = true,
+      -- show_end_of_line = true,
+      filetype_exclude = {
+        'packer',
+        'floaterm',
+        'help',
+        'Outline',
+        'NvimTree',
+        '',
+      },
+    },
+  },
   'dstein64/nvim-scrollview',
   { 'junegunn/goyo.vim', cmd = 'Goyo' },
   { 'junegunn/limelight.vim', cmd = 'Limelight' },
@@ -168,7 +192,7 @@ require('lazy').setup({
     'akinsho/bufferline.nvim',
     dependencies = 'kyazdani42/nvim-web-devicons',
     version = '^v3',
-    config = require('cfg.plugins.bufferline')
+    config = require('cfg.plugins.bufferline'),
   },
   { 'rrethy/vim-hexokinase', build = 'make hexokinase' },
   { 'nvim-lualine/lualine.nvim', config = require('cfg.plugins.lualine') },
@@ -178,16 +202,20 @@ require('lazy').setup({
   --- SDL
   {
     'rmagatti/auto-session',
-    config = {
-      log_level = 'warn',
-      auto_session_suppress_dirs = { '~/' },
-    }
+    config = { log_level = 'warn', auto_session_suppress_dirs = { '~/' } },
   },
-  { 'rmagatti/session-lens', dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = { theme_conf = { border = false } } },
-  --{'BodneyC/VirkSpaces'},
+  {
+    'rmagatti/session-lens',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = { theme_conf = { border = false } },
+  },
+  -- {'BodneyC/VirkSpaces'},
   'kyazdani42/nvim-tree.lua',
-  { 'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim', config = require('cfg.plugins.gitsigns') },
+  {
+    'lewis6991/gitsigns.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = require('cfg.plugins.gitsigns'),
+  },
   'f-person/git-blame.nvim',
   { 'oguzbilgic/vim-gdiff', cmd = { 'Gdiff', 'Gdiffsplit' } },
   'tpope/vim-fugitive',

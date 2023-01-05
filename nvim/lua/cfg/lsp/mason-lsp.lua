@@ -1,6 +1,6 @@
 require 'mason-lspconfig'.setup {
   ensure_installed = {
-    -- 'tsserver', -- npm i -g typescript-language-server
+    'tsserver', -- npm i -g typescript-language-server
     -- 'prosemd_lsp', -- system install
     'dockerls', -- npm i -g dockerfile-language-server-nodejs
     -- Tree-sitter required
