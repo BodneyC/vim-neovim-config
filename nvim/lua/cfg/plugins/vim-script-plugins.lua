@@ -1,6 +1,7 @@
 local util = require('utl.util')
 
 util.opt('g', {
+
   -- Relies on this file being loaded after the plugin itself
   __buffer_first_refreshed = false,
 
@@ -54,6 +55,8 @@ util.opt('g', {
   -- floaterm_wintype = 'vsplit',
   floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
   floaterm_autoclose = 1,
+
+  fzf_history_dir = os.getenv('HOME') .. '/.cache/nvim/fzf/.fzf_history_dir',
 
   gitblame_ignored_filetypes = {'Outline', 'NvimTree'},
 
