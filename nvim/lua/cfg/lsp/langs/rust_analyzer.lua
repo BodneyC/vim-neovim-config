@@ -1,11 +1,11 @@
-local add_to_default = require 'cfg.lsp.langs.default'.add_to_default
+local defaults = require 'cfg.lsp.langs.default'
 return function()
   local extension_path = vim.fn.glob(
     '$HOME/.vscode-oss/extensions/vadimcn.vscode-lldb-*/')
   local codelldb_path = extension_path .. 'adapter/codelldb'
   local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 
-  require('rust-tools').setup(add_to_default {
+  require('rust-tools').setup(defaults.add_to_default {
     tools = {
       autoSetHints = true,
       -- hover_with_actions = true,
@@ -13,6 +13,7 @@ return function()
     },
     server = {
       standalone = false,
+      on_attach = defaults.on_attach,
       -- settings = {
       --   ['rust-analyzer'] = {
       --     -- enable clippy on save

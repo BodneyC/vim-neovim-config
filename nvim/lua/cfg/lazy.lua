@@ -221,7 +221,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',
 
   --- Language support
-  'Olical/conjure',
+  -- 'Olical/conjure',
   'towolf/vim-helm',
   { 'hashivim/vim-terraform', ft = 'terraform' },
   { 'BodneyC/sood-vim', ft = 'sood' },
