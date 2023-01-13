@@ -57,7 +57,7 @@ require('nvim-tree').setup {
     icons = {
       hint = icons.diagnostics.sign.hint,
       info = icons.diagnostics.sign.info,
-      warning = icons.diagnostics.sign.warning,
+      warning = icons.diagnostics.sign.warn,
       error = icons.diagnostics.sign.error,
     },
   },

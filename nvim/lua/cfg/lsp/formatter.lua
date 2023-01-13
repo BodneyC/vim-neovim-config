@@ -1,88 +1,64 @@
+local function only_opts(opts)
+  return {
+    function()
+      return opts
+    end
+  }
+end
+
 require('formatter').setup {
   filetype = {
-    sh = {
-      function()
-        return {
-          exe = 'shfmt',
-          args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
-          stdin = false,
-        }
-      end,
+    sh = only_opts {
+      exe = 'shfmt',
+      args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
+      stdin = false,
     },
-    zsh = {
-      function()
-        return {
-          exe = 'shfmt',
-          args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
-          stdin = false,
-        }
-      end,
+    zsh = only_opts {
+      exe = 'shfmt',
+      args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
+      stdin = false,
     },
-    lua = {
-      function()
-        return {
-          exe = 'lua-format',
-          args = { '-i' },
-          stdin = false,
-        }
-      end,
+    lua = only_opts {
+      exe = 'lua-format',
+      args = { '-i' },
+      stdin = false,
     },
-    go = {
-      function()
-        return {
-          exe = 'gofmt',
-          args = { '-w' },
-          stdin = true,
-        }
-      end,
+    go = only_opts {
+      exe = 'gofmt',
+      args = { '-w' },
+      stdin = true,
     },
-    javascript = {
-      function()
-        return {
-          exe = 'prettier',
-          args = {
-            '--stdin-filepath',
-            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-            '--single-quote',
-          },
-          stdin = true,
-        }
-      end,
+    javascript = only_opts {
+      exe = 'prettier',
+      args = {
+        '--stdin-filepath',
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        '--single-quote',
+      },
+      stdin = true,
     },
-    json = {
-      function()
-        return {
-          exe = 'prettier',
-          args = {
-            '--stdin-filepath',
-            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-            '--double-quote',
-          },
-          stdin = true,
-        }
-      end,
+    json = only_opts {
+      exe = 'prettier',
+      args = {
+        '--stdin-filepath',
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        '--double-quote',
+      },
+      stdin = true,
     },
-    markdown = {
-      function()
-        return {
-          exe = 'prettier',
-          args = {
-            '--stdin-filepath',
-            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-            '--double-quote',
-          },
-          stdin = true,
-        }
-      end,
+    markdown = only_opts {
+      exe = 'prettier',
+      args = {
+        '--stdin-filepath',
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        '--double-quote',
+      },
+      stdin = true,
     },
-    python = {
-      function()
-        return {
-          exe = 'autopep8',
-          args = { '--in-place' },
-          stdin = true,
-        }
-      end,
+    python = only_opts {
+      exe = 'autopep8',
+      args = { '--in-place' },
+      stdin = true,
     },
 
     -- Use the special "*" filetype for defining formatter configurations on

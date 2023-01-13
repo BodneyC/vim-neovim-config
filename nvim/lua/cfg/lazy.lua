@@ -14,22 +14,36 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
   --- Lsp
-  'tami5/lspsaga.nvim',
   {
-    'hrsh7th/nvim-cmp',
+    'VonHeikemen/lsp-zero.nvim',
     dependencies = {
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+
+      -- Autocompletion
+      'hrsh7th/nvim-cmp',
+      'onsails/lspkind-nvim',
+      'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-vsnip',
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'ray-x/lsp_signature.nvim',
+
+      -- Snippets
+      'L3MON4D3/LuaSnip',
+      -- Snippet Collection (Optional)
+      'rafamadriz/friendly-snippets',
     },
   },
-  'neovim/nvim-lspconfig',
-  'nvim-lua/lsp-status.nvim',
+  'tami5/lspsaga.nvim',
+
+  -- 'nvim-lua/lsp-status.nvim',
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -42,9 +56,8 @@ require('lazy').setup({
       'nvim-telescope/telescope-rg.nvim',
     },
   },
-  'onsails/lspkind-nvim',
   'simrat39/symbols-outline.nvim',
-  'ray-x/lsp_signature.nvim',
+  -- { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
 
   --- DAP
   'mfussenegger/nvim-dap',
@@ -60,9 +73,6 @@ require('lazy').setup({
     end,
   },
   { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
-
-  { 'williamboman/mason.nvim', config = require('cfg.plugins.mason') },
-  'williamboman/mason-lspconfig.nvim',
 
   --- Added functionality
   { 'BodneyC/hex-this-vim', cmd = 'HexThis' },
@@ -115,8 +125,6 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim', config = require('cfg.plugins.todo-comments') },
   'bronson/vim-visual-star-search',
   'dominikduda/vim_current_word',
-  'hrsh7th/vim-vsnip',
-  'hrsh7th/vim-vsnip-integ',
   -- 'jiangmiao/auto-pairs',
   {
     'windwp/nvim-autopairs',
@@ -157,7 +165,7 @@ require('lazy').setup({
   'moll/vim-bbye', -- <leader>bd
   'tpope/vim-repeat',
   'tpope/vim-surround',
-
+  'mbbill/undotree',
   'tpope/vim-unimpaired',
   'tweekmonster/startuptime.vim',
   'vim-utils/vim-all', -- a<CR>
@@ -242,7 +250,5 @@ require('lazy').setup({
     build = 'sh install.sh npm',
     config = { highlight = 'Comment' },
   },
-
-  { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
 
 })

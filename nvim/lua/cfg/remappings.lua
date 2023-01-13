@@ -87,6 +87,8 @@ vim.keymap.set('n', '<leader>i',
 vim.keymap.set('n', '<leader>ea', [[vip:EasyAlign<CR>]], flags.s)
 vim.keymap.set('x', '<leader>ea', [[:EasyAlign<CR>]], flags.s)
 
+vim.keymap.set('n', '<leader>U', [[:UndotreeToggle<CR>]], flags.s)
+
 vim.keymap.set('n', '<leader>H', function()
   return require('mod.terminal').floating_help(vim.fn.expand('<cword>'))
 end, flags.s)

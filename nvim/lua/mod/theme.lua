@@ -3,14 +3,14 @@ return {
     diagnostics = {
       glyph = {
         error = ' ',
-        warning = ' ',
+        warn = ' ',
         info = ' ',
         hint = ' ',
         ok = ' ',
       },
       sign = {
         error = '■',
-        warning = '■',
+        warn = '■',
         info = '■',
         hint = '■',
         ok = '■',

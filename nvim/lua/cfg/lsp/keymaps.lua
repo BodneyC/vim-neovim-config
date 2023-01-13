@@ -42,8 +42,10 @@ function M.set_keymaps(client, bufnr)
   bkm.map('n', [[\q]], vim.lsp.buf.workspace_symbol, 'Workspace symbol')
   bkm.map('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', 'Lsp finder')
   bkm.map('n', [[\a]], function()
-    local ok = pcall(require 'lspsaga.command'.load_command, 'code_action')
-    if not ok then vim.lsp.buf.code_action() end
+    -- local ok = pcall(require 'lspsaga.command'.load_command, 'code_action')
+    -- if not ok then
+      vim.lsp.buf.code_action()
+    -- end
   end, 'Code action')
   bkm.map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
   bkm.map('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>',
