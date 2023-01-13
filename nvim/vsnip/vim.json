@@ -1,7 +1,0 @@
-{
-  "get": {
-    "prefix": ["get"],
-    "body": [ "let ${1:g}:$2 = get($1:, \"$2\", \"\")" ],
-    "description": "Call to get"
-  }
-}

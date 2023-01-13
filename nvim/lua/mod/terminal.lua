@@ -199,9 +199,10 @@ function M.floating_help(...)
   M.help_buf_nr = M.floating_centred()
   vim.bo.ft = 'help'
   vim.bo.bt = 'help'
-  if not pcall(vim.cmd, 'help ' .. query) then
+  local status, err = pcall(vim.cmd, 'help ' .. query)
+  if not status then
     vim.cmd('bw ' .. M.help_buf_nr)
-    print('"' .. query .. '" not in helptags')
+    print('"' .. query .. '" failed: ' .. err)
     vim.cmd(winid .. 'wincmd w')
     return
   end

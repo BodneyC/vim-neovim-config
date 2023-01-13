@@ -5,6 +5,7 @@ local confs = {
   'cfg.plugins.nvim-tree',
   'cfg.plugins.neotest',
   'cfg.plugins.telescope',
+  'cfg.plugins.luasnip',
 }
 
 for _, conf in ipairs(confs) do util.safe_require(conf) end

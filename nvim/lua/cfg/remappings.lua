@@ -7,16 +7,6 @@ vim.keymap.set('n', [[\]], [[<CMD>WhichKey \<CR>]], {})
 
 local flags = require('utl.maps').flags
 
-local function vsnip_map(mode, key, pos)
-  vim.keymap.set(mode, key, 'vsnip#jumpable(' .. pos .. ')  ? \'<Plug>(vsnip-jump-next)\' : \'' ..
-    key .. '\'', flags.se)
-end
-
-vsnip_map('i', '<C-j>', 1)
-vsnip_map('i', '<C-k>', -1)
-vsnip_map('s', '<C-j>', 1)
-vsnip_map('s', '<C-k>', -1)
-
 vim.keymap.set('n', '<leader>e', [[<CMD>e<CR>]], flags.s)
 vim.keymap.set('n', '<leader>q', [[<CMD>q<CR>]], flags.s)
 vim.keymap.set('n', '<leader>Q', [[<CMD>qa!<CR>]], flags.s)

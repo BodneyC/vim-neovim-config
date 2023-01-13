@@ -42,28 +42,10 @@ lsp.set_preferences({
 lsp.nvim_workspace()
 
 lsp.on_attach(function(client, bufnr)
-  require 'cfg.lsp.keymaps'.set_keymaps(client, bufnr)
+  require('cfg.lsp.keymaps').set_keymaps(client, bufnr)
 end)
 
-lsp.setup_nvim_cmp({
-  -- NOTE: For future Ben: the default is this but with `noinsert`
-  completion = { completeopt = 'menu,menuone,noselect' },
-  preselect = require('cmp').PreselectMode.None,
-  sources = {
-    { name = 'path', },
-    { name = 'nvim_lsp', keyword_length = 3 },
-    { name = 'nvim_lsp_signature_help', },
-    { name = 'buffer', keyword_length = 3 },
-    { name = 'luasnip', },
-  },
-  formatting = {
-    format = require('lspkind').cmp_format({
-      mode = 'symbol',
-      preset = 'default',
-      symbol_map = require('mod.theme').icons.lspkind,
-    }),
-  },
-})
+lsp.setup_nvim_cmp(require('cfg.lsp.cmp').zero_cmp_config())
 
 lsp.configure('diagnosticls', require('cfg.lsp.langs.diagnosticls'))
 
@@ -73,7 +55,7 @@ lsp.setup()
 
 ----------------------------------------- further configuration
 
-util.safe_require('cfg.lsp.cmp')
+util.safe_require('cfg.lsp.cmp').post_zero_setup()
 
 ----------------------------------------- lsps configured elsewhere
 

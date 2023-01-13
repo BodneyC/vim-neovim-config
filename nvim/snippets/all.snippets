@@ -1,0 +1,11 @@
+snippet modeline "vim modeline"
+	`substitute(&commentstring, '^\([^ ]*\)\s*%s\(.*\)$', '\1', '')` vim: set ${0:et tw=2 sw=2} : `substitute(&commentstring, '^.*%s\(.*\)$', '\1', '')`
+
+snippet filename "filename"
+	`expand('%:p')`
+
+snippet basename "basename"
+	`expand('%:t')`
+
+snippet directory "directory"
+	`expand('%:p:h')`
