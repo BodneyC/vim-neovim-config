@@ -60,4 +60,4 @@ util.safe_require('cfg.lsp.cmp').post_zero_setup()
 ----------------------------------------- lsps configured elsewhere
 
 util.safe_require('cfg.lsp.langs.rust-tools')
-util.safe_require('cfg.lsp.langs.rust-tools')
+util.safe_require('cfg.lsp.langs.typescript')

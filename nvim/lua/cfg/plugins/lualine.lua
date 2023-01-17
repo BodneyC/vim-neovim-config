@@ -8,8 +8,6 @@ return {
       modified = '*',
       readonly = '-',
     },
-    -- theme = 'bolorscheme',
-    theme = 'everforest',
     component_separators = {
       left = '',
       right = '',

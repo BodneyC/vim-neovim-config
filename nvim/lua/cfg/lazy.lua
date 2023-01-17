@@ -174,7 +174,12 @@ require('lazy').setup({
   {
     'sainnhe/everforest',
     lazy = false,
-    config = function() require('mod.everforest').config() end,
+    -- config = function() require('mod.colors').everforst() end,
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    lazy = false,
+    config = function() require('mod.colors').nightfox() end,
   },
   { 'KabbAmine/vCoolor.vim', cmd = 'VCoolor' },
   {

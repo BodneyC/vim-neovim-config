@@ -1,8 +1,30 @@
 local M = {}
 
--- This function is used in everforest pugin setup, changing here will require
--- a :PackerCompile
-function M.config()
+function M.nightfox()
+  local variant = 'carbonfox'
+  require('nightfox').setup({
+    styles = {
+      comments = 'italic',
+      keywords = 'bold',
+      types = 'italic,bold',
+    },
+    groups = {
+      all = {
+        IndentBlanklineChar = { fg = 'bg3' },
+        TelescopePromptBorder = { bg = 'bg2', fg = 'fg2' },
+        TelescopePromptNormal = { bg = 'bg2', fg = 'fg0' },
+        TelescopePromptTitle = { bg = 'bg2', fg = 'fg2' },
+        TelescopePromptPrefix = { bg = 'bg2', fg = 'fg2' },
+        TelescopeNormal = { bg = 'bg1' },
+        gitblame = { bg = 'bg2', fg = 'fg3' },
+        CursorLine = { bg = 'bg2' },
+      }
+    }
+  })
+  vim.cmd('colo ' .. variant)
+end
+
+function M.everforest()
   vim.g.everforest_background = 'medium'
 
   local group = vim.api.nvim_create_augroup('EverforestCustom', {
@@ -64,7 +86,7 @@ function M.custom()
   hl('NvimTreeCursorLine', nil, p.bg0)
   hl('NvimTreeEndOfBuffer', p.bg1, p.bg1)
 
-  hl('gitblame', p.grey1, p.bg1, {'italic'})
+  hl('gitblame', p.grey1, p.bg1, { 'italic' })
 
   hl('VirtualTextInfo', nil, p.bg1)
   hl('VirtualTextHint', p.blue, p.bg1)
