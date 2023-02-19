@@ -21,7 +21,7 @@ lsp.ensure_installed({
   'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
   -- 'pyright', -- pip3 install --user pyright
   'terraformls', -- system install
-  'sumneko_lua',
+  'lua_ls',
   'cssls',
   'jdtls',
   'diagnosticls',

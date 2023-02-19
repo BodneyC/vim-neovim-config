@@ -63,7 +63,7 @@ util.opt('o', {
   shiftwidth = 0,
   shortmess = vim.o.shortmess .. 'c',
   showmode = false,
-  showtabline = 2,
+  showtabline = 0,
   smartindent = true,
   softtabstop = 0,
   spell = false,

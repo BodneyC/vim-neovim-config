@@ -201,12 +201,12 @@ require('lazy').setup({
   'dstein64/nvim-scrollview',
   { 'junegunn/goyo.vim', cmd = 'Goyo' },
   { 'junegunn/limelight.vim', cmd = 'Limelight' },
-  {
-    'akinsho/bufferline.nvim',
-    dependencies = 'kyazdani42/nvim-web-devicons',
-    version = '^v3',
-    config = require('cfg.plugins.bufferline'),
-  },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   dependencies = 'kyazdani42/nvim-web-devicons',
+  --   version = '^v3',
+  --   config = require('cfg.plugins.bufferline'),
+  -- },
   { 'rrethy/vim-hexokinase', build = 'make hexokinase' },
   { 'nvim-lualine/lualine.nvim', config = require('cfg.plugins.lualine') },
   'wellle/targets.vim',
