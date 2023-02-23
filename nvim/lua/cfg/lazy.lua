@@ -63,7 +63,7 @@ require('lazy').setup({
   'mfussenegger/nvim-dap',
   'theHamsta/nvim-dap-virtual-text',
   'rcarriga/nvim-dap-ui',
-  { 'Pocco81/dap-buddy.nvim', branch = 'dev' },
+  { 'Pocco81/dap-buddy.nvim',    branch = 'dev' },
   'jbyuki/one-small-step-for-vimkind',
   'nvim-telescope/telescope-dap.nvim',
   {
@@ -75,7 +75,7 @@ require('lazy').setup({
   { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
 
   --- Added functionality
-  { 'BodneyC/hex-this-vim', cmd = 'HexThis' },
+  { 'BodneyC/hex-this-vim',      cmd = 'HexThis' },
   'windwp/nvim-spectre',
   'knubie/vim-kitty-navigator',
   'windwp/nvim-ts-autotag', -- Setup in ts.lua
@@ -122,7 +122,7 @@ require('lazy').setup({
       },
     },
   },
-  { 'folke/todo-comments.nvim', config = require('cfg.plugins.todo-comments') },
+  { 'folke/todo-comments.nvim',   config = require('cfg.plugins.todo-comments') },
   'bronson/vim-visual-star-search',
   'dominikduda/vim_current_word',
   -- 'jiangmiao/auto-pairs',
@@ -150,7 +150,7 @@ require('lazy').setup({
       },
     },
   },
-  { 'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
+  { 'folke/trouble.nvim',        dependencies = 'kyazdani42/nvim-web-devicons' },
   'mhartington/formatter.nvim',
   'machakann/vim-swap',
   'tpope/vim-commentary',
@@ -169,6 +169,32 @@ require('lazy').setup({
   'tpope/vim-unimpaired',
   'tweekmonster/startuptime.vim',
   'vim-utils/vim-all', -- a<CR>
+  {
+    "giusgad/pets.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
+    config = {
+      row = 8,
+      col = 0,
+      default_pet = "cat",
+      default_style = "brown",
+    }
+  },
+  {
+    "folke/noice.nvim",
+    config = function()
+      require("noice").setup({
+        -- add any options here
+      })
+    end,
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
 
   --- Prettiness
   {
@@ -181,7 +207,7 @@ require('lazy').setup({
     lazy = false,
     config = function() require('mod.colors').nightfox() end,
   },
-  { 'KabbAmine/vCoolor.vim', cmd = 'VCoolor' },
+  { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
   {
     'lukas-reineke/indent-blankline.nvim',
     config = {
@@ -199,15 +225,15 @@ require('lazy').setup({
     },
   },
   'dstein64/nvim-scrollview',
-  { 'junegunn/goyo.vim', cmd = 'Goyo' },
-  { 'junegunn/limelight.vim', cmd = 'Limelight' },
+  { 'junegunn/goyo.vim',         cmd = 'Goyo' },
+  { 'junegunn/limelight.vim',    cmd = 'Limelight' },
   -- {
   --   'akinsho/bufferline.nvim',
   --   dependencies = 'kyazdani42/nvim-web-devicons',
   --   version = '^v3',
   --   config = require('cfg.plugins.bufferline'),
   -- },
-  { 'rrethy/vim-hexokinase', build = 'make hexokinase' },
+  { 'rrethy/vim-hexokinase',     build = 'make hexokinase' },
   { 'nvim-lualine/lualine.nvim', config = require('cfg.plugins.lualine') },
   'wellle/targets.vim',
   'wellle/visual-split.vim',
@@ -230,19 +256,19 @@ require('lazy').setup({
     config = require('cfg.plugins.gitsigns'),
   },
   'f-person/git-blame.nvim',
-  { 'oguzbilgic/vim-gdiff', cmd = { 'Gdiff', 'Gdiffsplit' } },
+  { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
   'tpope/vim-fugitive',
 
   --- Language support
   -- 'Olical/conjure',
   'towolf/vim-helm',
-  { 'hashivim/vim-terraform', ft = 'terraform' },
-  { 'BodneyC/sood-vim', ft = 'sood' },
-  { 'BodneyC/knit-vim', ft = 'knit' },
+  { 'hashivim/vim-terraform',    ft = 'terraform' },
+  { 'BodneyC/sood-vim',          ft = 'sood' },
+  { 'BodneyC/knit-vim',          ft = 'knit' },
   { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
   -- 'leafgarland/typescript-vim',
   'jose-elias-alvarez/typescript.nvim',
-  { 'm-pilia/vim-pkgbuild', ft = 'pkgbuild' },
+  { 'm-pilia/vim-pkgbuild',    ft = 'pkgbuild' },
   'michaeljsmith/vim-indent-object',
   { 'plasticboy/vim-markdown', ft = 'markdown' },
   { -- bullet points in MD

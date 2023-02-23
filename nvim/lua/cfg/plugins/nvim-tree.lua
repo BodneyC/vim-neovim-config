@@ -13,7 +13,7 @@ vim.keymap.set('n', '<Leader>D', function()
 end, s)
 
 vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && ]] ..
-          [[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
+[[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
 
 do
   local group = vim.api.nvim_create_augroup('__NVIM_TREE__', {
@@ -30,6 +30,25 @@ do
       end
     end,
   })
+  vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+    group = group,
+    callback = function(data)
+      if vim.fn.isdirectory(data.file) == 1 then
+        vim.cmd.enew()
+        vim.cmd.bw(data.buf)
+        vim.cmd.cd(data.file)
+      else
+        return -- unsure if i want this yet
+      end
+      require('mod.nvim-tree').resize { refocus = true }
+    end
+  })
+  vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+    group = group,
+    callback = function()
+      vim.cmd([[bw NvimTree_*]])
+    end
+  })
 end
 
 local icons = require('mod.theme').icons
@@ -41,9 +60,6 @@ require('nvim-tree').setup {
 
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
-  ignore_ft_on_setup = {},
-  open_on_tab = false,
   hijack_cursor = false,
   update_cwd = false,
 
@@ -128,7 +144,7 @@ require('nvim-tree').setup {
             'fugitiveblame',
             'Outline',
           },
-          buftype = {'nofile', 'terminal', 'help'},
+          buftype = { 'nofile', 'terminal', 'help' },
         },
       },
     },
@@ -142,15 +158,15 @@ require('nvim-tree').setup {
       custom_only = false,
       list = {
         -- LuaFormatter off
-        { key = 'Y', cb = tree_cb('copy'), },
-        { key = 'l', cb = tree_cb('open_node'), },
-        { key = 'h', cb = tree_cb('close_node'), },
+        { key = 'Y',  cb = tree_cb('copy'), },
+        { key = 'l',  cb = tree_cb('open_node'), },
+        { key = 'h',  cb = tree_cb('close_node'), },
         { key = '+x', cb = system_cb('chmod +x'), },
         { key = '-x', cb = system_cb('chmod -x'), },
-        { key = 'd', cb = system_cb('rem -q --'), },
-        { key = 'D', cb = system_cb('rem -q --', { directories = true, }), },
-        { key = 'u', cb = system_cb('rem last -q', { directories = true, ignore_file = true, }), },
-        { key = 'U', cb = system_cb('rem last -qy', { directories = true, ignore_file = true, }), },
+        { key = 'd',  cb = system_cb('rem -q --'), },
+        { key = 'D',  cb = system_cb('rem -q --', { directories = true, }), },
+        { key = 'u',  cb = system_cb('rem last -q', { directories = true, ignore_file = true, }), },
+        { key = 'U',  cb = system_cb('rem last -qy', { directories = true, ignore_file = true, }), },
         -- LuaFormatter on
       },
     },
