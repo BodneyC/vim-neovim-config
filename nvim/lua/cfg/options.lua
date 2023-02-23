@@ -96,4 +96,5 @@ util.opt('o', {
   signcolumn = 'yes',
   winblend = 0,
   wrap = true,
+  report = 10000,
 })

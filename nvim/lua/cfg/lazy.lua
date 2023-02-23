@@ -176,24 +176,13 @@ require('lazy').setup({
       row = 8,
       col = 0,
       default_pet = "cat",
-      default_style = "brown",
+      default_style = "light_gray",
     }
   },
   {
     "folke/noice.nvim",
-    config = function()
-      require("noice").setup({
-        -- add any options here
-      })
-    end,
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    }
+    config = require('cfg.plugins.noice'),
+    dependencies = { "MunifTanjim/nui.nvim" }
   },
 
   --- Prettiness
