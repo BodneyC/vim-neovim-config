@@ -100,7 +100,7 @@ function M.term_split(toggle)
 
   local bufnr = vim.fn.bufnr(M.term_name)
   local term_exists = bufnr ~= -1 and vim.fn.bufexists(bufnr) and
-                        vim.fn.bufloaded(bufnr)
+      vim.fn.bufloaded(bufnr)
 
   if not toggle then
     vim.cmd('10 wincmd ' .. dir_char)
@@ -131,6 +131,7 @@ function M.term_split(toggle)
   M.term_name = vim.fn.bufname('%')
   vim.cmd(
     'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+  vim.cmd('au! BufEnter <buffer> startinsert')
 
   vim.defer_fn(function()
     vim.cmd('startinsert')
@@ -140,7 +141,7 @@ function M.term_split(toggle)
 end
 
 function M.floating_centred(...)
-  local args = {...}
+  local args = { ... }
   local height_divisor = args[1] or vim.g.floating_term_divisor
   local width_divisor = args[2] or vim.g.floating_term_divisor
   local height = math.floor(vim.o.lines * height_divisor)
@@ -168,7 +169,7 @@ local function on_term_exit(_, code, _)
 end
 
 function M.floating_term(...)
-  local args = {...}
+  local args = { ... }
   local bufnr = M.floating_centred()
   bskm(bufnr, 'n', '<Esc>', ':bw!<CR>', {})
   vim.fn.termopen(args[1] or os.getenv('SHELL'), {
@@ -182,14 +183,14 @@ function M.floating_term(...)
 end
 
 function M.floating_man(...)
-  local args = {...}
+  local args = { ... }
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   M.floating_term('man ' .. table.concat(args, ' '), winid)
   vim.cmd([[startinsert]])
 end
 
 function M.floating_help(...)
-  local args = {...}
+  local args = { ... }
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   if M.help_buf_nr > 0 and vim.fn.bufloaded(vim.g.tmp_help_buf) == 1 then
     vim.cmd('bw! ' .. M.help_buf_nr)
@@ -213,7 +214,7 @@ end
 function M.set_terminal_direction(...)
   M.term_height = math.floor(vim.o.lines * 0.3)
   M.term_width = math.floor(vim.o.columns * 0.4)
-  local args = {...}
+  local args = { ... }
   if args[1] then
     vim.g.term_direction = args[1]
     return
@@ -309,7 +310,7 @@ function M.init()
       pattern = 'term://*',
       command = [[set winhighlight=Normal:NvimTreeNormal]],
     })
-    vim.api.nvim_create_autocmd({'TermOpen', 'TermEnter'}, {
+    vim.api.nvim_create_autocmd({ 'TermOpen', 'TermEnter' }, {
       group = group,
       pattern = '*',
       command = [[setlocal nospell signcolumn=no nonu nornu nobuflisted ]], -- tw=0 wh=1]],
