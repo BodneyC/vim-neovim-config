@@ -131,7 +131,7 @@ require('lazy').setup({
     config = function()
       require('nvim-autopairs').setup {
         break_undo = false,
-        map_cr = false,
+        map_cr = true,
         map_bs = false,
         fast_wrap = { map = '<M-w>' },
       }

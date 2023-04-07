@@ -17,12 +17,13 @@ function M.zero_cmp_config()
           util.feedkeys('<C-d>', 'n')
         end
       end, { 'i', 's' }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = {
       { name = 'path', },
-      { name = 'nvim_lsp', keyword_length = 3 },
+      { name = 'nvim_lsp',                keyword_length = 3 },
       { name = 'nvim_lsp_signature_help', },
-      { name = 'buffer', keyword_length = 3 },
+      { name = 'buffer',                  keyword_length = 3 },
       { name = 'luasnip', },
     },
     formatting = {

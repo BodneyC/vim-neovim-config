@@ -135,22 +135,24 @@ local function table_len(t)
   return count
 end
 
-function _G.master_cr()
-  if cmp.visible() then
-    local entries = cmp.get_entries()
-    -- Bit of a shitty work around until I come up with something better
-    if table_len(entries) == 1 and entries[1].completion_item.label:find('^Workspace loading') then
-      return npairs.autopairs_cr()
-    else
-      return npairs.esc('<C-y>')
-    end
-  else
-    return npairs.autopairs_cr()
-  end
-end
+-- function _G.master_cr()
+--   if cmp.visible() then
+--     local entries = cmp.get_entries()
+--     -- Bit of a shitty work around until I come up with something better
+--     -- vim.pretty_print(entries)
+--       return npairs.esc('<C-y>')
+--     -- if table_len(entries) == 1 and entries[1].completion_item.label:find('^Workspace loading') then
+--     --   return npairs.autopairs_cr()
+--     -- else
+--     --   return npairs.esc('<C-y>')
+--     -- end
+--   else
+--     return npairs.autopairs_cr()
+--   end
+-- end
 
-vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.master_cr()', {
-  silent = true,
-  expr = true,
-  noremap = true,
-})
+-- vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.master_cr()', {
+--   silent = true,
+--   expr = true,
+--   noremap = true,
+-- })

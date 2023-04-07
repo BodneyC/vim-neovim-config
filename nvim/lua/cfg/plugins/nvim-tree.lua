@@ -13,7 +13,7 @@ vim.keymap.set('n', '<Leader>D', function()
 end, s)
 
 vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && ]] ..
-[[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
+  [[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
 
 do
   local group = vim.api.nvim_create_augroup('__NVIM_TREE__', {
@@ -52,9 +52,6 @@ do
 end
 
 local icons = require('mod.theme').icons
-
-local system_cb = require('mod.nvim-tree').system_cb
-local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 require('nvim-tree').setup {
 
@@ -154,21 +151,7 @@ require('nvim-tree').setup {
     width = require('mod.nvim-tree').min_width,
     hide_root_folder = false,
     side = 'left',
-    mappings = {
-      custom_only = false,
-      list = {
-        -- LuaFormatter off
-        { key = 'Y',  cb = tree_cb('copy'), },
-        { key = 'l',  cb = tree_cb('open_node'), },
-        { key = 'h',  cb = tree_cb('close_node'), },
-        { key = '+x', cb = system_cb('chmod +x'), },
-        { key = '-x', cb = system_cb('chmod -x'), },
-        { key = 'd',  cb = system_cb('rem -q --'), },
-        { key = 'D',  cb = system_cb('rem -q --', { directories = true, }), },
-        { key = 'u',  cb = system_cb('rem last -q', { directories = true, ignore_file = true, }), },
-        { key = 'U',  cb = system_cb('rem last -qy', { directories = true, ignore_file = true, }), },
-        -- LuaFormatter on
-      },
-    },
   },
+
+  on_attach = require('mod.nvim-tree').on_attach,
 }
