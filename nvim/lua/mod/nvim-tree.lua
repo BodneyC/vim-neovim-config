@@ -7,9 +7,6 @@ local api = require('nvim-tree.api')
 local function system(cmd, opts)
   opts = opts or {}
   return function()
-    if view.is_help_ui() then
-      return
-    end
     local node = api.tree.get_node_under_cursor()
     if not node then
       return
@@ -91,7 +88,7 @@ function M.on_attach(bufnr)
   -- Custom
   vim.keymap.set('n', 'Y', api.fs.copy.node, opts('Copy'))
   vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
-  vim.keymap.set('n', 'h', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Open'))
 
   vim.keymap.set('n', '+x', system('chmod +x'), opts('+x'))
   vim.keymap.set('n', '-x', system('chmod -x'), opts('-x'))
