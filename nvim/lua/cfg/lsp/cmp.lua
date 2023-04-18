@@ -20,11 +20,13 @@ function M.zero_cmp_config()
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = {
-      { name = 'path', },
       { name = 'nvim_lsp',                keyword_length = 3 },
       { name = 'nvim_lsp_signature_help', },
-      { name = 'buffer',                  keyword_length = 3 },
       { name = 'luasnip', },
+    },
+    {
+      { name = 'path', },
+      { name = 'buffer', keyword_length = 3 },
     },
     formatting = {
       format = require('lspkind').cmp_format({
@@ -55,6 +57,19 @@ function M.post_zero_setup()
       { { name = 'path', }, },
       { { name = 'cmdline', }, }
     ),
+  })
+
+  cmp.setup.filetype('clojure', {
+    sources = {
+      { name = 'conjure' },
+      { name = 'nvim_lsp',                keyword_length = 3 },
+      { name = 'nvim_lsp_signature_help', },
+      { name = 'luasnip', },
+    },
+    {
+      { name = 'path', },
+      { name = 'buffer', keyword_length = 3 },
+    },
   })
 end
 

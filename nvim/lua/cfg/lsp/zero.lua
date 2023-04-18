@@ -58,6 +58,12 @@ lsp.setup()
 
 util.safe_require('cfg.lsp.cmp').post_zero_setup()
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false,
+  }
+)
+
 ----------------------------------------- lsps configured elsewhere
 
 util.safe_require('cfg.lsp.langs.rust-tools')

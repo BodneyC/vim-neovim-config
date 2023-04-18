@@ -1,13 +1,12 @@
 local home = vim.loop.os_homedir()
 return {
-  filetypes = { 'pkgbuild', 'terraform', 'sh', 'zsh', 'markdown' },
+  filetypes = { 'pkgbuild', 'terraform', 'sh', 'zsh' },
   init_options = {
     filetypes = {
       pkgbuild = 'pkgbuild',
       terraform = 'terraform',
       zsh = 'shellcheck_zsh',
       sh = 'shellcheck',
-      markdown = 'markdown',
     },
     formatFiletypes = { sh = 'shfmt', zsh = 'shfmt' },
     -- package-manager - shfmt
@@ -15,22 +14,6 @@ return {
       shfmt = { args = { '-i=2', '-bn', '-ci', '-sr' }, command = 'shfmt' },
     },
     linters = {
-      markdown = {
-        -- npm i -g markdownlint
-        command = 'markdownlint',
-        args = { '--stdin' },
-        isStderr = true,
-        isStdout = false,
-        formatPattern = {
-          -- README.md:3:81 MD013/line-length Line length [Expected: 80; Actual: 282]
-          '^[^:]+(:)(\\d+):?(\\d*)\\s+(.*)$',
-          { security = 1, line = 2, column = 3, message = 4 },
-        },
-        offsetColumn = 0,
-        offsetLine = 0,
-        securities = { error = 'error', note = 'info', warning = ':' },
-        sourceName = 'markdown',
-      },
       pkgbuild = {
         args = { '%file' },
         -- manual - vim-pkgbuild

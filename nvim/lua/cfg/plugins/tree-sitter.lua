@@ -11,6 +11,7 @@ local autotag_filetypes = {
 
 local ensure_installed = {
   'c',
+  'clojure',
   'java',
   'python',
   'lua',

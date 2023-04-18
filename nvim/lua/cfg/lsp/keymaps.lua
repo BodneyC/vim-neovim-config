@@ -3,7 +3,6 @@ local M = {}
 local km = require 'utl.keymapper'
 
 function M.set_keymaps(client, bufnr)
-
   local bkm = km.buf_keymapper(bufnr)
 
   if client.server_capabilities.documentHighlightProvider then
@@ -28,8 +27,16 @@ function M.set_keymaps(client, bufnr)
   bkm.map('n', 'gD', vim.lsp.buf.implementation, 'Implementation')
   bkm.map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature help')
   bkm.map('n', '1gD', vim.lsp.buf.type_definition, 'Type definition')
-  bkm.map('n', ']w', require('mod.diagnostics').navigate('next'), 'Diagnotic next')
-  bkm.map('n', '[w', require('mod.diagnostics').navigate('prev'), 'Diagnotic prev')
+
+  bkm.map("n", "[w", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+  bkm.map("n", "]w", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+
+  bkm.map("n", "[W", function()
+    require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  end)
+  bkm.map("n", "]W", function()
+    require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+  end)
 
   if client.server_capabilities.documentFormattingProvider then
     bkm.map('n', '<space>F', function() vim.lsp.buf.format({ async = true }) end)
@@ -44,7 +51,7 @@ function M.set_keymaps(client, bufnr)
   bkm.map('n', [[\a]], function()
     -- local ok = pcall(require 'lspsaga.command'.load_command, 'code_action')
     -- if not ok then
-      vim.lsp.buf.code_action()
+    vim.lsp.buf.code_action()
     -- end
   end, 'Code action')
   bkm.map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
@@ -60,7 +67,6 @@ function M.set_keymaps(client, bufnr)
   bkm.map('n', [[\wl]], function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, 'List folders')
-
 end
 
 return M

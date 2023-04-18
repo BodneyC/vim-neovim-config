@@ -58,6 +58,10 @@ require('lazy').setup({
   },
   'simrat39/symbols-outline.nvim',
   -- { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function() require('cfg.plugins.null_ls') end,
+  },
 
   --- DAP
   'mfussenegger/nvim-dap',
@@ -162,7 +166,7 @@ require('lazy').setup({
     config = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
   },
   'andymass/vim-matchup', -- % on `end`s
-  'moll/vim-bbye', -- <leader>bd
+  'moll/vim-bbye',        -- <leader>bd
   'tpope/vim-repeat',
   'tpope/vim-surround',
   'mbbill/undotree',
@@ -260,7 +264,8 @@ require('lazy').setup({
   { 'm-pilia/vim-pkgbuild',    ft = 'pkgbuild' },
   'michaeljsmith/vim-indent-object',
   { 'plasticboy/vim-markdown', ft = 'markdown' },
-  { -- bullet points in MD
+  {
+    -- bullet points in MD
     'dkarter/bullets.vim',
     ft = 'markdown',
   },
@@ -269,6 +274,41 @@ require('lazy').setup({
     'barrett-ruth/import-cost.nvim',
     build = 'sh install.sh npm',
     config = { highlight = 'Comment' },
+  },
+  {
+    'rmagatti/gx-extended.nvim',
+    config = {}
+  },
+
+  -- Clojure
+  {
+    'tpope/vim-sexp-mappings-for-regular-people',
+    ft = { 'clojure' },
+    dependencies = {
+      'guns/vim-sexp',
+      'tpope/vim-repeat',
+      'tpope/vim-surround',
+    },
+  },
+  {
+    'guns/vim-sexp',
+    ft = { 'clojure' },
+    config = function()
+      vim.g.sexp_mappings = require('cfg.plugins.sexp').disabled_sexp_mappings
+    end,
+  },
+  {
+    'Olical/conjure',
+    ft = { 'clojure' },
+    config = function()
+      vim.g["conjure#mapping#prefix"] = ','
+    end,
+  },
+  'PaterJason/cmp-conjure',
+  {
+    'clojure-vim/vim-jack-in',
+    ft = { 'clojure' },
+    dependencies = { 'clojure-vim/vim-jack-in', 'tpope/vim-dispatch', 'radenling/vim-dispatch-neovim' }
   },
 
 })
