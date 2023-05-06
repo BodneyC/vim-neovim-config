@@ -38,10 +38,13 @@ require('lazy').setup({
       -- Snippets
       'L3MON4D3/LuaSnip',
       -- Snippet Collection (Optional)
-      'rafamadriz/friendly-snippets',
+      -- 'rafamadriz/friendly-snippets',
     },
   },
-  'tami5/lspsaga.nvim',
+  {
+    'nvimdev/lspsaga.nvim',
+    config = require('cfg.plugins.lspsaga'),
+  },
 
   -- 'nvim-lua/lsp-status.nvim',
   {

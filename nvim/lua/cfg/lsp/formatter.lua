@@ -60,7 +60,6 @@ require('formatter').setup {
       args = { '--in-place' },
       stdin = true,
     },
-
     -- Use the special "*" filetype for defining formatter configurations on
     -- any filetype
     ["*"] = {

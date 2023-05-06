@@ -88,7 +88,7 @@ util.opt('o', {
   breakindentopt = 'shift:3',
   cul = true,
   cursorcolumn = false,
-  cursorline = true,
+  cursorline = false,
   foldenable = true,
   linebreak = true,
   nu = true,

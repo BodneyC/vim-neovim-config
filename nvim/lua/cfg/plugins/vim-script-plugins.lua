@@ -79,7 +79,7 @@ util.opt('g', {
   },
 
   matchup_matchparen_offscreen = {
-    method = 'popup',
+    method = 'status', -- popup if I get rid of the winbar at some point
   },
 
   move_map_keys = false,

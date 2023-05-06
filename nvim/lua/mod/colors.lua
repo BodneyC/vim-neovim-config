@@ -1,7 +1,7 @@
 local M = {}
 
 function M.nightfox()
-  local variant = 'carbonfox'
+  local variant = 'nightfox'
   require('nightfox').setup({
     styles = {
       comments = 'italic',
@@ -16,7 +16,7 @@ function M.nightfox()
         TelescopePromptTitle = { bg = 'bg2', fg = 'fg2' },
         TelescopePromptPrefix = { bg = 'bg2', fg = 'fg2' },
         TelescopeNormal = { bg = 'bg1' },
-        gitblame = { bg = 'bg2', fg = 'fg3' },
+        gitblame = { fg = 'palette.comment' },
         CursorLine = { bg = 'bg2' },
       }
     }
