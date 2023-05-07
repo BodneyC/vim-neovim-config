@@ -5,8 +5,8 @@ return {
   },
   symbol_in_winbar = {
     enabled = true,
-    separator = ' ',
-    respect_toor = false,
+    separator = ' | ',
+    respect_root = true,
     folder_level = 2,
   }
 }

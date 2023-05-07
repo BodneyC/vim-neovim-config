@@ -1,7 +1,7 @@
 local M = {}
 
 local nvim_tree = require('nvim-tree')
-local view = require ('nvim-tree.view')
+local view = require('nvim-tree.view')
 local api = require('nvim-tree.api')
 
 local function system(cmd, opts)
@@ -19,8 +19,17 @@ local function system(cmd, opts)
     if not opts.without_file then
       cmd_str = cmd_str .. ' ' .. node.absolute_path
     end
-    vim.cmd([[echo """]] .. cmd_str .. [["""]])
-    os.execute(cmd_str)
+    if opts.echo_cmd then
+      print(cmd_str)
+    end
+    local fd = io.popen(cmd_str .. ' 2>&1')
+    if fd ~= nil then
+      local stdout = fd:read("*a"):gsub('[\n\r]', ' ')
+      fd:close()
+      print(stdout)
+    else
+      print("Couldn't run command: " .. cmd_str)
+    end
     api.tree.reload()
   end
 end
@@ -90,11 +99,12 @@ function M.on_attach(bufnr)
   vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
   vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Open'))
 
-  vim.keymap.set('n', '+x', system('chmod +x'), opts('+x'))
-  vim.keymap.set('n', '-x', system('chmod -x'), opts('-x'))
-  vim.keymap.set('n', 'd', system('rem -q --'), opts('rem file'))
-  vim.keymap.set('n', 'D', system('rem -q --', { directories = true, }), opts('rem dir'))
-  vim.keymap.set('n', 'u', system('rem last -q', { directories = true, without_file = true, }), opts('rem undo last'))
+  vim.keymap.set('n', '+x', system('chmod +x', { echo_cmd = true }), opts('+x'))
+  vim.keymap.set('n', '-x', system('chmod -x', { echo_cmd = true }), opts('-x'))
+  vim.keymap.set('n', 'd', system('rem --', { echo_cmd = true }), opts('rem file'))
+  vim.keymap.set('n', 'D', system('rem --', { directories = true, echo_cmd = true }), opts('rem dir'))
+  vim.keymap.set('n', 'u', system('NO_COLOR==true rem last', { directories = true, without_file = true, }),
+    opts('rem undo last'))
 end
 
 M.min_width = 30

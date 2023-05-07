@@ -7,6 +7,8 @@ local b = null_ls.builtins
 local sources = {
   -- b.formatting.prettierd.with { filetypes = { 'html', 'yaml', 'markdown' } },
   -- b.formatting.stylua,
+  -- b.diagnostics.shellcheck,
+  b.code_actions.shellcheck,
   b.diagnostics.markdownlint.with({
     diagnostic_config = {
       virtual_text = false,
