@@ -23,7 +23,7 @@ local builtins = {
 }
 
 for _, plugin in ipairs(builtins) do
-  vim.g['loaded_' .. plugin] = 1
+  vim.g['loaded_' .. plugin] = '1'
 end
 
 util.opt('g', {
@@ -75,7 +75,7 @@ util.opt('o', {
   termguicolors = true,
   textwidth = 0,
   title = true,
-  titlestring = 'bodneyc - nvim',
+  titlestring = os.getenv('PWD'):gsub("(.*/)(.*)", "%2"),
   ttimeout = true,
   ttimeoutlen = 50,
   undodir = os.getenv('HOME') .. '/.config/nvim/undo',

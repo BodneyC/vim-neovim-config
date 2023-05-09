@@ -31,6 +31,8 @@ local ensure_installed = {
   'javascript',
   'tsx',
   'help',
+  'markdown',
+  'markdown_inline',
 }
 
 return {

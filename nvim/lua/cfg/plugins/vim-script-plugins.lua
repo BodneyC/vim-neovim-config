@@ -58,7 +58,7 @@ util.opt('g', {
 
   fzf_history_dir = os.getenv('HOME') .. '/.cache/nvim/fzf/.fzf_history_dir',
 
-  gitblame_ignored_filetypes = {'Outline', 'NvimTree'},
+  gitblame_ignored_filetypes = {'Outline', 'NvimTree', 'neo-tree'},
 
   gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
   gutentags_modules = {'ctags'},
@@ -86,7 +86,7 @@ util.opt('g', {
 
   spelunker_disable_auto_group = 1,
 
-  scrollview_excluded_filetypes = {'defx', 'NvimTree'},
+  scrollview_excluded_filetypes = {'defx', 'NvimTree', 'neo-tree'},
 
   tagbar_auto_close = 1,
   tagbar_compact = 1,

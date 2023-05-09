@@ -12,8 +12,8 @@ vim.keymap.set('n', '<Leader>D', function()
   }
 end, s)
 
-vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && ]] ..
-  [[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
+-- vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && ]] ..
+--   [[bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
 
 do
   local group = vim.api.nvim_create_augroup('__NVIM_TREE__', {

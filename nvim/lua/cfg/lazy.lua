@@ -152,7 +152,7 @@ require('lazy').setup({
     'luukvbaal/stabilize.nvim',
     config = {
       ignore = {
-        filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline' },
+        filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline', 'neo-tree' },
         buftype = { 'terminal', 'quickfix', 'loclist' },
       },
     },
@@ -204,6 +204,7 @@ require('lazy').setup({
     config = function() require('mod.colors').nightfox() end,
   },
   { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
+  'voldikss/vim-floaterm',
   {
     'lukas-reineke/indent-blankline.nvim',
     config = {
@@ -216,6 +217,7 @@ require('lazy').setup({
         'help',
         'Outline',
         'NvimTree',
+        'neo-tree',
         '',
       },
     },
@@ -245,7 +247,39 @@ require('lazy').setup({
     config = { theme_conf = { border = false } },
   },
   -- {'BodneyC/VirkSpaces'},
-  'kyazdani42/nvim-tree.lua',
+  -- 'kyazdani42/nvim-tree.lua',
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    -- branch = 'v2.x',
+    -- config = function()
+    --   local config = require('cfg.plugins.neo-tree')
+    --   require('neo-tree').setup(config)
+    -- end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      'kyazdani42/nvim-web-devicons',
+      "MunifTanjim/nui.nvim",
+      {
+        -- only needed if you want to use the commands with "_with_window_picker" suffix
+        's1n7ax/nvim-window-picker',
+        tag = "v1.*",
+        config = {
+          autoselect_one = true,
+          include_current = false,
+          filter_rules = {
+            -- filter using buffer options
+            bo = {
+              -- if the file type is one of following, the window will be ignored
+              filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+              -- if the buffer type is one of following, the window will be ignored
+              buftype = { 'terminal', "quickfix" },
+            },
+          },
+          other_win_hl_color = '#e35e4f',
+        }
+      }
+    }
+  },
   {
     'lewis6991/gitsigns.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
