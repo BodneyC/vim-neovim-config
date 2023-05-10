@@ -1,5 +1,9 @@
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
+local NEO_TREE_MIN_WIDTH = 35
+local manager = require("neo-tree.sources.manager")
+local renderer = require("neo-tree.ui.renderer")
+
 local silent = require('utl.maps').flags.s
 vim.keymap.set('n', '<Leader>d', require('neo-tree').focus, silent)
 vim.keymap.set('n', '<Leader>D', require('neo-tree').show, silent)
@@ -7,6 +11,18 @@ vim.keymap.set('n', '<Leader>D', require('neo-tree').show, silent)
 do
   local group = vim.api.nvim_create_augroup('__NEO_TREE__', {
     clear = true,
+  })
+  vim.api.nvim_create_autocmd('VimResized', {
+    group = group,
+    pattern = '*',
+    callback = function()
+      -- default source, maybe find a way to iterate these
+      local state = manager.get_state('filesystem')
+      if renderer.window_exists(state) then
+        local winnr = vim.fn.win_id2win(state.winid)
+        vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. NEO_TREE_MIN_WIDTH)
+      end
+    end,
   })
   vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     group = group,
@@ -17,7 +33,6 @@ do
 end
 
 local function system(cmd, opts)
-  local manager = require("neo-tree.sources.manager")
   opts = vim.tbl_extend('keep', opts or {}, {
     run_on_dirs = false,
     append_filepath = true,
@@ -148,7 +163,7 @@ require('neo-tree').setup {
         -- Change type
         added     = '',  -- or '✚', but this is redundant info if you use git_status_colors on the name
         modified  = '',  -- or '', but this is redundant info if you use git_status_colors on the name
-        deleted   = '✖', -- this can only be used in the git_status source
+        deleted   = '🗑', -- this can only be used in the git_status source
         renamed   = '', -- this can only be used in the git_status source
         -- Status type
         untracked = '',
@@ -171,40 +186,45 @@ require('neo-tree').setup {
       run_on_dirs = true,
       append_filepath = false,
     }),
+    ['diff'] = function(state)
+      local tree = state.tree
+      local node = tree:get_node()
+      vim.cmd([[FloatermNew --autoclose=0 --width=0.9 --height=0.9 git diff ]] .. node.path)
+    end,
   },
   window = {
     position = 'left',
-    width = 35,
+    width = NEO_TREE_MIN_WIDTH,
     mapping_options = {
       noremap = true,
       nowait = true,
     },
     mappings = {
-      ['<space>'] = {
+      ['<space>']       = {
         'toggle_node',
         nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
       },
       ['<2-LeftMouse>'] = 'open',
-      ['<cr>'] = 'open',
-      ['l'] = 'open',
-      ['<esc>'] = 'revert_preview',
-      ['P'] = { 'toggle_preview', config = { use_float = true } },
-      ['o'] = 'focus_preview',
-      ['S'] = 'open_split',
-      ['s'] = 'open_vsplit',
+      ['<cr>']          = 'open',
+      ['l']             = 'open',
+      ['<esc>']         = 'revert_preview',
+      ['P']             = { 'toggle_preview', config = { use_float = true } },
+      ['o']             = 'focus_preview',
+      ['S']             = 'open_split',
+      ['s']             = 'open_vsplit',
       -- ['S'] = 'split_with_window_picker',
       -- ['s'] = 'vsplit_with_window_picker',
-      ['t'] = 'open_tabnew',
+      ['t']             = 'open_tabnew',
       -- ['<cr>'] = 'open_drop',
       -- ['t'] = 'open_tab_drop',
-      ['w'] = 'open_with_window_picker',
+      ['w']             = 'open_with_window_picker',
       --['P'] = 'toggle_preview', -- enter preview mode, which shows the current node without focusing
-      ['h'] = 'close_node',
-      ['C'] = 'close_node',
+      ['h']             = 'close_node',
+      ['C']             = 'close_node',
       -- ['C'] = 'close_all_subnodes',
-      ['z'] = 'close_all_nodes',
+      ['z']             = 'close_all_nodes',
       --['Z'] = 'expand_all_nodes',
-      ['a'] = {
+      ['a']             = {
         'add',
         -- this command supports BASH style brace expansion ('x{a,b,c}' -> xa,xb,xc). see `:h neo-tree-file-actions` for details
         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -212,28 +232,32 @@ require('neo-tree').setup {
           show_path = 'relative' -- 'none', 'relative', 'absolute'
         }
       },
-      ['A'] = 'add_directory', -- also accepts the optional config.show_path option like 'add'. this also supports BASH style brace expansion.
-      ['r'] = 'rename',
-      ['y'] = 'copy_to_clipboard',
-      ['x'] = 'cut_to_clipboard',
-      ['p'] = 'paste_from_clipboard',
-      ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like 'add':
+      ['A']             = 'add_directory', -- also accepts the optional config.show_path option like 'add'. this also supports BASH style brace expansion.
+      ['r']             = 'rename',
+      ['y']             = 'copy_to_clipboard',
+      ['x']             = 'cut_to_clipboard',
+      ['p']             = 'paste_from_clipboard',
+      ['c']             = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like 'add':
       -- ['c'] = {
       --  'copy',
       --  config = {
       --    show_path = 'none' -- 'none', 'relative', 'absolute'
       --  }
       --}
-      ['m'] = { 'move', config = { show_path = 'relative' } },
-      ['q'] = 'close_window',
-      ['R'] = 'refresh',
-      ['?'] = 'show_help',
-      ['<S-Tab>'] = 'prev_source',
-      ['<Tab>'] = 'next_source',
-      ['<'] = 'prev_source',
-      ['>'] = 'next_source',
-      ['+x'] = 'set_executable',
-      ['-x'] = 'unset_executable',
+      ['m']             = { 'move', config = { show_path = 'relative' } },
+      ['q']             = 'close_window',
+      ['R']             = 'refresh',
+      ['?']             = 'show_help',
+      ['<S-Tab>']       = 'prev_source',
+      ['<Tab>']         = 'next_source',
+      ['<']             = 'prev_source',
+      ['>']             = 'next_source',
+      ['+x']            = 'set_executable',
+      ['-x']            = 'unset_executable',
+      ['d']             = 'rem',
+      ['D']             = 'rem_dir',
+      ['u']             = 'rem_undo',
+      ['gd']            = 'diff',
     }
   },
   nesting_rules = {},
@@ -285,9 +309,6 @@ require('neo-tree').setup {
         ['<c-x>'] = 'clear_filter',
         ['[c'] = 'prev_git_modified',
         [']c'] = 'next_git_modified',
-        ['d'] = 'rem',
-        ['D'] = 'rem_dir',
-        ['u'] = 'rem_undo',
       },
       fuzzy_finder_mappings = {
         -- define keymaps for filter popup window in fuzzy_finder_mode
@@ -306,12 +327,11 @@ require('neo-tree').setup {
     show_unloaded = true,
     window = {
       mappings = {
-        ['bd'] = 'buffer_delete',
+        ['d'] = 'buffer_delete',
         ['<bs>'] = 'navigate_up',
         ['.'] = 'set_root',
-        ['d'] = 'rem',
-        ['D'] = 'rem_dir',
-        ['u'] = 'rem_undo',
+        ['D'] = '',
+        ['u'] = '',
       }
     },
   },
@@ -321,21 +341,14 @@ require('neo-tree').setup {
       mappings = {
         ['A']  = 'git_add_all',
         ['a']  = 'git_add_file',
-        ['s']  = 'git_add_file',
-        ['u']  = 'git_unstage_file',
+        ['r']  = 'git_unstage_file', -- restore
         ['gr'] = 'git_revert_file',
         ['gc'] = 'git_commit',
         ['gp'] = 'git_push',
         ['gg'] = 'git_commit_and_push',
-        ['d']  = 'diff',
       }
     },
     commands = {
-      ['diff'] = function(state)
-        local tree = state.tree
-        local node = tree:get_node()
-        vim.cmd([[FloatermNew --autoclose=0 --width=0.9 --height=0.9 git diff ]] .. node.path)
-      end
     }
   }
 }
