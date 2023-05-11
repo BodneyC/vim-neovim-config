@@ -36,7 +36,7 @@ require('lazy').setup({
       'ray-x/lsp_signature.nvim',
 
       -- Snippets
-      'L3MON4D3/LuaSnip',
+      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
       -- Snippet Collection (Optional)
       -- 'rafamadriz/friendly-snippets',
     },
@@ -317,35 +317,35 @@ require('lazy').setup({
     config = {}
   },
 
---   -- Clojure
---   {
---     'tpope/vim-sexp-mappings-for-regular-people',
---     ft = { 'clojure' },
---     dependencies = {
---       'guns/vim-sexp',
---       'tpope/vim-repeat',
---       'tpope/vim-surround',
---     },
---   },
---   {
---     'guns/vim-sexp',
---     ft = { 'clojure' },
---     config = function()
---       vim.g.sexp_mappings = require('cfg.plugins.sexp').disabled_sexp_mappings
---     end,
---   },
---   {
---     'Olical/conjure',
---     ft = { 'clojure' },
---     config = function()
---       vim.g["conjure#mapping#prefix"] = ','
---     end,
---   },
---   'PaterJason/cmp-conjure',
---   {
---     'clojure-vim/vim-jack-in',
---     ft = { 'clojure' },
---     dependencies = { 'clojure-vim/vim-jack-in', 'tpope/vim-dispatch', 'radenling/vim-dispatch-neovim' }
---   },
+  --   -- Clojure
+  --   {
+  --     'tpope/vim-sexp-mappings-for-regular-people',
+  --     ft = { 'clojure' },
+  --     dependencies = {
+  --       'guns/vim-sexp',
+  --       'tpope/vim-repeat',
+  --       'tpope/vim-surround',
+  --     },
+  --   },
+  --   {
+  --     'guns/vim-sexp',
+  --     ft = { 'clojure' },
+  --     config = function()
+  --       vim.g.sexp_mappings = require('cfg.plugins.sexp').disabled_sexp_mappings
+  --     end,
+  --   },
+  --   {
+  --     'Olical/conjure',
+  --     ft = { 'clojure' },
+  --     config = function()
+  --       vim.g["conjure#mapping#prefix"] = ','
+  --     end,
+  --   },
+  --   'PaterJason/cmp-conjure',
+  --   {
+  --     'clojure-vim/vim-jack-in',
+  --     ft = { 'clojure' },
+  --     dependencies = { 'clojure-vim/vim-jack-in', 'tpope/vim-dispatch', 'radenling/vim-dispatch-neovim' }
+  --   },
 
 })

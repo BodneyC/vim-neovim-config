@@ -7,4 +7,4 @@ snippet_map('i', '<C-k>', -1)
 snippet_map('s', '<C-j>', 1)
 snippet_map('s', '<C-k>', -1)
 
-require("luasnip.loaders.from_snipmate").lazy_load({ paths = "/home/benjc/.config/nvim/snippets" })
+require('luasnip.loaders.from_snipmate').lazy_load({ paths = os.getenv('HOME') .. '/.config/nvim/snippets' })

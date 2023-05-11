@@ -18,10 +18,14 @@ function M.nightfox()
         TelescopeNormal = { bg = 'bg1' },
         gitblame = { fg = 'palette.comment' },
         CursorLine = { bg = 'bg2' },
+        CurrentWords = { link = 'LspReferenceText' },
+        CurrentWordsTwins = { link = 'CurrentWords' },
       }
     }
   })
   vim.cmd('colo ' .. variant)
+  local palette = require('nightfox.palette.' .. variant).palette
+  vim.api.nvim_set_hl(0, '@text.uri', { fg = palette.orange.base, underline = false, italic = true })
 end
 
 function M.everforest()

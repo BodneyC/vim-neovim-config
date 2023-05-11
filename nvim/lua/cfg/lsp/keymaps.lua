@@ -8,11 +8,11 @@ function M.set_keymaps(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     local group = 'lsp_document_highlight'
     vim.api.nvim_create_augroup(group, { clear = true })
-    vim.api.nvim_create_autocmd('CursorHold', {
-      callback = vim.lsp.buf.document_highlight,
-      buffer = vim.api.nvim_get_current_buf(),
-      group = group,
-    })
+    -- vim.api.nvim_create_autocmd('CursorHold', {
+    --   callback = vim.lsp.buf.document_highlight,
+    --   buffer = vim.api.nvim_get_current_buf(),
+    --   group = group,
+    -- })
     vim.api.nvim_create_autocmd('CursorMoved', {
       callback = vim.lsp.buf.clear_references,
       buffer = vim.api.nvim_get_current_buf(),
