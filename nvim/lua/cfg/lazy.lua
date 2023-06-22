@@ -63,7 +63,7 @@ require('lazy').setup({
   -- { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
   {
     'jose-elias-alvarez/null-ls.nvim',
-    config = function() require('cfg.plugins.null_ls') end,
+    config = function() require('cfg.plugins.null-ls') end,
   },
 
   --- DAP
@@ -93,7 +93,7 @@ require('lazy').setup({
     end,
     config = function()
       require('nvim-treesitter.configs').setup(
-        require('cfg.plugins.tree-sitter'))
+        require('cfg.plugins.treesitter'))
     end,
   },
   'nvim-treesitter/nvim-treesitter-refactor',
@@ -103,7 +103,7 @@ require('lazy').setup({
   'vigoux/treesitter-context.nvim',
   'RRethy/nvim-treesitter-textsubjects',
   'RRethy/nvim-treesitter-endwise',
-  'p00f/nvim-ts-rainbow',
+  'HiPhish/nvim-ts-rainbow2',
   'vim-test/vim-test',
 
   'rcarriga/neotest-vim-test',
@@ -123,7 +123,7 @@ require('lazy').setup({
   'farmergreg/vim-lastplace',
   {
     'folke/which-key.nvim',
-    config = {
+    opts = {
       triggers_blacklist = {
         n = { '"' }, -- slow for "+
       },
@@ -150,7 +150,7 @@ require('lazy').setup({
   { 'kwkarlwang/bufresize.nvim', config = true },
   {
     'luukvbaal/stabilize.nvim',
-    config = {
+    opts = {
       ignore = {
         filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline', 'neo-tree' },
         buftype = { 'terminal', 'quickfix', 'loclist' },
@@ -166,7 +166,7 @@ require('lazy').setup({
   --- Vim internal wrappers
   {
     'nat-418/boole.nvim',
-    config = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
+    opts = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
   },
   'andymass/vim-matchup', -- % on `end`s
   'moll/vim-bbye',        -- <leader>bd
@@ -179,7 +179,7 @@ require('lazy').setup({
   {
     "giusgad/pets.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
-    config = {
+    opts = {
       row = 8,
       col = 0,
       default_pet = "cat",
@@ -189,7 +189,7 @@ require('lazy').setup({
   {
     "folke/noice.nvim",
     config = require('cfg.plugins.noice'),
-    dependencies = { "MunifTanjim/nui.nvim" }
+    dependencies = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' }
   },
 
   --- Prettiness
@@ -207,7 +207,7 @@ require('lazy').setup({
   'voldikss/vim-floaterm',
   {
     'lukas-reineke/indent-blankline.nvim',
-    config = {
+    opts = {
       char = '│',
       show_first_indent_level = true,
       -- show_end_of_line = true,
@@ -239,12 +239,12 @@ require('lazy').setup({
   --- SDL
   {
     'rmagatti/auto-session',
-    config = { log_level = 'warn', auto_session_suppress_dirs = { '~/' } },
+    opts = { log_level = 'warn', auto_session_suppress_dirs = { '~/' } },
   },
   {
     'rmagatti/session-lens',
     dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = { theme_conf = { border = false } },
+    opts = { theme_conf = { border = false } },
   },
   -- {'BodneyC/VirkSpaces'},
   -- 'kyazdani42/nvim-tree.lua',
@@ -262,8 +262,8 @@ require('lazy').setup({
       {
         -- only needed if you want to use the commands with "_with_window_picker" suffix
         's1n7ax/nvim-window-picker',
-        tag = "v1.*",
-        config = {
+        version = '2.*',
+        opts = {
           autoselect_one = true,
           include_current = false,
           filter_rules = {
@@ -310,11 +310,11 @@ require('lazy').setup({
   {
     'barrett-ruth/import-cost.nvim',
     build = 'sh install.sh npm',
-    config = { highlight = 'Comment' },
+    opts = { highlight = 'Comment' },
   },
   {
     'rmagatti/gx-extended.nvim',
-    config = {}
+    opts = {}
   },
 
   --   -- Clojure
@@ -349,3 +349,4 @@ require('lazy').setup({
   --   },
 
 })
+

@@ -33,6 +33,7 @@ local ensure_installed = {
   'help',
   'markdown',
   'markdown_inline',
+  'regex',
 }
 
 return {
@@ -146,7 +147,8 @@ return {
   endwise = { enable = true },
   rainbow = {
     enable = true,
-    extended_mode = true,
-    max_file_lines = 1000
+    disable = {},
+    query = 'rainbow-parens',
+    strategy = require('ts-rainbow').strategy.global,
   }
 }

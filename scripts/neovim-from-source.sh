@@ -14,7 +14,7 @@ git fetch --tags --all -f
 # git checkout tags/nightly
 
 # For 0.5
-git checkout origin/release-0.8
+git checkout origin/release-0.9
 
 unset LUA_PATH LUA_CPATH
 
