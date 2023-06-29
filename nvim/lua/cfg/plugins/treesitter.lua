@@ -30,7 +30,7 @@ local ensure_installed = {
   'css',
   'javascript',
   'tsx',
-  'help',
+  'vimdoc',
   'markdown',
   'markdown_inline',
   'regex',
@@ -149,6 +149,6 @@ return {
     enable = true,
     disable = {},
     query = 'rainbow-parens',
-    strategy = require('ts-rainbow').strategy.global,
+    -- strategy = require('ts-rainbow').strategy.global,
   }
 }

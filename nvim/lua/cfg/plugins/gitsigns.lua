@@ -33,27 +33,31 @@ return {
   },
   numhl = false,
   linehl = false,
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-    buffer = true,
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+    map('n','<Leader>hs', gs.stage_hunk, {})
+    map('n','<Leader>hS', gs.undo_stage_hunk, {})
+    map('n','<Leader>hu', gs.reset_hunk, {})
+    map('n','<Leader>hU', gs.reset_buffer, {})
+    map('n','<Leader>hp', gs.preview_hunk, {})
+    map('n','<Leader>hb', gs.blame_line, {})
 
-    ['n ]c'] = {
-      expr = true,
-      '&diff ? \']c\' : \'<cmd>lua require"gitsigns".next_hunk()<CR>\'',
-    },
-    ['n [c'] = {
-      expr = true,
-      '&diff ? \'[c\' : \'<cmd>lua require"gitsigns".prev_hunk()<CR>\'',
-    },
-
-    ['n <Leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['n <Leader>hS'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <Leader>hu'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['n <Leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n <Leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n <Leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-  },
+  end,
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
