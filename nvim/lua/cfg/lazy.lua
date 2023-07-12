@@ -84,8 +84,14 @@ require('lazy').setup({
   --- Added functionality
   { 'BodneyC/hex-this-vim',      cmd = 'HexThis' },
   'windwp/nvim-spectre',
-  'knubie/vim-kitty-navigator',
-  'christoomey/vim-tmux-navigator',
+  -- 'knubie/vim-kitty-navigator',
+  -- 'christoomey/vim-tmux-navigator',
+  {
+    'numToStr/Navigator.nvim',
+    config = function()
+      require('Navigator').setup()
+    end,
+  },
   'windwp/nvim-ts-autotag', -- Setup in ts.lua
   {
     'nvim-treesitter/nvim-treesitter',

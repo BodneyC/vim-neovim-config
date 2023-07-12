@@ -47,6 +47,8 @@ vim.keymap.set('n', '<leader>bD', require('mod.functions').bufonly, flags.s)
 vim.keymap.set('n', '<leader>be', [[<CMD>enew<CR>]], flags.s)
 vim.keymap.set('n', '<leader>bd', [[<CMD>Bdelete<CR>]], flags.s)
 
+vim.keymap.set('n', '<leader>m', [[<CMD>NoiceDismiss<CR>]], flags.s)
+
 -- resize
 
 local util = require('utl.util')

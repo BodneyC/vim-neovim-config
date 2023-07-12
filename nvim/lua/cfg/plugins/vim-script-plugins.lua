@@ -150,19 +150,19 @@ do
   })
 end
 
--- terminal window manager
-local pane_manager = 'Tmux'
-if os.getenv('KITTY_WINDOW_ID') then
-  pane_manager = 'Kitty'
-  local kitty_listen = os.getenv('KITTY_LISTEN_ON')
-  if kitty_listen then
-    vim.g.kitty_navigator_listening_on_address = kitty_listen
-  else
-    print('KittyNavigate will not work, no KITTY_LISTEN_ON')
-  end
-end
+-- -- terminal window manager
+-- local pane_manager = 'Tmux'
+-- if os.getenv('KITTY_WINDOW_ID') then
+--   pane_manager = 'Kitty'
+--   local kitty_listen = os.getenv('KITTY_LISTEN_ON')
+--   if kitty_listen then
+--     vim.g.kitty_navigator_listening_on_address = kitty_listen
+--   else
+--     print('KittyNavigate will not work, no KITTY_LISTEN_ON')
+--   end
+-- end
 
-vim.g[string.lower(pane_manager) .. '_navigator_no_mappings'] = 1
+-- vim.g[string.lower(pane_manager) .. '_navigator_no_mappings'] = 1
 
 -- LuaFormatter off
 local mappings = {
@@ -188,8 +188,8 @@ local mappings = {
 
 for _, mode in ipairs(mappings.mode_pairs) do
   for _, dir in ipairs(mappings.dir_pairs) do
-    vim.api.nvim_set_keymap(mode.mode, dir.key, mode.cmd .. pane_manager ..
-      'Navigate' .. dir.txt .. '<CR>', {
+    vim.api.nvim_set_keymap(mode.mode, dir.key, mode.cmd ..
+      'Navigator' .. dir.txt .. '<CR>', {
       noremap = true,
       silent = true,
     })

@@ -2,9 +2,11 @@ local bskm = vim.api.nvim_buf_set_keymap
 
 local flags = require('utl.maps').flags
 
-vim.wo.conceallevel = 1
+vim.wo.conceallevel = 0
 vim.wo.concealcursor = ''
 vim.bo.commentstring = '<!-- %s -->'
+vim.o.spell = true
+vim.o.nu = false
 bskm(0, 'n', 'j', 'gj', flags.ns)
 bskm(0, 'n', 'k', 'gk', flags.ns)
 bskm(0, 'n', 'gj', 'j', flags.ns)
