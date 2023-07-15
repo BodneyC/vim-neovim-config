@@ -61,10 +61,10 @@ require('lazy').setup({
   },
   'simrat39/symbols-outline.nvim',
   -- { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function() require('cfg.plugins.null-ls') end,
-  },
+  -- {
+  --   'jose-elias-alvarez/null-ls.nvim',
+  --   config = function() require('cfg.plugins.null-ls') end,
+  -- },
 
   --- DAP
   'mfussenegger/nvim-dap',

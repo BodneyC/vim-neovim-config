@@ -7,6 +7,24 @@ vim.wo.concealcursor = ''
 vim.bo.commentstring = '<!-- %s -->'
 vim.o.spell = true
 vim.o.nu = false
+local group = vim.api.nvim_create_augroup('CustomMarkdown', {
+  clear = true,
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = group,
+  pattern = '*.md',
+  callback = function()
+    vim.o.nu = false
+  end
+})
+vim.api.nvim_create_autocmd('BufLeave', {
+  group = group,
+  pattern = 'everforest',
+  callback = function()
+    vim.o.nu = true
+  end
+})
+
 bskm(0, 'n', 'j', 'gj', flags.ns)
 bskm(0, 'n', 'k', 'gk', flags.ns)
 bskm(0, 'n', 'gj', 'j', flags.ns)
