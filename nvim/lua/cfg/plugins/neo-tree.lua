@@ -24,6 +24,10 @@ do
       end
     end,
   })
+  -- This may cause lag... need to think on this
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    group = group, callback = manager.refresh
+  })
   vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     group = group,
     callback = function()
