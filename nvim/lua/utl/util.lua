@@ -32,22 +32,6 @@ function M.opt(s, d) for k, v in pairs(d) do vim[s][k] = v end end
 
 local store = require('utl.fn_store')
 
-function M.make_mappings(mappings)
-  local bskm = vim.api.nvim_buf_set_keymap
-  local skm = vim.api.nvim_set_keymap
-  for _, e in ipairs(mappings) do
-    local args = e.args or {}
-    if not e.mode or not e.key or not e.cmd then
-      print('Skipping: ' .. vim.inspect(e))
-    end
-    if e.bufnr then
-      bskm(e.bufnr, e.mode, e.key, e.cmd, args)
-    else
-      skm(e.mode, e.key, e.cmd, args)
-    end
-  end
-end
-
 function M.command(lhs, rhs, opts)
   local parts = {
     'command!',

@@ -23,6 +23,11 @@ do
       vim.g.repeat_tick = vim.g.repeat_tick and vim.g.repeat_tick + 1
     end,
   })
+  vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    group = group,
+    pattern = 'Jenkinsfile*',
+    callback = function() vim.bo.ft = 'groovy' end
+  })
   vim.api.nvim_create_autocmd('TextYankPost', {
     group = group,
     pattern = '*',

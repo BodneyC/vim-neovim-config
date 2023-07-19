@@ -4,9 +4,9 @@ local NEO_TREE_MIN_WIDTH = 35
 local manager = require("neo-tree.sources.manager")
 local renderer = require("neo-tree.ui.renderer")
 
-local silent = require('utl.maps').flags.s
-vim.keymap.set('n', '<Leader>d', require('neo-tree').focus, silent)
-vim.keymap.set('n', '<Leader>D', require('neo-tree').show, silent)
+local map = require('utl.mapper')({ noremap = true, silent = true })
+map('n', '<Leader>d', require('neo-tree').focus, 'Focus neotree')
+map('n', '<Leader>D', require('neo-tree').show, 'Open neotree')
 
 do
   local group = vim.api.nvim_create_augroup('__NEO_TREE__', {
@@ -45,7 +45,6 @@ local function system(cmd, opts)
   return function(state)
     local tree = state.tree
     local node = tree:get_node()
-    vim.pretty_print(node)
     if not node then
       return
     end

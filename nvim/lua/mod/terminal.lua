@@ -1,5 +1,3 @@
-local skm = vim.api.nvim_set_keymap
-local bskm = vim.api.nvim_buf_set_keymap
 local util = require('utl.util')
 
 local plane = {
@@ -168,10 +166,12 @@ local function on_term_exit(_, code, _)
   end
 end
 
+local map = require('utl.mapper')({ noremap = true, silent = true })
+
 function M.floating_term(...)
   local args = { ... }
   local bufnr = M.floating_centred()
-  bskm(bufnr, 'n', '<Esc>', ':bw!<CR>', {})
+  map('n', '<Esc>', ':bw!<CR>', nil, { buffer = bufnr })
   vim.fn.termopen(args[1] or os.getenv('SHELL'), {
     on_exit = function(job_id, code, event)
       on_term_exit(job_id, code, event)
@@ -207,8 +207,8 @@ function M.floating_help(...)
     vim.cmd(winid .. 'wincmd w')
     return
   end
-  bskm(M.help_buf_nr, 'n', '<Esc>', ':bw<CR>', {})
-  bskm(M.help_buf_nr, 'n', '<leader>q', ':bw<CR>', {})
+  map('n', '<Esc>', ':bw<CR>', nil, { buffer = M.help_buf_nr })
+  map('n', '<leader>q', ':bw<CR>', 'Quit', { buffer = M.help_buf_nr })
 end
 
 function M.set_terminal_direction(...)
@@ -239,7 +239,6 @@ function M.init()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
 
-  local ns = require('utl.maps').flags.ns
   local m_term = 'lua require\'mod.terminal\''
 
   -- `table.unpack` not in 5.1, use `unpack`
@@ -284,22 +283,13 @@ function M.init()
     },
   })
 
-  skm('n', '<Leader>\'', ':' .. m_term .. '.next_term_split(false)<CR>', ns)
+  map('n', '<Leader>\'', ':' .. m_term .. '.next_term_split(false)<CR>', 'New terminal')
 
-  skm('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', {
+  map('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', nil, {
     expr = true,
-    unpack(ns),
   })
 
-  -- skm('n', '<C-S-q>', ':' .. m_term .. '.term_split(true)<CR>', ns)
-  -- skm('i', '<C-S-q>', '<C-o>:' .. m_term .. '.term_split(true)<CR>', ns)
-  -- skm('t', '<C-S-q>', '<C-\\><C-n>:' .. m_term .. '.term_split(true)<CR>', ns)
-
-  -- skm('i', '<C-q>', '<C-o>:' .. m_term .. '.term_split(false)<CR>', ns)
-  -- skm('n', '<C-q>', ':' .. m_term .. '.term_split(false)<CR>', ns)
-  -- skm('t', '<C-q>', '<C-\\><C-n>:wincmd p<CR>', ns)
-
-  skm('t', '<LeftRelease>', '<Nop>', ns)
+  map('t', '<LeftRelease>', '<Nop>')
 
   do
     local group = vim.api.nvim_create_augroup('__TERMINAL__', {

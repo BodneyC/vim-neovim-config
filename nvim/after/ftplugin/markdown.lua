@@ -1,6 +1,4 @@
-local bskm = vim.api.nvim_buf_set_keymap
-
-local flags = require('utl.maps').flags
+local map = require('utl.mapper')({ noremap = true, silent = true })
 
 vim.wo.conceallevel = 0
 vim.wo.concealcursor = ''
@@ -25,16 +23,16 @@ vim.api.nvim_create_autocmd('BufLeave', {
   end
 })
 
-bskm(0, 'n', 'j', 'gj', flags.ns)
-bskm(0, 'n', 'k', 'gk', flags.ns)
-bskm(0, 'n', 'gj', 'j', flags.ns)
-bskm(0, 'n', 'gk', 'k', flags.ns)
+map('n', 'j', 'gj', nil, { buffer = 0 })
+map('n', 'k', 'gk', nil, { buffer = 0 })
+map('n', 'gj', 'j', nil, { buffer = 0 })
+map('n', 'gk', 'k', nil, { buffer = 0 })
 vim.cmd([[
   let @t = "mzvip:EasyAlign *|\<CR>`z"
   let @h = "YpVr="
 ]])
-bskm(0, 'n', '<leader>S', '1z=', flags.ns)
-bskm(0, 'i', '<Tab>', string.gsub([[
+map('n', '<leader>S', '1z=', nil, { buffer = 0 })
+map('i', '<Tab>', string.gsub([[
   pumvisible()
     ? "\<C-n>"
     : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s')
@@ -42,4 +40,4 @@ bskm(0, 'i', '<Tab>', string.gsub([[
         ? "\<C-o>>>\<C-o>A "
         : "\<Tab>"
       : compe#complete()
-]], '\n', ''), flags.nse)
+]], '\n', ''), nil, { buffer = 0, expr = true })

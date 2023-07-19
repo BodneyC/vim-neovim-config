@@ -25,6 +25,7 @@ lsp.ensure_installed({
   'cssls',
   'jdtls',
   'diagnosticls',
+  'ansiblels',
 })
 
 lsp.set_preferences({

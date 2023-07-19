@@ -17,48 +17,27 @@ util.safe_require('cfg.dap.signs')
 
 local ldr = [[<leader>x]]
 
-local s = require('utl.maps').flags.s
+local map = require('utl.mapper')({ noremap = true, silent = true })
 
-vim.keymap.set('n', ldr .. 'x', require('mod.dap-helper').run_dap, s)
+map('n', ldr .. 'x', require('mod.dap-helper').run_dap, 'Run DAP')
 
-vim.keymap.set('n', ldr .. 'c', require('dap').continue, s)
-vim.keymap.set('n', ldr .. 's', require('dap').step_over, s)
-vim.keymap.set('n', ldr .. 'S', require('dap').step_into, s)
-vim.keymap.set('n', ldr .. 'u', require('dap').step_out, s)
-vim.keymap.set('n', ldr .. 'b', require('dap').toggle_breakpoint, s)
-vim.keymap.set('n', ldr .. 'B',
+map('n', ldr .. 'c', require('dap').continue, 'Continue')
+map('n', ldr .. 's', require('dap').step_over, 'Step over')
+map('n', ldr .. 'S', require('dap').step_into, 'Step into')
+map('n', ldr .. 'u', require('dap').step_out, 'Step out')
+map('n', ldr .. 'b', require('dap').toggle_breakpoint, 'Toggle breakpoint')
+map('n', ldr .. 'B',
   [[<Cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]],
-  s)
-vim.keymap.set('n', ldr .. 'l', require('dap').list_breakpoints, s)
-vim.keymap.set('n', ldr .. 'r', require('dap').repl.open, s)
--- vim.keymap.set('n', ldr .. 'R', require('dap').repl.run_last, s)
+  'Set break condition')
+map('n', ldr .. 'l', require('dap').list_breakpoints, 'List breakpoints')
+map('n', ldr .. 'r', require('dap').repl.open, 'Open REPL')
+-- map('n', ldr .. 'R', require('dap').repl.run_last, 'Run last')
 
-vim.keymap.set('n', ldr .. 'h', require('dap.ui.widgets').hover, s)
--- vim.keymap.set('n', ldr .. 'e', require('dap.ui.widgets').expression, s)
-vim.keymap.set('n', ldr .. '?', function()
+map('n', ldr .. 'h', require('dap.ui.widgets').hover, 'DAP hover')
+-- map('n', ldr .. 'e', require('dap.ui.widgets').expression, 'Run expression')
+map('n', ldr .. '?', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
-end, s)
+end, 'DAP scopes')
 
-vim.keymap.set('n', ldr .. 'o', require('dapui').toggle, s)
-
-require('which-key').register({
-  x = {
-    x = 'Dap run',
-    c = 'Dap continue',
-    s = 'Dap step over',
-    S = 'Dap step into',
-    u = 'Dap step out',
-    b = 'Dap toggle breakpoint',
-    B = 'Dap set breakpoint',
-    l = 'Dap list breakpoints',
-    r = 'Dap repl open',
-    -- R = 'Dap repl run last',
-    h = 'Dap hover',
-    -- e = 'Dap expr',
-    ['?'] = 'Dap scopes',
-    o = 'DapUI toggle',
-  },
-}, {
-  prefix = '<leader>',
-})
+map('n', ldr .. 'o', require('dapui').toggle, 'Toggle DAPUI')

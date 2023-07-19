@@ -3,34 +3,36 @@ vim.cmd('let mapleader=" "')
 --- Leave unmapped for which-key
 -- vim.keymap.set('n', '<leader>', '<NOP>')
 
-vim.keymap.set('n', [[\]], [[<CMD>WhichKey \<CR>]], {})
+local mapper = require('utl.mapper')
+local map = mapper({ noremap = true, silent = true })
 
-local flags = require('utl.maps').flags
+map('n', [[\]], [[<CMD>WhichKey \<CR>]])
 
-vim.keymap.set('n', '<leader>e', [[<CMD>e<CR>]], flags.s)
-vim.keymap.set('n', '<leader>q', [[<CMD>q<CR>]], flags.s)
-vim.keymap.set('n', '<leader>Q', [[<CMD>qa!<CR>]], flags.s)
-vim.keymap.set('n', '<leader>w', [[<CMD>w<CR>]], flags.s)
-vim.keymap.set('n', '<leader>W', [[<CMD>wa | qa<CR>]], flags.s)
+map('n', '<leader>e', [[<CMD>e<CR>]], 'Edit')
+map('n', '<leader>q', [[<CMD>q<CR>]], 'Quit')
+map('n', '<leader>Q', [[<CMD>qa!<CR>]], 'Force quit')
+map('n', '<leader>w', [[<CMD>w<CR>]], 'Write')
+map('n', '<leader>W', [[<CMD>wa | qa<CR>]], 'Force write')
 
-vim.keymap.set('n', 'Q', [[q]])
-vim.keymap.set('n', 'Q!', [[q!]])
-vim.keymap.set('n', '<F1>', [[:H <C-r><C-w><CR>]], flags.s)
-vim.keymap.set('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], flags.s)
-vim.keymap.set('n', '<F7>', [[<CMD>set spell!<CR>]], flags.s)
-vim.keymap.set('i', '<F7>', [[<C-o>:set spell!<CR>]], flags.s)
+map('n', 'Q', [[q]])
+map('n', 'Q!', [[q!]])
+map('n', '<F1>', [[:H <C-r><C-w><CR>]], 'Help under cursor')
+map('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], 'Resync syntax')
+map('n', '<F7>', [[<CMD>set spell!<CR>]], 'Toggle spell')
+map('i', '<F7>', [[<C-o>:set spell!<CR>]])
 
-vim.keymap.set('i', '<C-w>', '<C-S-w>', flags.s)
+map('i', '<C-w>', '<C-S-w>')
 
-vim.keymap.set('n', 'Y', 'yy', flags.s)
+map('n', 'Y', 'yy')
 for _, ch in ipairs({ 'y', 'Y', 'p', 'P' }) do
-  vim.keymap.set('n', '<leader>' .. ch, '"+' .. ch, flags.s)
-  vim.keymap.set('x', '<leader>' .. ch, '"+' .. ch, flags.s)
+  local action = ((ch == 'y' or ch == 'Y') and 'Copy to' or 'Paste from') .. ' clipboard'
+  map('n', '<leader>' .. ch, '"+' .. ch, action)
+  map('x', '<leader>' .. ch, '"+' .. ch, action)
 end
 
-vim.keymap.set('n', '<C-p>', [[<Tab>]])
-vim.keymap.set('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]])
-vim.keymap.set('n', '<leader>/', [[<Cmd>noh<CR>]], flags.s)
+map('n', '<C-p>', [[<Tab>]])
+map('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], 'Replace under cursor')
+map('n', '<leader>/', [[<Cmd>noh<CR>]], 'Remove highlight')
 
 -- NOTE: Doesn't work with `vim.keymap.set`
 -- NOTE: Also works with vim.cmd([[nmap gcc]])
@@ -41,57 +43,59 @@ vim.api.nvim_set_keymap('n', '', [[gcc]], {})
 vim.api.nvim_set_keymap('x', '', [[gc]], {})
 vim.api.nvim_set_keymap('i', '', [[<C-o>gcc]], {})
 
-vim.keymap.set('n', '<leader>"', [[<CMD>sbn<CR>]], flags.s)
-vim.keymap.set('n', '<leader>%', [[<CMD>vert sbn<CR>]], flags.s)
-vim.keymap.set('n', '<leader>bD', require('mod.functions').bufonly, flags.s)
-vim.keymap.set('n', '<leader>be', [[<CMD>enew<CR>]], flags.s)
-vim.keymap.set('n', '<leader>bd', [[<CMD>Bdelete<CR>]], flags.s)
+map('n', '<leader>2', [[<CMD>sbn<CR>]], 'Split')
+map('n', '<leader>5', [[<CMD>vert sbn<CR>]], 'Vertical split')
+map('n', '<leader>bD', require('mod.functions').bufonly, 'Delete other buffers')
+map('n', '<leader>be', [[<CMD>enew<CR>]], 'New file')
+map('n', '<leader>bd', [[<CMD>Bdelete<CR>]], 'Delete buffer')
 
-vim.keymap.set('n', '<leader>m', [[<CMD>NoiceDismiss<CR>]], flags.s)
+map('n', '<leader>m', [[<CMD>NoiceDismiss<CR>]], 'Dismiss Noice messages')
 
 -- resize
 
 local util = require('utl.util')
-vim.keymap.set({ 'n', 't' }, '<C-M-h>', function() return util.resize_window('h') end, flags.s)
-vim.keymap.set({ 'n', 't' }, '<C-M-j>', function() return util.resize_window('j') end, flags.s)
-vim.keymap.set({ 'n', 't' }, '<C-M-k>', function() return util.resize_window('k') end, flags.s)
-vim.keymap.set({ 'n', 't' }, '<C-M-l>', function() return util.resize_window('l') end, flags.s)
+map({ 'n', 't' }, '<C-M-h>', function() return util.resize_window('h') end)
+map({ 'n', 't' }, '<C-M-j>', function() return util.resize_window('j') end)
+map({ 'n', 't' }, '<C-M-k>', function() return util.resize_window('k') end)
+map({ 'n', 't' }, '<C-M-l>', function() return util.resize_window('l') end)
 
 -- line movement
-vim.keymap.set('n', '<S-down>', [[<CMD>m+<CR>]], flags.s)
-vim.keymap.set('n', '<S-up>', [[<CMD>m-2<CR>]], flags.s)
-vim.keymap.set('n', '<S-Tab>', [[<CMD>bp<CR>]], flags.s)
-vim.keymap.set('n', '<Tab>', [[<CMD>bn<CR>]], flags.s)
-vim.keymap.set('i', '<S-down>', [[<C-o>:m+<CR>]])
-vim.keymap.set('i', '<S-up>', [[<C-o>:m-2<CR>]])
-vim.keymap.set('x', '<S-down>', [[:m'>+<CR>gv=gv]])
-vim.keymap.set('x', '<S-up>', [[:m-2<CR>gv=gv]])
+map('n', '<S-down>', [[<CMD>m+<CR>]])
+map('n', '<S-up>', [[<CMD>m-2<CR>]])
+map('n', '<S-Tab>', [[<CMD>bp<CR>]])
+map('n', '<Tab>', [[<CMD>bn<CR>]])
+map('i', '<S-down>', [[<C-o>:m+<CR>]])
+map('i', '<S-up>', [[<C-o>:m-2<CR>]])
+map('x', '<S-down>', [[:m'>+<CR>gv=gv]])
+map('x', '<S-up>', [[:m-2<CR>gv=gv]])
 
-vim.keymap.set('x', '>', [[>gv]])
-vim.keymap.set('x', '<', [[<gv]])
-vim.keymap.set('x', '<Tab>', [[>gv]])
-vim.keymap.set('x', '<S-Tab>', [[<gv]])
+map('x', '>', [[>gv]])
+map('x', '<', [[<gv]])
+map('x', '<Tab>', [[>gv]])
+map('x', '<S-Tab>', [[<gv]])
 
--- git
-vim.keymap.set('n', '<leader>ge', [[<CMD>Ge:<CR>]], flags.s)
-vim.keymap.set('n', '<leader>}', [[zf}]], flags.s)
+map('n', '<leader>ge', [[<CMD>Ge:<CR>]], 'Git edit')
+map('n', '<leader>}', [[zf}]], 'Fold to blank line')
 
-vim.keymap.set('n', '<leader>i',
-  function() return require('utl.util').toggle_bool_option('o', 'ignorecase') end, flags.s)
+map(
+  'n', '<leader>i',
+  function() return require('utl.util').toggle_bool_option('o', 'ignorecase') end,
+  'Toggle case sensitive'
+)
 
-vim.keymap.set('n', '<leader>ea', [[vip:EasyAlign<CR>]], flags.s)
-vim.keymap.set('x', '<leader>ea', [[:EasyAlign<CR>]], flags.s)
+map('n', '<leader>ea', [[vip:EasyAlign<CR>]], 'Easy align paragraph')
+map('x', '<leader>ea', [[:EasyAlign<CR>]], 'Easy align')
 
-vim.keymap.set('n', '<leader>U', [[:UndotreeToggle<CR>]], flags.s)
+map('n', '<leader>U', [[:UndotreeToggle<CR>]], 'Undo tree')
 
-vim.keymap.set('n', '<leader>H', function()
+map('n', '<leader>H', function()
   return require('mod.terminal').floating_help(vim.fn.expand('<cword>'))
-end, flags.s)
+end, 'Help under cursor')
 
-vim.keymap.set('v', '<up>', '<Plug>SchleppUp', flags.u)
-vim.keymap.set('v', '<down>', '<Plug>SchleppDown', flags.u)
-vim.keymap.set('v', '<left>', '<Plug>SchleppLeft', flags.u)
-vim.keymap.set('v', '<right>', '<Plug>SchleppRight', flags.u)
+map('v', '<up>', '<Plug>SchleppUp', nil, {unique = true})
+map('v', '<down>', '<Plug>SchleppDown', nil, {unique = true})
+map('v', '<left>', '<Plug>SchleppLeft', nil, {unique = true})
+map('v', '<right>', '<Plug>SchleppRight', nil, {unique = true})
 
 local npairs = require('nvim-autopairs')
 
@@ -131,33 +135,3 @@ vim.api.nvim_set_keymap('i', '<BS>', 'v:lua.master_bs()', {
   expr = true,
   noremap = true,
 })
-
-local cmp = require('cmp')
-
-local function table_len(t)
-  local count = 0
-  for _ in pairs(t) do count = count + 1 end
-  return count
-end
-
--- function _G.master_cr()
---   if cmp.visible() then
---     local entries = cmp.get_entries()
---     -- Bit of a shitty work around until I come up with something better
---     -- vim.pretty_print(entries)
---       return npairs.esc('<C-y>')
---     -- if table_len(entries) == 1 and entries[1].completion_item.label:find('^Workspace loading') then
---     --   return npairs.autopairs_cr()
---     -- else
---     --   return npairs.esc('<C-y>')
---     -- end
---   else
---     return npairs.autopairs_cr()
---   end
--- end
-
--- vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.master_cr()', {
---   silent = true,
---   expr = true,
---   noremap = true,
--- })

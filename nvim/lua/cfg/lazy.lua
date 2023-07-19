@@ -298,6 +298,7 @@ require('lazy').setup({
 
   --- Language support
   -- 'Olical/conjure',
+  'pearofducks/ansible-vim',
   'towolf/vim-helm',
   { 'hashivim/vim-terraform',    ft = 'terraform' },
   { 'BodneyC/sood-vim',          ft = 'sood' },

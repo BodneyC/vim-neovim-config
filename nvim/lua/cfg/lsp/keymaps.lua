@@ -1,9 +1,9 @@
 local M = {}
 
-local km = require 'utl.keymapper'
+local km = require 'utl.mapper'
 
 function M.set_keymaps(client, bufnr)
-  local bkm = km.buf_keymapper(bufnr)
+  local map = km({ buffer = bufnr, noremap = true, silent = true })
 
   if client.server_capabilities.documentHighlightProvider then
     local group = 'lsp_document_highlight'
@@ -21,50 +21,50 @@ function M.set_keymaps(client, bufnr)
   end
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  bkm.map('n', 'K', vim.lsp.buf.hover, 'Show documentation')
-  bkm.map('n', '<C-]>', vim.lsp.buf.definition, 'Go to definition')
+  map('n', 'K', vim.lsp.buf.hover, 'Show documentation')
+  map('n', '<C-]>', vim.lsp.buf.definition, 'Go to definition')
 
-  bkm.map('n', 'gD', vim.lsp.buf.implementation, 'Implementation')
-  bkm.map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature help')
-  bkm.map('n', '1gD', vim.lsp.buf.type_definition, 'Type definition')
+  map('n', 'gD', vim.lsp.buf.implementation, 'Implementation')
+  map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature help')
+  map('n', '1gD', vim.lsp.buf.type_definition, 'Type definition')
 
-  bkm.map("n", "[w", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-  bkm.map("n", "]w", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+  map("n", "[w", "<cmd>Lspsaga diagnostic_jump_prev<CR>", 'Prev warning')
+  map("n", "]w", "<cmd>Lspsaga diagnostic_jump_next<CR>", 'Next warning')
 
-  bkm.map("n", "[W", function()
+  map("n", "[W", function()
     require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  end)
-  bkm.map("n", "]W", function()
+  end, 'Prev diagnostic')
+  map("n", "]W", function()
     require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-  end)
+  end, 'Next diagnostic')
 
   if client.server_capabilities.documentFormattingProvider then
-    bkm.map('n', '<space>F', function() vim.lsp.buf.format({ async = true }) end)
+    map('n', '<space>F', function() vim.lsp.buf.format({ async = true }) end)
   end
 
-  bkm.map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
+  map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
 
-  bkm.map('n', [[\h]], vim.lsp.buf.hover, 'Hover')
-  bkm.map('n', [[\s]], vim.lsp.buf.document_symbol, 'Document symbol')
-  bkm.map('n', [[\q]], vim.lsp.buf.workspace_symbol, 'Workspace symbol')
-  bkm.map('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', 'Lsp finder')
-  bkm.map('n', [[\a]], function()
+  map('n', [[\h]], vim.lsp.buf.hover, 'Hover')
+  map('n', [[\s]], vim.lsp.buf.document_symbol, 'Document symbol')
+  map('n', [[\q]], vim.lsp.buf.workspace_symbol, 'Workspace symbol')
+  map('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', 'Lsp finder')
+  map('n', [[\a]], function()
     -- local ok = pcall(require 'lspsaga.command'.load_command, 'code_action')
     -- if not ok then
     vim.lsp.buf.code_action()
     -- end
   end, 'Code action')
-  bkm.map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
-  bkm.map('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>',
+  map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
+  map('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>',
     'Preview definition')
-  bkm.map('n', [[\r]], '<CMD>Lspsaga rename<CR>', 'Rename')
+  map('n', [[\r]], '<CMD>Lspsaga rename<CR>', 'Rename')
 
   -- km.which_key.register({ ['<leader>w'] = { name = 'Workspace' } },
   -- { mode = 'n', buffer = bufnr })
-  bkm.map('n', [[\wa]], vim.lsp.buf.add_workspace_folder, 'Add folder')
-  bkm.map('n', [[\wr]], vim.lsp.buf.remove_workspace_folder,
+  map('n', [[\wa]], vim.lsp.buf.add_workspace_folder, 'Add folder')
+  map('n', [[\wr]], vim.lsp.buf.remove_workspace_folder,
     'Remove folder')
-  bkm.map('n', [[\wl]], function()
+  map('n', [[\wl]], function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, 'List folders')
 end

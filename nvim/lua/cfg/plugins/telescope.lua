@@ -71,29 +71,31 @@ telescope.load_extension('live_grep_args')
 telescope.load_extension('ui-select')
 
 -- mappings
-local flags = require('utl.maps').flags
 util.command('Rg',
   [[lua require('telescope.builtin').grep_string{ search = <f-args> }]],
   { nargs = '1' })
 
 local tele_leader = '<leader>T'
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', tele_leader .. 's', builtin.git_status, flags.s)
-vim.keymap.set('n', tele_leader .. 'b', builtin.git_branches, flags.s)
-vim.keymap.set('n', tele_leader .. 'c', builtin.git_commits, flags.s)
-vim.keymap.set('n', tele_leader .. 'r', builtin.registers, flags.s)
-vim.keymap.set('n', tele_leader .. 'm', builtin.keymaps, flags.s)
-vim.keymap.set('n', tele_leader .. 'd', builtin.lsp_document_symbols, flags.s)
-vim.keymap.set('n', tele_leader .. 'w', builtin.lsp_workspace_symbols, flags.s)
-vim.keymap.set('n', tele_leader .. 'M', builtin.marks, flags.s)
-vim.keymap
-  .set('n', '<leader>s', require('session-lens').search_session, flags.s)
-vim.keymap.set('n', '<leader>r', function()
+
+local mapper = require('utl.mapper')
+local map = mapper({ noremap = true, silent = true })
+
+map('n', tele_leader .. 's', builtin.git_status, 'Git status')
+map('n', tele_leader .. 'b', builtin.git_branches, 'Git branches')
+map('n', tele_leader .. 'c', builtin.git_commits, 'Git commits')
+map('n', tele_leader .. 'r', builtin.registers, 'Registers')
+map('n', tele_leader .. 'm', builtin.keymaps, 'Keymaps')
+map('n', tele_leader .. 'd', builtin.lsp_document_symbols, 'LSP doc symbols')
+map('n', tele_leader .. 'w', builtin.lsp_workspace_symbols, 'LSP workspace symbols')
+map('n', tele_leader .. 'M', builtin.marks, 'Marks')
+map('n', '<leader>s', require('session-lens').search_session, 'Search session')
+map('n', '<leader>r', function()
   builtin.live_grep { search = '', path_display = { 'smart' } }
-end, { noremap = true })
-vim.keymap.set('n', '<leader>f', function()
+end, 'Search text')
+map('n', '<leader>f', function()
   builtin.fd { find_command = { 'fd', '-tf', '-H' } }
-end, flags.s)
-vim.keymap.set('n', '<leader>bl', builtin.buffers, flags.s)
-vim.keymap.set('n', '<M-]>', builtin.grep_string, flags.s)
-vim.keymap.set('n', '‘', builtin.grep_string, flags.s)
+end, 'Search files')
+map('n', '<leader>bl', builtin.buffers, 'List buffers')
+map('n', '<M-]>', builtin.grep_string, 'Grep string')
+map('n', '‘', builtin.grep_string, 'Grep string')
