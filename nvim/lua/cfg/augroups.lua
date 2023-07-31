@@ -40,4 +40,17 @@ do
       vim.keymap.set('n', '<CR>', [[<CR>:cclose<CR>]], { silent = true, buffer = true })
     end,
   })
+  -- if package.loaded['noice'] then
+  --   vim.api.nvim_create_autocmd({'VimEnter', 'VimResized'}, {
+  --     group = group,
+  --     pattern = '*',
+  --     callback = function()
+  --       if vim.o.columns < 100 then
+  --         vim.cmd [[NoiceDisable]]
+  --       else
+  --         vim.cmd [[NoiceEnable]]
+  --       end
+  --     end,
+  --   })
+  -- end
 end

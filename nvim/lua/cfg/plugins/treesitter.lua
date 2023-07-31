@@ -143,12 +143,5 @@ return {
       },
     },
   },
-
   endwise = { enable = true },
-  rainbow = {
-    enable = true,
-    disable = {},
-    query = 'rainbow-parens',
-    -- strategy = require('ts-rainbow').strategy.global,
-  }
 }

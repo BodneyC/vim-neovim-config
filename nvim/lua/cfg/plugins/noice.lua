@@ -16,7 +16,7 @@ return {
     lsp_doc_border = false,       -- add a border to hover docs and signature help
   },
   messages = {
-    enabled = true,              -- enables the Noice messages UI
+    enabled = false,             -- enables the Noice messages UI
     view = "notify",             -- default view for messages
     view_error = "notify",       -- view for errors
     view_warn = false,           -- view for warnings

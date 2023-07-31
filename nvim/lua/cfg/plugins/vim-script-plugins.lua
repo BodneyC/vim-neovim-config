@@ -2,6 +2,16 @@ local util = require('utl.util')
 
 util.opt('g', {
 
+  rainbow_delimiters = {
+    'TSRainbowRed',
+    'TSRainbowYellow',
+    'TSRainbowBlue',
+    'TSRainbowOrange',
+    'TSRainbowGreen',
+    'TSRainbowViolet',
+    'TSRainbowCyan',
+  },
+
   -- Relies on this file being loaded after the plugin itself
   __buffer_first_refreshed = false,
 
@@ -9,7 +19,7 @@ util.opt('g', {
   AutoPairsMultilineClose = false,
 
   Hexokinase_virtualText = ' ',
-  Hexokinase_highlighters = {'backgroundfull'},
+  Hexokinase_highlighters = { 'backgroundfull' },
 
   Hexokinase_optInPatterns = {
     'full_hex',
@@ -26,7 +36,7 @@ util.opt('g', {
   asynctasks_term_pos = 'bottom',
   asyncrun_open = 15,
 
-  bullets_outline_levels = {'ROM', 'ABC', 'num', 'abc', 'rom', 'std-'},
+  bullets_outline_levels = { 'ROM', 'ABC', 'num', 'abc', 'rom', 'std-' },
 
   ['conjure#mapping#prefix'] = '\\',
 
@@ -53,28 +63,28 @@ util.opt('g', {
   -- },
 
   -- floaterm_wintype = 'vsplit',
-  floaterm_rootmarkers = {'.project', '.git', '.hg', '.svn', '.root', '.vim'},
+  floaterm_rootmarkers = { '.project', '.git', '.hg', '.svn', '.root', '.vim' },
   floaterm_autoclose = 1,
 
   fzf_history_dir = os.getenv('HOME') .. '/.cache/nvim/fzf/.fzf_history_dir',
 
-  gitblame_ignored_filetypes = {'Outline', 'NvimTree', 'neo-tree'},
+  gitblame_ignored_filetypes = { 'Outline', 'NvimTree', 'neo-tree' },
 
   gutentags_cache_dir = os.getenv('HOME') .. '/.cache/vim/tags',
-  gutentags_modules = {'ctags'},
+  gutentags_modules = { 'ctags' },
   gutentags_add_default_project_roots = 0,
   gutentags_ctags_auto_set_tags = 1,
-  gutentags_project_root = {'.git', '.vim'},
+  gutentags_project_root = { '.git', '.vim' },
   gutentags_generate_on_write = 1,
   gutentags_generate_on_missing = 1,
   gutentags_generate_on_new = 1,
   gutentags_generate_on_empty_buffer = 0,
-  gutentags_ctags_exclude = {'*.json'},
+  gutentags_ctags_exclude = { '*.json' },
   gutentags_ctags_extra_args = {
     '--exclude=node_modules',
     '--tag-relative=' ..
-      (vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes' or
-        'always'),
+    (vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes' or
+      'always'),
     '--fields=+ailmnS',
   },
 
@@ -86,18 +96,18 @@ util.opt('g', {
 
   spelunker_disable_auto_group = 1,
 
-  scrollview_excluded_filetypes = {'defx', 'NvimTree', 'neo-tree'},
+  scrollview_excluded_filetypes = { 'defx', 'NvimTree', 'neo-tree' },
 
   tagbar_auto_close = 1,
   tagbar_compact = 1,
-  tagbar_iconchars = {'\\ua0', '\\ua0'},
+  tagbar_iconchars = { '\\ua0', '\\ua0' },
 
   ['test#strategy'] = 'neovim',
   ['test#java#maventest#file_pattern'] = [[\v([Tt]est.*|.*[Tt]est(s|Case)?).(java|kt)$]],
   ['test#javascript#ava#file_pattern'] = [[\v(tests|spec)?/.*\.(js|jsx|coffee|ts|tsx)$]],
   ['test#javascript#jest#file_pattern'] = [[\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$]],
 
-  togool_extras = {{'<', '+'}, {'>', '-'}},
+  togool_extras = { { '<', '+' }, { '>', '-' } },
 
   twiggy_local_branch_sort = 'mru',
   twiggy_remote_branch_sort = 'date',
@@ -126,7 +136,7 @@ util.opt('g', {
   virk_close_by_ft = {
     VimspectorPrompt = '',
     NvimTree = [[lua vim.defer_fn(function() ]] ..
-      [[require('mod.nvim-tree').resize { refocus = true } end, 0)]],
+        [[require('mod.nvim-tree').resize { refocus = true } end, 0)]],
     Outline = [[exe 'SymbolsOutline' | setlocal nobuflisted | wincmd p]],
     Mundo = 'MundoShow',
   },
@@ -137,15 +147,15 @@ util.opt('g', {
 })
 
 os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' ..
-             vim.g.gutentags_cache_dir)
+  vim.g.gutentags_cache_dir)
 
 do
   local group = vim.api.nvim_create_augroup('spelunker', {
     clear = true,
   })
-  vim.api.nvim_create_autocmd({'BufWinEnter', 'BufWritePost'}, {
+  vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufWritePost' }, {
     group = group,
-    pattern = {'*.md', '*.txt', '*.tex'},
+    pattern = { '*.md', '*.txt', '*.tex' },
     command = [[call spelunker#check()]],
   })
 end
@@ -190,8 +200,8 @@ for _, mode in ipairs(mappings.mode_pairs) do
   for _, dir in ipairs(mappings.dir_pairs) do
     vim.api.nvim_set_keymap(mode.mode, dir.key, mode.cmd ..
       'Navigator' .. dir.txt .. '<CR>', {
-      noremap = true,
-      silent = true,
-    })
+        noremap = true,
+        silent = true,
+      })
   end
 end

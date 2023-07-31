@@ -1,4 +1,7 @@
 return {
+  diagnostic = {
+    show_code_action = false,
+  },
   lightbulb = {
     enable_in_insert = false,
     virtual_text = false,

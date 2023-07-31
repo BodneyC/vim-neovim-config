@@ -26,6 +26,7 @@ lsp.ensure_installed({
   'jdtls',
   'diagnosticls',
   'ansiblels',
+  'groovyls',
 })
 
 lsp.set_preferences({
@@ -50,6 +51,8 @@ end)
 lsp.setup_nvim_cmp(require('cfg.lsp.cmp').zero_cmp_config())
 
 lsp.configure('diagnosticls', require('cfg.lsp.langs.diagnosticls'))
+
+-- lsp.configure('groovyls', require('cfg.lsp.langs.groovyls'))
 
 lsp.skip_server_setup({ 'rust_analyzer', 'tsserver' })
 

@@ -110,7 +110,8 @@ require('lazy').setup({
   'vigoux/treesitter-context.nvim',
   'RRethy/nvim-treesitter-textsubjects',
   'RRethy/nvim-treesitter-endwise',
-  'HiPhish/nvim-ts-rainbow2',
+  -- 'HiPhish/nvim-ts-rainbow2',
+  'HiPhish/rainbow-delimiters.nvim',
   'vim-test/vim-test',
 
   'rcarriga/neotest-vim-test',
@@ -299,6 +300,7 @@ require('lazy').setup({
   --- Language support
   -- 'Olical/conjure',
   'pearofducks/ansible-vim',
+  'midchildan/ft-confluence.vim',
   'towolf/vim-helm',
   { 'hashivim/vim-terraform',    ft = 'terraform' },
   { 'BodneyC/sood-vim',          ft = 'sood' },

@@ -39,7 +39,7 @@ function M.set_keymaps(client, bufnr)
   end, 'Next diagnostic')
 
   if client.server_capabilities.documentFormattingProvider then
-    map('n', '<space>F', function() vim.lsp.buf.format({ async = true }) end)
+    map('n', '<leader>F', function() vim.lsp.buf.format({ async = true }) end)
   end
 
   map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')

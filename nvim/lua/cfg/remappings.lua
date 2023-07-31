@@ -31,7 +31,7 @@ for _, ch in ipairs({ 'y', 'Y', 'p', 'P' }) do
 end
 
 map('n', '<C-p>', [[<Tab>]])
-map('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], 'Replace under cursor')
+map('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], 'Replace under cursor', { silent = false })
 map('n', '<leader>/', [[<Cmd>noh<CR>]], 'Remove highlight')
 
 -- NOTE: Doesn't work with `vim.keymap.set`
@@ -92,10 +92,12 @@ map('n', '<leader>H', function()
   return require('mod.terminal').floating_help(vim.fn.expand('<cword>'))
 end, 'Help under cursor')
 
-map('v', '<up>', '<Plug>SchleppUp', nil, {unique = true})
-map('v', '<down>', '<Plug>SchleppDown', nil, {unique = true})
-map('v', '<left>', '<Plug>SchleppLeft', nil, {unique = true})
-map('v', '<right>', '<Plug>SchleppRight', nil, {unique = true})
+map('v', '<up>', '<Plug>SchleppUp', nil, { unique = true })
+map('v', '<down>', '<Plug>SchleppDown', nil, { unique = true })
+map('v', '<left>', '<Plug>SchleppLeft', nil, { unique = true })
+map('v', '<right>', '<Plug>SchleppRight', nil, { unique = true })
+
+map('n', '<leader>F', function() vim.cmd [[Format]] end, 'Format', { unique = true })
 
 local npairs = require('nvim-autopairs')
 
