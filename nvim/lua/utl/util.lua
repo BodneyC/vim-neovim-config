@@ -33,6 +33,7 @@ function M.opt(s, d) for k, v in pairs(d) do vim[s][k] = v end end
 local store = require('utl.fn_store')
 
 function M.command(lhs, rhs, opts)
+  opts = opts or {}
   local parts = {
     'command!',
     '-nargs=' .. (opts.nargs or '0'),

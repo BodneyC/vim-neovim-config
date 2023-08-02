@@ -3,6 +3,7 @@ local util = require('utl.util')
 vim.cmd 'filetype off'
 
 util.safe_require('cfg.options')
+util.safe_require('cfg.filetypes')
 
 util.safe_require('cfg.lazy')
 

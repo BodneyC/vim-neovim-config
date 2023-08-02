@@ -27,6 +27,7 @@ lsp.ensure_installed({
   'diagnosticls',
   'ansiblels',
   'groovyls',
+  'helmls',
 })
 
 lsp.set_preferences({

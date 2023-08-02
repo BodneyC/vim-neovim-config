@@ -22,7 +22,12 @@ function M.set_keymaps(client, bufnr)
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   map('n', 'K', vim.lsp.buf.hover, 'Show documentation')
-  map('n', '<C-]>', vim.lsp.buf.definition, 'Go to definition')
+
+  -- Bit of a hack considering all the other nonsense that's gone into setting
+  --  this bitch up for Helm
+  if client.config.name ~= 'helm_ls' then
+    map('n', '<C-]>', vim.lsp.buf.definition, 'Go to definition')
+  end
 
   map('n', 'gD', vim.lsp.buf.implementation, 'Implementation')
   map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature help')

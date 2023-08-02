@@ -299,9 +299,6 @@ require('lazy').setup({
 
   --- Language support
   -- 'Olical/conjure',
-  'pearofducks/ansible-vim',
-  'midchildan/ft-confluence.vim',
-  'towolf/vim-helm',
   { 'hashivim/vim-terraform',    ft = 'terraform' },
   { 'BodneyC/sood-vim',          ft = 'sood' },
   { 'BodneyC/knit-vim',          ft = 'knit' },
@@ -326,6 +323,10 @@ require('lazy').setup({
     'rmagatti/gx-extended.nvim',
     opts = {}
   },
+
+  'pearofducks/ansible-vim',
+  'midchildan/ft-confluence.vim',
+  {'towolf/vim-helm'},
 
   --   -- Clojure
   --   {
