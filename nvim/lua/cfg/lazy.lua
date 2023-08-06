@@ -59,7 +59,7 @@ require('lazy').setup({
       'nvim-telescope/telescope-rg.nvim',
     },
   },
-  'simrat39/symbols-outline.nvim',
+  { 'simrat39/symbols-outline.nvim', opts = {} },
   -- { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
   -- {
   --   'jose-elias-alvarez/null-ls.nvim',
@@ -70,7 +70,7 @@ require('lazy').setup({
   'mfussenegger/nvim-dap',
   'theHamsta/nvim-dap-virtual-text',
   'rcarriga/nvim-dap-ui',
-  { 'Pocco81/dap-buddy.nvim',    branch = 'dev' },
+  { 'Pocco81/dap-buddy.nvim',        branch = 'dev' },
   'jbyuki/one-small-step-for-vimkind',
   'nvim-telescope/telescope-dap.nvim',
   {
@@ -326,7 +326,7 @@ require('lazy').setup({
 
   'pearofducks/ansible-vim',
   'midchildan/ft-confluence.vim',
-  {'towolf/vim-helm'},
+  { 'towolf/vim-helm' },
 
   --   -- Clojure
   --   {

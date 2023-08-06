@@ -4,7 +4,6 @@ vim.wo.conceallevel = 0
 vim.wo.concealcursor = ''
 vim.bo.commentstring = '<!-- %s -->'
 vim.o.spell = true
-vim.o.nu = false
 local group = vim.api.nvim_create_augroup('CustomMarkdown', {
   clear = true,
 })
@@ -17,7 +16,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 vim.api.nvim_create_autocmd('BufLeave', {
   group = group,
-  pattern = 'everforest',
+  pattern = '*.md',
   callback = function()
     vim.o.nu = true
   end
