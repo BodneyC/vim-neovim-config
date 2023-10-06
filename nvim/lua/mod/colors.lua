@@ -3,10 +3,12 @@ local M = {}
 function M.nightfox()
   local variant = 'nightfox'
   require('nightfox').setup({
-    styles = {
-      comments = 'italic',
-      keywords = 'bold',
-      types = 'italic,bold',
+    options = {
+      styles = {
+        comments = 'italic',
+        keywords = 'bold',
+        types = 'italic,bold',
+      },
     },
     groups = {
       all = {
@@ -18,7 +20,8 @@ function M.nightfox()
         TelescopeNormal = { bg = 'bg1' },
         gitblame = { fg = 'palette.comment' },
         CursorLine = { bg = 'bg2' },
-        CurrentWords = { link = 'LspReferenceText' },
+        CurrentWord = { bg = 'bg2' },
+        CurrentWords = { bg = 'bg1' },
         CurrentWordsTwins = { link = 'CurrentWords' },
         -- WSDelimiterRed = { bg = '#292736' },
         -- WSDelimiterYellow = { bg = '#313739' },
