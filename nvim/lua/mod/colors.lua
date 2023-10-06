@@ -20,6 +20,13 @@ function M.nightfox()
         CursorLine = { bg = 'bg2' },
         CurrentWords = { link = 'LspReferenceText' },
         CurrentWordsTwins = { link = 'CurrentWords' },
+        -- WSDelimiterRed = { bg = '#292736' },
+        -- WSDelimiterYellow = { bg = '#313739' },
+        -- WSDelimiterBlue = { bg = "#212E3F" },
+        -- WSDelimiterOrange = { bg = "#2D2F34" },
+        -- WSDelimiterGreen = { bg = "#22303A" },
+        -- WSDelimiterViolet = { bg = "#2A2B3F" },
+        -- WSDelimiterCyan = { bg = "#20323E" },
       }
     }
   })

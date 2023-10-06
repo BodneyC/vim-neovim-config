@@ -215,18 +215,32 @@ require('lazy').setup({
   'voldikss/vim-floaterm',
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     opts = {
-      char = '│',
-      show_first_indent_level = true,
+      indent = { char = '│' },
+      -- whitespace = {
+      --   highlight = {
+      --     "WSDelimiterRed",
+      --     "WSDelimiterYellow",
+      --     "WSDelimiterBlue",
+      --     "WSDelimiterOrange",
+      --     "WSDelimiterGreen",
+      --     "WSDelimiterViolet",
+      --     "WSDelimiterCyan",
+      --   },
+      -- },
+      -- show_first_indent_level = true,
       -- show_end_of_line = true,
-      filetype_exclude = {
-        'packer',
-        'floaterm',
-        'help',
-        'Outline',
-        'NvimTree',
-        'neo-tree',
-        '',
+      exclude = {
+        filetypes = {
+          'packer',
+          'floaterm',
+          'help',
+          'Outline',
+          'NvimTree',
+          'neo-tree',
+          '',
+        },
       },
     },
   },
@@ -293,7 +307,6 @@ require('lazy').setup({
     dependencies = 'nvim-lua/plenary.nvim',
     config = require('cfg.plugins.gitsigns'),
   },
-  'f-person/git-blame.nvim',
   { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
   'tpope/vim-fugitive',
 
