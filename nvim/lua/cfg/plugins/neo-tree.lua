@@ -4,9 +4,41 @@ local NEO_TREE_MIN_WIDTH = 35
 local manager = require("neo-tree.sources.manager")
 local renderer = require("neo-tree.ui.renderer")
 
+local function longest_in_window(winnr)
+  -- From second line to ignore directory path
+  local lines = vim.api.nvim_buf_get_lines(
+    vim.fn.winbufnr(winnr), 1, vim.api.nvim_buf_line_count(0), false)
+  local longest = 0
+  for _, line in ipairs(lines) do
+    local filtered_line = line:gsub("%s+%S+%s+$", "")
+    if #filtered_line > longest then
+      longest = #filtered_line
+    end
+  end
+  return longest
+end
+
+local function resize_neotree()
+  -- default source, maybe find a way to iterate these
+  local state = manager.get_state('filesystem')
+  if renderer.window_exists(state) then
+    local winnr = vim.fn.win_id2win(state.winid)
+    vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. (
+      longest_in_window(winnr) + 2))
+  end
+end
+
 local map = require('utl.mapper')({ noremap = true, silent = true })
-map('n', '<Leader>d', require('neo-tree').focus, 'Focus neotree')
-map('n', '<Leader>D', require('neo-tree').show, 'Open neotree')
+
+map('n', '<Leader>d', function()
+  require('neo-tree').focus()
+  vim.defer_fn(resize_neotree, 200)
+end, 'Focus neotree')
+
+map('n', '<Leader>D', function()
+  require('neo-tree').show()
+  vim.defer_fn(resize_neotree, 200)
+end, 'Open neotree')
 
 do
   local group = vim.api.nvim_create_augroup('__NEO_TREE__', {
@@ -15,14 +47,7 @@ do
   vim.api.nvim_create_autocmd('VimResized', {
     group = group,
     pattern = '*',
-    callback = function()
-      -- default source, maybe find a way to iterate these
-      local state = manager.get_state('filesystem')
-      if renderer.window_exists(state) then
-        local winnr = vim.fn.win_id2win(state.winid)
-        vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. NEO_TREE_MIN_WIDTH)
-      end
-    end,
+    callback = resize_neotree
   })
   -- This may cause lag... need to think on this
   vim.api.nvim_create_autocmd('BufWritePost', {
@@ -164,8 +189,8 @@ require('neo-tree').setup {
     git_status = {
       symbols = {
         -- Change type
-        added     = '',  -- or '✚', but this is redundant info if you use git_status_colors on the name
-        modified  = '',  -- or '', but this is redundant info if you use git_status_colors on the name
+        added     = '', -- or '✚', but this is redundant info if you use git_status_colors on the name
+        modified  = '', -- or '', but this is redundant info if you use git_status_colors on the name
         deleted   = '🗑', -- this can only be used in the git_status source
         renamed   = '', -- this can only be used in the git_status source
         -- Status type

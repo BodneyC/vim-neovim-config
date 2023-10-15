@@ -165,7 +165,7 @@ require('lazy').setup({
       },
     },
   },
-  { 'folke/trouble.nvim',        dependencies = 'kyazdani42/nvim-web-devicons' },
+  { 'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
   'mhartington/formatter.nvim',
   'machakann/vim-swap',
   'tpope/vim-commentary',
@@ -201,11 +201,7 @@ require('lazy').setup({
   },
 
   --- Prettiness
-  {
-    'sainnhe/everforest',
-    lazy = false,
-    -- config = function() require('mod.colors').everforst() end,
-  },
+  { 'sainnhe/everforest', lazy = false },
   {
     'EdenEast/nightfox.nvim',
     lazy = false,
@@ -231,6 +227,10 @@ require('lazy').setup({
       -- },
       -- show_first_indent_level = true,
       -- show_end_of_line = true,
+      scope = {
+        show_start = false,
+        show_end = false,
+      },
       exclude = {
         filetypes = {
           'packer',
