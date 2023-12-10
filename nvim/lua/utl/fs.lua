@@ -26,4 +26,10 @@ function M.fsize(fn)
   return size
 end
 
+function M.write_file(fname, txt)
+  local file = io.open(fname, 'w')
+  io.write(file, txt)
+  io.close(file)
+end
+
 return M

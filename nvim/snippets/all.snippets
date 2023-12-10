@@ -7,5 +7,8 @@ snippet filename "filename"
 snippet basename "basename"
 	`expand('%:t')`
 
-snippet directory "directory"
+snippet dir "directory"
 	`expand('%:p:h')`
+
+snippet date ""
+	`strftime('%Y-%m-%d')`

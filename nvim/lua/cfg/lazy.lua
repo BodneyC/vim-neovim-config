@@ -36,7 +36,11 @@ require('lazy').setup({
       'ray-x/lsp_signature.nvim',
 
       -- Snippets
-      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        build = 'make install_jsregexp'
+      },
       -- Snippet Collection (Optional)
       -- 'rafamadriz/friendly-snippets',
     },
@@ -165,7 +169,7 @@ require('lazy').setup({
       },
     },
   },
-  { 'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
+  { 'folke/trouble.nvim',        dependencies = 'kyazdani42/nvim-web-devicons' },
   'mhartington/formatter.nvim',
   'machakann/vim-swap',
   'tpope/vim-commentary',
@@ -201,13 +205,13 @@ require('lazy').setup({
   },
 
   --- Prettiness
-  { 'sainnhe/everforest', lazy = false },
+  { 'sainnhe/everforest',    lazy = false },
   {
     'EdenEast/nightfox.nvim',
     lazy = false,
     config = function() require('mod.colors').nightfox() end,
   },
-  { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
+  { 'KabbAmine/vCoolor.vim', cmd = 'VCoolor' },
   'voldikss/vim-floaterm',
   {
     'lukas-reineke/indent-blankline.nvim',

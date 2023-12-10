@@ -1,31 +1,71 @@
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
-local NEO_TREE_MIN_WIDTH = 35
+local NEO_TREE_MIN_WIDTH = 25
 local manager = require("neo-tree.sources.manager")
 local renderer = require("neo-tree.ui.renderer")
 
-local function longest_in_window(winnr)
+local function get_neo_tree_lines(winnr)
   -- From second line to ignore directory path
   local lines = vim.api.nvim_buf_get_lines(
     vim.fn.winbufnr(winnr), 1, vim.api.nvim_buf_line_count(0), false)
-  local longest = 0
+  local filtered_lines = {}
   for _, line in ipairs(lines) do
     local filtered_line = line:gsub("%s+%S+%s+$", "")
-    if #filtered_line > longest then
-      longest = #filtered_line
-    end
+    table.insert(filtered_lines, filtered_line)
   end
-  return longest
+  return table.concat(filtered_lines, '\n')
+end
+
+-- This is *not* a good approach, matches the portion of the name that would
+--  fit into the screen at a given level, very likely to break with API changes
+--  and very likely to be inaccurate if higher nodes exist with the same
+--  name...
+-- In short, this is because there's nothing in `state.tree.nodes.by_id` that
+--  would tell you if a given node is visible on screen, any directory that has
+--  been opened will have all it's nodes in the table - this is a check to see
+--  if it's in the buffer contents... sketchy stuff right here... but it works
+local function fname_fragment_match(winnr, node)
+  local width = vim.fn.winwidth(winnr)
+  -- 2 for SOL and 2 for icon
+  local starting_pos = 4 + (node.level * 2)
+  -- 2 for git status
+  local width_for_fname = width - (starting_pos + 2)
+  if width_for_fname < 1 then
+    return nil
+  end
+  local filtered_fname = string.sub(node.name, 1, width_for_fname + 1)
+  return filtered_fname:gsub('%-', '%%-')
 end
 
 local function resize_neotree()
   -- default source, maybe find a way to iterate these
   local state = manager.get_state('filesystem')
-  if renderer.window_exists(state) then
-    local winnr = vim.fn.win_id2win(state.winid)
-    vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. (
-      longest_in_window(winnr) + 2))
+  if not renderer.window_exists(state) then
+    return
   end
+  local winnr = vim.fn.win_id2win(state.winid)
+  local buftext = get_neo_tree_lines(winnr)
+  vim.print(buftext)
+  local longest = NEO_TREE_MIN_WIDTH
+  -- TODO: Delete
+  local winner = nil
+  for k, v in pairs(state.tree.nodes.by_id) do
+    local filtered_fname = fname_fragment_match(winnr, v)
+    if filtered_fname then
+      if string.find(buftext, ' ' .. filtered_fname) then
+        -- vim.print("found " .. v.name)
+        if v.level ~= 0 then
+          local length = 2 + ((v.level + 1) * 2) + #v.name + 1
+          if length > longest then
+            longest = length
+            winner = v
+          end
+        end
+      end
+    end
+  end
+  vim.print(winner)
+  vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. longest)
 end
 
 local map = require('utl.mapper')({ noremap = true, silent = true })
@@ -178,7 +218,7 @@ require('neo-tree').setup {
       highlight = 'NeoTreeFileIcon'
     },
     modified = {
-      symbol = '[+]',
+      symbol = '+',
       highlight = 'NeoTreeModified',
     },
     name = {
@@ -196,8 +236,8 @@ require('neo-tree').setup {
         -- Status type
         untracked = '',
         ignored   = '',
-        unstaged  = '',
-        staged    = '',
+        unstaged  = '', -- '',
+        staged    = '', -- '',
         conflict  = '',
       }
     },
