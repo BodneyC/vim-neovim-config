@@ -37,14 +37,6 @@ local ensure_installed = {
 }
 
 return {
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = true,
-    config = {
-      markdown = '<!-- %s -->',
-      c = '// %s',
-    },
-  },
   autotag = {
     enable = true,
     filetypes = autotag_filetypes,

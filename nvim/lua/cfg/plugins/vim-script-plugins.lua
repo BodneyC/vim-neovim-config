@@ -3,13 +3,15 @@ local util = require('utl.util')
 util.opt('g', {
 
   rainbow_delimiters = {
-    'TSRainbowRed',
-    'TSRainbowYellow',
-    'TSRainbowBlue',
-    'TSRainbowOrange',
-    'TSRainbowGreen',
-    'TSRainbowViolet',
-    'TSRainbowCyan',
+    highlight = {
+      'TSRainbowRed',
+      'TSRainbowYellow',
+      'TSRainbowBlue',
+      'TSRainbowOrange',
+      'TSRainbowGreen',
+      'TSRainbowViolet',
+      'TSRainbowCyan',
+    },
   },
 
   -- Relies on this file being loaded after the plugin itself

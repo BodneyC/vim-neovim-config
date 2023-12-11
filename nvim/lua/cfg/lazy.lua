@@ -1,12 +1,8 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
+    'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', --[[ latest stable release --]] lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -47,7 +43,7 @@ require('lazy').setup({
   },
   {
     'nvimdev/lspsaga.nvim',
-    config = require('cfg.plugins.lspsaga'),
+    opts = require('cfg.plugins.lspsaga'),
   },
 
   -- 'nvim-lua/lsp-status.nvim',
@@ -103,8 +99,9 @@ require('lazy').setup({
       require('nvim-treesitter.install').update({ with_sync = true })
     end,
     config = function()
-      require('nvim-treesitter.configs').setup(
-        require('cfg.plugins.treesitter'))
+      vim.g.skip_ts_context_commentstring_module = true
+      require('nvim-treesitter.configs').setup(require('cfg.plugins.treesitter'))
+      require('ts_context_commentstring').setup(require('cfg.plugins.ts_context_comments'))
     end,
   },
   'nvim-treesitter/nvim-treesitter-refactor',
@@ -135,13 +132,10 @@ require('lazy').setup({
   'farmergreg/vim-lastplace',
   {
     'folke/which-key.nvim',
-    opts = {
-      triggers_blacklist = {
-        n = { '"' }, -- slow for "+
-      },
+    opts = { triggers_blacklist = { n = { '"' } },
     },
   },
-  { 'folke/todo-comments.nvim',   config = require('cfg.plugins.todo-comments') },
+  { 'folke/todo-comments.nvim',   opts = require('cfg.plugins.todo-comments') },
   'bronson/vim-visual-star-search',
   'dominikduda/vim_current_word',
   -- 'jiangmiao/auto-pairs',
@@ -169,7 +163,10 @@ require('lazy').setup({
       },
     },
   },
-  { 'folke/trouble.nvim',        dependencies = 'kyazdani42/nvim-web-devicons' },
+  {
+    'folke/trouble.nvim',
+    dependencies = 'kyazdani42/nvim-web-devicons'
+  },
   'mhartington/formatter.nvim',
   'machakann/vim-swap',
   'tpope/vim-commentary',
@@ -189,29 +186,28 @@ require('lazy').setup({
   'tweekmonster/startuptime.vim',
   'vim-utils/vim-all', -- a<CR>
   {
-    "giusgad/pets.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
-    opts = {
-      row = 8,
-      col = 0,
-      default_pet = "cat",
-      default_style = "light_gray",
+    'folke/noice.nvim',
+    opts = require('cfg.plugins.noice'),
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      {
+        'rcarriga/nvim-notify',
+        opts = require('cfg.plugins.notify'),
+      }
     }
-  },
-  {
-    "folke/noice.nvim",
-    config = require('cfg.plugins.noice'),
-    dependencies = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' }
   },
 
   --- Prettiness
-  { 'sainnhe/everforest',    lazy = false },
+  {
+    'sainnhe/everforest',
+    lazy = false
+  },
   {
     'EdenEast/nightfox.nvim',
     lazy = false,
     config = function() require('mod.colors').nightfox() end,
   },
-  { 'KabbAmine/vCoolor.vim', cmd = 'VCoolor' },
+  { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
   'voldikss/vim-floaterm',
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -220,13 +216,13 @@ require('lazy').setup({
       indent = { char = '│' },
       -- whitespace = {
       --   highlight = {
-      --     "WSDelimiterRed",
-      --     "WSDelimiterYellow",
-      --     "WSDelimiterBlue",
-      --     "WSDelimiterOrange",
-      --     "WSDelimiterGreen",
-      --     "WSDelimiterViolet",
-      --     "WSDelimiterCyan",
+      --     'WSDelimiterRed',
+      --     'WSDelimiterYellow',
+      --     'WSDelimiterBlue',
+      --     'WSDelimiterOrange',
+      --     'WSDelimiterGreen',
+      --     'WSDelimiterViolet',
+      --     'WSDelimiterCyan',
       --   },
       -- },
       -- show_first_indent_level = true,
@@ -258,7 +254,7 @@ require('lazy').setup({
   --   config = require('cfg.plugins.bufferline'),
   -- },
   { 'rrethy/vim-hexokinase',     build = 'make hexokinase' },
-  { 'nvim-lualine/lualine.nvim', config = require('cfg.plugins.lualine') },
+  { 'nvim-lualine/lualine.nvim', opts = require('cfg.plugins.lualine') },
   'wellle/targets.vim',
   'wellle/visual-split.vim',
 
@@ -282,11 +278,11 @@ require('lazy').setup({
     --   require('neo-tree').setup(config)
     -- end,
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      'nvim-lua/plenary.nvim',
       'kyazdani42/nvim-web-devicons',
-      "MunifTanjim/nui.nvim",
+      'MunifTanjim/nui.nvim',
       {
-        -- only needed if you want to use the commands with "_with_window_picker" suffix
+        -- only needed if you want to use the commands with '_with_window_picker' suffix
         's1n7ax/nvim-window-picker',
         version = '2.*',
         opts = {
@@ -296,9 +292,9 @@ require('lazy').setup({
             -- filter using buffer options
             bo = {
               -- if the file type is one of following, the window will be ignored
-              filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+              filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
               -- if the buffer type is one of following, the window will be ignored
-              buftype = { 'terminal', "quickfix" },
+              buftype = { 'terminal', 'quickfix' },
             },
           },
           other_win_hl_color = '#e35e4f',
@@ -309,7 +305,7 @@ require('lazy').setup({
   {
     'lewis6991/gitsigns.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
-    config = require('cfg.plugins.gitsigns'),
+    opts = require('cfg.plugins.gitsigns'),
   },
   { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
   'tpope/vim-fugitive',

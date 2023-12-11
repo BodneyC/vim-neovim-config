@@ -20,17 +20,11 @@ function M.zero_cmp_config()
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = {
-      {
-        name = 'nvim_lsp',
-        keyword_length = 3
-      },
-      { name = 'nvim_lsp_signature_help', },
-      {
-        name = 'buffer',
-        keyword_length = 3
-      },
-      { name = 'path', },
-      { name = 'luasnip', },
+      { name = 'nvim_lsp', keyword_length = 3 },
+      { name = 'buffer', keyword_length = 3 },
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'path' },
+      { name = 'luasnip' },
     },
     formatting = {
       format = require('lspkind').cmp_format({
