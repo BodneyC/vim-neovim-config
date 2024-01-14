@@ -341,6 +341,18 @@ require('lazy').setup({
   'midchildan/ft-confluence.vim',
   { 'towolf/vim-helm' },
 
+  -- Note-taking
+  {
+    'lervag/wiki.vim',
+    init = function()
+      local root = os.getenv('HOME') .. '/.notes-wiki'
+      if vim.fn.isdirectory(root) == 0 then
+        os.execute('mkdir -p ' .. root)
+      end
+      vim.g.wiki_root = root
+    end
+  }
+
   --   -- Clojure
   --   {
   --     'tpope/vim-sexp-mappings-for-regular-people',

@@ -1,11 +1,36 @@
 local map = require('utl.mapper')({ noremap = true, silent = true })
+local util = require('utl.util')
 
 vim.wo.conceallevel = 0
 vim.wo.concealcursor = ''
 vim.bo.commentstring = '<!-- %s -->'
 vim.o.spell = true
+
+local function md_template()
+  local title = util.basename_to_title()
+  local lines = {
+    '<!-- markdownlint-disable MD013 -->',
+    '',
+    '# ' .. title,
+    '',
+  }
+  -- Buffer, start line, end line, error on no line, lines
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+end
+
+util.command('MDTemplate', md_template)
+
 local group = vim.api.nvim_create_augroup('CustomMarkdown', {
   clear = true,
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = group,
+  pattern = '*.md',
+  callback = function()
+    if vim.fn.line('$') == 1 and vim.fn.getline(1) == '' then
+      md_template()
+    end
+  end
 })
 vim.api.nvim_create_autocmd('BufEnter', {
   group = group,

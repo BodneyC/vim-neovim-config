@@ -7,6 +7,13 @@ do
     pattern = '*',
     callback = require('mod.functions').handle_large_file,
   })
+  vim.api.nvim_create_autocmd('BufEnter', {
+    group = group,
+    pattern = '*',
+    callback = function()
+      if vim.o.buftype == 'terminal' then vim.cmd('startinsert') end
+    end,
+  })
   vim.api.nvim_create_autocmd({ 'BufLeave', 'TextChanged' }, {
     group = group,
     pattern = '*',

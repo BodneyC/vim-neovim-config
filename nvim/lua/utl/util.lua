@@ -42,7 +42,7 @@ function M.command(lhs, rhs, opts)
     opts.range and '-range' or '',
     opts.buffer and '-buffer' or '',
     lhs,
-   }
+  }
   if type(rhs) == 'string' then
     table.insert(parts, rhs)
   elseif type(rhs) == 'function' then
@@ -69,7 +69,9 @@ end
 
 function M.toggle_bool_option(scope, opt)
   if vim[scope] and vim[scope][opt] ~= nil and type(vim[scope][opt]) ==
-    'boolean' then vim[scope][opt] = not vim[scope][opt] end
+      'boolean' then
+    vim[scope][opt] = not vim[scope][opt]
+  end
 end
 
 local function last_win_of_screen(d)
@@ -142,6 +144,14 @@ function M.basic_os_info()
   end
 
   return name, arch
+end
+
+-- Not perfect but it'll do
+function M.basename_to_title(basename)
+  basename = basename or vim.fn.expand('%:t:r')
+  basename = basename:match("(.+)%..+$") or basename
+  basename = basename:gsub('_', '-'):gsub('-', ' ')
+  return string.gsub(" " .. basename, "%W%l", string.upper):sub(2)
 end
 
 return M

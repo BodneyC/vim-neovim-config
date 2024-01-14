@@ -45,7 +45,6 @@ local function resize_neotree()
   end
   local winnr = vim.fn.win_id2win(state.winid)
   local buftext = get_neo_tree_lines(winnr)
-  vim.print(buftext)
   local longest = NEO_TREE_MIN_WIDTH
   -- TODO: Delete
   local winner = nil
@@ -64,7 +63,6 @@ local function resize_neotree()
       end
     end
   end
-  vim.print(winner)
   vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. longest)
 end
 
