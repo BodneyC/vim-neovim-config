@@ -32,18 +32,18 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end
   end
 })
+vim.api.nvim_create_autocmd('FileType', {
+  group = group,
+  pattern = 'markdown',
+  callback = function()
+    vim.cmd('setlocal nonu')
+  end
+})
 vim.api.nvim_create_autocmd('BufEnter', {
   group = group,
   pattern = '*.md',
   callback = function()
-    vim.o.nu = false
-  end
-})
-vim.api.nvim_create_autocmd('BufLeave', {
-  group = group,
-  pattern = '*.md',
-  callback = function()
-    vim.o.nu = true
+    vim.cmd('setlocal nonu')
   end
 })
 

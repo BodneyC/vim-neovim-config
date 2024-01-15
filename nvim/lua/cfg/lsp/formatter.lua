@@ -6,18 +6,24 @@ local function only_opts(opts)
   }
 end
 
+local function shfmt()
+  local pwd = os.getenv('PWD')
+  local args = { '-w', '-i=2', '-bn', '-ci', '-sr' }
+  if vim.fn.filereadable(pwd .. '/.editorconfig') then
+    args = { '-w' }
+  end
+  return {
+    exe = 'shfmt',
+    cwd = pwd,
+    args = args,
+    stdin = false,
+  }
+end
+
 require('formatter').setup {
   filetype = {
-    sh = only_opts {
-      exe = 'shfmt',
-      args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
-      stdin = false,
-    },
-    zsh = only_opts {
-      exe = 'shfmt',
-      args = { '-w', '-i=2', '-bn', '-ci', '-sr' },
-      stdin = false,
-    },
+    sh = shfmt,
+    zsh = shfmt,
     lua = only_opts {
       exe = 'lua-format',
       args = { '-i' },
