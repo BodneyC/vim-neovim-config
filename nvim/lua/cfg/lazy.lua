@@ -60,11 +60,6 @@ require('lazy').setup({
     },
   },
   { 'simrat39/symbols-outline.nvim', opts = {} },
-  -- { name = 'lsp_lines', url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
-  -- {
-  --   'jose-elias-alvarez/null-ls.nvim',
-  --   config = function() require('cfg.plugins.null-ls') end,
-  -- },
 
   --- DAP
   'mfussenegger/nvim-dap',
@@ -84,8 +79,6 @@ require('lazy').setup({
   --- Added functionality
   { 'BodneyC/hex-this-vim',      cmd = 'HexThis' },
   'windwp/nvim-spectre',
-  -- 'knubie/vim-kitty-navigator',
-  -- 'christoomey/vim-tmux-navigator',
   {
     'numToStr/Navigator.nvim',
     config = function()
@@ -111,7 +104,6 @@ require('lazy').setup({
   'vigoux/treesitter-context.nvim',
   'RRethy/nvim-treesitter-textsubjects',
   'RRethy/nvim-treesitter-endwise',
-  -- 'HiPhish/nvim-ts-rainbow2',
   'HiPhish/rainbow-delimiters.nvim',
   'vim-test/vim-test',
 
@@ -123,6 +115,7 @@ require('lazy').setup({
     'rcarriga/neotest',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'rcasia/neotest-bash',
       'nvim-treesitter/nvim-treesitter',
       'antoinemadec/FixCursorHold.nvim',
     },
@@ -214,23 +207,7 @@ require('lazy').setup({
     main = 'ibl',
     opts = {
       indent = { char = '│' },
-      -- whitespace = {
-      --   highlight = {
-      --     'WSDelimiterRed',
-      --     'WSDelimiterYellow',
-      --     'WSDelimiterBlue',
-      --     'WSDelimiterOrange',
-      --     'WSDelimiterGreen',
-      --     'WSDelimiterViolet',
-      --     'WSDelimiterCyan',
-      --   },
-      -- },
-      -- show_first_indent_level = true,
-      -- show_end_of_line = true,
-      scope = {
-        show_start = false,
-        show_end = false,
-      },
+      scope = { show_start = false, show_end = false },
       exclude = {
         filetypes = {
           'packer',
@@ -245,7 +222,30 @@ require('lazy').setup({
     },
   },
   'dstein64/nvim-scrollview',
-  { 'junegunn/goyo.vim',         cmd = 'Goyo' },
+  {
+    'mzlogin/vim-markdown-toc',
+    init = function()
+      vim.g.vmt_list_item_char = '-'
+      vim.g.vmt_list_indent_text = '  '
+      vim.g.vmt_dont_insert_fence = 1
+    end
+  },
+  {
+    'junegunn/goyo.vim',
+    cmd = 'Goyo',
+    config = function()
+      vim.g.goyo_width = 120
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'GoyoEnter',
+        callback = function()
+          require('lualine').hide({
+            place = { 'statuslint', 'tabline', 'winbar' },
+            unhide = false
+          })
+        end
+      })
+    end
+  },
   { 'junegunn/limelight.vim',    cmd = 'Limelight' },
   -- {
   --   'akinsho/bufferline.nvim',
@@ -318,9 +318,16 @@ require('lazy').setup({
   { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
   -- 'leafgarland/typescript-vim',
   'jose-elias-alvarez/typescript.nvim',
-  { 'm-pilia/vim-pkgbuild',    ft = 'pkgbuild' },
+  { 'm-pilia/vim-pkgbuild', ft = 'pkgbuild' },
   'michaeljsmith/vim-indent-object',
-  { 'plasticboy/vim-markdown', ft = 'markdown' },
+  {
+    'plasticboy/vim-markdown',
+    ft = 'markdown',
+    init = function()
+      vim.g.vim_markdown_folding_disabled = true
+      vim.g.vim_markdown_no_default_key_mappings = true
+    end
+  },
   {
     -- bullet points in MD
     'dkarter/bullets.vim',
@@ -350,6 +357,8 @@ require('lazy').setup({
         os.execute('mkdir -p ' .. root)
       end
       vim.g.wiki_root = root
+      vim.g.wiki_global_load = 0
+      vim.g.wiki_filetypes = { 'md', 'sh' }
     end
   }
 

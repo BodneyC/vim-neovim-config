@@ -1,6 +1,7 @@
 local map = require('utl.mapper')({ noremap = true, silent = true })
 local util = require('utl.util')
 
+vim.bo.sw = 2
 vim.wo.conceallevel = 0
 vim.wo.concealcursor = ''
 vim.bo.commentstring = '<!-- %s -->'

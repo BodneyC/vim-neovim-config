@@ -115,41 +115,7 @@ util.opt('g', {
   twiggy_remote_branch_sort = 'date',
 
   vcoolor_disable_mappings = false,
-
-  vim_markdown_folding_disabled = true,
-  vim_markdown_no_default_key_mappings = true,
-
-  vimade = {
-    fadelevel = 0.6,
-    enablesigns = 0,
-  },
-
-  virk_close_regexes = {
-    '^$',
-    'MERGE MSG',
-    'git-.*',
-    'COMMIT.*',
-    'packer].*',
-    'DAP .*',
-    -- 'FAR.*',
-    -- '.*Plugins.*',
-    -- 'NvimTree.*',
-  },
-  virk_close_by_ft = {
-    VimspectorPrompt = '',
-    NvimTree = [[lua vim.defer_fn(function() ]] ..
-        [[require('mod.nvim-tree').resize { refocus = true } end, 0)]],
-    Outline = [[exe 'SymbolsOutline' | setlocal nobuflisted | wincmd p]],
-    Mundo = 'MundoShow',
-  },
-  virk_close_terminals = 1,
-
-  vsnip_snippet_dir = os.getenv('HOME') .. '/.config/nvim/vsnip',
-
 })
-
-os.execute('test -d ' .. vim.g.gutentags_cache_dir .. ' || mkdir -p ' ..
-  vim.g.gutentags_cache_dir)
 
 do
   local group = vim.api.nvim_create_augroup('spelunker', {
