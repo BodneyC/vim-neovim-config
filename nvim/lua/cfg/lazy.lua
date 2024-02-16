@@ -9,14 +9,17 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-  --- Lsp
+  --[[------------------------------------------------------------------------
+  LSP Setup and configuration
+  --------------------------------------------------------------------------]]
+
   {
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
       -- LSP Support
-      { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
+      'neovim/nvim-lspconfig',
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
 
       -- Autocompletion
       'hrsh7th/nvim-cmp',
@@ -32,60 +35,35 @@ require('lazy').setup({
       'ray-x/lsp_signature.nvim',
 
       -- Snippets
-      {
-        'L3MON4D3/LuaSnip',
-        version = 'v2.*',
-        build = 'make install_jsregexp'
-      },
+      { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
       -- Snippet Collection (Optional)
-      -- 'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
     },
   },
-  {
-    'nvimdev/lspsaga.nvim',
-    opts = require('cfg.plugins.lspsaga'),
-  },
 
-  -- 'nvim-lua/lsp-status.nvim',
+  { 'nvimdev/lspsaga.nvim',          opts = require('cfg.plugins.lspsaga') },
+  { 'simrat39/symbols-outline.nvim', opts = {} },
+
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-packer.nvim',
-      { 'nvim-telescope/telescope-fzy-native.nvim', build = 'make' },
       'nvim-telescope/telescope-ui-select.nvim',
       -- One to track
       'nvim-telescope/telescope-rg.nvim',
+      { 'nvim-telescope/telescope-fzy-native.nvim', build = 'make' },
+      {
+        'nvim-telescope/telescope-smart-history.nvim',
+        dependencies = { 'kkharji/sqlite.lua' }
+      }
     },
   },
-  { 'simrat39/symbols-outline.nvim', opts = {} },
 
-  --- DAP
-  'mfussenegger/nvim-dap',
-  'theHamsta/nvim-dap-virtual-text',
-  'rcarriga/nvim-dap-ui',
-  { 'Pocco81/dap-buddy.nvim',        branch = 'dev' },
-  'jbyuki/one-small-step-for-vimkind',
-  'nvim-telescope/telescope-dap.nvim',
-  {
-    'mfussenegger/nvim-dap-python',
-    config = function()
-      require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-    end,
-  },
-  { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
-
-  --- Added functionality
-  { 'BodneyC/hex-this-vim',      cmd = 'HexThis' },
-  'windwp/nvim-spectre',
-  {
-    'numToStr/Navigator.nvim',
-    config = function()
-      require('Navigator').setup()
-    end,
-  },
-  'windwp/nvim-ts-autotag', -- Setup in ts.lua
+  --[[------------------------------------------------------------------------
+  Treesitter
+  --------------------------------------------------------------------------]]
   {
     'nvim-treesitter/nvim-treesitter',
     build = function()
@@ -96,42 +74,87 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup(require('cfg.plugins.treesitter'))
       require('ts_context_commentstring').setup(require('cfg.plugins.ts_context_comments'))
     end,
+    dependencies = {
+      'RRethy/nvim-treesitter-endwise',
+      'RRethy/nvim-treesitter-textsubjects',
+      'nvim-treesitter/nvim-treesitter-refactor',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'vigoux/treesitter-context.nvim',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
+    }
   },
-  'nvim-treesitter/nvim-treesitter-refactor',
-  'nvim-treesitter/nvim-treesitter-textobjects',
-  { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
-  'JoosepAlviste/nvim-ts-context-commentstring',
-  'vigoux/treesitter-context.nvim',
-  'RRethy/nvim-treesitter-textsubjects',
-  'RRethy/nvim-treesitter-endwise',
+
+  --[[------------------------------------------------------------------------
+  DAP Setup and configuration
+  --------------------------------------------------------------------------]]
+
+  'mfussenegger/nvim-dap',
+  'theHamsta/nvim-dap-virtual-text',
+  'rcarriga/nvim-dap-ui',
+  'jbyuki/one-small-step-for-vimkind',
+  'nvim-telescope/telescope-dap.nvim',
+
+  { 'Pocco81/dap-buddy.nvim',    branch = 'dev' },
+  { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
+
+  {
+    'mfussenegger/nvim-dap-python',
+    config = function()
+      require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+    end,
+  },
+
+  --[[------------------------------------------------------------------------
+  Extra Functionality
+  --------------------------------------------------------------------------]]
+
   'HiPhish/rainbow-delimiters.nvim',
   'vim-test/vim-test',
+  'windwp/nvim-spectre',
+  'windwp/nvim-ts-autotag', -- Setup in ts.lua
 
-  'rcarriga/neotest-vim-test',
-  'rcarriga/neotest-plenary',
-  'rcarriga/neotest-python',
-  'haydenmeade/neotest-jest',
+  { 'BodneyC/hex-this-vim',    cmd = 'HexThis' },
+  { 'numToStr/Navigator.nvim', opts = {} },
+
   {
     'rcarriga/neotest',
+    config = function()
+      require('neotest').setup(require('cfg.plugins.neotest'))
+    end,
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'rcasia/neotest-bash',
-      'nvim-treesitter/nvim-treesitter',
+      "nvim-neotest/neotest-go",
       'antoinemadec/FixCursorHold.nvim',
+      'haydenmeade/neotest-jest',
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'rcarriga/neotest-plenary',
+      'rcarriga/neotest-python',
+      'rcarriga/neotest-vim-test',
+      'rcasia/neotest-bash',
     },
   },
 
-  --- QOL
-  'farmergreg/vim-lastplace',
-  {
-    'folke/which-key.nvim',
-    opts = { triggers_blacklist = { n = { '"' } },
-    },
-  },
-  { 'folke/todo-comments.nvim',   opts = require('cfg.plugins.todo-comments') },
+  --[[------------------------------------------------------------------------
+  Quality of Life
+  --------------------------------------------------------------------------]]
+
   'bronson/vim-visual-star-search',
   'dominikduda/vim_current_word',
+  'farmergreg/vim-lastplace',
+  'junegunn/vim-easy-align',
+  'kamykn/spelunker.vim',
+  'machakann/vim-swap',
+  'mhartington/formatter.nvim',
+  'tpope/vim-commentary',
+  'zirrostig/vim-schlepp',
   -- 'jiangmiao/auto-pairs',
+
+  { 'folke/todo-comments.nvim',  opts = require('cfg.plugins.todo-comments') },
+  { 'folke/trouble.nvim',        dependencies = 'kyazdani42/nvim-web-devicons' },
+  { 'folke/which-key.nvim',      opts = { triggers_blacklist = { n = { '"' } } } },
+  { 'kwkarlwang/bufresize.nvim', config = true },
+
   {
     'windwp/nvim-autopairs',
     config = function()
@@ -144,9 +167,6 @@ require('lazy').setup({
       vim.keymap.set('i', '∑', [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]], { silent = true })
     end
   },
-  'junegunn/vim-easy-align',
-  'kamykn/spelunker.vim',
-  { 'kwkarlwang/bufresize.nvim', config = true },
   {
     'luukvbaal/stabilize.nvim',
     opts = {
@@ -157,19 +177,21 @@ require('lazy').setup({
     },
   },
   {
-    'folke/trouble.nvim',
-    dependencies = 'kyazdani42/nvim-web-devicons'
+    'rhysd/clever-f.vim',
+    config = function()
+      vim.g.clever_f_mark_char_color = 'ModeMsg'
+      vim.cmd([[
+        map ; <Plug>(clever-f-repeat-forward)
+        map , <Plug>(clever-f-repeat-back)
+        nmap <Esc> <Plug>(clever-f-reset)
+      ]])
+    end
   },
-  'mhartington/formatter.nvim',
-  'machakann/vim-swap',
-  'tpope/vim-commentary',
-  'zirrostig/vim-schlepp',
 
-  --- Vim internal wrappers
-  {
-    'nat-418/boole.nvim',
-    opts = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
-  },
+  --[[------------------------------------------------------------------------
+  Wrappers Around Vim Internal-ish Stuff
+  --------------------------------------------------------------------------]]
+
   'andymass/vim-matchup', -- % on `end`s
   'moll/vim-bbye',        -- <leader>bd
   'tpope/vim-repeat',
@@ -178,30 +200,40 @@ require('lazy').setup({
   'tpope/vim-unimpaired',
   'tweekmonster/startuptime.vim',
   'vim-utils/vim-all', -- a<CR>
+
+  {
+    'nat-418/boole.nvim',
+    opts = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
+  },
   {
     'folke/noice.nvim',
     opts = require('cfg.plugins.noice'),
     dependencies = {
       'MunifTanjim/nui.nvim',
-      {
-        'rcarriga/nvim-notify',
-        opts = require('cfg.plugins.notify'),
-      }
+      { 'rcarriga/nvim-notify', opts = require('cfg.plugins.notify') }
     }
   },
 
-  --- Prettiness
-  {
-    'sainnhe/everforest',
-    lazy = false
-  },
+  --[[------------------------------------------------------------------------
+  Colors Outside of Treesitter
+  --------------------------------------------------------------------------]]
+
+  'dstein64/nvim-scrollview',
+  'voldikss/vim-floaterm',
+  'wellle/targets.vim',
+  'wellle/visual-split.vim',
+
+  { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
+  { 'junegunn/limelight.vim',    cmd = 'Limelight' },
+  { 'nvim-lualine/lualine.nvim', opts = require('cfg.plugins.lualine') },
+  { 'rrethy/vim-hexokinase',     build = 'make hexokinase' },
+  { 'sainnhe/everforest',        lazy = false },
+
   {
     'EdenEast/nightfox.nvim',
     lazy = false,
-    config = function() require('mod.colors').nightfox() end,
+    config = require('mod.colors').nightfox,
   },
-  { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
-  'voldikss/vim-floaterm',
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
@@ -210,18 +242,11 @@ require('lazy').setup({
       scope = { show_start = false, show_end = false },
       exclude = {
         filetypes = {
-          'packer',
-          'floaterm',
-          'help',
-          'Outline',
-          'NvimTree',
-          'neo-tree',
-          '',
+          'packer', 'floaterm', 'help', 'Outline', 'NvimTree', 'neo-tree', '',
         },
       },
     },
   },
-  'dstein64/nvim-scrollview',
   {
     'mzlogin/vim-markdown-toc',
     init = function()
@@ -246,19 +271,20 @@ require('lazy').setup({
       })
     end
   },
-  { 'junegunn/limelight.vim',    cmd = 'Limelight' },
   -- {
   --   'akinsho/bufferline.nvim',
   --   dependencies = 'kyazdani42/nvim-web-devicons',
   --   version = '^v3',
   --   config = require('cfg.plugins.bufferline'),
   -- },
-  { 'rrethy/vim-hexokinase',     build = 'make hexokinase' },
-  { 'nvim-lualine/lualine.nvim', opts = require('cfg.plugins.lualine') },
-  'wellle/targets.vim',
-  'wellle/visual-split.vim',
 
-  --- SDL
+  --[[------------------------------------------------------------------------
+  SDLC-ish Stuff
+  --------------------------------------------------------------------------]]
+
+  'tpope/vim-fugitive',
+  { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
+
   {
     'rmagatti/auto-session',
     opts = { log_level = 'warn', auto_session_suppress_dirs = { '~/' } },
@@ -268,19 +294,10 @@ require('lazy').setup({
     dependencies = { 'nvim-telescope/telescope.nvim' },
     opts = { theme_conf = { border = false } },
   },
-  -- {'BodneyC/VirkSpaces'},
-  -- 'kyazdani42/nvim-tree.lua',
   {
     'nvim-neo-tree/neo-tree.nvim',
-    -- branch = 'v2.x',
-    -- config = function()
-    --   local config = require('cfg.plugins.neo-tree')
-    --   require('neo-tree').setup(config)
-    -- end,
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim',
       {
         -- only needed if you want to use the commands with '_with_window_picker' suffix
         's1n7ax/nvim-window-picker',
@@ -307,19 +324,26 @@ require('lazy').setup({
     dependencies = 'nvim-lua/plenary.nvim',
     opts = require('cfg.plugins.gitsigns'),
   },
-  { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
-  'tpope/vim-fugitive',
 
-  --- Language support
-  -- 'Olical/conjure',
-  { 'hashivim/vim-terraform',    ft = 'terraform' },
-  { 'BodneyC/sood-vim',          ft = 'sood' },
-  { 'BodneyC/knit-vim',          ft = 'knit' },
-  { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
-  -- 'leafgarland/typescript-vim',
+  --[[------------------------------------------------------------------------
+  Support for Specific Languages
+  --------------------------------------------------------------------------]]
+
   'jose-elias-alvarez/typescript.nvim',
-  { 'm-pilia/vim-pkgbuild', ft = 'pkgbuild' },
   'michaeljsmith/vim-indent-object',
+  'midchildan/ft-confluence.vim',
+  'pearofducks/ansible-vim',
+  'simrat39/rust-tools.nvim',
+  'towolf/vim-helm',
+
+  { 'BodneyC/knit-vim',          ft = 'knit' },
+  { 'BodneyC/sood-vim',          ft = 'sood' },
+  { 'dkarter/bullets.vim',       ft = 'markdown', },
+  { 'hashivim/vim-terraform',    ft = 'terraform' },
+  { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
+  { 'm-pilia/vim-pkgbuild',      ft = 'pkgbuild' },
+  { 'rmagatti/gx-extended.nvim', opts = {} },
+
   {
     'plasticboy/vim-markdown',
     ft = 'markdown',
@@ -329,26 +353,15 @@ require('lazy').setup({
     end
   },
   {
-    -- bullet points in MD
-    'dkarter/bullets.vim',
-    ft = 'markdown',
-  },
-  'simrat39/rust-tools.nvim',
-  {
     'barrett-ruth/import-cost.nvim',
     build = 'sh install.sh npm',
     opts = { highlight = 'Comment' },
   },
-  {
-    'rmagatti/gx-extended.nvim',
-    opts = {}
-  },
 
-  'pearofducks/ansible-vim',
-  'midchildan/ft-confluence.vim',
-  { 'towolf/vim-helm' },
+  --[[------------------------------------------------------------------------
+  Note-taking
+  --------------------------------------------------------------------------]]
 
-  -- Note-taking
   {
     'lervag/wiki.vim',
     init = function()
@@ -361,36 +374,4 @@ require('lazy').setup({
       vim.g.wiki_filetypes = { 'md', 'sh' }
     end
   }
-
-  --   -- Clojure
-  --   {
-  --     'tpope/vim-sexp-mappings-for-regular-people',
-  --     ft = { 'clojure' },
-  --     dependencies = {
-  --       'guns/vim-sexp',
-  --       'tpope/vim-repeat',
-  --       'tpope/vim-surround',
-  --     },
-  --   },
-  --   {
-  --     'guns/vim-sexp',
-  --     ft = { 'clojure' },
-  --     config = function()
-  --       vim.g.sexp_mappings = require('cfg.plugins.sexp').disabled_sexp_mappings
-  --     end,
-  --   },
-  --   {
-  --     'Olical/conjure',
-  --     ft = { 'clojure' },
-  --     config = function()
-  --       vim.g["conjure#mapping#prefix"] = ','
-  --     end,
-  --   },
-  --   'PaterJason/cmp-conjure',
-  --   {
-  --     'clojure-vim/vim-jack-in',
-  --     ft = { 'clojure' },
-  --     dependencies = { 'clojure-vim/vim-jack-in', 'tpope/vim-dispatch', 'radenling/vim-dispatch-neovim' }
-  --   },
-
 })

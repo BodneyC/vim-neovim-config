@@ -4,7 +4,7 @@ local confs = {
   'cfg.plugins.vim-script-plugins',
   -- 'cfg.plugins.nvim-tree',
   'cfg.plugins.neo-tree',
-  'cfg.plugins.neotest',
+  -- 'cfg.plugins.neotest',
   'cfg.plugins.telescope',
   'cfg.plugins.luasnip',
 }

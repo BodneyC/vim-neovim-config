@@ -1,0 +1,22 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[{*.groovy,*enkins*}]
+indent_size = 4
+
+[*.md]
+max_line_length = off
+
+[*.sh]
+indent_style = space
+binary_next_line = true
+switch_case_indent = true
+space_redirects = true
+keep_padding = false

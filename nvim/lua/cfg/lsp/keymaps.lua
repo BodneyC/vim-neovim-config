@@ -1,6 +1,7 @@
 local M = {}
 
-local km = require 'utl.mapper'
+local util = require('utl.util')
+local km = require('utl.mapper')
 
 function M.set_keymaps(client, bufnr)
   local map = km({ buffer = bufnr, noremap = true, silent = true })
@@ -44,7 +45,13 @@ function M.set_keymaps(client, bufnr)
   end, 'Next diagnostic')
 
   if client.server_capabilities.documentFormattingProvider then
-    map('n', '<leader>F', function() vim.lsp.buf.format({ async = true }) end)
+    map('n', '<leader>F', function()
+      if client.name == 'gopls' then
+        util.safe_require('cfg.lsp.langs.gopls').format()
+      else
+        vim.lsp.buf.format({ async = true })
+      end
+    end)
   end
 
   map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
@@ -52,7 +59,7 @@ function M.set_keymaps(client, bufnr)
   map('n', [[\h]], vim.lsp.buf.hover, 'Hover')
   map('n', [[\s]], vim.lsp.buf.document_symbol, 'Document symbol')
   map('n', [[\q]], vim.lsp.buf.workspace_symbol, 'Workspace symbol')
-  map('n', [[\f]], '<CMD>Lspsaga lsp_finder<CR>', 'Lsp finder')
+  map('n', [[\f]], '<CMD>Lspsaga finder<CR>', 'Lsp finder')
   map('n', [[\a]], function()
     -- local ok = pcall(require 'lspsaga.command'.load_command, 'code_action')
     -- if not ok then

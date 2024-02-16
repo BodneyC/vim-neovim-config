@@ -1,26 +1,31 @@
 local M = {}
 
 local neotest = require('neotest')
+local km = require('utl.mapper')
+
+local map = km({ noremap = true, silent = true })
 
 local function set_keymap()
-
   local s = {
     silent = true,
   }
 
-  vim.keymap.set('n', '<leader>tr', neotest.run.run, s)
-  vim.keymap.set('n', '<leader>td', function()
+  map('n', '<leader>tr', neotest.run.run, 'run test', s)
+  map('n', '<leader>td', function()
     require('neotest').run.run({
       strategy = 'dap',
     })
-  end, s)
-  vim.keymap.set('n', '<leader>tf', function()
+  end, 'debug test', s)
+  map('n', '<leader>tf', function()
     neotest.run.run(vim.fn.expand('%'))
-  end, s)
-  vim.keymap.set('n', '<leader>t|', neotest.summary.toggle, s)
-  vim.keymap.set('n', '<leader>tS', neotest.summary.toggle, s)
-  vim.keymap.set('n', ']t', neotest.jump.next, s)
-  vim.keymap.set('n', '[t', neotest.jump.prev, s)
+  end, 'test file', s)
+  map('n', '<leader>to', neotest.output_panel.toggle, 'test output panel', s)
+  map('n', '<leader>t|', neotest.summary.toggle, 'test summary', s)
+  map('n', '<leader>tS', neotest.summary.toggle, 'test summary', s)
+  map('n', ']t', neotest.jump.next, 'next summary', s)
+  map('n', '[t', neotest.jump.prev, 'prev summary', s)
+  map('n', ']T', function() neotest.jump.next { status = 'failed' } end, 'next summary', s)
+  map('n', '[T', function() neotest.jump.prev { status = 'failed' } end, 'next summary', s)
 end
 
 function M.init()

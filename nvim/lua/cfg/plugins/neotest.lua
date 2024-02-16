@@ -1,8 +1,9 @@
-require('neotest').setup({
+return {
   diagnostic = { enabled = true },
   status = { enabled = true, virtual_text = false, signs = true },
   adapters = {
     require('neotest-bash'),
+    require('neotest-go'),
     require('neotest-python')({ dap = { justMyCode = false } }),
     require('neotest-plenary'),
     require('neotest-vim-test')(
@@ -14,4 +15,4 @@ require('neotest').setup({
       cwd = function(_) vim.fn.getcwd() end,
     }),
   },
-})
+}
