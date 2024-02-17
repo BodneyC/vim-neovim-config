@@ -45,20 +45,20 @@ require('lazy').setup({
   { 'simrat39/symbols-outline.nvim', opts = {} },
 
   {
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
+    -- optional for icon support
     dependencies = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-packer.nvim',
-      'nvim-telescope/telescope-ui-select.nvim',
-      -- One to track
-      'nvim-telescope/telescope-rg.nvim',
-      { 'nvim-telescope/telescope-fzy-native.nvim', build = 'make' },
-      {
-        'nvim-telescope/telescope-smart-history.nvim',
-        dependencies = { 'kkharji/sqlite.lua' }
-      }
+      'nvim-tree/nvim-web-devicons',
+      { "junegunn/fzf", build = "./install --bin" },
     },
+    config = function()
+      vim.g.fzf_history_dir = os.getenv('HOME') .. '/.local/share/nvim/fzf-history'
+      if vim.fn.isdirectory(vim.g.fzf_history_dir) == 0 then
+        os.execute('mkdir -p ' .. vim.g.fzf_history_dir)
+      end
+      -- calling `setup` is optional for customization
+      require('fzf-lua').setup(require('cfg.plugins.fzf'))
+    end
   },
 
   --[[------------------------------------------------------------------------
@@ -93,7 +93,6 @@ require('lazy').setup({
   'theHamsta/nvim-dap-virtual-text',
   'rcarriga/nvim-dap-ui',
   'jbyuki/one-small-step-for-vimkind',
-  'nvim-telescope/telescope-dap.nvim',
 
   { 'Pocco81/dap-buddy.nvim',    branch = 'dev' },
   { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
@@ -283,6 +282,8 @@ require('lazy').setup({
   --------------------------------------------------------------------------]]
 
   'tpope/vim-fugitive',
+  'sindrets/diffview.nvim',
+
   { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
 
   {
@@ -290,9 +291,9 @@ require('lazy').setup({
     opts = { log_level = 'warn', auto_session_suppress_dirs = { '~/' } },
   },
   {
-    'rmagatti/session-lens',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    opts = { theme_conf = { border = false } },
+    'lewis6991/gitsigns.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    opts = require('cfg.plugins.gitsigns'),
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
@@ -319,11 +320,6 @@ require('lazy').setup({
       }
     }
   },
-  {
-    'lewis6991/gitsigns.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
-    opts = require('cfg.plugins.gitsigns'),
-  },
 
   --[[------------------------------------------------------------------------
   Support for Specific Languages
@@ -342,7 +338,7 @@ require('lazy').setup({
   { 'hashivim/vim-terraform',    ft = 'terraform' },
   { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
   { 'm-pilia/vim-pkgbuild',      ft = 'pkgbuild' },
-  { 'rmagatti/gx-extended.nvim', opts = {} },
+  { 'rmagatti/gx-extended.nvim', opts = { open_fn = require 'lazy.util'.open } },
 
   {
     'plasticboy/vim-markdown',

@@ -5,7 +5,7 @@ local confs = {
   -- 'cfg.plugins.nvim-tree',
   'cfg.plugins.neo-tree',
   -- 'cfg.plugins.neotest',
-  'cfg.plugins.telescope',
+  -- 'cfg.plugins.telescope',
   'cfg.plugins.luasnip',
 }
 

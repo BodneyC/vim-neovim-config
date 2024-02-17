@@ -1,5 +1,3 @@
-require('telescope').load_extension('dap')
-
 local dap_install = require('dap-install')
 local dbg_list = require('dap-install.api.debuggers').get_installed_debuggers()
 
@@ -47,7 +45,7 @@ require('dap-vscode-js').setup({
   },
 })
 
-for _, language in ipairs({'typescript', 'javascript'}) do
+for _, language in ipairs({ 'typescript', 'javascript' }) do
   require('dap').configurations[language] = {
     {
       type = 'pwa-node',
@@ -60,7 +58,7 @@ for _, language in ipairs({'typescript', 'javascript'}) do
       type = 'pwa-node',
       request = 'attach',
       name = 'Attach',
-      processId = require'dap.utils'.pick_process,
+      processId = require 'dap.utils'.pick_process,
       cwd = '${workspaceFolder}',
     },
     {
@@ -69,7 +67,7 @@ for _, language in ipairs({'typescript', 'javascript'}) do
       name = 'Debug Jest Tests',
       -- trace = true, -- include debugger info
       runtimeExecutable = 'node',
-      runtimeArgs = {'./node_modules/jest/bin/jest.js', '--runInBand'},
+      runtimeArgs = { './node_modules/jest/bin/jest.js', '--runInBand' },
       rootPath = '${workspaceFolder}',
       cwd = '${workspaceFolder}',
       console = 'integratedTerminal',

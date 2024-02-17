@@ -34,16 +34,6 @@ function M.set_keymaps(client, bufnr)
   map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature help')
   map('n', '1gD', vim.lsp.buf.type_definition, 'Type definition')
 
-  map("n", "[w", "<cmd>Lspsaga diagnostic_jump_prev<CR>", 'Prev warning')
-  map("n", "]w", "<cmd>Lspsaga diagnostic_jump_next<CR>", 'Next warning')
-
-  map("n", "[W", function()
-    require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  end, 'Prev diagnostic')
-  map("n", "]W", function()
-    require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-  end, 'Next diagnostic')
-
   if client.server_capabilities.documentFormattingProvider then
     map('n', '<leader>F', function()
       if client.name == 'gopls' then
@@ -54,22 +44,23 @@ function M.set_keymaps(client, bufnr)
     end)
   end
 
-  map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
-
-  map('n', [[\h]], vim.lsp.buf.hover, 'Hover')
   map('n', [[\s]], vim.lsp.buf.document_symbol, 'Document symbol')
   map('n', [[\q]], vim.lsp.buf.workspace_symbol, 'Workspace symbol')
-  map('n', [[\f]], '<CMD>Lspsaga finder<CR>', 'Lsp finder')
-  map('n', [[\a]], function()
-    -- local ok = pcall(require 'lspsaga.command'.load_command, 'code_action')
-    -- if not ok then
-    vim.lsp.buf.code_action()
-    -- end
-  end, 'Code action')
+
+  -- map('n', [[\f]], '<CMD>Lspsaga finder<CR>', 'Lsp finder')
+  -- map('n', [[\a]], vim.lsp.buf.code_action, 'Code action')
   map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
-  map('n', [[\D]], '<CMD>Lspsaga preview_definition<CR>',
+  map('n', [[\D]], '<CMD>Lspsaga peek_definition<CR>',
     'Preview definition')
-  map('n', [[\r]], '<CMD>Lspsaga rename<CR>', 'Rename')
+  map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
+  map("n", "[w", "<cmd>Lspsaga diagnostic_jump_prev<CR>", 'Prev warning')
+  map("n", "]w", "<cmd>Lspsaga diagnostic_jump_next<CR>", 'Next warning')
+  map("n", "[W", function()
+    require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  end, 'Prev diagnostic')
+  map("n", "]W", function()
+    require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+  end, 'Next diagnostic')
 
   -- km.which_key.register({ ['<leader>w'] = { name = 'Workspace' } },
   -- { mode = 'n', buffer = bufnr })

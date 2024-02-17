@@ -231,8 +231,7 @@ end
 
 function M.setup_terms_from_session()
   M.term_name = vim.fn.expand('%') -- I know this will pick one at random... but they have no real order anyway...
-  vim.cmd(
-    'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+  vim.cmd('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
 end
 
 function M.init()

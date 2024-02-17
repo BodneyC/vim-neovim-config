@@ -9,7 +9,7 @@ end
 local function shfmt()
   local pwd = os.getenv('PWD')
   local args = { '-w', '-i=2', '-bn', '-ci', '-sr' }
-  if vim.fn.filereadable(pwd .. '/.editorconfig') then
+  if vim.fn.filereadable(pwd .. '/.editorconfig') == 1 then
     args = { '-w' }
   end
   return {

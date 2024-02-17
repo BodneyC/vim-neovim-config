@@ -81,7 +81,7 @@ map('n', ldr .. 'm', builtin.keymaps, 'Keymaps')
 map('n', ldr .. 'd', builtin.lsp_document_symbols, 'LSP doc symbols')
 map('n', ldr .. 'w', builtin.lsp_workspace_symbols, 'LSP workspace symbols')
 map('n', ldr .. 'M', builtin.marks, 'Marks')
-map('n', '<leader>s', require('session-lens').search_session, 'Search session')
+-- map('n', '<leader>s', require('session-lens').search_session, 'Search session')
 map('n', '<leader>r', function()
   builtin.live_grep { search = '', path_display = { 'smart' } }
 end, 'Search text')

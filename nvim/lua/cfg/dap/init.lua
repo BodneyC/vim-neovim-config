@@ -1,7 +1,5 @@
 local util = require('utl.util')
 
-require('telescope').load_extension('dap')
-
 local dap_install = require('dap-install')
 local dbg_list = require('dap-install.api.debuggers').get_installed_debuggers()
 

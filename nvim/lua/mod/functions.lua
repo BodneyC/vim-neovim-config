@@ -20,7 +20,8 @@ function M.bufonly()
       cnt = cnt + 1
     end
   end
-  if cnt > 0 then print(cnt .. ' buffers wiped out: ' .. vim.inspect(bwd)) end
+  if cnt > 0 then print(cnt .. ' buffers wiped out') end
+  -- if cnt > 0 then print(cnt .. ' buffers wiped out: ' .. vim.inspect(bwd)) end
 end
 
 -- WIP
