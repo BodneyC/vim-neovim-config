@@ -229,6 +229,11 @@ require('lazy').setup({
   { 'sainnhe/everforest',        lazy = false },
 
   {
+    'marko-cerovac/material.nvim',
+    lazy = false,
+    -- config = require('mod.colors').material,
+  },
+  {
     'EdenEast/nightfox.nvim',
     lazy = false,
     config = require('mod.colors').nightfox,

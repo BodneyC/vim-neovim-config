@@ -8,6 +8,7 @@ map('n', [[\r]], fzf.registers, 'Registers')
 map('n', [[\h]], fzf.help_tags, 'Help tags')
 map('n', [[\m]], fzf.keymaps, 'Keymaps')
 map('n', [[\M]], fzf.marks, 'Marks')
+map('n', [[\c]], fzf.colorschemes, 'Marks')
 
 -- Git
 map('n', [[\gd]], fzf.git_status, 'Git status') -- gd for git diff
