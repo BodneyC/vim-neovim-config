@@ -54,19 +54,26 @@ return {
       local date_time
 
       if opts.relative_time then
-        date_time = require('gitsigns.util').get_relative_time(tonumber(blame_info['author_time']))
+        date_time = require('gitsigns.util').get_relative_time(
+          tonumber(blame_info['author_time'])
+        )
       else
         date_time = os.date('%Y-%m-%d', tonumber(blame_info['author_time']))
       end
 
       -- Extra spaces to account for nvim-scrollview
-      text = string.format('%s • %s • %s  ', blame_info.author, date_time, blame_info.summary)
+      text = string.format(
+        '%s • %s • %s  ',
+        blame_info.author,
+        date_time,
+        blame_info.summary
+      )
     end
 
     -- Pinched from:
     --  https://github.com/lewis6991/gitsigns.nvim/issues/368#issuecomment-927097279
-    local ffi = require("ffi")
-    ffi.cdef 'int curwin_col_off(void);'
+    local ffi = require('ffi')
+    ffi.cdef('int curwin_col_off(void);')
     local row = vim.api.nvim_win_get_cursor(0)[1]
     local len = #vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
     local width = vim.api.nvim_win_get_width(0) - ffi.C.curwin_col_off()
@@ -82,7 +89,6 @@ return {
     end
   end,
 
-
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
     local function map(mode, l, r, opts)
@@ -91,13 +97,21 @@ return {
       vim.keymap.set(mode, l, r, opts)
     end
     map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
+      if vim.wo.diff then
+        return ']c'
+      end
+      vim.schedule(function()
+        gs.next_hunk()
+      end)
       return '<Ignore>'
     end, { expr = true })
     map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
+      if vim.wo.diff then
+        return '[c'
+      end
+      vim.schedule(function()
+        gs.prev_hunk()
+      end)
       return '<Ignore>'
     end, { expr = true })
     map('n', '<Leader>hs', gs.stage_hunk, {})

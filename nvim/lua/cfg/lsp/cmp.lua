@@ -12,14 +12,14 @@ function M.zero_cmp_config()
 
   cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = { { name = 'buffer', }, },
+    sources = { { name = 'buffer' } },
   })
 
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
-      { { name = 'path', }, },
-      { { name = 'cmdline', }, }
+      { { name = 'path' } },
+      { { name = 'cmdline' } }
     ),
   })
 
@@ -38,8 +38,8 @@ function M.zero_cmp_config()
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = {
-      { name = 'nvim_lsp',               keyword_length = 3 },
-      { name = 'buffer',                 keyword_length = 3 },
+      { name = 'nvim_lsp', keyword_length = 3 },
+      { name = 'buffer', keyword_length = 3 },
       { name = 'nvim_lsp_signature_help' },
       { name = 'path' },
       { name = 'luasnip' },
@@ -54,7 +54,6 @@ function M.zero_cmp_config()
   }
 end
 
-function M.post_zero_setup()
-end
+function M.post_zero_setup() end
 
 return M

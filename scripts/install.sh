@@ -26,8 +26,8 @@ command -v pip2 && pip2 install --user --upgrade neovim
 
 command -v gem && gem install neovim
 
-command -v go \
-  && go get -u golang.org/x/tools/gopls \
+command -v go &&
+  go get -u golang.org/x/tools/gopls \
     go get -u github.com/juliosueiras/terraform-lsp
 
 command -v npm && npm i -g \

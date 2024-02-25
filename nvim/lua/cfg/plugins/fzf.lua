@@ -1,17 +1,17 @@
 local mapper = require('utl.mapper')
 local map = mapper({ noremap = true, silent = true })
 
-local fzf = require 'fzf-lua'
+local fzf = require('fzf-lua')
 
 local historyfile = vim.g.fzf_history_dir .. '/lua-fzf-custom-history'
 if vim.fn.filereadable(historyfile) == 0 then
-  vim.cmd('silent exec \'!touch ' .. historyfile .. '\'')
+  vim.cmd("silent exec '!touch " .. historyfile .. "'")
 end
 
 local history_idx = 0
 
 local function read_to_lines(filepath)
-  local file = io.open(filepath, 'r');
+  local file = io.open(filepath, 'r')
   if not file then
     vim.print('Unable to open file (' .. filepath .. ') for reading')
     return
@@ -28,7 +28,9 @@ local feedkeys = require('utl.util').feedkeys
 
 local function history_next()
   local lines = read_to_lines(historyfile)
-  if not lines or #lines == 0 then return end
+  if not lines or #lines == 0 then
+    return
+  end
   if history_idx == 0 then
     history_idx = 1
   elseif history_idx + 1 <= #lines then
@@ -39,7 +41,9 @@ end
 
 local function history_prev()
   local lines = read_to_lines(historyfile)
-  if not lines or #lines == 0 then return end
+  if not lines or #lines == 0 then
+    return
+  end
   if history_idx == 0 then
     history_idx = 1
   elseif history_idx - 1 > 0 then
@@ -61,9 +65,11 @@ local function fn_post_fzf(_, _)
   if not phrase or type(phrase) ~= 'string' then
     return
   end
-  local file = io.open(historyfile, 'r');
+  local file = io.open(historyfile, 'r')
   if not file then
-    vim.print('Unable to open fzf-lua history file (' .. historyfile .. ') for reading')
+    vim.print(
+      'Unable to open fzf-lua history file (' .. historyfile .. ') for reading'
+    )
     return
   end
   local lines = {}
@@ -76,7 +82,9 @@ local function fn_post_fzf(_, _)
   file:close()
   file = io.open(historyfile, 'w')
   if not file then
-    vim.print('Unable to open fzf-lua history file (' .. historyfile .. ') for writing')
+    vim.print(
+      'Unable to open fzf-lua history file (' .. historyfile .. ') for writing'
+    )
     return
   end
   local content = ''
@@ -123,7 +131,7 @@ map('n', [[\lw]], fzf.lsp_workspace_symbols, 'LSP workspace symbols')
 
 local function grep_cword()
   local cword = vim.fn.expand('<cword>')
-  fzf.grep_cword { prompt = 'Rg (' .. cword .. ')❯ ' }
+  fzf.grep_cword({ prompt = 'Rg (' .. cword .. ')❯ ' })
 end
 
 map('n', '<M-]>', grep_cword, 'Grep string')
@@ -131,31 +139,46 @@ map('n', '‘', grep_cword, 'Grep string')
 
 return {
   winopts = {
-    height    = 0.90,
-    width     = 0.92,
-    row       = 0.35,
-    col       = 0.50,
-    border    = {
-      { ' ', 'TabLineFill' }, { ' ', 'TabLineFill' }, { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' }, { ' ', 'TabLineFill' }, { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' }, { ' ', 'TabLineFill' },
+    height = 0.90,
+    width = 0.92,
+    row = 0.35,
+    col = 0.50,
+    border = {
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
+      { ' ', 'TabLineFill' },
     },
     -- border           = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    preview   = {
-      border       = 'noborder',
-      wrap         = 'nowrap',
-      hidden       = 'nohidden',
-      vertical     = 'down:45%',
-      horizontal   = 'right:58%',
-      layout       = 'flex',
+    preview = {
+      border = 'noborder',
+      wrap = 'nowrap',
+      hidden = 'nohidden',
+      vertical = 'down:45%',
+      horizontal = 'right:58%',
+      layout = 'flex',
       flip_columns = 120,
     },
     on_create = function()
-      vim.keymap.set('t', '<C-j>', history_next, { silent = true, buffer = true })
-      vim.keymap.set('t', '<C-k>', history_prev, { silent = true, buffer = true })
+      vim.keymap.set(
+        't',
+        '<C-j>',
+        history_next,
+        { silent = true, buffer = true }
+      )
+      vim.keymap.set(
+        't',
+        '<C-k>',
+        history_prev,
+        { silent = true, buffer = true }
+      )
     end,
   },
-  hls     = {
+  hls = {
     preview_normal = 'TabLineFill',
     preview_border = 'TabLineFill',
   },

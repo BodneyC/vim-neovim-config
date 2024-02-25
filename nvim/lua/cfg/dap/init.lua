@@ -24,9 +24,12 @@ map('n', ldr .. 's', require('dap').step_over, 'Step over')
 map('n', ldr .. 'S', require('dap').step_into, 'Step into')
 map('n', ldr .. 'u', require('dap').step_out, 'Step out')
 map('n', ldr .. 'b', require('dap').toggle_breakpoint, 'Toggle breakpoint')
-map('n', ldr .. 'B',
+map(
+  'n',
+  ldr .. 'B',
   [[<Cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]],
-  'Set break condition')
+  'Set break condition'
+)
 map('n', ldr .. 'l', require('dap').list_breakpoints, 'List breakpoints')
 map('n', ldr .. 'r', require('dap').repl.open, 'Open REPL')
 -- map('n', ldr .. 'R', require('dap').repl.run_last, 'Run last')

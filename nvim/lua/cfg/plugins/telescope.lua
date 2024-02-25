@@ -6,14 +6,18 @@ if vim.fn.isdirectory(histdir) == 0 then
   os.execute('mkdir -p ' .. histdir)
 end
 
-telescope.setup {
+telescope.setup({
   defaults = {
     mappings = {
       i = {
         ['<C-j>'] = require('telescope.actions').cycle_history_next,
         ['<C-k>'] = require('telescope.actions').cycle_history_prev,
-        ['<C-w>'] = function() vim.api.nvim_input '<C-S-w>' end,
-        ['<C-u>'] = function() vim.api.nvim_input '<C-S-u>' end,
+        ['<C-w>'] = function()
+          vim.api.nvim_input('<C-S-w>')
+        end,
+        ['<C-u>'] = function()
+          vim.api.nvim_input('<C-S-u>')
+        end,
       },
       n = {
         ['j'] = require('telescope.actions').cycle_history_next,
@@ -26,9 +30,18 @@ telescope.setup {
     },
     sorting_strategy = 'ascending',
     vimgrep_arguments = {
-      'rg', '--color=never', '--column', '--glob=!**/*.class',
-      '--glob=!**/target/**', '--glob=!.git/**', '--glob=!.vim/**', '--hidden',
-      '--line-number', '--no-heading', '--smart-case', '--with-filename',
+      'rg',
+      '--color=never',
+      '--column',
+      '--glob=!**/*.class',
+      '--glob=!**/target/**',
+      '--glob=!.git/**',
+      '--glob=!.vim/**',
+      '--hidden',
+      '--line-number',
+      '--no-heading',
+      '--smart-case',
+      '--with-filename',
     },
     prompt_prefix = '$ ',
     selection_strategy = 'reset',
@@ -45,8 +58,13 @@ telescope.setup {
       vertical = { mirror = true },
     },
     file_ignore_patterns = {
-      [[\.cache]], [[\.lsp]], [[\.clj-kondo]], [[node_modules]],
-      [[package-lock\.json]], [[yarn\.lock]], [[\.git]],
+      [[\.cache]],
+      [[\.lsp]],
+      [[\.clj-kondo]],
+      [[node_modules]],
+      [[package-lock\.json]],
+      [[yarn\.lock]],
+      [[\.git]],
     },
     path_display = { 'absolute' },
     winblend = 0,
@@ -56,16 +74,18 @@ telescope.setup {
     color_devicons = true,
     set_env = { ['COLORTERM'] = 'truecolor' },
   },
-}
+})
 telescope.load_extension('fzy_native')
 telescope.load_extension('live_grep_args')
 telescope.load_extension('ui-select')
 telescope.load_extension('smart_history')
 
 -- mappings
-util.command('Rg',
+util.command(
+  'Rg',
   [[lua require('telescope.builtin').grep_string{ search = <f-args> }]],
-  { nargs = '1' })
+  { nargs = '1' }
+)
 
 local mapper = require('utl.mapper')
 local map = mapper({ noremap = true, silent = true })
@@ -83,10 +103,10 @@ map('n', ldr .. 'w', builtin.lsp_workspace_symbols, 'LSP workspace symbols')
 map('n', ldr .. 'M', builtin.marks, 'Marks')
 -- map('n', '<leader>s', require('session-lens').search_session, 'Search session')
 map('n', '<leader>r', function()
-  builtin.live_grep { search = '', path_display = { 'smart' } }
+  builtin.live_grep({ search = '', path_display = { 'smart' } })
 end, 'Search text')
 map('n', '<leader>f', function()
-  builtin.fd { find_command = { 'fd', '-tf', '-H' } }
+  builtin.fd({ find_command = { 'fd', '-tf', '-H' } })
 end, 'Search files')
 map('n', '<leader>bl', builtin.buffers, 'List buffers')
 map('n', '<M-]>', builtin.grep_string, 'Grep string')

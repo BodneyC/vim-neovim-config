@@ -46,8 +46,9 @@ function M.seek(sr, whence, offset)
     sr.pos = #sr.buffer + (offset or 0)
   else
     error(
-      'bad argument #1 to \'seek\' (invalid option \'' .. tostring(whence) ..
-        '\')', 2)
+      "bad argument #1 to 'seek' (invalid option '" .. tostring(whence) .. "')",
+      2
+    )
   end
 
   sr.pos = math.min(math.max(sr.pos, 0), #sr.buffer)

@@ -9,4 +9,6 @@ local confs = {
   'cfg.plugins.luasnip',
 }
 
-for _, conf in ipairs(confs) do util.safe_require(conf) end
+for _, conf in ipairs(confs) do
+  util.safe_require(conf)
+end

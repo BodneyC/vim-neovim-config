@@ -1,6 +1,6 @@
 local util = require('utl.util')
 
-vim.cmd 'filetype off'
+vim.cmd('filetype off')
 
 util.safe_require('cfg.options')
 util.safe_require('cfg.filetypes')

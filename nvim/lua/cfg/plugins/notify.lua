@@ -8,7 +8,7 @@ return {
     DEBUG = icons.hint,
     ERROR = icons.error,
     INFO = icons.info,
-    TRACE = "✎",
-    WARN = icons.warn
+    TRACE = '✎',
+    WARN = icons.warn,
   },
 }

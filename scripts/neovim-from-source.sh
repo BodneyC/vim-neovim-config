@@ -23,6 +23,6 @@ make clean
 make CMAKE_INSTALL_PREFIX="$(realpath ~/.local)" CMAKE_BUILD_TYPE=RelWithDebInfo
 
 NVIM_PATH=$(command -v nvim)
-[[ -n "$NVIM_PATH" ]] && cp "$NVIM_PATH"{,.bak}
+[[ -n $NVIM_PATH ]] && cp "$NVIM_PATH"{,.bak}
 
 make install

@@ -1,6 +1,7 @@
 local lsp = require('lsp-zero')
 
-local extension_path = vim.fn.glob('$HOME/.vscode-oss/extensions/vadimcn.vscode-lldb-*/')
+local extension_path =
+  vim.fn.glob('$HOME/.vscode-oss/extensions/vadimcn.vscode-lldb-*/')
 require('rust-tools').setup({
   tools = {
     autoSetHints = true,

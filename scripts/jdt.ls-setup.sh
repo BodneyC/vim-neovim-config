@@ -13,7 +13,7 @@ mkdir -p "$CONFIG_DIR"
 
 STARTUP_SCRIPT="$HOME/.local/bin/jdt.ls.sh"
 
-cat << EOF > "$STARTUP_SCRIPT"
+cat <<EOF >"$STARTUP_SCRIPT"
 #!/usr/bin/env bash
 
 JAR="$JDTLS_DIR/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"

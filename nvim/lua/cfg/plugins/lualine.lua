@@ -16,7 +16,7 @@ return {
       left = '',
       right = '',
     },
-    disabled_filetypes = {'defx', ''},
+    disabled_filetypes = { 'defx', '' },
   },
   sections = {
     lualine_a = {
@@ -27,14 +27,14 @@ return {
         end,
       },
     },
-    lualine_b = {'branch'},
-    lualine_c = {'filename', [[require('mod.treesitter').statusline()]]},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_b = { 'branch' },
+    lualine_c = { 'filename', [[require('mod.treesitter').statusline()]] },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = {
       {
         'diagnostics',
-        sources = {'nvim_diagnostic'},
-        sections = {'error', 'warn', 'info'},
+        sources = { 'nvim_diagnostic' },
+        sections = { 'error', 'warn', 'info' },
         symbols = {
           error = icons.diagnostics.glyph.error,
           warn = icons.diagnostics.glyph.warning,
@@ -42,7 +42,7 @@ return {
         },
       },
     },
-    lualine_z = {'location'},
+    lualine_z = { 'location' },
   },
-  extensions = {'fugitive', 'nvim-tree', 'quickfix', 'symbols-outline'},
+  extensions = { 'fugitive', 'nvim-tree', 'quickfix', 'symbols-outline' },
 }

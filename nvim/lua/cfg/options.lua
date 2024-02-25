@@ -75,7 +75,7 @@ util.opt('o', {
   termguicolors = true,
   textwidth = 0,
   title = true,
-  titlestring = os.getenv('PWD'):gsub("(.*/)(.*)", "%2"),
+  titlestring = os.getenv('PWD'):gsub('(.*/)(.*)', '%2'),
   ttimeout = true,
   ttimeoutlen = 50,
   undodir = os.getenv('HOME') .. '/.config/nvim/undo',

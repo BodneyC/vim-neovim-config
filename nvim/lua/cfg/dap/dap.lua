@@ -58,7 +58,7 @@ for _, language in ipairs({ 'typescript', 'javascript' }) do
       type = 'pwa-node',
       request = 'attach',
       name = 'Attach',
-      processId = require 'dap.utils'.pick_process,
+      processId = require('dap.utils').pick_process,
       cwd = '${workspaceFolder}',
     },
     {

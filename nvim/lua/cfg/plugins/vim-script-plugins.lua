@@ -84,9 +84,11 @@ util.opt('g', {
   gutentags_ctags_exclude = { '*.json' },
   gutentags_ctags_extra_args = {
     '--exclude=node_modules',
-    '--tag-relative=' ..
-    (vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes' or
-      'always'),
+    '--tag-relative='
+      .. (
+        vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes'
+        or 'always'
+      ),
     '--fields=+ailmnS',
   },
 
@@ -145,31 +147,35 @@ end
 -- LuaFormatter off
 local mappings = {
   mode_pairs = {
-    { mode = 'n', cmd = ':', },
-    { mode = 'i', cmd = '<C-o>:', },
-    { mode = 't', cmd = [[<C-\><C-n>:]], },
+    { mode = 'n', cmd = ':' },
+    { mode = 'i', cmd = '<C-o>:' },
+    { mode = 't', cmd = [[<C-\><C-n>:]] },
   },
   dir_pairs = {
-    { key = '<M-k>', txt = 'Up', },
-    { key = '<M-h>', txt = 'Left', },
-    { key = '<M-j>', txt = 'Down', },
-    { key = '<M-l>', txt = 'Right', },
-    { key = [[<M-\>]], txt = 'Previous', },
+    { key = '<M-k>', txt = 'Up' },
+    { key = '<M-h>', txt = 'Left' },
+    { key = '<M-j>', txt = 'Down' },
+    { key = '<M-l>', txt = 'Right' },
+    { key = [[<M-\>]], txt = 'Previous' },
     -- MacOS
-    { key = '˚', txt = 'Up', },
-    { key = '˙', txt = 'Left', },
-    { key = '∆', txt = 'Down', },
-    { key = '¬', txt = 'Right', },
+    { key = '˚', txt = 'Up' },
+    { key = '˙', txt = 'Left' },
+    { key = '∆', txt = 'Down' },
+    { key = '¬', txt = 'Right' },
   },
 }
 -- LuaFormatter on
 
 for _, mode in ipairs(mappings.mode_pairs) do
   for _, dir in ipairs(mappings.dir_pairs) do
-    vim.api.nvim_set_keymap(mode.mode, dir.key, mode.cmd ..
-      'Navigator' .. dir.txt .. '<CR>', {
+    vim.api.nvim_set_keymap(
+      mode.mode,
+      dir.key,
+      mode.cmd .. 'Navigator' .. dir.txt .. '<CR>',
+      {
         noremap = true,
         silent = true,
-      })
+      }
+    )
   end
 end

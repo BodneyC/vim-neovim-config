@@ -5,7 +5,7 @@ require('dapui').setup({
   },
   mappings = {
     -- Use a table to apply multiple mappings
-    expand = {'<CR>', '<2-LeftMouse>'},
+    expand = { '<CR>', '<2-LeftMouse>' },
     open = 'o',
     remove = 'd',
     edit = 'e',
@@ -48,7 +48,7 @@ require('dapui').setup({
     max_height = nil, -- These can be integers or a float between 0 and 1.
     max_width = nil, -- Floats will be treated as percentage of your screen.
     mappings = {
-      close = {'q', '<Esc>'},
+      close = { 'q', '<Esc>' },
     },
   },
   windows = {

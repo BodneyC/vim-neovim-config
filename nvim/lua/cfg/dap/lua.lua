@@ -27,4 +27,3 @@ dap.adapters.nlua = function(callback, config)
     port = config.port,
   })
 end
-

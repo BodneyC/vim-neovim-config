@@ -20,8 +20,8 @@ M.shlex = {
   debug = 0,
   token = '',
   commenters = '#',
-  wordchars = 'abcdfeghijklmnopqrstuvwxyz' ..
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_',
+  wordchars = 'abcdfeghijklmnopqrstuvwxyz'
+    .. 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_',
 }
 M.shlex.__index = M.shlex
 
@@ -40,9 +40,9 @@ function M.shlex:create(str, posix, punctuation_chars)
 
   o.posix = posix == true
   if o.posix then
-    o.wordchars = o.wordchars ..
-                    'ßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ' ..
-                    'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ'
+    o.wordchars = o.wordchars
+      .. 'ßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ'
+      .. 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ'
   end
 
   if punctuation_chars then
@@ -75,7 +75,6 @@ function M.shlex:read_token()
   local nextchar
 
   while true do
-
     if some(self.punctuation_chars) and some(self._pushback_chars) then
       nextchar = table.remove(self._pushback_chars)
     else
@@ -87,19 +86,22 @@ function M.shlex:read_token()
     end
 
     if self.debug >= 3 then
-      print('shlex: in state \'' .. (self.state or 'nil') ..
-              '\' I see character: \'' .. (nextchar or 'nil') .. '\'')
+      print(
+        "shlex: in state '"
+          .. (self.state or 'nil')
+          .. "' I see character: '"
+          .. (nextchar or 'nil')
+          .. "'"
+      )
     end
 
     if none(self.state) then
       self.token = ''
       break
-
     elseif self.state == ' ' then
       if none(nextchar) then
         self.state = nil
         break
-
       elseif self.whitespace:find(nextchar, 1, true) then
         if self.debug >= 2 then
           print('shlex: I see whitespace in whitespace state')
@@ -109,33 +111,26 @@ function M.shlex:read_token()
         else
           goto continue
         end
-
       elseif self.commenters:find(nextchar, 1, true) then
         self.sr:readline()
         self.lineno = self.lineno + 1
-
       elseif self.posix and self.escape:find(nextchar, 1, true) then
         escapedstate = 'a'
         self.state = nextchar
-
       elseif self.wordchars:find(nextchar, 1, true) then
         self.token = nextchar
         self.state = 'a'
-
       elseif self.punctuation_chars:find(nextchar, 1, true) then
         self.token = nextchar
         self.state = 'c'
-
       elseif self.quotes:find(nextchar, 1, true) then
         if not self.posix then
           self.token = nextchar
         end
         self.state = nextchar
-
       elseif self.whitespace_split then
         self.token = nextchar
         self.state = 'a'
-
       else
         self.token = nextchar
         if some(self.token) or (self.posix and quoted) then
@@ -144,7 +139,6 @@ function M.shlex:read_token()
           goto continue
         end
       end
-
     elseif self.quotes:find(self.state, 1, true) then
       quoted = true
       if none(nextchar) then
@@ -161,14 +155,16 @@ function M.shlex:read_token()
         else
           self.state = 'a'
         end
-      elseif self.posix and self.escape:find(nextchar, 1, true) and
-        self.escapedquotes:find(self.state, 1, true) then
+      elseif
+        self.posix
+        and self.escape:find(nextchar, 1, true)
+        and self.escapedquotes:find(self.state, 1, true)
+      then
         escapedstate = self.state
         self.state = nextchar
       else
         self.token = self.token .. nextchar
       end
-
     elseif self.escape:find(self.state, 1, true) then
       if none(nextchar) then
         if self.debug >= 2 then
@@ -176,18 +172,19 @@ function M.shlex:read_token()
         end
         error('no escaped character')
       end
-      if self.quotes:find(escapedstate, 1, true) and nextchar ~= self.state and
-        nextchar ~= escapedstate then
+      if
+        self.quotes:find(escapedstate, 1, true)
+        and nextchar ~= self.state
+        and nextchar ~= escapedstate
+      then
         self.token = self.token .. self.state
       end
       self.token = self.token .. nextchar
       self.state = escapedstate
-
     elseif self.state == 'a' or self.state == 'c' then
       if none(nextchar) then
         self.state = nil
         break
-
       elseif self.whitespace:find(nextchar, 1, true) then
         if self.debug >= 2 then
           print('shlex: I see whitespace in word state')
@@ -198,7 +195,6 @@ function M.shlex:read_token()
         else
           goto continue
         end
-
       elseif self.commenters:find(nextchar, 1, true) then
         self.sr:readline()
         self.lineno = self.lineno + 1
@@ -210,7 +206,6 @@ function M.shlex:read_token()
             goto continue
           end
         end
-
       elseif self.state == 'c' then
         if self.punctuation_chars:find(nextchar, 1, true) then
           self.token = self.token .. nextchar
@@ -221,20 +216,20 @@ function M.shlex:read_token()
           self.state = ' '
           break
         end
-
       elseif self.posix and self.quotes:find(nextchar, 1, true) then
         self.state = nextchar
-
       elseif self.posix and self.escape:find(nextchar, 1, true) then
         escapedstate = 'a'
         self.state = nextchar
-
-      elseif self.wordchars:find(nextchar, 1, true) or
-        self.quotes:find(nextchar, 1, true) or
-        (self.whitespace_split and
-          not self.punctuation_chars:find(nextchar, 1, true)) then
+      elseif
+        self.wordchars:find(nextchar, 1, true)
+        or self.quotes:find(nextchar, 1, true)
+        or (
+          self.whitespace_split
+          and not self.punctuation_chars:find(nextchar, 1, true)
+        )
+      then
         self.token = self.token .. nextchar
-
       else
         if some(self.punctuation_chars) then
           table.insert(self._pushback_chars, nextchar)
@@ -247,9 +242,7 @@ function M.shlex:read_token()
         else
           goto continue
         end
-
       end
-
     end
 
     ::continue::
@@ -344,7 +337,7 @@ function M.quote(s)
   if not found then
     return s
   end
-  return '\'' .. s:gsub('\'', '\'"\'"\'') .. '\''
+  return "'" .. s:gsub("'", "'\"'\"'") .. "'"
 end
 
 return M

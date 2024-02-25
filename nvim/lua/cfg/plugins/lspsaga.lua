@@ -11,5 +11,5 @@ return {
     separator = ' | ',
     respect_root = true,
     folder_level = 2,
-  }
+  },
 }

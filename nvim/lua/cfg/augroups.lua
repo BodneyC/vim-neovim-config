@@ -11,15 +11,21 @@ do
     group = group,
     pattern = '*',
     callback = function()
-      if vim.o.buftype == 'terminal' then vim.cmd('startinsert') end
+      if vim.o.buftype == 'terminal' then
+        vim.cmd('startinsert')
+      end
     end,
   })
   vim.api.nvim_create_autocmd({ 'BufLeave', 'TextChanged' }, {
     group = group,
     pattern = '*',
     callback = function()
-      if vim.bo.readonly or not vim.bo.modified or vim.bo.buftype ~= '' or
-          vim.fn.filereadable(vim.fn.bufname('%')) == 0 then
+      if
+        vim.bo.readonly
+        or not vim.bo.modified
+        or vim.bo.buftype ~= ''
+        or vim.fn.filereadable(vim.fn.bufname('%')) == 0
+      then
         return
       end
       vim.cmd([[silent update]])
@@ -33,7 +39,9 @@ do
   vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     group = group,
     pattern = 'Jenkinsfile*',
-    callback = function() vim.bo.ft = 'groovy' end
+    callback = function()
+      vim.bo.ft = 'groovy'
+    end,
   })
   vim.api.nvim_create_autocmd('TextYankPost', {
     group = group,
@@ -44,7 +52,12 @@ do
     group = group,
     pattern = 'qf',
     callback = function()
-      vim.keymap.set('n', '<CR>', [[<CR>:cclose<CR>]], { silent = true, buffer = true })
+      vim.keymap.set(
+        'n',
+        '<CR>',
+        [[<CR>:cclose<CR>]],
+        { silent = true, buffer = true }
+      )
     end,
   })
   -- if package.loaded['noice'] then

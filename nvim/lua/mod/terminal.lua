@@ -68,7 +68,8 @@ function M.next_term_split()
     vim.cmd('terminal')
     local new_win = vim.fn.bufwinnr('%')
     vim.cmd(
-      'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+      "au! TermClose <buffer> lua require'mod.terminal'.close_if_term_job()"
+    )
     vim.cmd(cur_win .. 'wincmd w')
     vim.cmd(new_win .. 'wincmd w')
     vim.defer_fn(function()
@@ -97,8 +98,9 @@ function M.term_split(toggle)
   end
 
   local bufnr = vim.fn.bufnr(M.term_name)
-  local term_exists = bufnr ~= -1 and vim.fn.bufexists(bufnr) and
-      vim.fn.bufloaded(bufnr)
+  local term_exists = bufnr ~= -1
+    and vim.fn.bufexists(bufnr)
+    and vim.fn.bufloaded(bufnr)
 
   if not toggle then
     vim.cmd('10 wincmd ' .. dir_char)
@@ -128,7 +130,8 @@ function M.term_split(toggle)
 
   M.term_name = vim.fn.bufname('%')
   vim.cmd(
-    'au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+    "au! TermClose <buffer> lua require'mod.terminal'.close_if_term_job()"
+  )
   vim.cmd('au! BufEnter <buffer> startinsert')
 
   vim.defer_fn(function()
@@ -231,14 +234,16 @@ end
 
 function M.setup_terms_from_session()
   M.term_name = vim.fn.expand('%') -- I know this will pick one at random... but they have no real order anyway...
-  vim.cmd('au! TermClose <buffer> lua require\'mod.terminal\'.close_if_term_job()')
+  vim.cmd(
+    "au! TermClose <buffer> lua require'mod.terminal'.close_if_term_job()"
+  )
 end
 
 function M.init()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
 
-  local m_term = 'lua require\'mod.terminal\''
+  local m_term = "lua require'mod.terminal'"
 
   -- `table.unpack` not in 5.1, use `unpack`
   util.commands({
@@ -282,9 +287,14 @@ function M.init()
     },
   })
 
-  map('n', '<Leader>\'', ':' .. m_term .. '.next_term_split(false)<CR>', 'New terminal')
+  map(
+    'n',
+    "<Leader>'",
+    ':' .. m_term .. '.next_term_split(false)<CR>',
+    'New terminal'
+  )
 
-  map('t', '<C-R>', '\'<C-\\><C-N>"\' . nr2char(getchar()) . \'pi\'', nil, {
+  map('t', '<C-R>', "'<C-\\><C-N>\"' . nr2char(getchar()) . 'pi'", nil, {
     expr = true,
   })
 

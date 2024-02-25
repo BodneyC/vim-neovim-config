@@ -31,21 +31,21 @@ vim.api.nvim_create_autocmd('BufEnter', {
     if vim.fn.line('$') == 1 and vim.fn.getline(1) == '' then
       md_template()
     end
-  end
+  end,
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = group,
   pattern = 'markdown',
   callback = function()
     vim.cmd('setlocal nonu')
-  end
+  end,
 })
 vim.api.nvim_create_autocmd('BufEnter', {
   group = group,
   pattern = '*.md',
   callback = function()
     vim.cmd('setlocal nonu')
-  end
+  end,
 })
 
 map('n', 'j', 'gj', nil, { buffer = 0 })
@@ -57,7 +57,11 @@ vim.cmd([[
   let @h = "YpVr="
 ]])
 map('n', '<leader>S', '1z=', nil, { buffer = 0 })
-map('i', '<Tab>', string.gsub([[
+map(
+  'i',
+  '<Tab>',
+  string.gsub(
+    [[
   pumvisible()
     ? "\<C-n>"
     : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s')
@@ -65,4 +69,10 @@ map('i', '<Tab>', string.gsub([[
         ? "\<C-o>>>\<C-o>A "
         : "\<Tab>"
       : compe#complete()
-]], '\n', ''), nil, { buffer = 0, expr = true })
+]],
+    '\n',
+    ''
+  ),
+  nil,
+  { buffer = 0, expr = true }
+)

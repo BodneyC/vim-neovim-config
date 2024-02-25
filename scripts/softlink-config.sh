@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "$1" == "-f" ]]; then
+if [[ $1 == "-f" ]]; then
   rm -r ~/.config/{nvim,coc}
 fi
 

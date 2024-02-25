@@ -25,13 +25,20 @@ map('i', '<C-w>', '<C-S-w>')
 
 map('n', 'Y', 'yy')
 for _, ch in ipairs({ 'y', 'Y', 'p', 'P' }) do
-  local action = ((ch == 'y' or ch == 'Y') and 'Copy to' or 'Paste from') .. ' clipboard'
+  local action = ((ch == 'y' or ch == 'Y') and 'Copy to' or 'Paste from')
+    .. ' clipboard'
   map('n', '<leader>' .. ch, '"+' .. ch, action)
   map('x', '<leader>' .. ch, '"+' .. ch, action)
 end
 
 map('n', '<C-p>', [[<Tab>]])
-map('n', '<leader>*', [[:%s/\<<C-r><C-w>\>//g<left><left>]], 'Replace under cursor', { silent = false })
+map(
+  'n',
+  '<leader>*',
+  [[:%s/\<<C-r><C-w>\>//g<left><left>]],
+  'Replace under cursor',
+  { silent = false }
+)
 map('n', '<leader>/', [[<Cmd>noh<CR>]], 'Remove highlight')
 
 -- NOTE: Doesn't work with `vim.keymap.set`
@@ -54,10 +61,18 @@ map('n', '<leader>m', [[<CMD>NoiceDismiss<CR>]], 'Dismiss Noice messages')
 -- resize
 
 local util = require('utl.util')
-map({ 'n', 't' }, '<C-M-h>', function() return util.resize_window('h') end)
-map({ 'n', 't' }, '<C-M-j>', function() return util.resize_window('j') end)
-map({ 'n', 't' }, '<C-M-k>', function() return util.resize_window('k') end)
-map({ 'n', 't' }, '<C-M-l>', function() return util.resize_window('l') end)
+map({ 'n', 't' }, '<C-M-h>', function()
+  return util.resize_window('h')
+end)
+map({ 'n', 't' }, '<C-M-j>', function()
+  return util.resize_window('j')
+end)
+map({ 'n', 't' }, '<C-M-k>', function()
+  return util.resize_window('k')
+end)
+map({ 'n', 't' }, '<C-M-l>', function()
+  return util.resize_window('l')
+end)
 
 -- line movement
 map('n', '<S-down>', [[<CMD>m+<CR>]])
@@ -77,11 +92,9 @@ map('x', '<S-Tab>', [[<gv]])
 map('n', '<leader>ge', [[<CMD>Ge:<CR>]], 'Git edit')
 map('n', '<leader>}', [[zf}]], 'Fold to blank line')
 
-map(
-  'n', '<leader>i',
-  function() return require('utl.util').toggle_bool_option('o', 'ignorecase') end,
-  'Toggle case sensitive'
-)
+map('n', '<leader>i', function()
+  return require('utl.util').toggle_bool_option('o', 'ignorecase')
+end, 'Toggle case sensitive')
 
 map('n', '<leader>ea', [[vip:EasyAlign<CR>]], 'Easy align paragraph')
 map('x', '<leader>ea', [[:EasyAlign<CR>]], 'Easy align')
@@ -97,7 +110,9 @@ map('v', '<down>', '<Plug>SchleppDown', nil, { unique = true })
 map('v', '<left>', '<Plug>SchleppLeft', nil, { unique = true })
 map('v', '<right>', '<Plug>SchleppRight', nil, { unique = true })
 
-map('n', '<leader>F', function() vim.cmd [[Format]] end, 'Format', { unique = true })
+map('n', '<leader>F', function()
+  vim.cmd([[Format]])
+end, 'Format', { unique = true })
 
 local npairs = require('nvim-autopairs')
 
@@ -106,7 +121,9 @@ local function getline(bufnr, row)
 end
 
 function _G.master_bs()
-  if vim.bo.buftype ~= '' then return npairs.esc('<BS>') end
+  if vim.bo.buftype ~= '' then
+    return npairs.esc('<BS>')
+  end
   local bufnr = vim.api.nvim_get_current_buf()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   local current_line = getline(bufnr, row)
@@ -117,9 +134,9 @@ function _G.master_bs()
     if previous_line:match('%S') == nil then
       -- All of current line is blank
       if current_line:match('%S') == nil then
-        return npairs.esc('<Esc>:silent exe line(\'.\') - 1 . \'delete\'<CR>S')
+        return npairs.esc("<Esc>:silent exe line('.') - 1 . 'delete'<CR>S")
       else -- Part of current line is not blank
-        return npairs.esc('<C-o>:silent exe line(\'.\') - 1 . \'delete\'<CR>')
+        return npairs.esc("<C-o>:silent exe line('.') - 1 . 'delete'<CR>")
       end
     end
     -- The previous line has text

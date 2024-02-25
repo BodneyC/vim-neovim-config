@@ -11,7 +11,7 @@ local DEFAULT_CONFIGS = {
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
     protocol = 'inspector',
-    skipFiles = {'<node_internals>/**/*.js'},
+    skipFiles = { '<node_internals>/**/*.js' },
   },
 }
 DEFAULT_CONFIGS.typescript = vim.deepcopy(DEFAULT_CONFIGS.javascript)
@@ -22,9 +22,9 @@ function M.debug_mocha(prog, file, term)
   cfg.console = 'integratedTerminal'
   cfg.port = 9229
   if term then
-    cfg.runtimeArgs = {prog, '--inspect-brk', file, '--grep', term}
+    cfg.runtimeArgs = { prog, '--inspect-brk', file, '--grep', term }
   else
-    cfg.runtimeArgs = {prog, '--inspect-brk', file}
+    cfg.runtimeArgs = { prog, '--inspect-brk', file }
   end
   dap.run(cfg)
 end

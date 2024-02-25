@@ -23,7 +23,10 @@ return {
         --  But if it's 1 (0 after decrementing) and the line is empty, Lspsaga removes
         --   the field from the diagnostic entry which causes the nvim_win_set_cursor error
         --  Hence, 2, to be decremented once and later treated as a 0...
-        args = { '-c', [[markdownlint --stdin 2>&1 | sed 's/\(^[^:]\+:[0-9]\+\) /\1:2 /']] },
+        args = {
+          '-c',
+          [[markdownlint --stdin 2>&1 | sed 's/\(^[^:]\+:[0-9]\+\) /\1:2 /']],
+        },
         isStderr = false,
         isStdout = true,
         formatPattern = {
@@ -39,8 +42,8 @@ return {
       pkgbuild = {
         args = { '%file' },
         -- manual - vim-pkgbuild
-        command = home ..
-            '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
+        command = home
+          .. '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
           { column = 2, line = 1, message = 4, security = 3 },
@@ -48,6 +51,6 @@ return {
         securities = { error = 'error', note = 'info', warning = 'warning' },
         sourceName = 'pkgbuild',
       },
-    }
-  }
+    },
+  },
 }

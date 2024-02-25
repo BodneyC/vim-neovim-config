@@ -7,12 +7,12 @@ function M.statusline()
   local status = ''
   if ft == 'yaml' or ft == 'helm' then
     status = ts.statusline({
-      type_patterns = {'block_mapping_pair'},
+      type_patterns = { 'block_mapping_pair' },
       separator = '.',
       transform_fn = function(line)
         line = line:gsub('%s*[%[%(%{]*%s*$', ''):gsub(':.*$', '')
         if line:find('%.') then
-          line = '\'' .. line .. '\''
+          line = "'" .. line .. "'"
         end
         return line
       end,

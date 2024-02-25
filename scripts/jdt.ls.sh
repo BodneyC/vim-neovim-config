@@ -3,6 +3,7 @@
 # There is a reason for the "$(echo $JAR)", I just can't remember what
 
 JAR="$HOME/software/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"
+# shellcheck disable=SC2116,SC2086
 GRADLE_HOME=$HOME/gradle "$JAVA_HOME/bin/java" \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \

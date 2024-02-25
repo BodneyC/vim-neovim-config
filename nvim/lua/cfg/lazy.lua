@@ -1,8 +1,12 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', --[[ latest stable release --]] lazypath,
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', --[[ latest stable release --]]
+    lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -41,7 +45,7 @@ require('lazy').setup({
     },
   },
 
-  { 'nvimdev/lspsaga.nvim',          opts = require('cfg.plugins.lspsaga') },
+  { 'nvimdev/lspsaga.nvim', opts = require('cfg.plugins.lspsaga') },
   { 'simrat39/symbols-outline.nvim', opts = {} },
 
   {
@@ -49,16 +53,17 @@ require('lazy').setup({
     -- optional for icon support
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      { "junegunn/fzf", build = "./install --bin" },
+      { 'junegunn/fzf', build = './install --bin' },
     },
     config = function()
-      vim.g.fzf_history_dir = os.getenv('HOME') .. '/.local/share/nvim/fzf-history'
+      vim.g.fzf_history_dir = os.getenv('HOME')
+        .. '/.local/share/nvim/fzf-history'
       if vim.fn.isdirectory(vim.g.fzf_history_dir) == 0 then
         os.execute('mkdir -p ' .. vim.g.fzf_history_dir)
       end
       -- calling `setup` is optional for customization
       require('fzf-lua').setup(require('cfg.plugins.fzf'))
-    end
+    end,
   },
 
   --[[------------------------------------------------------------------------
@@ -71,8 +76,12 @@ require('lazy').setup({
     end,
     config = function()
       vim.g.skip_ts_context_commentstring_module = true
-      require('nvim-treesitter.configs').setup(require('cfg.plugins.treesitter'))
-      require('ts_context_commentstring').setup(require('cfg.plugins.ts_context_comments'))
+      require('nvim-treesitter.configs').setup(
+        require('cfg.plugins.treesitter')
+      )
+      require('ts_context_commentstring').setup(
+        require('cfg.plugins.ts_context_comments')
+      )
     end,
     dependencies = {
       'RRethy/nvim-treesitter-endwise',
@@ -82,7 +91,7 @@ require('lazy').setup({
       'vigoux/treesitter-context.nvim',
       'JoosepAlviste/nvim-ts-context-commentstring',
       { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
-    }
+    },
   },
 
   --[[------------------------------------------------------------------------
@@ -94,7 +103,7 @@ require('lazy').setup({
   'rcarriga/nvim-dap-ui',
   'jbyuki/one-small-step-for-vimkind',
 
-  { 'Pocco81/dap-buddy.nvim',    branch = 'dev' },
+  { 'Pocco81/dap-buddy.nvim', branch = 'dev' },
   { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
 
   {
@@ -113,7 +122,7 @@ require('lazy').setup({
   'windwp/nvim-spectre',
   'windwp/nvim-ts-autotag', -- Setup in ts.lua
 
-  { 'BodneyC/hex-this-vim',    cmd = 'HexThis' },
+  { 'BodneyC/hex-this-vim', cmd = 'HexThis' },
   { 'numToStr/Navigator.nvim', opts = {} },
 
   {
@@ -122,7 +131,7 @@ require('lazy').setup({
       require('neotest').setup(require('cfg.plugins.neotest'))
     end,
     dependencies = {
-      "nvim-neotest/neotest-go",
+      'nvim-neotest/neotest-go',
       'antoinemadec/FixCursorHold.nvim',
       'haydenmeade/neotest-jest',
       'nvim-lua/plenary.nvim',
@@ -150,28 +159,40 @@ require('lazy').setup({
   'zirrostig/vim-schlepp',
   -- 'jiangmiao/auto-pairs',
 
-  { 'folke/todo-comments.nvim',  opts = require('cfg.plugins.todo-comments') },
-  { 'folke/trouble.nvim',        dependencies = 'kyazdani42/nvim-web-devicons' },
-  { 'folke/which-key.nvim',      opts = { triggers_blacklist = { n = { '"' } } } },
+  { 'folke/todo-comments.nvim', opts = require('cfg.plugins.todo-comments') },
+  { 'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
+  { 'folke/which-key.nvim', opts = { triggers_blacklist = { n = { '"' } } } },
   { 'kwkarlwang/bufresize.nvim', config = true },
 
   {
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup {
+      require('nvim-autopairs').setup({
         break_undo = false,
         map_cr = true,
         map_bs = false,
         fast_wrap = { map = '<M-w>' },
-      }
-      vim.keymap.set('i', '∑', [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]], { silent = true })
-    end
+      })
+      vim.keymap.set(
+        'i',
+        '∑',
+        [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]],
+        { silent = true }
+      )
+    end,
   },
   {
     'luukvbaal/stabilize.nvim',
     opts = {
       ignore = {
-        filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline', 'neo-tree' },
+        filetype = {
+          'help',
+          'list',
+          'Trouble',
+          'NvimTree',
+          'Outline',
+          'neo-tree',
+        },
         buftype = { 'terminal', 'quickfix', 'loclist' },
       },
     },
@@ -185,7 +206,7 @@ require('lazy').setup({
         map , <Plug>(clever-f-repeat-back)
         nmap <Esc> <Plug>(clever-f-reset)
       ]])
-    end
+    end,
   },
 
   --[[------------------------------------------------------------------------
@@ -193,7 +214,7 @@ require('lazy').setup({
   --------------------------------------------------------------------------]]
 
   'andymass/vim-matchup', -- % on `end`s
-  'moll/vim-bbye',        -- <leader>bd
+  'moll/vim-bbye', -- <leader>bd
   'tpope/vim-repeat',
   'tpope/vim-surround',
   'mbbill/undotree',
@@ -215,8 +236,8 @@ require('lazy').setup({
     end,
     dependencies = {
       'MunifTanjim/nui.nvim',
-      { 'rcarriga/nvim-notify', opts = require('cfg.plugins.notify') }
-    }
+      { 'rcarriga/nvim-notify', opts = require('cfg.plugins.notify') },
+    },
   },
 
   --[[------------------------------------------------------------------------
@@ -228,11 +249,11 @@ require('lazy').setup({
   'wellle/targets.vim',
   'wellle/visual-split.vim',
 
-  { 'KabbAmine/vCoolor.vim',     cmd = 'VCoolor' },
-  { 'junegunn/limelight.vim',    cmd = 'Limelight' },
+  { 'KabbAmine/vCoolor.vim', cmd = 'VCoolor' },
+  { 'junegunn/limelight.vim', cmd = 'Limelight' },
   { 'nvim-lualine/lualine.nvim', opts = require('cfg.plugins.lualine') },
-  { 'rrethy/vim-hexokinase',     build = 'make hexokinase' },
-  { 'sainnhe/everforest',        lazy = false },
+  { 'rrethy/vim-hexokinase', build = 'make hexokinase' },
+  { 'sainnhe/everforest', lazy = false },
 
   {
     'marko-cerovac/material.nvim',
@@ -252,7 +273,13 @@ require('lazy').setup({
       scope = { show_start = false, show_end = false },
       exclude = {
         filetypes = {
-          'packer', 'floaterm', 'help', 'Outline', 'NvimTree', 'neo-tree', '',
+          'packer',
+          'floaterm',
+          'help',
+          'Outline',
+          'NvimTree',
+          'neo-tree',
+          '',
         },
       },
     },
@@ -263,7 +290,7 @@ require('lazy').setup({
       vim.g.vmt_list_item_char = '-'
       vim.g.vmt_list_indent_text = '  '
       vim.g.vmt_dont_insert_fence = 1
-    end
+    end,
   },
   {
     'junegunn/goyo.vim',
@@ -275,11 +302,11 @@ require('lazy').setup({
         callback = function()
           require('lualine').hide({
             place = { 'statuslint', 'tabline', 'winbar' },
-            unhide = false
+            unhide = false,
           })
-        end
+        end,
       })
-    end
+    end,
   },
   -- {
   --   'akinsho/bufferline.nvim',
@@ -295,7 +322,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'sindrets/diffview.nvim',
 
-  { 'oguzbilgic/vim-gdiff',      cmd = { 'Gdiff', 'Gdiffsplit' } },
+  { 'oguzbilgic/vim-gdiff', cmd = { 'Gdiff', 'Gdiffsplit' } },
 
   {
     'rmagatti/auto-session',
@@ -309,7 +336,9 @@ require('lazy').setup({
   {
     'nvim-neo-tree/neo-tree.nvim',
     dependencies = {
-      'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'kyazdani42/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
       {
         -- only needed if you want to use the commands with '_with_window_picker' suffix
         's1n7ax/nvim-window-picker',
@@ -327,9 +356,9 @@ require('lazy').setup({
             },
           },
           other_win_hl_color = '#e35e4f',
-        }
-      }
-    }
+        },
+      },
+    },
   },
 
   --[[------------------------------------------------------------------------
@@ -343,13 +372,16 @@ require('lazy').setup({
   'simrat39/rust-tools.nvim',
   'towolf/vim-helm',
 
-  { 'BodneyC/knit-vim',          ft = 'knit' },
-  { 'BodneyC/sood-vim',          ft = 'sood' },
-  { 'dkarter/bullets.vim',       ft = 'markdown', },
-  { 'hashivim/vim-terraform',    ft = 'terraform' },
+  { 'BodneyC/knit-vim', ft = 'knit' },
+  { 'BodneyC/sood-vim', ft = 'sood' },
+  { 'dkarter/bullets.vim', ft = 'markdown' },
+  { 'hashivim/vim-terraform', ft = 'terraform' },
   { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
-  { 'm-pilia/vim-pkgbuild',      ft = 'pkgbuild' },
-  { 'rmagatti/gx-extended.nvim', opts = { open_fn = require 'lazy.util'.open } },
+  { 'm-pilia/vim-pkgbuild', ft = 'pkgbuild' },
+  {
+    'rmagatti/gx-extended.nvim',
+    opts = { open_fn = require('lazy.util').open },
+  },
 
   {
     'plasticboy/vim-markdown',
@@ -357,7 +389,7 @@ require('lazy').setup({
     init = function()
       vim.g.vim_markdown_folding_disabled = true
       vim.g.vim_markdown_no_default_key_mappings = true
-    end
+    end,
   },
   {
     'barrett-ruth/import-cost.nvim',
@@ -379,6 +411,6 @@ require('lazy').setup({
       vim.g.wiki_root = root
       vim.g.wiki_global_load = 0
       vim.g.wiki_filetypes = { 'md', 'sh' }
-    end
-  }
+    end,
+  },
 })

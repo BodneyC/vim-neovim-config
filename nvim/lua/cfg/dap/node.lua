@@ -15,7 +15,7 @@ require('dap-vscode-js').setup({
   },
 })
 
-for _, language in ipairs({'typescript', 'javascript'}) do
+for _, language in ipairs({ 'typescript', 'javascript' }) do
   dap.configurations[language] = {
     {
       type = 'pwa-node',
@@ -28,7 +28,7 @@ for _, language in ipairs({'typescript', 'javascript'}) do
       type = 'pwa-node',
       request = 'attach',
       name = 'Attach',
-      processId = require'dap.utils'.pick_process,
+      processId = require('dap.utils').pick_process,
       cwd = '${workspaceFolder}',
     },
     -- NOTE: This is included *in* neotest-jest, specifying it here does nothing
@@ -38,15 +38,15 @@ for _, language in ipairs({'typescript', 'javascript'}) do
       name = 'Debug Jest Tests',
       -- trace = true, -- include debugger info
       runtimeExecutable = 'node',
-      runtimeArgs = {'./node_modules/jest/bin/jest.js', '--runInBand'},
+      runtimeArgs = { './node_modules/jest/bin/jest.js', '--runInBand' },
       rootPath = '${workspaceFolder}',
       cwd = '${workspaceFolder}',
       console = 'integratedTerminal',
       internalConsoleOptions = 'neverOpen',
       -- NOTE: These would solve the "no sourcemaps" things... see above
-      skipFiles = {'<node_internals>/**'},
+      skipFiles = { '<node_internals>/**' },
       sourceMaps = true,
-      resolveSourceMapLocations = {'${workspaceFolder}/', '!/node_modules/**'},
+      resolveSourceMapLocations = { '${workspaceFolder}/', '!/node_modules/**' },
     },
   }
 end
