@@ -131,6 +131,7 @@ require('lazy').setup({
       'rcarriga/neotest-python',
       'rcarriga/neotest-vim-test',
       'rcasia/neotest-bash',
+      'BodneyC/neotest-bats',
     },
   },
 
@@ -206,7 +207,12 @@ require('lazy').setup({
   },
   {
     'folke/noice.nvim',
-    opts = require('cfg.plugins.noice'),
+    config = function()
+      -- NOTE: Deferring this as large errors on startup causes Neovim to crash
+      vim.defer_fn(function()
+        require('noice').setup(require('cfg.plugins.noice'))
+      end, 100)
+    end,
     dependencies = {
       'MunifTanjim/nui.nvim',
       { 'rcarriga/nvim-notify', opts = require('cfg.plugins.notify') }

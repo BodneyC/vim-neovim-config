@@ -1,8 +1,12 @@
 return {
+  log_level = vim.log.levels.DEBUG,
   diagnostic = { enabled = true },
   status = { enabled = true, virtual_text = false, signs = true },
   adapters = {
     require('neotest-bash'),
+    require('neotest-bats').setup {
+      use_file_as_executable = true,
+    },
     require('neotest-go'),
     require('neotest-python')({ dap = { justMyCode = false } }),
     require('neotest-plenary'),
