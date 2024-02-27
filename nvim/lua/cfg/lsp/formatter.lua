@@ -12,6 +12,10 @@ local function shfmt()
   if vim.fn.filereadable(pwd .. '/.editorconfig') == 1 then
     args = { '-w' }
   end
+  local fname = vim.fn.expand('%')
+  if fname:match('.bats$') then
+    table.insert(args, '--language-dialect=bats')
+  end
   return {
     exe = 'shfmt',
     cwd = pwd,
