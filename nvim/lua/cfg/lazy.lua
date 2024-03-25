@@ -22,7 +22,10 @@ require('lazy').setup({
     dependencies = {
       -- LSP Support
       'neovim/nvim-lspconfig',
-      'williamboman/mason.nvim',
+      {
+        'williamboman/mason.nvim',
+        opts = {},
+      },
       'williamboman/mason-lspconfig.nvim',
 
       -- Autocompletion
@@ -43,6 +46,21 @@ require('lazy').setup({
       -- Snippet Collection (Optional)
       'rafamadriz/friendly-snippets',
     },
+  },
+  {
+    'stevearc/dressing.nvim',
+    init = function()
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.select = function(...)
+        require('lazy').load({ plugins = { 'dressing.nvim' } })
+        return vim.ui.select(...)
+      end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.input = function(...)
+        require('lazy').load({ plugins = { 'dressing.nvim' } })
+        return vim.ui.input(...)
+      end
+    end,
   },
 
   { 'nvimdev/lspsaga.nvim', opts = require('cfg.plugins.lspsaga') },
@@ -160,8 +178,14 @@ require('lazy').setup({
   -- 'jiangmiao/auto-pairs',
 
   { 'folke/todo-comments.nvim', opts = require('cfg.plugins.todo-comments') },
-  { 'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
-  { 'folke/which-key.nvim', opts = { triggers_blacklist = { n = { '"' } } } },
+  {
+    'folke/trouble.nvim',
+    dependencies = 'kyazdani42/nvim-web-devicons',
+  },
+  {
+    'folke/which-key.nvim',
+    opts = { triggers_blacklist = { n = { '"' } } },
+  },
   { 'kwkarlwang/bufresize.nvim', config = true },
 
   {
@@ -201,11 +225,12 @@ require('lazy').setup({
     'rhysd/clever-f.vim',
     config = function()
       vim.g.clever_f_mark_char_color = 'ModeMsg'
-      vim.cmd([[
-        map ; <Plug>(clever-f-repeat-forward)
-        map , <Plug>(clever-f-repeat-back)
-        nmap <Esc> <Plug>(clever-f-reset)
-      ]])
+      vim.keymap.set('', ';', '<Plug>(clever-f-repeat-forward)', {})
+      vim.keymap.set('', ',', '<Plug>(clever-f-repeat-back)', {})
+      vim.keymap.set('n', '<Esc>', function()
+        vim.fn['clever_f#reset']()
+        vim.cmd([[normal! "<Esc>"]])
+      end, {})
     end,
   },
 
@@ -267,22 +292,46 @@ require('lazy').setup({
   },
   {
     'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    opts = {
-      indent = { char = '│' },
-      scope = { show_start = false, show_end = false },
-      exclude = {
-        filetypes = {
-          'packer',
-          'floaterm',
-          'help',
-          'Outline',
-          'NvimTree',
-          'neo-tree',
-          '',
+    config = function()
+      local highlight = {
+        'RainbowRed',
+        'RainbowYellow',
+        'RainbowBlue',
+        'RainbowOrange',
+        'RainbowGreen',
+        'RainbowViolet',
+        'RainbowCyan',
+      }
+
+      local hooks = require('ibl.hooks')
+      -- create the highlight groups in the highlight setup hook, so they are reset
+      -- every time the colorscheme changes
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#BB5A61' })
+        vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#BE9F66' })
+        vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#5090C4' })
+        vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#A0764E' })
+        vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#77995F' })
+        vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#945BA5' })
+        vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#3E838C' })
+      end)
+
+      require('ibl').setup({
+        exclude = {
+          filetypes = {
+            'packer',
+            'floaterm',
+            'help',
+            'Outline',
+            'NvimTree',
+            'neo-tree',
+            '',
+          },
         },
-      },
-    },
+        scope = { show_start = false, show_end = false },
+        indent = { char = '│', highlight = highlight },
+      })
+    end,
   },
   {
     'mzlogin/vim-markdown-toc',

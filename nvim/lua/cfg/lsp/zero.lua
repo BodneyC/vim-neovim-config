@@ -18,8 +18,9 @@ lsp.ensure_installed({
   'yamlls', -- npm i -g yaml-language-server
   -- 'rls', -- rustup component add rls rust-{analysis,src}
   'rust_analyzer', -- code --install-extension /path/.vsix
-  'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
-  -- 'pyright', -- pip3 install --user pyright
+  -- 'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
+  'pyright', -- pip3 install --user pyright
+  'ruff_lsp', -- pip3 install --user pyright
   'terraformls', -- system install
   'lua_ls',
   'cssls',

@@ -65,11 +65,11 @@ require('formatter').setup({
       },
       stdin = true,
     }),
-    python = only_opts({
-      exe = 'autopep8',
-      args = { '--in-place' },
-      stdin = true,
-    }),
+    -- python = only_opts({
+    --   exe = 'autopep8',
+    --   args = { '--in-place' },
+    --   stdin = true,
+    -- }),
     -- Use the special "*" filetype for defining formatter configurations on
     -- any filetype
     ['*'] = {
