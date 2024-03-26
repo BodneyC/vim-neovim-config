@@ -71,7 +71,6 @@ end
 
 function M.match_over(...)
   local args = { ... }
-  print(vim.inspect(args))
   if #args > 1 or (args[1] and not tonumber(args[1])) then
     error('More than one argument')
   end
