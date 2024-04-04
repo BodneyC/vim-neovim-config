@@ -99,8 +99,8 @@ function M.term_split(toggle)
 
   local bufnr = vim.fn.bufnr(M.term_name)
   local term_exists = bufnr ~= -1
-    and vim.fn.bufexists(bufnr)
-    and vim.fn.bufloaded(bufnr)
+      and vim.fn.bufexists(bufnr)
+      and vim.fn.bufloaded(bufnr)
 
   if not toggle then
     vim.cmd('10 wincmd ' .. dir_char)

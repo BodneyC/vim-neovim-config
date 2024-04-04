@@ -4,6 +4,15 @@ local lang = require('utl.lang')
 
 local M = {}
 
+local function has_ele_with_substring(tab, substring)
+  for _, value in ipairs(tab) do
+    if string.find(value, substring) then
+      return true
+    end
+  end
+  return false
+end
+
 function M.bufonly()
   local tablist = {}
   for tabnr = 1, vim.fn.tabpagenr('$') do
@@ -16,9 +25,10 @@ function M.bufonly()
   local bwd = {}
   for bufnr = 1, vim.fn.bufnr('$') do
     if
-      vim.fn.bufexists(bufnr) == 1
-      and vim.fn.getbufvar(bufnr, '&mod') == 0
-      and lang.index_of(tablist, bufnr) == -1
+        vim.fn.bufexists(bufnr) == 1
+        and vim.fn.getbufvar(bufnr, '&mod') == 0
+        and lang.index_of(tablist, bufnr) == -1
+        and not has_ele_with_substring({ 'Neotest ' }, vim.fn.bufname(bufnr))
     then
       table.insert(bwd, vim.fn.bufname(bufnr))
       vim.cmd([[silent bwipeout]] .. bufnr)
@@ -93,8 +103,8 @@ end
 function M.handle_large_file()
   local fn = vim.fn.expand('<afile>')
   if
-    fs.file_exists(fn)
-    and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file
+      fs.file_exists(fn)
+      and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file
   then
     vim.o.updatetime = 1000
     vim.wo.wrap = false

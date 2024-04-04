@@ -21,10 +21,10 @@ return {
       local s = ' '
       for e, n in pairs(diagnostics_dict) do
         local sym = e == 'error' and icons.diagnostics.glyph.error
-          or (
-            e == 'warning' and icons.diagnostics.glyph.warning
-            or icons.diagnostics.glyph.info
-          )
+            or (
+              e == 'warning' and icons.diagnostics.glyph.warning
+              or icons.diagnostics.glyph.info
+            )
         if n == 1 then
           s = s .. sym
         else

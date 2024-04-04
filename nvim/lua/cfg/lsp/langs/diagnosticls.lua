@@ -43,7 +43,7 @@ return {
         args = { '%file' },
         -- manual - vim-pkgbuild
         command = home
-          .. '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
+            .. '/.local/share/nvim/plugged/vim-pkgbuild/scripts/shellcheck_pkgbuild.sh',
         formatPattern = {
           '^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$',
           { column = 2, line = 1, message = 4, security = 3 },

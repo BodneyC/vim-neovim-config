@@ -21,7 +21,7 @@ M.shlex = {
   token = '',
   commenters = '#',
   wordchars = 'abcdfeghijklmnopqrstuvwxyz'
-    .. 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_',
+      .. 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_',
 }
 M.shlex.__index = M.shlex
 
@@ -41,8 +41,8 @@ function M.shlex:create(str, posix, punctuation_chars)
   o.posix = posix == true
   if o.posix then
     o.wordchars = o.wordchars
-      .. 'ßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ'
-      .. 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ'
+        .. 'ßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ'
+        .. 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ'
   end
 
   if punctuation_chars then
@@ -88,10 +88,10 @@ function M.shlex:read_token()
     if self.debug >= 3 then
       print(
         "shlex: in state '"
-          .. (self.state or 'nil')
-          .. "' I see character: '"
-          .. (nextchar or 'nil')
-          .. "'"
+        .. (self.state or 'nil')
+        .. "' I see character: '"
+        .. (nextchar or 'nil')
+        .. "'"
       )
     end
 
@@ -156,9 +156,9 @@ function M.shlex:read_token()
           self.state = 'a'
         end
       elseif
-        self.posix
-        and self.escape:find(nextchar, 1, true)
-        and self.escapedquotes:find(self.state, 1, true)
+          self.posix
+          and self.escape:find(nextchar, 1, true)
+          and self.escapedquotes:find(self.state, 1, true)
       then
         escapedstate = self.state
         self.state = nextchar
@@ -173,9 +173,9 @@ function M.shlex:read_token()
         error('no escaped character')
       end
       if
-        self.quotes:find(escapedstate, 1, true)
-        and nextchar ~= self.state
-        and nextchar ~= escapedstate
+          self.quotes:find(escapedstate, 1, true)
+          and nextchar ~= self.state
+          and nextchar ~= escapedstate
       then
         self.token = self.token .. self.state
       end
@@ -222,12 +222,12 @@ function M.shlex:read_token()
         escapedstate = 'a'
         self.state = nextchar
       elseif
-        self.wordchars:find(nextchar, 1, true)
-        or self.quotes:find(nextchar, 1, true)
-        or (
-          self.whitespace_split
-          and not self.punctuation_chars:find(nextchar, 1, true)
-        )
+          self.wordchars:find(nextchar, 1, true)
+          or self.quotes:find(nextchar, 1, true)
+          or (
+            self.whitespace_split
+            and not self.punctuation_chars:find(nextchar, 1, true)
+          )
       then
         self.token = self.token .. nextchar
       else

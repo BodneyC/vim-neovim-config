@@ -28,11 +28,6 @@ require('formatter').setup({
   filetype = {
     sh = shfmt,
     zsh = shfmt,
-    lua = only_opts({
-      exe = 'lua-format',
-      args = { '-i' },
-      stdin = false,
-    }),
     go = only_opts({
       exe = 'gofmt',
       args = { '-w' },

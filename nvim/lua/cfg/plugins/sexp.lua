@@ -1,10 +1,10 @@
 local M = {}
 
 M.disabled_sexp_mappings = {
-  sexp_flow_to_prev_close = '', -- '<M-[>'
+  sexp_flow_to_prev_close = '',     -- '<M-[>'
   sexp_flow_to_next_open = '<C-]>', -- '<M-]>'
-  sexp_flow_to_prev_open = '', -- '<M-{>'
-  sexp_flow_to_next_close = '', -- '<M-}>'
+  sexp_flow_to_prev_open = '',      -- '<M-{>'
+  sexp_flow_to_next_close = '',     -- '<M-}>'
   sexp_flow_to_prev_leaf_head = '', -- '<M-S-b>',
   sexp_flow_to_next_leaf_head = '', -- '<M-S-w>',
   sexp_flow_to_prev_leaf_tail = '', -- '<M-S-g>',

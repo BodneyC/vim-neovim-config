@@ -2,7 +2,7 @@ local M = {}
 
 local function is_helm_file(path)
   local check =
-    vim.fs.find('Chart.yaml', { path = vim.fs.dirname(path), upward = true })
+      vim.fs.find('Chart.yaml', { path = vim.fs.dirname(path), upward = true })
   return not vim.tbl_isempty(check)
 end
 

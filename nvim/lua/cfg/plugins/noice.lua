@@ -9,11 +9,11 @@ return {
   },
   -- you can enable a preset for easier configuration
   presets = {
-    bottom_search = false, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
+    bottom_search = false,        -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
   },
 
   routes = {
@@ -39,12 +39,12 @@ return {
   },
 
   messages = {
-    enabled = true, -- enables the Noice messages UI
-    view = 'notify', -- default view for messages
-    view_error = 'notify', -- view for errors
-    view_warn = 'notify', -- view for warnings
+    enabled = true,            -- enables the Noice messages UI
+    view = 'notify',           -- default view for messages
+    view_error = 'notify',     -- view for errors
+    view_warn = 'notify',      -- view for warnings
     view_history = 'messages', -- view for :messages
-    view_search = false, -- view for search count messages. Set to `false` to disable
+    view_search = false,       -- view for search count messages. Set to `false` to disable
   },
 
   views = {
@@ -61,7 +61,7 @@ return {
   },
 
   popupmenu = {
-    enabled = true, -- enables the Noice popupmenu UI
+    enabled = true,  -- enables the Noice popupmenu UI
     backend = 'nui', -- backend to use to show regular cmdline completions
     relative = 'editor',
     position = { row = 8, col = '50%' },

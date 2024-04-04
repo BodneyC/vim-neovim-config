@@ -85,10 +85,10 @@ util.opt('g', {
   gutentags_ctags_extra_args = {
     '--exclude=node_modules',
     '--tag-relative='
-      .. (
-        vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes'
-        or 'always'
-      ),
+    .. (
+      vim.fn.isdirectory(os.getenv('HOME') .. '/Library') == 1 and 'yes'
+      or 'always'
+    ),
     '--fields=+ailmnS',
   },
 

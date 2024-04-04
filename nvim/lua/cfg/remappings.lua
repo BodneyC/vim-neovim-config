@@ -26,7 +26,7 @@ map('i', '<C-w>', '<C-S-w>')
 map('n', 'Y', 'yy')
 for _, ch in ipairs({ 'y', 'Y', 'p', 'P' }) do
   local action = ((ch == 'y' or ch == 'Y') and 'Copy to' or 'Paste from')
-    .. ' clipboard'
+      .. ' clipboard'
   map('n', '<leader>' .. ch, '"+' .. ch, action)
   map('x', '<leader>' .. ch, '"+' .. ch, action)
 end
@@ -39,7 +39,12 @@ map(
   'Replace under cursor',
   { silent = false }
 )
-map('n', '<leader>/', [[<Cmd>noh<CR>]], 'Remove highlight')
+map('n', '<leader>/', function()
+  vim.cmd('noh')
+  if vim.fn.exists(':NoiceDismiss') ~= 0 then
+    vim.cmd('NoiceDismiss')
+  end
+end, 'Remove highlight')
 
 -- NOTE: Doesn't work with `vim.keymap.set`
 -- NOTE: Also works with vim.cmd([[nmap gcc]])

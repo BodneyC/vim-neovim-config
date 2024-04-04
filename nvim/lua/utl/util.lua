@@ -89,9 +89,9 @@ end
 
 function M.toggle_bool_option(scope, opt)
   if
-    vim[scope]
-    and vim[scope][opt] ~= nil
-    and type(vim[scope][opt]) == 'boolean'
+      vim[scope]
+      and vim[scope][opt] ~= nil
+      and type(vim[scope][opt]) == 'boolean'
   then
     vim[scope][opt] = not vim[scope][opt]
   end

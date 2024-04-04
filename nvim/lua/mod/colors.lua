@@ -22,12 +22,12 @@ function M.material()
   require('material').setup({
 
     contrast = {
-      terminal = true, -- Enable contrast for the built-in terminal
-      sidebars = true, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-      floating_windows = false, -- Enable contrast for floating windows
-      cursor_line = false, -- Enable darker background for the cursor line
+      terminal = true,             -- Enable contrast for the built-in terminal
+      sidebars = true,             -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+      floating_windows = false,    -- Enable contrast for floating windows
+      cursor_line = false,         -- Enable darker background for the cursor line
       non_current_windows = false, -- Enable contrasted background for non-current windows
-      filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
+      filetypes = {},              -- Specify which filetypes get the contrasted (darker) background
     },
 
     styles = { -- Give comments style such as bold, italic, underline etc.
@@ -76,22 +76,22 @@ function M.material()
 
     disable = {
       colored_cursor = true, -- Disable the colored cursor
-      borders = true, -- Disable borders between verticaly split windows
-      background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
-      term_colors = false, -- Prevent the theme from setting terminal colors
-      eob_lines = true, -- Hide the end-of-buffer lines
+      borders = true,        -- Disable borders between verticaly split windows
+      background = false,    -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+      term_colors = false,   -- Prevent the theme from setting terminal colors
+      eob_lines = true,      -- Hide the end-of-buffer lines
     },
 
     high_visibility = {
       lighter = false, -- Enable higher contrast text for lighter style
-      darker = true, -- Enable higher contrast text for darker style
+      darker = true,   -- Enable higher contrast text for darker style
     },
 
     lualine_style = 'stealth', -- Lualine style ( can be 'stealth' or 'default' )
 
-    async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+    async_loading = true,      -- Load parts of the theme asyncronously for faster startup (turned on by default)
 
-    custom_colors = nil, -- If you want to override the default colors, set this to a function
+    custom_colors = nil,       -- If you want to override the default colors, set this to a function
 
     custom_highlights = {
       Search = {
@@ -106,8 +106,69 @@ function M.material()
   vim.cmd('colo material')
 end
 
+function M.kanagawa()
+  require('kanagawa').setup({
+    compile = false,
+    undercurl = true,
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true },
+    statementStyle = { italic = true },
+    typeStyle = {},
+    transparent = false,
+    dimInactive = true,
+    terminalColors = true,
+    colors = {
+      palette = {},
+      theme = {
+        wave = {},
+        lotus = {},
+        dragon = {},
+        all = { ui = { bg_gutter = 'none' } },
+      },
+    },
+    overrides = function(colors)
+      -- Kanagawa seems to be pinched largely from Nightfox... but with a few groups
+      --  missing. These are the ones I care about.
+      local theme = colors.theme
+      local syn = theme.syn
+      return {
+        ['@module'] = { fg = syn.keyword },
+        ['@label'] = { link = 'Label' },
+        ['@number.float'] = { link = 'Float' },
+        ['@type.builtin'] = { link = '@module' },
+        ['@keyword.function'] = { fg = syn.keyword, italic = true },
+        ['@keyword.storage'] = { link = 'StorageClass' },
+        ['@keyword.repeat'] = { link = 'Repeat' },
+        ['@keyword.exception'] = { link = 'Exception' },
+        ['@keyword.conditional'] = { link = 'Conditional' },
+        ['@keyword.conditional.ternary'] = { link = 'Conditional' },
+        ['@markup'] = { fg = theme.ui.fg },
+        ['@markup.link'] = { fg = syn.keyword },
+        ['@markup.link.label'] = { link = 'Special' },
+        ['@markup.link.url'] = {
+          fg = syn.constant,
+          italic = true,
+          underline = true,
+        },
+        ['@markup.raw'] = { fg = syn.identifier, italic = true },
+        ['@markup.raw.block'] = { fg = syn.number },          -- pink
+        ['@markup.list'] = { fg = syn.keyword },
+        ['@markup.list.checked'] = { fg = theme.term[11] },   -- green
+        ['@markup.list.unchecked'] = { fg = syn.identifier }, -- yellow
+      }
+    end,
+    theme = 'dragon',
+    background = {
+      dark = 'dragon',
+      light = 'lotus',
+    },
+  })
+  vim.cmd([[color kanagawa]])
+end
+
 function M.nightfox()
-  local variant = 'nordfox'
+  local variant = 'carbonfox'
   require('nightfox').setup({
     options = {
       styles = {

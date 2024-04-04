@@ -11,7 +11,7 @@ return add_to_default({
   filetypes = { 'groovy' },
   root_dir = function(fname)
     return util.root_pattern('Jenkinsfile')(fname)
-      or util.find_git_ancestor(fname)
+        or util.find_git_ancestor(fname)
   end,
   settings = {
     groovy = {

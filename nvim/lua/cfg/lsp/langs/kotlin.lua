@@ -11,7 +11,7 @@ return function()
   lspconfig.kotlin_language_server.setup(add_to_default({
     cmd = {
       home
-        .. '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
+      .. '/software/kotlin-language-server/server/build/install/server/bin/kotlin-language-server',
     },
   }))
 end

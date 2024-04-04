@@ -184,8 +184,8 @@ require('neo-tree').setup({
   enable_git_status = true,
   enable_diagnostics = true,
   open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-  sort_case_insensitive = false, -- used when sorting files and directories in the tree
-  sort_function = nil, -- use a custom function for sorting files and directories in the tree
+  sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+  sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
   -- sort_function = function (a,b)
   --       if a.type == b.type then
   --           return a.path > b.path
@@ -202,7 +202,7 @@ require('neo-tree').setup({
       padding = 1, -- extra padding on left hand side
       -- indent guides
       with_markers = true,
-      indent_marker = ' ', -- '│',
+      indent_marker = ' ',      -- '│',
       last_indent_marker = ' ', -- '└',
       highlight = 'NeoTreeIndentMarker',
       -- expander config, needed for nesting files
@@ -240,7 +240,7 @@ require('neo-tree').setup({
         untracked = '',
         ignored = '',
         unstaged = '', -- '',
-        staged = '', -- '',
+        staged = '',   -- '',
         conflict = '',
       },
     },
@@ -262,7 +262,7 @@ require('neo-tree').setup({
       local node = tree:get_node()
       vim.cmd(
         [[FloatermNew --autoclose=0 --width=0.9 --height=0.9 git diff ]]
-          .. node.path
+        .. node.path
       )
     end,
   },
@@ -359,9 +359,9 @@ require('neo-tree').setup({
         --'.null-ls_*',
       },
     },
-    follow_current_file = true, -- This will find and focus the file in the active buffer every
+    follow_current_file = true,             -- This will find and focus the file in the active buffer every
     -- time the current file is changed while the tree is open.
-    group_empty_dirs = true, -- when true, empty folders will be grouped together
+    group_empty_dirs = true,                -- when true, empty folders will be grouped together
     hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
     -- in whatever position is specified in window.position
     -- 'open_current',  -- netrw disabled, opening a directory opens within the
@@ -397,7 +397,7 @@ require('neo-tree').setup({
   buffers = {
     follow_current_file = true, -- This will find and focus the file in the active buffer every
     -- time the current file is changed while the tree is open.
-    group_empty_dirs = true, -- when true, empty folders will be grouped together
+    group_empty_dirs = true,    -- when true, empty folders will be grouped together
     show_unloaded = true,
     window = {
       mappings = {
