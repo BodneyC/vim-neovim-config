@@ -1,7 +1,5 @@
 local util = require('utl.util')
 
-vim.cmd('cabbrev L Lazy')
-
 util.commands({
   {
     name = 'DiffThis',
