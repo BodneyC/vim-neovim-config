@@ -116,7 +116,7 @@ function M.kanagawa()
     statementStyle = { italic = true },
     typeStyle = {},
     transparent = false,
-    dimInactive = true,
+    dimInactive = false,
     terminalColors = true,
     colors = {
       palette = {},

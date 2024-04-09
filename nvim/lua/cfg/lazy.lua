@@ -180,7 +180,7 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim',  opts = require('cfg.plugins.todo-comments') },
   {
     'folke/trouble.nvim',
-    dependencies = 'kyazdani42/nvim-web-devicons',
+    dependencies = 'nvim-tree/nvim-web-devicons',
   },
   {
     'folke/which-key.nvim',
@@ -312,13 +312,15 @@ require('lazy').setup({
       -- create the highlight groups in the highlight setup hook, so they are reset
       -- every time the colorscheme changes
       hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#BB5A61' })
-        vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#BE9F66' })
-        vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#5090C4' })
-        vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#A0764E' })
-        vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#77995F' })
-        vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#945BA5' })
-        vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#3E838C' })
+        for _, prefix in ipairs({ '', 'TS' }) do
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowRed', { fg = '#BB5A61' })
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowYellow', { fg = '#BE9F66' })
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowBlue', { fg = '#5090C4' })
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowOrange', { fg = '#A0764E' })
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowGreen', { fg = '#77995F' })
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowViolet', { fg = '#945BA5' })
+          vim.api.nvim_set_hl(0, prefix .. 'RainbowCyan', { fg = '#3E838C' })
+        end
       end)
 
       require('ibl').setup({
@@ -364,7 +366,7 @@ require('lazy').setup({
   },
   -- {
   --   'akinsho/bufferline.nvim',
-  --   dependencies = 'kyazdani42/nvim-web-devicons',
+  --   dependencies = 'nvim-tree/nvim-web-devicons',
   --   version = '^v3',
   --   config = require('cfg.plugins.bufferline'),
   -- },
@@ -391,7 +393,7 @@ require('lazy').setup({
     'nvim-neo-tree/neo-tree.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
       {
         -- only needed if you want to use the commands with '_with_window_picker' suffix
