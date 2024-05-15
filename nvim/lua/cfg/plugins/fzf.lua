@@ -137,6 +137,9 @@ end
 map('n', '<M-]>', grep_cword, 'Grep string')
 map('n', '‘', grep_cword, 'Grep string')
 
+local fzf_preview_hl = 'TabLineFill'
+local fzf_border_hl = 'Normal'
+
 return {
   winopts = {
     height = 0.90,
@@ -144,14 +147,14 @@ return {
     row = 0.35,
     col = 0.50,
     border = {
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
-      { ' ', 'TabLineFill' },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
+      { ' ', fzf_border_hl },
     },
     -- border           = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
     preview = {
@@ -179,7 +182,7 @@ return {
     end,
   },
   hls = {
-    preview_normal = 'TabLineFill',
-    preview_border = 'TabLineFill',
+    preview_normal = fzf_preview_hl,
+    preview_border = fzf_preview_hl,
   },
 }

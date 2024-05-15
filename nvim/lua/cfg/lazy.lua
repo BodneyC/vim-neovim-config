@@ -1,12 +1,8 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', --[[ latest stable release --]]
-    lazypath,
+    'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', --[[ latest stable release --]] lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -22,10 +18,7 @@ require('lazy').setup({
     dependencies = {
       -- LSP Support
       'neovim/nvim-lspconfig',
-      {
-        'williamboman/mason.nvim',
-        opts = {},
-      },
+      { 'williamboman/mason.nvim', opts = {} },
       'williamboman/mason-lspconfig.nvim',
 
       -- Autocompletion
@@ -42,25 +35,14 @@ require('lazy').setup({
       'ray-x/lsp_signature.nvim',
 
       -- Snippets
-      { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
+      { 'L3MON4D3/LuaSnip',        version = 'v2.*', build = 'make install_jsregexp' },
       -- Snippet Collection (Optional)
       'rafamadriz/friendly-snippets',
     },
   },
   {
     'stevearc/dressing.nvim',
-    init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.select = function(...)
-        require('lazy').load({ plugins = { 'dressing.nvim' } })
-        return vim.ui.select(...)
-      end
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.input = function(...)
-        require('lazy').load({ plugins = { 'dressing.nvim' } })
-        return vim.ui.input(...)
-      end
-    end,
+    init = require('cfg.plugins.dressing'),
   },
 
   { 'nvimdev/lspsaga.nvim',          opts = require('cfg.plugins.lspsaga') },
@@ -118,7 +100,7 @@ require('lazy').setup({
 
   'mfussenegger/nvim-dap',
   'theHamsta/nvim-dap-virtual-text',
-  'rcarriga/nvim-dap-ui',
+  { 'rcarriga/nvim-dap-ui',      dependencies = 'nvim-neotest/nvim-nio' },
   'jbyuki/one-small-step-for-vimkind',
 
   { 'Pocco81/dap-buddy.nvim',    branch = 'dev' },
@@ -190,33 +172,13 @@ require('lazy').setup({
 
   {
     'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup({
-        break_undo = false,
-        map_cr = true,
-        map_bs = false,
-        fast_wrap = { map = '<M-w>' },
-      })
-      vim.keymap.set(
-        'i',
-        '∑',
-        [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]],
-        { silent = true }
-      )
-    end,
+    config = require('cfg.plugins.autopairs'),
   },
   {
     'luukvbaal/stabilize.nvim',
     opts = {
       ignore = {
-        filetype = {
-          'help',
-          'list',
-          'Trouble',
-          'NvimTree',
-          'Outline',
-          'neo-tree',
-        },
+        filetype = { 'help', 'list', 'Trouble', 'NvimTree', 'Outline', 'neo-tree', },
         buftype = { 'terminal', 'quickfix', 'loclist' },
       },
     },
@@ -233,6 +195,7 @@ require('lazy').setup({
       end, {})
     end,
   },
+  'rktjmp/playtime.nvim',
 
   --[[------------------------------------------------------------------------
   Wrappers Around Vim Internal-ish Stuff
@@ -285,68 +248,25 @@ require('lazy').setup({
     lazy = false,
     -- config = require('mod.colors').material,
   },
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false,
+    priority = 1000,
+    config = require('mod.colors').oldworld,
+  },
   -- {
   --   'EdenEast/nightfox.nvim',
   --   lazy = false,
   --   config = require('mod.colors').nightfox,
   -- },
-  {
-    'rebelot/kanagawa.nvim',
-    lazy = false,
-    config = require('mod.colors').kanagawa,
-  },
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   lazy = false,
+  --   config = require('mod.colors').kanagawa,
+  -- },
   {
     'lukas-reineke/indent-blankline.nvim',
-    config = function()
-      local highlight = {
-        'RainbowRed',
-        'RainbowYellow',
-        'RainbowBlue',
-        'RainbowOrange',
-        'RainbowGreen',
-        'RainbowViolet',
-        'RainbowCyan',
-      }
-
-      local hooks = require('ibl.hooks')
-      -- create the highlight groups in the highlight setup hook, so they are reset
-      -- every time the colorscheme changes
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        for _, prefix in ipairs({ '', 'TS' }) do
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowRed', { fg = '#BB5A61' })
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowYellow', { fg = '#BE9F66' })
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowBlue', { fg = '#5090C4' })
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowOrange', { fg = '#A0764E' })
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowGreen', { fg = '#77995F' })
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowViolet', { fg = '#945BA5' })
-          vim.api.nvim_set_hl(0, prefix .. 'RainbowCyan', { fg = '#3E838C' })
-        end
-      end)
-
-      require('ibl').setup({
-        exclude = {
-          filetypes = {
-            'packer',
-            'floaterm',
-            'help',
-            'Outline',
-            'NvimTree',
-            'neo-tree',
-            '',
-          },
-        },
-        scope = { show_start = false, show_end = false },
-        indent = { char = '│', highlight = highlight },
-      })
-    end,
-  },
-  {
-    'mzlogin/vim-markdown-toc',
-    init = function()
-      vim.g.vmt_list_item_char = '-'
-      vim.g.vmt_list_indent_text = '  '
-      vim.g.vmt_dont_insert_fence = 1
-    end,
+    config = require('cfg.plugins.indent-blankline'),
   },
   {
     'junegunn/goyo.vim',
@@ -430,7 +350,6 @@ require('lazy').setup({
 
   { 'BodneyC/knit-vim',          ft = 'knit' },
   { 'BodneyC/sood-vim',          ft = 'sood' },
-  { 'dkarter/bullets.vim',       ft = 'markdown' },
   { 'hashivim/vim-terraform',    ft = 'terraform' },
   { 'justinmk/vim-syntax-extra', ft = { 'lex', 'yacc' } },
   { 'm-pilia/vim-pkgbuild',      ft = 'pkgbuild' },
@@ -439,18 +358,49 @@ require('lazy').setup({
     opts = { open_fn = require('lazy.util').open },
   },
 
+  ----- Markdown -----
+  { 'dkarter/bullets.vim', ft = 'markdown' },
   {
-    'plasticboy/vim-markdown',
-    ft = 'markdown',
-    init = function()
-      vim.g.vim_markdown_folding_disabled = true
-      vim.g.vim_markdown_no_default_key_mappings = true
+    'MeanderingProgrammer/markdown.nvim',
+    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('render-markdown').setup(require('cfg.plugins.markdown'))
     end,
   },
+  -- {
+  --   'plasticboy/vim-markdown',
+  --   ft = 'markdown',
+  --   init = function()
+  --     vim.g.vim_markdown_folding_disabled = true
+  --     vim.g.vim_markdown_no_default_key_mappings = true
+  --   end,
+  -- },
+  {
+    'mzlogin/vim-markdown-toc',
+    init = function()
+      vim.g.vmt_list_item_char = '-'
+      vim.g.vmt_list_indent_text = '  '
+      vim.g.vmt_dont_insert_fence = 1
+    end,
+  },
+
+  ----- Node -----
   {
     'barrett-ruth/import-cost.nvim',
     build = 'sh install.sh npm',
     opts = { highlight = 'Comment' },
+  },
+
+  ----- Python -----
+  {
+    "roobert/f-string-toggle.nvim",
+    config = function()
+      require("f-string-toggle").setup({
+        key_binding = "<Space>sf",
+        key_binding_desc = "Toggle f-string"
+      })
+    end,
   },
 
   --[[------------------------------------------------------------------------
