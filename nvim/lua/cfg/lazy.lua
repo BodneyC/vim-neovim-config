@@ -243,27 +243,29 @@ require('lazy').setup({
   { 'rrethy/vim-hexokinase',     build = 'make hexokinase' },
   { 'sainnhe/everforest',        lazy = false },
 
-  {
-    'marko-cerovac/material.nvim',
-    lazy = false,
-    -- config = require('mod.colors').material,
-  },
-  {
-    "dgox16/oldworld.nvim",
-    lazy = false,
-    priority = 1000,
-    config = require('mod.colors').oldworld,
-  },
+  -- {
+  --   'marko-cerovac/material.nvim',
+  --   lazy = false,
+  --   config = require('mod.colors').material,
+  -- },
+  -- {
+  --   "dgox16/oldworld.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = require('mod.colors').oldworld,
+  -- },
   -- {
   --   'EdenEast/nightfox.nvim',
   --   lazy = false,
+  --   priority = 1000,
   --   config = require('mod.colors').nightfox,
   -- },
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   lazy = false,
-  --   config = require('mod.colors').kanagawa,
-  -- },
+  {
+    'rebelot/kanagawa.nvim',
+    lazy = false,
+    priority = 1000,
+    config = require('mod.colors').kanagawa,
+  },
   {
     'lukas-reineke/indent-blankline.nvim',
     config = require('cfg.plugins.indent-blankline'),

@@ -12,7 +12,21 @@ map('n', '<leader>e', [[<CMD>e<CR>]], 'Edit')
 map('n', '<leader>q', [[<CMD>q<CR>]], 'Quit')
 map('n', '<leader>Q', [[<CMD>qa!<CR>]], 'Force quit')
 map('n', '<leader>w', [[<CMD>w<CR>]], 'Write')
-map('n', '<leader>W', [[<CMD>wa | qa<CR>]], 'Force write')
+
+-- Bit hacky but CBA to do it nicely
+vim.api.nvim_create_user_command('ClearUnlisted', function(_)
+  local unlisted = vim.tbl_filter(function(buf)
+    return vim.api.nvim_buf_is_valid(buf)
+        and not vim.api.nvim_buf_get_option(buf, 'buflisted')
+  end, vim.api.nvim_list_bufs())
+  for _, bufnr in ipairs(unlisted) do
+    -- local bufname = vim.api.nvim_buf_get_name(bufnr)
+    -- if string.find(bufname, 'neo%-tree') then
+    vim.cmd([[silent bd! ]] .. bufnr)
+    -- end
+  end
+end, { nargs = 0 })
+map('n', '<leader>W', [[<CMD>ClearUnlisted<CR><CMD>wa|qa<CR>]], 'Force write', { silent = false })
 
 map('n', 'Q', [[q]])
 map('n', 'Q!', [[q!]])
