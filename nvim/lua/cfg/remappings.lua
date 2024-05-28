@@ -1,5 +1,3 @@
-vim.cmd('let mapleader=" "')
-
 --- Leave unmapped for which-key
 -- vim.keymap.set('n', '<leader>', '<NOP>')
 
@@ -22,7 +20,7 @@ vim.api.nvim_create_user_command('ClearUnlisted', function(_)
   for _, bufnr in ipairs(unlisted) do
     -- local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- if string.find(bufname, 'neo%-tree') then
-    vim.cmd([[silent bd! ]] .. bufnr)
+    vim.cmd([[silent! bd! ]] .. bufnr)
     -- end
   end
 end, { nargs = 0 })

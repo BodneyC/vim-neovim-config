@@ -1,5 +1,7 @@
 local util = require('utl.util')
 
+vim.cmd('let mapleader=" "')
+
 -- Disable builtins
 local builtins = {
   'gzip',
