@@ -15,7 +15,7 @@ map('n', '<leader>w', [[<CMD>w<CR>]], 'Write')
 vim.api.nvim_create_user_command('ClearUnlisted', function(_)
   local unlisted = vim.tbl_filter(function(buf)
     return vim.api.nvim_buf_is_valid(buf)
-        and not vim.api.nvim_buf_get_option(buf, 'buflisted')
+        and not vim.api.nvim_get_option_value('buflisted', { buf = buf })
   end, vim.api.nvim_list_bufs())
   for _, bufnr in ipairs(unlisted) do
     -- local bufname = vim.api.nvim_buf_get_name(bufnr)
@@ -78,18 +78,11 @@ map('n', '<leader>m', [[<CMD>NoiceDismiss<CR>]], 'Dismiss Noice messages')
 -- resize
 
 local util = require('utl.util')
-map({ 'n', 't' }, '<C-M-h>', function()
-  return util.resize_window('h')
-end)
-map({ 'n', 't' }, '<C-M-j>', function()
-  return util.resize_window('j')
-end)
-map({ 'n', 't' }, '<C-M-k>', function()
-  return util.resize_window('k')
-end)
-map({ 'n', 't' }, '<C-M-l>', function()
-  return util.resize_window('l')
-end)
+for _, direction in ipairs({ 'h', 'j', 'k', 'l' }) do
+  map({ 'n', 't' }, '<C-M-' .. direction .. '>', function()
+    return util.resize_window(direction)
+  end)
+end
 
 -- line movement
 map('n', '<S-down>', [[<CMD>m+<CR>]])

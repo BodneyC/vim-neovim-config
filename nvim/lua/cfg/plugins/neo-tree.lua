@@ -399,18 +399,14 @@ return {
       local winnr = vim.fn.win_id2win(state.winid)
       local buftext = get_neo_tree_lines(winnr)
       local longest = NEO_TREE_MIN_WIDTH
-      -- TODO: Delete
-      local winner = nil
-      for k, v in pairs(state.tree.nodes.by_id) do
+      for _, v in pairs(state.tree.nodes.by_id) do
         local filtered_fname = fname_fragment_match(winnr, v)
         if filtered_fname then
           if string.find(buftext, ' ' .. filtered_fname) then
-            -- vim.print("found " .. v.name)
             if v.level ~= 0 then
               local length = 2 + ((v.level + 1) * 2) + #v.name + 1
               if length > longest then
                 longest = length
-                winner = v
               end
             end
           end

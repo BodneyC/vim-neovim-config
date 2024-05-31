@@ -6,7 +6,7 @@ local function is_helm_file(path)
   return not vim.tbl_isempty(check)
 end
 
-local function yaml_filetype(path, bufname)
+local function yaml_filetype(path, _)
   return is_helm_file(path) and 'helm' or 'yaml'
 end
 

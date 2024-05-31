@@ -8,11 +8,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {
-    'folke/which-key.nvim',
-    priority = 100,
-    opts = { triggers_blacklist = { n = { '"' } } },
-  },
+  require('cfg.plugins.which-key'),
 
   --[[------------------------------------------------------------------------
   LSP Setup and configuration
@@ -51,6 +47,7 @@ require('lazy').setup({
   require('cfg.plugins.navigator'),
   require('cfg.plugins.hex-this-vim'),
   require('cfg.plugins.neotest'),
+  require('cfg.plugins.kubectl'),
 
   --[[------------------------------------------------------------------------
   Quality of Life
@@ -126,6 +123,7 @@ require('lazy').setup({
   require('cfg.plugins.auto-session'),
   require('cfg.plugins.gitsigns'),
   require('cfg.plugins.neo-tree'),
+  require('cfg.plugins.oil'),
 
   --[[------------------------------------------------------------------------
   Support for Specific Languages

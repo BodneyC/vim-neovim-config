@@ -1,7 +1,5 @@
 local M = {}
 
-local bytemarkers = { { 0x7ff, 192 }, { 0xffff, 224 }, { 0x1fffff, 240 } }
-
 function M.index_of(arr, ele)
   for idx, val in ipairs(arr) do
     if ele == val then
@@ -15,7 +13,7 @@ function M.module_exists(m)
   if package.loaded[m] then
     return true
   end
-  for _, searcher in ipairs(package.searchers or package.loaders) do
+  for _, searcher in ipairs(package.loaders) do
     local loader = searcher(m)
     if type(loader) == 'function' then
       package.preload[m] = loader

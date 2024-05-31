@@ -1,7 +1,3 @@
-local fs = require('utl.fs')
-local util = require('utl.util')
-local lang = require('utl.lang')
-
 local M = {}
 
 local function has_ele_with_substring(tab, substring)
@@ -27,7 +23,7 @@ function M.bufonly()
     if
         vim.fn.bufexists(bufnr) == 1
         and vim.fn.getbufvar(bufnr, '&mod') == 0
-        and lang.index_of(tablist, bufnr) == -1
+        and require('utl.lang').index_of(tablist, bufnr) == -1
         and not has_ele_with_substring({ 'Neotest ' }, vim.fn.bufname(bufnr))
     then
       table.insert(bwd, vim.fn.bufname(bufnr))
@@ -71,6 +67,7 @@ function M.set_indent(n)
 end
 
 function M.change_indent(n)
+  local util = require('utl.util')
   util.toggle_bool_option('bo', 'et')
   vim.cmd('%retab!')
   vim.bo.ts = tonumber(n)
@@ -101,9 +98,10 @@ local function call_if_fn_exists(fn)
 end
 
 function M.handle_large_file()
+  local fs = require('utl.fs')
   local fn = vim.fn.expand('<afile>')
   if
-      fs.file_exists(fn)
+      vim.fn.filereadable(fn)
       and fs.fsize(vim.fn.expand('<afile>')) > vim.g.large_file
   then
     vim.o.updatetime = 1000

@@ -1,5 +1,3 @@
-local util = require('utl.util')
-
 local plane = {
   HORZ = 0,
   VERT = 1,
@@ -31,7 +29,7 @@ end
 function M.close_if_term_job()
   if vim.b.terminal_job_pid then
     local bufnr = vim.fn.bufnr()
-    if not pcall(vim.cmd, 'close') then
+    if not pcall(vim.cmd.close) then
       print('Could not close terminal')
     end
     if vim.fn.bufexists(bufnr) then
@@ -81,7 +79,8 @@ function M.next_term_split()
   end
 end
 
-function M.term_split(toggle)
+function M.term_split(ctx)
+  local toggle = ctx.bang
   M.set_terminal_direction()
   if M.term_name == some_init_val then
     set_open_term_buffer_name()
@@ -141,10 +140,9 @@ function M.term_split(toggle)
   flip()
 end
 
-function M.floating_centred(...)
-  local args = { ... }
-  local height_divisor = args[1] or vim.g.floating_term_divisor
-  local width_divisor = args[2] or vim.g.floating_term_divisor
+function M.floating_centred()
+  local height_divisor = vim.g.floating_term_divisor
+  local width_divisor = vim.g.floating_term_divisor
   local height = math.floor(vim.o.lines * height_divisor)
   local width = math.floor(vim.o.columns * width_divisor)
   local col = math.floor((vim.o.columns - width) / 2)
@@ -171,42 +169,43 @@ end
 
 local map = require('utl.mapper')({ noremap = true, silent = true })
 
-function M.floating_term(...)
-  local args = { ... }
+function M.floating_term(cmd, winid)
   local bufnr = M.floating_centred()
   map('n', '<Esc>', ':bw!<CR>', nil, { buffer = bufnr })
-  vim.fn.termopen(args[1] or os.getenv('SHELL'), {
+  vim.fn.termopen(cmd or os.getenv('SHELL'), {
     on_exit = function(job_id, code, event)
       on_term_exit(job_id, code, event)
-      if args[2] then
-        vim.cmd(args[2] .. 'wincmd w')
+      if winid then
+        vim.cmd(winid .. 'wincmd w')
       end
     end,
   })
 end
 
-function M.floating_man(...)
-  local args = { ... }
+function M.floating_man(ctx)
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
-  M.floating_term('man ' .. table.concat(args, ' '), winid)
+  M.floating_term('man ' .. ctx.args, winid)
   vim.cmd([[startinsert]])
 end
 
-function M.floating_help(...)
-  local args = { ... }
+function M.floating_help(ctx)
   local winid = vim.fn.bufwinnr(vim.fn.bufnr())
   if M.help_buf_nr > 0 and vim.fn.bufloaded(vim.g.tmp_help_buf) == 1 then
     vim.cmd('bw! ' .. M.help_buf_nr)
     M.help_buf_nr = -1
   end
-  local query = args[1] or ''
   M.help_buf_nr = M.floating_centred()
   vim.bo.ft = 'help'
   vim.bo.bt = 'help'
-  local status, err = pcall(vim.cmd, 'help ' .. query)
+  local status, err
+  if #ctx.args > 0 then
+    status, err = pcall(vim.cmd.help, ctx.args)
+  else
+    status, err = pcall(vim.cmd.help)
+  end
   if not status then
     vim.cmd('bw ' .. M.help_buf_nr)
-    print('"' .. query .. '" failed: ' .. err)
+    print(err)
     vim.cmd(winid .. 'wincmd w')
     return
   end
@@ -243,61 +242,18 @@ function M.init()
   M.set_terminal_direction()
   vim.g.floating_term_divisor = vim.g.floating_term_divisor or '0.9'
 
-  local m_term = "lua require'mod.terminal'"
+  local term = require('mod.terminal')
 
   -- `table.unpack` not in 5.1, use `unpack`
-  util.commands({
-    {
-      name = 'SetTerminalDirection',
-      cmd = m_term .. '.set_terminal_direction(<f-args>)',
-      opts = {
-        nargs = '?',
-      },
-    },
-    {
-      name = 'TermSplit',
-      cmd = m_term .. '.term_split(<bang>0)',
-      opts = {
-        bang = true,
-      },
-    },
-    {
-      name = 'M',
-      cmd = m_term .. '.floating_man(<f-args>)',
-      opts = {
-        nargs = '+',
-        complete = 'shellcmd',
-      },
-    },
-    {
-      name = 'H',
-      cmd = m_term .. '.floating_help(<f-args>)',
-      opts = {
-        nargs = '?',
-        complete = 'help',
-      },
-    },
-    {
-      name = 'Help',
-      cmd = m_term .. '.floating_help(<f-args>)',
-      opts = {
-        nargs = '?',
-        complete = 'help',
-      },
-    },
-  })
+  local command = vim.api.nvim_create_user_command
+  command('SetTerminalDirection', term.set_terminal_direction, { nargs = '?' })
+  command('TermSplit', term.term_split, { bang = true })
+  command('M', term.floating_man, { nargs = '+', complete = 'shellcmd' })
+  command('H', term.floating_help, { nargs = '?', complete = 'help' })
+  command('Help', term.floating_help, { nargs = '?', complete = 'help' })
 
-  map(
-    'n',
-    "<Leader>'",
-    ':' .. m_term .. '.next_term_split(false)<CR>',
-    'New terminal'
-  )
-
-  map('t', '<C-R>', "'<C-\\><C-N>\"' . nr2char(getchar()) . 'pi'", nil, {
-    expr = true,
-  })
-
+  map('n', "<Leader>'", function() term.next_term_split() end, 'New terminal')
+  map('t', '<C-R>', "'<C-\\><C-N>\"' . nr2char(getchar()) . 'pi'", nil, { expr = true })
   map('t', '<LeftRelease>', '<Nop>')
 
   do

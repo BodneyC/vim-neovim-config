@@ -19,7 +19,7 @@ local function md_template()
   vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
 end
 
-util.command('MDTemplate', md_template)
+vim.api.nvim_create_user_command('MDTemplate', md_template, {})
 
 local group = vim.api.nvim_create_augroup('CustomMarkdown', {
   clear = true,

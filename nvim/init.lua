@@ -17,4 +17,3 @@ util.safe_require('cfg.dap')
 
 util.safe_require_and_init('mod.terminal')
 util.safe_require_and_init('mod.vim-test')
-util.safe_require_and_init('mod.neotest')

@@ -1,7 +1,2 @@
-local util = require('utl.util')
-local helm = require('mod.helm')
-util.command('HelmLookup', helm.lookup)
-
-local mapper = require('utl.mapper')
-local map = mapper({ noremap = true, silent = true })
-map('n', '<C-]>', '<CMD>HelmLookup<CR>', 'Go to definition')
+vim.api.nvim_create_user_command('HelmLookup', require('mod.helm').lookup, {})
+vim.keymap.set('n', '<C-]>', '<CMD>HelmLookup<CR>', { noremap = true, silent = true })

@@ -17,7 +17,7 @@ function M.safe_call(fn, args, err, ctx)
   end
   local ok, res = pcall(fn, unpack(args))
   if not ok then
-    vim.notify(err .. ' (' .. res .. ')', 'error', { title = ctx })
+    vim.notify(err .. ' (' .. res .. ')', vim.log.levels.ERROR, { title = ctx })
   end
   return res
 end
@@ -42,49 +42,6 @@ function M.safe_require_and_init(module)
     'failed to call init on: ' .. module,
     'utl.util#safe_require_and_init'
   )
-end
-
-function M.opt(s, d)
-  for k, v in pairs(d) do
-    vim[s][k] = v
-  end
-end
-
-local store = require('utl.fn_store')
-
-function M.command(lhs, rhs, opts)
-  opts = opts or {}
-  local parts = {
-    'command!',
-    '-nargs=' .. (opts.nargs or '0'),
-    opts.complete and '-complete=' .. opts.complete or '',
-    opts.bang and '-bang' or '',
-    opts.range and '-range' or '',
-    opts.buffer and '-buffer' or '',
-    lhs,
-  }
-  if type(rhs) == 'string' then
-    table.insert(parts, rhs)
-  elseif type(rhs) == 'function' then
-    table.insert(parts, store.fn_aug(rhs))
-  end
-  vim.cmd(table.concat(parts, ' '))
-end
-
---[[
-util.commands({
-  {
-    name = '...',
-    cmd = ':...<CR>',        -- or .lua_fn
-    lua_fn = function() end, -- or .cmd
-    opts = {},
-  },
-})
---]]
-function M.commands(cmds)
-  for _, cmd in ipairs(cmds) do
-    M.command(cmd.name, cmd.cmd or cmd.lua_fn, cmd.opts)
-  end
 end
 
 function M.toggle_bool_option(scope, opt)
@@ -147,36 +104,6 @@ function M.resize_window(dir)
     end
   end
   vim.cmd(horz_vert .. ' resize ' .. pos_neg_dir .. inc)
-end
-
-function M.run_cmd(cmd, strip)
-  local handle = io.popen(cmd)
-  local result = handle:read('*a')
-  handle:close()
-  if strip then
-    result = result:gsub('^%s*(.-)%s*$', '%1')
-  end
-  return result
-end
-
-function M.basic_os_info()
-  local name, arch = '', ''
-
-  local popen_status, popen_result = pcall(io.popen, '')
-  if popen_status then
-    popen_result:close()
-    name = io.popen('uname -s', 'r'):read('*l')
-    arch = io.popen('uname -m', 'r'):read('*l')
-  else
-    -- Windows
-    local env_OS = os.getenv('OS')
-    local env_ARCH = os.getenv('PROCESSOR_ARCHITECTURE')
-    if env_OS and env_ARCH then
-      name, arch = env_OS, env_ARCH
-    end
-  end
-
-  return name, arch
 end
 
 -- Not perfect but it'll do
