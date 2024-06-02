@@ -33,6 +33,7 @@ map('n', '<F2>', [[<CMD>syn sync fromstart<CR>]], 'Resync syntax')
 map('n', '<F7>', [[<CMD>set spell!<CR>]], 'Toggle spell')
 map('i', '<F7>', [[<C-o>:set spell!<CR>]])
 
+map('i', '<C-a>', '<Esc>A')
 map('i', '<C-w>', '<C-S-w>')
 
 map('n', 'Y', 'yy')

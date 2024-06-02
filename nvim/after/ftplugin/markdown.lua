@@ -66,7 +66,7 @@ map(
     ? "\<C-n>"
     : (!(col('.') - 1) || getline('.')[col('.') - 2]  =~ '\s')
       ? (getline('.') =~ '^\s*-\s*')
-        ? "\<C-o>>>\<C-o>A "
+        ? "\<C-o>>>\<C-o>A"
         : "\<Tab>"
       : compe#complete()
 ]],
