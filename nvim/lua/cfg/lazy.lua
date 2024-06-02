@@ -33,6 +33,7 @@ require('lazy').setup({
   require('cfg.plugins.dap-buddy'),
   require('cfg.plugins.nvim-dap-vscode-js'),
   require('cfg.plugins.nvim-dap-python'),
+  require('cfg.plugins.nvim-dap-go'),
 
   --[[------------------------------------------------------------------------
   Extra Functionality

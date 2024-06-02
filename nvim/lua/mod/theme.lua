@@ -3,7 +3,7 @@ return {
     diagnostics = {
       glyph = {
         error = ' ',
-        warn = ' ',
+        warn = ' ',
         info = ' ',
         hint = ' ',
         ok = ' ',
@@ -26,9 +26,9 @@ return {
       ignored = '◌',
     },
     dap = {
-      breakpoint = '╛',
+      breakpoint = 'B',
       breakpoint_condition = 'C',
-      breakpoint_rejected = 'R',
+      breakpoint_rejcted = 'R',
       log_point = 'L',
     },
     lspkind = {

@@ -7,11 +7,14 @@ for _, debugger in ipairs(dbg_list) do
   dap_install.config(debugger)
 end
 
+vim.cmd([[au FileType dap-repl lua require('dap.ext.autocompl').attach()]])
+
 util.safe_require('cfg.dap.node')
 util.safe_require('cfg.dap.lua')
+util.safe_require('cfg.dap.go')
+
 util.safe_require('cfg.dap.dap-ui')
 util.safe_require('cfg.dap.virtual-text')
-util.safe_require('cfg.dap.signs')
 
 local ldr = [[<leader>x]]
 

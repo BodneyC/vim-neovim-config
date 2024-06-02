@@ -66,7 +66,7 @@ return {
   },
   config = function()
     require('neo-tree').setup({
-      sources = { 'filesystem', 'buffers', 'git_status' }, -- 'document_symbols' },
+      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
       -- source_selector = {
       --   winbar = true,                         -- toggle to show selector on winbar
       --   statusline = false,                    -- toggle to show selector on statusline
