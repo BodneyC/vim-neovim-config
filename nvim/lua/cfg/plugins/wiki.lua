@@ -5,6 +5,7 @@ return {
     if vim.fn.isdirectory(root) == 0 then
       os.execute('mkdir -p ' .. root)
     end
+    vim.g.wiki_mappings_prefix = [[\\w]]
     vim.g.wiki_root = root
     vim.g.wiki_global_load = 0
     vim.g.wiki_filetypes = { 'md', 'sh' }
