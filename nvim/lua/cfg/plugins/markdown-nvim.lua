@@ -4,8 +4,8 @@ return {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
     require('render-markdown').setup({
-      headings = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
-      bullets = { '●', '○', '◆', '◇' },
+      heading = { icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' } },
+      bullet = { icons = { '●', '○', '◆', '◇' } },
       -- Window options to use that change between rendered and raw view
       win_options = {
         conceallevel = {

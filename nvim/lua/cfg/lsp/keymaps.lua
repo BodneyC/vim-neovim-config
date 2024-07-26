@@ -3,6 +3,8 @@ local M = {}
 local util = require('utl.util')
 local km = require('utl.mapper')
 
+local lsp_maps_set = false
+
 function M.set_keymaps(client, bufnr)
   local map = km({ buffer = bufnr, noremap = true, silent = true })
 
@@ -20,6 +22,9 @@ function M.set_keymaps(client, bufnr)
       group = group,
     })
   end
+
+  if lsp_maps_set then return end
+  lsp_maps_set = true
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   map('n', 'K', vim.lsp.buf.hover, 'Show documentation')

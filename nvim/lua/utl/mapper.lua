@@ -5,7 +5,7 @@ return function(mapper_opts)
     local used_opts = vim.tbl_deep_extend('keep', opts or {}, mapper_opts)
     vim.keymap.set(mode, key, cmd, used_opts)
     if desc then
-      which_key.register({ [key] = { desc } }, { mode = mode })
+      which_key.add({ { key, desc = desc } })
     end
   end
 end

@@ -2,10 +2,6 @@ local M = {}
 
 local lspconfig = require('lspconfig')
 
-function M.on_attach(client, bufnr)
-  require('cfg.lsp.keymaps').set_keymaps(client, bufnr)
-end
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.foldingRange = {
@@ -15,7 +11,9 @@ capabilities.textDocument.foldingRange = {
 capabilities.offsetEncoding = { 'utf-8' }
 
 local default_opts = {
-  on_attach = M.on_attach,
+  on_attach = function()
+    require('cfg.lsp.keymaps').set_keymaps(client, bufnr)
+  end,
   root_dir = vim.loop.cwd,
   capabilities = capabilities,
   settings = { telemetry = { enable = false } },
