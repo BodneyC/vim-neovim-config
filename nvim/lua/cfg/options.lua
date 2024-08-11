@@ -67,6 +67,7 @@ vim.o.spell = false
 vim.o.spelllang = 'en_gb'
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.ssop = 'blank,buffers,curdir,folds,help,tabpages,winsize,terminal,localoptions'
 vim.o.tabstop = 2
 vim.o.tags = ''
 vim.o.termguicolors = true

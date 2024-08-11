@@ -2,6 +2,61 @@ vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 local NEO_TREE_MIN_WIDTH = 25
 
+-- Pinched from the source code... I just needed to `bw` first
+local function close_if_last_window()
+  local win_id = vim.api.nvim_get_current_win()
+  local utils = require("neo-tree.utils")
+  local log = require("neo-tree.log")
+  local setup = require('neo-tree.setup')
+  local tabid = vim.api.nvim_get_current_tabpage()
+  local wins = utils.get_value(setup, "config.prior_windows", {})[tabid]
+  local prior_exists = utils.truthy(wins)
+  local non_floating_wins = vim.tbl_filter(function(win)
+    return not utils.is_floating(win)
+  end, vim.api.nvim_tabpage_list_wins(tabid))
+  local win_count = #non_floating_wins
+  log.trace("checking if last window")
+  log.trace("prior window exists = ", prior_exists)
+  log.trace("win_count: ", win_count)
+  if prior_exists and win_count == 1 and vim.o.filetype == "neo-tree" then
+    local position = vim.api.nvim_buf_get_var(0, "neo_tree_position")
+    local source = vim.api.nvim_buf_get_var(0, "neo_tree_source")
+    if position ~= "current" then
+      -- close_if_last_window just doesn't make sense for a split style
+      log.trace("last window, closing")
+      local state = require("neo-tree.sources.manager").get_state(source)
+      if state == nil then
+        return
+      end
+      local mod = utils.get_opened_buffers()
+      log.debug("close_if_last_window, modified files found: ", vim.inspect(mod))
+      for filename, buf_info in pairs(mod) do
+        if buf_info.modified then
+          local buf_name, message
+          if vim.startswith(filename, "[No Name]#") then
+            buf_name = string.sub(filename, 11)
+            message = "Cannot close because an unnamed buffer is modified. Please save or discard this file."
+          else
+            buf_name = filename
+            message = "Cannot close because one of the files is modified. Please save or discard changes."
+          end
+          log.trace("close_if_last_window, showing unnamed modified buffer: ", filename)
+          vim.schedule(function()
+            log.warn(message)
+            vim.cmd("rightbelow vertical split")
+            vim.api.nvim_win_set_width(win_id, state.window.width or 40)
+            vim.cmd("b" .. buf_name)
+          end)
+          return
+        end
+      end
+      vim.cmd("bw")
+      vim.cmd("q!")
+      return
+    end
+  end
+end
+
 local function system(cmd, opts)
   opts = vim.tbl_extend('keep', opts or {}, {
     run_on_dirs = false,
@@ -104,7 +159,7 @@ return {
       --   highlight_separator = "NeoTreeTabSeparatorInactive",      -- string
       --   highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
       -- },
-      close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+      close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = 'rounded',
       enable_git_status = true,
       enable_diagnostics = true,
@@ -441,12 +496,19 @@ return {
         group = group,
         callback = manager.refresh,
       })
-      vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
-        group = group,
-        callback = function()
-          vim.cmd([[bw neo-tree\ *]])
-        end,
-      })
+      -- vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+      --   group = group,
+      --   callback = function()
+      --     vim.cmd([[bw neo-tree\ *]])
+      --   end,
+      -- })
     end
+
+    local events = require("neo-tree.events")
+    events.subscribe({
+      event = events.VIM_WIN_ENTER,
+      handler = close_if_last_window,
+      id = "neo-tree-close-if-last-window",
+    })
   end
 }
