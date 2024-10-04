@@ -37,6 +37,13 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'TextChanged' }, {
 })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   group = group,
+  pattern = 'Dockerfile*',
+  callback = function()
+    vim.bo.ft = 'dockerfile'
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = group,
   pattern = 'Jenkinsfile*',
   callback = function()
     vim.bo.ft = 'groovy'

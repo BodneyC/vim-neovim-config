@@ -149,6 +149,7 @@ require('lazy').setup({
   require('cfg.plugins.markdown-nvim'),
   -- require('cfg.plugins.vim-markdown'),
   require('cfg.plugins.vim-markdown-toc'),
+  require('cfg.plugins.markdown-preview'),
 
   ----- Node -----
   require('cfg.plugins.import-cost'),

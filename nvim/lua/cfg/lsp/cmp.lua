@@ -1,7 +1,6 @@
 local M = {}
 
 local cmp = require('cmp')
-local zero = require('lsp-zero')
 local util = require('utl.util')
 
 function M.zero_cmp_config()
@@ -23,11 +22,18 @@ function M.zero_cmp_config()
     ),
   })
 
-  return {
+  cmp.setup({
     -- NOTE: For future Ben: the default is this but with `noinsert`
     completion = { completeopt = 'menu,menuone,noselect' },
     preselect = require('cmp').PreselectMode.None,
-    mapping = zero.defaults.cmp_mappings({
+    mapping = cmp.mapping.preset.insert({
+      ['<Tab>'] = cmp.mapping(function(_)
+        if cmp.visible() then -- TODO: Or, at end of word
+          cmp.select_next_item()
+        else
+          util.feedkeys('<C-i>', 'n')
+        end
+      end, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(function(_)
         if cmp.visible() then
           cmp.select_prev_item()
@@ -51,9 +57,7 @@ function M.zero_cmp_config()
         symbol_map = require('mod.theme').icons.lspkind,
       }),
     },
-  }
+  })
 end
-
-function M.post_zero_setup() end
 
 return M
