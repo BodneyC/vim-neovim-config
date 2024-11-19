@@ -45,7 +45,8 @@ function M.set_keymaps(client, bufnr)
     end)
   end
 
-  map('n', [[\s]], vim.lsp.buf.document_symbol, 'Document symbol')
+  -- \ls
+  -- map('n', [[\s]], vim.lsp.buf.document_symbol, 'Document symbol')
   map('n', [[\q]], vim.lsp.buf.workspace_symbol, 'Workspace symbol')
 
   -- map('n', [[\f]], '<CMD>Lspsaga finder<CR>', 'Lsp finder')

@@ -107,7 +107,7 @@ map('x', '<S-Tab>', [[<gv]])
 
 map('n', '<leader>ge', [[<CMD>Ge:<CR>]], 'Git edit')
 map('n', '<leader>lg', [[<CMD>LazyGit<CR>]], 'Git edit')
-map('n', '<leader>tt', function() require('snacks').terminal.toggle() end, 'Toggle term')
+map('n', '<leader>T', function() require('snacks').terminal.toggle() end, 'Toggle term')
 map('n', '<leader>}', [[zf}]], 'Fold to blank line')
 
 map('n', '<leader>i', function()
@@ -127,10 +127,6 @@ map('v', '<up>', '<Plug>SchleppUp', nil, { unique = true })
 map('v', '<down>', '<Plug>SchleppDown', nil, { unique = true })
 map('v', '<left>', '<Plug>SchleppLeft', nil, { unique = true })
 map('v', '<right>', '<Plug>SchleppRight', nil, { unique = true })
-
-map('n', '<leader>F', function()
-  vim.cmd([[Format]])
-end, 'Format', { unique = true })
 
 local npairs = require('nvim-autopairs')
 

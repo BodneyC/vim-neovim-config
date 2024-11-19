@@ -21,12 +21,9 @@ return {
     words        = { enabled = false },
   },
   init = function()
-    _G.dd = function(...)
-      require('snacks').debug.inspect(...)
-    end
-    _G.bt = function()
-      require('snacks').debug.backtrace()
-    end
+    local snacks = require('snacks')
+    _G.dd = function(...) snacks.debug.inspect(...) end
+    _G.bt = function() snacks.debug.backtrace() end
     vim.print = _G.dd
   end
 }

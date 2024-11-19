@@ -62,7 +62,7 @@ require('lazy').setup({
   'junegunn/vim-easy-align',
   'kamykn/spelunker.vim',
   'machakann/vim-swap',
-  'mhartington/formatter.nvim',
+  require('cfg.plugins.conform'),
   'tpope/vim-commentary',
   'zirrostig/vim-schlepp',
   'rktjmp/playtime.nvim',
@@ -112,7 +112,8 @@ require('lazy').setup({
   require('cfg.plugins.kanagawa'),
 
   require('cfg.plugins.indent-blankline'),
-  require('cfg.plugins.goyo'),
+  require('cfg.plugins.zen'),
+  require('cfg.plugins.twilight'),
   -- require('cfg.plugins.bufferline'),
 
   --[[------------------------------------------------------------------------

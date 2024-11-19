@@ -11,7 +11,7 @@ capabilities.textDocument.foldingRange = {
 capabilities.offsetEncoding = { 'utf-8' }
 
 local default_opts = {
-  on_attach = function()
+  on_attach = function(client, bufnr)
     require('cfg.lsp.keymaps').set_keymaps(client, bufnr)
   end,
   root_dir = vim.loop.cwd,
