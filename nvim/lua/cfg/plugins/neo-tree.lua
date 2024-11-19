@@ -61,11 +61,11 @@ local function system(cmd, opts)
   opts = vim.tbl_extend('keep', opts or {}, {
     run_on_dirs = false,
     append_filepath = true,
+    append_root_dir = false,
     echo_cmd = true,
   })
   return function(state)
-    local tree = state.tree
-    local node = tree:get_node()
+    local node = state.tree:get_node()
     if not node then
       return
     end
@@ -76,6 +76,10 @@ local function system(cmd, opts)
     local cmd_str = cmd
     if opts.append_filepath then
       cmd_str = cmd_str .. ' ' .. node.path
+    elseif opts.run_on_dirs and node.type == 'directory' then
+      cmd_str = cmd_str .. ' ' .. node.path
+    elseif opts.append_root_dir then
+      cmd_str = cmd_str .. ' ' .. state.tree:get_nodes()[1].id
     end
     if opts.echo_cmd then
       print(cmd_str)
@@ -236,6 +240,7 @@ return {
         ['rem_undo'] = system('NO_COLOR==true rem last', {
           run_on_dirs = true,
           append_filepath = false,
+          append_root_dir = true,
         }),
         ['diff'] = function(state)
           local tree = state.tree
@@ -510,5 +515,11 @@ return {
       handler = close_if_last_window,
       id = "neo-tree-close-if-last-window",
     })
+
+    local function on_move(data)
+      require('snacks').rename.on_rename_file(data.source, data.destination)
+    end
+    events.subscribe({ event = events.FILE_MOVED, handler = on_move })
+    events.subscribe({ event = events.FILE_RENAMED, handler = on_move })
   end
 }

@@ -11,6 +11,11 @@ map('n', '<leader>q', [[<CMD>q<CR>]], 'Quit')
 map('n', '<leader>Q', [[<CMD>qa!<CR>]], 'Force quit')
 map('n', '<leader>w', [[<CMD>w<CR>]], 'Write')
 
+map('n', 'j', 'gj', nil)
+map('n', 'k', 'gk', nil)
+map('n', 'gj', 'j', nil)
+map('n', 'gk', 'k', nil)
+
 -- Bit hacky but CBA to do it nicely
 vim.api.nvim_create_user_command('ClearUnlisted', function(_)
   local unlisted = vim.tbl_filter(function(buf)
@@ -101,6 +106,8 @@ map('x', '<Tab>', [[>gv]])
 map('x', '<S-Tab>', [[<gv]])
 
 map('n', '<leader>ge', [[<CMD>Ge:<CR>]], 'Git edit')
+map('n', '<leader>lg', [[<CMD>LazyGit<CR>]], 'Git edit')
+map('n', '<leader>tt', function() require('snacks').terminal.toggle() end, 'Toggle term')
 map('n', '<leader>}', [[zf}]], 'Fold to blank line')
 
 map('n', '<leader>i', function()

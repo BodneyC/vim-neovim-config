@@ -1,7 +1,7 @@
-local lsp = require('lsp-zero')
+local lsp_zero = require('lsp-zero')
 -- local util = require('utl.util')
 
-lsp.extend_lspconfig({
+lsp_zero.extend_lspconfig({
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
   lsp_attach = require('cfg.lsp.keymaps').set_keymaps,
   float_border = 'rounded',
@@ -16,13 +16,13 @@ lsp.extend_lspconfig({
   call_servers = 'local',
 })
 
-lsp.set_sign_icons(require('mod.theme').icons.diagnostics.glyph)
+lsp_zero.set_sign_icons(require('mod.theme').icons.diagnostics.glyph)
 
 require('cfg.lsp.cmp').zero_cmp_config()
 
 require('mason-lspconfig').setup({
   ensure_installed = {
-    'tsserver', -- npm i -g typescript-language-server
+    -- 'tsserver', -- npm i -g typescript-language-server
     -- 'prosemd_lsp', -- system install
     'dockerls', -- npm i -g dockerfile-language-server-nodejs
     -- Tree-sitter required
@@ -40,14 +40,14 @@ require('mason-lspconfig').setup({
     'rust_analyzer', -- code --install-extension /path/.vsix
     -- 'pylsp', -- pip3 install --user 'python-lsp-sever[all]'
     'pyright',       -- pip3 install --user pyright
-    'ruff_lsp',      -- pip3 install --user pyright
+    'ruff',          --
     'terraformls',   -- system install
     'lua_ls',
     'cssls',
     'jdtls',
     'diagnosticls',
     'ansiblels',
-    'groovyls',
+    -- 'groovyls',
     'helm_ls',
   },
   handlers = {
@@ -57,17 +57,17 @@ require('mason-lspconfig').setup({
     lua_ls = function()
       require('lspconfig').lua_ls.setup({
         on_init = function(client)
-          lsp.nvim_lua_settings(client, {})
+          lsp_zero.nvim_lua_settings(client, {})
         end,
       })
     end,
-    rust_analyzer = lsp.noop,
-    tsserver = lsp.noop,
-    diagnosticls = lsp.noop,
+    rust_analyzer = lsp_zero.noop,
+    -- tsserver = lsp.noop,
+    diagnosticls = lsp_zero.noop,
   }
 })
 
-lsp.configure('diagnosticls', require('cfg.lsp.langs.diagnosticls'))
+lsp_zero.configure('diagnosticls', require('cfg.lsp.langs.diagnosticls'))
 
 -- lsp.configure('groovyls', require('cfg.lsp.langs.groovyls'))
 

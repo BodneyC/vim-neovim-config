@@ -21,6 +21,7 @@ function M.set_keymaps(client, bufnr)
     })
   end
 
+  ---@diagnostic disable-next-line: deprecated
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   map('n', 'K', vim.lsp.buf.hover, 'Show documentation')
 

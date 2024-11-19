@@ -35,3 +35,5 @@ command(
 -- command('HighlightUnderCursor', require('mod.functions').highlight_under_cursor, {})
 -- command('SpellChecker', require('mod.functions').spell_checker, {})
 -- command('ZoomToggle', require('mod.functions').zoom_toggle, {})
+
+command('LazyGit', function() require('snacks').lazygit() end, {})

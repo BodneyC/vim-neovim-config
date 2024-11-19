@@ -54,6 +54,8 @@ require('lazy').setup({
   Quality of Life
   --------------------------------------------------------------------------]]
 
+  require('cfg.plugins.snacks'),
+  -- 'LunarVim/bigfile.nvim',
   'bronson/vim-visual-star-search',
   'dominikduda/vim_current_word',
   'farmergreg/vim-lastplace',

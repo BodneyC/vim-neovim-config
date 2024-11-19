@@ -48,10 +48,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
-map('n', 'j', 'gj', nil, { buffer = 0 })
-map('n', 'k', 'gk', nil, { buffer = 0 })
-map('n', 'gj', 'j', nil, { buffer = 0 })
-map('n', 'gk', 'k', nil, { buffer = 0 })
 vim.cmd([[
   let @t = "mzvip:EasyAlign *|\<CR>`z"
   let @h = "YpVr="

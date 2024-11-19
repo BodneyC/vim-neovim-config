@@ -1,11 +1,11 @@
 local group = vim.api.nvim_create_augroup('__CONFIG_GENERAL__', {
   clear = true,
 })
-vim.api.nvim_create_autocmd('BufReadPre', {
-  group = group,
-  pattern = '*',
-  callback = require('mod.functions').handle_large_file,
-})
+-- vim.api.nvim_create_autocmd('BufReadPre', {
+--   group = group,
+--   pattern = '*',
+--   callback = require('mod.functions').handle_large_file,
+-- })
 vim.api.nvim_create_autocmd('BufEnter', {
   group = group,
   pattern = '*',
