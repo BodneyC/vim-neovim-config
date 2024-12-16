@@ -41,11 +41,12 @@ return {
         font = "+3", -- (10% increase per step)
       },
     },
-    -- callback where you can add custom code when the Zen window opens
-    on_open = function(win)
-    end,
-    -- callback where you can add custom code when the Zen window closes
-    on_close = function()
-    end,
+  },
+  keys = {
+    {
+      "<leader>z",
+      "<cmd>ZenMode<cr>",
+      desc = "Zen mode",
+    },
   }
 }

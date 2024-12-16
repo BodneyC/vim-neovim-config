@@ -162,7 +162,7 @@ return {
     'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-refactor',
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'vigoux/treesitter-context.nvim',
+    'nvim-treesitter/nvim-treesitter-context',
     'JoosepAlviste/nvim-ts-context-commentstring',
     { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
   },

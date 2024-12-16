@@ -154,6 +154,9 @@ require('lazy').setup({
   require('cfg.plugins.vim-markdown-toc'),
   require('cfg.plugins.markdown-preview'),
 
+  ----- Latex -----
+  require('cfg.plugins.vimtex'),
+
   ----- Node -----
   require('cfg.plugins.import-cost'),
 
