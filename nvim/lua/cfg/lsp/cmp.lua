@@ -31,7 +31,14 @@ function M.zero_cmp_config()
         if cmp.visible() then -- TODO: Or, at end of word
           cmp.select_next_item()
         else
-          util.feedkeys('<C-i>', 'n')
+          local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+          local line = vim.api.nvim_get_current_line()
+          local char = line:sub(col, col)
+          if char == '' or char:match("%s") ~= nil then
+            util.feedkeys('<C-i>', 'n')
+          else
+            cmp.complete()
+          end
         end
       end, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(function(_)

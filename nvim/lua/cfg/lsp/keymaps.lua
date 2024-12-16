@@ -4,6 +4,8 @@ local util = require('utl.util')
 local km = require('utl.mapper')
 
 function M.set_keymaps(client, bufnr)
+  require('lsp-zero').default_keymaps({ buffer = bufnr })
+
   local map = km({ buffer = bufnr, noremap = true, silent = true })
 
   if client.server_capabilities.documentHighlightProvider then
