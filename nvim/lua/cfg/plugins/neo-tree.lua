@@ -75,11 +75,11 @@ local function system(cmd, opts)
     end
     local cmd_str = cmd
     if opts.append_filepath then
-      cmd_str = cmd_str .. ' ' .. node.path
+      cmd_str = cmd_str .. ' \'' .. node.path .. '\''
     elseif opts.run_on_dirs and node.type == 'directory' then
-      cmd_str = cmd_str .. ' ' .. node.path
+      cmd_str = cmd_str .. ' \'' .. node.path .. '\''
     elseif opts.append_root_dir then
-      cmd_str = cmd_str .. ' ' .. state.tree:get_nodes()[1].id
+      cmd_str = cmd_str .. ' \'' .. state.tree:get_nodes()[1].id .. '\''
     end
     if opts.echo_cmd then
       print(cmd_str)
