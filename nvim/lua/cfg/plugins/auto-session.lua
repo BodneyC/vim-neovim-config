@@ -1,4 +1,4 @@
 return {
   'rmagatti/auto-session',
-  opts = { log_level = 'warn', auto_session_suppress_dirs = { '~/' } },
+  opts = { log_level = 'warn', suppressed_dirs = { '~/' } },
 }

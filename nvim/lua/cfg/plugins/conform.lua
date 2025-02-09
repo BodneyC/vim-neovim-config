@@ -1,17 +1,13 @@
-local function shfmt()
-  local cwd = require("conform.util").root_file({ ".editorconfig", ".git" })
-  local args = { '-w', '-i=2', '-bn', '-ci', '-sr' }
-  if vim.fn.filereadable(cwd .. '/.editorconfig') == 1 then
-    args = { '-w' }
-  end
-  if vim.fn.expand('%'):match('.bats$') then
-    table.insert(args, '--language-dialect=bats')
+local function latexindent()
+  local cwd = vim.fs.root(vim.fn.expand('%:p:h'), { ".git" })
+  local args = {}
+  if vim.fn.filereadable(cwd .. '/.latexindent.yaml') == 1 then
+    args = { '-l=' .. cwd .. '/.latexindent.yaml', '-' }
   end
   return {
-    command = 'shfmt',
-    cwd = cwd,
-    prepend_args = args,
-    stdin = false,
+    command = 'latexindent',
+    args = args,
+    stdin = true,
   }
 end
 
@@ -23,10 +19,12 @@ return {
         command = "jq",
         prepend_args = { "." }
       },
-      shfmt = shfmt,
+      latexindent_custom = latexindent,
     },
     formatters_by_ft = {
       json = { "jq" },
+      tex = { "latexindent_custom" },
+      bib = { "bibtex-tidy" },
     },
     format_on_save = {
       -- These options will be passed to conform.format()
