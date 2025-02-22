@@ -11,7 +11,7 @@ local autotag_filetypes = {
 
 local ensure_installed = {
   'bash',
-  'bibtex',
+  -- 'bibtex',
   'c',
   'clojure',
   'cpp',
@@ -24,7 +24,7 @@ local ensure_installed = {
   'javascript',
   'jsdoc',
   'json',
-  'latex',
+  -- 'latex',
   'lua',
   'markdown',
   'markdown_inline',
@@ -52,6 +52,7 @@ return {
           enable = true,
           filetypes = autotag_filetypes,
         },
+        disable = { 'tex' },
         ensure_installed = ensure_installed,
         indent = {
           enable = true,
@@ -99,12 +100,12 @@ return {
             },
           },
         },
-        textsubjects = {
-          enable = true,
-          keymaps = {
-            ['.'] = 'textsubjects-smart',
-          },
-        },
+        -- textsubjects = {
+        --   enable = false,
+        --   keymaps = {
+        --     ['.'] = 'textsubjects-smart',
+        --   },
+        -- },
         -- Currently unsupported by most
         textobjects = {
           select = {
@@ -162,7 +163,7 @@ return {
   end,
   dependencies = {
     'RRethy/nvim-treesitter-endwise',
-    'RRethy/nvim-treesitter-textsubjects',
+    -- 'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-refactor',
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
