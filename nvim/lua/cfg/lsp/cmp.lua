@@ -1,5 +1,6 @@
 local M = {}
 
+
 local cmp = require('cmp')
 local util = require('utl.util')
 
@@ -22,23 +23,25 @@ function M.zero_cmp_config()
     ),
   })
 
+  local luasnip = require("luasnip")
+
   cmp.setup({
     -- NOTE: For future Ben: the default is this but with `noinsert`
     completion = { completeopt = 'menu,menuone,noselect' },
     preselect = require('cmp').PreselectMode.None,
     mapping = cmp.mapping.preset.insert({
-      ['<Tab>'] = cmp.mapping(function(_)
+      ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then -- TODO: Or, at end of word
           cmp.select_next_item()
         else
-          local _, col = unpack(vim.api.nvim_win_get_cursor(0))
-          local line = vim.api.nvim_get_current_line()
-          local char = line:sub(col, col)
-          if char == '' or char:match("%s") ~= nil then
-            util.feedkeys('<C-i>', 'n')
-          else
-            cmp.complete()
-          end
+          -- local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+          -- local line = vim.api.nvim_get_current_line()
+          -- local char = line:sub(col, col)
+          -- if char == '' or char:match("%s") ~= nil then
+          --   -- util.feedkeys('<C-i>', 'n')
+          -- else
+          fallback()
+          -- end
         end
       end, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(function(_)
@@ -48,13 +51,26 @@ function M.zero_cmp_config()
           util.feedkeys('<C-d>', 'n')
         end
       end, { 'i', 's' }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<CR>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          if luasnip.expandable() then
+            luasnip.expand()
+          else
+            cmp.confirm({
+              select = true,
+            })
+          end
+        else
+          fallback()
+        end
+      end)
     }),
     sources = {
-      { name = 'nvim_lsp',               keyword_length = 3 },
-      { name = 'buffer',                 keyword_length = 3 },
-      { name = 'nvim_lsp_signature_help' },
-      { name = 'path' },
+      { name = 'nvim_lsp', keyword_length = 3 },
+      -- { name = 'buffer',                 keyword_length = 3 },
+      -- { name = 'nvim_lsp_signature_help' },
+      -- { name = 'path' },
       { name = 'luasnip' },
     },
     formatting = {

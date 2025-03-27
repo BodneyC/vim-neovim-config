@@ -166,8 +166,13 @@ return {
     -- 'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-refactor',
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-context',
     'JoosepAlviste/nvim-ts-context-commentstring',
     { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
+    {
+      'nvim-treesitter/nvim-treesitter-context',
+      opts = {
+        max_lines = 7, min_window_height = 20
+      }
+    },
   },
 }

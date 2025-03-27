@@ -121,9 +121,9 @@ map('x', '<leader>ea', [[:EasyAlign<CR>]], 'Easy align')
 
 map('n', '<leader>U', [[:UndotreeToggle<CR>]], 'Undo tree')
 
-map('n', '<leader>H', function()
-  return require('mod.terminal').floating_help(vim.fn.expand('<cword>'))
-end, 'Help under cursor')
+-- map('n', '<leader>H', function()
+--   return require('mod.terminal').floating_help(vim.fn.expand('<cword>'))
+-- end, 'Help under cursor')
 
 map('v', '<up>', '<Plug>SchleppUp', nil, { unique = true })
 map('v', '<down>', '<Plug>SchleppDown', nil, { unique = true })

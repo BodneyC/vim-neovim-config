@@ -23,7 +23,7 @@ return {
     },
     formatters_by_ft = {
       json = { "jq" },
-      tex = { "latexindent_custom" },
+      -- tex = { "latexindent_custom" },
       bib = { "bibtex-tidy" },
     },
     format_on_save = {

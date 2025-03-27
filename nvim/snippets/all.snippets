@@ -1,14 +1,14 @@
 snippet modeline "vim modeline"
 	`substitute(&commentstring, '^\([^ ]*\)\s*%s\(.*\)$', '\1', '')` vim: set ${0:et tw=2 sw=2} : `substitute(&commentstring, '^.*%s\(.*\)$', '\1', '')`
 
-snippet filename "filename"
-	`expand('%:p')`
+# snippet filename "filename"
+# 	`expand('%:p')`
 
-snippet basename "basename"
-	`expand('%:t')`
+# snippet basename "basename"
+# 	`expand('%:t')`
 
-snippet dir "directory"
-	`expand('%:p:h')`
+# snippet dir "directory"
+# 	`expand('%:p:h')`
 
 snippet date ""
 	`strftime('%Y-%m-%d')`

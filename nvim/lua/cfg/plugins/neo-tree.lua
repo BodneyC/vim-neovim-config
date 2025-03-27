@@ -2,59 +2,8 @@ vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 local NEO_TREE_MIN_WIDTH = 25
 
--- Pinched from the source code... I just needed to `bw` first
-local function close_if_last_window()
-  local win_id = vim.api.nvim_get_current_win()
-  local utils = require("neo-tree.utils")
-  local log = require("neo-tree.log")
-  local setup = require('neo-tree.setup')
-  local tabid = vim.api.nvim_get_current_tabpage()
-  local wins = utils.get_value(setup, "config.prior_windows", {})[tabid]
-  local prior_exists = utils.truthy(wins)
-  local non_floating_wins = vim.tbl_filter(function(win)
-    return not utils.is_floating(win)
-  end, vim.api.nvim_tabpage_list_wins(tabid))
-  local win_count = #non_floating_wins
-  log.trace("checking if last window")
-  log.trace("prior window exists = ", prior_exists)
-  log.trace("win_count: ", win_count)
-  if prior_exists and win_count == 1 and vim.o.filetype == "neo-tree" then
-    local position = vim.api.nvim_buf_get_var(0, "neo_tree_position")
-    local source = vim.api.nvim_buf_get_var(0, "neo_tree_source")
-    if position ~= "current" then
-      -- close_if_last_window just doesn't make sense for a split style
-      log.trace("last window, closing")
-      local state = require("neo-tree.sources.manager").get_state(source)
-      if state == nil then
-        return
-      end
-      local mod = utils.get_opened_buffers()
-      log.debug("close_if_last_window, modified files found: ", vim.inspect(mod))
-      for filename, buf_info in pairs(mod) do
-        if buf_info.modified then
-          local buf_name, message
-          if vim.startswith(filename, "[No Name]#") then
-            buf_name = string.sub(filename, 11)
-            message = "Cannot close because an unnamed buffer is modified. Please save or discard this file."
-          else
-            buf_name = filename
-            message = "Cannot close because one of the files is modified. Please save or discard changes."
-          end
-          log.trace("close_if_last_window, showing unnamed modified buffer: ", filename)
-          vim.schedule(function()
-            log.warn(message)
-            vim.cmd("rightbelow vertical split")
-            vim.api.nvim_win_set_width(win_id, state.window.width or 40)
-            vim.cmd("b" .. buf_name)
-          end)
-          return
-        end
-      end
-      vim.cmd("bw")
-      vim.cmd("q!")
-      return
-    end
-  end
+local function on_move(data)
+  require('snacks').rename.on_rename_file(data.source, data.destination)
 end
 
 local function system(cmd, opts)
@@ -123,7 +72,13 @@ return {
       },
     },
   },
+
   config = function()
+    local events = require("neo-tree.events")
+    -- events.unsubscribe({
+    --   event = events.VIM_WIN_ENTER,
+    --   id = "neo-tree-win-enter",
+    -- })
     require('neo-tree').setup({
       sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
       -- source_selector = {
@@ -252,6 +207,7 @@ return {
         end,
       },
       window = {
+        auto_expand_width = true,
         position = 'left',
         width = NEO_TREE_MIN_WIDTH,
         mapping_options = {
@@ -321,30 +277,27 @@ return {
       },
       nesting_rules = {},
       filesystem = {
+        components = {
+          name = function(config, node, state)
+            local components = require('neo-tree.sources.common.components')
+            local name = components.name(config, node, state)
+            -- Overriding the root node for auto_expand_width
+            if node:get_depth() == 1 then
+              ---@diagnostic disable-next-line: undefined-field
+              name.text = vim.fs.basename(vim.loop.cwd() or '')
+            end
+            return name
+          end
+        },
         filtered_items = {
           visible = false, -- when true, they will just be displayed differently than normal items
           hide_dotfiles = false,
           hide_gitignored = true,
           hide_hidden = true, -- only works on Windows for hidden files/directories
-          hide_by_name = {
-            --'node_modules'
-          },
-          hide_by_pattern = { -- uses glob style patterns
-            --'*.meta',
-            --'*/src/*/tsconfig.json',
-          },
-          always_show = { -- remains visible even if other settings would normally hide it
-            --'.gitignored',
-          },
-          never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-            --'.DS_Store',
-            --'thumbs.db'
-          },
-          never_show_by_pattern = { -- uses glob style patterns
-            --'.null-ls_*',
-          },
         },
-        follow_current_file = true,             -- This will find and focus the file in the active buffer every
+        follow_current_file = {
+          enabled = true, -- This will find and focus the file in the active buffer every
+        },
         -- time the current file is changed while the tree is open.
         group_empty_dirs = true,                -- when true, empty folders will be grouped together
         hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
@@ -380,9 +333,11 @@ return {
         commands = {}, -- Add a custom command or override a global one using the same function name
       },
       buffers = {
-        follow_current_file = true, -- This will find and focus the file in the active buffer every
+        follow_current_file = {
+          enabled = true, -- This will find and focus the file in the active buffer every
+        },
         -- time the current file is changed while the tree is open.
-        group_empty_dirs = true,    -- when true, empty folders will be grouped together
+        group_empty_dirs = true, -- when true, empty folders will be grouped together
         show_unloaded = true,
         window = {
           mappings = {
@@ -409,117 +364,32 @@ return {
         },
         commands = {},
       },
+      event_handlers = {
+        {
+          event = events.VIM_WIN_ENTER,
+          handler = require("cfg.plugins.neo-tree-close"),
+        },
+
+        { event = events.FILE_MOVED,   handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
+      }
     })
     local manager = require('neo-tree.sources.manager')
-    local renderer = require('neo-tree.ui.renderer')
-
-    local function get_neo_tree_lines(winnr)
-      -- From second line to ignore directory path
-      local lines = vim.api.nvim_buf_get_lines(
-        vim.fn.winbufnr(winnr),
-        1,
-        vim.api.nvim_buf_line_count(0),
-        false
-      )
-      local filtered_lines = {}
-      for _, line in ipairs(lines) do
-        local filtered_line = line:gsub('%s+%S+%s+$', '')
-        table.insert(filtered_lines, filtered_line)
-      end
-      return table.concat(filtered_lines, '\n')
-    end
-
-    -- This is *not* a good approach, matches the portion of the name that would
-    --  fit into the screen at a given level, very likely to break with API changes
-    --  and very likely to be inaccurate if higher nodes exist with the same
-    --  name...
-    -- In short, this is because there's nothing in `state.tree.nodes.by_id` that
-    --  would tell you if a given node is visible on screen, any directory that has
-    --  been opened will have all it's nodes in the table - this is a check to see
-    --  if it's in the buffer contents... sketchy stuff right here... but it works
-    local function fname_fragment_match(winnr, node)
-      local width = vim.fn.winwidth(winnr)
-      -- 2 for SOL and 2 for icon
-      local starting_pos = 4 + (node.level * 2)
-      -- 2 for git status
-      local width_for_fname = width - (starting_pos + 2)
-      if width_for_fname < 1 then
-        return nil
-      end
-      local filtered_fname = string.sub(node.name, 1, width_for_fname + 1)
-      return filtered_fname:gsub('%-', '%%-')
-    end
-
-    local function resize_neotree()
-      -- default source, maybe find a way to iterate these
-      local state = manager.get_state('filesystem')
-      if not renderer.window_exists(state) then
-        return
-      end
-      local winnr = vim.fn.win_id2win(state.winid)
-      local buftext = get_neo_tree_lines(winnr)
-      local longest = NEO_TREE_MIN_WIDTH
-      for _, v in pairs(state.tree.nodes.by_id) do
-        local filtered_fname = fname_fragment_match(winnr, v)
-        if filtered_fname then
-          if string.find(buftext, ' ' .. filtered_fname) then
-            if v.level ~= 0 then
-              local length = 2 + ((v.level + 1) * 2) + #v.name + 1
-              if length > longest then
-                longest = length
-              end
-            end
-          end
-        end
-      end
-      vim.cmd([[vertical ]] .. winnr .. [[ resize ]] .. longest)
-    end
 
     local map = require('utl.mapper')({ noremap = true, silent = true })
 
-    map('n', '<Leader>d', function()
-      require('neo-tree').focus()
-      vim.defer_fn(resize_neotree, 200)
-    end, 'Focus neotree')
-
-    map('n', '<Leader>D', function()
-      require('neo-tree').show()
-      vim.defer_fn(resize_neotree, 200)
-    end, 'Open neotree')
+    map('n', '<Leader>d', function() vim.cmd('Neotree focus') end, 'Focus neotree')
+    map('n', '<Leader>D', function() vim.cmd('Neotree close') end, 'Open neotree')
 
     do
       local group = vim.api.nvim_create_augroup('__NEO_TREE__', {
         clear = true,
-      })
-      vim.api.nvim_create_autocmd('VimResized', {
-        group = group,
-        pattern = '*',
-        callback = resize_neotree,
       })
       -- This may cause lag... need to think on this
       vim.api.nvim_create_autocmd('BufWritePost', {
         group = group,
         callback = manager.refresh,
       })
-      -- vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
-      --   group = group,
-      --   callback = function()
-      --     vim.cmd([[bw neo-tree\ *]])
-      --   end,
-      -- })
     end
-
-    local events = require("neo-tree.events")
-    events.subscribe({
-      event = events.VIM_WIN_ENTER,
-      handler = close_if_last_window,
-      id = "neo-tree-close-if-last-window",
-    })
-
-    local function on_move(data)
-      require('snacks').rename.on_rename_file(data.source, data.destination)
-    end
-    events.subscribe({ event = events.FILE_MOVED, handler = on_move })
-    events.subscribe({ event = events.FILE_RENAMED, handler = on_move })
   end
 }
