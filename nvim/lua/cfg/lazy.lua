@@ -17,7 +17,7 @@ require('lazy').setup({
   require('cfg.plugins.lsp-zero'),
   require('cfg.plugins.dressing'),
   require('cfg.plugins.lspsaga'),
-  require('cfg.plugins.symbols-outline'),
+  -- require('cfg.plugins.symbols-outline'),
   require('cfg.plugins.fzf-lua'),
   require('cfg.plugins.nvim-treesitter'),
 
@@ -95,7 +95,7 @@ require('lazy').setup({
   Colors Outside of Treesitter
   --------------------------------------------------------------------------]]
 
-  'dstein64/nvim-scrollview',
+  require('cfg.plugins.nvim-scrollview'),
   'voldikss/vim-floaterm',
   'wellle/targets.vim',
   'wellle/visual-split.vim',
