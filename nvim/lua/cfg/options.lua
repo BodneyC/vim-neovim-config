@@ -102,11 +102,24 @@ vim.o.report = 10000
 local icons = require('mod.theme').icons
 local glyphs = icons.diagnostics.glyph
 
-vim.fn.sign_define("DiagnosticSignError", { text = glyphs.error, texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = glyphs.warn, texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = glyphs.info, texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = glyphs.hint, texthl = "DiagnosticSignHint" })
 vim.fn.sign_define('DapBreakpoint', { text = icons.dap.breakpoint, texthl = '' })
 vim.fn.sign_define('DapBreakpointCondition', { text = icons.dap.breakpoint_condition, texthl = '', })
 vim.fn.sign_define('DapBreakpointRejected', { text = icons.dap.breakpoint_rejected, texthl = '', })
 vim.fn.sign_define('DapLogPoint', { text = icons.dap.log_point, texthl = '', })
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = glyphs.error,
+      [vim.diagnostic.severity.WARN] = glyphs.warn,
+      [vim.diagnostic.severity.INFO] = glyphs.info,
+      [vim.diagnostic.severity.HINT] = glyphs.hint,
+    },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    }
+  }
+})

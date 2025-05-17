@@ -14,7 +14,10 @@ require('lazy').setup({
   LSP Setup and configuration
   --------------------------------------------------------------------------]]
 
-  require('cfg.plugins.lsp-zero'),
+  require('cfg.plugins.nvim-lspconfig'),
+  require('cfg.plugins.cmp'),
+  require('cfg.plugins.luasnip'),
+  require('cfg.plugins.mason-lspconfig'),
   require('cfg.plugins.dressing'),
   require('cfg.plugins.lspsaga'),
   -- require('cfg.plugins.symbols-outline'),

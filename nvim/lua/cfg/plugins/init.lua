@@ -6,7 +6,7 @@ local confs = {
   -- 'cfg.plugins.neo-tree',
   -- 'cfg.plugins.neotest',
   -- 'cfg.plugins.telescope',
-  'cfg.plugins.luasnip',
+  -- 'cfg.plugins.luasnip',
 }
 
 for _, conf in ipairs(confs) do

@@ -171,7 +171,7 @@ return {
     {
       'nvim-treesitter/nvim-treesitter-context',
       opts = {
-        max_lines = 7, min_window_height = 20
+        max_lines = 4, min_window_height = 20
       }
     },
   },
