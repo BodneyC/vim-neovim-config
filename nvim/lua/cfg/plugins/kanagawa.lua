@@ -4,7 +4,7 @@ return {
   priority = 1000,
   config = function()
     require('kanagawa').setup({
-      compile = false,
+      compile = true,
       undercurl = true,
       commentStyle = { italic = true },
       functionStyle = {},
@@ -72,7 +72,7 @@ return {
         }
       end,
       background = {
-        dark = 'dragon',
+        dark = 'wave',
         light = 'lotus',
       },
     })

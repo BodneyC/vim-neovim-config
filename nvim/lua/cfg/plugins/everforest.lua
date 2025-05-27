@@ -58,22 +58,23 @@ local function custom()
 end
 
 return {
-  'sainnhe/everforest',
+  'neanias/everforest-nvim',
   lazy = false,
   config = function()
-    function M.everforest()
-      vim.g.everforest_background = 'medium'
+    require("everforest").setup({
+      background = "hard",
+      transparent_background_level = 0,
+    })
 
-      local group = vim.api.nvim_create_augroup('EverforestCustom', {
-        clear = true,
-      })
-      vim.api.nvim_create_autocmd('ColorScheme', {
-        group = group,
-        pattern = 'everforest',
-        callback = custom,
-      })
+    -- local group = vim.api.nvim_create_augroup('EverforestCustom', {
+    --   clear = true,
+    -- })
+    -- vim.api.nvim_create_autocmd('ColorScheme', {
+    --   group = group,
+    --   pattern = 'everforest',
+    --   callback = custom,
+    -- })
 
-      vim.cmd('colo everforest')
-    end
+    vim.cmd('colo everforest')
   end
 }
