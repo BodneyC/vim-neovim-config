@@ -72,7 +72,7 @@ return {
         }
       end,
       background = {
-        dark = 'wave',
+        dark = 'dragon',
         light = 'lotus',
       },
     })
