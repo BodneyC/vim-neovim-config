@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+---@diagnostic disable-next-line: undefined-field
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git',
@@ -46,12 +47,12 @@ require('lazy').setup({
   'vim-test/vim-test',
   'windwp/nvim-spectre',
   'windwp/nvim-ts-autotag', -- Setup in ts.lua
+  'seandewar/actually-doom.nvim',
 
   require('cfg.plugins.neotest'),
   require('cfg.plugins.navigator'),
   require('cfg.plugins.hex-this-vim'),
   require('cfg.plugins.neotest'),
-  require('cfg.plugins.kubectl'),
 
   --[[------------------------------------------------------------------------
   Quality of Life

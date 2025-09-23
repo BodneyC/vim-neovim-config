@@ -121,6 +121,10 @@ return {
 
 
     require('fzf-lua').setup({
+      files = {
+        fd_opts =
+        [[--color=never --hidden --type f --type l --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp --exclude snippets]],
+      },
       winopts = {
         height = 0.90,
         width = 0.92,

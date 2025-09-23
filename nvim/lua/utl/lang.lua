@@ -13,6 +13,7 @@ function M.module_exists(m)
   if package.loaded[m] then
     return true
   end
+  ---@diagnostic disable-next-line: deprecated
   for _, searcher in ipairs(package.loaders) do
     local loader = searcher(m)
     if type(loader) == 'function' then

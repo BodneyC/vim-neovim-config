@@ -172,7 +172,8 @@ local map = require('utl.mapper')({ noremap = true, silent = true })
 function M.floating_term(cmd, winid)
   local bufnr = M.floating_centred()
   map('n', '<Esc>', ':bw!<CR>', nil, { buffer = bufnr })
-  vim.fn.termopen(cmd or os.getenv('SHELL'), {
+  vim.fn.jobstart(cmd or os.getenv('SHELL'), {
+    term = true,
     on_exit = function(job_id, code, event)
       on_term_exit(job_id, code, event)
       if winid then

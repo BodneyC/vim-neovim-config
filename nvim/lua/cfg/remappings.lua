@@ -136,11 +136,13 @@ local function getline(bufnr, row)
   return vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false)[1] or ''
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function _G.master_bs()
   if vim.bo.buftype ~= '' then
     return npairs.esc('<BS>')
   end
   local bufnr = vim.api.nvim_get_current_buf()
+  ---@diagnostic disable-next-line: deprecated
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   local current_line = getline(bufnr, row)
   -- Current line is blank to cursor

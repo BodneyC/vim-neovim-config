@@ -106,6 +106,39 @@ function M.resize_window(dir)
   vim.cmd(horz_vert .. ' resize ' .. pos_neg_dir .. inc)
 end
 
+function M.run_cmd(cmd, strip)
+  local handle = io.popen(cmd)
+  if handle == nil then
+    return 'failed to run'
+  end
+  local result = handle:read('*a')
+  handle:close()
+  if strip then
+    result = result:gsub('^%s*(.-)%s*$', '%1')
+  end
+  return result
+end
+
+function M.basic_os_info()
+  local name, arch = '', ''
+
+  local popen_status, popen_result = pcall(io.popen, '')
+  if popen_status and popen_result then
+    popen_result:close()
+    name = io.popen('uname -s', 'r'):read('*l')
+    arch = io.popen('uname -m', 'r'):read('*l')
+  else
+    -- Windows
+    local env_OS = os.getenv('OS')
+    local env_ARCH = os.getenv('PROCESSOR_ARCHITECTURE')
+    if env_OS and env_ARCH then
+      name, arch = env_OS, env_ARCH
+    end
+  end
+
+  return name, arch
+end
+
 -- Not perfect but it'll do
 function M.basename_to_title(basename)
   basename = basename or vim.fn.expand('%:t:r')
