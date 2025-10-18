@@ -27,7 +27,7 @@ function M.bufonly()
         and not has_ele_with_substring({ 'Neotest ' }, vim.fn.bufname(bufnr))
     then
       table.insert(bwd, vim.fn.bufname(bufnr))
-      vim.cmd([[silent bwipeout]] .. bufnr)
+      vim.cmd([[silent bwipeout!]] .. bufnr)
       cnt = cnt + 1
     end
   end
