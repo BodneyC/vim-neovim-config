@@ -7,10 +7,6 @@ return {
       map_bs = false,
       fast_wrap = { map = '<M-w>' },
     })
-    vim.keymap.set(
-      'i', '∑',
-      [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]],
-      { silent = true }
-    )
+    vim.keymap.set('i', '∑', [[<esc>l<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>]], { silent = true })
   end,
 }

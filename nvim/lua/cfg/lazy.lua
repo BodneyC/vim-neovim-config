@@ -19,7 +19,6 @@ require('lazy').setup({
   require('cfg.plugins.cmp'),
   require('cfg.plugins.luasnip'),
   require('cfg.plugins.mason-lspconfig'),
-  require('cfg.plugins.dressing'),
   require('cfg.plugins.lspsaga'),
   -- require('cfg.plugins.symbols-outline'),
   require('cfg.plugins.fzf-lua'),
@@ -150,7 +149,6 @@ require('lazy').setup({
   require('cfg.plugins.vim-terraform'),
   require('cfg.plugins.vim-syntax-extra'),
   require('cfg.plugins.vim-pkgbuild'),
-  require('cfg.plugins.gx-extended'),
 
   ----- Markdown -----
   require('cfg.plugins.bullets'),

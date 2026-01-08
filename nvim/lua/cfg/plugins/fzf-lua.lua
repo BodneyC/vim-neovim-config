@@ -12,69 +12,26 @@ end
 local history_idx = 0
 
 -- NOTE: This will also store phrases even if you don't select an item...
-local function fn_post_fzf(_, _)
-  history_idx = 0
-  -- NOTE: The phrase is in the first element of the second parameter... but
-  --  they remove it before calling this func for some reason, luckily they
-  --  store it in an accessible place, the config module
-  local phrase = require('fzf-lua.config').__resume_data.opts.query
-  -- NOTE: Arguably should check for certain 'command' phrases like 'esc', not
-  --  only can I not be bothered to figure them all out but you may have just
-  --  searched 'esc'...
-  if not phrase or type(phrase) ~= 'string' then
-    return
-  end
-  local file = io.open(historyfile, 'r')
-  if not file then
-    vim.print(
-      'Unable to open fzf-lua history file (' .. historyfile .. ') for reading'
-    )
-    return
-  end
-  local lines = {}
-  for line in file:lines() do
-    if line ~= phrase then
-      table.insert(lines, line)
-    end
-  end
-  table.insert(lines, 1, phrase)
-  file:close()
-  file = io.open(historyfile, 'w')
-  if not file then
-    vim.print(
-      'Unable to open fzf-lua history file (' .. historyfile .. ') for writing'
-    )
-    return
-  end
-  local content = ''
-  for _, line in pairs(lines) do
-    if line ~= '' then
-      content = content .. line .. '\n'
-    end
-  end
-  file:write(content)
-  file:close()
+local function fn_post_fzf()
 end
 
-local function apply_opts(fn)
-  return function()
-    fn({ fn_post_fzf = fn_post_fzf })
-  end
-end
-
-local function read_to_lines(filepath)
-  local file = io.open(filepath, 'r')
-  if not file then
-    vim.print('Unable to open file (' .. filepath .. ') for reading')
-    return
-  end
-  local lines = {}
-  for line in file:lines() do
-    table.insert(lines, line)
-  end
-  file:close()
-  return lines
-end
+local group = vim.api.nvim_create_augroup('__FZF_UNIQ_HISTORY', { clear = true })
+-- Not ideal... but I don't care
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = group,
+  pattern = '*',
+  callback = function()
+    vim.system(
+      { 'gawk', '-i', 'inplace', [[!uniq[$0]++]], historyfile },
+      { text = true },
+      function(obj)
+        if obj.code ~= 0 then
+          print(obj.signal .. '\n' .. obj.stdout .. '\n' .. obj.stderr)
+        end
+      end
+    )
+  end,
+})
 
 local feedkeys = require('utl.util').feedkeys
 
@@ -121,6 +78,9 @@ return {
 
 
     require('fzf-lua').setup({
+      fzf_opts = {
+        ['--history'] = historyfile,
+      },
       files = {
         fd_opts =
         [[--color=never --hidden --type f --type l --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp --exclude snippets]],
@@ -150,20 +110,6 @@ return {
           layout = 'flex',
           flip_columns = 120,
         },
-        on_create = function()
-          vim.keymap.set(
-            't',
-            '<C-j>',
-            history_next,
-            { silent = true, buffer = true }
-          )
-          vim.keymap.set(
-            't',
-            '<C-k>',
-            history_prev,
-            { silent = true, buffer = true }
-          )
-        end,
       },
       hls = {
         preview_normal = fzf_preview_hl,
@@ -174,8 +120,8 @@ return {
     local fzf = require('fzf-lua')
 
     -- Daily
-    map('n', '<space>r', apply_opts(fzf.live_grep), 'Search text')
-    map('n', '<space>f', apply_opts(fzf.files), 'Search files')
+    map('n', '<space>r', fzf.live_grep, 'Search text')
+    map('n', '<space>f', fzf.files, 'Search files')
     map('n', '<space>bl', fzf.buffers, 'List buffers')
 
     -- Vim

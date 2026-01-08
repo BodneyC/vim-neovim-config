@@ -34,5 +34,6 @@ return {
     _G.dd = function(...) snacks.debug.inspect(...) end
     _G.bt = function() snacks.debug.backtrace() end
     vim.print = _G.dd
+    vim.keymap.set('n', '<leader>go', function() snacks.gitbrowse() end, { noremap = true })
   end
 }
