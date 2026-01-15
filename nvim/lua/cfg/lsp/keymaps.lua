@@ -79,17 +79,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
     map('n', [[\D]], '<CMD>Lspsaga peek_definition<CR>', 'Preview definition')
     map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
-    map('n', '[w', '<cmd>Lspsaga diagnostic_jump_prev<CR>', 'Prev warning')
-    map('n', ']w', '<cmd>Lspsaga diagnostic_jump_next<CR>', 'Next warning')
+
+    map('n', '[w', function() vim.diagnostic.jump({ count = -1 }) end, 'Prev warning')
+    map('n', ']w', function() vim.diagnostic.jump({ count = 1 }) end, 'Next warning')
     map('n', '[W', function()
-      require('lspsaga.diagnostic'):goto_prev({
-        severity = vim.diagnostic.severity.ERROR,
-      })
+      vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
     end, 'Prev diagnostic')
     map('n', ']W', function()
-      require('lspsaga.diagnostic'):goto_next({
-        severity = vim.diagnostic.severity.ERROR,
-      })
+      vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
     end, 'Next diagnostic')
 
     -- km.which_key.register({ ['<leader>w'] = { name = 'Workspace' } },

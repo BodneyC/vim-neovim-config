@@ -23,6 +23,7 @@ require('lazy').setup({
   -- require('cfg.plugins.symbols-outline'),
   require('cfg.plugins.fzf-lua'),
   require('cfg.plugins.nvim-treesitter'),
+  require('cfg.plugins.tiny-inline-diagnostic'),
 
   --[[------------------------------------------------------------------------
   DAP Setup and configuration
@@ -52,6 +53,7 @@ require('lazy').setup({
   require('cfg.plugins.navigator'),
   require('cfg.plugins.hex-this-vim'),
   require('cfg.plugins.neotest'),
+  require('cfg.plugins.multicursor'),
 
   --[[------------------------------------------------------------------------
   Quality of Life

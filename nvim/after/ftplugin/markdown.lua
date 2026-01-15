@@ -9,6 +9,9 @@ vim.o.spell = true
 
 local function md_template()
   local title = util.basename_to_title()
+  if title:lower() == 'readme' then
+    title = util.dirname_of_file_to_title()
+  end
   local lines = {
     '<!-- markdownlint-disable MD013 -->',
     '',

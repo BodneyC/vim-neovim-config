@@ -3,11 +3,7 @@ return {
   name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
-    local conceallevel = 1
-    local language_name = false
-    if conceallevel > 0 then
-      language_name = true
-    end
+    local conceallevel = 0
     require('render-markdown').setup({
       heading = { icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' } },
       bullet = { icons = { '●', '○', '◆', '◇' } },
@@ -23,7 +19,7 @@ return {
         },
       },
       code = {
-        language_name = language_name,
+        language_name = false,
       },
     })
   end,

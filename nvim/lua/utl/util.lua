@@ -147,4 +147,12 @@ function M.basename_to_title(basename)
   return string.gsub(' ' .. basename, '%W%l', string.upper):sub(2)
 end
 
+function M.dirname_of_file_to_title(basename)
+  basename = basename or vim.fn.expand('%:p:h:t')
+  basename = basename:gsub('-', ' '):gsub("(%a)(%w*)", function(first, rest)
+    return first:upper() .. rest:lower()
+  end)
+  return basename
+end
+
 return M
