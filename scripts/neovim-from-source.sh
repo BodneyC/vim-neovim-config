@@ -14,14 +14,14 @@ git fetch --tags --all -f
 # git checkout tags/nightly
 
 # For 0.5
-git checkout origin/release-0.11
+git checkout origin/release-0.12
 
 unset LUA_PATH LUA_CPATH
 
 make clean
 
 make CMAKE_INSTALL_PREFIX="$(realpath ~/.local)" \
-  CMAKE_BUILD_TYPE=RelWithDebInfo
+	CMAKE_BUILD_TYPE=RelWithDebInfo
 
 NVIM_PATH=$(command -v nvim)
 [[ -n $NVIM_PATH ]] && cp "$NVIM_PATH"{,.bak}

@@ -5,6 +5,7 @@ return {
   config = function()
     local conceallevel = 0
     require('render-markdown').setup({
+      latex = { enabled = false },
       heading = { icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' } },
       bullet = { icons = { '●', '○', '◆', '◇' } },
       -- Window options to use that change between rendered and raw view

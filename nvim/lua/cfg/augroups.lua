@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = group,
   pattern = '*',
-  callback = require('vim.highlight').on_yank,
+  callback = require('vim.hl').on_yank,
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = group,

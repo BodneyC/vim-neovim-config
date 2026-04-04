@@ -1,37 +1,37 @@
 repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.3.0
-  hooks:
-  - id: check-yaml
-  - id: end-of-file-fixer
-  - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
 
-# I know the 'local' repo is discouraged but I'm lazy and the sole
-#  developer on this one
-- repo: local
-  hooks:
+  # I know the 'local' repo is discouraged but I'm lazy and the sole
+  #  developer on this one
+  - repo: local
+    hooks:
+      # cd ~/gitclones
+      # git clone https://github.com/CppCXY/EmmyLuaCodeStyle.git
+      # cd EmmyLuaCodeStyle
+      # mkdir build && cd build && cmake .. && cmake --build .
+      # ln -s $PWD/CodeFormat/CodeFormat ~/.local/bin/emmylua
+      - id: EmmyLuaCodeStyle
+        name: emmylua
+        language: system
+        entry: emmylua
+        args: [format, -ow, -c, .editorconfig, -w, .]
+        pass_filenames: false
 
-  # cd ~/gitclones
-  # git clone https://github.com/CppCXY/EmmyLuaCodeStyle.git
-  # cd EmmyLuaCodeStyle
-  # mkdir build && cd build && cmake .. && cmake --build .
-  # ln -s $PWD/CodeFormat/CodeFormat ~/.local/bin/emmylua
-  - id: EmmyLuaCodeStyle
-    name: emmylua
-    language: system
-    entry: emmylua
-    args: [format, -ow, -c, .editorconfig, -w, .]
-    pass_filenames: false
+      - id: shfmt
+        name: shfmt
+        language: system
+        entry: shfmt
+        args: [-w, -s]
+        types: [shell]
+        exclude: ^nvim/snippets/friendly-snippets
 
-  - id: shfmt
-    name: shfmt
-    language: system
-    entry: shfmt
-    args: [-w, -s]
-    types: [shell]
-
-  - id: shellcheck
-    language: system
-    name: shellcheck
-    entry: shellcheck
-    types: [shell]
+      - id: shellcheck
+        language: system
+        name: shellcheck
+        entry: shellcheck
+        types: [shell]

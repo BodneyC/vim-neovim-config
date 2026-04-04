@@ -29,6 +29,7 @@ return {
 
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
+      ---@diagnostic disable-next-line: undefined-field
       sources = cmp.config.sources(
         { { name = 'path' } },
         { { name = 'cmdline' } }

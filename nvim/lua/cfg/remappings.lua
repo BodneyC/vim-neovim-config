@@ -47,8 +47,7 @@ map('n', 'Y', 'yy')
 for _, ch in ipairs({ 'y', 'Y', 'p', 'P' }) do
   local action = ((ch == 'y' or ch == 'Y') and 'Copy to' or 'Paste from')
       .. ' clipboard'
-  map('n', '<leader>' .. ch, '"+' .. ch, action)
-  map('x', '<leader>' .. ch, '"+' .. ch, action)
+  map({ 'n', 'v' }, '<leader>' .. ch, '"+' .. ch, action)
 end
 
 map('n', '<C-p>', [[<Tab>]])
@@ -117,7 +116,7 @@ map('n', '<leader>i', function()
 end, 'Toggle case sensitive')
 
 map('n', '<leader>ea', [[vip:EasyAlign<CR>]], 'Easy align paragraph')
-map('x', '<leader>ea', [[:EasyAlign<CR>]], 'Easy align')
+map('v', '<leader>ea', [[:EasyAlign<CR>]], 'Easy align')
 
 map('n', '<leader>U', [[:UndotreeToggle<CR>]], 'Undo tree')
 
