@@ -1,9 +1,13 @@
 local M = {}
 
+local function has_parent_dir(path, dir)
+  return vim.tbl_isempty(vim.fs.find(dir, { path = path, upward = true, type = 'directory' }))
+end
+
 local function is_helm_file(path)
-  local check =
-      vim.fs.find('Chart.yaml', { path = vim.fs.dirname(path), upward = true })
-  return not vim.tbl_isempty(check)
+  local chart = vim.fs.find('Chart.yaml', { path = vim.fs.dirname(path), upward = true })
+  return not vim.tbl_isempty(chart) and
+      (has_parent_dir(path, 'crds') or has_parent_dir(path, 'templates') or has_parent_dir(path, 'tests'))
 end
 
 local function yaml_filetype(path, _)

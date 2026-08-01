@@ -3,7 +3,7 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    local variant = 'carbonfox'
+    local variant = 'nightfox'
     require('nightfox').setup({
       options = {
         styles = {

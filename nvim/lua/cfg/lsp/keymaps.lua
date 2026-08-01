@@ -76,9 +76,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- map('n', [[\f]], '<CMD>Lspsaga finder<CR>', 'Lsp finder')
     -- map('n', [[\a]], vim.lsp.buf.code_action, 'Code action')
-    map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
+    -- map('n', [[\d]], '<CMD>Lspsaga hover_doc<CR>', 'Hover doc')
     map('n', [[\D]], '<CMD>Lspsaga peek_definition<CR>', 'Preview definition')
-    map('n', '<Leader>R', '<CMD>Lspsaga rename<CR>', 'Rename')
+    map('n', '<Leader>R', '<CMD>lua vim.lsp.buf.rename()<CR>', 'Rename')
 
     map('n', '[w', function() vim.diagnostic.jump({ count = -1 }) end, 'Prev warning')
     map('n', ']w', function() vim.diagnostic.jump({ count = 1 }) end, 'Next warning')

@@ -21,6 +21,7 @@ repos:
         entry: emmylua
         args: [format, -ow, -c, .editorconfig, -w, .]
         pass_filenames: false
+        exclude: ^nvim/snippets/friendly-snippets
 
       - id: shfmt
         name: shfmt

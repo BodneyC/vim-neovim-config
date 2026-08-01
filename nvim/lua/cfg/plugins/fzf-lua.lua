@@ -11,10 +11,6 @@ end
 
 local history_idx = 0
 
--- NOTE: This will also store phrases even if you don't select an item...
-local function fn_post_fzf()
-end
-
 local group = vim.api.nvim_create_augroup('__FZF_UNIQ_HISTORY', { clear = true })
 -- Not ideal... but I don't care
 vim.api.nvim_create_autocmd('VimEnter', {
@@ -35,6 +31,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 
 local feedkeys = require('utl.util').feedkeys
 
+---@diagnostic disable-next-line: unused-local, unused-function
 local function history_next()
   local lines = read_to_lines(historyfile)
   if not lines or #lines == 0 then
@@ -48,6 +45,7 @@ local function history_next()
   feedkeys('<C-u>' .. lines[history_idx], 'i')
 end
 
+---@diagnostic disable-next-line: unused-local, unused-function
 local function history_prev()
   local lines = read_to_lines(historyfile)
   if not lines or #lines == 0 then
@@ -118,6 +116,7 @@ return {
     })
 
     local fzf = require('fzf-lua')
+    fzf.register_ui_select()
 
     -- Daily
     map('n', '<space>r', fzf.live_grep, 'Search text')

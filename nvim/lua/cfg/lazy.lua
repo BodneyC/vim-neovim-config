@@ -113,9 +113,9 @@ require('lazy').setup({
   -- require('cfg.plugins.everforest'),
   -- require('cfg.plugins.material'),
   -- require('cfg.plugins.oldworld'),
-  -- require('cfg.plugins.nightfox'),
+  require('cfg.plugins.nightfox'),
   -- require('cfg.plugins.kanagawa'),
-  require('cfg.plugins.github-nvim-theme'),
+  -- require('cfg.plugins.github-nvim-theme'),
 
   require('cfg.plugins.indent-blankline'),
   require('cfg.plugins.zen'),
@@ -163,7 +163,7 @@ require('lazy').setup({
   require('cfg.plugins.vimtex'),
 
   ----- Node -----
-  require('cfg.plugins.import-cost'),
+  -- require('cfg.plugins.import-cost'),
 
   ----- Python -----
   require('cfg.plugins.f-string-toggle'),
