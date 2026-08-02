@@ -113,8 +113,8 @@ require('lazy').setup({
   -- require('cfg.plugins.everforest'),
   -- require('cfg.plugins.material'),
   -- require('cfg.plugins.oldworld'),
-  require('cfg.plugins.nightfox'),
-  -- require('cfg.plugins.kanagawa'),
+  -- require('cfg.plugins.nightfox'),
+  require('cfg.plugins.kanagawa'),
   -- require('cfg.plugins.github-nvim-theme'),
 
   require('cfg.plugins.indent-blankline'),

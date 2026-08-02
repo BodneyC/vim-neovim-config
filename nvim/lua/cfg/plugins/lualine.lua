@@ -30,7 +30,7 @@ return {
         },
       },
       lualine_b = { 'branch' },
-      lualine_c = { 'filename', [[require('mod.treesitter').statusline()]] },
+      lualine_c = { 'filename' },
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = {
         {
