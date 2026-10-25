@@ -11,12 +11,12 @@ return {
         readonly = '-',
       },
       component_separators = {
-        left = '',
-        right = '',
+        left = '',
+        right = '',
       },
       section_separators = {
-        left = '',
-        right = '',
+        left = '',
+        right = '',
       },
       disabled_filetypes = { 'defx', '' },
     },

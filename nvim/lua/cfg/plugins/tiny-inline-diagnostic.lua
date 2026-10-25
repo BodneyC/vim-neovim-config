@@ -3,7 +3,19 @@ return {
   event = 'VeryLazy',
   priority = 1000,
   config = function()
-    require('tiny-inline-diagnostic').setup()
-    vim.diagnostic.config({ float = false, virtual_text = false })
+    require('tiny-inline-diagnostic').setup({
+      transparent_cursorline = true,
+      hi = {
+        background = "None", -- Background highlight for diagnostics
+      },
+      options = {
+        multilines = {
+          enabled = true,
+          always_show = true,
+          severity = { vim.diagnostic.severity.ERROR },
+        },
+      },
+    })
+    vim.diagnostic.config({ virtual_text = false })
   end
 }

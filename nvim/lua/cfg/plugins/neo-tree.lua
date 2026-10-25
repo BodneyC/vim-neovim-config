@@ -1,6 +1,6 @@
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
-local NEO_TREE_MIN_WIDTH = 25
+local NEO_TREE_MIN_WIDTH = 30
 
 local function on_move(data)
   require('snacks').rename.on_rename_file(data.source, data.destination)
@@ -142,7 +142,7 @@ return {
         end,
       },
       window = {
-        auto_expand_width = true,
+        auto_expand_width = false,
         position = 'left',
         width = NEO_TREE_MIN_WIDTH,
         mapping_options = { noremap = true, nowait = true, },
@@ -286,8 +286,8 @@ return {
 
     local map = require('utl.mapper')({ noremap = true, silent = true })
 
-    map('n', '<Leader>d', function() vim.cmd('Neotree focus') end, 'Focus neotree')
-    map('n', '<Leader>D', function() vim.cmd('Neotree close') end, 'Open neotree')
+    map('n', '<Leader>\\', function() vim.cmd('Neotree focus') end, 'Focus neotree')
+    map('n', '<Leader>|', function() vim.cmd('Neotree close') end, 'Open neotree')
 
     do
       local group = vim.api.nvim_create_augroup('__NEO_TREE__', {

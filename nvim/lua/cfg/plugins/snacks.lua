@@ -28,6 +28,7 @@ return {
     toggle       = { enabled = true },
     win          = { enabled = true },
     words        = { enabled = false },
+    picker       = { ui_select = true }
   },
   init = function()
     local snacks = require('snacks')

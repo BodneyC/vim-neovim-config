@@ -17,7 +17,7 @@ require('lazy').setup({
 
   require('cfg.plugins.nvim-lspconfig'),
   require('cfg.plugins.cmp'),
-  require('cfg.plugins.luasnip'),
+  -- require('cfg.plugins.luasnip'),
   require('cfg.plugins.mason-lspconfig'),
   require('cfg.plugins.lspsaga'),
   -- require('cfg.plugins.symbols-outline'),
@@ -29,15 +29,11 @@ require('lazy').setup({
   DAP Setup and configuration
   --------------------------------------------------------------------------]]
 
-  'mfussenegger/nvim-dap',
-  'theHamsta/nvim-dap-virtual-text',
-  'jbyuki/one-small-step-for-vimkind',
-
-  require('cfg.plugins.nvim-dap-ui'),
-  require('cfg.plugins.dap-buddy'),
-  require('cfg.plugins.nvim-dap-vscode-js'),
-  require('cfg.plugins.nvim-dap-python'),
   require('cfg.plugins.nvim-dap-go'),
+  require('cfg.plugins.nvim-dap-python'),
+  require('cfg.plugins.nvim-dap'),
+  require('cfg.plugins.nvim-dap-ui'),
+  require('cfg.plugins.mason-nvim-dap'),
 
   --[[------------------------------------------------------------------------
   Extra Functionality
@@ -90,9 +86,9 @@ require('lazy').setup({
   'tpope/vim-surround',
   'mbbill/undotree',
   'tpope/vim-unimpaired',
-  'tweekmonster/startuptime.vim',
   'vim-utils/vim-all', -- a<CR>
 
+  require('cfg.plugins.startuptime'),
   require('cfg.plugins.boole'),
   require('cfg.plugins.noice'),
 
@@ -114,7 +110,8 @@ require('lazy').setup({
   -- require('cfg.plugins.material'),
   -- require('cfg.plugins.oldworld'),
   -- require('cfg.plugins.nightfox'),
-  require('cfg.plugins.kanagawa'),
+  -- require('cfg.plugins.kanagawa'),
+  require('cfg.plugins.catppuccin'),
   -- require('cfg.plugins.github-nvim-theme'),
 
   require('cfg.plugins.indent-blankline'),

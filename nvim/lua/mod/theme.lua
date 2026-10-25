@@ -2,11 +2,11 @@ return {
   icons = {
     diagnostics = {
       glyph = {
-        error = ' ',
-        warn = ' ',
-        info = ' ',
-        hint = ' ',
-        ok = ' ',
+        error = '●',
+        warn = '●',
+        info = '●',
+        hint = '●',
+        ok = '●',
       },
       sign = {
         error = '■',

@@ -36,7 +36,7 @@ return {
       ),
     })
 
-    local luasnip = require("luasnip")
+    -- local luasnip = require("luasnip")
 
     cmp.setup({
       -- NOTE: For future Ben: the default is this but with `noinsert`
@@ -67,13 +67,13 @@ return {
         -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
-            else
-              cmp.confirm({
-                select = true,
-              })
-            end
+            -- if luasnip.expandable() then
+            --   luasnip.expand()
+            -- else
+            cmp.confirm({
+              select = true,
+            })
+            -- end
           else
             fallback()
           end
@@ -84,7 +84,7 @@ return {
         { name = 'buffer' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'path' },
-        { name = 'luasnip' },
+        -- { name = 'luasnip' },
       },
 
       window = {
