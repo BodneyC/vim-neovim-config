@@ -136,13 +136,14 @@ require('lazy').setup({
   Support for Specific Languages
   --------------------------------------------------------------------------]]
 
-  'jose-elias-alvarez/typescript.nvim',
+  -- 'jose-elias-alvarez/typescript.nvim',
   'michaeljsmith/vim-indent-object',
   'midchildan/ft-confluence.vim',
   'pearofducks/ansible-vim',
   'simrat39/rust-tools.nvim',
   'towolf/vim-helm',
 
+  require("cfg.plugins.typescript-tools"),
   require('cfg.plugins.knit-vim'),
   require('cfg.plugins.sood-vim'),
   require('cfg.plugins.vim-terraform'),

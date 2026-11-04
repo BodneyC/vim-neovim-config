@@ -3,3 +3,4 @@ startup.log
 nvim/lua/packer_compiled.lua
 tags
 hicontrast.kitty.conf
+nvim/undo
