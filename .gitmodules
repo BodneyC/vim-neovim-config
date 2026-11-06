@@ -1,3 +1,0 @@
-[submodule "nvim/snippets/friendly-snippets"]
-	path = nvim/snippets/friendly-snippets
-	url = https://github.com/rafamadriz/friendly-snippets

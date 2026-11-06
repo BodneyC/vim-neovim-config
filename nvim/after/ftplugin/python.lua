@@ -1,2 +1,2 @@
-vim.o.ts = 4
-vim.o.sw = 4
+vim.opt_local.tabstop = 4
+vim.opt_local.shiftwidth = 4

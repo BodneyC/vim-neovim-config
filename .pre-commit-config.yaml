@@ -19,9 +19,8 @@ repos:
         name: emmylua
         language: system
         entry: emmylua
-        args: [format, -ow, -c, .editorconfig, -w, .]
+        args: [format, -ow, -c, .editorconfig, -w, ., --ignores-file, .gitignore]
         pass_filenames: false
-        exclude: ^nvim/snippets/friendly-snippets
 
       - id: shfmt
         name: shfmt
@@ -29,7 +28,6 @@ repos:
         entry: shfmt
         args: [-w, -s]
         types: [shell]
-        exclude: ^nvim/snippets/friendly-snippets
 
       - id: shellcheck
         language: system

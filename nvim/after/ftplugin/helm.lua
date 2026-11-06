@@ -1,2 +1,7 @@
-vim.api.nvim_create_user_command('HelmLookup', require('mod.helm').lookup, {})
-vim.keymap.set('n', '<C-]>', '<CMD>HelmLookup<CR>', { noremap = true, silent = true })
+local function lookup()
+  vim.cmd('normal! "kyi"')
+  vim.cmd(('silent! grep %s'):format(vim.fn.shellescape('define "' .. vim.fn.getreg('k') .. '"')))
+end
+
+vim.api.nvim_buf_create_user_command(0, 'HelmLookup', lookup, {})
+vim.keymap.set('n', '<C-]>', lookup, { buffer = true, silent = true, desc = 'Helm lookup' })

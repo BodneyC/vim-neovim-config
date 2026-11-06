@@ -1,3 +1,3 @@
-vim.bo.et = true
-vim.bo.ts = 4
-vim.bo.sw = 0
+vim.opt_local.expandtab = true
+vim.opt_local.tabstop = 4
+vim.opt_local.shiftwidth = 0
