@@ -83,18 +83,23 @@ return {
   },
 
   {
-    'rhysd/clever-f.vim',
-    init = function()
-      vim.g.clever_f_mark_char_color = 'ModeMsg'
-    end,
-    config = function()
-      vim.keymap.set('', ';', '<Plug>(clever-f-repeat-forward)')
-      vim.keymap.set('', ',', '<Plug>(clever-f-repeat-back)')
-      vim.keymap.set('n', '<Esc>', function()
-        vim.fn['clever_f#reset']()
-        return '<Esc>'
-      end, { expr = true })
-    end,
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      highlight = { backdrop = false },
+      modes = {
+        char = {
+          highlight = { backdrop = false },
+        },
+      }
+    },
+    keys = {
+      { "<c-f>", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "<c-t>", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
   },
 
   {
