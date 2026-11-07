@@ -45,6 +45,10 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         group = vim.api.nvim_create_augroup('config_treesitter', { clear = true }),
         callback = function(ev)
+          if ev.match == 'tex' then
+            vim.bo[ev.buf].syntax = "ON"
+            return
+          end
           if vim.bo[ev.buf].buftype ~= '' then
             return
           end
