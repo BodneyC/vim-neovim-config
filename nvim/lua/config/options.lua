@@ -43,5 +43,7 @@ vim.o.undolevels = 10000
 vim.o.updatetime = 250
 vim.o.wildmode = 'longest:full,full'
 
+vim.opt.diffopt:append('algorithm:histogram')
+vim.opt.fillchars:append({ diff = '╱' })
 vim.opt.matchpairs:append('<:>')
 vim.opt.shortmess:append('c')

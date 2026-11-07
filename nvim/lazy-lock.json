@@ -20,6 +20,7 @@
   "ft-confluence.vim": { "branch": "master", "commit": "88d91e7815d1597656fcbe53281d3e296d782037" },
   "fzf": { "branch": "master", "commit": "96028e2a54023a8ff8240e985ae9c8e4f25c0089" },
   "fzf-lua": { "branch": "main", "commit": "11357ee24a9f092b1db503237eb57e2a11e48434" },
+  "git-conflict.nvim": { "branch": "main", "commit": "4bbfdd92d547d2862a75b4e80afaf30e73f7bbb4" },
   "gitsigns.nvim": { "branch": "main", "commit": "ef707fb93301a9b856f36eae4c8f56f5b988a794" },
   "hex-this-vim": { "branch": "master", "commit": "0700beb35d000c53438293d03321983c65f7140d" },
   "indent-blankline.nvim": { "branch": "master", "commit": "f1e186e44d3b7f9ae918008e2c28ce37c6023d2d" },
