@@ -16,22 +16,22 @@ return {
     end,
   },
 
-  {
-    'MeanderingProgrammer/markdown.nvim',
-    name = 'render-markdown',
-    ft = 'markdown',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    opts = {
-      latex = { enabled = false },
-      heading = { icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' } },
-      bullet = { icons = { '●', '○', '◆', '◇' } },
-      win_options = {
-        conceallevel = { rendered = 0 },
-        concealcursor = { rendered = 'nvic' },
-      },
-      code = { language_name = false },
-    },
-  },
+  -- {
+  --   'MeanderingProgrammer/markdown.nvim',
+  --   name = 'render-markdown',
+  --   ft = 'markdown',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --   opts = {
+  --     latex = { enabled = false },
+  --     heading = { icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' } },
+  --     bullet = { icons = { '●', '○', '◆', '◇' } },
+  --     win_options = {
+  --       conceallevel = { rendered = 0 },
+  --       concealcursor = { rendered = 'nvic' },
+  --     },
+  --     code = { language_name = false },
+  --   },
+  -- },
 
   {
     'mzlogin/vim-markdown-toc',
