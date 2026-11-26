@@ -110,6 +110,7 @@ return {
           end),
         }),
         sources = {
+          { name = 'copilot' }, -- no-op unless copilot-cmp is loaded
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'buffer' },
@@ -120,7 +121,11 @@ return {
         },
         formatting = {
           fields = { 'abbr', 'menu', 'kind' },
-          format = require('lspkind').cmp_format({ mode = 'symbol_text', maxwidth = 50 }),
+          format = require('lspkind').cmp_format({
+            mode = 'symbol_text',
+            maxwidth = 50,
+            symbol_map = { Copilot = '\xef\x92\xb8' },
+          }),
         },
       })
 
