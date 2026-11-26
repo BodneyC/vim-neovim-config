@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client.name ~= 'helm_ls' then
       bmap('n', '<C-]>', vim.lsp.buf.definition, 'Go to definition')
     end
+    bmap('n', 'K', vim.lsp.buf.hover, 'Show documentation')
     bmap('n', 'gD', vim.lsp.buf.implementation, 'Implementation')
     bmap('n', '1gD', vim.lsp.buf.type_definition, 'Type definition')
     bmap('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature help')

@@ -23,5 +23,6 @@ vim.filetype.add({
   pattern = {
     ['Dockerfile.*'] = 'dockerfile',
     ['Jenkinsfile.*'] = 'groovy',
+    ['.*%.json$.tmpl'] = 'json',
   },
 })

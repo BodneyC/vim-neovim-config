@@ -30,10 +30,10 @@ return {
       mc.setup()
 
       local set = vim.keymap.set
-      set('n', '<Up>', function()
+      set('n', '<M-Up>', function()
         mc.lineAddCursor(-1)
       end, { desc = 'Add cursor above' })
-      set('n', '<Down>', function()
+      set('n', '<M-Down>', function()
         mc.lineAddCursor(1)
       end, { desc = 'Add cursor below' })
       set('n', '<leader><Up>', function()

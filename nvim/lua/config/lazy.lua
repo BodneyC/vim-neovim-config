@@ -1,3 +1,4 @@
+vim.env.GIT_DEFAULT_REF_FORMAT = 'files'
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   local out = vim.fn.system({
