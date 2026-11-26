@@ -214,6 +214,26 @@ return {
   'wellle/targets.vim',
   'wellle/visual-split.vim',
 
+  {
+    -- Soft wrap at a fixed column via inline virtual text; inactive until
+    -- `:Wrapwidth N` (or `\W`) is used in a buffer
+    'rickhowe/wrapwidth',
+    cmd = 'Wrapwidth',
+    keys = {
+      {
+        '\\W',
+        function()
+          local enable = not vim.b.wrapwidth_enabled
+          local width = vim.bo.textwidth > 0 and vim.bo.textwidth or 80
+          vim.cmd.Wrapwidth(enable and tostring(width) or '0')
+          vim.b.wrapwidth_enabled = enable
+          vim.notify(enable and ('Wrapwidth ' .. width) or 'Wrapwidth off')
+        end,
+        desc = 'Toggle soft wrap at textwidth (or 80)',
+      },
+    },
+  },
+
   { 'rktjmp/playtime.nvim', cmd = 'Playtime' },
   { 'seandewar/actually-doom.nvim', cmd = 'Doom' },
 }
